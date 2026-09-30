@@ -1,0 +1,4 @@
+- [ ] Create `apps/api/src/zclaw/tool-output-sanitizer.ts`
+- [ ] Implement `sanitizeToolOutputForStream(event, logger)`
+- [ ] Update `streamMessage` loop to use sanitizer for tool events
+- [ ] Add unit tests for sanitizer
