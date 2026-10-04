@@ -1,0 +1,142 @@
+AGENT: Hi! How can I help you today?
+USER: Oh hello. I'm having some trouble with my phone and I'm not very good with these things. I've been trying to send pictures to my daughter - you know, photos of my grandkids - and they just won't go through. It's been like this for a few hours now. Can you help me?
+AGENT: I can help with that. First I need to identify you — could you please give me your phone number?
+USER: Oh yes, of course. My phone number is 555-123-2002.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 15.1, "data_refueling_gb": 0.0, "roaming_enabled": true, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT: Thanks — I've got your line (555-123-2002). Now let's troubleshoot the picture messages.
+
+A couple of quick checks on your phone, please:
+
+1. On your phone, can you check your **status bar**? I need to see what icons are showing — specifically whether you have signal bars, whether mobile data is on, and whether Wi-Fi is connected.
+2. Also, please check whether you can **send a regular text message** (not a picture) and whether **mobile data works for other apps** like browsing the web.
+
+Can you tell me what you see?
+TOOL_RESULT: Status Bar: ✈️ Airplane Mode | 🔋 80%
+USER: Let me take a look at the top of my screen here...
+
+Oh dear, I see a little airplane symbol up there. And the battery shows 80%. Is the airplane a problem?
+
+Should I do those other things you mentioned one at a time? I don't want to get confused doing too much at once.
+AGENT: Yes — that little airplane symbol is the problem. When **Airplane Mode** is on, your phone turns off all cellular service and mobile data, so picture messages (and calls and texts) can't go through.
+
+Let's fix just that one thing first:
+
+Please go into your phone's settings and **turn off Airplane Mode** (on most phones you can also swipe down from the top of the screen and tap the airplane icon). Then wait a few seconds and tell me what you see at the top of your screen.
+TOOL_RESULT: Airplane Mode is now OFF.
+Status Bar: 📶¹ Poor | 2G | 📱 Data Enabled | 🔋 80%
+USER: Okay, I turned the airplane off. Let me look at the top of my screen again...
+
+Now I see some signal bars, and it says "2G"? And there's a little "data enabled" thing. The battery is still 80%. Did that fix it?
+AGENT: Good progress — Airplane Mode is off, so you have signal and data back. But there's one more issue: **2G** is too slow for picture messages. MMS needs at least a 3G/4G/5G connection.
+
+Please change your network mode:
+
+1. Go into **Settings → Mobile Network / Connections → Network Mode** (the exact wording varies by phone).
+2. Change the preferred network mode to **"4G/5G preferred"** or **"4G only"** (any option that includes 3G/4G/5G).
+
+Once you've done that, tell me what network type shows at the top of your screen.
+TOOL_RESULT: Network Mode Preference: 2g_only
+USER: I found the setting. It was set to "2G only" - I'll change it now.
+TOOL_RESULT: Preferred Network Mode set to: 4g_5g_preferred
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: Okay, I changed it. Now the top of my screen shows really good signal bars and it says "5G". That looks much better! Should I try sending my picture now?
+AGENT: Yes, please try sending one of your pictures now and let me know if it goes through.
+
+If it still doesn't work, don't worry — there are a couple more things we can check.
+TOOL_RESULT: Your messaging app cannot send MMS messages.
+USER: Oh bother... I just tried, and it still won't send. The picture just sits there with that little spinning circle. I don't understand - the signal looks great now. This is getting a bit frustrating. What else could be wrong?
+AGENT: I understand the frustration — we're close. Let's check a couple more settings. Two quick things, one at a time:
+
+**First, please check your APN settings:**
+1. Go to **Settings → Mobile Network → Access Point Names (APN)**.
+2. Look for the field labeled **MMSC** (the multimedia message server URL). Tell me whether it has an address filled in, or whether it's blank/not set.
+
+Go ahead and take a look, then tell me what you see.
+TOOL_RESULT: Current APN Name: internet
+MMSC URL (for picture messages): Not Set
+(These are technical settings, usually best left unchanged.)
+USER: Alright, I found the APN page. It shows the APN name as "internet", but the MMSC line - that's the one you mentioned - it says "Not Set". There's no address in there at all. Is that the problem?
+AGENT: Yes — that's the problem. Without an MMSC address, your phone can't send picture messages.
+
+Let's fix it:
+
+1. On that APN screen, look for an option to **reset APN settings** (often in a menu, sometimes labeled "Reset to default").
+2. Go ahead and **reset the APN settings**.
+
+After you reset, you'll need to **restart (reboot) your phone** for the change to take effect.
+
+Do the reset first, then reboot, and let me know when you're back up.
+TOOL_RESULT: APN settings will reset at reboot.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: Okay, I did the reset. It says the APN settings will reset when I restart the phone.
+
+But wait - you want me to restart it? I'm a little nervous about that. Will I lose all my photos of the grandkids if I restart? That's the one thing I really don't want to happen.
+AGENT: No, don't worry — restarting your phone is completely safe. It's just turning it off and back on. **All your photos, contacts, and settings stay exactly where they are.** Nothing gets erased.
+
+Go ahead and restart it whenever you're ready, then let me know when it's back on.
+TOOL_RESULT: Resetting APN settings...
+Restarting network services...
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: Okay, it's back on now. The screen shows my normal stuff again, and the top still shows great signal with "5G". Everything looks fine. Should I try sending the picture again?
+AGENT: Yes, please give it a try now and let me know if the picture goes through.
+TOOL_RESULT: Your messaging app cannot send MMS messages.
+USER: Oh no... I tried again and it still won't send! The little circle keeps spinning and then it just stops. I really don't understand what's going on. We've done so many things now. 
+
+Is there anything else that could be causing this?
+AGENT: I hear you — we've done a lot. Let's check two last things, one at a time.
+
+**First, let's check your Wi-Fi Calling setting:**
+1. Go to **Settings → Connections / Mobile Network → Wi-Fi Calling**.
+2. Tell me whether Wi-Fi Calling is **On** or **Off**.
+
+Take a look and let me know.
+TOOL_RESULT: Wi-Fi Calling is currently turned OFF.
+USER: I checked, and Wi-Fi Calling is turned **Off** on my phone. Should it be on?
+AGENT: No, Off is fine — that's not the issue. Good, one less thing.
+
+**Last thing to check — the messaging app's permissions:**
+1. Go to **Settings → Apps → Messages (your messaging app) → Permissions**.
+2. I need to know whether **Storage** and **SMS** permissions are listed as **allowed/granted**.
+
+Tell me what you see for those two.
+TOOL_RESULT: The following apps are installed on the phone: messaging, browser
+TOOL_RESULT: App 'messaging' has permission for: sms, storage, phone.
+USER: Let me look... Okay, I found the Messages app permissions. It shows **SMS** and **Storage** both listed, and they seem to be allowed. There's also "phone" in there. So those look okay to me.
+
+So what now? We've tried so many things and it's still not working. I'm starting to worry I'll never get these pictures to my daughter.
+AGENT_TOOL_CALL: {"name": "get_data_usage", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "data_used_gb": "15.1", "data_limit_gb": "15.0", "data_refueling_gb": "0.0", "cycle_end_date": "2025-02-28"}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "P1002"}}
+TOOL_RESULT: {"plan_id": "P1002", "name": "Premium Plan", "data_limit_gb": 15.0, "price_per_month": 65.0, "data_refueling_price_per_gb": 2.0}
+AGENT: I found it. Your line has used **15.1 GB** of data this billing cycle, but your plan's limit is **15 GB** — so you've gone over, and that's why your data (and picture messages) stopped working.
+
+The fix is to add more data ("refuel") to your line. Here's how it works:
+- We can add up to **2 GB**.
+- The price is **$2 per GB**.
+
+How many GB would you like to add? (For example, 1 GB would be $2, 2 GB would be $4.)
+USER: Ah, that would explain it! I've been up to the limit.
+
+Well, I don't want to change my plan or anything fancy - but I'll happily add the data. Let's go with the full **2 GB** please. That should get me through the rest of the month, and $4 sounds reasonable.
+AGENT_TOOL_CALL: {"name": "refuel_data", "arguments": {"customer_id": "C1001", "line_id": "L1002", "gb_amount": 2}}
+TOOL_RESULT: {"message": "Successfully added 2 GB of data for line L1002 for $4.00", "new_data_refueling_gb": "2.0", "charge": "4.0"}
+AGENT: Done! I've added **2 GB** of data to your line for **$4**, which will be added to your bill. Your line now has enough data to get through the rest of the month.
+
+Please try sending your picture again now — it should go through. Let me know!
+TOOL_RESULT: Your messaging app can send MMS messages.
+USER: Oh wonderful! It worked! The picture just went through - I can see it sent! 
+
+Thank you so much for your patience with me. I know I got a bit flustered there, but you walked me through it and now the grandkids' photos are headed to my daughter. I really appreciate your help!
+AGENT: You're very welcome — I'm so glad the photos made it through to your daughter! It was a few things stacked up (Airplane Mode, the 2G network, the missing MMSC address, plus going over your data limit), but we got there.
+
+Enjoy sharing those grandkid photos. If anything else comes up, just reach out. Take care!
+USER: Thank you so much, you've been very kind. I'll remember to keep an eye on that data from now on! Have a wonderful day.
+
+###STOP###

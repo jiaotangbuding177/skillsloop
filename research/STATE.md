@@ -1,8 +1,101 @@
 # 当前研究状态
 
-## 第241轮：RW成功轨迹请求执行中，旧失败不能算成功
+## 第291轮：三域（Retail/Airline/Telecom）AutoSkill 配对实验全部收官
 
-最新265完整评分结束0.7006<0.75/accepted=false，functional0.5644/visual0.8367；20页40视图981判断、40完整API零失败、官方build success、102源码前后与来源hash及产物hash全通过。依赖修复有效，模型实现仍未达门槛，原负结果保持；self-judge/物理backend未知/纠正演示非baseline/canary排除披露。旧265/264退出核验后267/v17唯一新agent/session75605、8173/8803、relayPID32599已实际启动，10运行SHA/102模型源码SHA与离线fixture通过，仅依据自有Contact/Gallery/概括性正文的公开比对提醒，不给私有评分或手写应用。初始真实browser导航/1完整API、尚未编辑或交付，成功未实现；不干预其他聊天。下述264/265运行段均历史。
+[268 最终报告](experiments/268_tau2_telecom_autoskill/reports/final_report_268.md)、[记忆291](memory/291_2026-10-05_telecom_v1_paired_eval_complete_three_domains.md)：268 telecom B0 0.7937（127/160）vs B1 0.7438（119/160），**−5.0pp**（配对 23胜/31负/106平，p=0.341，CI[-16.3pp,+5.6pp]；任务级 10/13/17）；技能真实读取 **160/160=100%**。
+
+- **三域并列（同口径）：148 retail +5.0pp（p=0.215）｜267 airline +5.0pp（p=0.503）｜268 telecom −5.0pp（p=0.341）——方向不一致、均不显著**；与"AutoSkill 原生盲提取技能库对配对结果无稳定方向性影响"的观察一致，不得选择性报告正向域、也不得把负向解读为确定有害。
+- v6 原生 `$技能` 引用机制三域均验证有效（读取率 99.4%/100%/100%），treatment 施加已实证。
+- 学习口径（用户决定，记忆 282/289/291）：**盲提取、无成败监督**（268：52 成功+18 失败混合进入提取）；归因必须保留此限制。
+- 环境：WSL 事故 #2 后稳定（PID1 19:26:20 起 >9 小时）；Docker Desktop 保持停止（恢复待用户）；两域实验守护均已自然退场。
+- 可选后续（未启动）：扩样/第二 seed、技能消融、结局标注学习 v2（记忆 282 方案 B）。
+
+## 第290轮：RW题间并发已执行；miniPaint三轮结束，Squoosh首轮继续
+
+用户“太慢了，并发加速”已执行，[记录290](memory/290_2026-10-05_rw_parallel_evolution_collection.md)。当前`experiments/288_rw_parallel_evolution_collection`，并发上限2；准入2/26，其他24待平台/reference/verifier。miniPaint第三轮自然结束：功能4/6、SSIM0.179、最终0.4228，完整原生session19,984,024bytes逐文件SHA通过；未达成功门槛，3/3耗尽，禁止第四轮或借版本重置。第一轮0.3394、第二轮实际交付后评分OOM/仅评分adapter最终0.1路径标记及全部失败保留，不挑分覆盖。
+
+Squoosh第1轮`...1791129536850164583`原controller126497/ticks1635703/native127286继续，与miniPaint第三轮真实重叠20.8分钟；epoch1791131406真实446事件/6.33MB且mtime推进。其浏览器发生exact容器MEMCG OOM，原actor仍在，独立external_resource_v261_manifest保留旧配额/故障后增至3GiB，代码/提示未热改，不称无异常或资源不变。v2.4原2GiB/2CPU与4GiB启动准入保持历史，当前实际以外部修复manifest为准。
+
+重叠期间8788共享proxy导致账本route混合，context/参考/候选仍独立，但不可据route单独归每路请求。临时8791/NAT只GET验收，没有实际模型迁移，miniPaint自然结束后精确清理；旧ss -K成功退出不代表真的重连，已侧证更正。未来8792/8793隔离v2.7另冻结、真实端口占用负对照通过，仅准备未激活，既有轮checkpoint须先准入且预算不重置。每30秒观察器142639留岗，保存身份/API/事件/内存与全部freeze；继续Squoosh并准备其他候选，不自动学习/250评测，不声称已测得2倍提升或任何skills收益。原285/旧corravale STOP及下述289、Co-Gym和其他聊天不变。[当前证据](experiments/288_rw_parallel_evolution_collection/reports/current_phase_v261_manifest.json)。
+
+## 第289轮：267（Airline）配对评测完成；268（Telecom）评测通宵进行中
+
+[267 最终报告](experiments/267_tau2_airline_autoskill/reports/final_report_267.md)、[记忆289](memory/289_2026-10-05_airline_v1_paired_eval_complete.md)：B0 0.675（54/80）vs B1 0.725（58/80），**+5.0pp（配对 12胜/8负/60平，p=0.503，CI[-5pp,+13.8pp]；任务级 7/3/10）**；**技能真实读取率 80/80=100%**（原生 sqlite 证据；v6 $引用全命中）。学习按原生链路盲提取（26 条=19 成功+7 失败混合）→1 技能库；结果解释保留"无成败监督"限制，与 148 零售 +5.0pp 同为不显著、不得合并宣称增益。
+
+- 268（telecom）：采集 70/70（均分 0.75）、学习冻结完成（`tau_telecom_pool_v1`，1 技能+29 参考文件）；**评测进行中（00:02 时 B0 32/160、B1 39/160）**，预计通宵完成；完成后按同口径出报告。
+- 环境：WSL 事故 #2 后持续稳定（PID1 19:26:20 起）；评测守护与自愈循环在岗；Docker Desktop 保持停止（恢复待用户）。
+
+## 第285轮：独立GUI演化集合开始采集（当前RW主线）
+
+最新[286进度核验](memory/286_2026-10-04_rw_first_round_progress.md)：epoch1791123330仍miniPaint第1轮、约28分钟，207实际API/206完成/1在途/0失败，537原生事件/21截图/23Write/25Edit/25源码文件；35SHA及唯一身份保持，持续实质推进，尚未最终交付评分。启动1/26、完整验收0/26（0%），其余25待准入；模型请求数不是完整迭代轮数。本轮只读监控、无重启/新轮次/冻结修改。下述285初快照为历史截面。
+
+用户“开始生成轨迹”已实际执行。当前目录`experiments/285_rw_evolution_collection`、版本`rw_evolution_collection_v1`，26主候选保留，不采纳未确认的50扩容。miniPaint参考实际准入1/26：独立训练行为验证参考6/6、静态负对照0/6，自有桌面/移动GT完成，官方setup权限隔离及参考functional1/SSIM1通过。第一轮`minipaint.training` / `recreation_eval_1791121638371741570`、唯一controller48903/ticks845864，35SHA首agent前冻结，原生prompt/CLI无旧corravale源码或纠正提示；8190独立视觉传输，模型图像/工具两次隔离准入通过。
+
+初快照33实际API/32完成/1进行中/0失败，29累计历史图像传输块、86原生事件/411599bytes，完整轨迹0，第一轮实际观察/复刻中。模型请求别名`deepseek-v4-flash-vision-exp`，返回别名`deepseek-v4.1-flash`，物理checkpoint未知。正式训练视觉合同是原生SSIM/LPIPS+真实GT，VLM显式不启用，不称其为250题完整program/VLM结果。原生参考metrics外层0与实际scores1均保留，接受依据实际`eval_results/scores.json`，不热改vendor。只读观察器50299每30秒记录真实推进/终态，尚未验收交付/原创性/完整session导出。
+
+每canonical应用家族最多三轮含首轮，成功停；当前miniPaint1/3已分配，启动器禁止重复。旧corravale17轮STOP不恢复；其他25候选仍待平台/构建/验证器准入，不能称26轨迹已经生成或全队列运行。未启动AutoSkill学习或250评测。下一步首轮终态核验、完整图文事件/原生session与原创性审计，之后继续同等准入候选；非成功不填成功、设施错误不填0。详见[285记录](memory/285_2026-10-04_rw_evolution_first_trajectory_started.md)和[安全快照](experiments/285_rw_evolution_collection/reports/health_monitor_state.json)。旧主线和其他聊天保持。
+
+## 第284轮：RW 26来源为首批，最终演化规模尚未实证确定
+
+用户质疑26演化链对250测试是否合理；[规模补充](reports/284_rw_evolution_scale_reassessment.md)/[记忆284](memory/284_2026-10-04_rw_evolution_scale_reassessment.md)明确：训练来源少于测试不使小样本迁移实验无效，但281“够首轮来源”不能扩大为素材/技能/五平台转移已充分。26主候选U7/W5/M3/A6/Web5、最多78执行轮非78独立应用，实际新准入/轨迹/skills尚0；现定位首批/pilot，不预锁最终规模。建议先验收完整记录/真实学习输入，再按能力缺口扩容；50演化应用/每平台约10是下一阶段预算建议，尚未用户确认，不是统计阈值；独立开发应用和预定规模曲线/停止指标需另设计，禁止按250测试成绩挑选或增补演化来源。三轮/旧STOP/其他聊天/原26 source freeze/283未激活协议均保持，本轮只读研究与记录、无下载/模型/GUI/学习/评分。下述281/283保留历史适用范围，非新规模已执行。
+
+## 第283轮：RW 26应用演化轨迹生成——先交方案，尚未启动
+
+用户要求基于已取得集合开始生成轨迹，**先给方案与期望产出，后续用这些轨迹建skills库**。已完成只读设施/原生harness/AutoSkill输入合同审计与[具体方案](reports/283_rw_evolution_trajectory_plan/PLAN.md)、[未激活协议](reports/283_rw_evolution_trajectory_plan/collection_protocol.proposed.json)、[记忆](memory/283_2026-10-04_rw_evolution_trajectory_collection_plan.md)。目标26完整应用家族链（U7/W5/M3/A6/Web5）、每家族首轮＋纠错至多3，最多78执行轮次非成功保证；先reference/独立训练verifier冻结，再26内canary，真实失败反馈/最后提交不挑分，不同应用不传skills/旧代码，本轮不自动学库或测250。全部新reference accepted0，Web/Ubuntu12可优先准备但未验收；Windows5/mac3/Android6原生宿主/通道未见准入证据，waiting_resource不填0，Docker Desktop及其他聊天服务不动。
+
+官方单run20h/请求30min/max_turns=None可查，避免旧240秒API截断；沿用户RW视觉资源及218固定官方vendor另建统一freeze，不继承旧corravale17版专用hint/guard或恢复STOP。关键数据合同：raw/图像/完整公开按序事件＋父轮/candidate/真实反馈、机械学习视图、外部outcome/质量/成本/hash分层；raw session可能64MiB跳过，图像consumer与实际API输入须核对。现AutoSkill trajectory file/data一user扁平且synthetic success非task成功、text-only不读图片、connector可能尾截断，sdk.ingest结构化适配未实现；每ingest候选硬上限1，不保证26最终skill。所有这些是输入验收/期望产出方案，本轮模型/GUI/采集/学习0，来源26＋MacPass候补与原freeze保持。
+
+## 第282轮：学习口径按 AutoSkill 原生链路；267 配对评测启动
+
+用户明确"不修复，就按照 autoskill 原生链路"：学习输入保持原样（无 reward/成败标签的盲提取，`success_only=False`），267 现行冻结库（`tau_airline_pool_v1`，1 技能）为评测最终版；方案 A/B/C（成功过滤/结局标注/双库）未采纳，记录为负决策。[记忆282](memory/282_2026-10-04_native_autoskill_learning_decision_eval_launch.md)。
+
+- **267 评测已启动（20:32）：B0/B1 各 80 场（test 20×4 trials），6+6 并行，relay 8180+独立账本；自愈循环 `run_eval_loop.sh` + Windows 守护 `wsl_supervisor_267_eval.ps1`。** 267 采集 26/26（均分 0.72；19 成功/7 失败）；学习 26/26 处理、0 失败；冻结 1 技能。
+- **268 采集 61/70（均分 0.70）推进中**；完成后按同一原生链路学习（`tau_telecom_pool_v1`）→ 冻结 → 评测 320 场。
+- 归因纪律：两域结果的解释必须标注"技能学习为盲提取、无成败监督"；无论涨跌不得声称只学了正确流程。
+- 环境：WSL 事故 #2 自 19:26 起未再现（稳定 >1h）；Docker Desktop 保持停止（另一实验线亦决定不恢复 Desktop 集成，口径一致）；评测启动时内存 13.3GB 可用。
+
+## 第281轮：RW 250题目标演化来源池已补齐，停止扩充
+
+用户最新要求对当前250题构建演化集合，“够了就停止，不够就继续”。已逐项核对250公开task IDs/各平台50，原16素材偏图文，补11项计算/规则/数据/计时/音频/科学图/菜单/系统/复杂Web表单来源；27固定源码归档311,322,152bytes、26742文件，11新项9678文件SHA全PASS、原279 manifest保持。MacPass家族关系未排除列1条件候补，不计足够性；**主候选26任务：Ubuntu7/Windows5/macOS3/Android6/Web5，首轮来源素材足够，搜集与下载到此停止**。[来源集合](reports/280_gui_pool_sufficiency/README.md)、[任务登记](reports/280_gui_pool_sufficiency/evolution_task_registry.json)、[记忆281](memory/281_2026-10-04_rw_250_evolution_pool_sufficiency.md)。
+
+64拟议观察→复刻→自查流程含候补，不是64真实轨迹；一应用一个完整复刻任务，26准入后最多78轮含首次。来源足够不等于运行就绪/技能数量或250题收益：模型/参考运行/轨迹/skills全0，构建/重置/访问树/独立训练verifier尚待准入；特殊CAD/IME/传感器/加密/backend等保持OOD未知，不无限补同款。全fork/模板隔离未证，仅27repo与200native精确去重0、Web显式身份未匹配；MacPass旧源保持。更正279：Web44合成＋6公开，Doodle是壁纸不是画布，37例映射非覆盖率。旧corravale17次暴露另审，不直接称250干净held-out；旧5+245、STOP及三轮保留，本轮无模型执行/服务修改。
+
+## 第280轮：Airline/Telecom 双域立项并跑通；Docker 引发 WSL 循环重启已止血
+
+用户（2026-10-04）：两域用**当前 deepseek-flash**（消费者与用户模拟器），banking_knowledge 暂缓（"3 先不做，没有 train 和 test"）。[记忆](memory/280_2026-10-04_airline_telecom_domains_and_wsl_incident.md)。
+
+- **267_tau2_airline_autoskill**：域参数化（vendor 自 148 逐字节复制、venv 克隆并重指 vendor、relay 8180/独立账本、原生根 skillsloop267）；分集 train30/test20、dev=4（42/21/20/12）、演化 26；单测 10/10、dry-run 通过；**dev 联调 4/4 通过**（0/1/0/1，工具调用 3/4/19/14，全 user_stop）；采集 26 题在跑（自愈循环）。
+- **268_tau2_telecom_autoskill**：同法搭建（relay 8181、原生根 skillsloop268）；train74/test40、dev=4 覆盖 3 类、演化 70；单测 10/10、dry-run 通过（13 工具）；任务 ID 特殊字符已做目录名安全化；dev 联调在跑。
+- **基建事故**：约 17:11 起 WSL 被 Docker Desktop 的 WSL 集成组件循环重置（loop0=docker-wsl-cli.iso 损坏 I/O 错误；全部实验线进程被杀，采集两次中断）。`wsl --shutdown` 无效；**停 Docker 集成组件后止血**（PID1 稳定 10+ 分钟）。已建自愈循环 + Windows 侧守护（跨 distro 重启存活）。**Docker Desktop 保持停止；是否恢复请用户决定**（直接重启可能复发，建议先清 isocache/更新 Docker）。
+- 边界：airline 绝对分不与论文比对（同 148 口径）；telecom 用 flash 预期绝对分低，仅配对观察；未改 vendor；事故期失败尝试与误端口残留已归档保留。
+
+## 第279轮：RW独立开源GUI来源池已取得，运行准入未完成
+
+用户要求按原文获取与bench对应且适合skills素材的开源GUI应用。已实际取得16个fixed-commit源码：Ubuntu/Windows/macOS/Android各3、Web4；归档153,239,413bytes（146.14MiB）、17064文件，每项来源/许可/构建/41拟议观察→原创复刻→自查流程已汇总，37个能力映射bench ID全部真实存在。[来源池与核验](reports/279_gui_acquisition/README.md)、[记忆](memory/279_2026-10-04_rw_open_source_gui_application_acquisition.md)。这是自己构造的来源池，不是作者官方train或35000轨迹。
+
+原生200行/198repo精确去重0命中，50Web公开首页身份全部读到摘要；匿名原站/完整fork与MacPass/KeePass家族风险仍pending。NotepadNext产品族/Czkawka GTK停止维护/CotEditor与Vue图像许可/FamilyGem SDK37.2负证据保留，改为独立来源或较兼容版本。主池运行accepted0、trajectory0、verifiedskills0；子模块/SDK/字体/离线行为/访问树与独立训练verifier未验收。后续先reference准入再采真实完整轨迹，不手写预期skills当产物；同题最多三轮含首次/旧STOP保持。本轮未重划5题/245协议、未恢复模型实验、不操作其他聊天Co-Gym服务。
+
+## 第272轮：RW改为五平台各一题演化、245题单次测试（未启动）
+
+最新[277训练来源核验](memory/277_2026-10-04_rw_training_application_selection_disclosure.md)：§3.1只给GitHub高质量GUI应用、五平台多样与去重原则，未找到训练应用清单/仓库检索流程/质量阈值/数量；附录C.3的详细选择是250benchmark构建，不是已明确训练池配方。公开核验无实验执行，旧停止/新方案不变。
+
+最新[276计数澄清](memory/276_2026-10-04_rw_trajectory_sampling_counts.md)：官方250为50网站＋200软件应用；35000是另选训练应用的采集轨迹筛选数，一题可多次执行产生多轨迹，但训练不同应用数/每应用次数/筛前规模未披露。不能按250×140反推，不把工具步数当轨迹条数。仅解释，STOP及5题／245方案不变。
+
+最新[274术语澄清](memory/274_2026-10-04_rw_framework_vs_training_task_inventory.md)：35,000训练轨迹确实由同一RecreationWorld设施与同类五平台应用复刻任务采集；之前“另选任务”指具体应用实例，与评测去重，并非另一套无关环境。RecreationBench为250发布评测实例，训练不同应用数未知。用户5题演化／245测试、三轮与STOP保持，无新增执行或实证效果。
+
+用户新方案替代270两折：五平台各1题多轮素材→AutoSkill多个技能候选/原生维护→新统一agent库冻结→其余各49共245题单次有技能评测。Web复用264公开638观察/41图及265完整0.7006失败证据，不重跑；历史17版本/指导/源码继承单列，不改写为三轮成功。其余四题medium确定性候选ksnip-ksnip/objective-see-netiquette/beryx-fxgl-sliding-puzzle/v1tzor-timeplanner，最多3轮含首次、新增上限12，未按分选择；全来源去重与平台就绪尚pending。[方案/名单](memory/272_2026-10-04_rw_five_seed_evolution_design.md)。245仅一次、无自动增加无技能对照，故绝对成绩不等于skills提升；空技能/合并与失败如实保留，不凑数量。论文35,000来自独立去重训练任务池，非公开250题重复。267 STOP/268未启动，未调用模型或启动其他平台，其他聊天保持。下述270为已替代建议。
+
+## 第270轮：RW演化／测试分集方案已准备，尚未恢复实验
+
+用户询问可否基于当前benchmark划分。已核实官方250任务五平台各50，全为公开test；35,000为未取得的独立训练轨迹，现多轮示例仍corravale一题。建议250登记／corravale开发排除／249候选，先在已实跑Web协议上分49题A24/B25互补学习评测，49无技能采集事前相同协议可兼baseline、冻结两库后49有技能，共98正式执行。候选JSON按难度A8/8/8、B7/9/9已保存，来源分组审计pending、draft未冻结，不冒充官方train/test或250全部可运行。全平台两同ID应用组需同折，其他环境未验收；[方案与证据](memory/270_2026-10-04_rw_derived_split_plan.md)。本轮无模型调用/批量执行，267 STOP/268未启动及同题三轮上限保持，其他聊天不改。
+
+## 第241轮：RW已按用户要求停止，纠正迭代最多三轮
+
+用户最新明确立刻停止，未来同一任务此类纠正迭代最多三轮、未达标就是未达标。267/private/STOP已写，controller32588/ticks4383630身份核实后停止，唯一任务容器running=false验明，证据267/reports/user_stop.json；268未启动，禁止恢复267或新增纠正版本，原代码/轨迹/结果全保留。三轮含首次，不以另建版本重置或借设施恢复增加能力纠正次数。成功通过仍0份；下述执行中段均历史。其他聊天独立实验不受此次停止影响。
+
+最新轮数口径已核实：同corravale DeepSeek17版本/18启动片段，含失败与恢复；8流水线正常结束中5份实际应用交付/评分/公开轨迹（250/254/255/257/264），2次完整视觉评分均未达0.75，通过0份。不是尚无轨迹，也不是官方单题需要17轮。267/v17当前409真实响应完整/空0、29编辑、output11959627字节、唯一原PTY75605仍活跃，尚无新交付/评分；不再自动新增纠正版本，保留历史与其他聊天。
+
+最新265完整评分结束0.7006<0.75/accepted=false，functional0.5644/visual0.8367；20页40视图981判断、40完整API零失败、官方build success、102源码前后与来源hash及产物hash全通过。依赖修复有效，模型实现仍未达门槛，原负结果保持；self-judge/物理backend未知/纠正演示非baseline/canary排除披露。旧265/264退出核验后267/v17唯一新agent/session75605、8173/8803、relayPID32599已实际启动，10运行SHA/102模型源码SHA与离线fixture通过，仅依据自有Contact/Gallery/概括性正文的公开比对提醒，不给私有评分或手写应用。最新177真实API完整/空0、6写入编辑，Layout与ContentPages两个src hash实际变化；已通过公开a11y/截图/普通动作比较22导航路径，两个network命令含自身预览与已阻止探测，无DOM脚本/私有评价读取/参考evaluate。268/v3独立完整评分环境准备、未启动；尚未交付/评分，成功未实现，不干预其他聊天。下述264/265运行段均历史。
 
 最新264功能102/229（78/140+24/89）、加权program0.5644，禁VLM旧总0.2822/score_passed=false；公开638动作观察/41图像已导出，309真实API全完整，原635vendor318data/10SHA保持、生成容器stopped。265/v2完整评分full_visual_1791093098524327635已实际启动，恢复原lock对应已安装官方依赖后原生重建，--skip-agent且候选冻结；已到scripted78/140与agent_gen阶段，尚无VLM请求属顺序预期。仍须完整40视图/真实API/源码及产物hash/build success和总分>=0.75验收，成功未实现。266仅公开参考文件名规模核验，不读私有测试/不启动其他题。下述评分待启动段为历史，其他聊天262及103暂缓保持。
 
@@ -30,7 +123,35 @@
 
 最后更新：2026-10-04（第247轮：v5旧8192输出预算截断已证，旧74/state/freeze保留；独立v6/32768真实8458-token验收后仅恢复B；A105及其他聊天保持）
 
-## 第266轮：归档兼容v2正式续跑，原评分继承
+## 第269轮：三路并发有技能评测，原评分继承
+
+**最新288速度诊断与进度：62/212（29.25%），继续150题。** [288记录](memory/288_2026-10-04_cogym_latency_bottleneck_diagnosis.md)：097/101真实17.34/16.51分钟、35/40次SP调用，各0错，模型等待78%/80%；当前090/089等待占比85%/89%。官方SP一次动作通常串行scratchpad/plan/action三调用，原baseline策略相同；网关线程并发、短登记锁，平均附加约0.02秒，未证明供应商内部排队/限流原因。旅行env PSS约2.4–2.8GiB，其他角色及swap放大并发占用；原三路OOM停机是总耗时的重要来源。仍287/v5、原GLM/max2/新增worker6GiB准入，不改冻结/单题策略。epoch1791126231唯一父健康、当前089 SP38/0错已读库，090自然结束是采样窗口暂一路；8146/8129/Qdrant200，WSL可用约7.94GiB，累计07815709+238580=16289。最近两次15585/15590已证官方分落盘后下游清理取消，不補成功或重跑评分。本轮全历史只读探针因不必要磁盘扫描已精确终止，仅保留轻量近期检查；原正式audit仍保留。潜在数据库共享/更快同模型资源未实现，必须另版一致性验收，当前不外推提速或技能收益。下方287为此前截面。
+
+**287收尾较晚截面：61/212（28.77%）**，59有效/原017与095两个UNKNOWN/34真实0、completion33/59、读取50/61；57有效同题差值−0.0614035、16胜27平14负、描述性95%[−0.1809211,0.0592105]。原两个接管worker自然完成097=0.8125、101=0，原59行逐字保持、最终29/30文件SHA保留，自动补090/089新任务且全部node活跃/已读库/SP0错，继续151题。原audit采节点退出属正常评分后清理窗口，未新故障。39/3021冻结、Redis/Docker/lease通过，Qdrant原storage与238 accepted等待页已恢复且未重学，Windows实际8000/8129/8130/8140/8145/8146全部200；最近账本截面07815608+238580=16188，Windows约1.13GiB/WSL约3.47GiB可用，维持max2/每新增worker6GiB准入。仍当前287/v5唯一父，禁止恢复269/286退役调度；下段59为同轮较早截面。
+
+**当前Co-Gym阶段已更正为287/v5**：[287恢复记录](memory/287_2026-10-04_cogym_memory_and_atomic_recovery.md)。正式目录`experiments/287_cogym_212_atomic_recovery_skill_evaluation_v5`、`sp_212_historical_baseline_skill_eval_v5_parallel2`，页8146，唯一controller73523/ticks1166809/boot255b5570-fab4-46e1-a9ff-c307b0bbb76a（每次重新核验）。269旧boot18:32—18:35再次真实OOM，三个无评分中断片段与59原首终态保留；独立286/v4 max2/新增任务6GiB准入后父状态替换PermissionError，原两worker活跃，287/v5只加JSON/CSV有界写入重试并接管其原身份，39新/3021外部SHA与持久失败拒绝验收通过。epoch1791124924仍59/212（27.83%），57有效/017与095两个UNKNOWN/33真实0、completion32/57、读取48/59；56有效同题无技能0.3582589/有技能0.3102679、差值−0.0479911、16胜27平13负、95%[−0.1707589,0.0647321]。097与101原worker/八node身份及库hash保持，SP30/39各0错、各已读技能，8146/8129实际200，累计07815582+238580=16162。模型/提示/vendor/库/折/单题预算/评分不改，不重学或重跑baseline；103用户暂缓与A官方容错照旧。269/286 STOP是版本退役，**不能恢复旧父**；当前接管的286 worker未退出前不另启worker，只按原身份跟踪。当前最多2路/6GiB每新增worker准入，不足时在途继续。剩余153题，临时子集不外推总体/因果收益，原315/945登记与巡检ACTIVE保持。下一次heartbeat先核对本状态，旧269路径只作来源；原automation API本轮不可用，未修改外部自动化文件。下方269/280为历史截面。
+
+280收尾更晚截面（epoch1791107722）：恢复后已51/212（24.06%），50有效/1UNKNOWN，49有效同题无技能0.3545918/有技能0.2933673、差值−0.0612245、13胜24平12负、95%[−0.1747449,0.0561224]，读取40/51；三中断retry1均已首评分，当前088/015/076三worker/12node存活，原2GiB门槛保持、WSL约3.25GiB/新boot无OOM，继续161题。下段48与账本为独立较早时点。同期另一聊天280记录Desktop集成异常/停止后稳定属其强推断，不抹本轮OOM实证；本聊天不恢复Desktop，原生dockerd正常。[最终快照](experiments/269_cogym_212_parallel_skill_evaluation_v3/reports/280_final_monitor.json)。
+
+最新[280故障恢复](memory/280_2026-10-04_parallel_evaluation_oom_restart_recovery.md)：48/212（22.64%），比278新增3首终态，47有效/1原017UNKNOWN/30有效0，completion25/47/读取38/48；46有效同题无技能0.3206522/有技能0.2649457、差值−0.0557065、12胜23平11负、95%[−0.1766304,0.0638587]，仍仅A折。旧boot内核17:11—17:19真实global OOM杀python28341，原WSL换boot且controller/全部node退出；具体角色及系统退出因果链未全证，不当额度错。061/106/108无评分片段/23、30、29 SHA与中断sidecar保留，不填0/完成。无STOP/44与1229 freeze完整后原--resume唯一父2476/ticks26395/boot43068c9d-31ea-4217-a203-75953dc36fd3三路retry1恢复，SP12/9/14各0错、全node/两Jupyter32768与32769/旧88与334 SHA通过。lease720、Qdrant2489原storage和238 accepted等待页4010恢复无重学，实际服务200。新boot未见OOM，收尾WSL约3.89GiB/Windows约0.79GiB，保持原2GiB准入，不热改并发。2284完整API/+154、27清理取消/2旧交接/1原13767传输错/1未评分14888中断取消全归属，累计07814959+238580=15539，原账本/首评分不改；监控采样旧false已更正且pre_recovery保留，ACTIVE同步先audit完成再followup及新身份。继续164题，不外推收益。下述278为历史快照。
+
+最新[278巡检](memory/278_2026-10-04_parallel_evaluation_fortyfive_tasks.md)：同269/v3已45/212（21.23%），比上次新增8首终态、44有效/1原017UNKNOWN/28有效0，均分0.265625、中位数0、completion24/44、读取35/45。43有效同题无技能0.3081395/有技能0.2718023、差值-0.0363372、12胜21平10负，描述性95%[-0.1671512,0.0872093]，仍仅A折。audit里030四节点退出经原status证明为completed/官方0.625/ended4586.99995的结束采样窗口，后续自动补061，不误重启；唯一父40813及073/056/061全部worker/节点身份通过，5/8/1真实SP完成各0错。44/1229来源、库copy、旧88/334run SHA/lease与两Jupyter32795/32796通过。2130完整API/+372、26评分后取消/2旧交接/1原13767失败传输全归属，复用273证据、旧087及017负结果保持，累计07814767+238580=15347。实际服务健康、Windows可用约2.66GiB/当次WSL4.00GiB，无新实质故障/修复，freeze未改；继续167题/巡检ACTIVE，不外推收益。下述275及此前为历史快照。
+
+最新[275巡检](memory/275_2026-10-04_parallel_evaluation_thirtyseven_tasks.md)：同269/v3已37/212（17.45%），相对上次新增8首终态，36有效/1原017UNKNOWN/24有效0、均分0.2395833、中位数0、completion19/36、读取28/37。35有效同题无技能0.3410714/有技能0.2464286、差值-0.0946429、8胜17平10负，描述性95%[-0.2446429,0.0464286]，仍仅A折。唯一父40813精确身份保持，008/032/094全部worker/节点通过，24/6/6真实SP完成各0错、均读技能；44/1229来源、库copy、旧88/334run SHA/lease、Jupyter32791及实际服务通过。1758完整API/+328、24评分后取消/2旧交接/1原13767失败传输全归属，复用273证据不反复定位，累计07814395+238580=14975；设施失败attempt仍2，原087独立retry1与017锁UNKNOWN保持。Windows可用约1.42GiB/当次WSL2.57GiB，未见OOM，继续原2GiB准入；无新增实质故障/修复、freeze未改，继续175题/巡检ACTIVE，不外推总体收益。下述273及此前为历史快照。
+
+最新[273巡检](memory/273_2026-10-04_parallel_evaluation_timeout_recovery.md)：同269/v3已29/212（13.68%），比上次新增5首终态，28有效/1UNKNOWN/17有效0、均分0.2991071、中位数0、completion16/28、读取20/29；27有效同题无技能0.3842593/有技能0.3101852、差值-0.0740741、7胜12平8负，描述性95%[-0.2476852,0.0879630]，仍仅A折。087原worker URLError与5秒8129健康轮询路径相符，未产分并被worker_failure拒绝；独立retry1已原生completed/首次官方0-completion1，旧失败与13767真实240秒upstream_transport_error全部保留，不当同payload请求恢复、不按分挑重试。017官方travel解析unterminated string literal导致scoring_failure锁UNKNOWN，不填0/不改parser/不重跑。1430完整API/+357、19评分后取消/2旧交接/1失败attempt传输全归属，累计07814058+238580=14638；13492/13672复用271证据，13767后续audit可复用273归属。唯一controller40813及099/102/071全部worker/节点通过，20/21/9真实SP完成各0错；44/1229来源、库copy、旧88/334run SHA/lease、Jupyter32785/32786及实际服务健康。Windows可用约1.79GiB/当次WSL4.52GiB，无OOM或额度原因证据，冻结运行未改，继续183题/巡检ACTIVE，不外推收益。下述271及此前为历史快照。
+
+最新[271巡检](memory/271_2026-10-04_parallel_evaluation_twentyfour_tasks.md)：同269/v3已24/212（11.32%），相对上次新增8首终态，12继承保持，继续188。24有效/0UNKNOWN/14有效0，均分0.3203125、中位数0、completion13/24、读取16/24；23有效同题无技能0.3858696/有技能0.3342391、差值-0.0516304、6胜10平7负，描述性95%[-0.2391304,0.1304348]，仍仅A折。唯一父40813身份保持，109自然结束自动补087；当前061/027/087全部worker/节点通过，27/21/6 SP完成各0错。44/1229来源与旧88/334run SHA/库copy/lease通过，两Jupyter32781/32782隔离。1073完整交付（+311）、17评分后清理取消/2旧交接全归属，累计07813699+238580=14279。13492/13672完整上游stop发生官方评分后/清理ended前，271时间线证据补监控分类，原audit/账本/成绩不改；083清理APIError容器精确确认已不存在，无残留需修复，具体APIError原因未知。实际服务健康、Windows可用约3.03GiB/当次WSL7.02GiB，无新模型或节点故障，继续原三路/巡检ACTIVE，不外推总体收益。后续audit可复用271已知取消证据。下述270及269为历史快照。
+
+最新[270巡检](memory/270_2026-10-04_parallel_evaluation_sixteen_tasks.md)：同269/v3已16/212（7.55%），比上次13新增3首终态，12继承评分保持，继续196未终态题。16有效/0UNKNOWN/11有效0，均分0.2265625、中位数0、completion7/16，成功读取11/16；15有效同题无技能0.3708333/有技能0.2416667、差值-0.1291667、2胜8平5负，描述性95%[-0.3041667,0.0333333]，当前均A评测折。唯一controller40813与009/044/026三worker及节点身份通过，31/23/9真实SP完成各0错；009同run新增13次成功，新旧任务轮换按run_id比较。44/1229来源、库copy、旧88/334run SHA与lease通过；762完整API/12终态清理取消/2旧交接中断全分类，累计07813382+238580=13962，实际服务均健康。Windows可用约1.38GiB无OOM实证，按原WSL2GiB准入继续；无新故障/修复，不改变freeze，不宣称总体或因果收益，巡检ACTIVE。下述269启动为历史快照。
+
+最新[269并发启动](memory/269_2026-10-04_parallel_three_skill_evaluation_started.md)：用户要求并发加速，当前269_cogym_212_parallel_skill_evaluation_v3/sp_212_historical_baseline_skill_eval_v3_parallel3，唯一controller40813/ticks4611114/原boot，页8146；max_workers3、表格最多2、WSL不足2GiB暂不新增。原GLM模型/SP/vendor/提示/单题预算/库/折/评分不变，44新SHA/1229来源、3真实并发canary与Redis隔离/调度去重/首评分不挑高/UNKNOWN分母验收通过；不是3个controller。交接时旧任务自然全部完成，无在途被打断，12原首终态继承，旧266 controller32205精确退出，38freeze与88旧run SHA/version_v2_parallel_handoff保留，旧262334 SHA保持；旧串行STOP为退役，禁止恢复旧父。已13/212（6.13%）=12继承+1新082官方有效0/completion1，自动补093；有技能13均分0.2788462/有效0分8/UNKNOWN0/读取9，12有效同题无技能0.3385417/有技能0.3020833、差值-0.0364583、2胜7平3负。当前009/100/093三个worker身份及四节点通过，18/10/6SP完成0错、均真实读技能，两Jupyter不同mount与32774/32775端口隔离。641完整交付/11终态取消/2旧交接中断分类、累计07813255+238580=13835；实际服务/内存/lease健康，Windows可用约1.4GiB继续关注、无OOM实证。315-30 ACTIVE已同步并发全任务检查，继续199题，历史基线/A容错/B资源差异与并发执行变体披露，不宣称三倍或技能增益。下述266及此前为历史快照。
+
+## 第266轮：归档兼容v2正式续跑，原评分继承（串行调度已退役）
+
+最新[268模型说明](memory/268_2026-10-04_current_model_roles_confirmed.md)：当前评测SP/模拟用户/需要LLM的官方评分共用原8000经8129的GLM-5.3-Flash，历史无技能同资源；已完成A库学习用原GLM、B库学习用用户接受的MiMo，ECNU1024维embedding独立。Claudex GLM请求/SSE别名与非流式MiMo自报差异保持，物理checkpoint未知。本轮仅只读汇报、未切换/重启/调用模型，无新增实证，进度仍以267快照为准。
+
+最新[267巡检](memory/267_2026-10-04_v2_first_terminal_and_valid_pairs.md)：同266/v2已10/212（4.72%），9继承/1新travel_050官方有效0/completion0，旧失败保持；历史050 UNKNOWN，因此有效同题仍9，无技能0.3958333/有技能0.3472222、差值-0.0486111、2胜4平3负，95%[-0.2291667,0.1458333]。全新10题均分0.3125/6有效0/0UNKNOWN、读取8/10，不与全历史207有效均分直接当差值。当前035/worker35510-ticks4458048及四节点精确存活、18SP完成零错/23回执；一条uuid前缀错误相对路径READ_SKILL被拒绝，原模型参数错误保留、任务继续。050无新AttributeError但日志未收到agent END且无agent归档，真实评分完成不升级为修复路径实测完成，不因此重跑已评分题。38运行/1102来源/38冻结副本/334旧run SHA及十题库copy通过；505完整交付、8评分后取消（新增13096）/2交接中断全部分类保留，累计07813110+238580=13690。实际服务/Redis/Docker/Qdrant/lease健康，Windows可用约6.5GiB，无新设施故障/修复、冻结运行未改，继续202题/巡检ACTIVE。下述266为先前快照。
 
 最新[266修复交接](memory/266_2026-10-04_sp_end_archive_compatibility_v2.md)：262/v1的travel_050在官方end归档读取SPModel.model时AttributeError，真实基础设施失败不记0；独立离线旧错误复现、新官方end非空history/token归档/请求逐字相同验收通过、外部调用0。当前266_cogym_212_skill_evaluation_v2/sp_212_historical_baseline_skill_eval_v2，仅补公开model归档属性，原提示/请求/库/分集/vendor/模型/评分不改，新38SHA/1102来源冻结。继承全部9个首终态（4.25%），不重跑已评分题，新均分0.3472222/同题历史0.3958333、配对-0.0486111、2胜4平3负；只续203未完成题。旧34freeze/源码/334run文件SHA/失败全保留于旧262及version_v1_retirement，交接travel_035部分attempt不计完成、不填0，旧controller40689精确退出且STOP标明操作方缺陷版本退役，禁止恢复旧v1。
 

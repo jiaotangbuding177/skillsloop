@@ -1,0 +1,65 @@
+AGENT: Hi! How can I help you today?
+USER: Hi, I've been having an issue with my phone. For the past few hours it's been showing "No Service" and I can't make any calls or use data. Can you help me figure out what's going on?
+AGENT: I can help with that. First, I need to identify you — could you please provide your phone number, or your customer ID, or your full name with date of birth?
+USER: Sure, my name is John Smith and my phone number is 555-123-2002.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 8.7, "data_refueling_gb": 0.0, "roaming_enabled": true, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT_TOOL_CALL: {"name": "get_bills_for_customer", "arguments": {"customer_id": "C1001"}}
+TOOL_RESULT: [{"bill_id": "B1003", "customer_id": "C1001", "period_start": "2025-03-01", "period_end": "2025-03-31", "issue_date": "2025-03-01", "total_due": 0.0, "due_date": "2025-03-15", "line_items": [], "status": "Draft"}, {"bill_id": "B1002", "customer_id": "C1001", "period_start": "2025-02-01", "period_end": "2025-02-28", "issue_date": "2025-02-05", "total_due": 150.0, "due_date": "2025-02-19", "line_items": [{"description": "Basic Plan - Line 555-123-2001", "amount": 40.0, "date": "2025-02-05", "item_type": "Plan Charge"}, {"description": "Premium Plan - Line 555-123-2002", "amount": 65.0, "date": "2025-02-05", "item_type": "Plan Charge"}, {"description": "Basic Plan - Line 555-123-2003", "amount": 40.0, "date": "2025-02-05", "item_type": "Plan Charge"}, {"description": "Suspension Fee - Line 555-123-2003", "amount": 5.0, "date": "2025-02-05", "item_type": "Fee"}], "status": "Issued"}, {"bill_id": "B1001", "customer_id": "C1001", "period_start": "2025-01-01", "period_end": "2025-01-31", "issue_date": "2025-01-05", "total_due": 160.5, "due_date": "2025-01-19", "line_items": [{"description": "Basic Plan - Line 555-123-2001", "amount": 40.0, "date": "2025-01-05", "item_type": "Plan Charge"}, {"description": "Premium Plan - Line 555-123-2002", "amount": 65.0, "date": "2025-01-05", "item_type": "Plan Charge"}, {"description": "Basic Plan - Line 555-123-2003", "amount": 40.0, "date": "2025-01-05", "item_type": "Plan Charge"}, {"description": "Data Overage - Line 555-123-2002", "amount": 15.5, "date": "2025-01-05", "item_type": "Overage"}], "status": "Paid"}]
+AGENT: Thanks for waiting, John. Here's what I found:
+
+- **Line 555-123-2002** (your number): status **Active**, so it isn't suspended. That means the "No Service" issue is likely something on the device/network side rather than a billing suspension.
+- **Line 555-123-2003**: suspended, but that appears to be a different line.
+- **Bill B1002** (Feb 2025, $150.00) is currently **Issued** — not yet overdue as far as I can see.
+
+Since your line is active, let's troubleshoot the device. Could you do the following on your phone and tell me what you see?
+
+1. Check the **status bar** — what icons are showing (airplane mode, signal strength, network type, etc.)?
+2. Run a **network status check** to show your connection status to cellular networks.
+
+If you have specific diagnostic options on your phone, let me know what they show.
+USER: I can only handle one action at a time — could you have me do them one at a time? Which should I start with?
+AGENT: No problem — let's start with the **status bar** check. Please run it and tell me exactly what icons/text you see (airplane mode, signal strength, network type, data status, etc.).
+TOOL_RESULT: Status Bar: ✈️ Airplane Mode | 🔋 80%
+USER: Okay, I checked. The status bar shows an **airplane mode icon** and the battery at **80%**. I don't see any signal bars or network type indicator at all.
+AGENT: That explains it — **airplane mode is ON**, which disables all cellular service. Let's turn it off.
+
+Please **disable airplane mode** on your phone, then check the status bar again and tell me what you see.
+TOOL_RESULT: Airplane Mode is now OFF.
+Status Bar: 📵 No Signal | 📵 Data Disabled | 🔋 80%
+TOOL_RESULT: Status Bar: 📵 No Signal | 📵 Data Disabled | 🔋 80%
+USER: Okay, I turned off airplane mode. Now the status bar shows **"No Signal"** and **"Data Disabled"**, battery still 80%. Still no signal bars though — the airplane icon is gone but I'm still not connected.
+AGENT: Progress — airplane mode is off, but you still have no signal. Let's look closer.
+
+Please run a **network status check** and tell me exactly what it shows (signal strength, network type, carrier connection, etc.).
+TOOL_RESULT: Airplane Mode: OFF
+SIM Card Status: locked_pin
+Cellular Connection: no_service
+Cellular Signal: none
+Cellular Network Type: none
+Mobile Data Enabled: Yes
+Data Roaming Enabled: No
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+USER: Here's what the network status check shows:
+
+- Airplane Mode: **OFF**
+- **SIM Card Status: locked_pin**
+- Cellular Connection: **no_service**
+- Cellular Signal: **none**
+- Network Type: **none**
+- Mobile Data: Enabled
+- Data Roaming: Disabled
+- Wi-Fi: OFF / not connected
+
+That "SIM locked with a PIN" looks suspicious — could that be the problem?
+AGENT_TOOL_CALL: {"name": "transfer_to_human_agents", "arguments": {"summary": "Customer John Smith (C1001), line 555-123-2002 (L1002, Active), reports \"No Service\". Airplane mode was on and has been turned off. Network status check shows SIM Card Status: locked_pin, no service, no signal, network type none. Needs assistance with SIM security/PIN unlock."}}
+TOOL_RESULT: Transfer successful
+AGENT: YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.
+USER: ###TRANSFER###

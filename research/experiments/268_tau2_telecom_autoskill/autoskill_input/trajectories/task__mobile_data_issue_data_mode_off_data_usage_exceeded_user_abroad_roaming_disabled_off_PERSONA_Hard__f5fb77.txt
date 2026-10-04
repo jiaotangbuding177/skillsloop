@@ -1,0 +1,121 @@
+AGENT: Hi! How can I help you today?
+USER: Oh, hello. I'm having a bit of trouble with my phone. The internet on it keeps cutting out, or it's just dreadfully slow. I'm traveling abroad right now and I really need good internet on my phone. Can you help me?
+AGENT: I can help with that. First, I need to identify you. Could you please provide your phone number, or your full name and date of birth?
+USER: Yes, of course. My name is John Smith, and my phone number is 555-123-2002.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 15.1, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT: I found the line for your phone number (555-123-2002). It's active, but **roaming is currently disabled** on it — that's why your internet is cutting out or slow while you're abroad.
+
+Since you're traveling outside your home network, I can enable roaming at no cost. Would you like me to turn it on?
+USER: Oh, roaming disabled? That would explain it! Yes, please, turn it on. I'd very much appreciate that.
+AGENT_TOOL_CALL: {"name": "enable_roaming", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: Roaming enabled successfully
+AGENT: All set — roaming is now enabled on your line. You should be able to use your data connection abroad now.
+
+If you're still having issues, try rebooting your device. Is there anything else I can help you with?
+USER: That's great, thank you! Let me check if the internet is working better now.
+TOOL_RESULT: Speed test failed: No Connection.
+USER: Hmm, well, that didn't work. I tried to run a speed test, but it just said "No Connection." That's frustrating. What should I do now?
+AGENT: Let's dig into this. Could you run a diagnostic on your phone and tell me what you see? Specifically:
+
+1. **Check your status bar** — what icons are showing (airplane mode, signal strength, network technology like 5G/4G, data enabled/disabled)?
+2. **Check your network status** — what does it show for cellular connection and signal?
+
+This will help me figure out why there's no connection.
+USER: Let me take a look for you.
+TOOL_RESULT: Status Bar: 📶⁴ Excellent | 5G | 📵 Data Disabled | 🔋 80%
+TOOL_RESULT: Airplane Mode: OFF
+SIM Card Status: active
+Cellular Connection: connected
+Cellular Signal: excellent
+Cellular Network Type: 5G
+Mobile Data Enabled: No
+Data Roaming Enabled: No
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+USER: Alright, here's what I see:
+
+On the status bar there's a strong signal, it says 5G, but it also shows "Data Disabled." And when I checked the network status, it says mobile data is "No" — so it's turned off. Data roaming is also showing "No."
+
+Does that help? Should I turn something on?
+AGENT: Yes, that helps a lot. Your mobile data is turned **off**, which is why you have no connection even though you have strong 5G signal.
+
+Please turn **mobile data ON** on your device. Once it's on, roaming should work since I've already enabled it on our end.
+
+Go ahead and turn on mobile data, then let me know if your connection comes back.
+USER: Okay, let me turn on the mobile data.
+TOOL_RESULT: Mobile Data is now ON.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: Okay, I've turned mobile data on. Let me test the connection now.
+TOOL_RESULT: Speed test failed: No Connection.
+USER: Oh dear, it still says "No Connection." That's rather frustrating — I was hoping that would do it.
+
+Hmm, I did notice earlier that when I checked the network status, it said data roaming was "No" on my phone. Could that be the problem? Should I turn that on too?
+AGENT: Yes, that would be the next step. Since you're abroad, your phone also needs **data roaming turned ON** in its settings — that's the device-side setting, separate from the network-side roaming I enabled.
+
+Please turn on **data roaming** on your phone, then let me know if your connection comes back.
+USER: Alright, let me turn on data roaming too.
+TOOL_RESULT: Data Roaming is now ON.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: Okay, data roaming is on now. Let me test it again.
+TOOL_RESULT: Speed test failed: No Connection.
+USER: It still says "No Connection"! I don't understand — I've turned on mobile data and roaming, just like you said. This is getting a bit frustrating, honestly. Is there something else that could be wrong?
+AGENT: I understand the frustration — let's keep working through it. There are a few other things that can block data. Can you check these for me?
+
+1. **APN settings** — does it show the APN as correct, or is something off (like a missing/incomplete MMSC URL)?
+2. **Airplane mode** — is it off?
+3. **Data saver** — is it enabled?
+4. **VPN** — is a VPN connected?
+5. **Wi-Fi** — are you connected to Wi-Fi (which would take over data)?
+
+Let me know what you find.
+USER: Let me check all of those for you.
+TOOL_RESULT: Current APN Name: internet
+MMSC URL (for picture messages): http://mms.carrier.com/mms/wapenc
+(These are technical settings, usually best left unchanged.)
+TOOL_RESULT: Data Saver mode is OFF.
+TOOL_RESULT: VPN is turned OFF.
+TOOL_RESULT: Wi-Fi is turned OFF.
+USER: Okay, here's what I found:
+
+- The APN settings look fine — it says "internet" and there's an MMSC URL listed.
+- Data Saver is off.
+- VPN is off.
+- Wi-Fi is off.
+- And airplane mode is off too, from what I saw earlier.
+
+So none of those seem to be the issue. What else could be wrong? I'm really hoping we can get this working.
+AGENT_TOOL_CALL: {"name": "get_data_usage", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "data_used_gb": "15.1", "data_limit_gb": "15.0", "data_refueling_gb": "0.0", "cycle_end_date": "2025-02-28"}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "P1002"}}
+TOOL_RESULT: {"plan_id": "P1002", "name": "Premium Plan", "data_limit_gb": 15.0, "price_per_month": 65.0, "data_refueling_price_per_gb": 2.0}
+AGENT: Found it. Your line has used **15.1 GB** of data, and your plan's limit is **15 GB** — so you've gone over your data limit, which cuts off data connectivity.
+
+The good news: I can **refuel** additional data for you. Your plan's refueling price is **$2 per GB**, and the maximum I can add is **2 GB**.
+
+How much data would you like to refuel?
+USER: Ah, that explains it! I've gone over my limit. Well, let's add some more data then — please refuel the full 2 GB for me. I want to make sure I've got plenty.
+AGENT: To confirm: refueling **2 GB** at **$2 per GB** will add **$4** to your bill, applied to your line ending in 2002. Shall I go ahead?
+USER: Yes, that's fine — please go ahead and add the 2 GB.
+AGENT_TOOL_CALL: {"name": "refuel_data", "arguments": {"customer_id": "C1001", "line_id": "L1002", "gb_amount": 2}}
+TOOL_RESULT: {"message": "Successfully added 2 GB of data for line L1002 for $4.00", "new_data_refueling_gb": "2.0", "charge": "4.0"}
+AGENT: Done! I've added **2 GB** of data to your line, for a charge of **$4.00** on your bill.
+
+Please try your connection again — you should have data now. Let me know if it's working.
+USER: Let me test it now.
+TOOL_RESULT: Speed Test Result: 275.00 Mbps (Excellent). Connection is very fast.
+USER: Oh, wonderful! It says my connection is "Excellent" now — 275 Mbps, very fast! That's exactly what I was hoping for. Thank you so much for your patience and for walking me through all of that. I really appreciate your help!
+AGENT: That's great to hear — 275 Mbps is excellent! Glad we got it sorted out. 
+
+To recap: roaming is enabled on your line, and you've got 2 GB of refueled data added for $4.00.
+
+Safe travels, and enjoy your trip! Is there anything else I can help you with?
+USER: No, that's everything I needed. Thank you again for all your help — you've been very kind and patient with me. Have a good day!
+
+###STOP###

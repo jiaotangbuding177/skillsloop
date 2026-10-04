@@ -1,0 +1,109 @@
+AGENT: Hi! How can I help you today?
+USER: Hi, I’m having trouble sending MMS messages from my phone. It’s been going on for the past few hours, and I’m currently abroad in France. Can you help me fix this?
+AGENT: I'll help you with your MMS issue. First, let me identify your account.
+
+Could you please provide me with your phone number, customer ID, or your full name along with your date of birth?
+USER: Sure! My name is John Smith, and my phone number is 555-123-2002.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 8.7, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT_TOOL_CALL: {"name": "enable_roaming", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: Roaming enabled successfully
+AGENT: I've enabled roaming on your line at no cost. Now, to narrow down the MMS issue further, I'd like to check some settings on your phone.
+
+Could you please run the following checks on your device and tell me the results?
+
+1. **check_status_bar** — to see your signal strength, network technology, and mobile data status.
+2. **check_network_status** — to confirm your connection to cellular networks.
+3. **check_apn_settings** — to verify the MMSC URL is set correctly.
+
+Once you share those results, I can guide you through the next steps.
+USER: I can only perform one action at a time. Could you please instruct me one action at a time? Which check would you like me to run first?
+AGENT: No problem! Let's start with the first one.
+
+Please run **check_status_bar** on your device and tell me what you see.
+TOOL_RESULT: Status Bar: 📶¹ Poor | 2G | 📱 Data Enabled | 🔋 80%
+USER: Here’s what I see on my status bar: the signal is poor, I’m on 2G, mobile data is enabled, and my battery is at 80%.
+AGENT: Thanks. Two things stand out: your signal is poor, and you're on **2G** — which is generally not suitable for MMS.
+
+Let's address the network technology first. Could you please run **check_network_status** and share the results?
+TOOL_RESULT: Airplane Mode: OFF
+SIM Card Status: active
+Cellular Connection: connected
+Cellular Signal: poor
+Cellular Network Type: 2G
+Mobile Data Enabled: Yes
+Data Roaming Enabled: No
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+USER: Here are the network status results:
+
+- Airplane Mode: OFF
+- SIM Card: active
+- Cellular Connection: connected
+- Cellular Signal: poor
+- Network Type: 2G
+- Mobile Data: enabled
+- Data Roaming: **disabled**
+- Wi-Fi: OFF and not connected
+
+It looks like data roaming is turned off, which might be causing problems since I’m abroad.
+AGENT: Good catch — that's the device-side data roaming setting. Since I've enabled roaming on your line, you'll also want to make sure it's turned on at the device level.
+
+But first, let's fix the network technology. MMS requires at least a 3G connection, and you're currently on 2G. Please run **set_network_mode_preference** and set it to a mode that includes 4G/5G — use `"4g_5g_preferred"`.
+TOOL_RESULT: Preferred Network Mode set to: 4g_5g_preferred
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: I've changed the preferred network mode to 4G/5G. My status bar now shows excellent signal, 5G, mobile data enabled, and battery at 80%.
+
+Should I turn on data roaming at the device level now?
+AGENT: Yes, please turn on data roaming at the device level now, since you're abroad and it needs to be enabled on the device as well.
+
+After that, let's verify your APN settings. Please run **check_apn_settings** and share the results.
+USER: I can only perform one action at a time. Could you please instruct me one action at a time? Should I start with turning on data roaming?
+AGENT: Yes, please start with turning on data roaming at the device level. Let me know once that's done.
+TOOL_RESULT: Data Roaming is now ON.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: Data roaming is now turned on at the device level. My status bar still shows excellent signal, 5G, and mobile data enabled. I’ll wait for your next instruction.
+AGENT: Great. Now please run **check_apn_settings** and share the results with me.
+TOOL_RESULT: Current APN Name: internet
+MMSC URL (for picture messages): http://mms.carrier.com/mms/wapenc
+(These are technical settings, usually best left unchanged.)
+USER: Here are my APN settings:
+
+- APN Name: internet
+- MMSC URL: http://mms.carrier.com/mms/wapenc
+
+These look like the standard settings to me. What should I do next?
+AGENT: Your APN settings look correct — the MMSC URL is properly set. That's good.
+
+Next, let's check your Wi-Fi Calling setting, as it can sometimes interfere with MMS. Please run **check_wifi_calling_status** and share the result.
+TOOL_RESULT: Wi-Fi Calling is currently turned OFF.
+USER: Wi-Fi Calling is currently turned off. What would you like me to check next?
+AGENT: Wi-Fi Calling is off — good, that's not the issue.
+
+Next, let's check your messaging app permissions. Please run **check_app_permissions** with `app_name="messaging"` and share the results.
+TOOL_RESULT: App 'messaging' has permission for: sms, storage, phone.
+USER: The messaging app has the following permissions: sms, storage, and phone. Let me know what you’d like me to do next.
+AGENT: Your messaging app has both **sms** and **storage** permissions granted, so that's not the issue either.
+
+Let's now verify whether MMS can actually be sent. Please run **can_send_mms** and share the result.
+TOOL_RESULT: Your messaging app can send MMS messages.
+USER: The result says my messaging app **can** send MMS messages. That’s strange, because I haven’t been able to send any for the past few hours. What should I try next?
+AGENT: That's actually a great sign — the diagnostic confirms MMS can now be sent. The combination of fixes we applied (enabling roaming on your line, turning on device-level data roaming, and switching you from 2G to 5G) very likely resolved the problem.
+
+Please try sending an MMS message now and let me know if it goes through.
+TOOL_RESULT: Your messaging app can send MMS messages.
+USER: I just tried sending an MMS, and it went through successfully! It seems the combination of enabling roaming and switching to 5G did the trick. Thank you so much for your help!
+AGENT: You're very welcome, John! I'm glad it's working now. To summarize what we fixed:
+
+1. Enabled roaming on your line (at no cost, since you're traveling).
+2. Turned on data roaming at the device level.
+3. Switched your network mode from 2G to 5G/4G, which is required for MMS.
+
+Enjoy the rest of your trip in France! Is there anything else I can help you with?
+USER: No, that’s everything I needed. Thanks again for your help! ###STOP###

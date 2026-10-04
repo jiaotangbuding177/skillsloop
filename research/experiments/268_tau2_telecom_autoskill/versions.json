@@ -1,0 +1,43 @@
+{
+  "_note": "Frozen versions for experiment 268 (AutoSkill x tau2-bench Telecom). Created 2026-10-04 per user decision: airline + telecom run with the existing deepseek-flash consumer/user; banking_knowledge deferred (no official split).",
+  "experiment": {
+    "id": "268_tau2_telecom_autoskill",
+    "created": "2026-10-04",
+    "status": "preparation"
+  },
+  "benchmark": {
+    "name": "tau2-bench",
+    "repo": "https://github.com/sierra-research/tau2-bench",
+    "tag": "v1.0.1",
+    "commit": "fc0055dc4e0a316c3f83133267fbd6faaa770992",
+    "domain": "telecom",
+    "vendor_source": "copied byte-for-byte from 148_tau2_retail_autoskill/vendor/tau2-bench (same fc0055dc checkout; .git excluded); data sha256 recorded in split_manifest.json",
+    "data": {
+      "telecom_tasks_full": "inputs/telecom_tasks_full.json (2285 tasks; base 114 selected by split)",
+      "telecom_split": "inputs/telecom_split.json (small 20 / train 74 / test 40 / full 2285 / base 114)",
+      "telecom_policy": "inputs/telecom_main_policy.md",
+      "telecom_manual": "inputs/telecom_tech_support_manual.md",
+      "telecom_db": "inputs/telecom_db.toml",
+      "telecom_user_db": "inputs/telecom_user_db.toml"
+    },
+    "notes": [
+      "Telecom reward_basis is [ENV_ASSERTION] (2253 tasks) or [ENV_ASSERTION, ACTION] (32); state-checked, no judge model for the main reward.",
+      "Task ids encode structure [<category>]<sub-issue path>[PERSONA:<difficulty>]; instructions are per-category templates.",
+      "The user simulator has 30 user-side tools (customer device actions); consumer/user model must support tool calling.",
+      "Absolute scores with flash-class models are expected to be low (the domain is hard for small models); this is accepted per user decision."
+    ]
+  },
+  "models": {
+    "consumer": {"id": "deepseek-flash", "endpoint": "DeepSeek official API via local relay (credentials outside repo)"},
+    "user_simulator": {"id": "deepseek-flash", "endpoint": "same relay user route"},
+    "judge_nl_assertions": {"id": "glm-4-flash", "endpoint": "relay judge route (upstream_connection)"},
+    "embeddings_autoskill": {"id": "ecnu-embedding-small", "dim": 1024, "endpoint": "relay embed route"},
+    "decision": "user instruction 2026-10-04: use the current deepseek-flash for consumer and user simulator"
+  },
+  "runtime": {
+    "python": "runtime_py (cloned from 148; editable tau2 install re-pointed at this vendor)",
+    "openclaw": "2026.9.7 (shared via /var/tmp/skillsloop078 runtime as in 148)",
+    "relay_port": 8181,
+    "ledger": "ledger/requests.jsonl (this directory only)"
+  }
+}

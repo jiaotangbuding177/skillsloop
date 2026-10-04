@@ -1,0 +1,76 @@
+AGENT: Hi! How can I help you today?
+USER: Hi there. I'm having trouble sending picture messages on my phone. They just won't go through, and it's been like this for a few hours now. Can you help me?
+AGENT: I'll help you with that. First, I need to verify your account. Could you please provide your phone number?
+
+Also, just to be safe — the picture messaging issue you're describing is MMS, right? Let me know once you share your number.
+USER: Yes, that's right — it's the picture messages that won't send. My phone number is 555-123-2002.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 15.1, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT: Thanks, John. I've verified your account. The line 555-123-2002 is active, so let's troubleshoot the MMS issue.
+
+To start, could you run a couple of checks on your phone and tell me what you see?
+
+1. Check your status bar — what network signal and technology (e.g., 5G, 4G, 2G) is showing, and is mobile data enabled?
+2. Check whether you can make calls and use mobile data for other apps (like browsing the web).
+
+Let me know what you find.
+TOOL_RESULT: Status Bar: 📶¹ Poor | 2G | 📱 Data Enabled | 🔋 80%
+USER: Okay, I checked the top of my screen. It shows a poor signal with just one bar, and it says "2G" next to it. Mobile data appears to be turned on, and my battery is at 80%. 
+
+I'm not sure about the browsing — it seems slow, honestly. Does that 2G thing matter?
+AGENT: Yes, that 2G matters — MMS needs at least a 3G connection, and 2G isn't suitable for sending picture messages. That's very likely the cause.
+
+Let's fix it. On your phone, please change the network mode to one that includes 3G/4G/5G. Look for a setting like **Network mode** or **Preferred network type** and select **"4G/5G preferred"** (or "4G only").
+
+Once you've changed it, tell me what the status bar shows.
+TOOL_RESULT: Preferred Network Mode set to: 4g_5g_preferred
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: Okay, I found that setting and changed it to "4G/5G preferred." Now the top of my screen shows four bars with excellent signal, and it says "5G." Mobile data is still on. That looks much better! Should I try sending a picture message now?
+AGENT: Yes, go ahead and try sending a picture message now. Let me know if it goes through.
+TOOL_RESULT: Your messaging app cannot send MMS messages.
+USER: I just tried, and it still won't send. Ugh, that's frustrating — I really thought the 5G would fix it. What else can we try?
+AGENT: No worries — let's keep digging. The next common culprit is the APN settings, specifically the MMSC (the server that handles picture messages). Could you check your APN settings and tell me what you see — in particular whether the MMSC URL is set?
+TOOL_RESULT: Current APN Name: internet
+MMSC URL (for picture messages): http://mms.carrier.com/mms/wapenc
+(These are technical settings, usually best left unchanged.)
+USER: I had a look at those APN settings. It shows the APN name as "internet" and there's an MMSC URL listed as "http://mms.carrier.com/mms/wapenc". I hope that makes sense to you, because it's all Greek to me. Does that look right?
+AGENT: The APN name and the MMSC URL both look correct, so that's not the problem.
+
+Next, let's rule out Wi-Fi Calling, which can sometimes interfere with MMS. Could you check whether Wi-Fi Calling is turned on in your settings, and tell me what it shows?
+TOOL_RESULT: Wi-Fi Calling is currently turned ON.
+USER: It shows that Wi-Fi Calling is currently turned on. Should I switch it off?
+AGENT: Yes, please turn Wi-Fi Calling off. Then try sending the picture message again and let me know what happens.
+TOOL_RESULT: Wi-Fi Calling is now OFF.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Your messaging app cannot send MMS messages.
+USER: Okay, I turned Wi-Fi Calling off, and I tried sending the picture message again. It still won't go through. This is getting a bit frustrating — I've been at this a while now. What else could it be?
+AGENT: I understand the frustration — we're getting close. One more common cause is the messaging app missing required permissions.
+
+Could you check the permissions for your messaging app and tell me which ones are granted? Specifically, I'm looking for **storage** and **SMS** permissions.
+TOOL_RESULT: The following apps are installed on the phone: messaging, browser
+TOOL_RESULT: App 'messaging' has permission for: phone.
+USER: I checked, and it looks like the messaging app only has "phone" permission. I don't see "storage" or "SMS" listed at all. Is that the problem?
+AGENT: Yes, that's likely the last piece. The messaging app needs **storage** (to attach the picture) and **SMS** permissions to send MMS.
+
+Please grant those two permissions to your messaging app:
+- **Storage**
+- **SMS**
+
+Then try sending the picture message again and let me know.
+TOOL_RESULT: Success. Permission 'storage' granted to app 'messaging'.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Success. Permission 'sms' granted to app 'messaging'.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Your messaging app cannot send MMS messages.
+USER: I granted both permissions — storage and SMS — and tried again, but it still won't send the picture. That didn't do it either. What now?
+AGENT_TOOL_CALL: {"name": "transfer_to_human_agents", "arguments": {"summary": "Customer John Smith (C1001), line 555-123-2002 (L1002), unable to send MMS/picture messages for several hours. Troubleshooting completed: network mode changed from 2G to 4G/5G preferred (now excellent 5G signal), APN settings verified correct (MMSC URL http://mms.carrier.com/mms/wapenc), Wi-Fi Calling turned OFF, and messaging app granted storage and SMS permissions. Issue persists after all steps; requires human/technical escalation."}}
+TOOL_RESULT: Transfer successful
+AGENT: YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.
+USER: ###TRANSFER###

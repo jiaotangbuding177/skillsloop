@@ -1,0 +1,135 @@
+AGENT: Hi! How can I help you today?
+USER: Hi there! I'm having some trouble with my mobile data. I'm currently abroad in France, and my internet is either not working at all or it's extremely slow. I really need to get this fixed — I depend on having excellent internet speed on my phone. Can you help me?
+AGENT: I can help with that. First, I need to identify you. Could you please provide your phone number, or your customer ID, or your full name and date of birth?
+USER: Sure! My name is John Smith, and my phone number is 555-123-2002.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 15.1, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT: Thanks for waiting, John. Since you're traveling outside your home network in France and your line isn't roaming-enabled, I can enable roaming on your line at no cost. That should allow you to use your data connection abroad.
+
+Just to confirm — the number you gave me (555-123-2002) is the line you're using while in France, correct? I'll enable roaming on it.
+USER: Yes, that's correct — 555-123-2002 is the line I'm using here in France. Please go ahead and enable roaming on it.
+AGENT_TOOL_CALL: {"name": "enable_roaming", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: Roaming enabled successfully
+AGENT: Roaming has been enabled on your line at no cost, John. 
+
+A couple of things that may help:
+- Try rebooting your device, as the change may need a restart to take effect.
+- Note that data speeds while roaming can also depend on your plan's data limit. Your line's plan may have a monthly data cap — if you've exceeded it, connectivity can drop.
+
+Would you like me to check your current data usage against your plan limit to make sure that's not contributing to the slow/no connection?
+USER: Thanks for enabling roaming! Let me try rebooting my phone first, as you suggested.
+TOOL_RESULT: Restarting network services...
+Status Bar: ✈️ Airplane Mode | 🔋 80%
+USER: Okay, I've restarted my phone. But I noticed something — the status bar at the top is showing an airplane icon, which means Airplane Mode is turned on. Could that be why my data isn't working?
+AGENT: Yes — Airplane Mode disables all cellular connections, so your data won't work while it's on. Please turn Airplane Mode **off** on your device, then let me know once it's disabled.
+
+After that, we can check your connection status again to make sure everything is working.
+USER: Sure, let me turn off Airplane Mode now.
+TOOL_RESULT: Airplane Mode is now OFF.
+Status Bar: 📶¹ Poor | 2G | 📱 Data Enabled | 🔋 80%
+USER: Okay, Airplane Mode is off now. The status bar shows I have a poor signal, it says "2G", and mobile data is enabled with the battery at 80%.
+
+Hmm, the signal looks weak and it's only on 2G — that doesn't sound good for speed. What should I do next?
+AGENT: Poor signal and being on 2G are both problematic for data speed — 2G is far too slow for a good data connection. Let's fix the network mode first.
+
+Please go to your network settings and change the preferred network mode to one that includes 4G/5G (for example, "4G/5G preferred" or "4G only"). This should move you off 2G and give you a much faster connection.
+
+Let me know once you've made that change, and check your status bar again for the signal and network type.
+USER: Got it — let me change the preferred network mode to 4G/5G.
+TOOL_RESULT: Preferred Network Mode set to: 4g_5g_preferred
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: Great news! I changed it to 4G/5G preferred, and now the status bar shows excellent signal on 5G with mobile data enabled. That looks much better!
+
+Should I run a speed test now to see what my actual internet speed is?
+AGENT: That's great progress — excellent signal on 5G is exactly what we want. 
+
+Go ahead and try using your data (browsing or a speed test) to confirm it's working well now. Since roaming was just enabled and the network mode changed, everything should be in good shape.
+
+Let me know how it goes — if the speed is still poor, we can look at your data usage against your plan limit next.
+USER: Let me run a speed test to check my actual internet speed.
+TOOL_RESULT: Speed test failed: No Connection.
+USER: Hmm, that's strange — the speed test failed and said "No Connection." But the status bar still shows excellent 5G signal with data enabled. That's a bit frustrating. Any idea what could be going on?
+AGENT_TOOL_CALL: {"name": "get_data_usage", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "data_used_gb": "15.1", "data_limit_gb": "15.0", "data_refueling_gb": "0.0", "cycle_end_date": "2025-02-28"}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "P1002"}}
+TOOL_RESULT: {"plan_id": "P1002", "name": "Premium Plan", "data_limit_gb": 15.0, "price_per_month": 65.0, "data_refueling_price_per_gb": 2.0}
+AGENT: Found it, John. Your line has used **15.1 GB** of data, and your plan's limit is **15.0 GB** — so you've exceeded your monthly data limit. That's why data connectivity has stopped even though your signal and 5G look fine.
+
+The good news is I can add more data to your line by "refueling." Here are the details:
+- Refueling price: **$2.00 per GB**
+- Maximum you can refuel at once: **2 GB**
+
+How much data would you like to refuel? (For example, 2 GB would cost $4.00.)
+USER: Ah, that explains it — I've gone over my data limit. Let's refuel the maximum, please — 2 GB. That should be $4.00, right? Go ahead and add that for me.
+AGENT_TOOL_CALL: {"name": "refuel_data", "arguments": {"customer_id": "C1001", "line_id": "L1002", "gb_amount": 2}}
+TOOL_RESULT: {"message": "Successfully added 2 GB of data for line L1002 for $4.00", "new_data_refueling_gb": "2.0", "charge": "4.0"}
+AGENT: Done! I've added **2 GB** of data to your line for **$4.00**. That brings your available data up and should restore your connectivity.
+
+Please try your speed test or browse again — you should now have working data. Let me know if it's back up and running.
+USER: Let me run the speed test again.
+TOOL_RESULT: Speed test failed: No Connection.
+USER: Hmm, it still failed — "No Connection" again. That's frustrating. 
+
+Is there something else that needs to happen? Maybe a payment needs to go through for the refuel? Would you like me to check anything on my end?
+AGENT_TOOL_CALL: {"name": "get_bills_for_customer", "arguments": {"customer_id": "C1001"}}
+TOOL_RESULT: [{"bill_id": "B1003", "customer_id": "C1001", "period_start": "2025-03-01", "period_end": "2025-03-31", "issue_date": "2025-03-01", "total_due": 4.0, "due_date": "2025-03-15", "line_items": [{"description": "Data refueling: 2 GB at $2.0/GB", "amount": 4.0, "date": "2025-02-25", "item_type": "Charge"}], "status": "Draft"}, {"bill_id": "B1002", "customer_id": "C1001", "period_start": "2025-02-01", "period_end": "2025-02-28", "issue_date": "2025-02-05", "total_due": 150.0, "due_date": "2025-02-19", "line_items": [{"description": "Basic Plan - Line 555-123-2001", "amount": 40.0, "date": "2025-02-05", "item_type": "Plan Charge"}, {"description": "Premium Plan - Line 555-123-2002", "amount": 65.0, "date": "2025-02-05", "item_type": "Plan Charge"}, {"description": "Basic Plan - Line 555-123-2003", "amount": 40.0, "date": "2025-02-05", "item_type": "Plan Charge"}, {"description": "Suspension Fee - Line 555-123-2003", "amount": 5.0, "date": "2025-02-05", "item_type": "Fee"}], "status": "Issued"}, {"bill_id": "B1001", "customer_id": "C1001", "period_start": "2025-01-01", "period_end": "2025-01-31", "issue_date": "2025-01-05", "total_due": 160.5, "due_date": "2025-01-19", "line_items": [{"description": "Basic Plan - Line 555-123-2001", "amount": 40.0, "date": "2025-01-05", "item_type": "Plan Charge"}, {"description": "Premium Plan - Line 555-123-2002", "amount": 65.0, "date": "2025-01-05", "item_type": "Plan Charge"}, {"description": "Basic Plan - Line 555-123-2003", "amount": 40.0, "date": "2025-01-05", "item_type": "Plan Charge"}, {"description": "Data Overage - Line 555-123-2002", "amount": 15.5, "date": "2025-01-05", "item_type": "Overage"}], "status": "Paid"}]
+AGENT: Thanks for your patience, John. Your bills look fine — the refuel charge ($4.00) was added as a draft, so no separate payment is needed to activate the data.
+
+To narrow down what's still blocking the connection, could you please check the following on your device and tell me what you see:
+
+1. **APN settings** — does it show as correct or incorrect?
+2. **VPN** — is a VPN connected (you'd see a 🔒 VPN icon in the status bar)?
+3. **Data Saver** — is it showing as enabled (🔽 Data Saver)?
+
+Once you let me know, we can take the next step.
+USER: Let me check those three things on my phone.
+TOOL_RESULT: Current APN Name: internet
+MMSC URL (for picture messages): http://mms.carrier.com/mms/wapenc
+(These are technical settings, usually best left unchanged.)
+TOOL_RESULT: VPN is turned OFF.
+TOOL_RESULT: Data Saver mode is OFF.
+USER: Okay, here's what I found:
+
+1. **APN settings** — the APN name shows "internet" and the MMSC URL is "http://mms.carrier.com/mms/wapenc". That looks correct/normal to me.
+2. **VPN** — it's turned off.
+3. **Data Saver** — it's also off.
+
+So none of those seem to be the problem. What should we try next?
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 15.1, "data_refueling_gb": 2.0, "roaming_enabled": true, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "D1002"}}
+TOOL_RESULT: {"device_id": "D1002", "device_type": "phone", "model": "Smartphone Pro Max", "imei": "234567890123456", "is_esim_capable": true, "activated": true, "activation_date": "2025-02-15 11:45:00", "last_esim_transfer_date": "2025-01-20 09:30:00"}
+AGENT: Everything on our side looks correct, John:
+- Your line is **Active**, roaming is **enabled**, and your data refuel (2 GB) is applied.
+- Your device is activated and eSIM-capable.
+
+Since the signal, APN, VPN, and Data Saver all look good but you still get "No Connection," let's try a couple of standard device steps:
+
+1. **Toggle Airplane Mode on and back off** again — sometimes this forces the phone to re-register on the network after roaming was enabled.
+2. Then **reboot your device** once more.
+
+Please try those and run the speed test again. Let me know the result.
+USER: Alright, let me try that. First, I'll toggle Airplane Mode on and back off.
+TOOL_RESULT: Airplane Mode is now ON.
+Status Bar: ✈️ Airplane Mode | 🔋 80%
+USER: Airplane Mode is on now. Let me turn it back off.
+TOOL_RESULT: Airplane Mode is now OFF.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: Airplane Mode is off again, and the status bar shows excellent signal on 5G with data enabled. Now let me reboot the device as you suggested.
+TOOL_RESULT: Restarting network services...
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: Reboot is complete — still showing excellent 5G signal with data enabled. Now let me run the speed test again.
+TOOL_RESULT: Speed test failed: No Connection.
+USER: Ugh, it still says "No Connection" even after the airplane mode toggle and reboot. That's really frustrating — the signal shows excellent 5G but nothing actually loads.
+
+Is there anything else we can try? Maybe the refuel charge needs to actually be paid? I'm not sure what else could be blocking it.
+AGENT_TOOL_CALL: {"name": "transfer_to_human_agents", "arguments": {"summary": "Customer John Smith (C1001), line 555-123-2002 (L1002), traveling in France. No data connectivity despite: roaming enabled, network mode set to 4G/5G (excellent 5G signal), data refueled 2 GB (was over 15 GB plan limit), APN correct (MMSC set), VPN off, Data Saver off, airplane mode toggled, device rebooted. Line is Active, contract valid to 2026-12-31. Speed test still reports \"No Connection.\" Needs further technical investigation beyond available tools."}}
+TOOL_RESULT: Transfer successful
+AGENT: YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.
+USER: ###TRANSFER###

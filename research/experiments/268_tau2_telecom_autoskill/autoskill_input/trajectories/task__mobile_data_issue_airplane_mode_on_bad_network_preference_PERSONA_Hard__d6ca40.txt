@@ -1,0 +1,74 @@
+AGENT: Hi! How can I help you today?
+USER: Hi there, I'm hoping you can help me. My phone's internet has been acting up — it either stops working completely or gets really slow. I don't have Wi-Fi, so I rely on my mobile data. I really need this fixed, and I want it to be fast. Can you help me?
+AGENT: I can help with that. First, I need to verify your identity. Could you please provide your phone number?
+USER: Sure, my phone number is 555-123-2002. My name is John Smith.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT: Thanks, John — I've verified your account. You have three lines. Which phone number is having the mobile data issue?
+USER: It's the number I just gave you — 555-123-2002. That's the one giving me trouble.
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 8.7, "data_refueling_gb": 0.0, "roaming_enabled": true, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "P1002"}}
+TOOL_RESULT: {"plan_id": "P1002", "name": "Premium Plan", "data_limit_gb": 15.0, "price_per_month": 65.0, "data_refueling_price_per_gb": 2.0}
+AGENT_TOOL_CALL: {"name": "get_data_usage", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "data_used_gb": "8.7", "data_limit_gb": "15.0", "data_refueling_gb": "0.0", "cycle_end_date": "2025-02-28"}
+AGENT: Thanks for waiting, John. Here's what I see on your line (555-123-2002):
+
+- Plan: Premium Plan — 15 GB monthly limit
+- Data used this cycle: 8.7 GB (so you're within your limit — not the cause of the slowdown)
+- Line status: Active
+
+Since it's not a data-cap issue, let's run some diagnostics on your phone to narrow this down.
+
+Could you please do the following on your device and tell me what you see:
+
+1. Open your status bar check and tell me what icons show (signal strength, data enabled/disabled, airplane mode, network type, data saver, etc.).
+2. Run a network status check and tell me the results.
+
+These will help me pinpoint whether it's a signal, network-mode, or settings problem.
+USER: Oh dear, that sounds like a lot of steps at once — I get a bit overwhelmed with this sort of thing. Could you walk me through one thing at a time, please? Which should I do first?
+AGENT: No problem at all — let's take it one step at a time.
+
+First, please check your status bar and tell me which icons you see (for example: signal strength, whether mobile data is enabled, airplane mode, network type like 4G/5G, data saver, etc.).
+
+Go ahead whenever you're ready.
+TOOL_RESULT: Status Bar: ✈️ Airplane Mode | 🔋 80%
+USER: Okay, I had a look. It shows a little airplane icon, and the battery is at 80%. That's about all I can see. Is the airplane icon a problem?
+AGENT: Yes — that's the problem. The airplane icon means Airplane Mode is turned on, which disables your cellular service entirely. That's why your mobile data isn't working.
+
+Could you please turn Airplane Mode OFF on your device, then tell me what you see?
+TOOL_RESULT: Airplane Mode is now OFF.
+Status Bar: 📶¹ Poor | 2G | 📱 Data Enabled | 🔋 80%
+USER: Alright, I turned it off. Now I see some bars — it says "Poor" signal, and it shows "2G", and there's a little data icon, plus the battery at 80%.
+
+Does that help? It still looks a bit weak to me.
+AGENT: Thanks — that helps a lot. Two things stand out now:
+
+1. Signal is showing **"Poor."**
+2. Network type is **"2G."**
+
+A 2G network isn't suitable for mobile data (that would explain the slow/no internet). Let's fix the network mode first.
+
+Could you please change your network mode preference to **"4g_5g_preferred"** on your device, then tell me what you see?
+TOOL_RESULT: Preferred Network Mode set to: 4g_5g_preferred
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: Oh, that's much better! Now it shows full bars — "Excellent" — and it says "5G", and the data icon is still there. Battery's still 80%.
+
+So is it fixed now?
+AGENT: That looks much better — Excellent signal on 5G, with mobile data enabled. That should have resolved the slow/no internet issue.
+
+Could you please try opening a website or app that uses data, and let me know if it's working normally now?
+TOOL_RESULT: Speed Test Result: 275.00 Mbps (Excellent). Connection is very fast.
+USER: I just checked the speed, and it says 275 Mbps — marked as "Excellent" and very fast! That's wonderful. It seems to be working perfectly now.
+
+Thank you so much for your patience walking me through that. I really appreciate it!
+AGENT: You're very welcome, John! To recap: the issues were Airplane Mode being on and your network stuck on 2G. Turning off Airplane Mode and switching your network mode to 4G/5G preferred got you back to full, fast 5G service.
+
+Everything looks great on your line, and your data usage is well within your plan. If anything acts up again, feel free to reach out. Enjoy the fast connection!
+USER: Thank you again for your help — you made it easy to follow, and I'm so glad it's fast now. Have a great day!
+
+###STOP###

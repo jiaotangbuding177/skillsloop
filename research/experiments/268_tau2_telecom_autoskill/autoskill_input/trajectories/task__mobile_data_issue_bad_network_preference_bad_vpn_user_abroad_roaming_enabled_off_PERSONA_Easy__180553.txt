@@ -1,0 +1,98 @@
+AGENT: Hi! How can I help you today?
+USER: Hi there! I'm having trouble with my mobile data while I'm traveling abroad in France. It keeps either stopping completely or getting really slow. I need to get excellent internet speed on my phone—nothing less will do. I don't have access to Wi-Fi, so I'm relying on mobile data. Can you help me fix this?
+AGENT: I can help with that. First, I need to identify you. Could you please provide your account details — your phone number, or your customer ID, or your full name and date of birth?
+USER: Sure, my name is John Smith and my phone number is 555-123-2002.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 8.7, "data_refueling_gb": 0.0, "roaming_enabled": true, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT_TOOL_CALL: {"name": "get_data_usage", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "data_used_gb": "8.7", "data_limit_gb": "15.0", "data_refueling_gb": "0.0", "cycle_end_date": "2025-02-28"}
+AGENT: I've checked the basics:
+
+- Your line's roaming is already enabled, so that's fine for France.
+- Your data usage is 8.7 GB out of a 15 GB limit, so you haven't hit the cap and data isn't being cut off for that reason.
+
+Since the issue is about speed and intermittent connectivity, this could be a device-side setting. Could you run a couple of checks on your phone and tell me the results?
+
+1. **Check your status bar** — what icons do you see (signal strength, network type like 4G/5G, data enabled, airplane mode, VPN, etc.)?
+2. **Check your network status** — what does it show for network type and signal?
+
+That'll help me narrow down the cause.
+TOOL_RESULT: Status Bar: 📶¹ Poor | 2G | 📱 Data Enabled | 🔒 VPN Connected | 🔋 80%
+TOOL_RESULT: Airplane Mode: OFF
+SIM Card Status: active
+Cellular Connection: connected
+Cellular Signal: poor
+Cellular Network Type: 2G
+Mobile Data Enabled: Yes
+Data Roaming Enabled: No
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+USER: Okay, I ran both checks. Here's what I'm seeing:
+
+**Status bar:**
+- Signal: Poor (shows 1 bar)
+- Network type: 2G
+- Data: Enabled
+- VPN: Connected
+- Battery: 80%
+
+**Network status:**
+- Airplane Mode: OFF
+- SIM Card: Active
+- Cellular Connection: Connected
+- Signal: Poor
+- Network Type: 2G
+- Mobile Data: Enabled
+- Data Roaming: **Disabled** (interesting — you said it was enabled on my line?)
+- Wi-Fi: OFF, not connected
+
+A couple of things jump out at me — it says 2G for the network, and my VPN shows as connected. Could either of those be the problem?
+AGENT: Great info — that explains it. Two things are hurting your data:
+
+1. **Network type is 2G.** 2G is too slow for good mobile data. You'll want to switch to a mode that includes 4G/5G.
+2. **VPN is connected.** A VPN can slow down data speeds.
+
+Let's fix the network type first. On your phone, go to your network settings and change the **preferred network mode** to **4G/5G preferred** (or **4G only** if that's what's offered).
+
+Also — regarding the roaming: the check shows roaming is disabled **on the device**, even though it's enabled on your line. Since you're traveling abroad, please make sure **Data Roaming is turned ON** in your phone's mobile network settings too.
+
+Go ahead and make those two changes (network mode → 4G/5G preferred, and enable Data Roaming on the device), then tell me what your status bar shows.
+TOOL_RESULT: Preferred Network Mode set to: 4g_5g_preferred
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔒 VPN Connected | 🔋 80%
+TOOL_RESULT: Data Roaming is now ON.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔒 VPN Connected | 🔋 80%
+USER: Okay, I made both changes. Here's my status bar now:
+
+- Signal: **Excellent** (4 bars) 📶
+- Network type: **5G**
+- Data: Enabled
+- VPN: Still **Connected**
+- Battery: 80%
+
+The signal and network look way better now — it's showing 5G with excellent strength. The VPN is still showing as connected though. Should I turn that off too?
+AGENT: That's a big improvement — 5G with excellent signal is exactly what you want.
+
+Yes, please **turn off the VPN**. A connected VPN can cap or slow your data throughput even on a strong 5G signal, so switching it off should give you the best possible speed.
+
+Turn it off, then check your status bar again and let me know if the VPN indicator is gone. After that, try browsing or loading a page and tell me how the speed feels.
+TOOL_RESULT: VPN disconnected successfully.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Speed Test Result: 275.00 Mbps (Excellent). Connection is very fast.
+USER: Great news! The VPN is now disconnected, and my status bar shows:
+
+- Signal: **Excellent** 📶
+- Network type: **5G**
+- Data: Enabled
+- VPN: Gone (no longer showing)
+- Battery: 80%
+
+And I ran a speed test — it came back at **275 Mbps, rated "Excellent"!** The connection is very fast now. That's exactly what I was hoping for. Thank you so much for your help — this is perfect! 😊
+
+###STOP###

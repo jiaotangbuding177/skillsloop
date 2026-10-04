@@ -1,0 +1,96 @@
+AGENT: Hi! How can I help you today?
+USER: Hi there! I'm having trouble with my mobile data while I'm traveling abroad in France. It keeps either stopping completely or getting really slow, and I need to get excellent internet speed on my phone. Can you help me fix this?
+AGENT: I can help with that. First, I need to identify you. Could you please provide your name and date of birth?
+USER: Sure, my name is John Smith. I don't have my date of birth handy right now, but my phone number is 555-123-2002. Would that work?
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 15.1, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT: I see you have three lines. Since you mentioned your number is 555-123-2002, that's line L1002. I can see roaming is currently **disabled** on that line.
+
+Since you're traveling abroad in France, I can enable roaming on that line at no cost. Would you like me to do that?
+USER: Yes, please go ahead and enable roaming on my line. I definitely need that while I'm here in France.
+AGENT_TOOL_CALL: {"name": "enable_roaming", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: Roaming enabled successfully
+AGENT: I've enabled roaming on your line (555-123-2002). 
+
+Your phone may need a moment to register on the local network — you may want to reboot your device to make sure it picks up the change. Is your data working better now, or would you like me to look into the slow speeds further?
+USER: Let me check my phone's current status first before rebooting.
+TOOL_RESULT: Airplane Mode: OFF
+SIM Card Status: active
+Cellular Connection: connected
+Cellular Signal: poor
+Cellular Network Type: 2G
+Mobile Data Enabled: Yes
+Data Roaming Enabled: No
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+USER: Thanks, I checked my phone's status. A few things stand out:
+- My phone's data roaming is currently **off** on my device.
+- I'm connected to a **2G** network with **poor** signal — that would definitely explain the slow speeds.
+
+Should I turn on data roaming on my phone as well? And is there anything we can do about being stuck on 2G?
+AGENT: Yes to both:
+
+1. **Data roaming on your phone** — Yes, please turn that on. Roaming must be enabled on your device as well as on your line for mobile data to work while abroad.
+
+2. **The 2G network** — 2G is far too slow for good data speeds. Please go into your network settings and change the preferred network mode to one that includes 3G/4G/5G (for example, "4G/5G preferred" or "4G only"). That should get you onto a faster network.
+
+Go ahead and make those two changes, then let me know how your speeds look.
+TOOL_RESULT: Data Roaming is now ON.
+Status Bar: 📶¹ Poor | 2G | 📱 Data Enabled | 🔒 VPN Connected | 🔋 80%
+TOOL_RESULT: Preferred Network Mode set to: 4g_5g_preferred
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔒 VPN Connected | 🔋 80%
+USER: Okay, I've made both changes. My status bar now shows a **5G** network with **excellent** signal. Let me run a speed test to check.
+TOOL_RESULT: Speed test failed: No Connection.
+USER: Hmm, the speed test failed — it says "No Connection." That's strange since it looked like I had a good 5G signal. Let me check my network status again.
+TOOL_RESULT: Airplane Mode: OFF
+SIM Card Status: active
+Cellular Connection: connected
+Cellular Signal: excellent
+Cellular Network Type: 5G
+Mobile Data Enabled: Yes
+Data Roaming Enabled: Yes
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+USER: So my network status actually looks good now:
+- Airplane Mode: Off
+- Cellular Connection: Connected, **5G**, **excellent** signal
+- Mobile Data: Enabled
+- Data Roaming: Enabled
+
+But the speed test still failed with "No Connection." I did notice earlier that my status bar shows a **VPN connected** — could that be causing the problem? What should I try next?
+AGENT: That's a good catch. A VPN can indeed interfere with your mobile data connection and slow things down or block traffic entirely. Let's rule it out.
+
+Please **disconnect/turn off the VPN** on your phone, then try the speed test again and let me know the result.
+TOOL_RESULT: VPN disconnected successfully.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Speed test failed: No Connection.
+USER: I disconnected the VPN, but the speed test still failed with "No Connection." That's a bit frustrating — the signal looks great on 5G, but I still can't actually get online. What else could be blocking it?
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "D1002"}}
+TOOL_RESULT: {"device_id": "D1002", "device_type": "phone", "model": "Smartphone Pro Max", "imei": "234567890123456", "is_esim_capable": true, "activated": true, "activation_date": "2025-02-15 11:45:00", "last_esim_transfer_date": "2025-01-20 09:30:00"}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "P1002"}}
+TOOL_RESULT: {"plan_id": "P1002", "name": "Premium Plan", "data_limit_gb": 15.0, "price_per_month": 65.0, "data_refueling_price_per_gb": 2.0}
+AGENT_TOOL_CALL: {"name": "get_data_usage", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "data_used_gb": "15.1", "data_limit_gb": "15.0", "data_refueling_gb": "0.0", "cycle_end_date": "2025-02-28"}
+AGENT: I found the problem. Your line has used **15.1 GB** against a plan limit of **15 GB** — you've slightly exceeded your data allowance for this billing cycle, and that's why data connectivity is blocked (even though your signal, network, and roaming all look fine).
+
+The fix is to **refuel your data**. Your plan's refueling rate is **$2.00 per GB**, and the maximum you can add is 2 GB.
+
+Would you like to refuel? If so, how much data would you like to add — 1 GB ($2.00) or 2 GB ($4.00)?
+USER: Ah, that explains it — I've gone over my data limit. Yes, please refuel. Let's go with the full **2 GB** for $4.00, since I really need excellent speed while I'm here.
+
+How do I proceed with the payment?
+AGENT_TOOL_CALL: {"name": "refuel_data", "arguments": {"customer_id": "C1001", "line_id": "L1002", "gb_amount": 2}}
+TOOL_RESULT: {"message": "Successfully added 2 GB of data for line L1002 for $4.00", "new_data_refueling_gb": "2.0", "charge": "4.0"}
+AGENT: Done! I've added **2 GB** of data to your line for **$4.00**. The $4.00 charge will be added to your account/bill.
+
+Your data connectivity should now be restored — please try the speed test again and let me know how it looks.
+TOOL_RESULT: Speed Test Result: 275.00 Mbps (Excellent). Connection is very fast.
+USER: That did it! The speed test now shows **275 Mbps — Excellent**. My connection is finally fast! Thank you so much for your help. Everything's working great now.
+
+###STOP###

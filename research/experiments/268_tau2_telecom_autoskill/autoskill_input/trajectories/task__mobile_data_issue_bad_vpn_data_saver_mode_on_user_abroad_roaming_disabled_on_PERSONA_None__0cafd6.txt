@@ -1,0 +1,96 @@
+AGENT: Hi! How can I help you today?
+USER: Hi, I'm having trouble with my mobile data. It either stops working or is extremely slow. I'm currently abroad in France and I really need to get excellent internet speed on my phone. Can you help me fix this?
+AGENT: I can help with that. First, let me verify your account — could you please provide your phone number?
+
+Also, just to confirm: you're currently in France and roaming outside your home network, correct?
+USER: Yes, that's correct — I'm in France right now, roaming outside my home network. My phone number is 555-123-2002. My name is John Smith.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 8.7, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT_TOOL_CALL: {"name": "enable_roaming", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: Roaming enabled successfully
+AGENT_TOOL_CALL: {"name": "get_data_usage", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "data_used_gb": "8.7", "data_limit_gb": "15.0", "data_refueling_gb": "0.0", "cycle_end_date": "2025-02-28"}
+AGENT: Good news on two fronts:
+
+1. **Roaming is now enabled** on your line (555-123-2002) at no cost, so you can use your data connection while in France.
+2. **Your data usage is fine** — you've used 8.7 GB out of your 15 GB limit this cycle, so you're not over your cap.
+
+To get your service working properly, please **reboot your device** — the new roaming setting needs a restart to take effect.
+
+Once you've rebooted, try using your mobile data again. If it's still slow or not working, let me know and we'll troubleshoot further.
+TOOL_RESULT: Restarting network services...
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔽 Data Saver | 🔒 VPN Connected | 🔋 80%
+USER: I've rebooted the phone. Let me test my connection now.
+TOOL_RESULT: Speed Test Result: 5.50 Mbps (Fair). Connection is okay for web browsing and some standard definition streaming.
+USER: Hmm, I just ran a speed test and it only came back as **"Fair" (5.50 Mbps)**. That's not good enough for me — I really need excellent speed. It's still quite slow. What can we do next?
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "P1002"}}
+TOOL_RESULT: {"plan_id": "P1002", "name": "Premium Plan", "data_limit_gb": 15.0, "price_per_month": 65.0, "data_refueling_price_per_gb": 2.0}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "D1002"}}
+TOOL_RESULT: {"device_id": "D1002", "device_type": "phone", "model": "Smartphone Pro Max", "imei": "234567890123456", "is_esim_capable": true, "activated": true, "activation_date": "2025-02-15 11:45:00", "last_esim_transfer_date": "2025-01-20 09:30:00"}
+AGENT: Thank you for that detail. I've checked your account and here's what I can tell you:
+
+- Your roaming is now enabled (that was the main issue blocking data abroad).
+- Your device is active and your data usage is within your plan limit.
+
+What I can help with from my side is limited to **technical support, bill payment, line suspension, and plan options** — I don't have a way to boost raw network speed beyond these.
+
+A few things that can affect speed while roaming abroad, which are on your device side:
+
+- **Reboot your device** after the roaming change — if you haven't already, this is important for the new setting to apply.
+- Check your **status bar** for signal strength and network technology (e.g., whether you're stuck on 2G/3G instead of 4G/5G).
+- A **VPN** can sometimes slow down data.
+
+Could you first confirm you've rebooted your device since we enabled roaming, and tell me what your status bar shows (signal strength, network type, data status)? That'll help me narrow down the cause.
+
+If after that you'd like to explore a higher-tier plan option, I can look into that as well.
+TOOL_RESULT: Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔽 Data Saver | 🔒 VPN Connected | 🔋 80%
+USER: Yes, I have rebooted. Here's what my status bar shows:
+
+- Signal strength: **Excellent** (4 bars)
+- Network type: **5G**
+- Data: **Enabled**
+- **Data Saver: ON**
+- **VPN: Connected**
+- Battery: 80%
+
+I notice Data Saver is on and there's a VPN connected. Could those be slowing things down? Also, I don't want to change my plan — I just want the speed fixed.
+AGENT: Yes — both of those can affect your data performance.
+
+- **Data Saver ON** restricts background data and can limit throughput.
+- **VPN Connected** routes your traffic through an encrypted tunnel, which commonly reduces speed.
+
+From your device, please do the following:
+
+1. **Turn off Data Saver.**
+2. **Disconnect the VPN.**
+
+Then run your speed test again.
+
+One note: I can't take these actions for you — they're settings on your device. Let me know the result after you've made those changes, and we'll go from there.
+USER: Sure, I can do those. One thing though — I can only handle one change at a time on my end. Could you tell me which one to do first?
+AGENT: Do this first:
+
+**Turn off Data Saver.**
+
+Then run the speed test and tell me the result.
+TOOL_RESULT: Data Saver Mode is now OFF.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔒 VPN Connected | 🔋 80%
+TOOL_RESULT: Speed Test Result: 27.50 Mbps (Good). Connection is good for most activities, including HD streaming.
+USER: Okay, I turned off Data Saver and ran the test again. It's now **"Good" (27.50 Mbps)** — better, but still not excellent, which is what I need. This is getting a bit frustrating. What's next?
+AGENT: Progress. Next:
+
+**Disconnect the VPN.**
+
+Then run the speed test once more and tell me the result.
+TOOL_RESULT: VPN disconnected successfully.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Speed Test Result: 275.00 Mbps (Excellent). Connection is very fast.
+USER: That did it! The speed test now shows **"Excellent" — 275 Mbps**. That's exactly what I was looking for. Thank you so much for your help, everything's working perfectly now!
+
+###STOP###

@@ -1,0 +1,56 @@
+# v4-B1 技能读取审计（真实原生 read 调用）
+
+- 扫描目录：`runs/autoskill_library`
+- 会话数（含 turn_000 prompt）：160；其中有 sqlite 归档：160
+- 首轮 prompt 含 `$技能` 引用（v6）：160/160
+- **真实读取技能的会话：160/160 = 1.0**（有归档口径：160/160 = 1.0）
+
+## 各技能被读取次数（会话口径）
+
+- `telecom_no_service_mms_data_diagnosis_restoration_escalation`: 160
+- `browser-automation`: 1
+
+## 逐任务
+
+| task | sessions | triggered | skills |
+|---|---|---|---|
+| task__mms_issue_airplane_mode_on_bad_network_preference_bad_wifi_calling_break_apn_mms_setting_break_app_both_permissions_uns | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__mms_issue_airplane_mode_on_bad_network_preference_bad_wifi_calling_break_apn_mms_setting_break_app_sms_permission_data_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__mms_issue_airplane_mode_on_bad_network_preference_bad_wifi_calling_break_apn_mms_setting_break_app_storage_permission_d | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__mms_issue_airplane_mode_on_bad_network_preference_break_app_both_permissions_data_usage_exceeded_unseat_sim_card_user_a | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__mms_issue_airplane_mode_on_bad_network_preference_break_app_storage_permission_data_mode_off_user_abroad_roaming_enable | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__mms_issue_airplane_mode_on_bad_wifi_calling_break_app_both_permissions_data_mode_off_data_usage_exceeded_unseat_sim_car | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__mms_issue_airplane_mode_on_bad_wifi_calling_user_abroad_roaming_enabled_off_PERSONA_Easy_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__mms_issue_airplane_mode_on_break_app_both_permissions_PERSONA_Hard_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__mms_issue_airplane_mode_on_break_app_both_permissions_data_usage_exceeded_user_abroad_roaming_disabled_off_PERSONA_None | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__mms_issue_bad_network_preference_bad_wifi_calling_break_app_sms_permission_data_mode_off_data_usage_exceeded_unseat_sim | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__mms_issue_bad_network_preference_break_app_both_permissions_PERSONA_Easy_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__mms_issue_bad_network_preference_break_app_sms_permission_user_abroad_roaming_disabled_on_PERSONA_Hard_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__mms_issue_bad_network_preference_data_mode_off_user_abroad_roaming_disabled_on_PERSONA_None_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__mms_issue_bad_wifi_calling_break_apn_mms_setting_break_app_both_permissions_data_mode_off_data_usage_exceeded_user_abro | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__mms_issue_break_apn_mms_setting_user_abroad_roaming_enabled_off_PERSONA_Hard_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__mms_issue_break_app_sms_permission_data_mode_off_PERSONA_None_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__mobile_data_issue_airplane_mode_on_bad_network_preference_bad_vpn_data_mode_off_data_saver_mode_on_data_usage_exceeded_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__mobile_data_issue_airplane_mode_on_bad_network_preference_data_mode_off_data_saver_mode_on_PERSONA_Hard_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__mobile_data_issue_airplane_mode_on_data_mode_off_data_saver_mode_on_data_usage_exceeded_user_abroad_roaming_enabled_off | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__mobile_data_issue_airplane_mode_on_data_saver_mode_on_user_abroad_roaming_disabled_on_PERSONA_None_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__mobile_data_issue_bad_network_preference_bad_vpn_data_mode_off_data_saver_mode_on_data_usage_exceeded_user_abroad_roami | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__mobile_data_issue_bad_network_preference_bad_vpn_data_saver_mode_on_data_usage_exceeded_user_abroad_roaming_disabled_of | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__mobile_data_issue_bad_network_preference_bad_vpn_user_abroad_roaming_disabled_off_PERSONA_Hard_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__mobile_data_issue_bad_vpn_data_mode_off_data_usage_exceeded_user_abroad_roaming_disabled_off_PERSONA_None_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__mobile_data_issue_data_saver_mode_on_user_abroad_roaming_enabled_off_PERSONA_Easy_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__service_issue_airplane_mode_on_break_apn_settings_contract_end_suspension_lock_sim_card_pin_PERSONA_None_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__service_issue_airplane_mode_on_break_apn_settings_contract_end_suspension_lock_sim_card_pin_unseat_sim_card_PERSONA_Eas | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__service_issue_airplane_mode_on_break_apn_settings_lock_sim_card_pin_overdue_bill_suspension_PERSONA_Hard_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__service_issue_airplane_mode_on_break_apn_settings_lock_sim_card_pin_unseat_sim_card_PERSONA_None_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__service_issue_airplane_mode_on_break_apn_settings_overdue_bill_suspension_PERSONA_None_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__service_issue_airplane_mode_on_contract_end_suspension_lock_sim_card_pin_unseat_sim_card_PERSONA_Hard_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__service_issue_airplane_mode_on_lock_sim_card_pin_PERSONA_Easy_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__service_issue_airplane_mode_on_lock_sim_card_pin_overdue_bill_suspension_PERSONA_Easy_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__service_issue_airplane_mode_on_overdue_bill_suspension_PERSONA_None_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__service_issue_break_apn_settings_contract_end_suspension_lock_sim_card_pin_PERSONA_Hard_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__service_issue_break_apn_settings_contract_end_suspension_lock_sim_card_pin_unseat_sim_card_PERSONA_Hard_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__service_issue_break_apn_settings_lock_sim_card_pin_PERSONA_None_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__service_issue_break_apn_settings_lock_sim_card_pin_overdue_bill_suspension_PERSONA_Easy_ | 4 | 4 | browser-automation×1, telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__service_issue_contract_end_suspension_unseat_sim_card_PERSONA_Hard_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |
+| task__service_issue_overdue_bill_suspension_unseat_sim_card_PERSONA_Easy_ | 4 | 4 | telecom_no_service_mms_data_diagnosis_restoration_escalation×4 |

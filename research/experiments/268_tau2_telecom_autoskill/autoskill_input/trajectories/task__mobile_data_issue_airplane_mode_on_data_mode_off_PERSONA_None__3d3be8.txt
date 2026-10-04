@@ -1,0 +1,94 @@
+AGENT: Hi! How can I help you today?
+USER: Hi there. My mobile data has been acting up — it either stops working completely or it's extremely slow. I really need to get excellent internet speeds on my phone. I don't have any Wi-Fi to fall back on, so I need this fixed. Can you help?
+AGENT: I can help with that. First, I need to identify you — could you please tell me your phone number? If you'd prefer, you can instead give me your customer ID, or your full name and date of birth.
+USER: Sure — my phone number is 555-123-2002, and my name is John Smith.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT: Thanks, John — I've found your account. Which line are you having trouble with? You have three lines on your account. Could you confirm the phone number of the line with the data issue?
+USER: It's the same number — 555-123-2002. That's the line with the data problem.
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 8.7, "data_refueling_gb": 0.0, "roaming_enabled": true, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "P1002"}}
+TOOL_RESULT: {"plan_id": "P1002", "name": "Premium Plan", "data_limit_gb": 15.0, "price_per_month": 65.0, "data_refueling_price_per_gb": 2.0}
+AGENT_TOOL_CALL: {"name": "get_data_usage", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "data_used_gb": "8.7", "data_limit_gb": "15.0", "data_refueling_gb": "0.0", "cycle_end_date": "2025-02-28"}
+AGENT: Let me run through a few checks with you to pin down the cause. Could you do the following on your phone and tell me what you see?
+
+1. **Check your status bar** — what icons are showing (airplane mode, signal strength, network technology like 5G/4G, data enabled/disabled, data saver, Wi-Fi, VPN, battery)?
+2. **Check your network status** as well.
+
+Could you share what those show?
+TOOL_RESULT: Status Bar: ✈️ Airplane Mode | 🔋 80%
+TOOL_RESULT: Airplane Mode: ON
+SIM Card Status: active
+Cellular Connection: no_service
+Cellular Signal: none
+Cellular Network Type: none
+Mobile Data Enabled: No
+Data Roaming Enabled: No
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+USER: Okay, here's what I see:
+
+**Status bar:** There's an airplane mode icon showing, and battery is at 80%. No signal or network icons.
+
+**Network status:** Airplane Mode is ON. The SIM card is active, but cellular connection shows "no service" with no signal and no network type. Mobile data is disabled, data roaming is off, and Wi-Fi is off.
+
+So it looks like Airplane Mode is on — that would explain why I have no connection at all.
+AGENT: That's exactly it — **Airplane Mode being ON** turns off all cellular connections, which is why you have no signal and no data.
+
+Could you go ahead and **turn Airplane Mode OFF**? Once you do, check your status bar and network status again and let me know what shows up.
+TOOL_RESULT: Airplane Mode is now OFF.
+Status Bar: 📶⁴ Excellent | 5G | 📵 Data Disabled | 🔋 80%
+TOOL_RESULT: Airplane Mode: OFF
+SIM Card Status: active
+Cellular Connection: connected
+Cellular Signal: excellent
+Cellular Network Type: 5G
+Mobile Data Enabled: No
+Data Roaming Enabled: No
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+USER: Okay, I turned Airplane Mode off. Now:
+
+**Status bar:** Excellent signal strength, 5G network, but it shows "Data Disabled," and battery at 80%.
+
+**Network status:** Airplane Mode is now OFF. SIM is active, cellular connection is "connected" with excellent signal on 5G. But Mobile Data is still disabled, roaming is off, and Wi-Fi is off.
+
+So I still have mobile data turned off.
+AGENT: Good progress — you've got excellent 5G signal now. The remaining issue is that **Mobile Data is disabled**. Please **turn Mobile Data ON**, then check your status bar/network status again and let me know what you see.
+TOOL_RESULT: Mobile Data is now ON.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Airplane Mode: OFF
+SIM Card Status: active
+Cellular Connection: connected
+Cellular Signal: excellent
+Cellular Network Type: 5G
+Mobile Data Enabled: Yes
+Data Roaming Enabled: No
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+USER: Mobile Data is now ON. Here's the update:
+
+**Status bar:** Excellent signal, 5G, "Data Enabled," battery 80%.
+
+**Network status:** Airplane Mode OFF, SIM active, connected with excellent 5G signal, Mobile Data enabled, roaming off, Wi-Fi off.
+
+Looks like data should be working now. Should I run a speed test to confirm the speed is good?
+AGENT: Your connection now looks fully restored: excellent 5G signal, mobile data enabled, and no Wi-Fi dependency. Please go ahead and test it — browse a page or run a speed test and let me know how it performs.
+
+If the speeds still seem slower than they should be, we can dig further. But before we do, I noticed a couple of things worth checking on your line. Let's confirm the speed first.
+TOOL_RESULT: Speed Test Result: 275.00 Mbps (Excellent). Connection is very fast.
+USER: I ran a speed test — it came back at 275 Mbps, which is rated **Excellent**. That's exactly the kind of speed I was hoping for.
+
+Everything seems to be working great now. Thank you for your help!
+AGENT: That's excellent — 275 Mbps is a great result. To summarize what fixed it: Airplane Mode was on and Mobile Data was disabled, both of which cut off your connection. Turning Airplane Mode off and enabling Mobile Data restored your service.
+
+You're all set, John. Anything else I can help you with?
+USER: Nope, that's everything I needed. Thanks again for the quick help — my data is working perfectly now!
+
+###STOP###

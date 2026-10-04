@@ -1,0 +1,129 @@
+AGENT: Hi! How can I help you today?
+USER: Hi there. I'm having trouble with my mobile data — it keeps either cutting out completely or getting really slow. I'm traveling abroad right now, and I need to get excellent internet speed on my phone. Can you help me fix this?
+AGENT: I can help with that. First, I need to identify you — could you please provide your phone number?
+USER: Sure, my phone number is 555-123-2002.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 15.1, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT: Thanks, John. I found your account.
+
+The line for the number you gave me (555-123-2002) is **L1002**, and it's currently **Active**. Since you're traveling abroad, the issue is likely that **roaming is not enabled** on this line. I can enable that for you at no cost.
+
+Before I do, one quick question: is 555-123-2002 the line you're currently using and having trouble with? Once you confirm, I'll turn roaming on.
+USER: Yes, that's the line I'm using right now — 555-123-2002. Please go ahead and enable roaming.
+AGENT_TOOL_CALL: {"name": "enable_roaming", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: Roaming enabled successfully
+AGENT: Roaming is now enabled on your line (555-123-2002) at no cost. You should reboot your device to make sure the change takes effect.
+
+Please give that a try and let me know if your data speed and stability improve. If it's still cutting out or slow after the reboot, tell me and we'll dig deeper.
+TOOL_RESULT: Restarting network services...
+Status Bar: ✈️ Airplane Mode | 🔋 80%
+USER: Okay, I rebooted. But I'm noticing something odd — my status bar is showing the Airplane Mode icon, and the battery at 80%. That seems like it might be a problem for my data connection. Also, my data still isn't working right.
+AGENT: That does sound like the problem — with Airplane Mode on, your phone can't connect to any cellular network at all, so data won't work regardless of roaming. Let's turn that off.
+
+Please go to your device's settings and **turn off Airplane Mode**. Once it's off, check your status bar again and let me know what icons you see.
+TOOL_RESULT: Airplane Mode is now OFF.
+Status Bar: 📶¹ Poor | 2G | 📱 Data Enabled | 🔽 Data Saver | 🔋 80%
+USER: Airplane Mode is off now. Here's what I see in the status bar: a poor signal strength indicator, it says 2G, mobile data is enabled, and Data Saver is on. Battery at 80%. My data is still not working well — hmm, 2G and poor signal doesn't sound promising.
+AGENT: You're right to flag those two:
+
+1. **2G network** — 2G is not suitable for mobile data; it will be extremely slow or effectively unusable. We need to switch your network mode to one that includes 4G/5G.
+2. **Data Saver is on** — this can restrict background data and affect performance.
+
+Let's tackle the network mode first, since that's the main issue. On your device, please go into settings and change the **network mode preference** to **"4g_5g_preferred"**. Then check your status bar again and tell me what you see.
+
+Also, please **turn off Data Saver** while you're in there, since it can limit your data connectivity.
+USER: I can only really handle one of those at a time — could you walk me through them one at a time? Which should I do first?
+AGENT: Let's do the network mode first, since that's the bigger issue.
+
+Please go into your device's settings and change the **network mode preference** to **"4g_5g_preferred"**. Then check your status bar and tell me what network type and signal strength you see.
+TOOL_RESULT: Preferred Network Mode set to: 4g_5g_preferred
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔽 Data Saver | 🔋 80%
+USER: Okay, that changed things. Now the status bar shows: excellent signal strength, 5G network, mobile data enabled, Data Saver still on, battery at 80%. That looks much better. What's next?
+AGENT: Excellent — 5G with excellent signal is a big improvement. Now for the Data Saver.
+
+Please go into your device's settings and **turn off Data Saver**. Then check your status bar to confirm it's gone, and let me know.
+TOOL_RESULT: Data Saver Mode is now OFF.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: Data Saver is off now. The status bar shows: excellent signal, 5G, mobile data enabled, battery at 80%. Data Saver icon is gone. Should I test the actual speed now?
+AGENT: Yes, please go ahead and test your actual data speed now — try browsing or running a speed test.
+
+Just to set expectations: 2G and the restricted network mode would have been the main culprits, so with 5G and excellent signal you should see a big difference. Let me know how it performs.
+TOOL_RESULT: Speed test failed: No Connection.
+USER: Hmm, that's strange. I ran the speed test and it failed — it says "No Connection." But the status bar shows 5G with excellent signal. That's frustrating. What's going on?
+AGENT_TOOL_CALL: {"name": "get_data_usage", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "data_used_gb": "15.1", "data_limit_gb": "15.0", "data_refueling_gb": "0.0", "cycle_end_date": "2025-02-28"}
+AGENT: Found it. Your line has used **15.1 GB** against a plan limit of **15 GB** for this billing cycle (which ends 2025-02-28). Because you've exceeded your data limit, data connectivity is cut off — that's why the speed test says "No Connection" even though the signal shows 5G.
+
+The fix is to **refuel data** on your line. Here's how it works:
+
+- Your plan allows refueling up to **2 GB** at a price per GB specified by your plan.
+- Would you like me to refuel **2 GB** (the maximum) for you? Let me know how much you'd like, and I'll confirm the exact price before applying it.
+USER: Yes, please refuel the full 2 GB — that should get me back online. Could you confirm the exact price before applying it?
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "P1002"}}
+TOOL_RESULT: {"plan_id": "P1002", "name": "Premium Plan", "data_limit_gb": 15.0, "price_per_month": 65.0, "data_refueling_price_per_gb": 2.0}
+AGENT: Here's the confirmation:
+
+- **Plan:** Premium Plan
+- **Refuel price:** $2.00 per GB
+- **Amount:** 2 GB
+- **Total charge:** **$4.00**, which will be added to your bill.
+
+Shall I go ahead and apply the 2 GB refuel?
+USER: Yes, please go ahead and apply the 2 GB refuel for $4.00.
+AGENT_TOOL_CALL: {"name": "refuel_data", "arguments": {"customer_id": "C1001", "line_id": "L1002", "gb_amount": 2}}
+TOOL_RESULT: {"message": "Successfully added 2 GB of data for line L1002 for $4.00", "new_data_refueling_gb": "2.0", "charge": "4.0"}
+AGENT: Done! I've added **2 GB** of data to your line for **$4.00** (charged to your bill). You should now be back online.
+
+Please try the speed test again and let me know how it performs.
+TOOL_RESULT: Speed test failed: No Connection.
+USER: Still no connection — the speed test failed again with "No Connection." I'm getting a bit frustrated here. The status bar shows 5G and excellent signal, and now I've got data refueled, but it's still not working. What else could be wrong?
+AGENT: Let me dig deeper into the device settings. A few things can still block data even with 5G and signal. Let's check them one at a time.
+
+First, please check your **APN settings** on the device and tell me what you see — specifically whether the APN settings show any issue (e.g., "Incorrect" or missing fields).
+
+Also, could you confirm whether you're connected to **Wi-Fi** right now, or if it's off?
+USER: That's two things at once — could you walk me through them one at a time? Which first?
+AGENT: No problem — let's start with the APN settings.
+
+Please check your **APN settings** on the device and tell me what they show — in particular, whether they appear "Incorrect" or have any missing fields.
+TOOL_RESULT: Current APN Name: internet
+MMSC URL (for picture messages): http://mms.carrier.com/mms/wapenc
+(These are technical settings, usually best left unchanged.)
+USER: The APN settings look fine to me — the APN name is "internet" and the MMSC URL is set to http://mms.carrier.com/mms/wapenc. Nothing looks incorrect or missing there.
+AGENT: Good, your APN settings look fine.
+
+Next: are you currently connected to a **Wi-Fi network**, or is Wi-Fi off? Please check and let me know what the status bar or Wi-Fi settings show.
+TOOL_RESULT: Wi-Fi is turned OFF.
+USER: Wi-Fi is off. And just so you know, I don't have access to any Wi-Fi network while I'm traveling, so I'm relying entirely on mobile data.
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 15.1, "data_refueling_gb": 2.0, "roaming_enabled": true, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT: Roaming is enabled and your refuel is in place, so the line side looks correct.
+
+Let's look at the device side again. Since you're traveling, a common issue is the device's **APN reset** being needed after network changes, but yours looks fine. Let's check whether your messaging/data app permissions or another connectivity setting is interfering.
+
+First, please check the device's **network status** and tell me exactly what it shows — including any details about the cellular network connection and whether it's fully registered on the network.
+TOOL_RESULT: Airplane Mode: OFF
+SIM Card Status: active
+Cellular Connection: connected
+Cellular Signal: excellent
+Cellular Network Type: 5G
+Mobile Data Enabled: Yes
+Data Roaming Enabled: No
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+USER: Here's what the network status shows: Airplane Mode is off, the SIM card is active, cellular connection is "connected," signal is excellent, network type is 5G, mobile data is enabled. But — it says **Data Roaming is disabled** on the device. And Wi-Fi is off. 
+
+Since I'm abroad, wouldn't data roaming need to be enabled on the phone itself? That might be the problem.
+AGENT: That's very likely it. The roaming state on our side is enabled, but the **device's own data roaming toggle** is off — while traveling abroad, the phone won't use mobile data unless that setting is enabled on the device itself.
+
+Please go into your device's settings and **turn on Data Roaming** (usually under Network/Cellular settings). Then test the speed again and let me know how it goes.
+TOOL_RESULT: Data Roaming is now ON.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Speed Test Result: 275.00 Mbps (Excellent). Connection is very fast.
+USER: That did it! I ran the speed test and got **275 Mbps — rated Excellent**. The connection is very fast now. Finally! Thank you so much for your patience in walking me through all of that. Everything's working perfectly now. ###STOP###

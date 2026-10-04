@@ -1,0 +1,117 @@
+AGENT: Hi! How can I help you today?
+USER: Hi there—my phone’s been showing “No Service” for the past few hours. I can’t make calls or use mobile data. Can you help me get it working again?
+AGENT: I can help with that. First I need to identify you — could you please provide your phone number?
+USER: Sure, my number is 555-123-2002.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003", "B1234321"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Suspended", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 8.7, "data_refueling_gb": 0.0, "roaming_enabled": true, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": "2025-02-25"}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT_TOOL_CALL: {"name": "get_bills_for_customer", "arguments": {"customer_id": "C1001"}}
+TOOL_RESULT: [{"bill_id": "B1003", "customer_id": "C1001", "period_start": "2025-03-01", "period_end": "2025-03-31", "issue_date": "2025-03-01", "total_due": 0.0, "due_date": "2025-03-15", "line_items": [], "status": "Draft"}, {"bill_id": "B1002", "customer_id": "C1001", "period_start": "2025-02-01", "period_end": "2025-02-28", "issue_date": "2025-02-05", "total_due": 150.0, "due_date": "2025-02-19", "line_items": [{"description": "Basic Plan - Line 555-123-2001", "amount": 40.0, "date": "2025-02-05", "item_type": "Plan Charge"}, {"description": "Premium Plan - Line 555-123-2002", "amount": 65.0, "date": "2025-02-05", "item_type": "Plan Charge"}, {"description": "Basic Plan - Line 555-123-2003", "amount": 40.0, "date": "2025-02-05", "item_type": "Plan Charge"}, {"description": "Suspension Fee - Line 555-123-2003", "amount": 5.0, "date": "2025-02-05", "item_type": "Fee"}], "status": "Issued"}, {"bill_id": "B1001", "customer_id": "C1001", "period_start": "2025-01-01", "period_end": "2025-01-31", "issue_date": "2025-01-05", "total_due": 160.5, "due_date": "2025-01-19", "line_items": [{"description": "Basic Plan - Line 555-123-2001", "amount": 40.0, "date": "2025-01-05", "item_type": "Plan Charge"}, {"description": "Premium Plan - Line 555-123-2002", "amount": 65.0, "date": "2025-01-05", "item_type": "Plan Charge"}, {"description": "Basic Plan - Line 555-123-2003", "amount": 40.0, "date": "2025-01-05", "item_type": "Plan Charge"}, {"description": "Data Overage - Line 555-123-2002", "amount": 15.5, "date": "2025-01-05", "item_type": "Overage"}], "status": "Paid"}, {"bill_id": "B1234321", "customer_id": "C1001", "period_start": "2025-01-01", "period_end": "2025-01-31", "issue_date": "2025-01-01", "total_due": 65.0, "due_date": "2025-01-15", "line_items": [{"description": "Charge for line L1002", "amount": 65.0, "date": "2025-02-25", "item_type": "Charge"}], "status": "Overdue"}]
+AGENT: I found the cause. Your line **555-123-2002** was suspended because of an **overdue bill**:
+
+- **Bill B1234321** — $65.00, due 2025-01-15, status: **Overdue**
+
+To get your service back, we first need to settle that overdue bill. Would you like me to send you a payment request for the $65.00? Once it's paid, I can lift the suspension.
+USER: Yes, please go ahead and send me the payment request for the $65. I’ll take care of it right away.
+AGENT_TOOL_CALL: {"name": "send_payment_request", "arguments": {"customer_id": "C1001", "bill_id": "B1234321"}}
+TOOL_RESULT: Payment request sent to the customer for bill B1234321
+AGENT: I've sent you a payment request for the **$65.00** overdue bill. Please check your payment requests to accept and complete it, then let me know once you've paid so I can lift the suspension on your line.
+TOOL_RESULT: You have a payment request for bill B1234321 of 65.0 USD.
+TOOL_RESULT: Payment of 65.0 USD has been made for bill B1234321.
+USER: I’ve completed the payment—$65.00 for bill B1234321. Could you please lift the suspension on my line now?
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "B1234321"}}
+TOOL_RESULT: {"bill_id": "B1234321", "customer_id": "C1001", "period_start": "2025-01-01", "period_end": "2025-01-31", "issue_date": "2025-01-01", "total_due": 65.0, "due_date": "2025-01-15", "line_items": [{"description": "Charge for line L1002", "amount": 65.0, "date": "2025-02-25", "item_type": "Charge"}], "status": "Paid"}
+AGENT_TOOL_CALL: {"name": "resume_line", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: {"message": "Line resumed successfully", "line": {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 8.7, "data_refueling_gb": 0.0, "roaming_enabled": true, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}}
+AGENT: Your line **555-123-2002** is now **Active** again. 🎉
+
+Please **reboot your device** to restore service — after that, calls and mobile data should work normally. Let me know if you still have any trouble!
+TOOL_RESULT: Restarting network services...
+Status Bar: ✈️ Airplane Mode | 🔋 80%
+USER: I rebooted the phone, but it’s still not working. Now the status bar is showing an **Airplane Mode** icon, and I don’t see any signal bars. Can you help me get service back?
+AGENT: I have no directory-listing tool available, but the workspace skills folder is noted as empty, so no procedure applies here.
+
+The **Airplane Mode** icon is the problem — while it's on, your phone won't connect to any cellular network. Please go to your phone's settings (or quick settings panel) and **turn Airplane Mode OFF**. Once it's off, let me know if you see signal bars and can use calls/data again.
+TOOL_RESULT: Airplane Mode is now OFF.
+Status Bar: 📵 No Signal | 📵 Data Disabled | 🔋 80%
+USER: Okay, I turned Airplane Mode off. But I’m still not getting service—the status bar now shows “No Signal,” and it also says data is disabled. What should I try next?
+AGENT_TOOL_CALL: {"name": "get_data_usage", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "data_used_gb": "8.7", "data_limit_gb": "15.0", "data_refueling_gb": "0.0", "cycle_end_date": "2025-02-28"}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 8.7, "data_refueling_gb": 0.0, "roaming_enabled": true, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT: Good news — your line is **Active** on our side, and your data usage (8.7 GB of 15 GB) is fine, so nothing is blocking service from the account side.
+
+Since the reboot didn't help, let's check a few things on your device:
+
+1. **SIM card** — Please **reseat your SIM card** (remove it and put it back in securely). This resolves many "No Signal" cases.
+2. **Mobile data** — Turn mobile data back **ON** in your settings.
+
+After reseating the SIM, could you check your **status bar** again and tell me what icons show (signal strength, network type, data status)?
+USER: I can only do one action at a time—could you please instruct me one step first? Should I reseat the SIM card, or turn mobile data on first?
+AGENT: Let's start with the SIM card, since cellular service is needed before mobile data can work.
+
+**Step 1:** Please **reseat your SIM card** — remove it and put it back in securely.
+
+Once that's done, tell me what the status bar shows.
+TOOL_RESULT: SIM card re-seated successfully.
+Status Bar: 📵 No Signal | 📵 Data Disabled | 🔋 80%
+USER: I reseated the SIM, but it’s still the same—status bar shows “No Signal,” data disabled, battery at 80%. Kind of frustrating that it didn’t help. What should I try next?
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 8.7, "data_refueling_gb": 0.0, "roaming_enabled": true, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT: Now I have the full troubleshooting tree. The status bar previously showed Airplane Mode, and the line itself is healthy (Active, contract valid, suspension cleared). So the remaining device-side checks are: Airplane Mode, SIM status, and APN settings.
+
+Let me guide the customer through the checks. Since I can only interact by asking them to run on-device actions, I'll ask for the diagnostic readings one at a time, starting with the two most likely culprits.
+
+The line is active and healthy on our side — paid bill, valid contract, suspension cleared. So we're now dealing with a device-side problem. Let's work through it step by step on your phone.
+
+First, two checks:
+
+1. **Check your status bar** and tell me exactly what it shows — specifically whether **Airplane Mode** (✈️) is still on, and what the signal indicator says.
+2. **Check your SIM status** on the device and tell me whether it reads **Active**, **Missing**, or **Locked**.
+
+Once I have those two readings, I'll tell you the exact next step.
+TOOL_RESULT: Status Bar: 📵 No Signal | 📵 Data Disabled | 🔋 80%
+TOOL_RESULT: Your SIM card is active and working.
+USER: Here’s what I’m seeing:
+
+- Status bar: “No Signal,” data disabled, battery 80%. Airplane Mode is not showing.
+- SIM status: Active.
+
+So no airplane mode, SIM is fine, but still no signal. What’s the next step?
+AGENT: Thanks — Airplane Mode off and SIM Active rules out those two. On our side the line is active with a valid contract, so the next likely cause is your **network/APN settings**.
+
+Two things to check on your phone:
+
+1. **APN settings** — check whether they read **Correct** or **Incorrect**. If they show **Incorrect**, the fix is to reset the APN settings, then reboot the phone.
+2. **Network mode preference** — tell me what it currently shows (**2G**, **3G**, or something like **4G/5G preferred**).
+
+Please check both and report what you see — I'll give you the exact next step based on the readings.
+TOOL_RESULT: Current APN Name: broken
+MMSC URL (for picture messages): http://mms.carrier.com/mms/wapenc
+(These are technical settings, usually best left unchanged.)
+TOOL_RESULT: Network Mode Preference: 4g_5g_preferred
+USER: Here’s what I found:
+
+- APN settings: the APN name shows as **broken** — so it looks **Incorrect**.
+- Network mode preference: **4G/5G preferred**.
+
+So the APN seems off. What would you like me to do next?
+AGENT: That's the culprit. With the APN settings incorrect, the phone can't attach to the network, which explains "No Signal."
+
+Here's what to do:
+
+1. **Reset your APN settings** on the phone.
+2. **Reboot your device** afterward — the reset only takes effect after a reboot.
+
+Once you've done both, check your status bar and tell me whether you have a signal indicator and whether mobile data is enabled. If the signal's back, we'll confirm everything's working.
+TOOL_RESULT: APN settings will reset at reboot.
+Status Bar: 📵 No Signal | 📵 Data Disabled | 🔋 80%
+TOOL_RESULT: Resetting APN settings...
+Restarting network services...
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: That did it! After the APN reset and reboot, my status bar now shows full signal bars (**Excellent**), **5G**, and mobile data is **Enabled**. Calls and data should be working now. Thanks for your help! ###STOP###

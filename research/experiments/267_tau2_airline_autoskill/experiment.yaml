@@ -1,0 +1,48 @@
+experiment: 267_tau2_airline_autoskill
+domain: airline
+benchmark: tau2-bench v1.0.1 (fc0055dc)
+created: 2026-10-04
+status: preparation
+
+seed: 42
+trials_evaluate: 4
+concurrency: 12
+max_steps: 200
+max_errors: 10
+max_retries: 3
+timeout: null
+
+relay:
+  port: 8180
+  max_requests: 60000
+  routes: [consumer, user, judge, autoskill, embed, plus]
+  ledger: ledger/requests.jsonl
+
+roles:
+  consumer: deepseek-flash
+  user_simulator: deepseek-flash
+  judge_nl_assertions: glm-4-flash
+  embeddings_autoskill: ecnu-embedding-small
+
+split:
+  source: inputs/airline_split.json (train 30 / test 20 / base 50)
+  dev_ids: ["42", "21", "20", "12"]
+  dev_rule: "primary-operation buckets [cancel,update_flights,book,update_baggages,update_passengers], seed=42 shuffle, first per bucket, stop at 4"
+  evolution: 26
+  test: 20
+
+phases:
+  - dev:       {group: no_skill, tasks: dev, trials: 1, result: runs/dev/no_skill.json}
+  - collect:   {group: no_skill, tasks: evolution, trials: 1, result: runs/collect/evolution.json}
+  - learn:     {extractor: autoskill_offline_agentic_trajectory, out: frozen_skills/}
+  - evaluate:  {tasks: test, trials: 4, groups: [no_skill, autoskill_library],
+                results: [runs/test/no_skill.json, runs/test/autoskill_library.json]}
+  - analyze:   {skill_read_scan: true, paired_summary: true}
+
+env_template:
+  TAU2_RETAIL_DOMAIN: airline
+  TAU2_RETAIL_RUN_ROOT: <root>/runs
+  TAU2_RETAIL_RELAY_PORT: "8180"
+  TAU2_RETAIL_RELAY_BASE: http://127.0.0.1:8180/tau2_retail/consumer/v1
+  TAU2_RETAIL_USER_MODEL: openai/deepseek-flash
+  TAU2_RETAIL_USER_BASE: http://127.0.0.1:8180/tau2_retail/user/v1

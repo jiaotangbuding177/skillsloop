@@ -1,0 +1,96 @@
+AGENT: Hi! How can I help you today?
+USER: Hi there! I'm having some trouble with my mobile data. It either stops working completely or gets really slow. I need to get this fixed because I rely on my phone for work, and I really want to get excellent internet speed. I don't have access to Wi-Fi, so I'm stuck with mobile data. Can you help me?
+AGENT: I can help with that. First I need to verify your account — could you please provide your phone number?
+
+Also, quick note: I'm your new assistant and I don't have a name yet. What would you like to call me?
+USER: Sure, my phone number is 555-123-2002. And as for a name — how about I call you Alex? That works for me if it works for you!
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT: Thanks, John. I found your account. You have three lines — which phone number is having the mobile data trouble? Is it the one you gave me (555-123-2002), or a different line?
+USER: It's the same one I gave you — 555-123-2002. That's the phone I'm using right now that's having the trouble.
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_data_usage", "arguments": {"customer_id": "C1001", "line_id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "data_used_gb": "3.2", "data_limit_gb": "5.0", "data_refueling_gb": "0.0", "cycle_end_date": "2025-02-28"}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 15.1, "data_refueling_gb": 0.0, "roaming_enabled": true, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT_TOOL_CALL: {"name": "get_data_usage", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "data_used_gb": "15.1", "data_limit_gb": "15.0", "data_refueling_gb": "0.0", "cycle_end_date": "2025-02-28"}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "P1002"}}
+TOOL_RESULT: {"plan_id": "P1002", "name": "Premium Plan", "data_limit_gb": 15.0, "price_per_month": 65.0, "data_refueling_price_per_gb": 2.0}
+AGENT: I can see the issue, John. Your line (555-123-2002) is on the Premium Plan with a 15 GB monthly limit, and you've used 15.1 GB — you're over your data limit, which is why your mobile data stops working or crawls. Since you're not on Wi-Fi, this is the cause.
+
+I can refuel data for you at **$2 per GB**, and the maximum I can add is 2 GB. How much data would you like to refuel — 1 GB or 2 GB?
+USER: Ah, that explains it! Let's go ahead and refuel the full 2 GB, please. That should get me back up and running.
+AGENT: 2 GB at $2/GB comes to **$4.00 total**, charged to your account. Shall I go ahead and apply it?
+USER: Yes, please go ahead and apply the 2 GB. $4.00 works for me.
+AGENT_TOOL_CALL: {"name": "refuel_data", "arguments": {"customer_id": "C1001", "line_id": "L1002", "gb_amount": 2}}
+TOOL_RESULT: {"message": "Successfully added 2 GB of data for line L1002 for $4.00", "new_data_refueling_gb": "2.0", "charge": "4.0"}
+AGENT: Done! ✅ I've added **2 GB** to your line (555-123-2002) for **$4.00**, which will appear on your account.
+
+That should restore your mobile data — you may need to reboot your device to get it back up and running. Is there anything else I can help you with?
+
+Also, small matter of housekeeping — you're naming me Alex, so I'll save that. Before I do: any favorite vibe/emoji you want for me, or should I just pick something that fits?
+USER: Great, thanks for adding the data! I'll go ahead and reboot my phone as you suggested, then check the speed.
+
+And for the vibe — just pick whatever fits you best. I trust your judgment, Alex!
+
+Let me restart the phone now.
+TOOL_RESULT: Restarting network services...
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔽 Data Saver | 🔋 80%
+USER: Okay, the phone has restarted. Now let me run a speed test to see where we stand.
+TOOL_RESULT: Speed Test Result: 55.00 Mbps (Good). Connection is good for most activities, including HD streaming.
+USER: Hmm, I just ran the speed test and it came back as **"Good" at 55 Mbps**. That's... okay, I guess, but honestly it's not what I'm looking for. I really need **excellent** speed, not just good. I'm a bit frustrated that it's still not where I want it to be.
+
+I did notice that my status bar shows Data Saver is turned on — could that be slowing things down? What should I try next?
+AGENT: Data Saver can absolutely slow things down — it restricts background data and can throttle your connection. Let me check a couple of things on your end.
+
+Going back to your soul/vibe for a moment — you did ask me to be Alex, so I'll save that. But first, let's get your speed sorted.
+
+A few quick things to check on your phone:
+
+1. **Turn off Data Saver** — this is likely the main culprit. Can you go into Settings → Network & Internet → Data Saver and turn it off?
+2. Let me also verify your network status. Can you run a network status check and tell me what it shows — specifically the **network type** (4G/5G/2G) and **signal strength**?
+
+Also, one thing I noticed: your line had **roaming enabled**. If you're not actually traveling outside your home network, that's worth turning off — but let's confirm where you are first. Are you currently at home (in your normal coverage area) or traveling?
+USER: I'm at home right now, in my normal coverage area — not traveling. So if roaming is on, that's probably not needed.
+
+I can definitely help with those checks, but I can only do one thing at a time. Could you walk me through them one step at a time? Which would you like me to start with — turning off Data Saver, or the network status check?
+AGENT: Let's start with the network status check — that tells us the most about your connection. Please run it and tell me what it shows, especially the **network type** (e.g., 5G, 4G, 2G) and **signal strength**.
+USER: Sure, let me run the network status check now.
+TOOL_RESULT: Airplane Mode: OFF
+SIM Card Status: active
+Cellular Connection: connected
+Cellular Signal: excellent
+Cellular Network Type: 5G
+Mobile Data Enabled: Yes
+Data Roaming Enabled: No
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+USER: Okay, here's what the network status check shows:
+
+- **Airplane Mode:** OFF
+- **SIM Card Status:** Active
+- **Cellular Connection:** Connected
+- **Cellular Signal:** Excellent
+- **Network Type:** 5G
+- **Mobile Data:** Enabled
+- **Data Roaming:** Off
+- **Wi-Fi:** Off, not connected
+
+So I've got excellent signal and I'm on 5G, and mobile data is on. Roaming is actually already off. What should I try next?
+AGENT: Great — signal and network are both excellent, and roaming is off. So that leaves Data Saver as the likely slowdown.
+
+Please go into Settings → Network & Internet → Data Saver and **turn it off**. Then re-run your speed test and let me know the result.
+USER: Alright, turning off Data Saver now.
+TOOL_RESULT: Data Saver Mode is now OFF.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: Data Saver is now off. Now let me re-run the speed test to see if that helped.
+TOOL_RESULT: Speed Test Result: 275.00 Mbps (Excellent). Connection is very fast.
+USER: That did it! 🎉 The speed test now shows **275 Mbps — Excellent**. Connection is very fast!
+
+That's exactly what I was hoping for. Thank you so much, Alex — turning off Data Saver made all the difference. I really appreciate your help getting this sorted out. Have a great day!
+
+###STOP###

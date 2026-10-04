@@ -1,0 +1,127 @@
+AGENT: Hi! How can I help you today?
+USER: Hello. I'm having some trouble with my mobile data. I'm abroad in France right now and my internet either stops working completely or it's just painfully slow. I really need it to work well - can you help me fix this?
+AGENT: I can help with that. First, I need to identify your account.
+
+Could you please provide your phone number?
+USER: Yes, of course. My phone number is 555-123-2002.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT: Thanks, John. I've found your account. Let me look into your line.
+
+Since you're traveling abroad, let me check the roaming status on your line. Which line is having the data issue — do you know the line ID, or is it the primary line at 555-123-2002?
+USER: Yes, that's the one - it's my main number, 555-123-2002.
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 8.7, "data_refueling_gb": 0.0, "roaming_enabled": true, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_data_usage", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "data_used_gb": "8.7", "data_limit_gb": "15.0", "data_refueling_gb": "0.0", "cycle_end_date": "2025-02-28"}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "P1002"}}
+TOOL_RESULT: {"plan_id": "P1002", "name": "Premium Plan", "data_limit_gb": 15.0, "price_per_month": 65.0, "data_refueling_price_per_gb": 2.0}
+AGENT: Good news on the account side: your line is active, and roaming is already enabled. You've used 8.7 GB out of your 15 GB plan limit this cycle, so you haven't run out of data.
+
+Since the data connection is either dropping or very slow while you're in France, let's troubleshoot your device. Could you do the following on your phone and tell me what you see?
+
+1. Open your status bar check — what network technology does it show (e.g., 5G, 4G, 3G, 2G)?
+USER: Let me take a look at my phone's status bar for you.
+TOOL_RESULT: Status Bar: 📶¹ Poor | 2G | 📱 Data Enabled | 🔋 80%
+USER: Okay, I checked. It shows a poor signal, and it says "2G" for the network. Mobile data is enabled, and my battery is at 80%. Does that help?
+AGENT: Yes, that helps a lot. Your phone is connected to a **2G** network, and 2G is not suitable for mobile data — that's very likely why your internet is either not working or painfully slow.
+
+The fix is to change your network mode to prefer 4G/5G. On your phone, please go to your network settings and use the option to set the network mode preference to **"4g_5g_preferred"** (or "4g_only" if that's available). Can you do that and let me know?
+USER: Alright, let me try changing that setting. I'll set it to prefer 4G/5G.
+TOOL_RESULT: Preferred Network Mode set to: 4g_5g_preferred
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: Okay, I did that. Now my status bar shows "Excellent" signal and it says "5G"! That's much better, isn't it?
+AGENT: That's exactly what we wanted — excellent signal on 5G means your data connection should now work properly.
+
+To confirm everything's good: can you try browsing the web or using an app that needs internet, and let me know if it's working at normal speed now?
+USER: Let me run a speed test to check the actual internet speed.
+TOOL_RESULT: Speed test failed: No Connection.
+USER: Hmm, that's strange. I tried to run a speed test, but it failed and said "No Connection." But my status bar shows 5G with excellent signal and data enabled. What should I do now?
+AGENT: Let me dig into this a bit more. There are a few things that can block data even when your signal looks fine. Let me have you check your APN settings.
+
+On your phone, could you run a check of your APN settings and tell me what it shows — specifically whether the APN is listed as correct or incorrect?
+USER: Let me check those APN settings for you.
+TOOL_RESULT: Current APN Name: internet
+MMSC URL (for picture messages): http://mms.carrier.com/mms/wapenc
+(These are technical settings, usually best left unchanged.)
+USER: Okay, I checked. It says the APN name is "internet" and there's an MMSC URL that starts with http://mms.carrier.com... It also says these are technical settings best left unchanged. Is that right, or is something wrong there?
+AGENT: Those APN settings look correct — nothing wrong there, so no changes needed on that front.
+
+Let's check a couple of other things that can interfere with your data:
+
+1. Is **Airplane Mode** on or off?
+2. Is a **VPN** connected?
+3. Is **Data Saver** enabled?
+
+Could you check those and let me know what you see?
+USER: Let me check all three of those for you.
+TOOL_RESULT: Airplane Mode: OFF
+SIM Card Status: active
+Cellular Connection: connected
+Cellular Signal: excellent
+Cellular Network Type: 5G
+Mobile Data Enabled: Yes
+Data Roaming Enabled: No
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+TOOL_RESULT: VPN is turned OFF.
+TOOL_RESULT: Data Saver mode is OFF.
+USER: Okay, I checked all three:
+
+1. Airplane Mode is off.
+2. VPN is off.
+3. Data Saver is off.
+
+But I did notice one thing — it says "Data Roaming Enabled: No." Could that be the problem, since I'm abroad in France?
+AGENT: Good catch — but on our side your line's roaming feature is already enabled, so that particular device setting isn't our issue and I don't want you toggling things unnecessarily.
+
+Let me review what we've confirmed so far:
+- Line is active ✅
+- Roaming enabled on the line ✅
+- Plenty of data left (8.7/15 GB) ✅
+- Network mode now 5G, excellent signal ✅
+- APN settings correct ✅
+- Airplane Mode off, VPN off, Data Saver off ✅
+
+One remaining common cause when data still won't work: whether your device's data connection is actually registered on the roaming network. Let me check your line's network status once more.
+
+Could you run a **check_network_status** on your phone and tell me exactly what it reports — signal, network type, and any connection state it shows?
+USER: Let me run that network status check for you again.
+TOOL_RESULT: Airplane Mode: OFF
+SIM Card Status: active
+Cellular Connection: connected
+Cellular Signal: excellent
+Cellular Network Type: 5G
+Mobile Data Enabled: Yes
+Data Roaming Enabled: No
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+USER: Okay, I ran it again. It says:
+
+- Airplane Mode: OFF
+- Cellular Connection: connected
+- Cellular Signal: excellent
+- Cellular Network Type: 5G
+- Mobile Data Enabled: Yes
+- Data Roaming Enabled: **No**
+
+I'm getting a bit frustrated here — everything looks great (5G, excellent signal) but my internet still isn't working! That "Data Roaming: No" keeps showing up. Are you sure that's not the problem? I'm in France, after all...
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 8.7, "data_refueling_gb": 0.0, "roaming_enabled": true, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT: I've re-checked, and I can confirm roaming **is enabled on your line** on our side — so the service side is correct. The "Data Roaming: No" showing on your device is the device-level toggle, and since you're abroad, your phone does need its own data roaming switch turned **on** to use data on a foreign network. That device setting is something you control on the phone, and it's currently off.
+
+Please go into your phone's settings (Cellular / Mobile Network settings) and turn **Data Roaming ON**, then try the speed test again. Let me know what happens.
+USER: Alright, that makes sense now. Let me turn Data Roaming on.
+TOOL_RESULT: Data Roaming is now ON.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: Okay, I turned Data Roaming on. Let me try that speed test again now.
+TOOL_RESULT: Speed Test Result: 275.00 Mbps (Excellent). Connection is very fast.
+USER: That did it! The speed test now shows **275 Mbps — Excellent**! My internet is finally working at full speed. Thank you so much for your patience and for walking me through all of that — I really appreciate it!
+AGENT: You're very welcome, John — glad it's running at full speed now! To recap what fixed it: your phone was stuck on 2G, which doesn't support data, and once we got you onto 5G the device's own data roaming switch was still off, which was blocking the connection abroad.
+
+Enjoy the rest of your trip to France, and reach out anytime if anything else comes up!
+USER: Thank you again for all your help! Everything's working perfectly now. Have a great day!
+
+###STOP###

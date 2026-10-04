@@ -1,0 +1,70 @@
+AGENT: Hi! How can I help you today?
+USER: Hi, I'm having trouble with my mobile data. It keeps stopping or is really slow. I'm currently abroad in France, and I really need to get excellent internet speed on my phone. Can you help me fix this?
+AGENT: I can help with that. First, I need to identify you — could you please provide your phone number (or your customer ID, or your full name and date of birth)?
+USER: Sure, my name is John Smith and my phone number is 555-123-2002.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 15.1, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT_TOOL_CALL: {"name": "get_data_usage", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "data_used_gb": "15.1", "data_limit_gb": "15.0", "data_refueling_gb": "0.0", "cycle_end_date": "2025-02-28"}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "P1002"}}
+TOOL_RESULT: {"plan_id": "P1002", "name": "Premium Plan", "data_limit_gb": 15.0, "price_per_month": 65.0, "data_refueling_price_per_gb": 2.0}
+AGENT: I found two issues, John. Let me address them.
+
+**1. You've used up your data.** Your line (555-123-2002) is on the Premium Plan, which has a 15 GB monthly limit. You've used 15.1 GB, so you've exceeded it — that's why your data has stopped or slowed. I can refuel additional data for you at **$2 per GB**, up to a maximum of 2 GB.
+
+**2. Roaming is disabled on your line.** Since you're abroad in France, you need roaming enabled to use data outside your home network. I can enable that for you at no cost.
+
+Would you like me to enable roaming (free), and how much data would you like to refuel (up to 2 GB at $2/GB)?
+USER: Thanks for looking into that. Yes, please enable roaming for me. And since I really need to get excellent speed, please refuel the full 2 GB. Let's do both.
+AGENT_TOOL_CALL: {"name": "enable_roaming", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: Roaming enabled successfully
+AGENT_TOOL_CALL: {"name": "refuel_data", "arguments": {"customer_id": "C1001", "line_id": "L1002", "gb_amount": 2}}
+TOOL_RESULT: {"message": "Successfully added 2 GB of data for line L1002 for $4.00", "new_data_refueling_gb": "2.0", "charge": "4.0"}
+AGENT: Done, John! Here's what I set up for you:
+
+- **Roaming enabled** on your line (555-123-2002) — free of charge, so you can use data in France.
+- **Refueled 2 GB of data** — a $4.00 charge was added to your account.
+
+That brings your available data back up. Please **reboot your phone** to make sure the new settings and data take effect.
+
+For best data speed while abroad, you can also check your phone's network settings to make sure it's using a 4G/5G network rather than a slower one. Is there anything else I can help you with?
+TOOL_RESULT: Restarting network services...
+Status Bar: ✈️ Airplane Mode | 🔋 80%
+TOOL_RESULT: Speed test failed: No Connection.
+TOOL_RESULT: Status Bar: ✈️ Airplane Mode | 🔋 80%
+USER: Okay, I rebooted the phone, but now something seems off. I ran a speed test and it just failed — it said "No Connection." Also, my status bar is showing the Airplane Mode icon. It seems like Airplane Mode is on. What should I do?
+AGENT_TOOL_CALL: {"name": "get_customer_by_id", "arguments": {"customer_id": "C1001"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT: The "No Connection" and the Airplane Mode icon explain it — when Airplane Mode is on, your phone turns off all cellular connections, so you won't have service or data regardless of your plan.
+
+Here's how to fix it:
+
+1. **Turn off Airplane Mode.** Swipe down from the top of your screen to open the quick settings/control center, and tap the **Airplane Mode** icon (✈️) so it turns off. (You can also go into **Settings → Network & Internet → Airplane Mode** and toggle it off.)
+2. Once it's off, your phone should reconnect to the network. Give it a moment, then check your status bar — you should see signal bars and a data indicator instead of ✈️.
+3. Then try your speed test again.
+
+Once Airplane Mode is off, since we've enabled roaming and refueled your data, you should get a connection. Let me know what you see after turning it off.
+TOOL_RESULT: Airplane Mode is now OFF.
+Status Bar: 📶¹ Poor | 2G | 📵 Data Disabled | 🔋 80%
+USER: Okay, I turned Airplane Mode off. Now my status bar shows a poor signal, "2G", and it says "Data Disabled." So it looks like my mobile data is turned off. What should I do next?
+AGENT: Good — turning off Airplane Mode brought your connection back. Now there are a couple of things to address:
+
+**1. Turn on mobile data.** Since it says "Data Disabled," go to **Settings → Network & Internet → Mobile Data** (or swipe down the quick settings and tap the **Mobile Data** icon) to turn it on.
+
+**2. Change your network mode.** Your phone is currently on **2G**, which is very slow — this would cause poor speeds and also prevent MMS. You'll want to switch to a network mode that prefers 4G/5G. Go to **Settings → Network & Internet → Mobile Network → Preferred Network Type**, and select **4G/5G Preferred** (or **4G Only** if that's unavailable).
+
+After making those changes, check your status bar again. You should see Data Enabled and a 4G or 5G indicator. Then try the speed test once more — let me know how it goes.
+TOOL_RESULT: Mobile Data is now ON.
+Status Bar: 📶¹ Poor | 2G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Preferred Network Mode set to: 4g_5g_preferred
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Speed Test Result: 275.00 Mbps (Excellent). Connection is very fast.
+USER: That did it! 🎉 My status bar now shows excellent signal on 5G with data enabled, and I ran a speed test — 275 Mbps, which is rated "Excellent." This is exactly what I needed. Thank you so much for your help!
+
+###STOP###
