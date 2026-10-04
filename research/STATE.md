@@ -1,6 +1,1218 @@
 # 当前研究状态
 
-最后更新：2026-09-30，轮次 076（Git上传通道恢复）。
+## 第241轮：RW成功轨迹请求执行中，旧失败不能算成功
+
+最新265完整评分结束0.7006<0.75/accepted=false，functional0.5644/visual0.8367；20页40视图981判断、40完整API零失败、官方build success、102源码前后与来源hash及产物hash全通过。依赖修复有效，模型实现仍未达门槛，原负结果保持；self-judge/物理backend未知/纠正演示非baseline/canary排除披露。旧265/264退出核验后267/v17唯一新agent/session75605、8173/8803、relayPID32599已实际启动，10运行SHA/102模型源码SHA与离线fixture通过，仅依据自有Contact/Gallery/概括性正文的公开比对提醒，不给私有评分或手写应用。初始真实browser导航/1完整API、尚未编辑或交付，成功未实现；不干预其他聊天。下述264/265运行段均历史。
+
+最新264功能102/229（78/140+24/89）、加权program0.5644，禁VLM旧总0.2822/score_passed=false；公开638动作观察/41图像已导出，309真实API全完整，原635vendor318data/10SHA保持、生成容器stopped。265/v2完整评分full_visual_1791093098524327635已实际启动，恢复原lock对应已安装官方依赖后原生重建，--skip-agent且候选冻结；已到scripted78/140与agent_gen阶段，尚无VLM请求属顺序预期。仍须完整40视图/真实API/源码及产物hash/build success和总分>=0.75验收，成功未实现。266仅公开参考文件名规模核验，不读私有测试/不启动其他题。下述评分待启动段为历史，其他聊天262及103暂缓保持。
+
+最新264/v16原生actor已结束：attempt recreation_eval_baseline_1791089863418290376、309真实响应全完整/空0、21编辑/最终非摘要2561字符、output11957104字节；App/Header/隐私声明/搜索/离线页/data共6源码实际变化，公开行为清单保留。有限源码/工具审计无DOM回放/私有评价读取，6受限探测中的非自有预览全部实际拒绝；跨轮tool ID复用的只读审计关联已纠正，不当运行根因。原生scorer与Playwright测试正在实际运行，阶段日志未变不等于停滞；功能分与265完整VLM评分仍待结束，成功未实现。以下264刚启动与257评分为历史记录。其他聊天262/148/103暂缓不变。
+
+最新257完整评分已结束：251官方functional0.5411/视觉0.8002/总0.6706<0.75，正式成功false；20页40视图981判断与101源码SHA全部通过，41请求40完成/1供应商中间错误经官方重试恢复。独立构建install_failed，旧official_rebuild=true元数据已在新报告明确更正，旧成绩与原文件保留。官方worker收尾删除node_modules链接；一次性无网络恢复原lock对应已安装依赖后原生构建success、源码未改。264/v16独立只恢复257模型源码101SHA/10运行SHA，依据自有搜索no-op/缺隐私声明route提示公开行为核验，不给私有评分；旧身份退出、离线验收后唯一agent/session37469、8172/8802已运行，成功仍未验收。265/v2独立评分环境准备完成、未启动，正式要求原依赖链接恢复与build success。其他聊天262评测/148/103暂缓不改。[241记录](memory/241_2026-10-04_rw_successful_trajectory_execution.md)。下段及其后为历史进度。
+
+当前257/rw_web_deepseek_route_semantics_v15已交付并停止：437请求全完整/空0、65编辑/最终3334字符、output11938670字节，932公开动作观察/50图及有限原创性审计通过。原禁VLM官方功能97/229（75/140+22/89）、program0.5411/旧总0.2705、score_passed=false；原635vendor318data与10运行SHA保持。251完整评分full_visual_1791087571222561011/session95272启动，stopped候选commit冻结、原生--skip-agent/同资源assertion VLM并发2、返回值只读观察/前后SHA/真实API全覆盖检查，当前采集阶段，不另起agent/改旧成绩。成功目标仍待完整评分验收，self-judge/物理backend未知/纠正演示排除主结果限制保持。256参考自验228/229/功能0.9975保留，v1缺依赖无效0保留；可选私有测试复制被自动审批拒绝、未执行/不绕过。其他聊天与315暂缓保持。[241后续记录](memory/241_2026-10-04_rw_successful_trajectory_execution.md)。
+
+最新实质评分纠正：246原20页SSIM全no_gt_screenshots、数据包无参考截图，visual0不是有效视觉能力0；禁用VLM时原生50/50总分最高0.5，无法用于0.75完整通过验收。program0.5502是官方去视觉归一化后的分组加权功能分（raw130/229），此前混合SSIM别名说法更正。251独立完整评分准备：官方VLM函数实际正反图像断言true/false通过，将在250候选结束并冻结SHA后--skip-agent评分，旧分与250冻结配置不热改；self-judge/后端未知披露，合成不混正式数据。250原生agent已正常非摘要交付，312请求全部完整、App3433字节/约11.7MB；公开工具审计无私有评分读取/网络DOM脚本，两次browser_evaluate均被阻止；原生首组功能脚本58/140，余项及251完整视觉评分仍待结束，成功未验收；其他聊天不改。[241后续记录](memory/241_2026-10-04_rw_successful_trajectory_execution.md)。
+
+最新RW当前250/rw_web_deepseek_observation_guard_v10、loopback8166/8796、干净冷启动：246265请求完整但功能130/229、program0.5502/task0.2751、score_passed=false，并由HTML批量nav-block分组采集证据明确拒绝原创合规；所有原分/源码/轨迹保留，公开528动作/31图已导出。250新增原生managed PreToolUse观察门禁和Stop交付/摘要/构建新鲜度门禁，受控二进制下载，10fixture+实际CLI允许/阻止验收通过，合成验收不混正式数据；原635vendor318data及新10SHA验明，旧agent/scorer结束后唯一新任务启动。不改官方评分，但属于明确工具协议变体、非原harness baseline；成功仍未证，不影响其他聊天。[241后续记录](memory/241_2026-10-04_rw_successful_trajectory_execution.md)。下述246/245/244状态均历史。
+
+最新RW当前为246/rw_web_deepseek_clean_delivery_v9、attempt recreation_eval_baseline_1791065946555636335、loopback8165/8795：245末次完整stop却无可见输出，默认App/no_usable_submission明确失败；原生messages端点探测同样空答案，未采用。246新增非空输出门禁（四空类型拒绝通过），原任务后追加执行提醒，干净冷启动，无旧源码/会话，7SHA及原635vendor318data验明；164真实请求完整、App4197字节，正在构建，成功尚未证。参考标题HTML/CSS读取没有完全遵循补充截图限定，最终原创合规仍需审计；不改官方评分或其他聊天。[241后续记录](memory/241_2026-10-04_rw_successful_trajectory_execution.md)。下述245/244状态为历史。
+
+最新RW当前正式尝试：245/rw_web_deepseek_clean_vision_v8，loopback8164/8794，干净官方脚手架、无旧源码/会话恢复。244正确图像输入后agent又在参考站批量抽取14页DOM结构并复用类名，违反原native prompt原创规则，明确作为agent负结果停止并全部保留，未评分；不当API问题/不伪报0.10已打分。245独立7SHA/原635vendor318data/SSE门禁通过，补充禁止参考evaluate/run_code与DOM采集，仅截图/无障碍/交互观察；唯一新agent已启动，目标尚未成功。其他聊天不改。[241后续记录](memory/241_2026-10-04_rw_successful_trajectory_execution.md)。
+
+最新实质纠正：官方Claude→OpenAI proxy的image分支缺失，工具截图被序列化成纯文本JSON；243真实9图/830948编码字符及精确函数复现已证。直接provider图片验收不能证明完整链路，238—243视觉受污染，524精确因果未知。243精确容器停止并保留所有源码/轨迹/失败；独立244/rw_web_deepseek_vision_bridge_v7无损恢复image_url/连续工具回执顺序，完整官方函数→随机图→provider识别、SSE/截断门禁通过。7源freeze/151检查点/原635vendor318data验明后唯一新单题启动，loopback8163/8793，显式收尾提示；官方vendor/评分不改，最终成功尚未证，其他聊天保持。[241后续记录](memory/241_2026-10-04_rw_successful_trajectory_execution.md)。
+
+最新RW更正：241末请求4次524各约127秒，50请求49完整，已有实际App2767字节/约6.56MB自包含交付但原生infra_error、未评分；242同历史SSE首请求96.814秒错误帧、未推进，错误根因未知。简单SSE图片与工具验收通过后，独立243/rw_web_deepseek_checkpoint_v6仅恢复模型生成源码151SHA、清空上下文，显式检查点提示；6源freeze/旧218验明，loopback8162/8792启动。首3请求2完整、正在检查现有代码；成功仍未证。所有旧会话/失败/分保留，不当无条件baseline，不改其他聊天服务。
+
+同轮后续：240已生成实际应用/多路由并构建自查，但第188请求HTTP524约127秒，前187完整，原生infra_error/评测not_run，0非有效分。旧代码/原生会话/失败保持。独立241/rw_web_deepseek_infra_resume_v4补524有限重试，151快照SHA/真实SSE/合成故障重试通过，旧容器退出后同原生会话--resume，官方vendor/评分不改。当前15新增完整请求，应用保持并继续桌面/移动端与菜单自查；最终交付尚未验收。最终必须披露中断/恢复segments，不当无故障原提示baseline。
+
+[241记录](memory/241_2026-10-04_rw_successful_trajectory_execution.md)：238两次分别无交付与URLError；239连接重试门禁通过，101请求完整却主App仍默认模板，功能0/229。原生passed=true仅流水线结束，score_passed=false。旧分/轨迹/freeze/失败全部保留。现240/rw_web_deepseek_delivery_hint_v3另加先构建再完善提醒，官方vendor/评分不改，独立目录/8789端口、共享239 loopback代理。旧agent和scorer已结束，当前240一个agent继续；72完整请求、主应用尚未交付，成功未证。其他聊天当前B-MiMo学习、A105 accepted、148结果与103暂缓保持，不改其服务或模型。待真实交付/功能证据收尾更新。
+
+最后更新：2026-10-04（第247轮：v5旧8192输出预算截断已证，旧74/state/freeze保留；独立v6/32768真实8458-token验收后仅恢复B；A105及其他聊天保持）
+
+## 第266轮：归档兼容v2正式续跑，原评分继承
+
+最新[266修复交接](memory/266_2026-10-04_sp_end_archive_compatibility_v2.md)：262/v1的travel_050在官方end归档读取SPModel.model时AttributeError，真实基础设施失败不记0；独立离线旧错误复现、新官方end非空history/token归档/请求逐字相同验收通过、外部调用0。当前266_cogym_212_skill_evaluation_v2/sp_212_historical_baseline_skill_eval_v2，仅补公开model归档属性，原提示/请求/库/分集/vendor/模型/评分不改，新38SHA/1102来源冻结。继承全部9个首终态（4.25%），不重跑已评分题，新均分0.3472222/同题历史0.3958333、配对-0.0486111、2胜4平3负；只续203未完成题。旧34freeze/源码/334run文件SHA/失败全保留于旧262及version_v1_retirement，交接travel_035部分attempt不计完成、不填0，旧controller40689精确退出且STOP标明操作方缺陷版本退役，禁止恢复旧v1。
+
+新唯一controller32205/ticks4353113、首worker32215/原boot，travel_050新v2真实4SP完成0错/7回执/技能读取1次，四节点精确存活；尚无v2新评分，9题均明确继承。新旧路由账本443完整交付/7终态清理取消/2交接取消全部原记录保留，累计07813048+238580=13628追加。实际8000/8129/8130/8140/8145/新8146及Redis/Docker/Qdrant/lease通过，Windows可用物理一度约1.1GiB后约2.4GiB无OOM实证，继续监测不操作其他聊天。A strict false/官方合并容错与B资源差异保持，103仍暂缓；315-30 ACTIVE已同步新目录/版本/38SHA/1102来源，恢复只许当前单controller/无活跃孤儿/无STOP/冻结完整。报告在新266/reports持续更新，原945及旧分/失败保持，少量负差值不证明整体效应。下方262及之前全部历史状态。
+
+## 第262轮：有技能评测正式运行，复用历史无技能（已退役）
+
+最新[265评测巡检](memory/265_2026-10-04_skill_evaluation_six_tasks.md)：同262/v1完成6/212（2.83%），6有效/0UNKNOWN/真实0分4；新均分0.2604167/同题历史0.3750、配对-0.1145833、1胜3平2负、描述性95%[-0.3333333,0.0208333]，实际读取4/6，六题库copy后hash全通过。第七题tabular_071/A真实9SP完成/16回执/读取1，controller40689保持、唯一worker80147/ticks4087201及四节点/原boot通过，旧节点退出/Jupyter正常。271完整API/5终态清理取消（新增12802/12857/12858）原记录全部保留，不補成功、不重跑真实0；累计07812871+238580=13451。34新SHA/1011原来源及实际服务/Redis/Docker/Qdrant/lease/内存健康，无新故障或修复；少量负差值不证明总体效应，继续206题/巡检ACTIVE。下方264及之前为历史快照。
+
+最新[264评测巡检](memory/264_2026-10-04_skill_evaluation_four_tasks.md)：同262/v1完成4/212（1.89%），4有效/0UNKNOWN/真实0分2，新均分0.390625/同题无技能0.40625、配对-0.015625、1胜2平1负、描述性95%[-0.09375,0.03125]；实际读取2/4，库copy后hash全部通过。第五题travel_098/A真实25SP完成/42回执/读取1，唯一controller40689/worker67781-ticks3879001及四节点/原boot通过，旧节点全部退出。175完整交付API/2终态清理下游取消012644、12677均上游完整stop，原记录保留、不补成功、不重跑真实0；累计07812772+238580=13352追加。34新SHA/1011原来源/实际HTTP/Redis/Docker/Qdrant/lease和内存正常，无新故障或修复；少量配对子集不证明整体收益，继续208题/巡检ACTIVE。下方263及262为历史快照。
+
+最新[263首题评分与健康巡检](memory/263_2026-10-04_first_skill_evaluation_score.md)：新有技能1/212（0.47%），travel_046官方0.75/completion1，历史同题0.875/completion1，配对-0.125；真实读取1次/36SP完成零错，评分锁定不挑分重试。当前tabular_086/A，controller40689保持、唯一worker64028/ticks3758555及四节点/原boot通过，当前9SP完成/19回执真实推进，旧首题节点全部退出。34新SHA/1011原来源及库copy验明，实际服务/Redis/Docker/Jupyter/Qdrant/lease正常，Windows可用约4GiB无内存故障。64完整交付API+1下游取消012644：官方评分/正常节点清理先于其上游完整stop，非超时或评分失败；原取消与failed1保留、health单列分类不补成功。累计07812659+238580=13239追加；单题差值不代表总体收益，继续211题，不重学/重跑baseline/恢复103，315-30 ACTIVE。以下262初始0/212记录保留作历史。
+
+用户明确“开始有技能评测”，复用原212采集no_skill，只新增212 autoskill_library，旧不评测/不复用边界由新阶段授权覆盖，原freeze/315登记/945计划/分/失败不改。当前262/sp_212_historical_baseline_skill_eval_v1，[页8146](http://127.0.0.1:8146/)，新34SHA/1011原来源通过；A折107用B折105学出的208_A_attempt1，B折105用A折107学出的238_B_attempt4，组隔离及完整导出hash保持。A一次官方维护容错/strict全API成功false、A GLM/B接受MiMo学习差异披露，不重学、不恢复103。[262记录](memory/262_2026-10-04_skill_evaluation_started_baseline_reused.md)。
+
+唯一controller40689/ticks3662934、worker40721/ticks3664465/原boot，首travel_046/A当前0/212（0%）尚未评分；真实READ_SKILL整份16604字符/hash匹配，20SP完成0错/33原生回执，收尾23完整路由API零失败，累计07812618+238580=13198追加。原8000/8129经GLM消费者/模拟用户/官方评分、原SP及skills扩展/原prompt/步数配置保持；实际服务/Redis/Docker/Qdrant通过。Windows可用物理约2GiB仅监测，无内存故障证据，不操作其他聊天。
+
+两组comparison_report.md、metrics_summary.json、skill_results.json、paired_results.csv持续保存；无技能207有效/5UNKNOWN均分0.4386，有技能均分/配对差值尚UNKNOWN。按双方有效同task交集、分类型/分折、胜平负/描述性区间和真实读取/API/耗时报告，不填0或宣称收益。独占锁、失败独立attempt退避并先跑其余题、首终态锁定不挑分；完成/STOP不强制恢复。315-30 ACTIVE已转262评测监督和指标汇报，不误重启旧学习/采集；下方全部旧不评测/累计计数为历史状态。
+
+## 第247轮：输出预算修复v6，当前正式B学习
+
+最新[261评测授权与基线核验](memory/261_2026-10-04_evaluation_authorized_existing_no_skill_baseline.md)：用户已授权有/无技能指标评测，覆盖旧“不评测”等待；不重学A/103暂缓保持。已有212采集no_skill全部canonical/status SHA通过，207有效均分0.4386/5UNKNOWN，表格0.3106、旅行0.5838；不是新evaluation结果。原b0_trajectory_reuse=false，已询问复用历史基线只新增212有技能或新424场，选择未回前正式新场次未启动。原GLM资源预检012594完整stop/HTTP200，累计13174，A容错和学习资源差异保持披露，strict资格不抹除。
+
+最新[260历史超时处理说明](memory/260_2026-10-04_A_historical_timeout_remediation_options.md)：A012016合并超时已由官方启发式容错入库，原生105完成不等于所有API成功；保留失败披露可描述原生完成库，不自动放宽strict formal_ready=false。若另要求无未恢复API故障的新A，需要独立版本及可信checkpoint/后续状态重放，不能补一次调用覆盖当前库；checkpoint可用性未知。本轮无新增实证或执行，不重学A、不评测的授权保持。
+
+最新[259完成后巡检](memory/259_2026-10-04_completed_learning_healthy_wait.md)：A105/B107各2技能、原生212/212处理及全部freeze/导出/1024向量/旧92state保持，唯一身份/实际服务正常，累计13173不变。无新增实证发现或故障；完成worker退出预期，formal_ready=false/B通过/A官方容错已证保持，静默等待，不重学/评测。
+
+最新[258完成后巡检](memory/258_2026-10-04_completed_learning_healthy_wait.md)：A105/B107各2技能、原生212/212处理及全部freeze/导出/1024向量/旧92state保持，唯一身份/实际服务正常，累计13173不变。无新增实证发现或故障；完成worker退出预期，formal_ready=false/B通过/A官方容错已证保持，静默等待，不重学/评测。
+
+最新[257完成后巡检](memory/257_2026-10-04_completed_learning_healthy_wait.md)：A105/B107各2技能和212/212原生处理保持，freeze/导出/1024向量/旧92state及唯一身份/实际服务通过，累计13173未增。无新增实证发现或故障，完成worker退出预期；formal_ready=false/B通过/A官方容错已证保持，快照保存、静默等待，不重学/评测。
+
+最新[256完成后巡检](memory/256_2026-10-04_completed_learning_healthy_wait.md)：A105/B107各2技能与原生212/212=100%保持，冻结/导出/1024向量/旧92state及唯一身份/实际服务通过。完成worker退出、无学习推进属预期等待；累计13173未增，无新增实证发现或故障，资格标记formal_ready=false/B通过/A官方容错已证保持，静默等待，不重学、不评测。
+
+最新[255完成后巡检](memory/255_2026-10-04_completed_learning_healthy_wait.md)：A105/B107各2技能、原生212/212=100%及全部冻结/导出/1024向量/旧92state SHA保持；唯一controller/网关/lease身份与实际服务通过，无活跃worker属预期等待。累计13173不变，无新增实证发现、请求或故障；formal_ready=false/B_final_acceptance_passed=true/A_official_fallback_verified=true保持，静默等待，不重学/评测，不重复已知A容错诊断。
+
+最新[254完成后健康巡检](memory/254_2026-10-04_completed_learning_healthy_wait.md)：A105/B107各2技能保持，原生212/212=100%；freeze/两库导出/真实1024向量/旧92state SHA和唯一controller/网关身份通过，实际服务正常，完成worker退出预期。累计13173不变，无新增请求、故障或实证发现；快照formal_ready=false/B_final_acceptance_passed=true/A_official_fallback_verified=true保持，不重复诊断已知A容错，不重学、不评测，静默等待授权。
+
+最新[253只读诊断](memory/253_2026-10-04_A_merge_timeout_official_fallback_verified.md)：A012016为第82题tabular_003技能合并，官方trajectory prompt精确匹配；012014/015成功后合并超时，冻结官方_merge离线重放的六字段/version0.1.26与真实result完全一致，证实官方启发式容错已入库。更正252容错未知，但不当等价LLM成功重试；A原生105/2技能accepted保留，含历史API故障，严格双库无失败资格仍false。B107/2技能已验收，两库原生212/212=100%，无新增请求/重学/评测。freeze/导出/1024向量/旧92stateSHA及服务身份健康，累计13173保持；完成worker退出预期，安全快照A_official_fallback_verified=true、B_final_acceptance_passed=true、formal_ready=false。
+
+最新[252完成验收与资格更正](memory/252_2026-10-04_212_trajectory_B_ready_A_api_qualification.md)：B107/107（100%）、原生failed/skipped0、253真实API全完整且107题成功final覆盖、215ECNU1024操作最终错误0，6次中间HTTP错均恢复；2技能/3文件导出hash及持久向量通过，B正式验收。controller52243保持8145、worker52245退出属预期，运行phase=skills_ready、总212/212（100%）。A105/2技能原accepted及导出保持，但独立复核232历史API发现012016超时240秒（231完整），105题成功请求覆盖不证明该调用等价恢复；新增严格两库资格未确认，安全快照formal_ready=false。保留失败，不重学A、不启动评测。42新/960原/115freeze通过，Windows实际服务正常，累计13173追加；本轮无运行代码/配置变更。下方251及之前均历史进度，不强制重启完成worker。
+
+最新[251健康巡检](memory/251_2026-10-04_B85_v6_healthy_monitor.md)：同v6/attempt4 B85/107（79.44%）、第86条travel_030执行，较250增加23条/52ECNU操作，A105保持，总190/212（89.62%）。203真实raw完整/85题最终API覆盖、173ECNU1024操作HTTP/最终错误均0、持久向量通过；42新/960原freeze、A导出和旧92state SHA保持。唯一身份/Windows实际HTTP/Redis/Qdrant/内存正常，首快照13122累计追加，531首尝试7.96秒在途非卡死；无新异常或代码变更，快照保存、静默继续、不评测。
+
+最新[250健康巡检](memory/250_2026-10-04_B62_v6_healthy_monitor.md)：同v6/attempt4 B62/107（57.94%）、第63条tabular_086执行，较249增加25条/47ECNU操作，A105保持，总167/212（78.77%）。145真实raw完整/62题最终API覆盖、121ECNU1024操作HTTP/最终错误均0、持久向量通过；新42/原960freeze、A导出与旧92state SHA保持。唯一身份/Windows实际HTTP/Redis/Qdrant/内存正常，首快照13064累计追加，473首尝试4.66秒在途非卡死；无新异常或代码变更，快照保存、静默继续、不评测。
+
+最新[249健康巡检](memory/249_2026-10-04_B37_v6_healthy_monitor.md)：同v6/attempt4 B37/107（34.58%）、第38条tabular_074执行，较248增加24条/50ECNU操作，A105保持，总142/212（66.98%）。89真实raw完整/37题最终API覆盖、74ECNU1024操作HTTP/最终错误均0、持久向量通过；42新/960原freeze、A导出/旧92state SHA保持。唯一身份/Windows实际服务/Redis/Qdrant/内存正常，首快照13009累计追加，417首尝试29秒在途非卡死；无新异常或代码变更，快照保存、静默继续、不评测。
+
+最新[248健康巡检](memory/248_2026-10-04_B13_v6_healthy_monitor.md)：同v6/attempt4 B13/107（12.15%）、第14条travel_048执行，A105保持，总118/212（55.66%）。30真实raw完整/13题最终API区间覆盖、24ECNU1024操作HTTP/最终错误均0、持久向量通过；42新/960原freeze、A导出和旧v5全92state SHA保持。唯一身份/Windows实际服务/Redis/Qdrant/内存正常，首快照12948累计追加，358首尝试20秒在途非卡死；无新异常或代码变更，快照保存、静默继续、不评测。
+
+收尾实际进度页复核：v6/238_B_attempt4已处理B3/107（2.80%），第4条travel_095执行中；A105 accepted保持，正式B未验收，旧74不混加。
+
+[247记录](memory/247_2026-10-04_B_output_budget_repair_v6.md)：旧v5/238_B_attempt3处理74条，但000320/321/322三次完整SSE均DONE/length/completion8192、最终失败，不能作普通无候选或完整覆盖。旧000306由307完整恢复。直接原因是冻结max_tokens8192不足，不当网络或额度实证；全部旧34freeze源码/manifest和92 state SHA保留reports/version_v5，原controller43901/worker43909/网关22600精确确认退出，326退役时在途单列。
+
+**当前sp_212_B_mimo_trajectory_v6、238_B_attempt4、网关scripts/resource_gateway_v6.py、页http://127.0.0.1:8145/**。仅输出预算提高32768和版本/namespace身份，原提示/107输入/原生算法/模型/ECNU/240每尝试与750逻辑故障边界不改。同失败320仅提高预算的真实canary327输出8458 token/74.74秒完整stop，通过且不进库；6完整raw重放及4length/缺DONE拒绝，新42SHA+原960/115/A完整导出通过。唯一controller52243/ticks1310626、worker52245/ticks1311325、Windows网关38960创建21:43:14.6423708Z运行。
+
+首次恢复B1/107（0.93%）、第2条tabular_106在途，A105 accepted/2技能原GLM保持，总当前106/212（50%）；真实328/329完整成功、330在途，实际32768预算/1ECNU1024操作零最终错误验证。旧74不混计，无干净72题checkpoint证据则按既有规则新空库恢复。新快照/Windows实际服务/Redis/Qdrant/身份/内存通过，12923累计追加、315-30同步v6/42SHA；真实107/API/embedding/完整导出全门禁通过前不称skills_ready，不评测，103暂缓和其他聊天保持。下方v5/v4记录均历史版本，不启动旧网关。
+
+## 第243轮：SSE心跳解析修复v5，唯一B继续
+
+最新[246巡检](memory/246_2026-10-04_B49_embedding_retry_recovered.md)：同attemptB49/107（45.79%）、第50条执行，总处理154/212（72.64%），A105保持。90次真实ECNU最终成功，operation84/90中间HTTP错均下次重试完成（0.340/0.416秒总耗时），最终错误0；持久1024维/count2/8192字节及有限值通过。48新增完整raw通过，LLM仅旧170/171已恢复故障、最终API错误空。freeze/唯一身份/实际服务与内存正常，累计首快照12863追加；保存快照，不改配置/重启/评测，B未正式验收。
+
+最新[245巡检](memory/245_2026-10-04_B27_healthy_monitor.md)：同attempt新B27/107（25.23%）、第28条执行，总处理132/212（62.26%），A105保持。49次ECNU零错、持久1024维/count2/8192字节通过，62完整raw通过、最终API错误空，仅旧170/171已恢复故障。freeze/唯一身份/lease/实际服务与内存健康，累计首快照12814追加。本轮无新故障或代码变更，快照保存、静默继续，不评测。
+
+最新[244巡检](memory/244_2026-10-04_B_connection_reset_retry_recovered.md)：B11/107（10.28%）、第12条在途，A105保持，总处理116/212（54.72%）。000170连接重置是中间失败，000171同逻辑第2次完整返回已恢复，最终API错误空；10次ECNU零错，持久向量1024维/count2/8192字节验证。新34SHA/原960SHA/115freeze/A导出及唯一身份/实际服务正常，累计12772追加；本轮不改配置或重启，继续B、未正式skills_ready、不评测。
+
+收尾安全复核：新B4/107（3.74%）、第5条在途，A105保持，总处理109/212（51.42%）；4次真实ECNU1024操作与新B API错误均0，累计12760追加。仍未正式完成B，旧13条不混加。
+
+[243记录](memory/243_2026-10-04_B_sse_heartbeat_parser_repair.md)：000140/148完整SSE以注释开头，被旧v4误当JSON，确定本地兼容缺陷；000147真实超时仍未知。旧v4在13条时停止，精确旧controller/worker/网关退出，28SHA源码/freeze及31 state hash保存reports/version_v4，旧namespace不改、不补成功。当前正式sp_212_B_mimo_trajectory_v5，新34SHA/原960SHA/115freeze/A导出/107输入及原生入口验证，4真实响应重放与缺DONE拒绝/实时API000159通过；新网关scripts/resource_gateway_v5.py/Windows22600，原8130/页8145。每尝试240秒、3次/10和20秒backoff，逻辑故障750秒、SDK780秒，无总cap；不改vendor算法/提示/分集/模型。
+
+唯一controller43901/ticks701954、worker43909/ticks702827运行238_B_attempt3。首B1/107（0.93%）、第2条在途，A105 accepted保持，总处理106/212（50%）；新API错误0，首次无候选、embedding操作0不当失败或完整向量已证。逐题真实API/原生/ECNU/导出门禁通过前不通知skills_ready。315-30已指v5/新脚本/34SHA/重试边界。安全快照/真实服务与内存核验通过，累计12754继续追加；旧v3/208/196/115/315登记和103暂缓、其他聊天均保持，不评测。
+
+## 第241轮：B传输修复版v4已运行，旧107遍历未验收
+
+最新[242复核](memory/242_2026-10-04_B_mimo_progress_api_errors.md)：当前B8/107（7.48%），第9条执行中；A105保留，总处理113/212（53.30%）。13次真实ECNU1024操作零错，但新B API已有2次未恢复逻辑失败（000140 JSONDecodeError、000147 URLError），000148在途；不能宣称持续健康或8条均成功抽取。v4正式门禁将拒绝含未恢复错误的attempt并保留后按原规则重试，不热改当前运行、不重学A。唯一worker/lease/freeze通过，累计账本12741追加，安全快照保存。
+
+- [241纠正与恢复](memory/241_2026-10-04_B_mimo_transport_recovery.md)：v3原生processed107/failed0及2技能/19ECNU操作不等于成功覆盖；真实20 API完成/99URLError/2 HTTP524，正式质量拒绝，整个旧state/源码/freeze/原生accepted/导出/错误保留。不能把故障空候选当“无可学技能”，不能继续宣称v3正式skills_ready。
+- **当前正式版本sp_212_B_mimo_trajectory_v4**，目录238_cogym_212_claudex_learning、页http://127.0.0.1:8145/；Windows8130必须用**scripts/resource_gateway_v4.py**（PID36272）。直连授权域名、标准SSE上游/完整缓冲后原生JSON、3次故障尝试全账本保留；native245秒/relay每逻辑240秒仅故障边界，无总cap。曾524的同一长payload现27.55秒完整DONE/stop，未进学习库；根因未知，不证明代理或额度导致。
+- 新门禁逐条检查实际final逻辑API成功覆盖，结合native processed107/failedskipped0、真实ECNU最终错误0、原生导出/A继承hash后才接受库；native吞错误成空候选不会再过门禁。不改vendor/算法/分集/提示，不以技能数或评分选样。
+- 唯一controller42184/start_ticks554699、B worker42260/start_ticks555605，28新SHA＋原960SHA/原115freeze/输入107/A导出通过后启动**238_B_attempt2**。首复核B3/107（2.80%）、A105保留，总108/212（50.94%），4次ECNU1024操作与新B API零错；实时值见新页和安全快照。A不重学，旧V3/208/196/115与103暂缓保持，不评测。
+- MiMo精确ID404，供应商alias glm-5.3-flash非流式自报MiMo、SSE自报GLM请求别名，raw字段如实保存，不伪写成MiMo；用户接受资源，物理backend/checkpoint未独立证明，不能称GLM身份或技能增益已证。078原12593＋新238 137=12730首复核累计不重置；315-30 ACTIVE改指v4真实API门禁/版本边界，正常静默继续。
+
+
+## 第240轮：B库MiMo新版本已启动，A库保留
+
+- [240记录](memory/240_2026-10-04_B_mimo_resource_handoff.md)：用户明确只学未完成B库，并接受服务实际返回的MiMo Flash。当前正式目录`238_cogym_212_claudex_learning`、`sp_212_B_mimo_trajectory_v3`，页http://127.0.0.1:8145/，只运行原A折107条B学习；A引用原208_A_attempt1的105 accepted/2技能完整导出，不重学。旧115/196/315登记、103用户暂缓、所有旧结果/freeze/失败保持，不自动评测。
+- 原208 B3在WSL再次整体退出时停32/107；旧B79/91/32条全部hash保留、旧controller/node确认退出、无STOP。退出原因未知，不当额度问题。旧208不再恢复；新namespace独立从原107输入学习，不混加旧attempt进度。18新冻结文件、原960SHA、输入/原生入口/继承A导出通过后才启动唯一controller7083/B worker7085，实际逐题progress、API与ECNU操作已验证。
+- **资源归属：A学习原GLM，B学习供应商自报xiaomi/mimo-v2.6-flash**。Claudex请求别名glm-5.3-flash未当真实GLM身份；用户明确接受MiMo后正式切换。独立Windows8130网关每次校验响应身份与完整性，raw/normalized分别保留；原8000/8129/RW服务不改，账本078原12593＋238新资源追加，不重置。准备v1/v2失败和000001—000003请求保留，000004真实canary通过且不进库。
+- 首健康复核A105＋新B4=109/212（51.42%）；7次真实ECNU1024维操作零HTTP/最终错误，后续B5已推进，实时值见新页/安全快照。**000007/tabular_106、000014/tabular_105各125秒HTTP524后官方返回processed1/upserted0；无同body成功重试证据。不能把processed或空候选当成功抽取/轨迹无可学技能，API故障影响单列。** 队列继续，native计数/embedding/完整导出之外还要解释真实API证据，不宣称无故障覆盖或收益。
+- foreground WSL lease身份保持同boot；Qdrant唯一恢复PID7695/health200，不检索暂缓题；Redis/Docker与Windows内存正常。Windows实际8129/8130/8140/8145 HTTP200、8000/v1/models200，某WSL地址不可达或错误health路径不能当模型故障。315-30 ACTIVE改指新B-only阶段，保留旧身份与版本边界；新故障/修复/完成记录，其余静默。
+
+
+## 第239轮：148 v4 配对评测完成——技能读取修复后 +5.0pp（未达显著）
+
+- [239记录](memory/239_2026-10-04_148_v4_paired_final.md)：B0 无技能 126/160=0.7875 vs B1 有技能（frozen_skills_v2+v6 原生 `$技能` 引用）134/160=0.8375；配对 160 对 20胜/12负/128平、确切符号 p=0.215、任务级 bootstrap 95% CI [-2.5pp,+12.5pp] 含 0；任务级 15 改善/7 退步/18 持平（p=0.134）。**技能真实读取率 159/160=99.4%**（原生 sqlite toolCall 扫描＋直接抽查复核；对照 v1/v2 旧批 0/162）。
+- 消费者与用户模拟器均为 deepseek-flash（DeepSeek 官方 API）；判分 glm-4-flash；两组唯一差异为 skills 目录；全部 320 场 user_stop 正常终止、无 None 奖励、无基建失败计入。单 seed、n=40 题功效有限；**+5.0pp 仅作初步正向证据，不能宣称性能提升成立，也不覆盖旧负结果**。
+- 基建处置：WSL ext4.vhdx 在 C: 上的膨胀（/var/tmp 原生状态 47GB）已按"仅删闲置>40min 且已归档副本"回收 32GB；WSL ~02:05 整体重启致 B1 在 156/160 中断、4 场在飞丢失，杀残留→重启 relay→auto_resume 补齐至 160/160。重启触发原因未知，不写入结论。
+- 产物见[最终报告](experiments/148_tau2_retail_autoskill/reports/final_report_v4.md)：`runs/test_v4/*.json`、`reports/{v4_paired_report,skill_read_audit_v4}.md`、`ledger/requests.jsonl`（累计 36,359 请求）。下一步建议（未实施）：追加 trials/第二 seed、改善/退步任务轨迹归因、技能消融、只列不读控件组；不做数值覆盖与旧结果修改。
+
+## 第238轮：RW模型切换已实际生效，新单题尚在运行
+
+[238记录](memory/238_2026-10-04_rw_deepseek_vision_switch_and_canary.md)：用户指定claudex.org/v1/deepseek-v4-flash-vision-exp；238/rw_web_deepseek_vision_v1独立冻结，两图/工具/SSE及4错误门禁验收通过，服务自报deepseek/deepseek-v4.1-flash不可当精确checkpoint。8158新relay先验证完整响应再交付，240绝对截止取消、代理/idle1800秒，全部层无限等待未证。原GLM run/freeze/失败/账本保留，不替换Co-Gym。
+
+新corravale canary recreation_eval_baseline_1791051558705758062 running，官方ClaudeCode2.1.177/Playwright，Linuxcontroller1490/Windowsrelay15416，同route已有两次真实完整tool_calls。当前不称交付成功/原生视觉全验收/250完成，VLMjudge保持禁用、后续核验交付/API；根门禁遇不完整为transport_failure，native收尾也不自动正式验收。没有250批量或启动旧103题。
+
+## 第237轮：RW canary不能当无故障完整轨迹或能力基线
+
+[故障核验与更正](memory/237_2026-10-04_rw_zero_score_transport_contamination.md)：218单题末请求012259在240秒截止，upstream_transport_error/response_complete=false；与native13:43:59结束同时，result却success且仅说开始构建，输出与App仍Ready to build模板。功能0/229真实评分该模板，但不能归因agent能力，235完整完成表述撤回为“进程收尾、生成链路不完整”。VLMnull因明确禁用，SSIM替代非论文VLM；program_score提取final混合分非纯功能。旧失败/评分保留，无覆盖重跑，需独立版本验收传输错误传播/完成门禁，未启动250批量或干预208。
+
+## 第236轮：多模态非执行硬门槛，视觉复刻仍需要图像观察
+
+[模态解释](memory/236_2026-10-04_recreationbench_execution_modality.md)：论文GLM-5.3 text-only通过无障碍/tool text执行，证明可运行；视觉遗漏案例不当受控消融。截图路径要图像能力，DOM/结构化文本路径可执行但不保证成功。不评分可不调用judge，与执行agent观察独立。Flash原生能力及本地CLI/网关实际传图不可混同，本轮未验收该链路或修改配置。
+
+## 第235轮：RW评测250题，35,000是未取得的论文训练轨迹
+
+[范围澄清](memory/235_2026-10-04_benchmark_counts_and_local_rollout_scope.md)：未下载官方35,000训练轨迹，93,739是发布资产文件清单。RW本地GLM只核实一个完整结束的corravale.example基线执行，205JSONL内部记录不是205题；程序分0、VLMnull，不等于成功或250题全完成。ProCUA/AgentNet外部样本不冒充RW训练包，旧Co-Gym212独立。未启动批量或改旧实验。
+
+## 第234轮：新B尝试健康推进，当前54.72%
+
+- [234巡检](memory/234_2026-10-04_B_attempt3_11_healthy.md)：A105 accepted/导出保持；208_B_attempt3处理11/107、failed/skipped0、2技能、20次真实ECNU1024维零错，当前116/212（54.72%）仅新attempt进度。较233推进6条/16次embedding，旧B79/91条部分state全hash保持，不混加。
+- 本轮23个208原始响应完整/HTTP200，无新增模型失败；12547采样在途后已核清208_B_attempt3完整完成。真实推进约98秒，boot fe26dcd1稳定；960SHA/来源/向量/身份/旧导出与全部实际服务健康。
+- 本轮无新增实证发现或故障，安全快照保存；历史模型失败、B2操作127最终embedding错误及WSL触发未知保留。继续学习巡检，不重启热改、覆盖或评测；103暂缓及115预期等待/196已完成服务保持。
+
+
+## 第234轮：可下载轨迹是教师演示，不能混为RW训练后模型rollout
+
+[实样审计](memory/234_2026-10-04_downloaded_trajectory_model_provenance.md)：RW固定revision全93,739项文件清单/官方网页未找到完整轨迹下载。实际ProCUA样本0028原JSON及8截图已下载逐步核对：Kimi-K2.5教师、Ubuntu VM/OSWorld/PyAutoGUI，属于下游SFT输入，不是学生训练后rollout；无精确checkpoint不可称裸base。设置改变可见但无独立评分，继承setup/evaluator与新goal不同。AgentNet人工演示；本地RW真实账本GLM-5.3-Flash、Claude Code2.1.177/Playwright、无skills基线，原程序0/VLMnull不改。详见[报告](reports/234_trajectory_download_and_provenance.md)。本轮未巡检运行健康、未启动或改实验，233状态保留。
+
+## 第233轮：再次运行时中断已恢复，当前新尝试50%
+
+- [233巡检与恢复](memory/233_2026-10-04_repeated_wsl_runtime_recovery.md)：WSL再次重启，旧208/196/Qdrant退出，无STOP/孤儿。中断前A105 accepted+B2 91条=196/212（92.45%）仅处理；B2仍有已知操作127最终embedding错误1条，全部状态/hash/失败保留，不能接受该语义库。
+- WSL E_UNEXPECTED后清理残余运行时并恢复可执行；服务重启权限失败未执行。首次208因115正重建被冻结阶段守卫拒绝，无新worker/模型；115回到waiting_resource后顺序恢复唯一原控制器，B3新空命名空间。A/196导出及旧B1 79/B2 91条全文件hash完整，不热改或覆盖。
+- 恢复首验新B3处理1条；收尾已处理5/107、failed/skipped0、4次真实1024维embedding零错；当前110/212（51.89%）是新attempt进度，A105已验收，不混加旧尝试。23个首验208 raw完整，先前在途12524收尾核清归208_B_attempt3且原始完整/HTTP200；960SHA/来源/身份/向量/实际8000/8129/8140/8142/8143与Redis/Docker/Qdrant健康。
+- 重复运行时退出触发仍未知，新boot无OOM不排除旧boot原因。最终安全快照保存、current_runtime_checks_passed=true、formal_ready=false；继续学习巡检，不评测、不调用103资源或干预另一聊天。
+
+
+## 第232轮：单题执行记录、权重训练和技能库学习分开
+
+[232解释](memory/232_2026-10-04_rollout_sft_and_skill_learning.md)：评测轨迹是受测agent在任务环境中的探索/实现/自查记录，交付后官方固定隐藏评分；执行不默认训练权重。论文独立训练池高分35,000轨迹SFT更新两模型；本项目API GLM不改权重，AutoSkill学习外部技能再测无/有技能对照，embedding仅检索索引，消费机制需验收。论文行为变化/迁移不等于RW技能收益；原train获取仍缺，未启动或改分集/库。
+
+## 第231轮：当前公开任务运行产生评测rollout，不是论文训练数据下载
+
+[231澄清](memory/231_2026-10-04_evaluation_rollout_semantics.md)：官方Web指南以公开RecreationBench任务为输入，分别输出agent trajectory、workspace与metrics/evaluation artifacts。轨迹是agent执行过程，分数是随后评分结果；公开框架不自带论文35,000训练轨迹。用评测任务轨迹学习需将其从该库held-out范围分离，属于派生分集，不能仍称全部250独立评测。未改分集/启动任务，官方train获取缺口仍见229调研。
+
+## 第230轮：运行推进正常，B当前attempt仍不可验收
+
+- [230巡检](memory/230_2026-10-04_B81_known_embedding_failure_monitor.md)：A105 accepted/导出保持；208_B_attempt2处理81/107、failed/skipped0、2技能，当前186/212（87.74%）仅处理率。较229推进3条、较227推进25条，旧B79条部分state全hash保持。
+- B扩展153次真实1024维embedding完成，最终错误仍为操作127/URLError1条，后续复核29次操作完成，无新增失败。current_runtime_checks_passed=true，但包含验收门禁的infrastructure_passed=false；冻结规则将末尾拒绝该attempt并保留后新空命名空间重试，当前尚未结束或attempt3启动，不宣称skills_ready。
+- 本轮51个208原始响应完整/stop/HTTP200，历史12016保留，无新增模型失败；12450/12500已完成，12501短时在途待核。960SHA/来源/向量/身份/旧导出及实际服务正常，boot稳定。快照保存，同一未变错误静默继续，不热改/双启动/覆盖/评测或调用103资源。
+
+
+## 第229轮：当前处理86.32%，B语义库验收需重试
+
+- [229记录](memory/229_2026-10-04_progress_and_embedding_attempt_error.md)：当前A105 accepted+B78/107=183/212（86.32%），仅当前attempt处理率。B原生failed/skipped0、2技能，但新增embedding操作127/tabular_066最终URLError（25.44秒），没有同操作completed；不能把processed正常当完整语义学习成功。
+- 后续22次真实embedding已完成、ECNU DNS可解析且无凭据/models实际401，当前连接恢复；具体网络异常触发原因未知，不归为模型或embedding语义质量。冻结evidence.failed门禁会拒绝当前B attempt导出/accept，原控制器在本attempt结束后保留失败并新空命名空间重试；尚未发生下一次重试，不提前宣称恢复验收。
+- 当前controller/worker身份正确，进度页与原生result读取通过；安全进度/诊断快照保存，最近完整freeze/基础服务健康审计沿用227。本轮不热改、覆盖或双启动，不自动评测；103继续暂缓，旧A/B尝试及失败完整保留。
+
+
+## 第229轮：官方训练池未找到公开入口，明确渠道是作者询问
+
+[229核查](memory/229_2026-10-04_official_training_access_channels.md)、[报告/未发送邮件草稿](reports/229_recreationworld_training_access.md)：论文/网站/仓库/发布页/HF/ModelScope均未发现独立官方train任务清单或35,000轨迹下载。HF全部test/250，作者关键词API仅RecreationBench；镜像API根8项同评测布局。公开执行框架不等于论文训练池，35,000是轨迹数。官方README列两联系邮箱，可索取训练清单、参考/环境/验证包、去重映射与许可，研究访问/发布日期未知。未发送邮件/Issue、未改变分集或启动批量，208/218保持。
+
+## 第228轮：优先官方训练与评测分工，训练资源尚未核实可得
+
+[228记录](memory/228_2026-10-04_official_training_evaluation_route.md)：优先官方训练任务采GLM轨迹→AutoSkill→冻结库，官方held-out任务做无/有技能原生评分对照。无需额外把功能类别家族隔离设为主实验前提；保持官方去重及评测不进入待测库。论文SFT与本项目技能学习不同，轨迹筛选规则待冻结。公开250仅test，官方训练任务清单/环境/验证包入口仍未核实，不能把论文训练池当已下载train split；未改分集或启动批量，208/218保持。
+
+## 第227轮：新B attempt持续健康推进
+
+- [227巡检](memory/227_2026-10-04_B_attempt2_56_healthy.md)：A105 accepted/导出保持，208_B_attempt2处理56/107、failed/skipped0、2技能、106次真实ECNU1024维零错，当前总161/212（75.94%）。较226同attempt推进20条，旧B79条state全hash保持，不混加尝试。
+- 本轮39个208原始响应完整/stop/HTTP200，无新增模型失败；历史12016及四次已恢复HTTP错误保留。12411/12448已完成，12450采样11.76秒在途待核；真实逐题/API/embedding推进，boot稳定。
+- 960SHA/来源/向量/身份/旧库导出及实际服务健康，115/196维持预期等待/skills_ready；无新增实证发现或故障，安全快照保存，不重启热改/覆盖/评测或调用103资源，静默继续巡检。
+
+
+## 第226轮：新B attempt持续健康推进
+
+- [226巡检](memory/226_2026-10-03_B_attempt2_36_healthy.md)：A105 accepted/导出保持，208_B_attempt2处理36/107、failed/skipped0、2技能、72次真实ECNU1024维零错，总141/212（66.51%）。较225同attempt推进24条，旧B79条state全hash保持，不混加尝试。
+- 本轮48个208原始响应完整/stop/HTTP200，无新增模型失败；历史12016及四次已恢复HTTP错误保持。12363已完成，12411采样74.71秒在途待核；真实推进、boot稳定。
+- 960SHA/来源/向量/身份/旧库导出及实际服务健康；115/196维持预期等待/skills_ready，无新增实证发现或故障，快照保存，不重启热改/覆盖/评测或调用103资源，静默继续巡检。
+
+
+## 第225轮：恢复后的新B attempt持续推进
+
+- [225巡检](memory/225_2026-10-03_B_attempt2_12_healthy.md)：A105 accepted/导出保持，新208_B_attempt2处理12/107、failed/skipped0、2技能、31次真实ECNU1024维零错，当前总117/212（55.19%）。较224恢复采样同attempt推进9条，旧B79条部分state全文件hash未改，不混加尝试或将数字回落判故障。
+- 本轮25个208原始响应完整/stop/HTTP200，无新增模型失败，历史12016及四次已恢复HTTP尝试错误保留；12338/12362已完成，12363短时在途待核。真实模型/embedding/逐题推进，boot稳定。
+- 960SHA/来源/向量/身份/旧库导出及实际服务健康，115/196维持预期等待/skills_ready；无新增实证发现或故障，安全快照保存，不重启热改/覆盖/评测或调用103资源，静默继续巡检。
+
+
+## 第224轮：运行时中断已恢复，新B attempt继续
+
+- [224记录](memory/224_2026-10-03_wsl_restart_B_learning_recovered.md)：WSL运行时重启导致208/196学习页面与Qdrant退出，无STOP/孤儿worker；中断前A105 accepted、B79/107、总184/212（86.79%）证据完整保留。重启触发原因未知，不归为模型或embedding失败。
+- 旧状态/部分库hash独立保留；960SHA/来源/旧导出完整，原208控制器复用A并新空208_B_attempt2重学，不热改旧attempt。当前B3/107、2技能、6次真实ECNU1024维零错，总108/212（50.94%）仅新attempt进度，不能混加旧尝试。196只恢复已完成页面，不重学。
+- 恢复后43个208原始响应完整，无新增模型失败，历史12016与HTTP已恢复错误保留；12338短时在途待核。身份/向量/旧库/实际服务健康，115原监督器--resume重建后回到waiting_resource（100文献+3课程，current_run null），不启动旧hashing/旧110或103题。
+- Qdrant/8000/8129/8140/8142/8143恢复验收通过，安全快照及故障/恢复记忆保存。继续新B学习与巡检，不自动评测；不干预独立218或8141/148。
+
+
+## 第224轮：来源身份隔离是建议，现成匹配分集尚未验收
+
+[224调研](memory/224_2026-10-03_recreationworld_split_evidence.md)：论文§3.1明确训练任务与评测集去重，未公布可核验的应用家族分组隔离定义/名单；HF当前250题test。222所说家族隔离更正为拟议“应用来源身份隔离”，同源派生体需分组，同时匹配平台/交互/实现验证能力；功能类别或框架相同不应自动同组。原生RW轨迹与评测有任务协议关联，AutoSkill跨应用收益仍未知；外部GUI轨迹不能因隔离自动变为匹配训练数据。具体名单与来源/能力审计尚未完成；不改旧实验/分集、不启动批量。
+
+## 第223轮：B库61条持续健康
+
+- [223巡检](memory/223_2026-10-03_B_61_learning_healthy.md)：A105完整accepted/导出SHA保持；B61/107、failed/skipped0、3技能、123次真实ECNU1024维零错，3条向量/12288字节一致。总166/212（78.30%），两库尚未齐。
+- 本轮49个208路由raw完整/stop/HTTP200，无新增模型失败；历史12016与4次已恢复HTTP重试保持。上轮12229属于208并已完成，12227属于独立218并已完成、排除208统计；共享12295采样时短时在途，保留待复核，不混归208失败。
+- 960SHA、来源/输入、身份、旧库导出、实际服务及内存健康。本轮无新增实证发现或故障，保存安全快照，不重启热改/覆盖/评测或调用103资源，静默继续巡检，不干预独立实验。
+
+
+## 第222轮：主实验数据匹配与外部迁移应分开
+
+[222澄清](memory/222_2026-10-03_external_trajectories_vs_recreationbench.md)：AgentNet/ProCUA不是RW250题的配套执行轨迹，现有应用操作与应用复刻目标/分布不同。GIMP首样仅管道验收，不能当匹配主学习数据；迁移收益未知，逐实体交集未全面核查。建议原生RW学习应用采轨迹→AutoSkill→家族隔离评测应用配对，外部轨迹单列迁移对照；本轮仅建议，未改旧分集、停止canary或启动批量，论文训练轨迹下载仍未确认。
+
+## 第221轮：B库36条持续健康
+
+- [221巡检](memory/221_2026-10-03_B_36_learning_healthy.md)：A105完整accepted/导出SHA保持；B36/107、failed/skipped0、3技能、82次真实ECNU1024维零错，3条向量/12288字节一致。总141/212（66.51%），两库未齐。
+- 本轮45个208路由raw逐条完整/stop/HTTP200，历史12016失败和4次已恢复HTTP重试保持，无新增模型失败。共享累计12229，两个短时在途路由尚未落盘，不混归208失败；真实推进正常。
+- 960SHA、来源/输入、身份、旧库导出、实际服务与内存健康。本轮无新增实证发现或故障，保存安全快照，不重启热改/覆盖/评测或调用103资源，静默继续巡检，不干预220独立实验。
+
+
+## 第220轮：RecreationWorld独立管道已搭建，完整效果验收未齐
+
+- 用户明确授权公开轨迹调研与管道搭建。[220记忆](memory/220_2026-10-03_recreationworld_open_trajectory_pipeline.md)、[报告](reports/220_recreationworld_pipeline_and_open_trajectories.md)、[218独立目录](experiments/218_recreationworld_glm_pipeline/README.md)。不改208学习或旧库/分/冻结，103仍暂缓，不启动新250题全量或自动配对。
+- AgentNet22.6K/ProCUA93,566公开；完整首条7步GIMP失败示范与7真实图通过CRC/PIL/SHA/原序核验，原生AutoSkill processed1/failed0/skipped0/upserted0，空库/无embedding操作保留。当前文字学习，图片仅来源，不冒称SDK像素学习。全量家族去泄漏及非空语义库/技能Read回执仍待验。
+- 原GLM两随机视觉+tool接口实际通过，官方源码固定无语义改动，镜像/318文件/隔离setup通过，CRLF与缺归档旧infra失败保留。参考program0.9975；公开包缺GT截图导致nativevisual0/task0.4987，禁止作为正式总分、不造GT或覆盖分数。
+- 原生CLI单题canary已实际运行，浏览器导航/点击/截图、文件读写及8幅去重图像输入出现；原账本本218路由采样55请求完整/零失败，模型精确GLM，最终任务未结束。原生工具ID去重最近54回执/2工具错误保留，不能将目录或Read文件泛指技能消费。
+- 官方VLM四断言真实截图调用/解析验收通过；独立scripts_judged与reports/judged_v3版本rw_web_glm_pipeline_v3_glm_judge，636源码SHA与318输入/参考archive SHA门禁通过。v2活跃run/源码/freeze不改；GLM同时agent/judge，与论文不同，981完整断言/正式总分尚未验收。
+
+## 第219轮：B库17条持续健康
+
+- [219巡检](memory/219_2026-10-03_B_17_learning_healthy.md)：A105/105完整accepted/导出SHA复核；B17/107、failed/skipped0、当前3技能、41次真实ECNU1024维零错，3条向量/12288字节一致。总122/212（57.55%），两库未齐。
+- 12069—12107共39个raw逐条完整/stop/HTTP200，累计12108采样时正常在途9.46秒；历史12016失败与4次已恢复HTTP重试保持，无新增GLM失败。960SHA、来源/输入、身份、旧库导出、实际服务与内存健康，无真实停滞。
+- 本轮无新增实证发现或故障。保存安全快照，未重启热改/覆盖/评测或调用103资源，正常静默继续巡检。
+
+
+## 第218轮：A库验收完成，B库已推进
+
+- [218巡检](memory/218_2026-10-03_A_accepted_B_started_healthy.md)：A105/105、failed/skipped0、2技能、212次真实ECNU1024维操作，原生完整导出SHA与accepted/exit0通过。4次HTTP重试错误均已恢复，最终操作错误0；12016历史合并超时保留。
+- B库208_B_attempt1/worker11972/start8636635正常启动，已处理2/107、2技能ID更新、4次真实1024维操作零错；总107/212（50.47%），尚非两库skills_ready。
+- 本轮35＋4个raw逐条完整，无新增GLM失败，累计12069采样时正常在途；960SHA、212来源/输入、身份、旧库导出、实际服务与内存健康。阶段采样时点分别保留，不重启热改/覆盖/评测或调用103资源，正常安静继续巡检。
+
+
+## 第217轮：合并超时与embedding重试已定位
+
+- [217记录](memory/217_2026-10-03_native_merge_timeout_recovered.md)：A87/105、总87/212（41.04%），技能2、原生failed/skipped0；B未开始。12016/tabular_003官方trajectory合并请求240秒超时，官方确定性合并容错并完成维护；真实上游失败保留，不能说全部模型调用成功。
+- 两次ECNU HTTP错误均同操作原生重试恢复，181次1024维操作完成、最终操作错误0。只修正未冻结probe的最终失败/重试错误分项统计，旧脚本保留；960SHA、来源、进程、旧库导出、服务与内存通过。
+- 11998—12026有28个raw完整/1真实失败，超时后响应与逐题继续推进；12027采样时正常在途。无重启/热改/评测或103资源调用，保存安全快照并继续巡检。
+
+
+## 第217轮：不是用户持续多轮协作轨迹
+
+[217记录](memory/217_2026-10-03_recreationworld_interaction_semantics.md)：官方非交互CLI默认禁止AskUserQuestion，任务初始请求后主要为agent与GUI/编码工具/环境的多步执行。日志user角色不当真人或模拟用户对话。若添加澄清/改要求/反馈，应另立派生协议，不称原生多轮用户benchmark。未改208或启动新实验。
+
+## 第216轮：computer-use评测底座候选
+
+- [216记录](memory/216_2026-10-03_recreationworld_feasibility.md)与[报告](reports/216_recreationworld_integration_assessment.md)：官方RecreationWorld环境/原生CLI/轨迹/评分可复用，外接本项目skills学习和消费；应用复刻与企业会话闭环不同，论文SFT增益不当skills增益。
+- 建议先Web再Ubuntu，保留官方评分与隐藏答案隔离；同项目家族去泄漏，模型协议/视觉输入/judge/skills挂载/采集尺寸须正式预检，尚未部署或验收。
+- 当前208冻结学习未改动或中断，未启动配对评测/新benchmark。最新学习健康证据仍为215采样73/212，不作实时进度声明。
+
+## 第 215 轮：trajectory 学习健康巡检
+
+- [215巡检](memory/215_2026-10-03_trajectory_learning_healthy_73.md)：A73/105、总73/212（34.43%），failed/skipped0、技能2、153次真实ECNU1024维零错；向量与输入前缀一致，B尚未开始。
+- 累计11998，11963—11997共35个raw全完整/stop/HTTP200，11998采样时正常在途33秒、保留待复核。960SHA、来源、身份、旧196导出、实际服务及内存健康，无真实停滞。
+- 本轮无新增实证发现或故障。保存安全快照、未重启热改/覆盖/评测或启动103暂缓题，继续静默巡检。
+
+## 第 214 轮：当前学习进度
+
+实时进度页与原生结果显示已处理 70/212（33.02%）；A 库 70/105（66.67%），B 库尚未开始。A 库当前 2 个技能，failed/skipped/embedding_errors 均为 0，控制器身份匹配，评测未启动。本轮是即时进度读取，完整健康核验沿用第 213 轮；未改变冻结配置或启动评测。详见 [第 214 轮记忆](memory/214_2026-10-03_user_progress_trajectory_70.md)。
+
+## 213 trajectory学习58条健康
+
+- [213巡检](memory/213_2026-10-03_trajectory_learning_healthy_58.md)：A58/105、总58/212（27.36%）、failed/skipped0、当前技能2、121真实ECNU1024维零错及2条向量/8192字节一致，输入前缀通过；两库尚未齐。
+- 累计11962/新增33个raw逐条完整/stop/HTTP200，初筛在途11962后来完成；真实推进约23秒，无10分钟停滞。960SHA/身份/实际服务/容量健康，旧196完整导出未变。
+- 本轮无新增实证发现或故障，快照保存，不重启热改/覆盖/评测或103资源调用，正常安静继续巡检。
+
+## 212 trajectory学习41条健康
+
+- [212巡检](memory/212_2026-10-03_trajectory_learning_healthy_41.md)：A41/105、总41/212（19.34%）、failed/skipped0，当前技能2、94真实ECNU1024维零错及2条向量/8192字节一致；输入顺序前缀通过，两库尚未齐。
+- 累计11929/新增23个raw逐条完整/stop/HTTP200，初筛在途11929随后完成；近期142—162秒请求真实完成，不作卡死。960SHA/进程身份/stderr/HTTP/Redis/Docker/Qdrant/容量正常，旧196导出hash保持。
+- 本轮无新增实证发现或故障，安全快照保存，不重启热改/覆盖/评测或103资源调用，正常安静继续巡检。
+
+## 211 用户进度询问：32条，学习阶段15.09%
+
+- [211记录](memory/211_2026-10-03_user_progress_trajectory_32.md)：A32/105、B未开始，总32/212（15.09%），当前A技能2。69次ECNU1024维零错、原生failed/skipped0，960SHA与身份/服务正常，最近模型原始响应完整，无停滞。
+- 百分比仅指212技能学习，不是原945场完整实验；尚未评测、103仍暂缓、旧结果保留。本轮无新增实证发现或故障，正常运行与半小时巡检保持。
+
+## 210 trajectory学习27条持续健康
+
+- [210巡检](memory/210_2026-10-03_trajectory_learning_healthy_27.md)：A27/105、总27/212（12.74%）、failed/skipped0、原输入前缀通过，当前技能2且有维护更新；60真实ECNU1024维操作零错、2条向量完整。进入第28题travel_055，两库尚未齐，不当最终验收。
+- 累计11895/新增35，11861—11895共35个raw逐条完整/stop/HTTP200，初筛在途11895后已完成；960SHA/身份/stderr/实际服务与内存正常、无10分钟停滞。旧115与196等待身份保持，0Jupyter/0运行容器符合离线阶段。
+- 本轮无新增实证发现或故障，安全快照保存，未热改/重启/覆盖/评测或103资源调用，正常安静继续半小时巡检。
+
+## 209 trajectory学习14条健康，无新故障
+
+- [209巡检](memory/209_2026-10-03_trajectory_learning_healthy_14.md)：A14/105、总14/212（6.60%）、failed/skipped0、输入顺序前缀通过，当前技能2、28真实ECNU1024维零错，2条向量/8192字节/ID一致；两库未齐，未验收最终库。
+- 960SHA、controller/worker身份与stderr、8000/8129/8140/8142/8143实际HTTP、Redis/Docker/Qdrant及内存正常；旧115等待、196已完成身份保持。上轮在途11838和新增至11860的23个raw逐条全部完整/stop/200，不只信ledger。采样13→14为真实推进，非卡死。
+- 无新增实证发现或故障，安全快照与扩展审计保存，不热改/重启/覆盖/评测或调用103资源，正常不重复通知，315-30继续。
+
+## 208 官方trajectory独立学习已启动
+
+- [208记录](memory/208_2026-10-03_official_trajectory_learning_started.md)：用户“切换成trajectory”授权已落实。新目录208_cogym_212_trajectory_learning，版本sp_212_ecnu_trajectory_v1，进度[8143](http://127.0.0.1:8143/)；A由B折105、B由A折107学习，原212公开canonical及92有效零分/65未交付/5UNKNOWN全部保留，103仍暂缓。
+- 官方extract_from_agentic_trajectory逐题单文件调用、success_only=False、消息/事件数量不限，原生trajectory抽取/维护提示、语义匹配与导出。960SHA与212个Spy原生记录/输入无损验收通过；实际首抽取/维护请求提示逐字匹配官方。泛文件导入success=True为合成标记，真实task_outcome另明确传入，不冒称成功；公开工具回执在完整文本内，无私有gold/隐藏reasoning。
+- controller389511/7425989、A worker389513/7427096真实存活；初始复核3条已处理、技能2、7ECNU1024维零错、8GLM完整零失败/1在途，累计11838。旧196两库/低产出及所有freeze/轨迹/成绩/失败保留，不重采或热改旧运行，8140/8142保持，148隔离。
+- 半小时315-30已更新ACTIVE；安全快照与逐题日志可查，辅助只读probe写目录/请求末编号问题已修复且不影响冻结学习。仅两库学习，不启动配对评测；trajectory产出与复用收益待验，输入封装/结果上下文也有版本差异，不能作入口单因素因果结论。
+
+## 207 建议执行经验学习选择官方trajectory，尚未切换
+
+- [207判断](memory/207_2026-10-03_recommend_official_trajectory_entry.md)：该入口显式学习agent工具操作、环境反馈、检查点、回退与错误恢复，适合Co-Gym执行经验；实际技能产出/复用增益未验证。当前212均已处理，200空候选不是前置漏送或infra错误，沿205澄清保留。
+- 后续另立学习版本并保留196库与freeze，复用212证据、原GLM/ECNU/105107分集，显式关闭success_only以保留失败/UNKNOWN，不重采Co-Gym或为数量强制生成；本轮仅建议，未实现/启动/评测。
+
+## 206 等待阶段复核正常
+
+- [206巡检](memory/206_2026-10-03_skills_ready_wait_recheck.md)：A105/B107完整accepted、failed0、A1/B2、42真实ECNU1024维操作零错及导出SHA通过；326/37freeze/212来源/身份与实际服务正常，累计11829增0，无新请求需审。Windows物理5.26GiB/虚拟31.76GiB、WSL11154060kB，未见容量故障。
+- 完成后的progress增0属预期，未变103暂缓/未评测/不重启，安全快照保存，完成通知不重复，315-30继续；无新增实证发现或故障。
+
+## 205 no_skill为已处理但无候选，入口对照尚未执行
+
+- [205澄清](memory/205_2026-10-03_autoskill_entrypoints_and_empty_candidate_semantics.md)：212全部进入AutoSkill抽取并processed；200candidate0正常no_skill，缺少候选后不做相似匹配/维护入库。当前模型/提示/规范化组合没有留下技能，不能判这些轨迹在所有学习方式下都无价值。
+- 官方conversation有specific/common两模式，trajectory学习执行/工具/环境经验，AutoSkill4Doc学习文档；在线SDK/代理和OpenClaw为运行集成，不自动等同独立更强抽取算法。低产出不自动等于实现错误，204适配解释须用控制对照验证，不能只为增技能数改配置。
+- 未切换/重学/评测/调用模型或embedding，原结果、103暂缓及巡检保持；本轮未重新服务巡检，健康证据沿203。
+
+## 204 低产出首先是抽取对象适配问题
+
+- [204诊断](memory/204_2026-10-03_low_skill_yield_entrypoint_mismatch.md)与[完整报告](reports/204_autoskill_low_yield_diagnosis.md)：200条候选为空、12候选全部维护ok并归3个ID；94.34%的输入未进入候选维护。不能将其归为embedding合并过度或API失败。
+- 当前原生conversation/specific只学USER可复用要求，不直接学习agent自行操作/错误恢复，选择该入口不够贴合执行经验目标；原生trajectory已有对应能力。模型能力与提示各自作用未做控制对照，embedding语义质量仍未知；论文不同WildChat样本不能给本配置预设产出阈值。
+- 建议保留196结果另立官方trajectory对照版本，复用已有轨迹、先少量固定输入核验、不优先换ECNU；尚未启动，不能静默用trajectory默认success_only筛掉失败/UNKNOWN。旧skills_ready/103暂缓/未评测/巡检继续，0新模型或embedding调用、无热改、148不操作。
+
+## 203 完成后等待健康，无新异常
+
+- [203巡检](memory/203_2026-10-03_skills_ready_expected_wait_healthy.md)：两库官方result/progress、42真实1024维embedding及accepted身份/完整导出SHA复核通过，105/107输入及326/37freeze/212来源保持。212全部processed/failed0、A1/B2技能不变，完成后无推进属预期等待。
+- 共享账本11829、较202无新请求；身份与实际8000/8129/8140/8142、Redis/Docker/Qdrant正常。Windows物理3.14GiB/虚拟29.80GiB，WSL9636488kB，无当前容量失败；无STOP、worker正常退出/stderr空。
+- 本轮无新增实证发现或故障，快照保存；未启动评测/103用户暂缓/不催key/不热改或重启。202通知标记保留、安静继续巡检，原945未完成。
+
+## 202 两库技能沉淀完成，skills_ready
+
+- [202记录](memory/202_2026-10-03_two_ecnu_banks_skills_ready.md)：A库105条/B库107条全部处理、failed0；最终独立技能A1/B2。200no_skill与12ok维护为官方学习结果，不能把维护事件当技能数。42真实ECNU操作均1024维成功，两库accepted身份、官方result、原生向量和完整导出SHA验收通过。
+- 正式196学习631个GLM请求全部完整/零失败，本轮新增60/下一游标11829；326学习与37旧freeze及212来源保持。controller251293/start5853847仍正确，worker均正常exit0；服务正常、无STOP/stderr错误。阶段结束后停止实际学习推进是预期等待，不重启或双启。
+- 保存安全快照与learning_completion，通知skills_ready；小库产出的复用效果未知，不热改提高数量。未启动配对评测，等待后续授权；103用户暂缓不调用/不催key/不记0，原945未完成。8142页面及315-30巡检继续，旧115等待和失败分数保持，148不操作。
+
+## 201 总学习93.40%，B库93条仍健康
+
+- [201巡检](memory/201_2026-10-03_B_bank_93_healthy.md)：A105完整accepted/failed0/唯一技能与导出SHA复核通过；B93/107（87no_skill/6ok）、当前技能2、22operation/22HTTP真实1024维完成/零错，B result/accepted未生成。总198/212=93.40%，较200增加46；两库尚未齐，不称skills_ready。
+- 当前进程身份/实际学习、模型维护与embedding健康；11635—11769新增135GLM全完整/无缺号在途或失败，下一11769。326/37SHA/212来源与分集105107/交集0及实际服务通过，Windows5.01GiB/虚拟29.08GiB/WSL约9.62GiB，STOP无/stderr空，无当前容量故障。
+- 0额外调用/无热改重启/旧分失败保留/148不操作，103暂缓/不评测/低产出不重复通知，安全快照存、正常安静，315-30继续。
+
+## 200 总学习71.70%，B库47条持续健康
+
+- [200巡检](memory/200_2026-10-03_B_bank_47_healthy.md)：A105完整accepted/failed0/唯一技能，13ECNU真实操作、accepted身份与导出SHA复核通过，旧worker正常退出。B47/107（43no_skill/4ok）、运行中技能2、13operation/13HTTP成功1024维/零错；B result/accepted未生成，两库尚未齐，不称skills_ready。
+- 总152/212=71.70%，较199增加38；当前进程身份正确，真实progress/模型维护持续推进。11505—11634新增130GLM最终全完整、末请求补核正常，下一11634；326/37SHA/212来源/105107分集及交集0与所有实际服务通过，Windows2.47GiB/虚拟28.87GiB/WSL约8.25GiB，无当前容量错误。
+- 无新故障/无热改重启/0额外调用/旧分失败保留，103暂缓/不评测/低产出不重复通知，安全快照保存、正常安静，315-30继续。
+
+## 199 A库完整验收，B库健康学习
+
+- [199巡检](memory/199_2026-10-03_A_bank_accepted_B_learning_healthy.md)：A105/105/failed0/唯一技能1，101no_skill/4ok维护同一ID、version0.1.3；ECNU13operation/13HTTP成功1024维/零错误，accepted版本/折/输入身份与完整导出hash通过。worker251295正常exit0、/proc退出预期，controller251293/start5853847正确，不误判卡死或双启。
+- B/196_B_attempt1 worker291101/start6260694正确，官方9/107（8no_skill/1ok）、首ECNU operation/HTTP成功/1024维。B result/accepted未生成，两库尚未齐，不称skills_ready。总114/212=53.77%，较198增加48；实际API/学习/embedding持续推进。
+- 11379—11504新增126GLM最终全完整，11504初审未终态后补核正常；下一11504。326/37SHA/212来源/105107分集与交集0、Windows8000/8129/8140/8142与Redis/Docker/Qdrant通过；Windows2.74GiB/虚拟30.74GiB、WSL约9.74GiB，stderr空/STOP无/无新容量故障。
+- 无热改或恢复/0额外调用/旧分失败保留，103暂缓/不评测/低产出观察不重复通知，安全快照存、315-30继续；两库全部通过再通知skills_ready，148不操作。
+
+## 198 A库66条，真实模型与embedding持续健康
+
+- [198巡检](memory/198_2026-10-03_ecnu_learning_66_healthy.md)：A/196_A_attempt1官方66/105（62.86%，212总学习31.13%），较197增加32；64no_skill/2ok，index31/57同一skill ID，当前唯一SKILL1，不把维护事件数当技能数。ECNU8operation/8HTTP完成、1024维、零error，当前向量count1；B未开始/result与accepted无，不称skills_ready。
+- 11280—11378新增99GLM全HTTP200完整，无缺号/失败/在途；最近维护与embedding实际推进，controller刷新不是唯一证据。326/37SHA/212来源及分集105/107/交集0、进程身份全部通过；8000/8129/8140/8142、Redis/Docker/Qdrant正常，采集结束无Jupyter作业。Windows物理1.59GiB/虚拟29.24GiB/WSL约5.81GiB，未见容量失败/无STOP/stderr空。
+- 本轮无新故障或机制发现，低候选观察沿197；安全快照存、下一游标11378。0额外调用/无热改重启/旧分保留/103暂缓/不评测/148隔离，正常安静，315-30继续ACTIVE。
+
+## 197 正式学习首技能与ECNU调用，低产出诊断
+
+- [197巡检](memory/197_2026-10-03_ecnu_learning_first_skill_and_low_yield.md)：A/196_A_attempt1官方34/105（32.38%，212总学习16.04%），33no_skill/1ok，后续采样35；第32条候选成功入库一个技能。ECNU首操作1/HTTP尝试1、1024维真实成功、约0.249秒、零错误，更新196尚无正式embedding的历史观察。最终库验收未完成/B未开始，不称skills_ready。
+- 11202—11279新增78GLM全部完整；身份、326/37SHA、212来源105/107与互补交集0核验通过；Windows8000/8129/8140/8142均200、Redis/Docker/Qdrant正常。当前无Jupyter作业/运行容器0属采集结束状态；Windows物理5.22GiB/虚拟33.15GiB、WSL约9.67GiB，stderr空，无新基础设施故障。
+- 连续无候选是实际模型返回合法空skills，而非响应/解析失败。官方specific提示保守排除一次性任务参数，这可能解释低产出，因果未对照验证；保留当前结果/配置，不强制生成或合入合成技能。安全快照保存、下一API游标11279；不重启或热改、未评测、103不启动，315-30继续。
+
+## 196 用户授权212技能沉淀，ECNU正式学习启动
+
+- [196记录](memory/196_2026-10-03_212_ecnu_skill_learning_started.md)：新196版本v2引用212原canonical/原互补成员，A库从B折105条学习/B库从A折107条学习，全部真实零分/未交付/UNKNOWN保留，不混原infra不完整尝试/157合成技能。原315/115等待及103暂缓保留，新阶段只学习、不启动配对评测。
+- 官方AutoSkill/157已验收learner原样复用，ECNU1024语义embedding/GLM原网关与累计账本；两库从空命名空间。326文件冻结，embedding失败/BM25回退或结果不齐拒绝接受，失败attempt保留且先继续另一库再新命名空间重试。单主锁、孤儿worker防双启/已接受库hash核验。
+- 实际controller251293/start5853847、worker251295/start5855253均正确，当前A/196_A_attempt1；官方首1/105 no_skill/0候选，3请求11199—11201完整，尚无embedding事件/技能产出。页8142 WindowsHTTP200已提交打开请求（queued），进度5秒刷新，315-30 ACTIVE同步真实progress/API/embedding检查；startup_evidence/health快照已存。
+- 自动审批初拒绝“潜在企业数据外传”，公开benchmark来源/输入无凭据/目的地核验后同一操作获批。v1仅8141端口占用且无模型调用，源码/manifest/stderr保留；核验旧PID退出与8142空闲后新v2冻结启动。115旧代码/轨迹/分/失败不热改，另一聊天148不操作。后续两库验收完成再通知并确定评测阶段。
+
+## 195 212就绪采集结束，进入预期等待
+
+- [195记录](memory/195_2026-10-03_sp_212_collection_expected_wait.md)：首采样211，巡检期间090结束、复核持久/controller212，初次监测断言是计数采样竞态，无错误快照落盘/非基础设施失败。新增075/089/090_retry1，原失败保留；207有效分142交付/65未交付、五UNKNOWN另列，92原生0。就绪212结束率100%/原315演化67.30%/945整体22.43%，不称评分全部有效或315完整完成。
+- controller/supervisor存活身份正确、waiting_resource/current_run空，090四旧节点退出、无匹配原生节点/学习进程；103暂缓run0/learning progress0/skill reads0，正式学习/两库/630评测未启动。预期等待不重启，157未交接、不启动旧hashing、不自行缩减分集。
+- 96API全HTTP200完整，11198取消在090结束后1.988秒且完整，下一11198；身份37SHA/来源/observer/服务/实际8140/Qdrant正常，Windows采样5.45GiB/虚拟余量34.43GiB、WSL末次13.92GiB，无当前分配失败。十旧infra/五UNKNOWN未增，9853旧超时/候选未部署保留。
+- 0额外调用/无重启热改/148隔离；通知212采集结束这一新阶段，不催103资源。945未完成，315-30继续ACTIVE。
+
+## 194 巡检209场，136新增API完整无新故障
+
+- [194记录](memory/194_2026-10-03_sp_209_sessions_healthy.md)：持久/controller209，新增062_retry1/084_retry1，原失败保留、重试不重复计逻辑题。204有效分139交付/65未交付、五UNKNOWN另列，92原生0。212采集98.58%/原315演化66.35%/945整体22.12%，正式学习/评测未启动；十旧infra/评分UNKNOWN均未增。
+- 当前075_retry1两次核验均推进，最终回执63/最近13秒、SP42完整、18原生查询协作全成功，四身份正确，无当前失败标记，尚未进入等待。136API全HTTP200完整，10999取消在062_retry1结束后6.123秒且完整，下一11102；身份37SHA/来源/observer/服务/实际8140/Qdrant正常，Windows8.58GiB/虚拟余量37.34GiB、WSL9.95GiB，无当前分配失败。
+- 103暂缓run0、157未交接、212齐后原冻结等待保持；0额外调用/无重启热改/148隔离。无新异常不重复通知，945未完成，315-30继续ACTIVE。
+
+## 193 巡检207场，原infra重试推进无新增故障
+
+- [193记录](memory/193_2026-10-03_sp_207_sessions_healthy.md)：持久/controller207，新增028/057及029_retry1/042_retry1，原失败保留、重试不重复计逻辑题。202有效分138交付/64未交付、五UNKNOWN另列，91原生0。212采集97.64%/原315演化65.71%/945整体21.90%，正式学习/评测未启动；十旧infra/评分UNKNOWN均未增。
+- 当前062_retry1四角色身份正确，回执29/最近2秒，审计SP7完整8开始、7原生事件成功含agent EDITOR_UPDATE1615字符，仍执行无当前失败标记。121API全HTTP200完整，10966初审在途19.096秒/补核20.827秒正常，无取消，下一10966；身份37SHA/来源/observer/服务/实际8140/Qdrant正常，Windows8.33GiB/虚拟余量37.34GiB、WSL9.92GiB，无当前分配失败。
+- 103暂缓run0、157未交接、212齐后原冻结等待保持；0额外调用/无重启热改/148隔离。无新异常不重复通知，945未完成，315-30继续ACTIVE。
+
+## 192 巡检203场，120新增API完整无新故障
+
+- [192记录](memory/192_2026-10-03_sp_203_sessions_healthy.md)：持久/controller203，新增032与000；198有效分136交付/62未交付、五UNKNOWN另列，89原生0。212采集95.75%/原315演化64.44%/945整体21.48%，正式学习/评测未启动；十旧infra/评分UNKNOWN均未增。
+- 当前028四角色身份正确，回执42/最近13秒、SP20完整21开始、11原生查询协作事件均成功，无当前失败标记。120API全HTTP200完整，10844初审在途44.826秒、补核48.622秒正常完成，无下游取消，下一10845；身份37SHA/来源/observer/服务/实际8140/Qdrant正常，Windows9.45GiB/虚拟余量38.33GiB、WSL9.92GiB，无当前分配失败。
+- 103暂缓run0、157未交接、212齐后原冻结等待保持；0额外调用/无重启热改/148隔离。无新异常不重复通知，945未完成，315-30继续ACTIVE。
+
+## 191 巡检201场，144新增API完整无新故障
+
+- [191记录](memory/191_2026-10-03_sp_201_sessions_healthy.md)：持久/controller201，比190增加4；196有效分134交付/62未交付、五UNKNOWN另列，89原生0。212采集94.81%/原315演化63.81%/945整体21.27%，正式学习/评测未启动；十旧infra/评分UNKNOWN均未增。
+- 当前032四角色身份正确、回执14/最近5秒，审计SP12完整13开始、5原生查询事件成功，无当前失败标记。144API全HTTP200完整，10595取消在017结束后11.354秒且完整，下一10725；身份37SHA/来源/observer/服务/实际8140/Qdrant正常，Windows6.75GiB/虚拟余量35.54GiB、WSL8.61GiB，无当前分配失败。
+- 103暂缓run0、157未交接、212齐后原冻结等待保持；0额外调用/无重启热改/148隔离。无新异常不重复通知，945未完成，315-30继续ACTIVE。
+
+## 190 041闭合围栏评分UNKNOWN，197场继续
+
+- [190记录](memory/190_2026-10-03_sp_041_parser_fence_unknown.md)：持久/controller197，192有效分132交付/60未交付、五UNKNOWN另列，87原生0，212采集92.92%/原315演化62.54%/945整体20.85%。041 agent写2727字符/user FINISH，parser10500 HTTP200完整，合法7日JSON附Notes，原split/strip保留闭合围栏，第73行三反引号SyntaxError；无node_failure/.model叠加，旧四节点退出，保留UNKNOWN不填0/缓存重算。030outcome空/原生0单列。
+- 当前017四角色身份正确、回执103/最近8秒，审计SP45完整46开始/26原生查询协作成功，仍执行无当前失败标记。114API全完整，10501结束后1.042秒取消且完整，下一10581；十旧infra未增、9853旧超时未重复/候选未部署，身份37SHA/来源/observer/服务/实际8140/Qdrant正常，Windows9.63GiB/虚拟余量38.42GiB、WSL9.96GiB，无当前分配失败。
+- 103暂缓run0、157未交接、212齐后原冻结等待保持；0额外调用/无重启热改/148隔离。新041评分UNKNOWN通知，945未完成，315-30继续ACTIVE。
+
+## 189 巡检195场，129新增API完整无新故障
+
+- [189记录](memory/189_2026-10-03_sp_195_sessions_healthy.md)：epoch1790991095.072持久/controller195，191有效分132交付/59未交付、四UNKNOWN单列，212采集91.98%/原315演化61.90%/945整体20.63%。当前030四角色身份正确，回执13/最近6秒，审计SP3完整4开始、3协作事件成功，无当前失败标记；十旧infra/四UNKNOWN未增。
+- 10339—10467共129API最终均HTTP200/完整，10467在途约40秒后补核正常，两个取消结束后5.850/2.038秒且完整，下一10467。9853旧超时保留且不重复/候选未部署，身份37SHA/来源/observer/Redis/Docker/8129/Jupyter/实际8140/Qdrant正常，Windows4.26GiB/虚拟余量32.89GiB、WSL6.49GiB，无当前分配失败。
+- 103暂缓run0、157未交接、212齐后原冻结等待保持；0额外调用/无重启热改/148隔离。无新异常不重复通知，945未完成，315-30继续ACTIVE。
+
+## 188 050尾文解析评分UNKNOWN，192场继续
+
+- [188记录](memory/188_2026-10-03_sp_050_parser_tail_unknown.md)：持久/controller192，188有效分129交付/59未交付、四UNKNOWN单列，212采集90.57%/原315演化60.95%/945整体20.32%。050 agent两次成功editor最终1108字符；parser10323 HTTP200完整，合法3日JSON后Notes被原split/strip保留，第36行Day 3's触发SyntaxError。无node_failure/.model叠加、旧四节点退出，原分UNKNOWN单列不填0/重算；轨迹未见FINISH，不误称模拟用户提前结束。
+- 当前007四角色身份正确、回执26/最近2秒，SP6完整/5原生成功；122API全完整，10322结束后18.736秒取消且完整，下一10338。十旧infra未增、9853旧超时不重复/候选未部署；身份/37SHA/来源/observer/服务/实际8140/Qdrant正常，Windows3.37GiB/虚拟余量31.92GiB、WSL6.96GiB，无当前分配失败。
+- 103暂缓run0、157未交接、212齐后原冻结等待保持；0额外调用/无重启热改/148隔离。新050具体评分失败通知，945未完成，315-30继续ACTIVE。
+
+## 187 090尾文解析与结束诊断失败，190场继续
+
+- [187记录](memory/187_2026-10-03_sp_090_parser_tail_failure.md)：持久/controller190，187有效分128交付/59未交付、三UNKNOWN单列，212采集89.62%/原315演化60.32%/945整体20.11%。090 agent先写2408、模拟用户补3226并FINISH；parser10122 HTTP200完整，合法7日JSON后Notes被原split/strip保留，第76行transport's触发SyntaxError。SP end缺.model叠加归第十原infra，旧四节点退出、原失败/UNKNOWN保留不计190，不填0或缓存改分。
+- 当前008四角色身份正确、回执20/最近4秒，审计SP9完整10开始、6原生成功；107API全完整，10201结束后6.488秒取消且完整，下一10216。三评分UNKNOWN不增、9853旧超时不重复/候选未部署，身份/37SHA/来源/observer/服务/实际8140/Qdrant正常；Windows1.97GiB/虚拟余量30.78GiB、WSL5.68GiB，无当前分配失败，持续监测。
+- 103暂缓run0、157未交接、212齐后原冻结等待保持；0额外调用/无重启热改/148隔离。新090具体失败通知，945未完成，315-30继续ACTIVE。
+
+## 186 067模拟用户交付触发原生缺成本评分失败，188场继续
+
+- [186记录](memory/186_2026-10-03_sp_067_native_cost_unknown.md)：持久/controller188，185有效分126交付/59未交付、三UNKNOWN另列，212采集88.68%/原315演化59.68%/945整体19.89%。067由模拟用户写入2765字符/FINISH，parser10082 HTTP200完整合法5日；Evansville→Little Rock及Jackson→Evansville距离0匹配，原HardConstraint85行None×人数崩溃，原生计划亦有区域/交通/城市数等错误。保留UNKNOWN、不补近似成本/0，旧四节点退出，九infra未增；首次离线DictReader类型错误已用正确pandas重跑更正并保留旧诊断。
+- 当前090四角色身份正确、回执37/最近0秒，SP12完整、9原生成功含editor2408；124新增API全完整，10083结束后71.479秒取消且上游完整，下一10109。9853旧超时未重复，身份/37SHA/来源/observer/Redis/Docker/8129/Jupyter/实际8140/Qdrant正常；Windows空闲1.19GiB/虚拟余量30.60GiB、WSL9.56GiB，无当前分配失败，持续监测。
+- 103暂缓run0、157未交接、212齐后原冻结等待保持；0额外调用/无重启热改/148隔离。新067具体评分失败通知，945未完成，315-30继续ACTIVE。
+
+## 185 巡检186场，127新增API完整无新故障
+
+- [185记录](memory/185_2026-10-03_sp_186_sessions_no_new_error.md)：epoch1790983951.674持久/controller186，184有效分125交付/59未交付、两UNKNOWN单列，86原生0。212采集87.74%/原315演化59.05%/945整体19.68%，正式学习/配对未开始；025四角色身份正确，回执9/最近7秒，审计SP6完整7开始、原生查询3成功，无当前失败标记。
+- 9859—9985共127API全部HTTP200/完整，两取消分别结束后7.977/4.634秒，下一9985；9853旧240秒超时保留且未重复，九旧infra/两评分UNKNOWN未增，旧候选未部署。supervisor/controller身份、37SHA/来源/observer/Redis/Docker/8129/Jupyter/Windows8140/Qdrant正常，Windows2.90GiB/WSL9.02GiB继续监测，无当前分配错误。
+- 103暂缓run0、157未交接、212齐后原冻结等待保持；0额外调用/无重启热改/148隔离。无新异常不重复通知，945未完成，315-30继续ACTIVE。
+
+## 184 098真实单次API超时，原分保留并继续077
+
+- [184记录](memory/184_2026-10-03_sp_098_api_timeout_queue_continues.md)：持久/controller184，182有效分123交付/59未交付、两UNKNOWN单列，212采集86.79%/原315演化58.41%/945整体19.47%。098有2253字符editor、模拟用户FINISH、parser9858完整/原分0.625，9853 SP序列65等待240秒上游超时、结束后67.417秒落盘；真实错误保留，不改分或挑分重试。
+- 098旧四节点退出，077四角色身份正确、回执21/最近4秒，后续SP21完整/9成功事件，超时后开始的9863—9874 API全部完整；当前服务恢复，未重启。115审计终态114完整＋1超时，下一9858，内部超时原因未知、可能影响agent修订，不称完全无影响。九旧infra/两评分UNKNOWN未增；身份/37SHA/来源/observer/服务正常，Windows3.85GiB/WSL7.79GiB，无当前分配错误。
+- 103暂缓run0、157未交接、212齐后原冻结等待保持；0额外调用/无重启热改/148隔离。新API异常通知，原945未完成，315-30继续ACTIVE。
+
+## 183 巡检182场，123新增API完整且无新增故障
+
+- [183记录](memory/183_2026-10-03_sp_182_sessions_healthy.md)：epoch1790980442.954持久/controller182，180有效数字分121交付/59未交付、86原生0，087/097已交付评分UNKNOWN单列。212采集85.85%，原315演化57.78%/945整体19.26%，正式学习/配对尚未开始。
+- 当前071四角色身份正确，回执36/最近18秒，审计SP25完整26开始，10原生事件全成功含航班/住宿/距离/餐厅和协作，无当前失败标记。九旧infra/两评分UNKNOWN未增，旧候选未正式部署，不把队列健康称根因已修。
+- 9621—9743共123API全部HTTP200/完整，9641与9676分别结束后10.494秒/2.708秒下游取消，上游完整，下一9743。supervisor3511/start35331、controller3526/start36143、37SHA/来源/observer/Redis/Docker/8129/Jupyter/Windows8140/Qdrant正常，boot未变；Windows3.94GiB/WSL8.59GiB，无当前分配错误。103暂缓run0，157未交接/212齐后原冻结等待保持，0额外调用/无重启热改/148隔离，无新异常安静，315-30继续ACTIVE。
+
+## 182 075健康超时与089缺成本评分失败，179场继续
+
+- [182记录](memory/182_2026-10-03_sp_075_health_timeout_089_none_cost.md)：075运行70秒后URLError Timeout，run_trial唯一HTTP为8129health(timeout5)，单次失败被通用except清理节点；仅START/无交付，四模型请求HTTP200完整，9552在结束后0.597秒取消，非模型无响应。旧节点退出/原排尾，当前三健康GET均200/约1ms；当时延迟源未知，未重启或假称健康容错已修，建议新执行版本有限重试尚未实施。
+- 089已成功editor2544/FINISH，parser9581完整合法7日；离线原生HardConstraint复现85行None成本×人数，第3日Atlanta→Athens及第4日Athens→Savannah原距离0匹配。Commonsense指Athens非法/航班号无sandbox等计划错误；并行end缺.model优先归infra/UNKNOWN，旧四节点退出、原分失败保留不填0。九原infra不计179，两个评分UNKNOWN087/097单列。
+- epoch1790978460.512持久/controller179，177有效数字分118交付/59未交付、86原生0；212采集84.43%，原315演化56.83%/945整体18.94%，正式学习/配对未开始。当前015四角色身份正确、回执49/最近18秒，后续SP28完整29开始、13原生成功事件含检索协作，已知Reasoning混杂未解决，无当前失败标记。
+- 9509—9620共112API上游全完整，下一9620。supervisor3511/start35331、controller3526/start36143、37SHA/来源/observer/Redis/Docker/8129/Jupyter/实际Windows8140/Qdrant正常、boot未变；Windows可用3.60GiB/WSL7.24GiB，容量降低继续监测、未见当前分配失败。103暂缓run0，不调用Voyage/Tavily或催key；157未交接/旧候选未部署，212齐后原冻结等待边界保持。0额外模型/embedding/搜索调用、无重启热改/旧分覆盖，六旧500/两旧API UNKNOWN/148隔离保留，315-30继续，通知两项新异常。
+
+## 181 巡检178场，原生/API持续推进且无新故障
+
+- [181记录](memory/181_2026-10-03_sp_178_sessions_no_new_failure.md)：epoch1790976720.116持久/controller178，176有效数字分117交付/59未交付、86原生0；087/097已交付评分UNKNOWN另列、七旧infra未增。212采集83.96%，原315演化56.51%/945整体18.84%，无正式学习/配对。当前061四角色身份正确，回执15/最近7秒，后续SP8完整9开始，原生航班查询/协作成功，无当前失败标记。
+- 9414—9508共95API上游全完整，9454/9496分别在027/024结束后6.771/13.090秒下游取消，下一9508。supervisor3511/start35331、controller3526/start36143、37SHA/来源/observer/Redis/Docker/8129/Jupyter/实际Windows8140/Qdrant正常，boot未变；Windows可用5.92GiB/WSL7.80GiB，容量继续监测，未见当前分配失败。
+- 七旧infra/解析诊断候选未部署、原分/六旧500/两旧API UNKNOWN保留。103暂缓run0、不调用Voyage/Tavily或催key；157未正式交接，212齐后原冻结等待/两库/630配对边界保持。0额外模型/embedding/搜索调用、无重启热改/旧分覆盖，148隔离，本轮无新故障，315-30正常安静巡检。
+
+## 180 084两层解析/收尾失败定位，176场继续
+
+- [180记录](memory/180_2026-10-03_sp_084_scoring_notes_and_end_failure.md)：084成功editor3372→3265字符/FINISH；parser9304 HTTP200/完整/stop、七日JSON后Notes，官方split/strip留尾注进eval，78行Day 7's导致unterminated string literal。0调用缓存离线复现/首闭合围栏json.loads七日通过，原UNKNOWN保留，不重评分/部署。SP end缺self.lm.model并行失败，node_failure优先归infra，旧四节点退出，原队列继续065/027；七原infra保留不计176，不冒充根因修复。
+- epoch1790974859.175持久/controller176，174有效数字分115交付/59未交付、86原生0，087/097已交付评分UNKNOWN单列。212采集83.02%，原315演化55.87%/945整体18.62%，无正式学习/配对。当前027四角色身份正确，回执34/最近5秒，后续SP22完整23开始、10原生成功事件/editor2167字符，无当前失败标记。
+- 9282—9413共132API上游全完整，无新增错误/取消/缺号，下一9413。supervisor3511/start35331、controller3526/start36143、37SHA/来源/observer/Redis/Docker/8129/Jupyter/实际Windows8140/Qdrant健康，boot未变、Windows可用8.61GiB/WSL6.87GiB，容量降低继续监测，未见当前分配失败。
+- 103暂缓run0、不调用Voyage/Tavily或催key，157未正式交接/解析诊断候选未部署，212齐后原冻结等待/两库/630配对边界保持；七infra/原分/六旧500/两旧API UNKNOWN保留。0额外模型/embedding/搜索调用、无重启热改/原分覆盖，148隔离，315-30继续，仅通知新084异常。
+
+## 179 097已交付但原生偏好评分崩溃，175场继续
+
+- [179记录](memory/179_2026-10-03_sp_097_native_none_cost_scoring_unknown.md)：097成功EDITOR_UPDATE2408字符/FINISH；parser9238 HTTP200/完整/stop、合法7日，无JSON解析问题。缓存离线官方HardConstraint复现第85行cost=None×人数TypeError：第5日Savannah→Athens及第7日Athens→Chattanooga原距离表0匹配，首个空成本在第5日。Commonsense指出Athens非法/餐厅重复/早餐无sandbox信息。计划结果不合格叠加评分器缺成本未处理，归scoring_failure/UNKNOWN，旧四节点退出，不填0/重跑选分，无原成绩覆盖。
+- epoch1790973056.273持久/controller175，173有效分114交付/59未交付、86原生0，087/097已交付评分UNKNOWN单列；六旧infra不计完成。212采集82.55%，原315演化55.56%/945整体18.52%，正式学习/配对未开始。当前084四角色身份正确、回执48/最近3秒、SP34完整35开始，14原生检索/协作/距离事件成功，尚在执行不以空editor判未交付。
+- 9145—9281共137API最终全完整，9281初审在途后完成，9240在097结束后9.102秒下游取消，下一9281。supervisor3511/start35331、controller3526/start36143、37SHA/来源/observer/Redis/Docker/8129/Jupyter/实际Windows8140/Qdrant正常、boot未变；Windows可用9.44GiB/WSL9.62GiB，无当前容量故障。
+- 六旧infra/解析诊断候选未正式激活，原分/六旧500/两旧API UNKNOWN保留。103暂缓run0、不调用Voyage/Tavily或催key；157未正式交接，212齐后原冻结等待/两库/630配对边界保持。0额外模型/embedding/搜索调用、无重启热改/旧分覆盖，148隔离，315-30继续，仅通知新097评分异常。
+
+## 178 062两层评分/收尾失败定位，后验172场继续
+
+- [178记录](memory/178_2026-10-03_sp_062_scoring_prose_failure_queue_continues.md)：062实际editor2144字符；parser9075 HTTP200/完整/stop/1794 tokens，五日JSON后Notes经官方split/strip留进eval，第53行闭合围栏SyntaxError，离线0调用复现/首闭合围栏json.loads五日通过。并行SP end缺self.lm.model→node_failure，优先归infra/UNKNOWN，不计172。旧四节点退出，原冻结排尾继续088/035；原失败完整、候选未部署，不能把队列继续称根治。
+- 初审171后验epoch1790971542.601持久/controller172，171有效数字分112交付/59未交付、86原生0，087已交付评分UNKNOWN另列，六原infra021/018/073/029/042/062。212采集81.13%，原315演化54.60%/945整体18.20%，无正式学习/配对。初审088 editor2822字符/22成功事件后原生0.5625结束；当前035四角色身份正确、回执6/最近3秒，后续SP5完整6开始、航班检索成功。
+- 9009—9144共136上游API完整、无新增错误/取消，下一9144；后验累计9156后续请求未纳入窗口、不跳过。supervisor3511/start35331、controller3526/start36143、37SHA/来源/observer/Redis/Docker/8129/Jupyter/实际Windows8140/Qdrant健康，boot未变、Windows可用9.68GiB/WSL9.70GiB，无当前容量故障。
+- 103用户暂缓run0、不调用Voyage/Tavily或催key；157未正式交接、解析/诊断候选未部署，212齐后原冻结等待/两库/630配对边界保持。六旧500/两旧UNKNOWN/原分失败保留，0额外模型/embedding/搜索调用、无重启热改/原分覆盖，148隔离，315-30继续，仅通知新062异常。
+
+## 177 巡检170场，真实写入与API持续推进
+
+- [177记录](memory/177_2026-10-03_sp_170_sessions_active_scoring_healthy.md)：epoch1790969456.195持久/controller170，169有效数字分110交付/59未交付、86原生0，087评分UNKNOWN单列；212采集80.19%，原315演化53.97%/945整体17.99%，无正式学习/配对。当前081/A/no_skill四角色身份正确，回执39/最近16秒、SP15完整、8原生成功事件含editor1922字符/距离查询，无当前失败标记。
+- 8893—9008共116上游API最终全完整，9008初审在途后终态；8946在074结束后11.154秒下游取消，下一9008。supervisor3511/start35331、controller3526/start36143、37SHA/来源/observer/Redis/Docker/8129/Jupyter/实际Windows8140/Qdrant健康；boot未变、Windows可用10.07GiB/WSL9.68GiB，无当前容量故障。
+- 五旧infra/解析诊断候选未激活、原分/六旧500/两旧UNKNOWN保留。103暂缓run0，不调用Voyage/Tavily或催key；157未正式交接，212齐后原冻结等待/两库/630配对边界不改。0额外模型/embedding/搜索调用，无重启热改/原分覆盖，148隔离，本轮无新异常，315-30继续正常安静巡检。
+
+## 176 巡检167场，API与原生检索持续正常
+
+- [176记录](memory/176_2026-10-03_sp_167_sessions_api_healthy.md)：epoch1790967745.713持久/controller167，166有效数字分108交付/58未交付、85原生0，087已交付评分UNKNOWN另列；212采集78.77%，原315演化53.02%/945整体17.67%，正式学习/配对未开始。当前074/A/no_skill四角色身份正确，回执7/最近0秒，SP3完整4开始、原生START/2次航班检索成功，无失败标记。
+- 8768—8892共125上游API全完整，无新错误/取消/在途缺号，下一8892。supervisor3511/start35331、controller3526/start36143、37SHA/来源/observer/Redis/Docker/8129/Jupyter/实际Windows8140/Qdrant正常、boot未变；Windows可用9.95GiB/WSL9.67GiB，无当前容量故障。
+- 五旧infra（含073重启侧证）、042/087解析与157诊断候选未激活，原分/失败/六旧500/两旧UNKNOWN保留。103暂缓run0、不调用Voyage/Tavily或催key；157未正式交接，212齐后原冻结等待/两库/630配对边界不改。0额外模型/embedding/搜索调用、无重启热改或旧分覆盖，148隔离，本轮无新异常，315-30继续安静巡检。
+
+## 175 巡检164场，原生检索/写入持续且无新故障
+
+- [175记录](memory/175_2026-10-03_sp_164_sessions_queue_healthy.md)：epoch1790965855.460持久/controller164，163有效分106交付/57未交付、84原生0，087已交付评分UNKNOWN单列；212采集77.36%，原315演化52.06%/945整体17.35%，正式学习/配对未开始。当前046/A/no_skill四角色身份正确、回执39/最近2秒、SP23完整24开始，10原生成功事件含真实检索/2次editor1163→1865字符。
+- 8656—8767共112上游API全完整，8735在048结束后2.013秒下游取消，下一8767。supervisor3511/start35331、controller3526/start36143、37SHA/来源/observer/Redis/Docker/8129/Jupyter/实际Windows8140/Qdrant正常，boot未变；Windows可用9.93GiB/WSL9.68GiB，无当前容量故障。
+- 五旧infra/042和087解析问题与157诊断候选未正式激活，原失败/分数/六旧500/两旧UNKNOWN保留。103暂缓run0，不调用Voyage/Tavily或催key；157未交接，212齐后原冻结等待与两库/630配对边界保持。0额外模型/embedding/搜索调用，无重启热改或原分覆盖，148隔离；本轮无新故障，315-30正常安静巡检。
+
+## 174 042两层失败定位，162场结束且队列继续
+
+- [174记录](memory/174_2026-10-03_sp_042_scoring_prose_and_end_failure.md)：042成功editor1284→1348字符/FINISH，实际交付；parser8611 HTTP200/完整/stop，合法三日JSON后Notes，官方split/strip留闭合围栏与附注进eval，31行SyntaxError。0调用缓存离线复现、首闭合围栏json.loads三日通过，未重评分或激活候选。SP end访问self.lm.model缺失并行失败，优先归infra/UNKNOWN，原042不计完成；旧四节点退出，原协议排尾，当前070继续，无重启。
+- epoch1790964053.332持久/controller162，161有效数字分105交付/56未交付、83原生0；087已交付评分UNKNOWN单列，五原infra021/018/073/029/042保留。212采集76.42%，原315演化51.43%/945整体17.14%，无正式学习/配对。070/A/no_skill回执18/最近2秒，后验SP6完整7开始、6原生成功事件/editor1741字符；已知Reasoning字段混杂仍在。
+- 8530—8655共126上游API全完整，8552/8640为034/095结束后3.216/63.347秒下游取消，下一8655。supervisor3511/start35331、controller3526/start36143/四节点，37SHA/来源/observer/Redis/Docker/8129/Jupyter/实际Windows8140/Qdrant正常；boot未变、Windows可用10.4GiB/WSL9.72GiB，无当前容量故障。
+- 103用户暂缓run0、不调用Voyage/Tavily或催key；157未交接，原冻结212齐后等待边界不改。167解析候选/157诊断兼容未正式部署，不能将排尾继续称根因修复；六旧500/两旧UNKNOWN/旧分完整，0额外模型/embedding/搜索调用，无热改或旧分覆盖，148隔离，315-30继续，仅通知新042异常。
+
+## 173 巡检160场，原生检索与交付持续
+
+- [173记录](memory/173_2026-10-03_sp_160_sessions_request_completed.md)：epoch1790962312.400持久/controller160，159有效分103交付/56未交付/83原生0，087已知评分UNKNOWN与4旧infra分开。212采集75.47%，原315演化50.79%/945整体16.93%，无正式学习/配对。当前034/A/no_skill回执77/最近12秒、SP48完整49开始，19原生成功事件/editor2657字符，确有持续推进。
+- 8399—8529共131上游API最终全完整，8529初审78秒在途保存时已完成，无新增取消/错误/缺号，下一8529。supervisor3511/start35331、controller3526/start36143/四节点、37SHA/来源/observer/Redis/Docker/8129/Jupyter/实际Windows8140/Qdrant正常，boot未变、Windows可用10.29GiB/WSL9.71GiB，无容量故障证据。
+- 103用户暂缓无启动、不调用Voyage/Tavily或催key；157未交接，原冻结212齐后等待、两库/630评测边界不改。029原队列排尾恢复、087/诊断候选未激活，旧六500/两UNKNOWN/四infra保留，0额外模型/embedding/搜索调用，无重启热改/旧分覆盖，148隔离，315-30继续正常安静巡检。
+
+## 172 巡检158场，原队列持续健康
+
+- [172记录](memory/172_2026-10-03_sp_158_sessions_no_new_failure.md)：epoch1790960454.931持久/controller158、157有效分102交付/55未交付/82原生0；087已知评分UNKNOWN与4旧infra021/018/073/029分开，未新增失败。212采集74.53%，原315演化50.16%/945整体16.72%，无正式学习/配对。当前072/B/no_skill回执12/最近3秒、SP9完整10开始，原生航班检索与协作成功。
+- 8251—8398共148上游API全完整，8290/8361在043/006结束后8.566/2.705秒下游取消，下一8398。supervisor3511/start35331、controller3526/start36143/四节点、37SHA/来源/observer/Redis/Docker/8129/Jupyter/实际Windows8140/Qdrant正常，boot未变，Windows可用8.96GiB/WSL9.69GiB，无容量故障证据。
+- 103用户暂缓无启动/不调用Voyage或Tavily、不催key，157未正式交接，无正式学习progress/技能读取/两库/630评测，原冻结等待边界不改。029原队列排尾恢复、087候选/诊断兼容未激活、六旧500/两旧UNKNOWN保留；0额外模型/embedding/搜索调用，无重启热改/旧分覆盖，148隔离，315-30保持ACTIVE，正常安静。
+
+## 171 029两层新失败定位，原队列155场继续
+
+- [171记录](memory/171_2026-10-03_sp_029_native_cost_and_end_export_failure.md)：029在170进行中之后终态infra/UNKNOWN，不计完成；editor3970/FINISH、parser8137 HTTP200/完整/stop/合法7日。第4天Phoenix→Sedona及后两自驾路线在原距离表无精确匹配，cost=None于原生hard_constraint.py:85乘人数报TypeError，偏好空；缓存离线0调用精确复现。并行SP Agent.end诊断self.lm.model缺失，优先node_failure归infra；157兼容未正式激活，不能称根因修复。
+- 旧029四角色身份均退出、原失败/轨迹/UNKNOWN保留，既有collect返回None→pending排尾，已继续其他题与当前043，无需双启动或改评分。后验epoch1790958885.417持久/controller155、154有效分99交付/55未交付、82原生0，087实际交付但评分UNKNOWN单列；失败原attempt4（021/018/073/029）。212采集73.11%，原315演化49.21%/945整体16.40%，无正式学习/配对。
+- 8134—8250共117API上游全完整，3取消均任务结束后；下一8250，后验8271的后续调用尚未纳入窗口。supervisor3511/start35331、controller3526/start36143/043四角色、37SHA/来源/observer/Redis/Docker/8129/Jupyter/实际Windows8140/Qdrant正常，Windows可用8.66GiB/WSL9.88GiB、boot未变；043原生检索成功/SP13完整14开始。
+- 103暂缓无启动、不调用Voyage/Tavily或催key；157未交接/原冻结212齐后等待、两库/630评测边界保持。旧分、六旧500/两旧UNKNOWN保留；0额外模型/embedding/搜索调用，无重启热改/旧分覆盖，148隔离，315-30继续。新029失败通知；未把合法解析当高分，未自定义缺成本罚分或宣称根因已解决。
+
+## 170 跨日150场结束，当前029已交付并在评分
+
+- [170记录](memory/170_2026-10-03_sp_150_sessions_native_scoring_in_progress.md)：epoch1790956881.688持久/controller150，149有效分96交付/53未交付、80原生0，087已知评分UNKNOWN单列；212采集70.75%，原315演化47.62%/945整体15.87%，无正式学习/配对。当前029/B/no_skill四角色身份正确、3970字符EDITOR_UPDATE与FINISH成功、SP8完整9开始，尚未把当前评分计入150。
+- 8025—8133共109新增API上游全完整，8039/8122分别在100/066结束后20.594/7.765秒下游取消，下一8133；37SHA/来源/observer/Redis/Docker/8129/Jupyter/实际Windows8140/Qdrant正常、boot未变，Windows可用5.39GiB/WSL8.27GiB。3旧infra/087解析候选未部署、旧六500/两UNKNOWN仍保留，无新增故障。
+- 103用户暂缓无启动、不调用Voyage/Tavily或催key；157未交接、原冻结212齐后等待边界不改，无正式技能库/630评测。0额外模型/embedding/搜索调用，无重启/热改/旧分覆盖，148隔离，315-30保持ACTIVE且正常安静。
+
+## 169 巡检147场，长请求完成且原生活动持续
+
+- [169记录](memory/169_2026-10-02_sp_147_sessions_api_requests_resolved.md)：epoch1790955193.004持久/controller147，146有效分94交付/52未交付、79原生0，087已知评分UNKNOWN单列；212采集69.34%，原315演化46.67%/945整体15.56%，学习/配对未开始。当前100/B/no_skill回执79/最近14秒、19原生成功事件含真实检索/editor2253字符；SP42后验150.637秒完整43开始。
+- 7907—8024新增118API最终全部HTTP200/完整，168在途7907最终214.251秒完成、8021初审在途后验完整；7929为052结束后30.409秒下游取消，下一8024。监督器3511/start35331、controller3526/start36143/四节点、37SHA/来源/observer/Redis/Docker/8129/Jupyter/实际Windows8140/Qdrant身份与health正常；Windowsboot未变、可用4.43GiB/WSL9.20GiB，无容量故障证据。
+- 103用户暂缓无启动、不调用Voyage/Tavily或催key；157未交接/无正式学习、技能读取、两库/630评测，原冻结采集等待边界不改。3旧infra/087未部署候选/六旧500/两旧UNKNOWN仍独立保留，0模型/embedding/搜索探针、无重启热改或覆盖旧分，148隔离；无新可行动异常，315-30正常安静巡检。
+
+## 168 巡检145场，活动模型请求与原生动作正常
+
+- [168记录](memory/168_2026-10-02_sp_145_sessions_active_request_healthy.md)：epoch1790953284.609持久/controller145；新增013已交付0.3125，144有效分92交付/52未交付、79原生0，087已知评分UNKNOWN单列。212采集68.40%，原315演化46.03%/945整体15.34%；学习/配对未开始。
+- 当前052/B/no_skill回执47/最近7秒、SP30完整31开始，13原生成功事件含航班/住宿/餐厅查询与2335字符editor。7792—7906共115终态API全完整，无新错误/取消；7907请求存在/保存时154秒在途，无终态不冒充成功或失败，下一7906。身份/37SHA/来源/observer/Redis/Docker/8129/Jupyter/实际Windows8140/Qdrant健康，Windowsboot未变、可用6.84GiB/WSL9.15GiB。
+- 103用户暂缓无启动/不调用Voyage或Tavily、不催key；157未交接，无正式学习/技能读取/两库/630配对，原315冻结等待边界不改。3旧infra、087评分附注问题与离线候选未部署、六旧500/两旧UNKNOWN保持；0额外模型/embedding/搜索调用，无重启热改/原分覆盖，148隔离。无新可行动异常，315-30正常安静巡检。
+
+## 167 新评分UNKNOWN点对点定位，队列仍推进
+
+- [167记录](memory/167_2026-10-02_sp_144_sessions_scoring_json_trailing_prose.md)：144结束含143有效数字分/1 scoring_failure；087实际两次EDITOR_UPDATE、最终3523字符并FINISH，非未交付。parser7786 HTTP200/完整/stop/1710 tokens，完整7日JSON后附说明；官方只split开围栏并strip边缘反引号，将尾部附注留进eval，第77行Day 1's导致SyntaxError。离线首闭合围栏提取/json.loads/7日字段通过，未计算新分或部署、原UNKNOWN保留；正式修复须明确新评分版本与统一归属，禁止热改/挑分重试。
+- 当前013/B/no_skill、4角色身份正确、原生航班搜索成功/SP3完整；监督器3511/start35331、controller3526/start36143、37SHA/来源/observer/Redis/Docker/8129/Jupyter/实际Windows8140/Qdrant正常。7677—7791共115新增API上游全完整，7788在087结束后下游取消，下一7791；旧六500/两UNKNOWN/3infra保留。
+- 有效分91交付/52未交付，79原生0；087实际交付但评分UNKNOWN单列，不用null摘要误判未交付。Windows可用2.24GiB/WSL6.96GiB，无新内存故障证据，继续监测。103用户暂缓无启动、不催key/不调用Voyage或Tavily；157未交接、无正式两库/630评测。0额外模型/embedding/搜索调用，无重启/冻结热改/原分覆盖，148隔离，315-30继续；仅新评分异常通知。
+
+## 166 巡检142场，用户暂缓范围内健康推进
+
+- [166记录](memory/166_2026-10-02_sp_142_sessions_user_deferred_scope_healthy.md)：后验epoch1790950013.971，038结束转002，持久/controller142；212就绪采集66.98%，原315演化45.08%/945整体15.03%。当前002/B/no_skill回执9/最近7秒、SP4开始、4角色身份匹配，无failure marker。边界日志暂缺的只读监测竞态已后验排除为任务故障。
+- supervisor3511/start35331、controller3526/start36143、37SHA/来源/observer/Redis/Docker/8129/Jupyter/实际Windows8140/Qdrant正常；Windowsboot未变、可用3.56GiB/WSL6.68GiB。7532—7676共145API上游全完整，7570/7651在053/012结束后下游取消，下一7676；后验7682中后续请求未纳入该窗口，六旧500/两旧UNKNOWN不重置。
+- 142完成90交付/52未交付、79原生0、已完成score UNKNOWN0，3旧infra/收尾属性警告仍保留。103用户暂缓无启动/不催key、不调用Voyage/Tavily，315登记/原学习冻结规则不改；157未交接、无正式学习/技能读取/两库/630配对。0模型/embedding/搜索探针、无重启热改或旧分覆盖，148隔离；无新可行动异常，315-30继续安静巡检。
+
+## 165 最新范围：103题用户主动暂缓，其余212继续
+
+- [165记录](memory/165_2026-10-02_user_defers_voyage_and_tavily_tasks.md)：用户要求Voyage/Tavily依赖数据暂不跑，覆盖旧巡检自动就绪运行描述。文献100/课程3保留为用户暂缓，未经明确恢复不调用两资源/启动103题，不催key；212旅行/表格题继续，不中断当前任务。
+- 原315-30通过原生工具更新成功，名称/ACTIVE/半小时/同聊天及旧恢复/冻结/真实API/内存/正常安静规则保留。115/reports/user_resource_deferrals_165.json保存外部约束；核实无文献/课程run，当前012/B/no_skill、140完成。下一API审计仍7531，六旧500/两旧UNKNOWN/3旧infra及收尾警告保留，本次不声称额外健康实证。
+- 103不填0/计失败/已完成，不永久移除315覆盖。未热改315采集→学习/两折/630配对冻结协议；212就绪采集齐后预期等待不误重启。如先出212独立完整基线须另定版本/报告归属并完成157交接，尚未擅自实施。ECNU准备保留，0新增模型/embedding/搜索调用、无重启或旧分覆盖，148隔离。
+
+## 164 巡检139场，原失败重试结束且无新设施异常
+
+- [164记录](memory/164_2026-10-02_sp_139_sessions_no_new_infrastructure_error.md)：epoch1790947851.622，较163新增3场；073_retry1正常终态task_completion0/performance0、收尾node_failure警告保留，3旧infra仍021/018/073，不计139完成。当前053/B/no_skill回执10/最近7秒、SP6完整7开始，4成功原生事件含真实航班检索/协作。
+- supervisor3511/start35331、controller3526/start36143/4节点、37SHA/注册来源/observer/Redis/Docker/8129/Jupyter/实际Windows8140/Qdrant正常；启动时间未变，Windows可用6.37GiB、WSL8.33GiB，无当前容量不足。7423—7531共109API全终态完整，无新错误/缺号，下一7531及六旧500/两旧UNKNOWN。
+- 139完成88交付/51未交付、78原生0，完成score UNKNOWN0与3旧infra UNKNOWN分开。157正式阶段交接/103检索资源持续待办，无正式学习progress/技能读取/两库/630配对；0额外探针/无重启或热改，148隔离，不宣称旧字段/收尾/内存根因全修，945未完成保持安静巡检。
+
+## 163 重启恢复后136场，旧失败重试按原协议结束
+
+- [163记录](memory/163_2026-10-02_sp_post_reboot_136_sessions_healthy.md)：probe epoch1790946142.287，持久与controller结果一致136；021_retry1实际交付原生0.25、018_retry1空outcome真实未交付0，保留两post_score node_failure警告，不能称属性根因已修。3旧infra为021/018/073，不计完成；当前仅073_retry1。
+- 当前073回执42/最近11秒、SP13耗时76.878秒完整后14开始，9原生成功协作事件/editor尚空不判卡死；监督器3511/start35331、controller3526/start36143/4节点、37SHA/源/observer/Redis/Docker/8129/Jupyter/Windows8140及Qdrant3558/start37544正常。Windows启动时间未变，WSL可用8.05GiB/Windows5.32GiB，无新内存不足证据。
+- 7356—7422共67新增API全终态HTTP200/完整，无新增错误缺号，下一7422；六重启前500/两旧UNKNOWN独立保存。136完成86交付/50未交付、77原生0，完成集合score UNKNOWN0与3旧infra UNKNOWN分开。
+- 157正式阶段交接/103检索资源仍待、无学习progress/技能读取/两库/630配对。0检查探针/无重启热改或覆盖原分，148隔离；945未完成继续安静巡检，不把持续运行等同全部缺陷已修。
+
+## 162 系统重启后原服务与单监督器续跑恢复成功
+
+- [162记录](memory/162_2026-10-02_system_reboot_services_and_experiment_resumed.md)：Windows LastBootUpTime20:24:43.500、WSL uptime87秒，8000/8129/8140无监听，全部旧实验身份失效/停滞749秒；确认无STOP、37SHA一致、原live验收通过后保留旧状态，隐藏恢复原三个服务、单监督器3511/start35331＋controller3526/start36143 --resume。Qdrant同版本/存储恢复3558/start37544、health200/0正式集合。
+- 持久完成134不变，controller重建旧结果暂20→42→86→132，非删分；当前021_retry1四节点身份正确、原生15总线/SP9完成10开始，7346—7355十个真实任务API全HTTP200完整，下一7355。累计7345恢复时保留，后续正常增长，无总上限/额外模型探针。
+- 重启前7296—7345五十请求：44完整、6真实500（7319/7341/7342 aborted，7343—7345后端stdout提前关闭）；保留错误，不称全由重启导致。018 error Cannot allocate memory为独立infra，073原running及轨迹保留＋owner_exit侧证；当前Windows可用14.4GiB，WSL启动任务后约9.47GiB可用，容量症状已消退但责任根因未确定。
+- 旧021 None成本/收尾属性/字段链问题与157正式交接/103检索资源待办持续，无正式两库/630评测。37freeze/评分/模型/分集/预算/原分不热改，148隔离；真正恢复服务运行不声称全部已根治。945未完成继续定时巡检并核对内存、失败题重排和两旧UNKNOWN。
+
+## 161 021原生评分None成本崩溃与收尾适配异常，队列未停
+
+- [161记录](memory/161_2026-10-02_sp_native_none_cost_failure_and_queue_continues.md)：021已EDITOR_UPDATE/FINISH，真实7161—7177均完整，parser有效JSON五日计划。原生commonsense指出Gatlinburg/路线不在sandbox；官方HardConstraint在cost None×人数TypeError，吞异常为空偏好结果，guard拒绝伪分。离线缓存重放确认，不是API不响应/JSON错误/没有交付。
+- 并存官方end导出缺SPModel.model触发agent node_failure，控制器归infra；021额外UNKNOWN1/不计完成、不填0，旧四节点身份退出，冻结自动控制器重排尾并继续019/037/018。157属性兼容已离线通过但未正式激活；当前不热改或改原生评分补成本，不能把恢复队列说成根因已修。
+- 最终probe epoch1790942858.777为134完成，当前018回执26/最近2秒、SP20启动19完成；身份/37SHA/源/observer/Redis/Docker/8129/Jupyter/实际Windows8140/Qdrant正常。7142—7295共154上游完整，7160/7270分别原生终态后45.352/24.972秒取消；下一7295及旧4661/6350 UNKNOWN。
+- 134完成85交付/49未交付、76原生0，完成集合score UNKNOWN0与额外021 UNKNOWN1分开；无正式学习/两库/630评测。103资源与157正式阶段交接持续待办，0检查调用/无重启热改/148隔离，945未完成继续检测。
+
+## 160 巡检131场，当前原生检索与模型持续推进
+
+- [160记录](memory/160_2026-10-02_sp_131_sessions_native_progress_healthy.md)：epoch1790940682.224，较159新增1场；当前132题016/B/no_skill，66回执/最近9秒、SP42完整，16原生成功检索/协作事件；editor仍空是当前未结束观察，不判卡死。身份/37SHA/注册来源/observer/Redis/Docker/8129/Jupyter镜像及实际Windows8140正常。
+- 7057—7141共85新增API终态均HTTP200/完整，无新增缺号/异常；下一7141后及4661/6350旧UNKNOWN。Qdrant原身份health200、0集合；Voyage/Tavily正式验收及157学习阶段交接均未完成，103等待沿旧。
+- 131终态83交付/48未交付、75原生0，native score UNKNOWN0/结果terminal infrastructure_error0；无正式学习progress/技能读取/两库或630评测。0检查调用、不重启或改freeze/旧成绩，不宣称字段链已修或完整基线完成，945未完成正常安静巡检。
+
+## 159 巡检130场，两晚取消与真实模型进展核验
+
+- [159记录](memory/159_2026-10-02_sp_130_sessions_late_cancellations_and_health.md)：较158新增4场；当前131题036/B/no_skill，START成功后4→14原生总线、SP4真实完成/5开始。身份/37SHA/注册来源/observer/Redis/Docker/8129/Jupyter镜像与Windows8140正常；Qdrant原身份health200/0集合，103资源等待和157正式阶段未交接沿旧。
+- 6948—7056共109请求上游完整；7007/7054客户端取消发生在040/063已交付终态后10.747/6.478秒，原生0.8125/0.75保留，不作模型失败或重采。7056先在途约14秒后53.009秒完整。下一7056后及旧4661/6350 UNKNOWN。
+- 130终态82交付/48未交付、75原生0；native score UNKNOWN0/结果terminal infrastructure_error0，无正式学习progress/两库/配对。健康不说明协议旧缺陷已修。0检查调用、不重启或改freeze/旧成绩，945未完成，正常保持安静巡检。
+
+## 158 巡检126场，原生旅行动作与外部服务持续正常
+
+- [158记录](memory/158_2026-10-02_sp_126_sessions_native_and_qdrant_healthy.md)：最终epoch1790937874.429，当前078回执33→100、最近活动4秒/SP54完成；26原生成功事件含旅行检索、2EDITOR_UPDATE/editor3498字符，真实推进，不由终态数未增判卡死。controller/supervisor/4节点身份、37SHA/注册source/observer/Redis/Docker/8129/Jupyter正常。
+- WSL宿主网卡访问8140失败后核实实际Windows127.0.0.1:8140 HTTP200，不当页面故障。157 Qdrant原PID/start_ticks/health正常、0集合；Voyage索引/Tavily实检无、103等待及157新阶段尚未交接保持，不能旧hashing直接学正式库。
+- 6896—6947共52终态API均HTTP200/完整，无新增缺号/上游异常；下一6947后并独立4661/6350各0文件UNKNOWN。累计6947保留、本轮0检查模型/embedding/检索调用、不重启或改freeze。
+- 126终态78交付/48未交付、75原生0；评分UNKNOWN0/结果terminal infrastructure_error0，无正式学习progress/技能读取或630评测。健康不等于字段问题已修或基线效果成立；157验收合成库排除，另一聊天148隔离，945未完成继续安静巡检。
+
+## 157 ECNU真实学习验收、本地Qdrant/语料已备，仍待两外部key
+
+- [157记忆](memory/157_2026-10-02_ecnu_embedding_and_native_retrieval_resource_preparation.md)／[资源报告](reports/157_cogym_resource_completion.md)：ECNU官方AutoSkill适配器1024维、store向量检索/导出通过；1隔离合成会话官方抽取/维护/ECNU入库/导出通过，19GLM API均完整、1 embedding操作无错误，测试库排除正式。凭据只受控ignored private，公共密钥扫描通过。
+- [157资源目录](experiments/157_cogym_resource_completion/README.md)：Qdrant1.13.6 PID23998/start5434262，WSL回环6333/原生search通过、测试集合已删除，正式索引无。已下载1.84GB公开arXiv并筛687,969篇CS首发2024-10-01前语料；70,119条后续更新，非论文原2024快照，重建须标新资源身份。仍缺VOYAGE_API_KEY及匹配索引/原生retriever验收。
+- 用户确认无已有Google资源、选择替代搜索版；STORM免key候选实际Bing三版失败（TLS、cookie、小说/空结果），语义否决，不接正式题。TavilySearchRM已有、隔离SDK0.7.12导入通过，仍需TAVILY_API_KEY/真实查询与Co-Gym动作验收；课程数值质量UNKNOWN持续。
+- SP收尾model只读兼容版官方end导出离线通过。**157是已验收的资源/学习准备，当前115 frozen controller/SP未切换、正式两库未生成；学习前必须新阶段交接，不能直接用旧hashing正式learner。** 141/144字段问题未修当前运行，不把资源补齐当根治交付或证明技能有效。原freeze/分/失败/148隔离保存，不双启动。
+- epoch1790937124.805为126、travel_078活跃33回执/最近1秒/SP20启动，37SHA/身份/服务正常、累计6895。6685—6806共122正式完整，6807—6895共89完整含19合成学习验收；共211无新缺号/上游异常。下次6895后并两旧4661/6350 UNKNOWN；103仍waiting、不伪填0。945未完成，半小时巡检继续并读取本节的资源/交接边界。
+
+## 156 完整设施审计：采集可保留，不等于干净正式基线齐备
+
+- [156记忆](memory/156_2026-10-02_comprehensive_facility_audit_and_collection_limits.md)及[阶段设施表](reports/156_full_experiment_facility_audit.md)：123场公开canonical/bus/events/score/rounds和初始query/receipt顺序结构检查通过，15模块/AutoSkill入口可导入、Jupyter镜像/注册源/observer哈希/315唯一及630配对互补通过，容量未见不足。结构完整不证明每条语义/隐藏链完整，烟测不是实际正式库/630评测验收。
+- 22正式终态end诊断缺SPModel.model，公开轨迹分保留；4661/6350旧账本缺口UNKNOWN。语义embedding、文献100/课程3检索未齐，课程无原生数值质量评分单列UNKNOWN；141字段链已影响部分采集，不能把全当前阶段说无影响/所有未交付归能力。修复仍需新版本，不热改/抹旧分。
+- 最终epoch1790934231.54975为123、第124题094、24回执/3秒、SP6完整；controller/supervisor/4节点/37SHA/服务/8140正常，当前无failure marker。6649—6684共36上游完整，6664为091交付0.9375终态后17.4秒取消，不算模型失败/重采。下一6684后及两旧UNKNOWN。
+- 0新模型/embedding/检索调用、不重启/冻结更改。未学习两库/配对、152并发未实施，真实资源及协议/诊断缺陷均未称已修。报告明确全部当前已知欠缺及未验收项，另一聊天148隔离，945未完成巡检继续。
+
+## 155 巡检122场，真实推进；055晚取消不是模型失败
+
+- [155记录](memory/155_2026-10-02_sp_122_sessions_late_cancellation_verified.md)：epoch1790933572.9047048为122、第123题travel_091/B/no_skill、49→50原生回执/实际检索协作，SP26完整后27开始，最后活动22秒。controller/supervisor/四节点身份、37SHA/Redis/Docker/8129/8140正常，当前无failure marker。
+- 6517—6648共132终态上游完整；6609 HTTP200/stop/完整，客户端在055终态约19.9秒后取消，055原生交付0.9375，不算上游失败/不重采。6648首次在途后65.2秒正常落盘；下一6648后并独立4661/6350旧UNKNOWN，无新增编号缺口。
+- 122终态74交付/48未交付、75个0、评分UNKNOWN0/结果terminal infrastructure_error0；新054=0.875、055=0.9375、049未交付0。当前skill_reads0/无学习progress或配对，154语义embedding未接/152并发未部署；103资源等待与150收尾缺陷不变。0检查模型调用/无重启或冻结热改，不复报同一阻塞，继续巡检。
+
+## 154 AutoSkill使用demo hashing，不能当语义embedding已接好
+
+- [154核验](memory/154_2026-10-02_autoskill_hashing_embedding_configuration_audit.md)：115 learn_library.py明确hashing/256维；官方hashing.py标无网络demo/tests、非语义模型，config默认提供此选项并不等于正式语义基线等效。maintenance候选相似检索及store向量构建用它，影响邻居/合并的可能性须评估，不称LLM已抵消。
+- 115尚无正式autoskill_state配置/progress/result，两库学习未开始，采集阶段不使用AutoSkill embedding；SP消费目录/READ_SKILL也不用向量召回。与文献100的Voyage/Qdrant工具链分开解释。不能由管道可运行推断正式语义资源齐备。
+- 学习前应固定真实embedding并创建学习配置新版本/两空库，保留原freeze与采集/旧结果、披露兼容性；未实施/无热改或新调用、不重建不存在的正式库。资源及效果未知，151健康/API游标6516和4661/6350未知沿旧，103等待/并发未实施仍保持。
+
+## 153 103题缺的是检索工具资源，尚不能完成全部315覆盖
+
+- [153说明](memory/153_2026-10-02_103_waiting_retrieval_resources_explained.md)：文献100题依赖Voyage embedding及匹配voyage-3的Qdrant地址/集合/索引；课程3题依赖Google搜索key/CSE ID，当前能力检查仍未配置。模型对话API不能代替这些工具；Qdrant可本地，未探测索引不等于证实索引不存在或坏掉。
+- 表格110＋旅行102共212题类型就绪；103留waiting_resource而非完成/0。当前固定管道全部315采集后才离线学习两库/630配对，缺口会阻碍完整全量结果，不把队列已启动等同依赖已齐。
+- 0新增调用/部署/冻结更改，不要求明文凭据、不声称资源已修。151健康/API游标6516、4661/6350未知及152并发尚未实施沿旧，课程原生评分UNKNOWN与资源缺口分开。
+
+## 152 提速优先题间并行，尚未改变正式执行
+
+- [152分析](memory/152_2026-10-02_speed_bottleneck_and_parallel_execution_plan.md)：控制器同步collect，最近10场102.4分钟/均10.2分钟，表格均6.4分钟、旅行均11.5分钟；固定151窗口113API均13.7秒。时序快照121终态/travel_055，不代表本轮全健康或新增API已核验。
+- 建议新版本先2题并行验收、再看4题负载；原生同题行为/评分/模型等一致，两组统一执行条件、独立资源/结果/账本与单一调度器，避免旧控制器双启动。上游并发容量未测，增加延迟可能影响native idle；2—4倍仅理想吞吐上限，未承诺/未实测，不将AutoSkill库内顺序演化并行乱序。
+- 0模型调用、未启动并行/改冻结配置/重启或改分。103资源等待无法靠提速解决；正式健康/API游标6516及4661/6350未知沿151，下一独立小并行验收方案，旧freeze与版本归属须保留。
+
+## 151 半小时巡检119场，当前模型与原生回执持续推进
+
+- [151记忆](memory/151_2026-10-02_sp_119_sessions_api_healthy.md)：最终epoch1790931707.802173为119、第120题travel_049/B/no_skill、12回执/最近活动2秒、SP连续完成；controller/supervisor/四节点身份、37SHA/Redis/Docker/8129/8140正常，无当前failure marker，不单凭控制器阶段时间判停滞。
+- 6404—6516共113新增API全部200完整，无新异常/编号缺口；下一从6516后及独立4661/6350，两旧缺口仍全无文件/UNKNOWN，不伪补。119终态72交付/47未交付，74个0、30个1、4个0.8125等原生分保留，评分UNKNOWN0/结果terminal infrastructure_error0；001空editor FINISH已核对，不猜完整因果或称skills改善。
+- 当前skill_reads0/无官方学习progress或配对，103waiting_resource、144提示未部署及150收尾诊断缺陷沿旧。0检查模型调用、无重启/冻结热改/回填，不复报同一未变缺口；未完成945，巡检继续。
+
+## 150 进度115场，运行继续；诊断导出缺陷与账本缺口单列
+
+- [150记忆](memory/150_2026-10-02_sp_115_progress_and_terminal_artifact_warning.md)：最终epoch1790930212.820556为115/315演化（36.5%）、115/945全计划（12.2%），第116题travel_076/B/no_skill、21回执/最近活动10秒、真实SP连续完成。controller/supervisor/四节点身份、37SHA/Redis/Docker/8129/8140正常，当前无failure marker，0检查模型调用。
+- 6278—6385中107完成、6350无任何文件为新增记录UNKNOWN；6386—6403另18均完整。本轮125可核验API无上游新错误，下一6403后并独立4661/6350，不能将缺口计成功。115终态69交付/46未交付、73个0，评分UNKNOWN0/终态infrastructure_error0；新031=0.75、083未交付0、096=0.6875，无技能学习/配对/提示部署，不称改善。
+- 初筛096收尾标记：官方end诊断写info时缺SPModel.model。17同类（1dev/16正式）均评分存在且旧PID退出；16正式canonical与bus保留，学习不用end诊断，缺陷不等于未交付原因。队列已自动继续，不重跑/恢复/热改；该诊断缺陷尚未修正，后续独立版本验收与归属披露。103资源等待未变，两API未知持续复查。
+
+## 149 实际发送正文已包含协议，不能归因完全未告知
+
+- [149记忆](memory/149_2026-10-02_actual_api_prompt_protocol_disclosure.md)／[报告](reports/149_actual_requests_contain_cogym_protocol.md)：固定6013已发送动作空间/正则/Thought与Action格式，2465和5886已发送模拟用户完整长Action字段/rationale与正则；三个请求无所查规范标记遗漏，不是全请求普查。
+- 已发出规范不等于模型理解或遵循；单user文本/无tools schema是官方文字动作路径事实，不单凭此判配置错误或上下文混杂。SP自定义JSON失败与模拟用户DSPy字段链分开；6013整题已交付0.5，不新增未交付数。
+- 0新模型调用/环境动作、无冻结提示/代码/评分/分集/库更改、不重启或回填。144轻提示尚未完全通过且未部署，115正式健康及API游标6277/4661未知/103等待沿147；本轮无新增健康进度结论。148新τ²实验保持隔离。
+
+## 148 新实验：τ²-bench Retail×AutoSkill 准备（0 模型调用）
+
+- [148记忆](memory/148_2026-10-02_tau2_retail_autoskill_preparation.md)／[实验目录](experiments/148_tau2_retail_autoskill/README.md)：用户下达 τ²-bench 文本零售域 AutoSkill 基线；固定 **v1.0.1**（fc0055dc，τ³ 修订；零售文本数据与 main 逐字节一致；**不与旧论文分数排名**）、AutoSkill `94c47ca`、复用 OpenClaw 2026.9.7（078 runtime，只读）。目录原命名 143 因并行会话占用编号改为 148。
+- 分集审计（`scripts/audit_split.py`）：train 74/test 40/base 114 校验通过；dev=4（seed42：69/28/8/112 覆盖 cancel/return/exchange/modify_items）、演化 70、test 40；发现 45 订单跨集共享（29/40 test）、93↔94 近似（0.993）、**modify_payment 演化侧无覆盖**、task 9 禁用。
+- 源码核验：τ² 工具由 orchestrator 执行且 **DB 判分从轨迹重放（strict）**；114 题 reward_basis 全为 DB（112 DB+NL），**无 ACTION**；NL 判分需替换模型（适配）。
+- 实现（全部实验目录内，vendor 不改）：`openclaw_config.py`／`mcp_retail_bridge.py`（挂起-转发）／`tau2_openclaw_agent.py`（一个 OpenClaw 进程跨工具调用）／`run_wrapper.py`；**单测 10/10**（假 OpenClaw）、**dry-run 接线通过**（16 工具）；0 模型调用、未接触 test task 9。
+- [阻塞项](experiments/148_tau2_retail_autoskill/blockers.md)：①**模型资源已换**为 GLM-4-Flash@open.bigmodel.cn（账号吴天辰；凭据存仓库外；1 次探测确认原生工具调用可用、usage 171 tokens；覆盖全部角色）②**embeddings 已配** `ecnu-embedding-small` @ chat.ecnu.edu.cn（dim 1024，探测通过，凭据仓库外）③预算硬上限与 dev 联调许可（唯一剩余确认）④v1.0.1 版本选择（已固定，可改）。确认后：dev 联调→冻结→70 采集→AutoSkill 冻结→40×2×4 配对评测。115/110/078 状态全部保留，与新实验隔离。
+
+## 147 新API超时已定位，当前队列仍活跃
+
+- [147记忆](memory/147_2026-10-02_sp_travel_timeout_after_terminal_queue_live.md)：epoch1790928417.8284566为112、第113题travel_031、累计6277，原controller/supervisor/四节点身份及37SHA/Redis/Docker/8129/8140正常，无failure marker；原生回执46→69→73、真实检索/协作，SP35完整后36开始，不把一题较久当停滞。
+- 6161—6277共117终态，116完成、6214/travel_023消费者一次240秒上游超时。023等待115.41秒时已终态，API超时记录晚124.60秒，无同请求重试且旧节点全退出；已有editor3278字符、原生0.4375，不填成功/0或重采挑分。5idle/无FINISH/21动作高度指向累计闲置终止，独立end理由未记录，低分因果未定。当前服务无需要重启证据，通知新模型异常并继续队列。
+- 112终态67交付/45未交付、评分UNKNOWN0/终态infrastructure错误0；无正式学习/配对/技能读取或提示部署，不称skills改善。下一API6277后并单独4661仍UNKNOWN；文献100/课程3资源等待保持，不改分集/原生idle/冻结。0检查模型请求，无重启/热改/旧分回填。
+
+## 146 根因按角色分开：动作格式与字段格式不是同一接口
+
+- [146记忆](memory/146_2026-10-02_sp_vs_simulator_protocol_failure_root_cause.md)及[报告](reports/146_sp_and_simulator_protocol_root_cause.md)：官方SP短Thought/Action＋文本原生动作，模拟用户Reasoning/长Action＋DSPy提取。38主要未交付链发生在后者，不归为SP消费者都不懂工具，也不需API原生tool_calls。
+- 6013真实请求有EXECUTE_JUPYTER_CELL/EDITOR_UPDATE规范，模型却给自定义execute JSON；官方字符串后处理从首个大写字符File截取，得到环境拒绝碎片。100整题之后交付0.5，该格式失败单例不加到45或泛化全体。模型为何不稳定遵循（习惯/上下文等）仍未知，不称已证实混杂/网关注入。
+- 144轻提示诊断仍未完全解决、未正式部署；用户首选提示，不擅改工具调用器或冻结评分。0新增模型调用、无冻结/分/库/提示变更或新健康巡检；145游标6160、4661未知及资源103等待沿旧。
+
+## 145 旅行阶段真实推进，081既有超时恢复已核实
+
+- [145记忆](memory/145_2026-10-02_sp_travel_phase_and_timeout_recovery_verified.md)：最终epoch1790926584.6830406为111、第112题travel_023、20回执/最近活动2秒，原controller/supervisor与4角色身份匹配，37SHA/Redis/Docker/8129/8140正常，无failure marker。两次真实FLIGHT_SEARCH，SP1开始→7完成→13开始，不将任务切换或长单题当停滞。
+- 6019—6141中119正式＋4诊断全有记录，正式无异常；6142—6160再19正式全部200/完整，本轮138新正式无上游错误，下一从6160后。081两超时5964/5974后5982请求体相同、7.8秒200完整，SP489.2秒恢复，任务已交付，旧错误保留；未人工重启/热改。4661独立仍无文件/API UNKNOWN。
+- 111終态66交付/45未交付，30个1/7个0.5/1个2/3/1个0.8125/72个0，UNKNOWN评分0/终态infrastructure错误0。新100原生0.5、033真实检索/editor原生0.8125；尚无两库学习/配对、无技能读取或144提示部署，不能将新增交付归因为修复/skills。文献100/课程3资源等待保持，无取消/假检索/补0，监督与巡检继续，仅通知081新确认恢复。
+
+## 144 skills可学行为教训，但不能直接修模拟用户解析
+
+- [144记忆](memory/144_2026-10-02_skills_failure_learning_and_light_prompt_probe.md)及[诊断报告](reports/144_skills_failure_learning_and_prompt_diagnostics.md)：技能仅SP读取；AutoSkill从公开原生动作/观察学习、不见未执行草稿与字段续写内部链，315会话后才离线生成库。主动实际执行/写editor/确认回执可能间接改善，是待检验假设，不宣称已学到或能根治。
+- 用户轻提示授权覆盖143解析兼容作为首选。冻结外两短提示、各固定2465/5886一次，4新增请求均200；同版官方字段提取：062两版EDITOR_UPDATE可提取，029两版仍短标签无字段，负结果保留。未执行动作或评分，未完全解决，未部署/新正式cohort/热改/旧分回填；累计账本不重置。
+- 两组须同模拟器/解析/评分，不能只给有技能组修交付或给用户模拟器另挂skills；不喂隐藏metadata/人工根因/标准答案作为自然学习。不将模型格式失败或错误“已完成”话术升级为正常成功。081第三次、4661与资源等待仍沿143待核验。
+
+## 143 修复边界：解析兼容不能替agent完成任务
+
+- [143记录](memory/143_2026-10-02_sp_parser_repair_scope_and_benchmark_fidelity.md)：先零模型审计38原回复，仅规范唯一明确且本体符合原生语法的独立Action封装；不改答案/参数/代码，不从聊天/观察猜动作。格式违约也是模型协议能力失败，字段续写链不等于正确答案本可得分。
+- 算错、未选执行工具、聊天不交付、合法FINISH及原生idle保留；不改评分/结束规则。两组同解析、新版本冻结/dev/明确归属，不能称完全未改原生管道。本轮仅方案，0新增模型调用、无冻结改动。
+- 补充142当时范围：中断心跳已审计5902—6018共117终态，081消费者5964/5974两次240秒超时，第三次恢复及4661尚待核验；安全API窗口已保存，后续不能漏检，不用初筛healthy替代完整检查。109终态/6018是epoch1790924539.947687快照；无重启/热改。
+
+## 142 项目接续：实时核验与现状确认
+
+- [142记录](memory/142_2026-10-02_project_reentry_and_live_status_check.md)：用户要求接续理解项目、现状与目标。重读README/CHARTER/STATE及141/140/139/115/110等最新记忆；只读核验15:02快照（epoch1790924539.9）：phase evolution、109场完成（64交付/45未交付）、当前`tabular_100`（fold A）、16原生回执/最近活动9秒、最近模型调用86.5秒/14263字符、37项协议SHA与Redis/Docker/relay健康、无failure marker，requests_reserved=6018；supervisor/controller身份一致。
+- 相对141固定前107场（62交付/45未交付）新增2场均交付，未交付数不变；141根因（38场DSPy字段续写假FINISH）与最小修复建议沿旧、未实施。5902—6018增量未审计、4661缺口未复核、文献100/课程3资源等待与全量学习/配对未开始沿旧状态。0新模型调用、不重启/不热改。
+
+## 141 未交付根因更正：DSPy字段补写诱发假完成
+
+- [141记忆](memory/141_2026-10-02_sp_undelivered_dspy_field_continuation_audit.md)及[45题报告](reports/141_sp_undelivered_root_cause_audit.md)：固定前107场62交付/45未交付（42.1%）；40空editor FINISH，5无FINISH累计idle强推断。38场候选EDITOR_UPDATE进入Reasoning，补Action变FINISH，036/083另2直接选择4误判。44未尝试实际editor更新，053唯一尝试被解析拒绝。
+- 029请求2465→2467与062请求5886→5887直接证据，同版本DSPy离线解析两原输出无output、规范字段结构后能提取编辑动作；未评估答案质量或实际执行。主要原因不是单纯API无响应；已记录相关超时3题5请求与机制重叠。旧API4661未知继续保留。
+- 更正早先“模拟用户误判完成”只解释末端的归纳；官方评分空editor给0符合源码，字段解析/续写缺陷发生在交付前，这批结果受管道兼容性干扰，不能直接作模型/skills能力结论。139/140健康只适用于当时运行服务，不表示无功能缺陷，历史保留。
+- 轻量修复方向为模拟用户任务动作字段边界结构归一化、保留真实独立Action，先离线回放38回复再新版本dev/cohort。尚未实施或证明改善；不能热改、回填旧run。0新增模型调用、无停止/重启/冻结改动；下次健康API仍从5901后并独立复查4661，资源103及全量学习/配对状态沿旧证据。
+
+## 140 短间隔巡检：080仍活跃，核对原生执行
+
+- [140核验](memory/140_2026-10-02_sp_106_sessions_active_native_execution_check.md)：epoch1790922822.612299仍106、第107题080、累计5901，回执5→26/SP第10次完成后第11次开始。原controller/supervisor及4节点、37SHA/服务/8140健康，最近活動8秒，无fatal标记，不因3分钟无新增终态判卡死。
+- 新5891—5901共11API正常完成、编号差为空；下一从5901后，4661单独复查仍无文件/API outcome未知。080用户模拟抱怨内核未执行，但真实Jupyter只有14:30:08成功动作、后续代码是聊天；本题容器running/挂载正确、6事件succeeded，不据模拟文字重启，未执行额外探针干扰冻结任务。
+- 本轮无新增成绩、基础设施故障实证或修复需求；106终态62交付/44未交付、30原生1/69原生0沿139，评分UNKNOWN0与API记录UNKNOWN1分开。0检查模型调用，无重启/热改，103等待与无全量库/配对状态不变，正常安静。
+
+## 139 用户实时询问：106场结束，运行健康但质量/资源仍有问题
+
+- [139答复证据](memory/139_2026-10-02_sp_106_sessions_user_progress_answer.md)：北京时间14:30核验100→105→106，第107题080/A/no_skill/evolution、演化106/315≈33.7%、全计划106/945≈11.2%，累计5890；原controller/supervisor及4节点/37SHA/服务/8140健康、最近活动6秒。080真实Jupyter成功、容器running且挂载正确，无fatal标记。
+- 新5715—5890共176API终态无上游错误；首5885在途后核验57.35秒完整返回，5742/5885皆任务结束后取消但上游完整，不能误判超时/丢记录。4661独立复查仍无文件、API outcome/role未知，下轮从5890后并单独复查，不补造。
+- 新073/088/065交付1、103交付0、099/062未交付0；106终态62交付/44未交付、30个1/6个0.5/1个2/3/69个0（44未交付0＋25交付0），全native、评分UNKNOWN0/终态infrastructure错误0；新0完整因果未裁定。运行健康不等于质量理想；103资源等待未补齐前不能完成全315与后续学习/配对。0检查模型调用，无重启/热改，后台/巡检持续。
+
+## 138 巡检：100场结束，新增API全部正常完成
+
+- [138快照](memory/138_2026-10-02_sp_100_sessions_healthy.md)：epoch1790920841.8894053，96→100、第101题099、累计5714，原controller/supervisor及4节点/37SHA/服务/8140健康、最近活动1秒，无fatal标记。099真实Jupyter及协作、10次SP完整回复；epoch1790920932.8943129容器running/本题挂载正确、8原生事件全succeeded，不将聊天代码视为实际执行。
+- 新5579—5714共136可读API终态0异常、编号差为空、最近10完整。4661独立复查仍无文件、API outcome/role未知，下一轮从5714后并单独复查，不补造或重启健康网关。
+- 新4场均交付：087/072/084原生0、075原生1；100终态58交付/42未交付、27个1/6个0.5/1个2/3/66个0，全native、评分UNKNOWN0及终态infrastructure错误0，未完整点查新0因果。0检查模型调用，无重启/热改，103等待及无全量库/配对状态不变，正常/未变缺口安静。
+
+## 137 巡检：96场结束，任务切换与实际API健康
+
+- [137快照](memory/137_2026-10-02_sp_96_sessions_healthy.md)：正式90→95→96，089结束后第97题087正常启动；最终epoch1790919188.392357、累计5578，原controller/supervisor及4节点/37SHA/服务/8140健康、最近活动2秒，087有真实Jupyter、容器running且挂载正确，无fatal标记。
+- 新5393—5578共186可读API终态无上游错误，5563终态后下游取消但上游完整。4661独立复查仍无文件、API outcome/role未知，下一轮从5578后并单独复查，不补造或重启健康网关。
+- 新097交付0.5、094交付0、070/083/101/089未交付0；96终态54交付/42未交付、26个1/6个0.5/1个2/3/63个0，全native、评分UNKNOWN0和终态infrastructure错误0，新0完整因果未裁定。0检查模型调用，无重启/热改，103等待及无全量库/配对状态不变，正常和未变缺口安静。
+
+## 136 巡检：90场结束，API和基础设施健康
+
+- [136快照](memory/136_2026-10-02_sp_90_sessions_healthy.md)：epoch1790917297.5751016，84→90、第91题070、累计5392，原controller/supervisor及4节点/37SHA/服务/8140健康。070前9次SP完整非空、真实Jupyter及协作；epoch1790917377.8327367本题容器running/挂载正确、6原生事件全succeeded。聊天代码不视为执行，当前空editor尚未判终态。
+- 新5211—5392共182可读API终态、编号差为空，无上游错误；5290终态后取消但上游完整。4661独立复查仍无文件、API outcome/role未知，下一轮从5392后并单独复查，不伪补、不重启健康网关。
+- 新102/086交付0，079/091/066/054未交付0；90终态52交付/38未交付、26个1/5个0.5/1个2/3/58个0，全native、评分UNKNOWN0、终态infrastructure错误0。新0因果未完整裁定，0检查模型调用，无重启/热改，103等待及无全量库/配对状态不变，正常/未变缺口安静。
+
+## 135 巡检：84场结束，新增API全部完成
+
+- [135快照](memory/135_2026-10-02_sp_84_sessions_healthy.md)：epoch1790915497.1552465正式79→84、第85题079、累计5210，原controller/supervisor及4节点/37SHA/Redis/Docker/8129/8140健康、无fatal标记。079前12次SP完整非空，真实Jupyter与模拟用户列名反馈；epoch1790915579.1010323本题容器running/挂载正确、7原生事件全succeeded，不把聊天代码当作已执行或交付。
+- 新5079—5210共132可读API终态0异常、编号集合差为空、最近10完整。4661独立复查仍无文件、API outcome/role未知；下一轮从5210后并单独复查4661，不伪补、不重启健康网关。
+- 新095/085交付0，104/069/067未交付0；84终态50交付/34未交付、26个1/5个0.5/1个2/3/52个0，全native、评分UNKNOWN0及终态infrastructure错误0；新0因果未完整裁定。0检查模型调用，无重启/热改，103资源等待及无全量库/配对状态不变，正常和未变缺口安静。
+
+## 134 巡检：79场结束，原生交付与新任务推进正常
+
+- [134快照](memory/134_2026-10-02_sp_79_sessions_healthy.md)：73→78→79，057 Jupyter/editor真实交付后模拟用户结束原生0.5，当前095启动0事件后复核4回执/SP/Jupyter推进、本题容器running且挂载正确；原controller/supervisor和4节点、37SHA/服务/8140健康。最终epoch1790913797.2776499，累计5078、最近活动2秒。
+- 新4911—5078共168API终态可读、无上游错误，4977终态后下游取消但上游完整；4661独立复查仍无文件、API outcome/role未知。下一轮从5078后审计并单独复查4661，不补造或重启健康网关。
+- 新6场均交付：058/057原生0.5，096/077/074原生0，090原生1。79终态48交付/31未交付、26个1/5个0.5/1个2/3/47个0，全native、评分UNKNOWN0、终态infrastructure错误0；新0因果未完整裁定。0检查模型调用，无重启/热改，103等待及无全量库/配对状态不变，正常和未变缺口安静。
+
+## 133 巡检：73场结束，队列推进且4661缺口未变
+
+- [133快照](memory/133_2026-10-02_sp_73_sessions_healthy_gap_unchanged.md)：正式66→73，当前058回执4→20、9次SP完整回复、两次原生Jupyter执行成功，容器running且本题挂载正确；原controller/supervisor和4节点、37SHA/服务/8140健康。最终epoch1790912192.5681536、累计4910，最近活动20秒。
+- 本轮新增4719—4910连续192可核验API终态无上游错误；4737/4751下游取消但上游完整，完成均晚于本题终态。4661独立glob仍无文件、API outcome/role未知，不伪补、不重启健康网关；下轮从4910后审计并独立复查4661，不跳过未知。
+- 新056/063未交付0，108/061交付1，064/093交付0，071交付0.5；73终态42交付/31未交付、25个1/3个0.5/1个2/3/44个0，native全部、评分UNKNOWN0及终态infrastructure错误0。新0因果未完整裁定，不能笼统归因。0检查模型调用，无重启/热改；103等待和无全量库/配对状态不变，未变缺口不重复通知。
+
+## 132 巡检：66场结束，4661 API记录缺失单列
+
+- [132证据](memory/132_2026-10-02_sp_66_sessions_missing_api_record.md)：首056启动0回执后复核epoch1790910214.9575832为14回执/SP/Jupyter真实推进，原controller/supervisor和4节点/37SHA/服务/8140健康、累计4718。4529已HTTP200完整成功74.46秒，107原生1；新189可核验API终态无上游错误，4604终态后取消但上游完整。
+- 唯一缺口4661请求/响应/ledger文件全缺，API outcome UNKNOWN、route/role未知；原网关PID46032健康，但没有异常traceback证明具体丢失点，不猜成超时/成功/0。单独安全派生JSON保存，原ledger/累计计数/结果不动。下一轮从4718后审计并独立复查4661，不用cursor跳过未知。
+- 新107/109交付1，068/059交付0，078未交付0；66终态37交付/29未交付、23个1/2个0.5/1个2/3/40个0，评分UNKNOWN0与API记录UNKNOWN1须分开。0检查模型调用，无人工重启/热改，103资源等待及无全量库/配对状态不变；通知本轮新缺口。
+
+## 131 巡检：61场结束，1条API在途待核验
+
+- [131快照](memory/131_2026-10-02_sp_61_sessions_one_api_inflight.md)：epoch1790908298.7967074，57→61场、107四节点及原controller/supervisor身份正确，37SHA/服务/8140正常，累计4529。新增4369—4528全部160终态0异常/不可读、最近10完整；4529无终态、SP第21调用在途不足10分钟，不判失败或成功、不重启。
+- 新098/060未交付0、082/092交付0；61终态33交付/28未交付、21个1/2个0.5/1个2/3/37个0，未完整点查新零分因果，不猜成全部基础设施。107已有真实Jupyter/editor与用户反馈，当前请求仍未知，非配对效果。
+- 本轮无新增基础设施故障实证或修复需求，0检查模型调用，无重启/热改。下一API起点必须4528，包含待核验4529；103资源等待及无全量库/配对状态不变，正常保持安静。
+
+## 130 巡检：57场结束，新任务启动正常
+
+- [130快照](memory/130_2026-10-02_sp_57_sessions_startup_boundary_healthy.md)：首0回执未判停机，复核epoch1790906539.7408264为098四节点/SP/Jupyter推进、9回执/最近4秒，原controller/supervisor及37SHA/服务/8140正常、累计4368。新增4248—4368连续121终态无上游错误/不可读，4326终态后取消但上游完整；055原scorer和098模型回复实际完成。
+- 新106交付1、055交付0.5、105未交付0；57终态31交付/26未交付、21个1/2个0.5/1个2/3/33个0。105完整结束原因未裁定，不猜成031同样idle或API错误，非技能效果。
+- 本轮无新增基础设施故障实证或修复需求，0检查模型调用，无重启/热改；下一API从4368后连续核验，103资源等待及无全量库/配对状态不变，正常保持安静。
+
+## 129 巡检：54场结束，API及真实执行健康
+
+- [129快照](memory/129_2026-10-02_sp_half_hour_54_sessions_healthy.md)：epoch1790904758.3205986，51→54场、106四节点及原controller/supervisor身份正确，37SHA/服务/8140正常，最近推进27秒、累计4247。新增4108—4247全部140终态0异常/不可读，最近10含原scorer完整；原生WorldBank Jupyter及模型回复/协作真实推进。
+- 新026/037交付原生1、002未交付0；54终态29交付/25未交付、20个1/1个0.5/1个2/3/32个0。未完整点查002结束原因，不猜成031相同idle或格式失败，非配对技能效果。
+- 本轮无新增基础设施故障实证或修复需求，0检查模型调用，无重启/热改；下一API从4247后连续核验，103资源等待及无全量库/配对状态不变，正常保持安静。
+
+## 128 巡检：消费者请求已恢复，031非用户FINISH的空交付
+
+- [128证据](memory/128_2026-10-02_sp_consumer_timeout_and_native_idle_end.md)：epoch1790902945.3224542，46→51场、026四节点及原controller/supervisor活跃，37SHA/服务/8140正常，最近推进2秒、累计4107。新增133请求中4021/4028同请求上游超时，4036原SDK第三次完整成功、SP第一调用488秒后完成；4104终态后取消但上游完整，当前接口可用。
+- 031空editor且无原生FINISH；5次idle提醒、第6idle tick后2秒结束及官方tick计数不清零逻辑高度指向累计idle终止，但end通道未旁录，保留为推断。不能把031零分说成纯答案错/模拟用户误认交付；API延迟干扰与原生规则并存，因果贡献未知。原分/失败保留，不热改规则或挑分重跑。
+- 新014交付1，015/030/031/021未交付0；51终态27交付/24未交付、18个1/1个0.5/1个2/3/31个0。检查0模型调用，无人工恢复/冻结变更；下一API窗口从4107后核验，103资源等待及无全量库/配对状态不变，通知本轮新异常/恢复。
+
+## 127 巡检：46场结束，原生执行持续健康
+
+- [127快照](memory/127_2026-10-02_sp_half_hour_46_sessions_healthy.md)：epoch1790901122.7895017，40→46场、015四节点及原controller/supervisor活跃，37SHA/服务/8140正常，最近推进6秒、累计3974。新增3812—3974共163终态无上游错误/不可读，3868/3969终态后下游取消但上游完整，当前Jupyter真实推进。
+- 新010/003/000交付原生1，049/042交付0、033未交付0；46终态26交付/20未交付、17个1/1个0.5/1个2/3/27个0，不猜测尚未完整点查的新零分原因或当技能效果。
+- 本轮无新增基础设施故障实证或修复需求，0检查模型调用，无重启/热改，旧分/失败保留。下一次API从3974之后连续核验；103资源等待、无全量库/配对状态不变，正常保持安静。
+
+## 126 巡检：40场结束，新请求无上游故障
+
+- [126快照](memory/126_2026-10-02_sp_40_sessions_incremental_health_audit.md)：首039终态/051评分，复核epoch1790899400.327208为40/945、010四节点及原controller/supervisor活跃，37SHA/服务/8140正常，最近推进6秒、累计3811。051原scorer及010最新10API完整，连续3664—3811共148请求无上游错误；3743终态后下游取消但上游完整。
+- 新035/006交付1，038/020未交付0、051交付0；40终态21交付/19未交付、14个1/1个0.5/1个2/3/24个0，非技能效果。051真实抽取5假设但原context覆盖空，非JSON解析失败，科学真值及完整拒绝原因未裁定。
+- 新增冻结外reports/incremental_api_probe.py只读派生审计，实际138/10两窗口均0不可读，37freeze复核不变。后续优先连续窗口从3811之后核验，旧完整审计保留；缺文件需结合在途/native/SP日志，不推断成功。检查0模型调用，无重启/热改，103资源等待不变，正常保持安静。
+
+## 125 巡检：模拟用户请求超时已自动恢复，队列继续
+
+- [125证据](memory/125_2026-10-02_sp_simulator_timeout_auto_retry_recovered.md)：首快照35/945，第36题038、累计3663；复核epoch1790897711.7579398回执68→87、SP第33调用、最近推进10秒、累计3679。原controller/supervisor及4节点身份、37SHA、Redis/Docker/8129/8140正常，未双启动或改freeze。
+- 新3557消费者、3648/3655模拟用户240秒上游超时；后两条同一请求由原SDK第三次3660完整返回且继续原生执行。3557结束记录晚于046交付/原生1终态，不能称为终态唯一原因或节点当时已收错求助。确为上游未及时响应，内部原因未知，非此次JSON解析失败；无持续API/基础设施阻断，不人工重启健康队列。
+- 新046/001交付原生1、040交付原生2/3；35终态18交付/17未交付、12个1/1个0.5/1个2/3/21个0，非技能效果结论。检查0模型调用、旧结果与失败保留；103资源等待及无全量库/配对状态不变，本轮通知新增超时/恢复事实。
+
+## 124 巡检：32场结束，真实执行及用户纠错持续
+
+- [124快照](memory/124_2026-10-02_sp_half_hour_32_sessions_healthy.md)：epoch1790895760.8096828，28→32场、046四节点及原controller/supervisor身份活跃，37SHA/服务/8140正常，最近推进9秒，累计3547。近期3538—3547完整成功，全审计区间无新增API异常。
+- 新018交付原生1、034交付原生0.5、012/047未交付0；32终态15交付/17未交付、10个1/1个0.5/21个0，不猜测未点查的零分原因。046原生Jupyter/editor及用户纠错真实推进；scratchpad拟造bash输出不当真实工具回执或基础设施故障。
+- 本轮无新增基础设施故障实证或修复需求，0检查模型调用，无重启/冻结修改；103资源等待持续，尚无全量库/配对结果，正常保持安静。
+
+## 123 巡检：28场结束，正常任务边界已复核
+
+- [123快照](memory/123_2026-10-02_sp_half_hour_28_sessions_boundary_check.md)：初筛epoch1790893901.3964214空current_run未判停机，复核1790893936.3236034为012四节点及原controller/supervisor活跃，37SHA/服务/8140正常，最近推进6秒、累计3397、25→28场。近期3385—3394含025原scorer完整成功，区间无API异常。
+- 新050交付原生1，004/025交付原生0；28终态13交付/15未交付、9原生1，原0不猜成基础设施错误或挑分重试。当前原SP协作/用户WAIT/模型调用推进，未开始完整学习/配对。
+- 无新增基础设施故障实证或修复需求，0检查模型调用，无重启/双启动/冻结修改；103资源等待持续，正常保持安静。
+
+## 122 巡检：25场结束，当前第26题健康
+
+- [122快照](memory/122_2026-10-02_sp_half_hour_25_sessions_healthy.md)：epoch1790892164.9450374，20→25场、050四节点及controller/supervisor原身份活跃，37SHA/服务/8140正常，最近推进8秒，累计3263。近期3253—3262完整成功，63秒消费者慢响应实际完成，区间无API异常。
+- 新005/044交付且原生1，039/019/036未交付0；25终态10交付/15未交付、8原生1，不猜测未完整点查的新零分原因或挑分重排。当前实际Jupyter/观察/反馈推进，未判卡死。
+- 本轮无新增基础设施故障实证或修复需求，0检查模型调用，无重启/冻结修改；103资源等待持续、无全量库/配对结果，正常保持安静。
+
+## 121 巡检：20场结束，原生评分/队列持续推进
+
+- [121快照](memory/121_2026-10-02_sp_half_hour_20_sessions_healthy.md)：epoch1790890358.4392235，17→20场、039四节点及controller/supervisor原身份活跃，37SHA/服务/8140正常，最近推进5秒、累计3107。最近3097—3106含007原scorer及039 consumer/simulator完整成功，新增区间无API异常。
+- 新008/007交付且原生1、016未交付0；20终态8交付/12未交付、6原生1。未完整点查016原因，原0不当基础设施挑分重试。当前SP记忆格式错误/启动reset之后原Jupyter/观察推进，未判卡死。
+- 本轮无新增基础设施故障实证或修复需求，0检查模型调用，无重启/冻结变更；103资源等待持续、无全量库/配对结果，正常保持安静。
+
+## 120 巡检：17场结束，无新增基础设施阻断
+
+- [120快照](memory/120_2026-10-02_sp_half_hour_17_sessions_healthy.md)：epoch1790888473.3008544，12→17场、008四节点活跃，controller/supervisor原身份正确、37SHA和服务/8140正常，27回执/最近30秒，累计2966。当前实际Jupyter/协作/用户反馈有推进，不以controller边界时间误判。
+- 近期2957—2966完整成功；2949终态后下游取消但上游完整，无新上游错误。新013交付1/rating1、024/023/032未交付0、052交付0；17终态6交付/11未交付、4原生1。保留负例，不猜测全部新零分原因或当基础设施挑分重试。
+- 本轮无新增基础设施故障实证或修复需求，0检查模型调用，无重启/冻结变更；103资源等待持续，未到完整库/配对阶段，正常保持安静。
+
+## 119 巡检：第13题健康，历史单请求超时未停队列
+
+- [119记录](memory/119_2026-10-02_sp_health_017_api_timeout_without_queue_stop.md)：epoch1790886670.0772853，7→12终态、013四节点活跃，原controller/supervisor身份与37SHA正确；服务/8140正常，最近推进8秒、累计2826。近期2815—2824完整成功，73秒/45秒消费者慢响应已真实结束，不判卡死。
+- 2706消费者240秒上游超时，但017在请求等待期间已因用户误认空editor为已交付而FINISH；超时最终记录在该题结束之后，不能将原生0唯一归因API或称控制器停机。2737下游取消但上游完整，当前接口可用，未重启或改模型。
+- 12终态4交付/8未交付，原生3个1；045交付0已成功抽取3子假设，gold覆盖空，非格式解析失败。028/011新增未交付仍提前FINISH，旧分/日志保留，不挑分重排或热改freeze。无完整库/配对效果，103资源等待持续。
+
+## 118 半小时巡检：7场已结束，原生评分正常推进
+
+- [118记录](memory/118_2026-10-02_sp_half_hour_healthy_progress.md)：health epoch1790884965.5308678，2→7终态、当前043四节点活跃，controller/supervisor原身份正确、37SHA/Redis/Docker/8129/8140正常，最近推进3秒；累计2514→2689。当前gold/generated抽取与scorer调用有真实推进，不以controller边界时间误判。
+- 最近2679—2688全部HTTP200完整非空；上一检查之后2608/2628为终态后下游取消但上游完整，未新增上游超时。旧dev2400/2406两次超时均保留，更正此前只突出2400的非穷尽说明。
+- 7终态027/022交付且原生1，029/053/048/009/041空editor原生0；新增三条均无EDITOR_UPDATE且用户声称已交付FINISH，原日志点查保存。无需基础设施重启，不热改提示或重跑挑分。103检索资源等待不变、尚无正式学习/配对收益；本轮无新增基础设施实证故障或修复需求，正常保持安静。
+
+## 117 巡检：第三题继续，第二题交付格式失败
+
+- [117点查](memory/117_2026-10-02_sp_health_and_053_delivery_failure.md)：snapshot epoch1790883103.6437383，2/945完成、027四节点活跃，controller/supervisor原身份正确，37SHA不变、服务/8140正常、最近推进2秒，累计2514。最近2503—2512全部上游完整非空，2507终态后下游取消并非上游失败。
+- 053原生0/outcome空：官方event_log第12行SP以JSON尝试EDITOR_UPDATE被拒，第13行用户误认已写而FINISH；生成候选答案不等于交付。第10行invalid属模拟用户，明确更正116此前未区分的归属；原证据保存。清理APIError未掩盖，独立精确挂载核验容器0。
+- 无需重启；不热改提示/解析器或对有效0挑分重跑。027 scratchpad空动作invalid后仍有原生Jupyter执行，不当API空回复或基础设施停机；103缺资源题等待持续。
+
+## 116 巡检：连接已自动恢复，队列仍推进
+
+- [116记录](memory/116_2026-10-02_sp_health_check_and_native_reconnect.md)：健康快照epoch1790882857.030118，controller6420/start_ticks89090和supervisor550/start_ticks287真实活跃，当前053四节点正常；37SHA不变，Redis/Docker/8129/Windows8140正常，事件18→33、请求+14到2495，最近推进17秒，不误判边界时间。
+- 053 WebSocket关闭由现有原连接恢复逻辑约1.03秒重连；本次未改正式代码、未重启任务。最近2485—2494全部HTTP200/完整非空，检查0新增模型调用。模型两处JSON动作不符合Co-Gym文本格式由原环境报错后继续，非API/基础设施停机；最终交付和分数仍待真实终态。
+- 原首029未交付0保留，不声称SP已解决提前结束。未到官方学习或配对阶段，文献100/课程3缺资源等待不变。
+
+## 115 官方SP＋技能扩展重评，主动恢复监督器已启动
+
+- 最新授权/当前任务见[115记忆](memory/115_2026-10-02_native_sp_skills_full_restart.md)及[新协议](experiments/115_cogym_spagent_full/protocol.md)。用户明确覆盖OpenClaw消费者要求，直接官方SP，无原生技能库则参考OpenClaw接入，并授权基础设施主动修复/持续恢复。
+- 新115/cohort sp_glm53_flash_full_v1直接官方CollaborativeAgent政策＋scratchpad/原容错；新增目录元数据与自主READ_SKILL，不嵌套OpenClaw、官方vendor不改。13离线、真实随机正文回执技能读取及两dev043/041交付/Jupyter/editor均通过；37SHA正式冻结并启动315演化＋630评测。旧110/7完成/2失败及26freeze不变、不混新结果。
+- 监督器Linux550/start_ticks287、正式controller6420/start_ticks89090，末查epoch1790882678.850874，第2题053四节点/Redis/Docker/8129正常、18原生回执/最近8秒；正式1/945完成，累计2390→2481、不重置无总cap。首dev#2400API240秒上游超时后恢复，两dev均原生1；首正式最近10API全部完整非空，SP走原生文本动作无OpenClaw工具层。
+- 首正式029四次Jupyter成功、editor空，用户误认已写后提前FINISH，原生delivery0/rating0保留、不当基础设施重试；换SP不能证明根治提前结束。清理APIError保留，独立核验精确归属容器0。21冻结Python源可编译，8140从Windows本地GET200。
+- 8140已真实切115服务53656，定时315-30已ACTIVE新目标/每半小时主动恢复，另有常驻supervisor；基础设施尝试保留重排/指数退避，失活身份确认后安全恢复，禁止双启动与热改。文献100/课程3仍缺原生资源pending，不承诺凭空跑齐945；当前无新库/配对收益。
+
+历史截面：2026-10-02，轮次114（已由上方115覆盖；当轮核验官方SP源码与采用边界，尚未切换，无新增运行实证或调用；112半小时巡检发现第8题043空响应中断；独立同配置单次恢复有有效API/tool_calls，仍因错误工具ID及原生240秒整次运行超时失败。旧7 completed／2基础设施失败尝试、phase failed、累计2390；旧30结果文件和26freeze全未变，进程全失活、精确容器0；当轮未继续重试、不记0）。
+
+## 112 新中断与单次版本化恢复负结果
+
+- 114官方源码核验：[SP直接采用评估](memory/114_2026-10-02_official_spagent_adoption_assessment.md)。原SP单轮异常转求助、非法动作原环境继续；当前适配上抛停全量存在容错差异。官方SP可直接复用，但替换OpenClaw后没有原生skills消费；尚未决定/实施切换，0新模型或实验。当前契约已有动作非工具说明，不能仅补重复提示认定根治。
+- 113解释补充：[责任说明](memory/113_2026-10-02_failure_cause_explanation.md)。模型混淆原生read与Co-Gym动作字符串入口，当前契约未能阻止；我设置的240秒整次运行时限未充分覆盖多轮慢回复。取消总实验预算不自动取消单次超时；本轮无新实证／模型调用／配置修改，112停止状态保持。
+- [112逐项证据](memory/112_2026-10-02_half_hour_empty_response_recovery.md)／[下一版恢复方案](reports/112_native_timeout_versioned_recovery_plan.md)：相对111完成5→7，原043消费者#2372—2376五次HTTP200但正文/reasoning/tool_calls均空。API内部原因未知，不能当解析器丢内容或有效0。
+- 确认原controller与所有节点退出、freeze完整后，独立reports/full_pipeline_recovery_v1.py新会话仅再试043一次；原7及旧失败精确保留，主945逻辑场与额外物理尝试明确披露。恢复14请求（13completed、1下游取消且上游完整）、无空completed；原生工具返回真实，但误用tool_call／EXECUTE_JUPYTER_CELL工具ID后两个约103/105秒请求耗尽OpenClaw整次240秒预算，terminal_timeout。最终673字符回复在时限临界未被采纳，不声称成功恢复。
+- 最终核验30既有结果文件SHA、26runtime SHA、base manifest及恢复代码SHA均一致；两run全部节点/控制器退出，精确所属容器0。Redis/Docker/8129正常、Jupyter启动重试恢复，不把已记录cleanup APIError覆盖为成功。累计2390／本110增量188无总cap；审计新增模型0，恢复14，不再同配置无限尝试。
+- 当前phase failed，7场完成＋2基础设施失败尝试；无完整315历史／新全量库／配对评测。新版本必须先独立验收工具面选择与协调时限，prompt/timeout/终止规则变化需新freeze及共同配置主表；方案未实施。旧0／失败与所有历史保留，监控继续且同一未变异常不反复通知。已知100文献／3课程waiting_resource与本次中断分开。
+
+## 111 每30分钟巡检与异常安全恢复
+
+- [111记录](memory/111_2026-10-02_half_hour_experiment_health_monitor.md)：原生线程heartbeat315-30已启用并view／本地配置核验，每小时整点及半点检查110目录／8140／glm53_flash_full_v1。旧8147不同聊天的PAUSED任务不动。
+- 首次健康快照epoch1790876965.9738235：5场结束、第6场tabular_041正在推进，controller634与4节点身份均对、26冻结SHA未变、Redis/Docker/网关正常、无failure marker、38原生回执／最近9秒前，累计2345请求／无总cap。检查不新增模型调用，初筛不代替API/学习评分具体日志核验。
+- 正常安静；新异常定位、必要外部基础设施修复／验证后安全恢复，保持失败／不完整run和原冻结；仅确认控制器退出、没有活跃节点才--resume，禁止双启动/热改冻结实验。已知100文献／3课程待资源不填0或反复通知，完成945后停用；本机调度需开机与桌面应用运行。
+
+## 110 315题两折覆盖已冻结并真实启动，检索资源仍部分缺失
+
+- [110记忆](memory/110_2026-10-02_all_315_tasks_split_and_execution.md)／[协议](experiments/110_cogym_full_all_tasks/protocol.md)／[清单](experiments/110_cogym_full_all_tasks/split_manifest.json)：旅行102／文献100／表格110为312论文模拟题，另3真实课程扩展＝315；扩展没有原生数值质量，单列UNKNOWN，不混论文质量均分。
+- A158、B157，来源／近重复隔离，不按旧得分或gold挑题。每315题独立演化1次，A评测只用B历史生成库、B评测只用A；各题两组各一次，共945独立物理场。manifest输入与配对顺序固定，95%以上覆盖不是完整覆盖；未齐315不能说新全量库已训练。
+- 真实运行started_epoch1790875424.2619104，WSL PID634/start_ticks1544；已结束首evo tabular_029原生delivery1/rating0，第二053进行，最近验证新请求32、历史起点2202。全量进度[8140](http://127.0.0.1:8140/)已实际GET确认945，旧32页面进程关闭；不把进程启动当全量结果。
+- 末次状态快照：2演化completed、第三tabular_027进行，模型请求增量65；controller身份与26冻结文件SHA复核通过、UNKNOWN0／基础设施终态0。两条有效原生0是演化观察，非评测均分／科学正确性结论。
+- 31原生接线离线检查＋11观测fixtures及真实日志回放通过；旅行官方数据库已下载14文件、官方真实reset/search／固定本地fixture评分结构通过，预检0模型。原生4env按需注册、helper角色经共同ledger、课程PDF常量最小路径/形状规范；新TakeTaskAction短格式提示与旧DecideAction提示首场前冻结，用户自主FINISH不加门禁。
+- 文献100缺Voyage／匹配voyage-3的Qdrant索引接入，课程3缺Google搜索/CSE；已请求本机凭据文件路径，缺资源保持pending不填0。已具备表格110及旅行102依次自动采集；不静默删103缺资源题或把212说成315。没有新AutoSkill完整库／paired eval／平均分／因果收益，原GLM代judge与context-only高分限制持续；全中间稿额外重评分／曲线是待补分析边界，真实快照保留。
+
+## 109 两侧均分差主要集中某一来源，科学难度未确认
+
+- [109报告](reports/109_evolution_vs_evaluation_difficulty_audit.md)／[记忆](memory/109_2026-10-02_evolution_evaluation_score_gap_by_source.md)：当前manifest结合106原评分安全字段聚合，研究汇总五题.15、WorldBank五题.8、植物十测试.8（九交付.888889）。新JSON来源汇总保存，20原无技能终态SHA一致；演化.475为5:5混合，不等于完整56均分。
+- 研究汇总gold个数1／2／2／2／4，WorldBank五题与植物九交付均1；context分粒度和单gold饱和可见，但不从分母直接推均值或科学难度。064直接问EE均值而gold跨域、093联合project对单project拒绝表明范围与抽取问题；未裁定真实结论／gold正确性。
+- WorldBank四满分中三关系0，植物八满分中四关系0，.8不能当真正正确率。分集来源隔离优先、未统一难度校准；先补方法对应和科学正确性核验是建议，尚未实施。不按成绩挑题，104仍未运行；本轮模型请求0／实验0，无新性能实证，仅既有数据复核聚合。
+
+## 108 演化集是来源设计，随机只用于pilot抽题
+
+- [108核验](memory/108_2026-10-02_evolution_set_selection_provenance.md)：audit_split.py77行人工固定source→split；先按source/file/query/answer重复连接整组，再验证隔离。全元研究50和全WorldBank6为演化，植物16测试、考古38调试；56不是随机抽题配额，workflow方法标签不直接决定逐题入选。
+- 初稿元研究独占演化，078记录正式运行前将WorldBank移入以增加建模／解释机会，记录未按模型分选择。当前源码无得分选择分支；本轮未独立核查完整历史时间戳，不把固定文本声明升为穷尽人工验收。
+- pilot按seed20260930两演化来源各5，实际066／106／101／107／093／108／088／109／064／104；本轮只读重建三集合2／10／10全顺序匹配。方法相关性主要来源级，缺完整逐题56→16对应；全量50:6与pilot5:5不同，不能只当同分布扩样。原用户方法相关＋实例独立要求持续，未因本轮解释自行重划或开跑。
+- 本轮无新增性能实证；新增模型请求0／实验0，仅源码／文件核对和本地研究记忆。103既有结果、106评分口径和107judge变化记录保留。
+
+## 107 原生算法不等于原论文评分模型
+
+- [107记录](memory/107_2026-10-01_judge_model_configuration_clarification.md)：固定官方源码192行默认gpt-4o-2024-08-06，实际#1759 scorer ledger model／reported均GLM-5.3-Flash、原8000、HTTP200／completed。现有实验资源统一用于所有模型角色，包括评分器；不是本轮新更换。
+- 原算法及prompt保留、judge已替换，论文数值不能直接当同条件结果比较。GLM造成高分多少未知；context-only赋值不会因换回judge自动改变。用户仅询问，不授权本轮换模型／重评，继续先不跑。无本轮新增实证发现，仅既有请求核对，新增模型请求0／实验0，原结果保留。
+
+## 106 高无技能分不能直接当科学正确率
+
+- [106报告](reports/106_high_no_skill_score_vs_cogym_paper.md)／[记忆](memory/106_2026-10-01_high_no_skill_score_paper_check.md)：原论文v1表2与v6表3表格TaskPerformance一致（autonomous.358–.426、普通collaborative.311–.427、SP.365–.434）。无技能仍有用户协作，不能当autonomous；B0交付.9／质量8/9／Collab.8口径分开，不称本文配置复现。
+- 新[30份原终态安全字段及hash](experiments/078_autoskill_cogym/analysis/106_pilot_native_rating_audit.json)确认B0八满分004／008／011／015关系0／accuracy0，B1九满分008／009／011关系0；所有19交付评测gold仅一个子假设。官方固定源码最终只取context recall，关系字段计算却不进入rating；004 B0原judge明确不同关系但最终1。不能把原1判成整份分析正确，也不据此确认reference科学真值。
+- 同批十无技能演化均分.475；测试单来源六家族、随机单次和改GLM／OpenClaw／judge共同限制。评分字段失配及局部饱和有直接证据，但数据本身难度／模型能力／judge宽松等因果贡献未知。论文文字蕴含与当前源码覆盖口径不等同，原实验精确版本未核实，不指控数据泄漏或擅改算法。
+- 建议保留原生主分、展示已有var／rel明细并为未来科学正确性核验预先定规则；派生诊断不能冒称独立真值或预注册主指标。增加重复与同稿复用不能解决context-only测量缺口；不依得分筛题。本轮模型请求0／实验会话0，无运行协议、提示、旧分集／结果修改，104仍计划稿。
+
+## 105 110题只指表格分析，计划改用自然叙事
+
+- [105核验及说明](memory/105_2026-10-01_cogym_scope_and_plain_language_plan.md)：官方数据说明旅行102、文献100、表格110，合计312模拟任务；110为DiscoveryBench-Real困难子集，不是全部Co-Gym或整个DiscoveryBench。固定上游版本的表格源码与本地110索引对应，不升级版本。
+- 38／56／16是本研究为技能实验自行划分，不是原生官方skills划分；38调试池只拟用2题，其余36不参与正式学习／测试。104所谓全量仅固定56历史／16评测的全部覆盖，不称110全部正式跑完。保留单来源调试和单植物来源评测属设计选择，16题仅6结论家族；增加重复不增独立题量。
+- 用户要求正常人类叙事，后续先解释“做56任务积累交互→官方AutoSkill生成新库→另16题用同Agent有／无库比较交付、质量和用户投入”，再给数量。消费OpenClaw原生技能、官方模拟用户与评分持续；仅解释计划，无新增实证、模型调用或会话，不改运行代码、分集、原分，不自动扩到其他任务类。
+
+## 104 原计划全量方案：本轮只规划，不启动
+
+- [104方案](protocols/104_autoskill_cogym_full_plan.md)／[104记忆](memory/104_2026-10-01_full_autoskill_plan_before_run.md)：完整重读原311行实验计划，与078保存副本字节SHA一致。用户最新“先不跑”覆盖文档中的执行指令；不自动恢复模型调用或生成可启动配置。
+- 按当前110题manifest固定：dev38保留池仅拟跑045／041；演化56全采（元研究50＋WorldBank6），评测16全覆盖两组。推荐每组每题3重复＝96评测／154逻辑／152正式；原文没有指定全量重复数，该建议未冒称已确认。一次覆盖版32评测／90逻辑／88正式。学习、快照和诊断judge请求另计。
+- 管道已通是103观察，skills有用仍为待验证判断。全量沿用完整原生OpenClaw skills目录发现／自主read／会话／压缩、官方AutoSkill空namespace学习与全部导出、官方Co-Gym模拟用户／Jupyter-editor及评分；不自建skills读取器。原8000／GLM-5.3-Flash及无总上限偏好保持，但本轮不调用。
+- 建议新版本重新采全部56历史和全部配对评测，原pilot单列。旧10历史仅在采集协议完全一致且事先固定hash引用规则时可复用；旧B1的10历史技能库不能并入56历史库主表。当前方法表仅pilot，全量56→16方法表待补。
+- 16评测只有6结论／metadata家族、1来源／4共享文件，新增六题仍是已接触家族问法；不称严格盲测或16独立dataset。旧private/question_review的split／pilot列过时，以manifest为准，不按pilot成绩改分集。
+- 后续必要准备限全量入口／repeat编号、统一观测v2、请求最小持久记录、TakeTaskAction轻量原生Action字段约束；固定dev验收后冻结，不加parser／硬FINISH门禁。新评分建议终态原生分固定、同run同SHA最终稿优先复用，中间唯一稿一次原生评分；12额外稳定性评分仅预声明诊断建议。以上均未实施，103旧分及4/14同稿冲突不回写。
+- 报告同时提供质量三指标及分母、用户参与／初稿后投入、真实快照曲线与覆盖、实际skill read／采用UNKNOWN、全部失败与阶段成本。3重复不是48独立任务，四千量级API请求只为pilot粗估，真实技能数／收益／费用未知。本轮无新增效果实证；仅文档和范围核验。后续用户明确执行后才准备与开跑。
+
+## 103 完整基线已完成，以下启动与增量截面保留
+
+- [103记录](memory/103_2026-10-01_full_autoskill_baseline_light_prompt.md)：用户要求“跑整体／开始全量实验”。沿用固定2 dev／10演化／10评测两组，32新会话；原8000／GLM-5.3-Flash、完整OpenClaw消费者、原生Co-Gym评分。模拟用户仅实例追加101短prompt，两组统一，不加parser／FINISH门禁。
+- 新cohort glm53_flash_light_v1不复用旧dev，正式库不导入旧cohort或dev库；提示正文／hash纳入冻结，运行中变化拒绝。95项预检通过，北京时间19:49新首dev045实际启动，运行级提示hash已核验，累计从1304继续且无总上限。
+- 旧v5原owner及64子节点已失活；保留原状态、旧冻结协议与库，精确资源清理0错误，未完成004技能组如实interrupted，不伪造模型失败或完成。新8140显示本批32、当前run与历史折叠，HTTP已实际核验。
+- 流程自动执行新dev联合门禁／官方AutoSkill dev验收、10演化、新完整库冻结、20评测、原生逐快照评分及纯本地最终汇总。当前尚无新完整结果或技能收益结论，真实0／未交付／评分UNKNOWN保留；后续完成状态以本批实际产物更新。
+- 20:00后实际追加：v1两新dev均交付／原生1.0、Agent4／5动作，用户真实WAIT且协作轮次0。本地强求实质参与门禁不合理阻断，已保留旧失败并改观察→WAIT native_bus提交回执证明模拟器活性，19针对性检查通过，原0轮不改；并非模型／交付／评分故障。
+- 当前控制器glm53_flash_light_v2精确hash绑定引用本轮v1两dev（不选历史高分／不重采），104项检查通过，phase dev_native_autoskill，逻辑32＝引用2＋新增30；模型、采集runtime与提示相同，prompt文件hash及每run元数据必须匹配。当前报告路径reports/baseline_glm53_flash_light_v2/、日志pilot_glm53_flash_light_v2.log，完整终局待实际核验。
+- 20:13实际追加：dev原生AutoSkill两条均no_skill／candidate_count0，processed2／failed0；独立dev库0 skill，并非正式库已生成。43冻结文件hash核验一致。phase=evolution，4/32已结束且均交付：两dev1.0、066原生0、106原生1.0，101运行，累计1399。三条已审计的终态共10次DecideAction首轮字段严格合法、无补字段续写，均Agent在editor非空后FINISH；不据此预设全量改善。066抽取／JSON成功、两个gold context未被覆盖，具体审计另存103报告，不改原分。
+- 后续9/32完成均交付，演化7/10原生分0／1／0.25／0／0／1／0.5，109运行、累计1541。[0分逐条](reports/103_current_cohort_zero_score_audit.md)／[实际分组范围](reports/103_dataset_scope_audit.md)／[分集限制](reports/103_split_and_comparability_audit.md)均0新增模型审计。093精确容器已不存在，原cleanup APIError细节未知。
+- [108观测漏计](reports/103_observation_metric_prefix_audit.md)：实际9 Jupyter＋1editor／1991字符／native1.0，startswith漏为3／0；canonical完整、学习不受派生漏项影响。评测前另存[观测v2协议](protocols/103_observation_metrics_v2.md)，独立analysis sidecar实施中，统一纠正所有本批run、保留原指标和原分；不是原43冻结采集脚本热改。不把空快照集合当覆盖完成，不对dev/evolution扩新judge。
+
+- 正式10演化全部交付、6正分4零、均值0.475；[学习终局审计](reports/103_formal_learning_integrity_audit.md)证明10/10实际payload共383消息匹配完整canonical／官方脱敏。新namespace processed10／failed0／upserted1、9空提取＋104候选官方add，无旧库/dev导入。完整库1目录／1文件hash一致，唯一skill来自104实际但晚于FINISH约0.593秒、未被环境执行的纠错，不称已验证当前题纠错闭环。
+- phase evaluation，14/32截面001两组交付／native1.0，012技能组运行、累计1671；001工具参数失败、无成功skill read，raw schema核对中。观测v2最终源码512ba6、11边界检查／10812断言通过；初版12 analyzed／20 pending输出保留，最终全32／中间点覆盖待核验。
+- 21:16追加16/32：001／012四次评测均交付／native1，004无技能运行，累计1725。[001读取审计](reports/103_native_skill_read_audit.md)确认原API tool_call缺schema必填id，与native字段一致；012三次Unknown tool id，误用EXECUTE_JUPYTER_CELL。两B1成功read均0，API完整响应，保留工具负结果与原分、不热修／重采。观测v2再输出15 analyzed／17 pending，真正缺失中间点须等原offline阶段后判定。
+- 21:31追加20/32／eval8/20均交付，001／012／015两组1、004无技能1／技能0，009无技能运行、累计1802。[评测点查](reports/103_evaluation_pointwise_and_simulator_audit.md)确认004零分为gold全范围对prediction 2009/1000m子集的原context拒绝，Agent交付后结束；四条24/24 Decides首字段合法／续写0。[完整性](reports/103_baseline_execution_integrity_audit.md)与[全B1读取](reports/103_native_skill_read_group_audit.md)已存，4/10正文read0／9native工具错误／其余pending，004成功read对象公共状态文件。完整20评分／真实快照覆盖待完成，不预设技能效果。
+- 用户再次明确禁止自建skill读取流程、消费Agent全套OpenClaw；当前源码已核验官方SDK完整导出→原生workspace/skills→官方agent --local自行发现／选择／read／压缩，无正文预读注入。native read权限、Co-Gym官方Jupyter/editor、关闭bundled/plugins/watch的实验隔离配置已向用户明确，审计仅观察不代选；实验继续、不热改冻结协议。
+- 21:44追加22/32、eval10/20：009无技能delivery0／native0，009技能交付1／native1，005B1运行。[原生009复现](reports/103_evaluation_pointwise_and_simulator_audit.md)精确定位Decide选3→执行模块缺Action字段／补续写FINISH→空editor结束，非Decide选4／judge解析失败；当前短prompt未全面解决提前结束，原负例保留。观测v2新22 analyzed／10 pending、43freeze不变；5B1技能正文read0／native工具错误12，009三次成功read均公共状态，不推断配对差异的技能因果。
+- 28/32截面eval16/20、15交付，新增005／000两组1、010无技能0／技能1，008无技能运行，累计2036。[010逐条审计](reports/103_evaluation_pointwise_and_simulator_audit.md)确认用户3次实际Jupyter、交付后FINISH，原judge预测两子群对gold全路径范围各拒绝match，原0不改；不是未交付／JSON失败。尚待剩4eval／原offline评分／统一v2观测与最终耗用，不预设完整效果。
+- 全32逻辑（精确引用2dev＋新增30）与20eval终态均完成，主phase offline_snapshot_scoring；31/32总交付／19/20eval交付，最后011两组1，累计2133截面仍增加。主指标B0/B1：DeliveryRate0.9/1、TaskPerformance0.8889/0.9、CollabScore0.8/0.9，仅描述pilot不归因技能。全10读取审计确认005两次完整native read／正文覆盖1/10、读取UNKNOWN0、21工具错误与应用null；原库／43freeze一致。观测v2全32已识别、5eval原首稿快照漏项用明确同SHA native分，012中间稿先等原offline，最终曲线／耗用／报告待完成。
+
+- 终局追加：[完整基线报告](reports/103_full_autoskill_baseline_results.md)已保存。原phase completed、主进程exit0，原汇总及offline15快照已生成；最终observer `20261001T144611609166Z`全32 analyzed／pending0、20实际评测快照均评分覆盖＝15offline＋5原native同SHA复用，待补点空、额外judge0，43freeze与dev12来源不变。独立汇总／完整逐题表／质量图最终`analysis/103_baseline_report/glm53_flash_light_v2/20261001T145054300128Z/`，主三指标与原表严格相等，原表保留。绘图库缺失的原错误保留，依赖仅隔离装在分析目录、实际最终图已视觉核验。
+- v2统一修正前导动作漏记：B0/B1任务工具尝试均值5.5/5.6（原4.9/5.3）、首稿后参与块0.1/0.2（原0/0.2）；用户参与块0.9/0.7、非初始消息0.4/0.6、用户任务动作0.5/0.1。仅观察计数，不热改运行或学习输入。status wall均271.183/275.677秒，不含后续学习／offline。
+- 原生harness终局：20实际WSL config／SQLite hash身份匹配、session互异，原生type=compaction共4（B1 009/012、B0 008/011）；83条zstd仅存储压缩。用户禁止自建skills读取持续有效，消费发现／选择／正文read／session／压缩均OpenClaw原生；受控read权限与Co-Gym官方模拟用户／环境边界已明示。
+- [评分点查终局](reports/103_evaluation_pointwise_and_simulator_audit.md)：129 Decide严格128、续写0，唯一非严格009B1草稿误进AnswerQuestion；唯一空editor终止009B0来自TakeTaskAction续写FINISH。14份同稿再次原生评分有4冲突（004B1/010B0 0→1，010B1/008B1 1→0），八对抽取messages相同、官方temperature微扰不同，已定位抽取scope／context变化，非JSON失败填0；主原生分不改、offline曲线明确来源，不解释成答案进步或技能收益。
+- [最终完整性／耗用](reports/103_baseline_execution_integrity_audit.md)：全局2202、本轮计数增量898；880有完整API旁录（876交付／4下游取消、上游均完整），18计数号无request/raw/ledger、route／是否实际发上游UNKNOWN。记录分段30dev＋4dev学习＋240演化＋33正式学习＋499评测＋74offline；usage／计费实际未知，不把全局2202或全部898说成已证明本轮模型调用。原cleanup16 APIError＝dev1/evo4/eval11保留，精确32容器在捕获时均明确不存在；大小写分类漏判原capture也保留，HTTP原因未知。
+
+## 102 轻量提示格式改善，提前终止与交付率尚待整题验证
+
+- 用户要求“看看是否改善”。[102报告](reports/102_light_simulated_user_prompt_ab_probe.md)／[记忆](memory/102_2026-10-01_light_simulated_user_prompt_ab_probe.md)：四个历史空editor状态＋041已交付1079字符对照，两提示各一次，共10次真实动作决策；原8000／GLM-5.3-Flash，首提示重建规范空白一致、两组观察hash相同，只有实例extended_signature instructions追加。
+- 首轮合法字段原0/5、新5/5；原生DSPy续写原5/5、新0/5；最终合法字段原3/5、新5/5；实际请求原10、新5。15次 #1290—1304均HTTP200／stop／完整成功，累计1289→1304；恢复原8129计数relay，原起点／无上限保持。
+- 新组空editor分别选3／3／5／5，已交付对照4；原组四空editor本次也都未FINISH，因此不能拿历史4/4与本次0/4宣称提前结束率下降。两组正控都可自主FINISH，无硬门禁或代选动作。
+- 内容核对原组三条首轮完整终稿拟稿，新组没有完整终稿，但045仍带较长统计摘要；本次两组均未误认空editor已写入，不声称短提示已完全约束简短输出或降低误认发生率。
+- 原组045／004非法长output含多编号，未改官方forward离线核验都会优先进入AnswerQuestion；短提示严格编号避免本次分支歧义。该核验未执行真实环境动作或调用模型。
+- 结论仅支持此样本的字段格式／调用量改善。新增整题、Jupyter动作与评分均0，未启动新完整cohort或新库，不改冻结v5与旧分；下一项是独立提示版本下固定两dev端到端验证。当前状态不是对v5仍存活／已完成的实时核验，不沿用旧快照声称正在运行。
+
+## 101 当前选定轻量prompt方向
+
+- 用户要求轻量化并尽量交给模拟用户agent决策。[101记录](memory/101_2026-10-01_light_simulated_user_prompt_plan.md)与[短提示](experiments/078_autoskill_cogym/prompts/simulated_user_decision_light_v1.txt)：动作选择阶段不生成任务拟稿；只按实际观察判断完成；简短状态字段后输出完整原生编号字段。
+- 保留原生DSPy和五动作、执行／终止分支、OpenClaw与评分；不新增解析器、格式重试或空editor结束硬门禁，不代替用户agent选3／5。仅计划给DecideAction instructions追加提示，当前冻结v5不热改。
+- 提示文件已保存，尚未接入代码、启动新批次或真实验证；0模型调用，本轮无新增实证发现。后续用固定两dev核验格式和状态判断，不要求正分；提示版本两组一致、旧原分与历史保存。
+
+## 100 修复方案已形成，尚未改运行
+
+- [100完整方案](reports/100_simulated_user_finish_repair_plan.md)／[记忆](memory/100_2026-10-01_simulated_user_finish_repair_plan.md)：在ExperimentSimulatedUserNode实例中只包DecideAction，原生parser前规范唯一显式编号，避免缺字段续写把拟稿误作执行；合法原输出保留、歧义不猜，不全局改SDK／模型包装。
+- 格式失败最多基于真实状态重判一次，旧rationale／拟稿不入重试；再次失败显式记录、不自动给WAIT／FINISH／0。交付只看环境回执，规划文字不变更editor状态。
+- 兼容层跳过原续写也改变决策路径，必须新版本／cohort披露，不能以官方文件未改声称行为等价。空editor禁FINISH属于明确终止协议变体，推荐先独立验收输出契约，结束门禁另列方案B。
+- 计划先0调用历史／负例验收，再固定两dev集成，不要求每题正分；通过后同规模新cohort重采10演化、官方AutoSkill新库、20配对评测。旧失败／库／原分保存，不混算；同题再跑属于适应性pilot修复验证。
+- 本轮只交付方案，未改代码、停止或重启运行，0新增模型调用；无新增效果证据。099运行截面为历史，不作为本轮新进度核验。
+
+## 099 模拟器把拟执行／拟回答当成真实完成
+
+- [099报告](reports/099_premature_finish_decision_and_dspy_continuation.md)／[记忆](memory/099_2026-10-01_premature_finish_dspy_decision_root_cause.md)：045 #885→889、101 #1009→1011、093 #1032→1034、004 no_skill #1264→1267逐条核对。首轮行动意图分别3／3／1／3，最终均4，首轮拟消息／editor从未执行。
+- 三条最终判断误认editor已更新；093识别editor空仍将自身中间拟答案当作已回答用户而结束。004首轮明确知道editor空且准备写入，随后误认为已写入，前后矛盾最直接。决策依据仅保留简要摘要，不复制内部推理全文。
+- 原生DSPy所需最后动作字段prefix缺失，四条回复全作为rationale、output空，自动二次调用补字段。实际安装库4/4离线首／续提示词规范空白后完全匹配原请求，整段拟答案进入续写、原观察不变、最终4；不是解析器把3转换为4，也不是judge JSON评分失败。
+- 这是当前任务内部的计划／执行状态混淆；模拟用户沿用原生DSPy，消费Agent才用完整OpenClaw，消费者压缩不能直接修复这个决策路径。不能由四例推断全部历史串题同因、唯一模型因果或更多时间一定答对。
+- 本轮0新增模型调用，不改正式prompt／结束门禁／原分；建议独立验证格式与补字段策略，空editor禁止FINISH若实施须独立协议变体。最新只读状态17结束、13交付4未交付，004技能组仍运行，未作终局收益结论。
+
+## 098 原生代码可执行，不等于提前结束合理
+
+- [098报告](reports/098_native_simulator_premature_finish_and_benchmark_fidelity.md)／[记忆](memory/098_2026-10-01_native_simulator_premature_finish_audit.md)：dev045 v3、演化101／093 v5、评测004 no_skill v5均在editor空且无Agent editor动作时，由模拟用户实际#889／1011／1034／1267精确选择4结束。四条聊天仅最初问题，无重复催促；原生等待／完成规则确实在请求中。
+- 093 START后19秒结束，消费者正常tool_calls但未完成环境动作；101 notebook已有50/97比例，004已有5次Agent计算，仍未写editor。三条v5相关API正常200，不能称模型不响应。045旧工具500恢复的共同扰动保留。
+- 官方四核心文件规范换行文本／AST一致，FINISH无空editor硬门禁；空editor评分0本身原生。初版／v6论文报告一般未交付，未找到空editor立即结束合理性的具体统计。GPT-4o模拟器换GLM、SP换OpenClaw意味着不能称原论文配置完全复现；DiscoveryBench自身不提供这项模拟用户终止机制。
+- 18:35截面10演化结束、8交付／4正分；评测no_skill 3结束2交付，技能组2结束均交付，004技能组运行。阶段／样本不同，不提前比较收益；整体17终态含2 dev引用，13交付4未交付。
+- 本轮只读审计0新增模型调用，当前v5可继续诊断采集；原分／负结果／库不变。建议单列交付率、已交付质量、模拟器提前结束；效果归因受模拟器影响。空editor禁止FINISH硬门禁将改变原生协议，须独立变体，未在冻结正式批次加入。尚未完成模拟器资源对照或行为修复。
+
+## 097 当前0分必须分开解释：未交付与范围匹配拒绝
+
+- 用户要求解释大量0的具体责任。当前截面045／101为空editor，066／106已成功交付1120／1427字符并抽取出假设；4条0中2未交付＋2上下文匹配被拒绝，无评分JSON解析失败被填成0。[097逐条报告](reports/097_zero_scores_pointwise_delivery_and_context_audit.md)／[记忆](memory/097_2026-10-01_zero_scores_delivery_context_pointwise_audit.md)。
+- 066六次真实match=false针对Psychology与Social／Cognitive子范围／Economics。106两次false直接理由为gold的SSA+LMC联合范围与逐组生成子假设、时间边界不一致；更正中间正负相反直接归零的推断。官方最终rating是gold context覆盖率，不是整体分析正确率。
+- 独立CSV复算106：SSA -0.9664208、LMC -0.4805382，确与答案的负相关一致；不能未经核查判模型算错或擅自改原评分。gold正相关对应定义／预处理仍未知；范围拆分的judge敏感性需单列。066四个主要引用差中位数亦复现，但领域映射／整体统计口径尚未证明正确。
+- 截至17:45，v5演化107运行、5/32结束含两条dev引用，后续继续。此轮0新增模型调用、未改prompt／任务终止／评分／原成绩或当前冻结协议；旧污染cohort及额外重跑不并入当前比例。
+- 17:48追加：已逐条核验7个评分6个0，108运行。107已交付且全文有跨组比较，却被抽为LMC／SSA两条，#1030／1031因各自缺另一组拒绝，覆盖0/1；093 START后模拟用户立即FINISH，无Agent环境动作／editor，#1032拟答案→#1034选4结束已核对。当前6个0为3未交付＋3范围拒绝，不能全算Agent能力；原17:45截面保留，0新增请求，协议与原分不改。
+
+## 096 dev覆盖门禁／原生工具ID修正，新v5启动
+
+- 最新v3两dev原评分已完成：045无editor／0、041交付／1.0。原“每条dev都交付”的本地门禁过严，按用户计划失败保留原则改为成功Jupyter／Agent editor／用户参与联合覆盖；每条评分仍需成功，UNKNOWN不转0。[096报告](reports/096_dev_infrastructure_gate_and_native_tool_id_boundary.md)／[记忆](memory/096_2026-10-01_dev_gate_and_native_tool_id_boundary.md)。
+- 045 #884→886实际原生工具ID因GLM去除连字符而不匹配500；统一出口发出字母数字opaque ID，保留原RPC reqId／严格认证归属，未修改原版OpenClaw或模拟工具。30网关回归与95实验检查通过，完整适配器read／SQLite调用结果／回执及正确EDITOR_UPDATE再次通过，新增2诊断调用。消费／原生压缩profile不变，沿用095的1条压缩证据。
+- 显式hash绑定最新两条固定dev原结果，包括0；不重跑dev、不挑历史最高分。v4诊断停止前066原生0、106研究者中断保留并隔离，不能混入v5主效果。最终新glm53_flash_nativefix_v5已启动，计划2条dev引用＋10演化＋20配对评测；真实阶段见078 reports，尚无最终技能收益结论。
+- 8140明确显示源cohort、dev复用和新增计划30；旧批次与累计请求保存，无总截止／上限。浏览器权限拒绝页面视觉读取，没有绕过；运行文件与计数可核验。v3清理APIError的历史HTTP细节未知，当前Docker无容器残留；不能声称所有未来失败已消除。
+- v5实际追加：dev官方AutoSkill failed=0、41个冻结文件hash一致；首条正式演化066已completed，3个成功Agent Jupyter动作／1个editor更新，官方task_completion=1／rating=0.0，有交付但context recall为0，负结果保留。3/32结束含两条dev引用，106运行中，后续正式采集继续。核验累计981；首条完成不等于完整实验完成或技能收益成立。
+
+## 095 最终动作契约与服务器工具边界通过，另开v3
+
+- v2真实两dev已完成：045反复使用非法content参数、editor为空／官方原生0；041交付／官方原生1.0，产物门禁停止，未进正式阶段。045有9条compaction，不据此声称全部非法动作因果均已证明。[095报告](reports/095_persistent_action_contract_and_native_tool_boundary.md)／[记忆](memory/095_2026-10-01_persistent_action_contract_and_native_tool_boundary.md)。
+- 精确官方公共action_space参数／pattern现在留在持久AGENTS，明确Co-Gym动作返回字符串与OpenClaw原生API工具不同。完整适配器另一次read仍在服务器Windows端找文件，已将网关工具白名单收窄为DelegateTool，并拒绝旧全工具后端复用；不模拟tool_calls、不改原版OpenClaw或官方评分。
+- 最终完整OpenClawAgent.get_action真实执行客户端read，SQLite调用ID／toolResult／随机回执核验，完整回复为正确EDITOR_UPDATE(text=...)。旧读失败和带前言非法动作负结果保留。撤64KiB强制阈值后同5轮原生token压缩4→1条，标记准确保留；不提高未验证的模型真实窗口或伪造usage。
+- 85实验／26网关检查通过，31本轮诊断请求有ledger route索引。最终源码／配置／SQLites已冻结私有归档，更新验收证书并通过门禁。新glm53_flash_nativefix_v3已启动，同2 dev→10演化→20配对评测；旧v2结果及技能库隔离，尚无v3完整评分或技能收益结论。
+
+## 094 原生工具通路已恢复，新批次通过门禁后启动
+
+- 用户最新确认继续OpenClaw／原生tool_calls。原8000、GLM-5.3-Flash与原版OpenClaw保持不变，不再因093旧负结果要求先换资源。[094报告](reports/094_openclaw_native_tool_calls_recovery.md)和[记忆](memory/094_2026-10-01_openclaw_native_tool_calls_recovery.md)。
+- 真实元数据／原生日志显示模型选DelegateTool且进入executeTool，RPC却丢失；SessionManager建连后健康检查另建ACP连接，底层单例回调所有者被覆盖。已修复无状态健康探测，并修复同key挂起覆盖、旧tool历史误续流和工具结果归属；旧代码RED／新代码GREEN保留，24项通过。
+- 最终API源码重载、诊断preload关闭后，两个并发原版OpenClaw会话均有SQLite真实read／相应toolResult／各自随机回执。093同profile／哈希的4条实际压缩证据有效，SQLites已私有归档，原生验收门禁通过；不是文本工具模拟。新增12诊断请求、累计767→779，不混入训练或正式成绩。
+- 新批次glm53_flash_nativefix_v2已完成82项预检并开始同题首dev cogym_045。计划仍2 dev→10演化→20配对评测，dev需Jupyter／editor／参与与原生Co-Gym评分成功；当前尚无本批正式评分或技能收益结论。8140实时进度已更新，旧状态归档、失败／UNKNOWN及库继续隔离。
+- 不能保证模型／网络／评分永远零失败，历史全因仍不逐条等同本次根因。后续观察同两dev和官方评分门禁，保持固定协议与负结果；093下述“原生read未通过／等待新资源”为已被本次验收更正的历史状态。
+
+## 093 根因修复已验收，完整原生工具门禁仍未通过
+
+- 已按最新根治授权修改本机API回复事件隔离、等待者／会话队列、进程池复用／释放所有者和旧prompt续流；备份／补丁／前后哈希保留，未扩展工具定义或执行权限。17网关回归与82实验检查通过，复杂评分／模拟器原样串并发重放4次均200，未观察交叉污染。历史ACP缺失，仍不能将全部旧失败逐一归因。[093报告](reports/093_native_harness_context_root_fix.md)。
+- 原版OpenClaw2026.9.7继续复用，单任务持久session／增量公开上下文／恢复文件／原生bootstrap；Linux原子写入改为Linux原生workspace。仅32K输入cap不触发压缩的负结果保留；统一窗口与cap、原生safeguard／64KiB阈值后SQLite实查4条compaction，同session准确保留随机标记。只读实验memoryFlush关闭，不宣称整个原生工具目录或所有模型角色均启用。[093记忆](memory/093_2026-10-01_native_harness_context_root_fix.md)。
+- 原生读取未验收：首次回复在模型网关Windows端找文件，OpenClaw侧未执行read；最终配置另开会话两次请求后桥接300秒退出，仍无回执，所属原生Node进程0。现有文本调用可用不等于原生工具循环可靠；内部失败全因仍未知，未以备用文本工具协议替代。
+- 已实际尝试Claude Code2.1.220原URL／指定模型，/v1/messages返回404、0推理tokens。已向用户询问兼容常规模型API的Base URL／model／本机凭据路径；没有使用Coding Plan凭据，也没有虚称已迁移Claude或解决所有infrastructure_failure。
+- 当前原生read／回执／compaction／源码资源一致性启动门禁明确false，实测拒绝；dev官方评分失败不放行正式阶段。0新正式任务、未启动新cohort／学习／补旧评分；34诊断请求、累计733→767，无总上限／截止，旧27终态与UNKNOWN保留。后续须先新资源原生验收、同题dev及原评分，再冻结新协议启动32会话pilot。无新有效技能收益结论。
+
+## 092 原生harness确认，API并发对照失稳，停止污染采集
+
+- 14:23源码追加：只读本机API回复组装，acp-client合并GET／POST事件不按sessionId过滤，StreamDriver对任意result结束，sink直接累加文本。安装原AcpClient／Driver／sink三项离线测试重现异会话插入字段名、旧队列文字入新回复、旧result提前结束，0调用。已定位具体隔离缺陷；历史没有ACP ID，不能声称全部旧失败逐一因果重现。网关未修改，串行不完全防止旧队列污染，根治需session／prompt事件隔离。[092追加证据](reports/092_context_harness_api_isolation_diagnosis.md)。
+- 消费者确用npm OpenClaw2026.9.7原版CLI，task104实际meta有agentHarnessId=openclaw；26核验run有26独立session/state。Co-Gym负责环境及Jupyter/editor，模拟用户／评分器用官方SDK，不夸大所有角色均为OpenClaw。[092诊断](reports/092_context_harness_api_isolation_diagnosis.md)及[记忆](memory/092_2026-10-01_context_harness_api_isolation_diagnosis.md)。
+- 本地每轮在原session追加完整start/observation/chat_history，造成重复与输入效率风险；009 17轮原生估计6318→94523 tokens，未报告原生压缩。评分实际为独立单user消息，#374没有旧经济任务内容，不能将其跨任务混杂归于同一消费者上下文。
+- 14次独立API诊断#720—733：原样#374/#390串行返回干净JSON；三组并发各至少一条超时／500，临时上游串行gate两条正常且无发送重叠。短串行也有一次500；未独立复现混杂正文，内部混杂根因与并发因果仍未知。诊断不进正式评分或学习，累计733、无总预算限制。
+- 已核对owner575命令／start ticks后中断本pilot并经原finally清理所属资源；当前phase=failed为响应完整性诊断停止。14:11:24计27结束＝17评分完成＋9评分失败＋1诊断中断技能组000，剩5未运行；原结果保留，中断不冒充模型自然失败。进度说明真实更新，模型API/relay/Redis/其他进程未停止。
+- 正式执行源码／评分协议未改，临时诊断gate已关闭；尚未启用新cohort或全量恢复。先验证上游全部角色串行隔离并精简重复context、真实同两dev＋官方评分门槛后才能恢复。当前无有效正式技能收益结论。
+
+## 091 评分失败原文显示混杂，不能只靠剥前言恢复
+
+- 取证截止13:29:00：全部8条保存的评分失败终态＝旧hy4 1＋当前GLM 7。八份均HTTP200／完整stop回复；逐条原文、评分步骤、原错误／内部坏位置及恢复边界见[091报告](reports/091_scoring_failures_pointwise_audit.md)和[记忆](memory/091_2026-10-01_scoring_replies_pointwise_audit.md)。
+- #105纯前言已有恢复；#172／280／293／390／601字段／内部JSON语法损坏；#374有多对象、其他任务与模拟用户文本；#524可找到语法合法对象但字段值交错混杂。更正089／090“模型不遵循JSON格式”的过粗归因；保留原直接解析异常与旧记录。
+- scorer／simulator #280↔279精确共享973字符，#390包含#391全部2625字符，跨任务#374↔356共享282字符；完整共享片段均不在对应两请求输入messages中。混杂已在上游响应原字节旁录中，不是Co-Gym parser拼接；服务内部发生环节仍未知，未查改buddy2api内部／工具逻辑。
+- 13:28:46当前GLM处于评测：计划32中20结束，13评分完成、7失败，2dev／10演化结束、评测两组各4结束。原API收到的内容完整性风险影响已解析结果的可信性；不能仅凭JSON成功宣布评分可靠或技能收益成立。
+- 本轮0新增模型请求，只读离线审计与研究记录；没有改执行源码、评分算法／prompt／parser／协议，没有停／重启pilot或覆盖成绩。失败保持UNKNOWN，后续必要补评分须保留原结果单列，新出现失败不能未经核验沿用本轮归因。
+
+## 090 评分算法原生，但当前配置和失败处理经过适配
+
+- 固定官方Co-Gym提交58972c0的评分和TaskEnv end源码，与本地规范换行后全文／Python AST一致；字节差异是Git LF与checkout CRLF。WSL guard闭包调用vendor原CoAnalysisEnv评分/helper，实际失败回溯进入相同路径。[090核验](memory/090_2026-10-01_native_scoring_provenance_and_logic.md)及[报告](experiments/078_autoskill_cogym/reports/native_scoring_provenance_090.json)。
+- 官方最终performance_rating是匹配到的gold子假设数／全部gold子假设数（recall_context）；非空editor只算交付，变量／关系详细指标不是最终rating。当前#172／280／293失败是原子假设JSON抽取解析失败，真实请求带原指令/schema，默认抽取max_retry=1，未使用服务端response_format约束。
+- 不能称完全未经适配的原始配置复现：官方GPT-4o judge已按授权替换GLM，SDK有界重试、唯一有效JSON围栏视图及UNKNOWN保护是本地适配。原评分算法／prompt没改，失败不填默认数字；judge替换对评分数值的影响未独立测量。
+- 本轮0新增模型调用，仅核验和说明，未改运行中的评分协议或停止pilot；原失败／UNKNOWN和历史继续保留，无新技能收益结论。
+
+## 089 当前失败项是评分格式失败，实验仍在演化
+
+- 实际8140核验时phase=evolution、cogym108运行、318累计、无总预算上限；新cohort8条启动／7条结束，4条官方评分完成，3条scoring_failure，配对评测0。旧失败在历史表保留，当前3条失败是新GLM记录。[089核验](memory/089_2026-10-01_glm_failure_status_review.md)。
+- dev045／演化107／093都有真实Agent动作与editor交付；失败分别来自#172／280／293评分HTTP200完整回复不是有效JSON。107的gold #277已成功、生成产物抽取#280失败；其余gold抽取失败。原helper耗尽，保留UNKNOWN而非0。保存回复的实际格式／JSON重放0模型调用，未改评分或工具协议。[解析核验](experiments/078_autoskill_cogym/reports/scoring_failures_review_089.json)。
+- 当前没有新infrastructure_failure终态；API请求级超时、SSE aborted及500仍存在，部分在已完成任务内经重试恢复，不能将请求错误等同整条任务未运行。dev041与演化066／106／101评分已完成；原context recall不能升级为完整正确率或技能收益。[状态快照](experiments/078_autoskill_cogym/reports/failure_review_089.json)。
+- 未停正在运行的采集、重跑已交付任务或修造有效评分；继续原pipeline，失败评分与可用率单列报告。模型不遵循评分JSON的内部原因未知，不能声称基础设施或资源可靠性全部解决。
+
+## 088 无总预算上限，原API GLM-5.3-Flash同题恢复
+
+- 最新追加：首dev045已交付（4 Agent动作／2 Agent Jupyter／1 editor／2用户动作）；#153的240秒超时经原生重试#163恢复，后续消费者多次完整响应。但#172评分回复非有效JSON、原gold抽取max_retry=1耗尽，保留scoring_failure／UNKNOWN而非0。第二dev041已自动启动；核验时173累计、无总上限，评分与正式收益尚未通过。解析重放0调用、未修造JSON值。[格式诊断](experiments/078_autoskill_cogym/reports/glm53_flash_v1_scorer_format_diagnosis.json)。
+
+- 追加：76项完整预检通过（34.741秒、0模型调用），11:58:21启动dev045。新模拟器#152／154／156／157已正常HTTP200、非空正文、stop；OpenClaw消费者#153仍在原生流式调用，核对时137秒尚无final ledger／任务动作。只能确认模拟器响应，尚不能确认整个harness或dev成功。[实时诊断](experiments/078_autoskill_cogym/reports/glm53_flash_v1_current_diagnosis.json)。
+
+- 用户明确撤销截止与请求上限，保留累计151及原始起点；规模仍固定2 dev／10演化／10评测两组各一次。最新指定原8000模型API精确GLM-5.3-Flash，覆盖常规百炼待提供资源，不使用Coding Plan凭据。[088记录](memory/088_2026-10-01_glm53_flash_unlimited_pilot.md)。
+- 两维限制用JSON null贯穿relay、run_trial、watchdog和进度，单次240秒传输超时保留。5项无模型预算检查通过；8129 health与8140 status已实测为无限预算。原151累计／旧配置和失败保留，启动前35文件完整快照可查。[清单](experiments/078_autoskill_cogym/reports/source_before_dev_glm53_flash_v1.json)。
+- 新glm53_flash_v1已启动完整预检→固定两dev→10演化→新独立AutoSkill库→20次配对评测，日志`reports/pilot_glm53_flash_v1.log`。旧hy4／deepseek不进入新库或主效果，真实API／动作／评分结果待追加，不预设资源成功。
+- 原flesh按用户当时拼写发送，空响应无明确unsupported model证据，不能认定“拼错Flash”为根因。新GLM id也未出现在原API列表中，直接同题尝试，不改内部工具协议。以下旧预算／资源阻塞是历史记录。
+
+## 087 Coding Plan资源核对，时间预算已到期
+
+- 用户再次指定`https://coding.dashscope.aliyuncs.com/v1`和`qwen3.7-plus`要求试用。官方列明该模型与OpenClaw，但明确禁止非交互批量API调用；当前完整pilot中的SDK模拟用户／学习／评分不能据此直接运行。[087核对与来源](memory/087_2026-10-01_coding_plan_resource_review.md)。
+- 实际北京时间11:44:07已超过085确认的今天11:00截止；账本仍151/2000，原始起点保留。本轮没有发送模型请求、验证密钥、激活新资源、覆盖旧失败或自行延长预算。
+- 已询问常规允许批量API继续完整实验，或仅进行OpenClaw交互连通测试，以及新的截止时间。原deepseek_v1失败和真实资源配置保留；本轮无新增实证发现，不能称已测试新模型响应。
+
+04:00轮次复核：8147无监听、连接被拒绝及等待可用模型id均未变；实际151/2000、11:00截止不变。0新增模型调用，不重启、不重复通知，记录追加于086。
+
+05:00轮次复核：同端口/实验/资源阻塞仍未变，实际151/2000及11:00截止不变；0新增模型调用，不重启、不重复通知，追加086记录。旧05:23:18不是当前截止。
+
+06:00轮次复核：8147仍无监听且连接被拒绝，pilot/资源阻塞未变；实际151/2000、今天11:00截止。无新增模型调用、修复或重启，不重复通知，追加086。
+
+07:00轮次复核：8147无监听、GET连接被拒绝，deepseek_v1首dev失败及等待可用id均未变；账本151/2000、原始起点与11:00截止不变。0新增模型调用，不重启、不重复通知，追加086。
+
+08:00轮次复核：8147仍无监听且连接被拒绝，实验仍等待可用模型id；151/2000、原始起点及今天11:00截止未变。无新增模型调用或重启，不重复通知，核验记录追加086。
+
+09:00轮次复核：8147无监听、连接被拒绝及既有资源等待状态未变；累计151/2000、原始起点和11:00截止不变。无新增模型调用、修复或重启，不重复通知，追加086。
+
+10:00轮次复核：8147无监听且连接被拒绝，pilot/模型资源等待状态未变；实际151/2000、原始起点及11:00截止不变。无新增模型调用或重启，不重复通知，追加086。
+
+## 086 首次巡检：8147入口不可达，已知资源阻塞不重启
+
+- 03:01巡检，8147无LISTEN进程，GET连接被拒绝；已检查研究脚本/配置无8147服务定义，078当前进度脚本配置8140。未自动替换端口或假设服务身份。[086证据与处理](memory/086_2026-10-01_0300_monitor_target_unavailable.md)。
+- 实际pilot为deepseek_v1首dev失败，资源明确等待可用模型id；没有重复启动、模型调用或覆盖原失败。实际账本151/2000、截止今天11:00，085新授权有效。
+- 首次通知8147入口阻塞，需要确认服务身份/端口；后续状态不变时安静返回，04:00继续核对目标。无新增算法效果实证发现。
+
+## 085 预算截止延长至今天11:00，累计用量与失败保留
+
+- 用户明确延长078 pilot时间预算至北京时间2026-10-01 11:00:00，覆盖下述历史8小时／05:23:18截止；2,000外部请求上限和原始起点不重置。固定2 dev／10演化／10评测两组各一次不变。[085记录](memory/085_2026-10-01_pilot_deadline_extension.md)。
+- 已停旧8129后原子更新账本并重启同资源relay，避免内存旧预算覆盖新值；实际health与8140/status均为新11:00截止、151/2000。执行器原函数在截止前可用、截止时停止、请求达2000停止，0模型调用。[核验报告](experiments/078_autoskill_cogym/reports/budget_extension_verification_085.json)。
+- 仍为deepseek_v1首dev空输出失败，等待可用id；没有因延长而重复失败调用或更换模型。后续恢复的watchdog读取新账本。084巡检提示已要求核对实际账本与用户后续明确变更，本轮未改巡检端口／计划。
+- 本轮无新增实证发现（无任务质量或技能效果实证）；新增证据仅为预算配置与运行时核验。历史失败、原预算授权及诊断记录保留。
+
+## 084 今天03:00起，每小时巡检8147
+
+- 用户指定 `http://127.0.0.1:8147/`。原生线程heartbeat ID8147已创建并读取配置核验ACTIVE；03:00前不访问/不操作，03:00起每小时实际巡检。[084记录](memory/084_2026-10-01_hourly_experiment_error_monitor.md)。
+- 发现错误终止则核对实际日志、定位、修复、相关验证，有预算/资源时新attempt恢复；旧失败/冻结源码保留，正常完成、用户停止、预算到期及等待外部资源不自动重启。仅变化或需要介入时通知。电脑须开机、桌面应用须运行。
+- 本轮无目标8147服务检查、模型调用或实验效果。原2000请求/8小时及05:23:18截止不重置；实验与资源状态保留下述083，定时执行须核对最新记忆与账本。
+
+## 083 新模型已真实调用，空输出失败保留并等待可用id
+
+- 02:00后追加：`deepseek_v1`完整71项无模型回归通过，01:54:15启动固定dev045。实际#150／151分别12.824／17.194秒正常HTTP200／stop／DONE，但正文和tool_calls均0；OpenClaw原生续接一次仍为空，0任务动作后停止。#149模拟用户在240.045秒明确超时，新有界保护有效。当前151/2000，第二条dev／正式演化／评测均未开始，旧预算截止05:23:18不变。[新资源诊断](experiments/078_autoskill_cogym/reports/deepseek_v1_failure_diagnosis.json)。
+- 没有明确unsupported model错误，不以空响应证明flesh拼错；原API列表仅公布DeepSeek项deepseek-v3-2-volc且也无旧hy4。已询问用户提供可用v4.1 id或选该公布模型。等待期间不新增模型调用，不更改OpenClaw工具协议；失败后的36文件源码快照与旧运行前冻结独立保存。
+
+- 用户最新授权原`http://127.0.0.1:8000/v1`、占位key `local`和精确模型`deepseek-v4.1-flesh`，消费者仍为原生OpenClaw，模拟器／学习器／评分器共同使用新资源。`deepseek_v1`从同2条dev开始，再同10条演化与10题两组各一次；旧hy4结果不进入新库或主效果。预算切换时148／2,000，原截止今天05:23:18不重置。[083记忆](memory/083_2026-10-01_scoring_audit_and_model_switch.md)。
+- 045_v4有效`recall_context=0.0`：参考1子假设、产物6子假设，#81／82／85／88／89／90真实有效JSON均match:false，无parser fallback。日期2800 BCE／2700 BCE和较宽context只是独立解释线索；judge没给理由，0不等于全部分析全错。[评分审计](experiments/078_autoskill_cogym/reports/dev_045_scoring_audit.json)。
+- 041_v4原评分仍UNKNOWN：#105正常返回但唯一JSON围栏前有前言，原抽取max_retry=1解析失败。严格原值JSON视图的0调用重放通过；既有editor离线原算法补评分1.0单列，原失败未覆盖。dev原生AutoSkill处理2会话、failed0、导出1 skill；仅dev库，尚无正式收益。[补评分](experiments/078_autoskill_cogym/reports/dev_scoring_recovery_v4.json)。
+- 正式066首次演化0 Agent动作即infrastructure_failure；OpenClaw原生timeout重试被bridge300秒截断，模拟器亦有500／aborted与240秒上游超时。旧正式版本停止，配对评测0。旧32项冻结源码／配置已核对归档`reports/history/protocol_1790787958/`；原run和旧评分保留。
+- 旧relay已停止，#92／144／148缺final ledger，按UNKNOWN保留已预留预算和未知终态／tokens／费用；旧进程组和Docker无残留的只读核查已完成，066回收APIError原因仍未知。[对账](experiments/078_autoskill_cogym/reports/request_reconciliation_resource_switch_1790789768963298400.json)。
+- 中间提供的qwen3.7-plus／Coding Plan资源没有模型调用；官方说明限制非交互批量用途，凭据仅在仓库外用户ACL保护。65项资源／cohort回归不调用模型且通过；绝对上游截止修复仍待验收，新deepseek请求截至记录交接尚未启动。不能声称基础设施全部消失、技能收益或论文贡献成立。
+
+## 082 全链路基础设施保护修复，同题v4真实验证进行中
+
+- 00:40追加：cogym_045_v4已完整交付并正常评分，11次Jupyter、2次editor，初始query后用户消息1／直接任务动作1；task_completion=1、有效recall_context=0.0，是dev负结果而非默认回退。42请求中4次API错误均重试恢复，没有基础设施失败，回收无错误。cogym_041_v4已自动开始，3次Jupyter及真实用户互动、9次旁录API完成，仍在运行；累计102/2000，正式演化/评测尚未开始。
+
+- v3的原API有12次完成与2次明确模型错误，不能解释为模型全无响应。simulator一次0.032秒500触发终止；旧代码SDK max_retries=0，081“已恢复重试”更正。scorer已完整返回，后续Win10053是下游取消。原失败请求同API重放27.55秒正常stop，暂不需要换API；内部500原因未知。[082记忆](memory/082_2026-10-01_infrastructure_failure_recovery.md)。
+- 明确SDK重试2次、完整保留评分helper外层重试、最终耗尽评分UNKNOWN；Jupyter有界同内核重连与旧client关闭、精确挂载资源回收；异步异常/事件捕获/JSON写入race可见；公开历史receipt回指在官方loader后有效；原预算watchdog覆盖阻塞学习与评分，仅清理本pilot所属进程。原厂算法/任务提示/工具协议不变。[诊断报告](experiments/078_autoskill_cogym/reports/infrastructure_failure_diagnosis.md)。
+- 47项全量预检、真实Docker断socket变量保留、实际SDK两次500第三恢复均通过，测试真实模型请求0。北京时间00:16:57启动cogym_045_v4，下一题仍cogym_041；旧失败保留、额外重跑单列，dev库按attempt隔离。
+- 截至启动48/2000外部请求，预算仍截止今天05:23:18；当前进度见http://127.0.0.1:8140/。正式演化0／配对评测0，尚无有效收益或SkillsLoop方法证据。后续是否更换API以有界重试后的真实新run结果判断。
+
+## 081 dev未通过，SDK路径修复后同题v2已启动
+
+- 后续：v2正确路径收到原模型API的HTTP500/aborted后停止。纠正检查过早打断原SDK重试的问题，只将最终API失败作为致命标记，保留全部重试账本；同题v3于23:34:24启动。当前阶段以实时页为准；尚无正式演化/评测或有效收益结果。
+
+- 用户报告产物验收停止；确认cogym_041 v1原生OpenClaw调用aborted及bridge超时，没有Jupyter/editor。另确认模拟器/评分器api_base缺末尾斜杠导致原SDK请求404，两条旧dev均未形成真实模拟用户参与。[081记忆](memory/081_2026-09-30_dev_failure_api_route_fix.md)。
+- 更正080：cogym_045 v1确有产物，但rating1.0为API失败后的官方默认路径数值，不是有效评分；原文件保留，dev_validation_v1.json标注无效，进度页不再计其有效评分完成。不存在AutoSkill效果证据。
+- API地址末尾斜杠修复后原SDK真实调用返回SDK_OK，模拟器/评分器实际SDK路径回归通过（回归模型请求0）。不改模型工具协议。旧失败状态已归档，同两条dev以v2重跑，当前cogym_045_v2；23:29:08共33外部请求，预算截止不变。新故障保护防止API失败后的默认数字被当作有效分数。
+
+## 080 计划22道任务／32次session，实时进度已可查看
+
+- 2 dev＋10演化＋10评测题两组各一次＝32次运行；学习及离线评分额外计请求。只读实时页 http://127.0.0.1:8140/ 每3秒刷新，reports/progress.md每10秒更新，显示阶段、任务、已结束/评分完成/失败、动作、最近活动和预算。[080记忆](memory/080_2026-09-30_pilot_live_progress.md)。
+- 北京时间23:09:21核验：cogym_045 dev已结束，有交付，原评分1.0；Agent动作16、Jupyter尝试14、编辑器更新1。cogym_041 dev运行中，演化/评测尚未开始。30/2000外部请求含前期诊断，截止10月1日05:23:18。单条dev原评分不证明独立正确性或AutoSkill效果。
+
+## 079 按用户更正停止工具协议改造，实际dev已启动
+
+- 用户明确要求将buddy2api当作模型API，不再排查或修改其内部工具逻辑；已停用隔离代理和文本工具协议，预算网关仅向原8000端点透传。模型hy4-preview-f、原生OpenClaw、2/10/10与2000请求/8小时预算不变。[079记忆](memory/079_2026-09-30_native_openclaw_api_execution.md)。
+- pilot.py已启动dev_no_skill_cogym_045_v1；官方Docker Jupyter内核已连接、环境原生异步通知与AgentNode开始事件已观察到。独立工具诊断不再阻塞实际dev启动。运行进度以实验reports/pilot_status.json为准，未宣称整个pilot完成或效果提升。
+- 先前文本工具适配诊断后来成功，但仅属于已放弃的适配路径，不作为当前原API的技能读取验收；所有诊断账本与负结果保留。预算起点不重置，截止北京时间10月1日05:23:18；真实tokens/费用未知。
+
+## 078 用户授权AutoSkill × Co-Gym pilot，准备与dev验证进行中
+
+- 当前实验转向用户提供的AutoSkill/无技能强基线，暂不执行073恢复比较。Tabular Analysis、hy4-preview-f、本地代理、共同OpenClaw消费者；用户确认2 dev/10演化/10评测，两组各一次，2000请求或8小时硬上限。[078记忆](memory/078_2026-09-30_autoskill_cogym_pilot.md)。
+- 官方110题审计与全文问题复核完成，dev38/演化56/评测16，固定2/10/10 pilot；Plants组内子题相关。WSL原生依赖、Docker/Redis/Jupyter及Co-Gym导入完成，11项完整性单测通过。文本/流式连通，但OpenClaw原生读取尚未通过；buddy2api后端内置工具干扰委托，已准备隔离DelegateTool兼容实例，仍待验收。模型会话配置接受hy4-preview-f，不能据响应回显证明云端身份；8次外部请求预留，内部调用及真实tokens/费用UNKNOWN。
+- 未采集正式演化历史、生成冻结库或完成配对评测，尚无效果结论。原评分器rating=recall_context及已交付Task Performance分母需明确报告，详见实验source_audit.md。
+
+## 077 远端资料已拉取，研究目标与当前进度已接续
+
+- 用户要求拉取远端研究并理解进度与目标；已克隆至D:\skillloop，基准提交a9ee4b6，origin为指定skillsloop仓库。[077记忆](memory/077_2026-09-30_repository_research_handoff.md)。
+- 已核对章程、状态、最新073实验设计及相关案例和数据说明。完整企业技能生命周期与WWW Industry目标不变；当前聚焦阶段2/3轨迹恢复对技能学习的作用，073方案仍未执行。
+- 本次远端归档包含文档、记忆与部分展示产物；未包含私有企业会话和Demo Python源码。历史验收由文档报告，本机未独立复验；旧端口、绝对路径及源材料链接不自动视为可用。
+- 本轮无新增实证发现，无模型实验、业务修改或远端推送。下文历史轮次保留；下部旧阶段概括与最新轮次冲突时，以最新轮次及对应证据核对当前状态。
 
 ## 076 Git上传通道恢复
 

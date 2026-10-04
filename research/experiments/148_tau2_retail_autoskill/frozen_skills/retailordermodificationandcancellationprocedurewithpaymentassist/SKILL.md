@@ -1,0 +1,452 @@
+---
+id: "85dceb8e-8560-4506-82ce-058bfaa8cb55"
+name: "RetailOrderModificationAndCancellationProcedureWithPaymentAssistance"
+description: "A comprehensive procedure for handling customer requests to modify or cancel retail orders, including exchanges, returns, upgrades, canceling items, changing shipping addresses, verifying customer identity, checking item availability, confirming with the customer, processing modifications and cancellations, updating shipping address, product specifications, and payment method, and modifying orders to the cheapest available option and calculating the gift card credit for the price difference. Additionally, it assists customers with payment issues on their orders by verifying identity, checking order details, and providing suitable solutions."
+version: "0.1.63"
+tags:
+  - "retail"
+  - "customer service"
+  - "order management"
+  - "exchange procedure"
+  - "order exchange"
+  - "eligibility check"
+  - "exchange policy"
+  - "exchange"
+  - "procedure"
+  - "order return"
+  - "confirmation"
+  - "refund process"
+  - "refund processing"
+  - "return"
+  - "order modification"
+  - "address management"
+  - "order processing"
+  - "modify"
+  - "identity verification"
+  - "refund"
+  - "upgrade procedure"
+  - "customer-service"
+  - "order-management"
+  - "cancellation"
+  - "camera exchange"
+  - "update procedure"
+  - "gift card credit"
+  - "eligibility"
+  - "cancel order"
+  - "order cancellation"
+  - "cancel retail order"
+  - "return process"
+  - "address update"
+  - "policy compliance"
+  - "product exchange"
+  - "order tracking"
+  - "boot exchange"
+  - "payment processing"
+  - "laptop exchange"
+  - "defective goods"
+  - "return policy"
+  - "order check"
+  - "cancellation procedure"
+triggers:
+  - "exchange order"
+  - "item swap"
+  - "order exchange"
+  - "replace item"
+  - "change order"
+  - "retail customer service"
+  - "assist with item exchange"
+  - "exchange purchased items"
+  - "help with returning items"
+  - "exchange item"
+  - "item exchange"
+  - "return item"
+  - "replacement item"
+  - "return order"
+  - "handle return"
+  - "process return"
+  - "refund order"
+  - "refund assistance"
+  - "order refund"
+  - "customer service"
+  - "account lookup"
+  - "order check"
+  - "process refund"
+  - "verify customer identity"
+  - "confirm order details"
+  - "initiate return"
+  - "check order details"
+  - "confirm return"
+  - "change order size"
+  - "modify order size"
+  - "update order size"
+  - "update shipping address"
+  - "change shipping address"
+  - "revert shipping address"
+  - "update order address"
+  - "change order address"
+  - "revert order address"
+  - "exchange items"
+  - "modify order"
+  - "customer service procedure"
+  - "order mistake"
+  - "return arrangement"
+  - "refund processing"
+  - "upgrade order"
+  - "most expensive options"
+  - "order upgrade"
+  - "lookup customer order"
+  - "check order eligibility"
+  - "confirm order action"
+  - "execute business write"
+  - "Check order status"
+  - "Request tracking number"
+  - "Inquire about refund or reorder"
+  - "Modify order items"
+  - "cancel items"
+  - "order modification"
+  - "update order"
+  - "undo cancellation"
+  - "order cancellation"
+  - "rescind cancellation"
+  - "cancel reversal"
+  - "exchange digital camera"
+  - "higher zoom camera"
+  - "camera exchange"
+  - "retail camera exchange"
+  - "Cancel order item"
+  - "Cancel entire order"
+  - "Refund to gift card"
+  - "modify retail order"
+  - "change order items"
+  - "update order details"
+  - "change order specifications"
+  - "modify payment method"
+  - "calculate gift card credit"
+  - "modify to cheapest option"
+  - "exchange product"
+  - "customer product return"
+  - "retail product swap"
+  - "exchange confirmation"
+  - "eligibility check"
+  - "order assistance"
+  - "check orders"
+  - "manage orders"
+  - "order support"
+  - "cancel order"
+  - "cancel retail order"
+  - "order return"
+  - "refund to credit card"
+  - "refund request"
+  - "gift card"
+  - "payment issue"
+  - "order payment"
+  - "payment assistance"
+  - "laptop exchange"
+  - "laptop upgrade"
+  - "exchange laptop"
+  - "upgrade laptop"
+  - "cancel purchase"
+  - "cancel reservation"
+  - "order lookup"
+  - "address change"
+  - "refund confirmation"
+  - "total price verification"
+  - "exchange defective goods"
+  - "customer exchange"
+  - "process exchange"
+  - "cancel pending orders"
+  - "verify customer"
+  - "check availability"
+  - "confirm details"
+  - "refund"
+  - "verify identity"
+  - "check order"
+  - "return"
+  - "exchange"
+  - "identity lookup"
+  - "policy confirmation"
+  - "cancel my order"
+  - "cancel orders"
+  - "update delivery address"
+  - "set default address"
+---
+
+# RetailOrderModificationAndCancellationProcedureWithPaymentAssistance
+
+A comprehensive procedure for handling customer requests to modify or cancel retail orders, including exchanges, returns, upgrades, canceling items, changing shipping addresses, verifying customer identity, checking item availability, confirming with the customer, processing modifications and cancellations, updating shipping address, product specifications, and payment method, and modifying orders to the cheapest available option and calculating the gift card credit for the price difference. Additionally, it assists customers with payment issues on their orders by verifying identity, checking order details, and providing suitable solutions.
+
+## Prompt
+
+# Goal
+
+To handle customer requests for modifying or canceling retail orders, including exchanges, returns, upgrades, canceling items, changing shipping addresses, verifying customer identity, checking item availability, confirming with the customer, processing modifications and cancellations, updating shipping address, product specifications, and payment method, and modifying orders to the cheapest available option and calculating the gift card credit for the price difference. Additionally, to assist customers with payment issues on their orders by verifying identity, checking order details, and providing suitable solutions.
+
+# Constraints & Style
+
+- Must verify customer identity using provided information.
+- Must check the availability of the requested items for modification.
+- Must confirm the modification details with the customer before proceeding.
+- Must only process the modification if the requested items are available.
+- Must verify customer identity using name and zip code or user ID.
+- Must check the current status and details of the order.
+- Must confirm changes with the customer before proceeding.
+- Must adhere to the company's policies regarding order modifications.
+- Must communicate with the customer regarding the status of the modification.
+- Must verify customer identity using provided information (name, order number, etc.).
+- Must confirm with the customer before making any changes.
+- Must apply changes to all order addresses.
+- Must revert changes if requested by the customer.
+- Use customer's name and zip code to locate the order.
+- Confirm with the customer before proceeding with the cancellation undo.
+- Update the customer on the progress of the order status.
+- Ensure that all items are delivered without delay.
+- Must verify the order number to locate the order.
+- Must check the shipping status of the order.
+- Must cancel specific items if they have not been shipped.
+- Must cancel the entire order and issue a refund to the customer's gift card if the specific item has been shipped.
+- Must communicate with the customer to confirm their cancellation preference.
+- Must verify the customer's identity and order details before making any changes.
+- Must confirm changes with the customer before proceeding.
+- Must update shipping address, product specifications, and payment method as requested.
+- Must ensure that payment method changes are specific to the requested item.
+- The order modification must be based on the cheapest available option.
+- The price difference should be credited to a gift card.
+- Personal information should not be requested unless necessary.
+- The customer should be informed of the total credit on the gift card.
+- Must verify customer identity before proceeding.
+- Must check order details and confirm with the customer if only part of the order can be canceled.
+- Must ensure that the customer is aware of the possibility of order cancellation issues.
+- Must only proceed with the cancellation if the customer confirms the action.
+- Must verify customer identity using provided information (e.g., name, zip code).
+- Must check order details and confirm the item(s) to be returned.
+- Must confirm the refund method (credit card or gift card) with the customer.
+- Must ensure the refund is processed according to the original payment method.
+- Must communicate with the customer throughout the process, providing updates and instructions.
+
+# Workflow
+
+1. Lookup customer identity.
+2. Retrieve order details.
+3. Confirm the order to be modified or canceled with the customer.
+4. If modifying, check the availability of the requested items.
+5. If canceling, confirm the order details and partial cancellation possibility.
+6. If confirmed, proceed with the modification or cancellation.
+7. If issues arise, recommend customer service assistance.
+8. Update the order status and notify the customer via email.
+
+# Resources
+
+- Execute script: scripts/verify_customer.js
+- Read reference: references/order_modification_policy.md
+
+# Triggers
+
+- exchange order
+- item swap
+- order exchange
+- replace item
+- change order
+- retail customer service
+- assist with item exchange
+- exchange purchased items
+- help with returning items
+- exchange item
+- item exchange
+- return item
+- replacement item
+- return order
+- handle return
+- process return
+- refund order
+- refund assistance
+- order refund
+- customer service
+- account lookup
+- order check
+- process refund
+- verify customer identity
+- confirm order details
+- initiate return
+- check order details
+- confirm return
+- change order size
+- modify order size
+- update order size
+- update shipping address
+- change shipping address
+- revert shipping address
+- update order address
+- change order address
+- revert order address
+- exchange items
+- modify order
+- customer service procedure
+- order mistake
+- return arrangement
+- refund processing
+- upgrade order
+- most expensive options
+- order upgrade
+- lookup customer order
+- check order eligibility
+- confirm order action
+- execute business write
+- Check order status
+- Request tracking number
+- Inquire about refund or reorder
+- Modify order items
+- cancel items
+- order modification
+- update order
+- undo cancellation
+- order cancellation
+- rescind cancellation
+- cancel reversal
+- exchange digital camera
+- higher zoom camera
+- camera exchange
+- retail camera exchange
+- Cancel order item
+- Cancel entire order
+- Refund to gift card
+- modify retail order
+- change order items
+- update order details
+- change order specifications
+- modify payment method
+- calculate gift card credit
+- modify to cheapest option
+- exchange product
+- customer product return
+- retail product swap
+- exchange confirmation
+- eligibility check
+- order assistance
+- check orders
+- manage orders
+- order support
+- cancel order
+- cancel retail order
+- order return
+- refund to credit card
+- refund request
+- gift card
+- order check
+- customer service
+- payment issue
+- order payment
+- payment assistance
+- laptop exchange
+- laptop upgrade
+- exchange laptop
+- upgrade laptop
+- cancel purchase
+- cancel reservation
+- order lookup
+- order cancellation
+- address change
+- refund confirmation
+- total price verification
+- exchange defective goods
+- customer exchange
+- process exchange
+- cancel pending orders
+- verify customer
+- check availability
+- confirm details
+- process return
+- refund
+- verify identity
+- check order
+- return
+- exchange
+- identity lookup
+- policy confirmation
+- cancel my order
+- cancel orders
+- cancel retail order
+- order return
+- refund to credit card
+- refund request
+- gift card
+- order check
+- customer service
+- payment issue
+- order payment
+- payment assistance
+- laptop exchange
+- laptop upgrade
+- exchange laptop
+- upgrade laptop
+- cancel purchase
+- cancel reservation
+- order lookup
+- order cancellation
+- address change
+- refund confirmation
+- total price verification
+- exchange defective goods
+- customer exchange
+- process exchange
+
+# Tags
+
+- retail
+- customer service
+- order management
+- exchange procedure
+- order exchange
+- eligibility check
+- exchange policy
+- exchange
+- procedure
+- order return
+- confirmation
+- refund process
+- refund processing
+- return
+- order modification
+- address management
+- order processing
+- modify
+- identity verification
+- refund
+- upgrade procedure
+- customer-service
+- order-management
+- cancellation
+- camera exchange
+- update procedure
+- gift card credit
+- eligibility
+- cancel order
+- order cancellation
+- cancel retail order
+- return process
+- refund process
+- address update
+- policy compliance
+- product exchange
+- order tracking
+- boot exchange
+- payment processing
+- laptop exchange
+- defective goods
+- return policy
+- order check
+- cancellation procedure
+- address update
+- customer service
+
+## Triggers
+
+- exchange order
+- item swap
+- order exchange
+- replace item
+- change order
+- retail customer service
+- assist with item exchange
+- exchange purchased items
+- help with returning items
+- exchange item

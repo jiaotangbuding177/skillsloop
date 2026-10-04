@@ -1,0 +1,82 @@
+{
+  "experiment": "148_tau2_retail_autoskill",
+  "benchmark": "tau2-bench v1.0.1 retail text (tau3-era revisions; not tau2-paper comparable)",
+  "models": {
+    "consumer": "glm-4-flash",
+    "user_simulator": "glm-4-flash",
+    "judge": "glm-4-flash",
+    "embeddings": "ecnu-embedding-small (dim 1024)"
+  },
+  "materials": {
+    "evolution": 70,
+    "test_tasks": 40,
+    "trials": 4,
+    "frozen_skills": 5
+  },
+  "B0_no_skill": {
+    "runs": 160,
+    "evaluable": 160,
+    "avg_reward": 0.0688,
+    "pass_1": 0.0688,
+    "pass_4_tasks": 0,
+    "tasks": 40,
+    "non_zero_runs": 11,
+    "terminations": {
+      "user_stop": 140,
+      "timeout": 17,
+      "too_many_errors": 3
+    },
+    "avg_user_turns": 14.75,
+    "avg_tool_calls": 4.68
+  },
+  "B1_autoskill_library": {
+    "runs": 160,
+    "evaluable": 160,
+    "avg_reward": 0.0813,
+    "pass_1": 0.0813,
+    "pass_4_tasks": 0,
+    "tasks": 40,
+    "non_zero_runs": 13,
+    "terminations": {
+      "user_stop": 145,
+      "timeout": 13,
+      "too_many_errors": 2
+    },
+    "avg_user_turns": 13.0,
+    "avg_tool_calls": 4.53
+  },
+  "paired": {
+    "pairs": 160,
+    "B1_better": 11,
+    "B0_better": 9,
+    "ties": 140,
+    "mean_diff_B1_minus_B0": 0.0125,
+    "sign_test_two_sided_p": 0.824
+  },
+  "skill_read_evidence": {
+    "sessions_scanned": 162,
+    "sessions_with_skill_read": 0,
+    "exposure": "skills listed in system prompt (160/160); workspace copies match manifest (810/810 sha256)"
+  },
+  "content_review": {
+    "B0": {
+      "ideal": 12,
+      "partial": 27,
+      "wrong": 101,
+      "abnormal": 20,
+      "ideal_vs_nonideal": "1:10.7"
+    },
+    "B1": {
+      "ideal": 17,
+      "partial": 48,
+      "wrong": 80,
+      "abnormal": 15,
+      "ideal_vs_nonideal": "1:7.5"
+    },
+    "reports": [
+      "reports/final_review_b0.md",
+      "reports/final_review_b1.md"
+    ]
+  },
+  "conclusion": "No detectable skill benefit (and no harm): the B1 arm never read any skill (0/160); the comparison therefore tests exposure only. Differences are within noise."
+}

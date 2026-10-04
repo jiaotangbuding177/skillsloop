@@ -1,0 +1,91 @@
+# Experiment 148: AutoSkill x tau2-bench Retail (text)
+# Status: preparation_unpaid. Budget / some model roles PENDING user confirmation (blockers.md).
+experiment:
+  id: 148_tau2_retail_autoskill
+  created: 2026-10-02
+  status: preparation_unpaid
+  groups: [no_skill, autoskill_library]
+  consumer: "native OpenClaw 2026.9.7 + custom tau2 HalfDuplex agent adapter (suspend-and-relay MCP tool bridge)"
+  consumer_identical_across_groups: true
+
+benchmark:
+  name: tau2-bench
+  version: v1.0.1
+  commit: fc0055dc4e0a316c3f83133267fbd6faaa770992
+  domain: retail
+  communication: half_duplex_text
+  disabled: [voice, audio_native, banking_knowledge, oracle_plan_llm_agent_gt, solo_no_user_llm_agent_solo, workflow_policy_variant]
+
+splits:
+  train: 74
+  dev:
+    ids: ["69", "28", "8", "112"]
+    categories: {69: cancel, 28: return, 8: exchange, 112: modify_items}
+    seed: 42
+    rule: "primary-operation buckets ranked by priority [cancel,return,exchange,modify_payment,modify_items,modify_address]; per bucket shuffle(sorted train ids, random.Random(42)), take first; stop at 4. Deterministic; no test data consulted."
+  evolution: 70   # train minus dev; 1 collection run per task
+  test: 40        # official test split, all tasks
+
+materials:
+  collector:
+    agent: openclaw_retail
+    skills: empty
+    runs_per_task: 1
+    tasks: evolution_70
+  library:
+    tool: AutoSkill offline conversation path
+    namespace: tau_retail_pool
+    llm: PENDING
+    embeddings: PENDING
+    maintenance: native add/merge/discard against the same single library
+  consumer:
+    agent: openclaw_retail
+    groups:
+      no_skill: empty skills dir (same config, same tools)
+      autoskill_library: frozen_skills copied into workspace skills dir
+    trials_per_task: 4
+    tasks: test_40
+
+run_parameters:
+  num_trials_evolution: 1
+  num_trials_test: 4
+  concurrency: 1
+  seed: {base: 42, per_trial: "42 + trial_index", paired_groups_same_seed: true}
+  max_steps: 200
+  max_errors: 10
+  max_retries: 3            # tau2 native infra-error retry; every retry recorded and reported
+  retry_delay_seconds: 1.0
+  timeout_seconds_per_simulation: 900
+  agent_side:
+    openclaw_agent_timeout_seconds: 300
+    mcp_request_timeout_seconds: 900
+    bridge_subprocess_timeout_seconds: 1200
+
+scoring:
+  evaluation_type: ALL      # DB (114/114) + NL_ASSERTION (112/114); ACTION checks recorded but NOT in reward (reward_basis)
+  reward_basis_observed: {db_plus_nl: 112, db_only: 2}
+  action_checks: "recorded for diagnostics; not part of the native reward for any retail task"
+  infra_error_policy: "keep native exclusion from pass^k/avg_reward; disclose excluded count, reasons, denominator"
+  judge: PENDING
+
+budget:
+  status: PENDING-CONFIRMATION
+  hard_caps:
+    model_requests_total: TBD
+    wallclock_deadline: TBD
+  phase_caps:
+    dev_live_linking: "proposed <= 300 requests (needs confirmation)"
+    evolution_collection: "70 runs"
+    paired_test: "320 runs (40 tasks x 2 groups x 4 trials)"
+  notes: "no paid run starts before explicit confirmation; unknown usage is never reported as 0"
+
+phases:
+  - {id: P0_versions, status: done}
+  - {id: P1_split_audit, status: done}
+  - {id: P2_dev_tooling_offline, status: done, evidence: "10/10 unit tests, dry-run wiring OK, 0 model calls"}
+  - {id: P3_dev_live_linking, status: blocked_on_resource_confirmation}
+  - {id: P4_freeze_protocol, status: pending}
+  - {id: P5_collection, status: pending}
+  - {id: P6_autoskill_build_freeze, status: pending}
+  - {id: P7_paired_test, status: pending}
+  - {id: P8_reporting, status: pending}

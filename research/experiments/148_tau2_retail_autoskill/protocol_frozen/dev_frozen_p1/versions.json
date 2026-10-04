@@ -1,0 +1,68 @@
+{
+  "_note": "Frozen versions for experiment 148 (AutoSkill x tau2-bench Retail). Items marked PENDING have not been used for any paid call. Generated 2026-10-02 during unpaid preparation.",
+  "experiment": {
+    "id": "148_tau2_retail_autoskill",
+    "created": "2026-10-02",
+    "status": "preparation_unpaid"
+  },
+  "benchmark": {
+    "name": "tau2-bench",
+    "repo": "https://github.com/sierra-research/tau2-bench",
+    "tag": "v1.0.1",
+    "commit": "fc0055dc4e0a316c3f83133267fbd6faaa770992",
+    "tag_date": "2026-07-22",
+    "python_requires": ">=3.12,<3.14",
+    "pin_rationale": "tau3-era release. Retail TEXT data and text code paths are identical to main@5bfa7e37 (verified 2026-10-02: data/tau2/domains/retail/tasks.json and split_tasks.json byte-identical; v1.0.1..main commits touch voice/leaderboard only). The retail tasks include the tau3 'Task Quality' revision (commit 01e812d, 2026-03): evaluation_criteria.reward_basis set for all 114 tasks, user_scenario.instructions revised for 21 tasks, evaluation_criteria changed for all 114. This is NOT the tau2-paper configuration; reward numbers from this run must not be ranked directly against the tau2 paper.",
+    "data": {
+      "tasks_sha256": "8e03ebce7901bd6218e7a7dc3105faa9324091a68058f7fe61c65262868812e8",
+      "split_sha256": "ed0580ec52575b63fbf76568af42490da6ee7783ecb4aa81af46961291358f20",
+      "policy_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467",
+      "db_sha256": "413a65160adbdb5fde0ffc0015c49b6d70250b10c18128de169b597af7766765",
+      "splits": { "train": 74, "test": 40, "base": 114 }
+    },
+    "disabled_modes": [
+      "voice / audio-native / full-duplex",
+      "banking_knowledge domain and knowledge-retrieval configurations",
+      "oracle-plan agent (registry: llm_agent_gt)",
+      "no-user / solo agent (registry: llm_agent_solo)",
+      "workflow-policy variant (telecom-workflow)"
+    ]
+  },
+  "autoskill": {
+    "repo": "https://github.com/ECNU-ICALK/AutoSkill",
+    "commit": "94c47ca488d4ba4117d20272e66d49b9877e68cf",
+    "commit_date": "2026-05-10",
+    "path_used": "core offline conversation extraction (autoskill/offline/conversation/extract.py, SDK import_openai_conversations)",
+    "not_used": ["AutoSkill4Doc", "AutoSkill4OpenClaw", "SkillEvo", "offline trajectory extractor"],
+    "local_reuse": "clean checkout at 115_cogym_spagent_full/vendor/AutoSkill verified equal to upstream main on 2026-10-02"
+  },
+  "openclaw": {
+    "version": "2026.9.7",
+    "runtime_path": "runtime_linux/openclaw (npm install; WSL)",
+    "node": "node-v26.1.0-linux-x64 (bundled)",
+    "tool_bridge": "native MCP server per run (streamable HTTP, localhost), exposing official retail tool schemas; suspend-and-relay so that tau2's orchestrator executes every tool call exactly once (design in protocol.md section 4)"
+  },
+  "harness": {
+    "mcp_sdk": "mcp 2.2.0 (python, handler-style Server + streamable_http_app)",
+    "venv": "runtime_py (python 3.12.3, WSL)",
+    "unit_tests": "tests/test_openclaw_retail_adapter.py — 10/10 pass, no model calls",
+    "dry_run": "scripts/run_wrapper.py --dry-run verified 2026-10-02 (retail env, 16 tools, session dir + openclaw.json generated)"
+  },
+  "runtime": {
+    "host": "Windows + WSL Ubuntu",
+    "python": "3.12.3 (WSL)",
+    "docker": "29.1.3 (present; tau2 retail tools do not require Docker)",
+    "redis": "running (reuse of local infra); not required by retail tools",
+    "isolation": "new experiment directory; does not modify or consume 078/110/115 runs, ledgers, or skill libraries"
+  },
+  "models": {
+    "resource_update_2026-10-02": "User provided a new resource for this experiment: GLM-4-Flash @ https://open.bigmodel.cn/api/paas/v4 (account label: 吴天辰). Credentials live outside the repo (C:/Users/22142/.skillsloop148/upstream_connection.json) and are never copied into this file, ledgers, or reports.",
+    "consumer": { "status": "approved", "id": "glm-4-flash", "endpoint": "https://open.bigmodel.cn/api/paas/v4 (via the experiment relay); same for B0 and B1" },
+    "user_simulator": { "status": "approved", "id": "glm-4-flash", "note": "adaptation; official recommendation is gpt-4o; reported as adaptation" },
+    "autoskill_llm": { "status": "approved", "id": "glm-4-flash" },
+    "autoskill_embeddings": { "status": "approved", "id": "ecnu-embedding-small", "endpoint": "https://chat.ecnu.edu.cn/open/api/v1", "dim": 1024, "credentials": "outside repo (C:/Users/22142/.skillsloop148/embeddings_connection.json)", "probe_2026-10-02": "1 embedding request OK, dim 1024, usage 13 tokens; raw: private/probe_ecnu_embedding.json" },
+    "judge_nl_assertions": { "status": "approved", "id": "glm-4-flash", "note": "reported separately from consumer/user roles" },
+    "probe_2026-10-02": "1 successful chat request: finish_reason=tool_calls, get_order_details(order_id=\"W1\"), usage 171 tokens -> native tool calling confirmed. One earlier attempt was rejected by the endpoint with HTTP 400 (client-side encoding); no generation from it. Raw response: private/probe_glm4flash.json"
+  },
+  "budget": { "status": "PENDING-CONFIRMATION", "details": "blockers.md" }
+}
