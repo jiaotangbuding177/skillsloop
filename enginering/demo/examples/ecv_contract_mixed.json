@@ -1,0 +1,17 @@
+{
+  "E": [
+    {"id":"u1","sessionId":"example-mixed","role":"user","order":1,"content":"请站采购方立场审阅这份合成协议，保留原编号，先给文本。协议第2.1条：供应方完成验收后支付尾款，但未写验收标准。"},
+    {"id":"a1","sessionId":"example-mixed","role":"assistant","order":2,"content":"第1条：建议补充验收标准，并明确尾款支付条件。"},
+    {"id":"u2","sessionId":"example-mixed","role":"user","order":3,"content":"顺便写一则周五下午三点的内部培训通知，地点会议室。"},
+    {"id":"a2","sessionId":"example-mixed","role":"assistant","order":4,"content":"培训通知：请相关同事于周五下午三点到会议室参加内部培训。"},
+    {"id":"u3","sessionId":"example-mixed","role":"user","order":5,"content":"回到协议，原来是2.1，不能改成1。审查结果改成表格，保留原编号，无法确认的内容单列。"},
+    {"id":"a3","sessionId":"example-mixed","role":"assistant","order":6,"content":"| 原编号 | 发现 | 建议 | 待确认 |\n| 2.1 | 未写验收标准 | 请双方明确验收标准与尾款支付条件 | 具体标准需双方确认 |"}
+  ],
+  "C": [
+    {"id":"c-numbering","kind":"PUBLIC_CONTEXT","text":"本例为人工构造的功能验收材料。审阅交付应保留原条款编号；修改交付形式不撤销采购方立场与编号要求。","source":"AUTHORED_FUNCTIONAL_EXAMPLE"}
+  ],
+  "V": [
+    {"id":"v-numbering-failed","source":"AUTHORED_EXPLICIT_NUMBERING_CHECK","scope":"STEP","targetIds":["a1"],"criterion":"保留输入协议的原编号2.1","status":"FAILURE","outcomeType":"BUSINESS","verified":true,"verificationBasis":"输入原编号2.1，第一版可见输出明确写为第1条；仅核验编号，不评价法律质量。"},
+    {"id":"v-numbering-revised","source":"AUTHORED_EXPLICIT_NUMBERING_CHECK","scope":"STEP","targetIds":["a3"],"criterion":"保留输入协议的原编号2.1","status":"SUCCESS","outcomeType":"BUSINESS","verified":true,"verificationBasis":"后续可见表格使用2.1；仅核验编号，不评价法律质量。"}
+  ]
+}
