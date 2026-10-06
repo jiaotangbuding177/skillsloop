@@ -1,0 +1,103 @@
+{
+  "method": "tools/list",
+  "params": {},
+  "result": {
+    "tools": [
+      {
+        "name": "GetSystemPrompt",
+        "description": "Returns a compact markdown context block describing the repository for use as an AI agent system prompt.",
+        "inputSchema": {
+          "title": "GetSystemPrompt",
+          "description": "Returns a compact markdown context block describing the repository for use as an AI agent system prompt.",
+          "type": "object",
+          "properties": {}
+        }
+      },
+      {
+        "name": "GenerateDesignDocument",
+        "description": "Generates design documents containing Mermaid diagrams (class diagrams or dependency/flow graphs) for a given symbol to visualize architecture.",
+        "inputSchema": {
+          "title": "GenerateDesignDocument",
+          "description": "Generates design documents containing Mermaid diagrams (class diagrams or dependency/flow graphs) for a given symbol to visualize architecture.",
+          "type": "object",
+          "properties": {
+            "diagramType": {
+              "description": "Type of diagram: 'class' (for class structures and inheritance) or 'flow' (for dependencies, calls, and workflow)",
+              "type": "string"
+            },
+            "symbolName": {
+              "description": "The exact or partial name of the class, module, or symbol to diagram.",
+              "type": "string"
+            },
+            "depth": {
+              "description": "Depth of relations to traverse. Default is 1 for class, 2 for flow. Use -1 for auto.",
+              "type": "integer",
+              "default": -1
+            }
+          },
+          "required": [
+            "diagramType",
+            "symbolName"
+          ]
+        }
+      },
+      {
+        "name": "GetCodeGraph",
+        "description": "Returns the full repository code graph as compact JSON for AI agent context. Automatically compresses if over token budget.",
+        "inputSchema": {
+          "title": "GetCodeGraph",
+          "description": "Returns the full repository code graph as compact JSON for AI agent context. Automatically compresses if over token budget.",
+          "type": "object",
+          "properties": {
+            "maxTokens": {
+              "description": "Max token budget. Defaults to 80000.",
+              "type": "integer",
+              "default": 80000
+            }
+          }
+        }
+      },
+      {
+        "name": "GetSymbol",
+        "description": "Searches for a symbol by name and returns its definition, file location, connected symbols with names, and code snippet.",
+        "inputSchema": {
+          "title": "GetSymbol",
+          "description": "Searches for a symbol by name and returns its definition, file location, connected symbols with names, and code snippet.",
+          "type": "object",
+          "properties": {
+            "symbolName": {
+              "description": "Symbol name to search for (partial match, case-insensitive)",
+              "type": "string"
+            }
+          },
+          "required": [
+            "symbolName"
+          ]
+        }
+      },
+      {
+        "name": "GetFileContext",
+        "description": "Returns all nodes and edges for a specific file path, including connected nodes up to hopDepth hops away. Accepts both relative and absolute paths.",
+        "inputSchema": {
+          "title": "GetFileContext",
+          "description": "Returns all nodes and edges for a specific file path, including connected nodes up to hopDepth hops away. Accepts both relative and absolute paths.",
+          "type": "object",
+          "properties": {
+            "filePath": {
+              "description": "Relative or absolute file path",
+              "type": "string"
+            },
+            "hopDepth": {
+              "description": "Number of hops to traverse from the file's nodes. Default 2.",
+              "type": "integer",
+              "default": 2
+            }
+          },
+          "required": [
+            "filePath"
+          ]
+        }
+      }
+    ]
+  }
+}

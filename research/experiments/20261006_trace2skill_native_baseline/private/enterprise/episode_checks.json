@@ -1,0 +1,232 @@
+{
+  "schema": "source-bound-free-eligibility-check-v1",
+  "probes": [
+    {
+      "probe_id": "salary_monthly_conversion",
+      "candidate_id": "conv_bcf6044319f6:learn01",
+      "user_id": "u_1827670ad949f9bf25",
+      "assistant_id": "a_19c98d4fafef8b83f8",
+      "scope": "每人年工资20万元折算每人月工资；排除团队/地区/现金/文件更新断言",
+      "checker": "annual_to_monthly",
+      "family_id": "DATA:annual_to_monthly",
+      "coverage": "COMPLETE_EXPLICIT_LOCAL_SUBREQUEST_ONLY",
+      "session_id": "conv_bcf6044319f6",
+      "source_user_content_sha256": "9463cea8b4f2a25efb94e8ae7552eb328475b79a51f55c8b48569c72a4a07f7c",
+      "source_assistant_content_sha256": "19c98d4fafef8b83f8f80704b225c4aff7388da25d76bea0fc71b1a871648e5b",
+      "existing_content_associations": [
+        {
+          "user_group_id": "u_1827670ad949f9bf25",
+          "assistant_group_id": "a_19c98d4fafef8b83f8",
+          "chronology_verified": false,
+          "same_task_verified": false,
+          "source": "accepted_071",
+          "evidence": {
+            "annotation_key": "assistant:a_19c98d4fafef8b83f8",
+            "basis": "ai_reused_semantic_066",
+            "note": "复用原模型语义对应；旧版仅因引文校验退回"
+          },
+          "meaning": "用户验收的内容对应；来源含AI建议与人工选择，不是全人工或时序真值"
+        }
+      ],
+      "chronology_verified": false,
+      "new_relation_inference": false,
+      "existing_candidate_message_count": 12,
+      "existing_candidate_group_ids": [
+        "u_63f0eb6af9795854eb",
+        "u_59637c1fc1e03d9e86",
+        "u_d810217ee80bbc72fa",
+        "u_46fddb99e1e5d428a3",
+        "u_1827670ad949f9bf25",
+        "u_147f9a73af20f45a86",
+        "u_9de9a0e633b82de344",
+        "a_5199d8d2ae39d16cfd",
+        "a_85da6802102b8dc928",
+        "a_19c98d4fafef8b83f8",
+        "a_882b35c0353c51c63a",
+        "a_f87cdfdedadb104e36"
+      ],
+      "condition_result": {
+        "status": "PASS",
+        "expected_yuan_per_person_per_month": "16666.67",
+        "observed_yuan_per_person_per_month": [
+          "16666.67",
+          "16666.67"
+        ],
+        "basis": "Decimal(200000)/12 rounded to 0.01 yuan; actual visible number, not completion claim"
+      },
+      "local_request_outcome": "PASS",
+      "whole_candidate_outcome": "UNKNOWN",
+      "business_outcome": "UNKNOWN",
+      "artifact_bytes_outcome": "UNKNOWN",
+      "native_agentic_verified_pass": false,
+      "native_llm_only_failed_whole_task": false,
+      "native_job_prepared": true,
+      "native_job_executed": false,
+      "route_status": "READY_NATIVE_SUCCESS_LOCAL_TEXT_SUBREQUEST"
+    },
+    {
+      "probe_id": "visible_one_paragraph",
+      "candidate_id": "conv_41874c950938:learn01",
+      "user_id": "u_5592d075b840be7936",
+      "assistant_id": "a_fd5e45c7f61b41d72a",
+      "scope": "完整回复中展示的引用段落是否只有一段；不判压缩的全部语义或Word字节",
+      "checker": "one_quoted_paragraph",
+      "family_id": "OFFICE:one_paragraph_conversion",
+      "coverage": "VISIBLE_FORMAT_CONDITION_ONLY",
+      "session_id": "conv_41874c950938",
+      "source_user_content_sha256": "867816237574f5cd472a9ba6c1eb2a7f9617bcc2aa924a0e879692b5e3b7cecd",
+      "source_assistant_content_sha256": "fd5e45c7f61b41d72ad016253799d7bd7a6544b441976bf27dcb80537ff1bcf2",
+      "existing_content_associations": [
+        {
+          "user_group_id": "u_5592d075b840be7936",
+          "assistant_group_id": "a_fd5e45c7f61b41d72a",
+          "chronology_verified": false,
+          "same_task_verified": false,
+          "source": "accepted_071",
+          "evidence": {
+            "annotation_key": "user:u_5592d075b840be7936",
+            "basis": "ai_semantic_annotation_069",
+            "note": "用户提供详细文本要求整理，AI输出最终段落"
+          },
+          "meaning": "用户验收的内容对应；来源含AI建议与人工选择，不是全人工或时序真值"
+        }
+      ],
+      "chronology_verified": false,
+      "new_relation_inference": false,
+      "existing_candidate_message_count": 8,
+      "existing_candidate_group_ids": [
+        "u_efffcae723e1f7c8ed",
+        "u_48e74a9c8c2f50a13c",
+        "u_5592d075b840be7936",
+        "a_385927f7330529ef6f",
+        "a_8258df855d8397ace4",
+        "a_a2fa848d84d637ca74",
+        "a_094b28bb1b66778b28",
+        "a_fd5e45c7f61b41d72a"
+      ],
+      "condition_result": {
+        "status": "PASS",
+        "visible_quote_block_count": 1,
+        "basis": "Count actual quoted text blocks; semantic preservation and Word bytes remain UNKNOWN"
+      },
+      "local_request_outcome": "UNKNOWN",
+      "whole_candidate_outcome": "UNKNOWN",
+      "business_outcome": "UNKNOWN",
+      "artifact_bytes_outcome": "UNKNOWN",
+      "native_agentic_verified_pass": false,
+      "native_llm_only_failed_whole_task": false,
+      "native_job_prepared": false,
+      "native_job_executed": false,
+      "route_status": "DIAGNOSTIC_ONLY_INCOMPLETE_OUTCOME_COVERAGE"
+    },
+    {
+      "probe_id": "visible_negative_debit",
+      "candidate_id": "conv_f74f7410ccfd:learn01",
+      "user_id": "u_5126c2301b5fab90f1",
+      "assistant_id": "a_572ea7a1697d58f47f",
+      "scope": "可见凭证表中的手续费是否置于负借方；不认证真实DOCX或专业会计正确性",
+      "checker": "negative_debit_table",
+      "family_id": "DATA:explicit_table_representation",
+      "coverage": "VISIBLE_TABLE_CONDITION_ONLY",
+      "session_id": "conv_f74f7410ccfd",
+      "source_user_content_sha256": "b092cd2afbea3916fdf98187b4e5efb4bf3b4cb4b83773123129178c4a5e70df",
+      "source_assistant_content_sha256": "572ea7a1697d58f47fac013d4207e8c2fc2990445ceb2a1193a06a91967a594e",
+      "existing_content_associations": [
+        {
+          "user_group_id": "u_5126c2301b5fab90f1",
+          "assistant_group_id": "a_572ea7a1697d58f47f",
+          "chronology_verified": false,
+          "same_task_verified": false,
+          "source": "accepted_071",
+          "evidence": {
+            "annotation_key": "user:u_5126c2301b5fab90f1",
+            "basis": "ai_review_069",
+            "note": "用户要求调整利息科目，AI声称已更新"
+          },
+          "meaning": "用户验收的内容对应；来源含AI建议与人工选择，不是全人工或时序真值"
+        }
+      ],
+      "chronology_verified": false,
+      "new_relation_inference": false,
+      "existing_candidate_message_count": 7,
+      "existing_candidate_group_ids": [
+        "u_b81eafdd4b98b8335e",
+        "u_5126c2301b5fab90f1",
+        "u_c5857125f966b1acd6",
+        "a_efe1a29e0ed30d7510",
+        "a_572ea7a1697d58f47f",
+        "a_c8aac87a065ea57228",
+        "a_ef1e89a37d561513f8"
+      ],
+      "condition_result": {
+        "status": "FAIL",
+        "visible_fee_rows": [
+          {
+            "debit": "",
+            "credit": "4.23"
+          }
+        ],
+        "basis": "Actual table debit/credit cells; no assertion about the claimed DOCX or economic equivalence"
+      },
+      "local_request_outcome": "UNKNOWN",
+      "whole_candidate_outcome": "UNKNOWN",
+      "business_outcome": "UNKNOWN",
+      "artifact_bytes_outcome": "UNKNOWN",
+      "native_agentic_verified_pass": false,
+      "native_llm_only_failed_whole_task": false,
+      "native_job_prepared": false,
+      "native_job_executed": false,
+      "route_status": "DIAGNOSTIC_ONLY_INCOMPLETE_OUTCOME_COVERAGE"
+    }
+  ],
+  "constructed_checker_controls": [
+    {
+      "control_id": 1,
+      "checker": "annual_to_monthly",
+      "constructed_not_enterprise_episode": true,
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "control_id": 2,
+      "checker": "annual_to_monthly",
+      "constructed_not_enterprise_episode": true,
+      "expected": "FAIL",
+      "actual": "FAIL"
+    },
+    {
+      "control_id": 3,
+      "checker": "one_quoted_paragraph",
+      "constructed_not_enterprise_episode": true,
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "control_id": 4,
+      "checker": "one_quoted_paragraph",
+      "constructed_not_enterprise_episode": true,
+      "expected": "FAIL",
+      "actual": "FAIL"
+    },
+    {
+      "control_id": 5,
+      "checker": "negative_debit_table",
+      "constructed_not_enterprise_episode": true,
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "control_id": 6,
+      "checker": "negative_debit_table",
+      "constructed_not_enterprise_episode": true,
+      "expected": "FAIL",
+      "actual": "FAIL"
+    }
+  ],
+  "judge_is_not_native_trace2skill_analyzer": true,
+  "limits": [
+    "No UNKNOWN task is relabeled FAILED for the native LLM-only error prompt.",
+    "Format/arithmetic condition checks do not certify missing artifacts or professional correctness.",
+    "Existing accepted content correspondences retain false chronology/same-task verification flags."
+  ]
+}

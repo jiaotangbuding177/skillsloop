@@ -1,0 +1,133 @@
+AGENT: Hi! How can I help you today?
+USER: Hi there! I'm having trouble sending MMS messages on my phone. It's been going on for a few hours now and I can't seem to get it working. Can you help me figure out what's wrong?
+AGENT: I can help with that. First, I need to verify your account — could you please provide your phone number?
+USER: Sure, my phone number is 555-123-2002.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT: Thanks, John — I've located your account. I see you have three lines. Which phone number is the one having trouble sending MMS?
+USER: It's the same one I just gave you — 555-123-2002. That's the line I'm having the MMS issue with.
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 8.7, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT: I've got your line — 555-123-2002. It's active, so let's dig into the MMS issue.
+
+To start, could you run a couple of checks on your phone and tell me what you see?
+
+1. **Check your network status** — what network type (e.g., 5G, 4G, 2G) does it show, and is there signal?
+2. **Check your APN settings** — does it show a MMSC URL configured?
+
+Let me know what you find and we'll go from there.
+TOOL_RESULT: Airplane Mode: OFF
+SIM Card Status: active
+Cellular Connection: connected
+Cellular Signal: poor
+Cellular Network Type: 2G
+Mobile Data Enabled: Yes
+Data Roaming Enabled: Yes
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+TOOL_RESULT: Current APN Name: internet
+MMSC URL (for picture messages): http://mms.carrier.com/mms/wapenc
+(These are technical settings, usually best left unchanged.)
+USER: Okay, I ran both checks. Here's what I found:
+
+1. **Network status:** I'm connected to the cellular network, but the signal is poor and it's showing **2G** as the network type. Mobile data is enabled, and data roaming is on. Wi-Fi is off.
+
+2. **APN settings:** The APN name is "internet" and there is an MMSC URL configured: `http://mms.carrier.com/mms/wapenc`.
+
+So the APN looks fine, but the network type being 2G stands out. What should I try next?
+AGENT: 2G is the problem — MMS needs at least a 3G connection, and 2G networks aren't suitable for it. Your APN settings look correct, so let's fix the network mode.
+
+On your phone, please go to your network settings and change the preferred network mode to one that includes 4G/5G — for example, **"4G/5G preferred"** or **"4G only"**. Then let me know what the network type shows afterward.
+TOOL_RESULT: Network Mode Preference: 2g_only
+TOOL_RESULT: Preferred Network Mode set to: 4g_5g_preferred
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: I switched the network mode over. Now it's showing **5G** with excellent signal, and mobile data is enabled. That looks a lot better than the 2G before!
+
+Should I try sending an MMS now to see if it works?
+AGENT: Yes, please try sending an MMS now and let me know if it goes through.
+TOOL_RESULT: Your messaging app cannot send MMS messages.
+USER: Hmm, it still didn't go through. My messaging app says it can't send MMS messages. That's frustrating — I was hoping the network change would do it. What else could be causing this?
+AGENT: Thanks for trying. Let's check a few more things that commonly block MMS:
+
+1. **Wi-Fi Calling** — check your Wi-Fi Calling status. Is it ON or OFF?
+2. **Messaging app permissions** — check your messaging app's permissions. Are **storage** and **sms** both listed as granted?
+
+Let me know what you find for both, and we'll take it from there.
+TOOL_RESULT: Wi-Fi Calling is currently turned OFF.
+TOOL_RESULT: The following apps are installed on the phone: messaging, browser
+TOOL_RESULT: App 'messaging' has permission for: sms, storage, phone.
+USER: Here's what I found:
+
+1. **Wi-Fi Calling:** It's currently OFF.
+2. **Messaging app permissions:** The app has **sms**, **storage**, and **phone** permissions — so both storage and sms are granted.
+
+So both of those seem fine. What's next?
+AGENT: Both of those look good. Since your APN, network, and permissions are all fine, let's verify the basics one more time:
+
+- Can you make a regular phone call, and does mobile data work for other apps (like browsing the web)?
+
+Also, is there anything in your status bar that stands out — like Airplane Mode, VPN, or Data Saver being enabled?
+TOOL_RESULT: Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: VPN is turned OFF.
+TOOL_RESULT: Data Saver mode is OFF.
+TOOL_RESULT: Speed test failed: No Connection.
+USER: Okay, here's what I found:
+
+- **Status bar:** No Airplane Mode, no VPN, no Data Saver — it just shows 5G with excellent signal, data enabled, and 80% battery. Both VPN and Data Saver are OFF.
+- **Mobile data:** I tried running a speed test, and it **failed with "No Connection."** So even though the status bar says data is enabled, it doesn't seem to actually be working.
+
+I haven't tried a phone call yet — but the failed speed test seems like a red flag. What should I do?
+AGENT: That's an important clue — mobile data isn't actually working even though it shows enabled. Let's check your APN settings more closely.
+
+Please re-check your APN settings — specifically, look for any fields that are **not set** or look wrong (for example, the APN name, MMSC URL, or the MMSC proxy/port). Tell me exactly what each field shows.
+
+Also, can you make a regular phone call? Let me know if that works.
+TOOL_RESULT: Current APN Name: internet
+MMSC URL (for picture messages): http://mms.carrier.com/mms/wapenc
+(These are technical settings, usually best left unchanged.)
+USER: I re-checked the APN settings. Here's exactly what it shows:
+
+- **APN Name:** internet
+- **MMSC URL:** http://mms.carrier.com/mms/wapenc
+
+That's all the fields it displays — the APN name and the MMSC URL. I don't see any proxy or port fields listed, and nothing appears blank or obviously wrong from what I can tell.
+
+As for the phone call — I'm not sure how to verify that reliably right now. Is there a specific way you'd like me to test it, or should we focus on the data connection issue first?
+AGENT: Let's focus on the data connection. Since the status bar says data is enabled but the speed test shows "No Connection," let's reset your APN settings to clear out any incorrect configuration.
+
+Please go ahead and **reset the APN settings** on your phone. After that, you'll need to **reboot your device** for the changes to take effect. Let me know once you've done both, and then try the speed test again.
+TOOL_RESULT: APN settings will reset at reboot.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Resetting APN settings...
+Restarting network services...
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Speed test failed: No Connection.
+USER: I did both — reset the APN settings and rebooted the device. But when I tried the speed test again, it **still failed with "No Connection."** 
+
+Honestly, this is getting a bit frustrating. The status bar keeps showing 5G with data enabled, but nothing actually connects. What else could be going on here?
+AGENT: I understand the frustration — let's keep working through it. There's one more connectivity check worth running: try making a regular phone call to confirm you have actual cellular service (a call to any number, even a quick one). If the call works, that tells us service is fine and the issue is specific to data.
+
+Also, can you check your SIM card status on the device — does it show as detected and not "Missing" or "Locked"? If it shows as missing, please reseat the SIM card.
+
+Let me know what you find on both.
+TOOL_RESULT: Your SIM card is active and working.
+USER: Okay, I checked a couple of things:
+
+- **SIM card:** It shows as **active and working** — not missing or locked.
+- **Phone call:** I placed a quick call and it connected normally, so regular cellular service seems fine.
+
+So calls work and the SIM is fine, but data still won't connect. What's left to try?
+AGENT_TOOL_CALL: {"name": "get_data_usage", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "data_used_gb": "8.7", "data_limit_gb": "15.0", "data_refueling_gb": "0.0", "cycle_end_date": "2025-02-28"}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "P1002"}}
+TOOL_RESULT: {"plan_id": "P1002", "name": "Premium Plan", "data_limit_gb": 15.0, "price_per_month": 65.0, "data_refueling_price_per_gb": 2.0}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "D1002"}}
+TOOL_RESULT: {"device_id": "D1002", "device_type": "phone", "model": "Smartphone Pro Max", "imei": "234567890123456", "is_esim_capable": true, "activated": true, "activation_date": "2025-02-15 11:45:00", "last_esim_transfer_date": "2025-01-20 09:30:00"}
+AGENT_TOOL_CALL: {"name": "transfer_to_human_agents", "arguments": {"summary": "Customer John Smith (C1001), line 555-123-2002 (L1002), cannot send MMS and mobile data will not connect (speed test fails \"No Connection\") despite: 5G with excellent signal, mobile data enabled, correct APN/MMSC settings (reset and rebooted), Wi-Fi Calling OFF, messaging app has sms+storage permissions, SIM active/not locked, calls work normally. Data usage 8.7/15 GB, line active, contract end date future. All standard troubleshooting exhausted; needs device-side data investigation."}}
+TOOL_RESULT: Transfer successful
+AGENT: YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.
+USER: ###TRANSFER###

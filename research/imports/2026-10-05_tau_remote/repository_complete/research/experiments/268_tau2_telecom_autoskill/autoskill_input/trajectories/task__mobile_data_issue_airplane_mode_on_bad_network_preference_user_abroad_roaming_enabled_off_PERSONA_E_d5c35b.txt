@@ -1,0 +1,156 @@
+AGENT: Hi! How can I help you today?
+USER: Hi there! I'm having some trouble with my mobile data. I'm currently abroad in France, and my internet keeps either stopping completely or running really slowly. I need to get this fixed — I absolutely need excellent internet speed on my phone. Can you help me out?
+AGENT: I can help with that. First I need to verify your account. Could you please provide your phone number, or your customer ID?
+
+Also, just to confirm — you mentioned you're abroad in France. Is this your home network area, or are you traveling outside it?
+USER: Sure! My phone number is 555-123-2002. And yes, I'm currently traveling abroad — I'm in France, which is outside my home network area.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 8.7, "data_refueling_gb": 0.0, "roaming_enabled": true, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT_TOOL_CALL: {"name": "get_data_usage", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "data_used_gb": "8.7", "data_limit_gb": "15.0", "data_refueling_gb": "0.0", "cycle_end_date": "2025-02-28"}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "P1002"}}
+TOOL_RESULT: {"plan_id": "P1002", "name": "Premium Plan", "data_limit_gb": 15.0, "price_per_month": 65.0, "data_refueling_price_per_gb": 2.0}
+AGENT: Here's what I found for your line (555-123-2002):
+
+- **Roaming:** Already enabled ✅ — so that's not the problem
+- **Data usage:** 8.7 GB used out of a 15 GB limit — you're well within your plan, so this isn't a data cap issue either
+
+Since your account looks fine on the network side, this is likely a device-side issue. Let me walk you through some diagnostics.
+
+Could you please do the following on your phone and tell me what you see:
+
+1. **Check your status bar** — what icons are showing? (e.g., signal strength, network type like 5G/4G, mobile data enabled/disabled, airplane mode)
+2. **Check your network status** — what network technology does it say you're connected to?
+
+This will help me pinpoint whether it's a signal, network mode, or settings issue.
+TOOL_RESULT: Status Bar: ✈️ Airplane Mode | 🔋 80%
+USER: Okay, I checked my status bar. Here's what I see:
+
+- ✈️ **Airplane Mode** icon is showing
+- 🔋 Battery at 80%
+
+I notice the airplane mode icon is on. Also, just so you know, I'd prefer to handle these one step at a time — could you guide me through one action at a time?
+AGENT: Got it — one step at a time. 
+
+The airplane mode icon is the likely culprit. **Airplane mode cuts off all cellular service**, so you won't get data or calls while it's on.
+
+**Step 1:** Please turn **airplane mode OFF** on your phone, then check your status bar again and tell me what icons you see.
+TOOL_RESULT: Airplane Mode is now OFF.
+Status Bar: 📶¹ Poor | 2G | 📱 Data Enabled | 🔋 80%
+USER: Okay, done — airplane mode is now OFF. Here's what the status bar shows now:
+
+- 📶 Signal: **Poor**
+- **2G** network
+- 📱 **Data Enabled**
+- 🔋 Battery at 80%
+
+Hmm, it says poor signal and only 2G. That doesn't sound great for speed.
+AGENT: Good progress. Two issues showing up now:
+
+- **Poor signal** — weak reception
+- **2G network** — 2G is very slow and generally not suitable for data/MMS. To get good speeds, you need at least 3G/4G/5G.
+
+**Step 2:** Let's fix the network mode first. On your phone, set the network mode preference to **4G/5G preferred**.
+
+Please change that setting, then check your status bar again and let me know what network type it shows.
+TOOL_RESULT: Preferred Network Mode set to: 4g_5g_preferred
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: Excellent! That made a big difference. Here's the status bar now:
+
+- 📶 Signal: **Excellent**
+- **5G** network
+- 📱 **Data Enabled**
+- 🔋 Battery at 80%
+
+That looks much better! Should I run a speed test to confirm?
+AGENT: That looks great — excellent signal on 5G, with mobile data enabled. That's exactly what you want.
+
+Yes, please go ahead and run a speed test to confirm. Let me know the results — download and upload speeds.
+TOOL_RESULT: Speed test failed: No Connection.
+USER: Hmm, that's strange. The speed test **failed** — it says "No Connection." 
+
+That's odd, since the status bar shows excellent signal on 5G with data enabled. A bit frustrating that it's still not working... What should I try next?
+AGENT: I understand the frustration — let's dig deeper. The status bar looks good, but we need to check whether your mobile data connection is actually working end-to-end.
+
+**Step 3:** Please check your **APN settings** on your phone and tell me what they show — in particular, whether the APN/MMSC is set correctly, or if anything shows as missing/incorrect.
+
+Let me know what you see and we'll go from there.
+TOOL_RESULT: Current APN Name: internet
+MMSC URL (for picture messages): http://mms.carrier.com/mms/wapenc
+(These are technical settings, usually best left unchanged.)
+USER: Okay, I checked the APN settings. Here's what I see:
+
+- **APN Name:** internet
+- **MMSC URL:** http://mms.carrier.com/mms/wapenc
+
+Both look correctly set to me, nothing missing. So that doesn't seem to be the problem either. What else could be causing the "No Connection" on the speed test?
+AGENT: Thanks for checking — APN and MMSC look correct, so that's ruled out.
+
+**Step 4:** Please check your **Wi-Fi Calling** status on your phone and tell me whether it's ON or OFF. Wi-Fi Calling can sometimes interfere with cellular data behavior. Also, while you're in there, let me know if you happen to be connected to a Wi-Fi network.
+
+Let me know what you see.
+TOOL_RESULT: Wi-Fi Calling is currently turned OFF.
+TOOL_RESULT: Wi-Fi is turned OFF.
+USER: Here's what I found:
+
+- **Wi-Fi Calling:** OFF
+- **Wi-Fi:** OFF (not connected to any network)
+
+So Wi-Fi Calling isn't interfering, and I'm not on Wi-Fi — just relying on cellular data. Since the APN is fine and Wi-Fi isn't in the picture, what should I try next?
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "D1002"}}
+TOOL_RESULT: {"device_id": "D1002", "device_type": "phone", "model": "Smartphone Pro Max", "imei": "234567890123456", "is_esim_capable": true, "activated": true, "activation_date": "2025-02-15 11:45:00", "last_esim_transfer_date": "2025-01-20 09:30:00"}
+AGENT: Device looks fine — activated and eSIM capable.
+
+**Step 5:** Let's check your **SIM card** status. Please check whether your SIM is showing as properly seated/recognized, or if there's any message like "Missing" or "Locked". Tell me what you see.
+TOOL_RESULT: Your SIM card is active and working.
+USER: I checked — my **SIM card is active and working**, no issues there. No "Missing" or "Locked" messages.
+
+So far everything looks fine: signal is excellent on 5G, data is enabled, APN is correct, Wi-Fi is off. But the speed test still failed with "No Connection." What else could it be?
+AGENT_TOOL_CALL: {"name": "get_data_usage", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "data_used_gb": "8.7", "data_limit_gb": "15.0", "data_refueling_gb": "0.0", "cycle_end_date": "2025-02-28"}
+AGENT: Usage still shows 8.7 GB out of 15 GB — well within your limit, so it's not a data cap.
+
+Let me check the **messaging app permissions** and other device-level settings. Actually, for a data connection issue, permissions wouldn't be it.
+
+Let me try one more thing on the device side.
+
+**Step 6:** Please **reboot your device** (turn it off and back on), then run the speed test again and tell me the result.
+
+Sometimes a fresh network registration after a reboot resolves a stuck data session — especially right after toggling airplane mode and changing network mode.
+TOOL_RESULT: Restarting network services...
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Speed test failed: No Connection.
+USER: Ugh, that's really frustrating. I rebooted the phone and ran the speed test again — and it **still failed with "No Connection."**
+
+Everything looks perfect on paper: excellent signal, 5G, data enabled. But it's just not connecting. I'm getting a bit impatient here — I really need this working. Is there something else we can try?
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 8.7, "data_refueling_gb": 0.0, "roaming_enabled": true, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT: Everything on the line checks out: Active status, roaming enabled, contract valid, no suspension, and data well within limits.
+
+To be thorough on the device side, there's one more thing worth checking — the **Data Saver** setting. Let me have you verify that.
+
+**Step 7:** Please check your **Data Saver** setting and tell me if it's ON or OFF. Data Saver can restrict background data and, in some configurations, interfere with connectivity.
+
+Also, while you're looking — is there a **VPN** connected?
+TOOL_RESULT: Data Saver mode is OFF.
+TOOL_RESULT: VPN is turned OFF.
+USER: Here's what I found:
+
+- **Data Saver:** OFF
+- **VPN:** OFF (not connected)
+
+So neither of those is interfering either. I've now checked just about everything — airplane mode, network mode, APN, Wi-Fi, SIM, rebooted — and the speed test still can't connect. I'm really getting frustrated here. What else can we possibly try?
+AGENT_TOOL_CALL: {"name": "get_bills_for_customer", "arguments": {"customer_id": "C1001"}}
+TOOL_RESULT: [{"bill_id": "B1003", "customer_id": "C1001", "period_start": "2025-03-01", "period_end": "2025-03-31", "issue_date": "2025-03-01", "total_due": 0.0, "due_date": "2025-03-15", "line_items": [], "status": "Draft"}, {"bill_id": "B1002", "customer_id": "C1001", "period_start": "2025-02-01", "period_end": "2025-02-28", "issue_date": "2025-02-05", "total_due": 150.0, "due_date": "2025-02-19", "line_items": [{"description": "Basic Plan - Line 555-123-2001", "amount": 40.0, "date": "2025-02-05", "item_type": "Plan Charge"}, {"description": "Premium Plan - Line 555-123-2002", "amount": 65.0, "date": "2025-02-05", "item_type": "Plan Charge"}, {"description": "Basic Plan - Line 555-123-2003", "amount": 40.0, "date": "2025-02-05", "item_type": "Plan Charge"}, {"description": "Suspension Fee - Line 555-123-2003", "amount": 5.0, "date": "2025-02-05", "item_type": "Fee"}], "status": "Issued"}, {"bill_id": "B1001", "customer_id": "C1001", "period_start": "2025-01-01", "period_end": "2025-01-31", "issue_date": "2025-01-05", "total_due": 160.5, "due_date": "2025-01-19", "line_items": [{"description": "Basic Plan - Line 555-123-2001", "amount": 40.0, "date": "2025-01-05", "item_type": "Plan Charge"}, {"description": "Premium Plan - Line 555-123-2002", "amount": 65.0, "date": "2025-01-05", "item_type": "Plan Charge"}, {"description": "Basic Plan - Line 555-123-2003", "amount": 40.0, "date": "2025-01-05", "item_type": "Plan Charge"}, {"description": "Data Overage - Line 555-123-2002", "amount": 15.5, "date": "2025-01-05", "item_type": "Overage"}], "status": "Paid"}]
+AGENT_TOOL_CALL: {"name": "transfer_to_human_agents", "arguments": {"summary": "Customer John Smith (C1001, line 555-123-2002 / L1002) traveling abroad in France reports mobile data not working: speed test fails with \"No Connection\" despite excellent 5G signal and data enabled. Troubleshooting completed: airplane mode was ON (turned off), network mode was 2G (changed to 4G/5G preferred — now excellent 5G), APN/MMSC correct, Wi-Fi and Wi-Fi Calling OFF, SIM active, device rebooted, Data Saver OFF, VPN OFF. Account status Active, roaming enabled, data usage 8.7/15 GB (within limit), no overdue bills, contract valid. All device/account checks pass but cellular data still cannot connect. Needs further network-level investigation."}}
+TOOL_RESULT: Transfer successful
+AGENT: YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.
+USER: Alright, I'll hold. Thanks for your help so far.
+
+###TRANSFER###

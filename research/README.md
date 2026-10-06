@@ -6,6 +6,110 @@
 
 ## 轮次记忆索引
 
+- [全量原始与整理数据Git迁移（2026-10-06—07）](memory/2026-10-07_git_full_data_migration.md)：用户授权全部数据随研究记忆上传供新环境接续；65外部源文件归档SHA通过，原始20＋人工3及源文档保留。历史数据/LFS、原生实验private证据、作者固定子模块和实际检查器纳入；37文件上传副本仅遮蔽凭据，本地原件不改。独立LF checkout225项严格换行恢复、550历史SHA和S0通过；[迁移说明](../MIGRATION.md)。提交与远端核验状态见记忆后续记录。
+
+- [原生Trace2Skill接通与真实企业单经验验收（2026-10-06）](memory/2026-10-06_trace2skill_native_baseline_execution.md)：[本轮报告](reports/2026-10-06_trace2skill_native_baseline_execution.md)／[原生skill](experiments/20261006_trace2skill_native_baseline/deliverables/enterprise_monthly_salary/xlsx/SKILL.md)。原源码550哈希一致，真实Success1经验→MAP1→定位翻译1→APPLY／格式检查；作者人工xlsx深化，不冒称Creation，单补丁原MERGE跳过。5真实请求11148tokens（含探针），719来源及4042成员复核。三真实响应0新调用精确回放，3文件SHA全等；旧wrapper仅hash缺全文如实披露，检查器OpenClaw来源非论文同版认证。原机制合成控制通过；评分表名、非空技能注入、run缓存已修外层。WindowsLO三轮缓存／独立转换未过，5条项目崩溃记录非算法失败；Docker有界／延迟快照未ready，待Linux资源。公开校准与消费尚未启动，公式入口API前阻断。
+
+- [Trace2Skill强基线缺项与验收归因核查（2026-10-06）](memory/2026-10-06_trace2skill_baseline_gap_and_acceptance_audit.md)：[完整缺项／配置／验收清单](reports/2026-10-06_trace2skill_baseline_gap_and_acceptance_audit.md)。Demo自家算法、旧ECNU删改适配、当前719来源登记分开；原成功／Agentic修复、初始化、定位与自修、实际模型参数、消费与学习验证仍待补。新查论文合并32vs发布5、温度覆盖、缓存缺seed/config、消费只选排序首skill、检查器缺失可跳过True／Combined退出。verified400及400输入／真值可定位但无输出。版本不保证v5完全映射，负结果先排除配置／环境／测量；本轮0模型／0代码改动。
+
+- [当前全主题技能库的Trace2Skill强基线范围（2026-10-06）](memory/2026-10-06_trace2skill_all_topic_baseline_scope.md)：用户要求当前图内各主题多skills；核实两合同属于LEGAL、051仅后续恢复层，原主线改为1224会话/719片段。已交付[719来源登记与13类统计](experiments/20261006_trace2skill_topic_library_preparation/README.md)及[完整核心链方案](reports/2026-10-06_trace2skill_all_topic_library_baseline.md)。作者一次目标skill多轨迹归纳，多库需预定义任务族分别原链；纠正整会话验收门槛为task episode，旧主题129差异已规避。领域接口范围已澄清待答，无模型/新skills，旧实验保留。
+
+- [自主选择已有轨迹并冻结完整原文（2026-10-06）](memory/2026-10-06_autonomous_existing_trace_selection_and_input_freeze.md)：用户授权自行选类别；选合同051已有2恢复trace/48原文（8用户40AI），按来源ID补齐正文、分离原图并交付[输入包及中文全文](experiments/20261006_trace2skill_existing_trace_preflight/README.md)。DATA43逐条复查未找到可认证整任务成功材料；两局部纠错不能改名FAILED，原--all非UNKNOWN支持。原成败/领域/初始化边界仍未解，无模型、新skills或原版生成，旧实验保持。
+
+- [先确认已有轨迹文件再执行（2026-10-06）](memory/2026-10-06_confirm_existing_trace_file_before_execution.md)：用户确定已有轨迹，不切公开数据。实查旧脚本抽6整会话129消息；表格类已有6片段29消息（类别池43/286），合同051实存2结构化trace/48消息、047实存4trace/70来源。已列[输入核对单](reports/2026-10-06_trace2skill_existing_input_confirmation.md)，仅确认本次具体文件，未自行替换类别/扩跑或重做恢复；11工具快照对应6可见调用，无新API/代码/正式输入导出。
+
+- [已有轨迹不要求先使用skills（2026-10-06）](memory/2026-10-06_existing_traces_do_not_require_prior_skill_use.md)：初始草稿为修改对象、历史轨迹为独立经验输入，公开分析与演化入口无同一skill使用证明门槛；论文主实验加载初始技能采样是受控设置，企业历史须披露差异但可学习。不要求重跑旧任务或切公开数据，成败与材料另按任务核对，原6会话未知不扩至全量轨迹；无新模型/生成或源码修改。
+
+- [完整Trace2Skill要求与初稿来源更正（2026-10-06）](memory/2026-10-06_trace2skill_native_completion_requirement.md)：原论文确有仅参数知识生成的xlsx-basic初稿，手写三步未忠实执行；公开CLI要求已有目录与论文方法不同，当前发布树缺原seed/准确初始化提示。企业整会话成败未知，原处理器无UNKNOWN入口；Agentic失败还需文件验证。数据范围已向用户确认，未擅自改成深化/公开benchmark，未新调用；[核查文档](reports/2026-10-06_trace2skill_native_initialization_and_execution_boundary.md)及旧报告归因更正，原包/费用保持。
+
+- [Trace2Skill复用边界与技能封装核查（2026-10-06）](memory/2026-10-06_trace2skill_fidelity_and_packaging_audit.md)：当前为UNKNOWN历史适配＋官方MAP/合并/程序APPLY＋OpenClaw脚本归档，非完整原版链路。初始泛三步为手写弱草稿；原MERGE漏old_text，官方默认空串替换导致前插/原标题连行/旧步骤保留，ZIP未改正文。未做语义聚类、原生成功失败分析、creator智能体或消费；定位翻译/LLM修复关闭。总报告补精确边界，原包与19调用不变，无新实验/修复。
+
+- [ECNU续跑与总实验结果（2026-10-06）](memory/2026-10-06_trace2skill_ecnu_continuation_and_final_results.md)：[总报告](reports/2026-10-06_trace2skill_ecnu_total_experiment_report.md)／[skills交付](experiments/20261006_trace2skill_ecnu/deliverables/README.md)。明确外发授权后v2超时、v3唯一显式重发成功但第四恢复关系方向契约失败，按协议停止。19实际请求265639已报告tokens＋1超时用量未知，114592仅预留。A1待审包原样交付，B4返回/3恢复/3分析15经验、无生成；任务过拆/未选反馈/哈希自述升级与文档结构缺陷可查，未证恢复收益或成本下降。历史/原包/账本保留，无v4或消费扩跑。
+
+- [ECNU真实企业历史技能生成试跑（2026-10-06）](memory/2026-10-06_trace2skill_ecnu_generation_pilot.md)：[报告](reports/2026-10-06_trace2skill_ecnu_generation_pilot.md)／[实验入口](experiments/20261006_trace2skill_ecnu/README.md)。6全文会话129消息＋11原工具；官方固定源码与中立适配。A6分析27经验→3MAP/1MERGE→1待审包；B第二恢复漏来源索引终止。14实际请求151623token，v1失败保留；v2窄归一化免费验证及冻结，指定接口外发待确认。来源错标部分未传播但最终范围/Markdown缺陷保留，无消费收益或恢复优越结论。
+
+- [本地tools盘点与公开skills获取（2026-10-06）](memory/2026-10-06_evomind_environment_and_skill_acquisition.md)：[完整报告](environment/20261006/README.md)／[给平台的清单](environment/20261006/向EvoMind索取skills清单.md)。1224会话中74标识，42 GitHub＋2 ClawHub独立包及1视频组合参考对应45标识；29待落实＝5平台适配候选＋24来源/获取待核，非原生认证。Windows默认OpenClaw2026.9.5，LibreOffice/通用FFmpeg、依赖路径及专属服务仍缺。1389文件与3源hash通过；仅下载/探针，无注册、消费实验或Demo变更。许可/基准/版本边界保存，优先级对齐新增表格试跑方案。
+
+- [技能生成与执行依赖边界（2026-10-06）](memory/2026-10-06_skill_generation_dependency_boundary.md)：纯历史→技能生成不以旧附件／产物实体、KM环境或完整历史skills为前置；仍需会话正文、模型／生成依赖、共同弱草稿与格式检查。缺失内部方法／结果未知不补造。新输入／执行工具与评分属于后续消费验收，不阻塞先生成。补明上轮方案，无新增实证／代码／实验。
+
+- [Trace2Skill官方源码与单主题试跑方案（2026-10-06）](memory/2026-10-06_trace2skill_single_topic_pilot_plan.md)：[方案](reports/2026-10-06_trace2skill_single_topic_pilot_plan.md)。确认作者表格源码及离线补丁合并、只读失败分析；未知成败与检查路径仍须适配。DATA43候选中8种子盘点，先建议6全文会话（129消息／30603字符），2长会话另定公平窗口。直接／恢复后同一官方下游＋弱技能消费对照，拟6新任务；仅计划，无克隆／安装／模型／代码／实验，未证收益。
+
+- [任务主题复查与学习材料池（2026-10-06）](memory/2026-10-06_evomind_task_topic_release.md)：[报告](reports/2026-10-06_evomind_task_topic_release.md)／[入口](datasets/evomind/task_topics_20261006/private/index.html)。1224会话（716保留+508暂存）、719片段；242排除不入新版。全量摘要及来源摘录复查，7会话扩展用户全文；4会话主主题、129片段主题修订，两分类轴分开。标签写入正文、13主题分区、无答案模型输入、两柱状图和CSV；原源一致，非完整轨迹或业务认证。
+
+- [柱状图三类筛选状态解释（2026-10-06）](memory/2026-10-06_evomind_screening_labels_clarification.md)：716至少找到局部学习线索、508任务有但学习点尚不能判定、242本轮不纳入候选；按会话统计，非轨迹质量／成功／技能效果。“待补证”可指回查语义和关联，不要求恢复全部附件；原文保留，未重筛或改冻结图，本轮无新增实证。
+
+- [719候选逐条质量与柱状图（2026-10-06）](memory/2026-10-06_evomind_trajectory_quality_assessment.md)：[整体报告](reports/2026-10-06_evomind_trajectory_quality_assessment.md)／[逐条质量页](datasets/evomind/quality_20261006/private/index.html)。全719来源/双边/引用可查，203接受局部对应、505仅待核、11无局部记录；正文514多输入/90单输入多AI/115单输入单AI。47载荷工具锚点/297文件元数据，非执行认证；37固定正文复核21方法支持/16部分，8前轮同审阅者重读，非全量准确率。三图三格式与中文清单；计数232/230/199更正口径未知，原源/旧标签保持，认证0不当失败，无新模型/技能/benchmark或Demo改动。
+
+- [全量证据富化与数据演化（2026-10-06）](memory/2026-10-06_evomind_dataset_enrichment_and_evolution.md)：[报告](reports/2026-10-06_evomind_dataset_enrichment_and_evolution.md)／[新版数据](datasets/evomind/enriched_20261006/README.md)／[演化计划](datasets/evomind/enriched_20261006/evolution_plan.md)。1466全量正文与工具/文件/skills证据整合，去重阅读26116条；固定25HOLD补漏8，新716保留/508暂存/242排除、719候选。原071显式/066未核对应分开，输入不含研究答案，32同输入组中8跨账户。原源/旧判断保持；后续关系核验/派生/独立消费为计划，无新模型API、技能或benchmark，非黄金认证。
+
+- [真实会话技能学习材料精筛（2026-10-06）](memory/2026-10-06_evomind_skill_learning_screening.md)：[报告](reports/2026-10-06_evomind_skill_learning_screening.md)／[全量筛选页](datasets/evomind/screening_20261006/private/index.html)。1466全覆盖，708保留／516暂存／242排除，711代表候选及实际文字；初201短回复复核后144清理／57保护，候选内30次完全重复合并。原数据及071不变、15离线核对通过；候选非黄金／技能、未逐字全读或认证收益，无新API、生成、实验或Demo变更。
+
+- [最小补交请求：三包资料＋业务验收（2026-10-05）](memory/2026-10-05_evomind_minimal_forward_request.md)：[可直接转发正文](reports/2026-10-05_evomind_request_to_forward.md)。实际可取得技能包、运行/工具/服务条件、仍留存输入/最终文件；业务方验收标准。历史缺稿不作前置，优先已有独立可执行任务留出。仅要求澄清，无新实证或运行。
+
+- [固定真实历史学习：补交要求修订（2026-10-05）](memory/2026-10-05_frozen_history_evomind_supply_revision.md)：[给数据方要求](reports/2026-10-05_frozen_history_evomind_supply.md)／[评估第2版](reports/2026-10-05_local_evaluation_readiness_and_trace2skill.md)。既有轨迹直接用，旧稿/原环境/全量结果不再必交，不重跑旧任务采样；遗失保持未知。新消费任务输入/评分/必需包工具仍需可用。官方Trace2Skill每题一轨迹，未知结果适配及基线同权明确；原方案/CSV存档，073主动构造为可选。无新实验/模型/开发。
+
+- [本地评测准备、17项补交与Trace2Skill强基线（2026-10-05）](memory/2026-10-05_local_evaluation_readiness_and_trace2skill.md)：[评估方案](reports/2026-10-05_local_evaluation_readiness_and_trace2skill.md)／[可填写清单](datasets/evomind/km_skill_audit_20261005/evaluation_supply_checklist.csv)。现有3578可提取工具记录支持依赖线索，不认证安装；真实文件/技能版本/环境/评分与留出任务仍是缺口。官方表格与企业适配分线，工具/基础技能固定，不以KM完整源码为前置；企业集补齐后可评测。仅离线分析/官方核查，未安装/执行新任务或基线。
+
+- [更正：已提供工具调用，先用现有记录盘点依赖（2026-10-05）](memory/2026-10-05_existing_tool_records_correction.md)：原包1391工具样本和消息活动快照已在，未导全量不等于没有。技能筛选574记录中确认含soffice转换参数的exec返回外层退出0；不证明每子命令、产物或本机环境。先分析已给参数/返回再按缺口补版本与日志，无环境安装/历史命令执行。
+
+- [工具环境适配与KM源码必要性（2026-10-05）](memory/2026-10-05_skill_tool_environment_adaptation.md)：[说明](reports/2026-10-05_skill_tool_environment_adaptation.md)。独立Demo通常无需KM完整源码；需实际技能包、程序依赖与环境、工具契约及专属服务接口。配置允许exec不证明安装可用，81技能不等于工具库存；先小范围盘点再真实交付验收。本轮无安装/运行/代码或新增实证。
+
+- [81项技能来源、用户安装与平台内置标注（2026-10-05）](memory/2026-10-05_evomind_skill_provenance_annotation.md)：[报告](reports/2026-10-05_evomind_skill_provenance.md)／[CSV](datasets/evomind/km_skill_audit_20261005/skill_provenance.csv)。20本地catalog内置、27其他共享、34个人/工作区/未知；与来源独立。4公开项目安装请求仅1同用户消费且缺安装成功链；5平台品牌适配候选、5emerged待核、60其他来源未知。11公开参考地址不等于开源，文档四包为源码可见。逐项列实际包与版本来源补取，未接生产或改原数据。
+
+- [KM底层技能记录统计及历史假定更正（2026-10-05）](memory/2026-10-05_evomind_km_skill_usage_audit.md)：[报告](reports/2026-10-05_evomind_km_skill_usage.md)／[81项清单与来源](datasets/evomind/km_skill_audit_20261005/README.md)。1466范围内现有工具载荷+1373结构样本，有74明确运行目录标识/386会话；扩大工作区/缺路径81/399，另4脱敏。纠正全量KM无技能假定，声明仍不计使用；非完整库存/频次/有效应用，版本/日志缺口保持。11核验通过，未接KM/生产或改算法/标注。
+
+- [41条边界会话人工复核包（2026-10-05）](memory/2026-10-05_evomind_41_topic_human_review.md)：[标注说明及入口](datasets/evomind/topic_review_20261005/README.md)。32目标不明+9模板模拟，185用户/263AI全文、071回复叠加；判断/主题/说明、本地保存、JSON导入导出、CSV及完整MD。11离线检查通过，浏览器实点击未验；人工结果尚待用户填写，原标签/主集不变，无模型/生成/训练/生产。
+
+- [全量会话主题与缺失数据补交（2026-10-05）](memory/2026-10-05_evomind_full_data_processing.md)：[全量报告](reports/2026-10-05_evomind_full_data_processing.md)／[数据方清单](reports/2026-10-05_evomind_data_supplement_request.md)。1466会话分12主题+32不明/9模板，443多主题；词面线索后AI归类、107边界/28代表复核，非任务真值/准确率。442用户文件/14输出元数据/57活动快照，列1767引用及PG/KM来源、固定范围SQL、同路径覆写漏查补救；原SHA不变、链接和图通过。未补真实文件/生产/生成/训练，历史无skill与未知时序保持。
+
+- [黄金轨迹池到工作流：聚类形式化（2026-10-05）](memory/2026-10-05_golden_pool_workflow_induction_formal.md)：[调研／公式／例子](reports/2026-10-05_golden_pool_workflow_induction_formal.md)核实Trace2Skill补丁合并与SkillGLoW方法聚类之别，AWM参数化及早期流程MDL。拟依赖完整方法、类型绑定、步骤图对齐、条件联合路径与局部反证约束，保真可重建后按正压缩收益凝聚；Skill=Render(W)。黄金输入不自动认证抽象，单失败不推禁令，诊断错误回执可有用；本轮无实现或新实验。
+
+- [黄金轨迹结构与RL恢复定义（2026-10-05）](memory/2026-10-05_golden_trajectory_schema_and_rl.md)：[数据结构／公式／示例](reports/2026-10-05_golden_trajectory_schema_and_rl.md)给T=(g,N,R,J,L,U)，逐标准证据判断，Gold相对预声明学习范围及协议，五条件同时成立；不可识别历史不能由RL补真值，补日志与新验证分开。RL奖励关系、局部判断、可答覆盖与合理未知，遮掉唯一证据后不奖励猜隐藏答案。新schema／认证／训练均是方案，本轮无新增实证或代码。
+
+- [黄金轨迹定义的人话重申（2026-10-05）](memory/2026-10-05_golden_trajectory_plain_definition.md)：黄金是指定学习范围内经过核验的经验记录，说明目标／条件、真实动作结果、局部判断与修订、学习用途及未知；成功、格式化和官方封装均不充分。区分局部与整任务认证，关键缺证仍候选，失败边界不冒充因果；当前管道无独立黄金认证。本轮无新增实证／代码／模型。
+
+- [算法GitHub上传与原链路复用清单（2026-10-05）](memory/2026-10-05_algorithm_github_upload.md)：用户明确授权限定提交／推送；分支`codex/direct-trace-skill-pipeline`、提交`6286e0f`远端核验一致。80文件含新算法及原包依赖／测试／安装说明，不混私有输入和其他工程；[原链路文件清单](../enginering/demo/DIRECT_PIPELINE_SOURCE_MAP.md)已上传。本轮无新模型、benchmark或实证发现，未合并main。
+
+- [综合研究报告：实验结果、瓶颈与算法路线（2026-10-05）](memory/2026-10-05_research_summary_results_bottlenecks_and_method.md)：[团队阅读版](reports/2026-10-05_research_summary_results_bottlenecks_and_method.md)统一三域AutoSkill基线（+5／+5／−5个百分点、区间均跨0）、局部误学及消费漏步案例、R恢复与W聚合，附全链图和创新边界。同步写作期间新增直接管道实现：构造3→1、真实task50两查询候选且0合并，保留旧343负结果；新算法下游收益仍未证。本轮仅复核与写作，无新实验／代码／训练。
+
+- [直接实验管道实施与验收（2026-10-05）](memory/2026-10-05_direct_experiment_pipeline_implementation.md)：用户明确只做E/C/V→恢复→聚合→冻结skills库；[使用说明](../enginering/demo/DIRECT_PIPELINE_README.md)／[报告](reports/2026-10-05_direct_experiment_pipeline_implementation.md)。局部原标准与范围、双方动作、失败依赖、跨批步骤映射及正压缩程序聚合接通，官方封装无模型；416免费检查，构造3→1／2次合并。真实task50为保存R回复＋1新请求，2查询候选／0合并，冻结及0调用复入通过；全轮4请求／100549已知tokens＋1超时未知，旧失败保留。可接实验，非黄金／效用认证，无新benchmark／训练／后续自进化。
+
+- [第二核心：工作流聚合启发式设计（2026-10-05）](memory/2026-10-05_workflow_aggregation_heuristic_design.md)：用户明确R恢复＋W聚合，封装不列主要创新。[设计](reports/2026-10-05_workflow_aggregation_heuristic_design.md)从局部方法做步骤／条件对齐，以全成员映射和反例检查替代机械全两两兼容，再按保真约束下的压缩收益贪心合并；保留独特单例、未知及完整方法支持，不拼造成功路径。核对现源码仍靠模型兼容声明、最新三单例簇无合并；复核AWM／Trace2Skill／SkillGLoW与MDL，候选贡献在R约束W。仅研究方案，无新实现／模型／实验。
+
+- [案例驱动的轨迹恢复设计（2026-10-05）](memory/2026-10-05_case_driven_trajectory_recovery_design.md)：[人话算法说明](reports/2026-10-05_case_driven_trajectory_recovery_design.md)以task96拆开真实查询、失败修改、地址冲突与无依据下单；收敛为关系选择／逐项条件核对／证据完整的学习视图。区分AND、条件分支、依赖、目标转向；黄金为独立核验资格，未知候选保留，错误历史不得为满足约束而删除。补RL关系／局部判定／条件覆盖与条款约束，复核原论文和电信消费漏步；仅设计，无新实验／实现／训练。
+
+- [黄金轨迹与局部经验理解重设（2026-10-05）](memory/2026-10-05_golden_trajectory_local_experience_redesign.md)：回应用户批评，[调研和定义](reports/2026-10-05_golden_trajectory_local_experience_redesign.md)核对Trace2Skill／SkillGen／SkillGLoW／AgentTether／PRM；现R有关系约束，但缺标准—局部声明覆盖，m1错伤/m3越范围确证。提出预声明目标/核验协议的黄金标准、局部单元三轴、覆盖矩阵/依赖相关回溯/修订差分及证据约束归纳；图／PRM／成败对比非首次，候选贡献在混合会话关系向条款传递。方案未实现，无新实验／模型／训练，343结构检查不作黄金认证。
+
+- [轻量E/C/V轨迹到技能库实现（2026-10-05）](memory/2026-10-05_light_ecv_skill_pipeline_implementation.md)：用户授权离线入口，不要求成员／组织／数据库；[使用说明](../enginering/demo/LIGHT_PIPELINE_README.md)与[验收报告](reports/2026-10-05_light_ecv_skill_pipeline.md)。双边动作、同回合要求生效、关系约束聚类与用途封装接通；343免费检查通过。最终2任务／3官方技能包为保存真实R回复重验＋2新W请求，缓存复入0新；全轮6请求／104899tokens，旧失败保留。仍有宽方法错伤警示、成功标签覆盖偏宽及未决要求，本例无跨流程合并；不当正式语义库／收益证明。未训练／新benchmark／部署，不改其他实验。
+
+- [τ²洞察与我方算法管道人话说明（2026-10-05）](memory/2026-10-05_tau_insights_and_pipeline_explanation.md)：保留两核心与十二阶段，[说明文档](reports/2026-10-05_our_pipeline_plain_language.md)以目标／对象／要求／动作／反馈／结果解释恢复，再按方法支持与整簇相容归纳；含全链图、输入输出、真实漫游摘要及构造交错例子。纳入用户新增失败动作误学洞察：用途区分推荐／条件／警示／待验证，已有方法级检查不等于逐条款保护。源码核对用户调用展开和行动方仍缺，消费者漏步另验。无新效果实验／代码／模型，新R/W未接τ²，收益与资源目标未证。
+
+- [最新远端τ²三域结果与独立分析（2026-10-05）](memory/2026-10-05_tau_remote_pull_and_analysis.md)：固定远端14f5b59、隔离下载148/267/268，六份原结果复算零售／航空+5pp、电信−5pp均未显著；稳定性与耗时并列。更正航空19/26、电信53/70及读取触发／全文、部分ACTION；发现电信866用户调用结构被适配省略，真实漏手机漫游但技能已有规则。[人话报告](reports/2026-10-05_tau_remote_results_analysis.md)／[指标说明](reports/2026-10-05_tau_metrics_dictionary.md)／[核心CSV](reports/2026-10-05_tau_main_metrics.csv)。只下载与离线审计，未跑模型／改算法；我方收益、全文读取及总成本未证。
+
+- [主动修复的必要性与最小范围（2026-10-05）](memory/2026-10-05_active_repair_scope_decision.md)：区分已有失败修订恢复（核心必要）、修订假设（可选扩展）和通用主动重跑修复（当前非必选）；建议可回放、有验收且预算内才启用阶段4／9验证分支。新增验证不冒充原历史，不削弱Trace2Skill强基线；仅建议、未实施／实验／用户采纳。
+
+- [两个已实现算法及 Trace2Skill 对照（2026-10-05）](memory/2026-10-05_two_algorithms_explanation_and_trace2skill.md)：源码核对恢复的语义候选／宽度8约束拼接、要求与结果范围，以及局部流程两两兼容／整簇要求和依赖的贪心聚类；明确新链路非向量相似度。构造合同／通知例子解释关系如何影响技能，[详细报告](reports/2026-10-05_two_implemented_algorithms_and_trace2skill.md)公平区分Trace2Skill已有成功失败分析与我们的上游恢复贡献候选。仅说明，无新实验／训练／代码改动，收益未证。
+
+- [启发式全管道实现与隔离验收（2026-10-04，跨日10-05）](memory/2026-10-04_heuristic_pipeline_implementation.md)：独立Demo的E/C/V、联合关系恢复、范围约束聚合、creator及治理接通；281项与十二阶段fixture通过。真实1—8及保存回复回放v2通过，实时更新续验仍超时，十次失败保留；最后新契约仅一次结构化选择，旧代理保留。[实现报告](reports/2026-10-04_heuristic_pipeline_implementation.md)区分功能、语义覆盖和收益未证；无训练／大规模benchmark，不改旧实验。
+
+- [模型训练路线：关系SFT、可核验奖励与技能效用RL（2026-10-04）](memory/2026-10-04_trajectory_model_sft_and_rl_plan.md)：优先R恢复模型，W归纳及消费者先固定；SFT→关系GRPO→效用传导诊断→有信号才效用RL，W后续单独训练。[完整方案](reports/2026-10-04_trajectory_model_sft_and_rl_plan.md)含样例、奖励、分集、预算与停止条件；复核071标签来源、038非完整人工trace，SAPO已有技能效用参数训练。仅方案、未训练／新实验。
+
+- [统一方法：高质量轨迹定义、关系恢复与工作流归纳（2026-10-04）](memory/2026-10-04_standardized_trajectory_recovery_method.md)：分开记录质量、完成结果和学习价值，E/C/V输入统一兼容好坏轨迹；模型关系预测＋程序有界约束拼接，步骤／依赖／条件对齐聚类，关系决定条款支持范围。[算法与流程图](reports/2026-10-04_standardized_trajectory_recovery_method.md)含构造全链例子及创新边界；未知不编造、未验证正常处理，未实施／训练／新实验。
+
+- [过程与结果联合输入：验收反馈及结果关联（2026-10-04）](memory/2026-10-04_process_outcome_input_and_credit_assignment.md)：用户发现结果存在却未进学习；148同类转换reward仅在manifest得到核实，267数字暂未本地复核。拟E事件＋C上下文＋V稀疏评价，保留来源与作用范围；演化反馈可作为新信息条件，完整reward_info含参考内容须区分。加分数非创新，恢复评价归属并影响技能为候选。[报告](reports/2026-10-04_process_outcome_input_and_credit_assignment.md)。未运行新实验。
+
+- [泛化要求与轨迹恢复主贡献定位（2026-10-04）](memory/2026-10-04_trace_recovery_generalization_and_advantage.md)：用户要求其他任务良好表现，主优势固定为更深的独立轨迹恢复；通用关系核心与领域资料分离，恢复结构必须约束聚合和条款。新实例／未见领域／会话干扰分开验证，独有模块不等于全球首创。[设计](reports/2026-10-04_trace_recovery_generalization_and_advantage.md)。无新增实证、未训练／实验／开发。
+
+- [两个核心算法：关系轨迹恢复与工作流技能归纳（2026-10-04）](memory/2026-10-04_two_core_algorithms_trace_and_skill.md)：用户收敛两问题；给标准轨迹、步骤／依赖／条件／结果对齐及簇内抽象路线。LifeMem／SkillGLoW／GSE已有聚类、差异归纳与泛化，新增候选在恢复关系如何约束合并与条款推广范围，不宣称首次。[完整方案](reports/2026-10-04_two_core_algorithms_trace_and_skill.md)。未实验／训练／改Demo。
+
+- [关系恢复与技能学习方案的人话解释（2026-10-04）](memory/2026-10-04_relation_learning_plan_plain_language.md)：构造合同／通知交错示意，逐步解释目标线索、要求变化、反馈归属、完成证据、有条件方法聚合与使用后定点更新；先验证机制，再训练关系模型，必要时用开发任务效用优化。[完整解释](reports/2026-10-04_relation_learning_plan_plain_language.md)。本轮无新增实证发现，未训练／实验／改Demo。
+
+- [148全部指标、额外强基线与独立关系学习路线（2026-10-04）](memory/2026-10-04_148_metrics_baselines_and_relation_learning_plan.md)：AutoSkill仅强基线，RQ保持任务／尝试／反馈／要求关系恢复；用户看不到后台回执，感谢不能单归用户差，但task0有场景外编号和偏好漂移。全指标含pass^k、耗时、工具、资源及未知成本；优先Trace2Skill／EvoSkill，关系SFT＋约束解码、开发技能效用训练为拟议独立方法，干净／交错收益分开。[方案](reports/2026-10-04_148_metrics_baselines_and_algorithm_plan.md)。未启动训练或实验。
+
+- [148三个瓶颈的案例化解释（2026-10-04）](memory/2026-10-04_148_autoskill_bottlenecks_explained.md)：task0证据冲突不等于错误规则已学到；task50承诺／task96完成自述与未支持能力扩张分开；预分任务尚未测试交错。明确需求、方法、能力三类证据，纠正“单输入单主链”过强措辞。[详细解释](reports/2026-10-04_148_autoskill_bottlenecks_explained.md)。无新效果实验，不改其他任务状态。
+
+- [148结果与轨迹分析证据复核（2026-10-04）](memory/2026-10-04_148_autoskill_evidence_review.md)：独立复算126→134/160、+5pp未显著；70演化源仅5通过，159/160仅读取尝试。定位task50/96来源→版本→未支持操作，区分模拟器／消费失分；固定AutoSkill后端的关系恢复对照仍待做。[综合报告](reports/2026-10-04_148_autoskill_baseline_and_trajectory_recovery.md)。只读分析、无新实验，不改变其他运行状态。
+
 - [第266轮：SP结束归档缺陷修复，v2续跑](memory/266_2026-10-04_sp_end_archive_compatibility_v2.md)：travel_050官方end缺SPModel.model导致真实失败，离线旧错/新非空归档与请求等价通过；旧34freeze/334run SHA、失败与9首评分全保留，交接travel_035部分attempt单列。独立266/v2/38SHA/1102来源、唯一新controller已恢复，9/212（4.25%）继承/203剩余，首050真实读取/API推进，累计13628；[页8146](http://127.0.0.1:8146/)，巡检已同步，不改提示/模型/vendor/评分。
 
 - [第265轮：有技能6/212，负差值保留](memory/265_2026-10-04_skill_evaluation_six_tasks.md)：2.83%，同题无技能0.3750/有技能0.2604、配对-0.1146、1胜3平2负；读取率66.7%，有效0分4/UNKNOWN0。第七题正常推进，271完整API/5终态清理取消单列、freeze/库copy/身份/实际服务通过，累计13451；不挑分重试或宣称总体收益。

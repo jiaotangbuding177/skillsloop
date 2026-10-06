@@ -1,0 +1,100 @@
+AGENT: Hi! How can I help you today?
+USER: Hi there! I'm having some trouble with my mobile data. I'm currently abroad in France and my internet is either super slow or just stops working altogether. I really need to get this fixed—I absolutely need excellent internet speed on my phone. Can you help me?
+AGENT: I can help with that. First, I need to verify your account. Could you please provide your phone number, or your customer ID?
+USER: Sure! My phone number is 555-123-2002. My name is John Smith.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 8.7, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT: I found the line associated with your number (555-123-2002, line L1002). Here's the situation:
+
+- **L1002** (your line, 555-123-2002): Active, but **roaming is currently disabled**.
+- **L1001** (555-123-2001): Active, roaming disabled.
+- **L1003** (555-123-2003): Suspended (contract ended), roaming disabled.
+
+Since you're traveling outside your home network in France, roaming needs to be enabled for your line to use data abroad. I can enable roaming on your line (L1002) at no cost. Would you like me to do that?
+USER: Yes, please go ahead and enable roaming on my line. That sounds like it could be the issue.
+AGENT_TOOL_CALL: {"name": "enable_roaming", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: Roaming enabled successfully
+AGENT: Done — roaming is now enabled on your line (555-123-2002) at no cost.
+
+Please note that you may need to reboot your device for the change to take effect. Also, keep in mind your data still counts against your plan's limit, so let me know if your connection remains slow or drops out and I can look into your data usage next.
+
+Is there anything else I can help you with?
+USER: Thanks! Let me check my phone to see if roaming is set up correctly on my end.
+TOOL_RESULT: Airplane Mode: ON
+SIM Card Status: active
+Cellular Connection: no_service
+Cellular Signal: none
+Cellular Network Type: none
+Mobile Data Enabled: Yes
+Data Roaming Enabled: Yes
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+USER: Hmm, I checked my phone and I found something. My phone shows that **Airplane Mode is ON**, there's no cellular service or signal at all, and the network type is showing "none." Mobile data and data roaming both show as enabled on the device, but with airplane mode on, I'm guessing nothing can connect. Should I turn off Airplane Mode?
+AGENT: Yes, exactly — Airplane Mode disables all cellular connectivity, so nothing can connect while it's on. Please turn Airplane Mode **off** on your device.
+
+Once it's off, the phone should reconnect to the local network. After that, let me know what you see (signal strength, network type) and we can continue troubleshooting from there.
+TOOL_RESULT: Airplane Mode is now OFF.
+Status Bar: 📶¹ Poor | 2G | 📱 Data Enabled | 🔽 Data Saver | 🔒 VPN Connected | 🔋 80%
+USER: Okay, I've turned Airplane Mode off. Now here's what I see:
+
+- Signal strength: **Poor**
+- Network type: **2G**
+- Mobile data: **Enabled**
+- A **Data Saver** mode is on
+- A **VPN is connected**
+- Battery at 80%
+
+Hmm, 2G doesn't sound great for speed. What should I do next?
+AGENT: You're right — 2G is not suitable for good data speeds (and it also causes issues with MMS). Let's fix the network type first.
+
+Please switch your network mode preference to a mode that includes 4G/5G — for example **"4g_5g_preferred"** or **"4g_only"**. This should get you off 2G and onto a faster network.
+
+Go ahead and make that change, then let me know what network type and signal strength you see afterward.
+USER: Let me make that change now.
+TOOL_RESULT: Preferred Network Mode set to: 4g_5g_preferred
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔽 Data Saver | 🔒 VPN Connected | 🔋 80%
+USER: Great, that did the trick! Now I'm seeing:
+
+- Signal strength: **Excellent**
+- Network type: **5G**
+- Mobile data: **Enabled**
+- Still showing **Data Saver** mode on
+- Still showing a **VPN connected**
+- Battery 80%
+
+That looks much better already! Should I do a speed test now, or is there something else to address first?
+AGENT: Great progress — you're on 5G with excellent signal now. Go ahead and run a speed test.
+
+A couple of notes while you do that: the **Data Saver** mode may limit background data, and the **VPN** can affect throughput, so if your speed test result still isn't "excellent," those are the next things we'd look at. Let me know what the speed test shows.
+TOOL_RESULT: Speed Test Result: 5.50 Mbps (Fair). Connection is okay for web browsing and some standard definition streaming.
+USER: Hmm, that's disappointing. The speed test came back at **5.50 Mbps — rated "Fair."** That's not the excellent speed I was hoping for.
+
+You mentioned the Data Saver mode and the VPN might be hurting throughput. Should I turn one of those off and try again?
+AGENT: Yes — let's address those. Please start by turning **Data Saver off**, then re-run the speed test. Data Saver restricts background data and can suppress speeds.
+
+If it's still not where you want it, we can look at the VPN next. Let me know the result.
+TOOL_RESULT: Data Saver Mode is now OFF.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔒 VPN Connected | 🔋 80%
+USER: Data Saver is now off. Let me run the speed test again.
+TOOL_RESULT: Speed Test Result: 27.50 Mbps (Good). Connection is good for most activities, including HD streaming.
+USER: Better, but still not excellent. The speed test now shows **27.50 Mbps — rated "Good."** That's an improvement, but I really need excellent speed.
+
+You mentioned the VPN might be the next thing to check. Should I disconnect it?
+AGENT: Yes — please try **disconnecting the VPN**, then run the speed test once more. The VPN routes your traffic through an encrypted tunnel, which can add overhead and reduce throughput.
+
+Let me know what you get.
+TOOL_RESULT: VPN disconnected successfully.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: VPN is now disconnected. Let me run the speed test once more.
+TOOL_RESULT: Speed Test Result: 275.00 Mbps (Excellent). Connection is very fast.
+USER: That's it — **275 Mbps, rated "Excellent"!** That's exactly the speed I was hoping for. 
+
+So it looks like the combination of getting off Airplane Mode, switching to the 4G/5G network, turning off Data Saver, and disconnecting the VPN did the trick. Thank you so much for your help — you walked me through everything step by step and it worked perfectly. I really appreciate it!
+
+###STOP###

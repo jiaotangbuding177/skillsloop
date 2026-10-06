@@ -1,0 +1,80 @@
+AGENT: Hi! How can I help you today?
+USER: Hello. I'm having some trouble with my mobile data. I'm abroad in France right now and the internet on my phone either stops working entirely or is painfully slow. I really need to get this fixed — I need excellent internet speed, nothing less. Can you help me?
+AGENT: I can help with that. Since you're abroad, let me first identify your account and check your line's roaming setup.
+
+Could you please provide the phone number on the line you're using?
+USER: Yes, of course. The number is 555-123-2002.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 8.7, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT_TOOL_CALL: {"name": "get_data_usage", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "data_used_gb": "8.7", "data_limit_gb": "15.0", "data_refueling_gb": "0.0", "cycle_end_date": "2025-02-28"}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "P1002"}}
+TOOL_RESULT: {"plan_id": "P1002", "name": "Premium Plan", "data_limit_gb": 15.0, "price_per_month": 65.0, "data_refueling_price_per_gb": 2.0}
+AGENT: Here's what I found:
+
+- Your line **555-123-2002** has **roaming disabled**, which is why data isn't working properly abroad.
+- You've used **8.7 GB** of your **15 GB** monthly limit, so you're not over your data cap.
+
+The fix for the roaming part is straightforward — per policy, I can enable roaming on your line **at no cost** since you're traveling outside your home network. Would you like me to enable it?
+
+One quick note: you mentioned you need "excellent internet speed." I can enable roaming and get your data working, but I can't guarantee a specific speed — that depends on the local network where you're traveling. I want to be upfront about that. Shall I go ahead and enable roaming?
+USER: Oh, roaming is disabled? That would explain it. Yes, please go ahead and enable it — and thank you for doing it at no cost.
+
+I do understand you can't promise a specific speed, but I really do need it to be excellent. Let's get it working first and then check. Please go ahead.
+AGENT_TOOL_CALL: {"name": "enable_roaming", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: Roaming enabled successfully
+AGENT: Roaming is now **enabled** on your line **555-123-2002**, at no cost. 
+
+To start using it, please **reboot your device** — that will let it register on the local network in France. Once you've done that, let me know how the connection is and we can check further from there.
+USER: Okay, let me restart my phone.
+TOOL_RESULT: Restarting network services...
+Status Bar: ✈️ Airplane Mode | 🔋 80%
+USER: Okay, I've restarted it. But I noticed something at the top of my screen — there's a little airplane icon showing. Does that mean anything? I hope that's not a problem.
+AGENT: That airplane icon means **Airplane Mode is turned on** — that disables all cellular connectivity, so it would block your data even with roaming enabled.
+
+Could you please **turn off Airplane Mode** on your device? Once it's off, give it a moment to reconnect and let me know what you see at the top of your screen (signal bars, network type, and data status).
+USER: Oh dear, airplane mode! Let me turn that off right away.
+TOOL_RESULT: Airplane Mode is now OFF.
+Status Bar: 📶¹ Poor | 2G | 📵 Data Disabled | 🔋 80%
+USER: Alright, I've turned off Airplane Mode. Now at the top of my screen I see: a signal bar that looks quite weak (shows one bar), it says "2G", and there's a symbol indicating my data is disabled. Also the battery is at 80%. What should I do now?
+AGENT: Thanks for the details. Two things there need attention:
+
+1. **Your data is disabled** — you'll need to turn **Mobile Data ON** in your device settings for internet to work.
+2. **You're on 2G** — 2G is too slow for practical data use and is likely why things feel "painfully slow." You'll want to switch your network mode to one that includes 3G/4G/5G.
+
+Please do the following:
+- Turn **Mobile Data ON**.
+- Change your network mode to **"4g_5g_preferred"** (or **"4g_only"** if that's not available).
+
+Then let me know what the status bar shows — I'd like to see the network type and whether data is now enabled.
+USER: Oh my, two things at once — I get a bit flustered with too many steps. Could you please walk me through one thing at a time? Let's start with whatever the first step should be.
+AGENT: No problem — let's take it one step at a time.
+
+**Step 1:** Please turn **Mobile Data ON**.
+
+Once that's done, tell me what you see, and we'll move on to the next step.
+USER: Thank you, that's much easier. Turning on Mobile Data now.
+TOOL_RESULT: Mobile Data is now ON.
+Status Bar: 📶¹ Poor | 2G | 📱 Data Enabled | 🔋 80%
+USER: Okay, Mobile Data is now ON. The status bar shows: weak signal (one bar), "2G", data enabled, and battery 80%. What's the next step?
+AGENT: Great. 
+
+**Step 2:** Now please change your network mode to **"4g_5g_preferred"** (or **"4g_only"** if that option isn't offered).
+
+Let me know once that's done and what the status bar shows.
+USER: Alright, let me try changing that setting.
+TOOL_RESULT: Preferred Network Mode set to: 4g_5g_preferred
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: Okay, I did that. Now the status bar shows: strong signal (four bars), "5G", data enabled, and battery 80%. That looks much better! Shall I test the speed now?
+AGENT: That looks great — strong signal on **5G** with data enabled. Yes, please go ahead and test it. Load a website or run a speed test and let me know how it feels.
+USER: Let me run a speed test now.
+TOOL_RESULT: Speed Test Result: 275.00 Mbps (Excellent). Connection is very fast.
+USER: Wonderful news! The speed test came back at 275 Mbps, and it says "Excellent — connection is very fast." That's exactly what I needed! Thank you so much for your patience and for walking me through it step by step. Everything's working perfectly now.
+
+###STOP###

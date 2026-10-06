@@ -1,0 +1,407 @@
+{
+  "domain": "airline",
+  "tau2_version": "v1.0.1",
+  "inputs": {
+    "tasks_sha256": "34dfcf0622792d0d0fa32aa491d21582e1b5d3ec1948e7743bae881885f878ea",
+    "split_sha256": "8249d7af4c654a48e5fa776993c3416c3b68c7213a26d00ec89e976c28363e97",
+    "policy_sha256": "7db375ddcce5061cf9f48a5aabe1fc3e52aa2936d6a65b7c5b62e3c7ca54cfe4",
+    "db_sha256": "7184914bd3720d93f1160a09bb2724c3a5601d8ca39d02d371cbbfa62626f7e2"
+  },
+  "checks": {
+    "task_ids_all_valid": true,
+    "train_test_disjoint": true,
+    "base_equals_union": true,
+    "base_equals_all_tasks": true,
+    "counts": {
+      "train": 30,
+      "test": 20,
+      "base": 50
+    }
+  },
+  "counts": {
+    "train": 30,
+    "test": 20,
+    "dev": 4,
+    "evolution": 26
+  },
+  "dev_selection": {
+    "rule": "primary-operation buckets ranked by priority [cancel,update_flights,book,update_baggages,update_passengers]; per bucket shuffle sorted train ids with random.Random(42), take first; stop at 4 dev tasks. Deterministic; no test data consulted.",
+    "seed": 42,
+    "dev_ids": [
+      "42",
+      "21",
+      "20",
+      "12"
+    ],
+    "dev_categories": {
+      "42": "cancel",
+      "21": "update_flights",
+      "20": "book",
+      "12": "update_baggages"
+    }
+  },
+  "train_ids": [
+    "0",
+    "1",
+    "10",
+    "11",
+    "12",
+    "14",
+    "15",
+    "17",
+    "20",
+    "21",
+    "23",
+    "27",
+    "28",
+    "3",
+    "33",
+    "34",
+    "36",
+    "38",
+    "39",
+    "4",
+    "40",
+    "41",
+    "42",
+    "43",
+    "46",
+    "47",
+    "49",
+    "5",
+    "7",
+    "9"
+  ],
+  "test_ids": [
+    "13",
+    "16",
+    "18",
+    "19",
+    "2",
+    "22",
+    "24",
+    "25",
+    "26",
+    "29",
+    "30",
+    "31",
+    "32",
+    "35",
+    "37",
+    "44",
+    "45",
+    "48",
+    "6",
+    "8"
+  ],
+  "evolution_ids": [
+    "0",
+    "1",
+    "10",
+    "11",
+    "14",
+    "15",
+    "17",
+    "23",
+    "27",
+    "28",
+    "3",
+    "33",
+    "34",
+    "36",
+    "38",
+    "39",
+    "4",
+    "40",
+    "41",
+    "43",
+    "46",
+    "47",
+    "49",
+    "5",
+    "7",
+    "9"
+  ],
+  "category_counts": {
+    "train": {
+      "read_only": 17,
+      "cancel": 5,
+      "update_flights": 5,
+      "update_baggages": 1,
+      "book": 1,
+      "update_passengers": 1
+    },
+    "test": {
+      "read_only": 6,
+      "book": 4,
+      "escalate": 1,
+      "update_flights": 7,
+      "cancel": 2
+    }
+  },
+  "relatedness": {
+    "train_test_shared_users": [
+      {
+        "key": "sophia_silva_7557",
+        "train": [
+          "4"
+        ],
+        "test": [
+          "44",
+          "8"
+        ]
+      },
+      {
+        "key": "gift_card_8887175",
+        "train": [
+          "15"
+        ],
+        "test": [
+          "16"
+        ]
+      },
+      {
+        "key": "gift_card_8190333",
+        "train": [
+          "17"
+        ],
+        "test": [
+          "22"
+        ]
+      },
+      {
+        "key": "noah_muller_9847",
+        "train": [
+          "38"
+        ],
+        "test": [
+          "2"
+        ]
+      }
+    ],
+    "train_test_shared_reservations": [
+      {
+        "key": "H8Q05L",
+        "train": [
+          "4",
+          "47"
+        ],
+        "test": [
+          "44"
+        ]
+      },
+      {
+        "key": "KC18K6",
+        "train": [
+          "4"
+        ],
+        "test": [
+          "44"
+        ]
+      },
+      {
+        "key": "NM1VX1",
+        "train": [
+          "4"
+        ],
+        "test": [
+          "44"
+        ]
+      },
+      {
+        "key": "S61CZX",
+        "train": [
+          "4"
+        ],
+        "test": [
+          "44"
+        ]
+      },
+      {
+        "key": "WUNA5K",
+        "train": [
+          "4"
+        ],
+        "test": [
+          "44",
+          "8"
+        ]
+      },
+      {
+        "key": "HAT110",
+        "train": [
+          "15"
+        ],
+        "test": [
+          "16"
+        ]
+      },
+      {
+        "key": "HAT172",
+        "train": [
+          "15"
+        ],
+        "test": [
+          "16"
+        ]
+      },
+      {
+        "key": "M05KNL",
+        "train": [
+          "15"
+        ],
+        "test": [
+          "16"
+        ]
+      },
+      {
+        "key": "FQ8APE",
+        "train": [
+          "17"
+        ],
+        "test": [
+          "22"
+        ]
+      },
+      {
+        "key": "HAT056",
+        "train": [
+          "17"
+        ],
+        "test": [
+          "22"
+        ]
+      },
+      {
+        "key": "HAT138",
+        "train": [
+          "17"
+        ],
+        "test": [
+          "22"
+        ]
+      },
+      {
+        "key": "HAT175",
+        "train": [
+          "21"
+        ],
+        "test": [
+          "18"
+        ]
+      },
+      {
+        "key": "4OG6T3",
+        "train": [
+          "38"
+        ],
+        "test": [
+          "2"
+        ]
+      },
+      {
+        "key": "3RK2T9",
+        "train": [
+          "40",
+          "49"
+        ],
+        "test": [
+          "48"
+        ]
+      }
+    ],
+    "same_action_signature_train_test_pairs": [
+      {
+        "train": "15",
+        "test": "16",
+        "similarity": 0.849
+      }
+    ]
+  },
+  "test_primary_coverage": {
+    "13": {
+      "primary": "escalate",
+      "covered_by_evolve_category": false
+    },
+    "16": {
+      "primary": "update_flights",
+      "covered_by_evolve_category": true
+    },
+    "18": {
+      "primary": "update_flights",
+      "covered_by_evolve_category": true
+    },
+    "19": {
+      "primary": "cancel",
+      "covered_by_evolve_category": true
+    },
+    "2": {
+      "primary": "read_only",
+      "covered_by_evolve_category": true
+    },
+    "22": {
+      "primary": "update_flights",
+      "covered_by_evolve_category": true
+    },
+    "24": {
+      "primary": "book",
+      "covered_by_evolve_category": false
+    },
+    "25": {
+      "primary": "book",
+      "covered_by_evolve_category": false
+    },
+    "26": {
+      "primary": "read_only",
+      "covered_by_evolve_category": true
+    },
+    "29": {
+      "primary": "cancel",
+      "covered_by_evolve_category": true
+    },
+    "30": {
+      "primary": "update_flights",
+      "covered_by_evolve_category": true
+    },
+    "31": {
+      "primary": "read_only",
+      "covered_by_evolve_category": true
+    },
+    "32": {
+      "primary": "update_flights",
+      "covered_by_evolve_category": true
+    },
+    "35": {
+      "primary": "book",
+      "covered_by_evolve_category": false
+    },
+    "37": {
+      "primary": "update_flights",
+      "covered_by_evolve_category": true
+    },
+    "44": {
+      "primary": "update_flights",
+      "covered_by_evolve_category": true
+    },
+    "45": {
+      "primary": "read_only",
+      "covered_by_evolve_category": true
+    },
+    "48": {
+      "primary": "read_only",
+      "covered_by_evolve_category": true
+    },
+    "6": {
+      "primary": "read_only",
+      "covered_by_evolve_category": true
+    },
+    "8": {
+      "primary": "book",
+      "covered_by_evolve_category": false
+    }
+  },
+  "exposure_notes": [
+    "Gold action names were used only for this researcher-facing coverage audit; no gold action content flows into Collector/AutoSkill/Consumer inputs.",
+    "Airline reward_basis is [DB, COMMUNICATE] for all 50 tasks; COMMUNICATE checks are pure string matching in the vendor evaluator (no judge model)."
+  ]
+}

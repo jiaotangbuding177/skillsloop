@@ -1,0 +1,137 @@
+AGENT: Hi! How can I help you today?
+USER: Hi, I’m having trouble sending MMS messages on my phone. It’s been going on for a few hours now, and I’d like to get it fixed. Could you help me figure out what’s wrong?
+AGENT: I can help with that. First, I need to verify your account. Could you please provide your phone number?
+USER: Sure, my phone number is 555-123-2002.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT: Thanks, John. I've verified your account.
+
+Now let's troubleshoot the MMS issue. To start, could you check your phone's status bar and tell me what icons you see at the top of the screen?
+TOOL_RESULT: Status Bar: 📶¹ Poor | 2G | 📵 Data Disabled | 🔋 80%
+USER: I see a poor signal indicator, a 2G network icon, and it looks like mobile data is currently disabled. Battery is at 80%.
+AGENT: Thanks. I can see a couple of things there that would affect MMS:
+
+1. **Mobile data is disabled** – MMS requires mobile data to work.
+2. **You're on a 2G network** – MMS needs at least 3G.
+
+Let's fix both:
+
+- Please **turn on mobile data** on your phone.
+- Then go into your network settings and **change the preferred network mode to one that includes 4G or 5G** (e.g., "4G/5G preferred").
+
+Let me know once you've done that and what your status bar shows.
+USER: I can do that, but I’m only able to handle one action at a time. Which would you like me to do first—turn on mobile data, or change the network mode?
+AGENT: Let's start with **turning on mobile data** first. Once that's done, let me know and we'll move on to the network mode.
+TOOL_RESULT: Mobile Data is now ON.
+Status Bar: 📶¹ Poor | 2G | 📱 Data Enabled | 🔋 80%
+USER: Okay, mobile data is now turned on. The status bar still shows a poor signal, 2G network, data enabled, and battery at 80%.
+AGENT: Good — mobile data is on. Now let's fix the network mode.
+
+Please go into your network settings and **change the preferred network mode to one that includes 4G or 5G** (e.g., "4G/5G preferred"). Let me know once done and what the status bar shows.
+TOOL_RESULT: Preferred Network Mode set to: 4g_5g_preferred
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: Done. The status bar now shows excellent signal, a 5G network, data enabled, and battery at 80%.
+AGENT: That's a big improvement — you're now on 5G with excellent signal and data enabled.
+
+Next, let's verify the APN/MMSC settings. Could you check your APN settings and tell me whether the **MMSC URL is set** or **not set**?
+TOOL_RESULT: Current APN Name: internet
+MMSC URL (for picture messages): http://mms.carrier.com/mms/wapenc
+(These are technical settings, usually best left unchanged.)
+USER: I checked the APN settings. The MMSC URL is set to: http://mms.carrier.com/mms/wapenc. The current APN name is “internet.”
+AGENT: Good, the MMSC URL is set correctly, so that's not the issue.
+
+Next, let's check Wi-Fi Calling — it can sometimes interfere with MMS. Could you check whether **Wi-Fi Calling is ON or OFF**?
+TOOL_RESULT: Wi-Fi Calling is currently turned OFF.
+USER: Wi-Fi Calling is currently turned OFF.
+AGENT: Wi-Fi Calling is off, so that's not the problem either.
+
+Last check: the messaging app needs certain permissions. Could you check the **messaging app's permissions** and tell me whether **"storage"** and **"sms"** are listed as granted?
+TOOL_RESULT: The following apps are installed on the phone: messaging, browser
+TOOL_RESULT: App 'messaging' has permission for: storage, phone.
+USER: I checked the messaging app’s permissions. It has **storage** granted, and also **phone**, but **sms** is not listed as granted.
+AGENT: We found the issue — the messaging app is missing the **SMS** permission, which is required to send messages.
+
+Please grant the **SMS** permission to the messaging app, then let me know.
+TOOL_RESULT: Success. Permission 'sms' granted to app 'messaging'.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: Done — I granted the **SMS** permission to the messaging app. The status bar still shows excellent signal, 5G, data enabled, and battery at 80%.
+AGENT: Could you try sending an MMS now and let me know if it works?
+TOOL_RESULT: Your messaging app cannot send MMS messages.
+USER: Hmm, that’s frustrating — I tried, but I still can’t send an MMS. What should we try next?
+AGENT: Let me re-check a couple of things. First, could you re-check your **APN settings** and confirm what the APN name is showing now, and whether the MMSC URL is still set?
+TOOL_RESULT: Current APN Name: internet
+MMSC URL (for picture messages): http://mms.carrier.com/mms/wapenc
+(These are technical settings, usually best left unchanged.)
+USER: I re-checked the APN settings. The APN name is still **internet**, and the MMSC URL is still set to **http://mms.carrier.com/mms/wapenc**.
+AGENT: Thanks. Let me have you check one more thing — please run a check on whether your phone **can send MMS** and tell me the result.
+TOOL_RESULT: Your messaging app cannot send MMS messages.
+USER: I ran the check again, and it still says my messaging app cannot send MMS messages.
+AGENT: Let me re-verify your connection. Could you check your **network status** and tell me what it shows — including airplane mode, signal strength, network type, and mobile data status?
+TOOL_RESULT: Airplane Mode: OFF
+SIM Card Status: active
+Cellular Connection: connected
+Cellular Signal: excellent
+Cellular Network Type: 5G
+Mobile Data Enabled: Yes
+Data Roaming Enabled: No
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+USER: Here’s what the network status shows:
+
+- Airplane Mode: OFF
+- SIM Card Status: active
+- Cellular Connection: connected
+- Cellular Signal: excellent
+- Network Type: 5G
+- Mobile Data: enabled
+- **Data Roaming: OFF**
+- Wi-Fi Radio: OFF
+- Wi-Fi Connected: No
+
+I notice data roaming is off — and since I’m currently abroad in France, could that be the problem?
+AGENT: Yes, that's very likely the issue — since you're abroad, MMS won't work without data roaming enabled.
+
+Let me enable roaming on your line. Could you confirm you'd like me to turn on data roaming?
+USER: Yes, please go ahead and turn on data roaming so I can try sending the MMS again.
+AGENT_TOOL_CALL: {"name": "enable_roaming", "arguments": {"customer_id": "C1001", "line_id": "L1001"}}
+TOOL_RESULT: Roaming enabled successfully
+AGENT: Done — data roaming is now enabled on your line. Please try sending the MMS again and let me know if it goes through.
+TOOL_RESULT: Your messaging app cannot send MMS messages.
+USER: I tried again, but it still won’t send — the check says my messaging app cannot send MMS messages. Maybe there’s still something else we can check?
+AGENT: Let me have you check one more thing. Could you confirm the **network type** shown on your phone is still 5G, and also check the **Data Saver** status — is Data Saver ON or OFF?
+TOOL_RESULT: Data Saver mode is OFF.
+TOOL_RESULT: Airplane Mode: OFF
+SIM Card Status: active
+Cellular Connection: connected
+Cellular Signal: excellent
+Cellular Network Type: 5G
+Mobile Data Enabled: Yes
+Data Roaming Enabled: No
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+USER: Here’s what I see:
+
+- Network type: still **5G**
+- **Data Saver: OFF**
+
+But I also notice that on my device, **Data Roaming is still showing as OFF**, even though you mentioned you enabled it on the line. Could that be why MMS still isn’t working?
+AGENT: The roaming setting I changed is on our network side; the device-level **Data Roaming toggle** also needs to be ON for roaming data to work. Please **turn on Data Roaming in your phone's settings**, then try the MMS again and let me know.
+TOOL_RESULT: Data Roaming is now ON.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Your messaging app cannot send MMS messages.
+USER: I turned on Data Roaming in my phone settings, but I tried again and **I still can’t send MMS messages**. This is getting a bit frustrating — what else could be causing it?
+AGENT: Let me have you re-check the SMS permission — sometimes it needs to be verified after other changes. Could you check the **messaging app's permissions** again and tell me exactly which permissions are listed as granted?
+TOOL_RESULT: App 'messaging' has permission for: sms, storage, phone.
+USER: The messaging app now has these permissions granted: **sms, storage, and phone**.
+AGENT: Thanks — permissions look good now. Let me have you re-check the APN settings one more time to confirm the exact details. Could you read out the current **APN name** and **MMSC URL**?
+TOOL_RESULT: Current APN Name: internet
+MMSC URL (for picture messages): http://mms.carrier.com/mms/wapenc
+(These are technical settings, usually best left unchanged.)
+USER: The APN settings show:
+
+- APN name: **internet**
+- MMSC URL: **http://mms.carrier.com/mms/wapenc**
+AGENT_TOOL_CALL: {"name": "transfer_to_human_agents", "arguments": {"summary": "Customer John Smith (C1001, phone 555-123-2002, line L1001) is unable to send MMS while abroad in France. Troubleshooting completed: mobile data enabled, network set to 5G with excellent signal, APN name 'internet' with MMSC URL http://mms.carrier.com/mms/wapenc correctly set, Wi-Fi Calling OFF, Data Saver OFF, messaging app permissions (sms, storage, phone) granted, and line-level roaming enabled plus device Data Roaming toggled ON. MMS still fails; can_send_mms() reports cannot send. Requires further technical escalation."}}
+TOOL_RESULT: Transfer successful
+AGENT: YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.
+USER: ###TRANSFER###

@@ -1,0 +1,59 @@
+AGENT: Hi! How can I help you today?
+USER: Hi, I'm having trouble with my mobile data. It keeps either stopping completely or getting really slow. I want to get excellent internet speed on my phone. Can you help me fix this?
+AGENT: I can help you with that. First, I need to identify you. Could you please provide your phone number or customer ID?
+USER: Sure, my phone number is 555-123-2002. My name is John Smith.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT: Thanks, John. I've found your account. I see you have three lines. Which phone number or line is having the mobile data trouble?
+USER: It's the line for 555-123-2002 that's having the issue. That's the phone I'm using right now.
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 15.1, "data_refueling_gb": 0.0, "roaming_enabled": true, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT_TOOL_CALL: {"name": "get_data_usage", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "data_used_gb": "15.1", "data_limit_gb": "15.0", "data_refueling_gb": "0.0", "cycle_end_date": "2025-02-28"}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "P1002"}}
+TOOL_RESULT: {"plan_id": "P1002", "name": "Premium Plan", "data_limit_gb": 15.0, "price_per_month": 65.0, "data_refueling_price_per_gb": 2.0}
+AGENT: I found the issue. Your line has used **15.1 GB** of data, but your plan's limit is **15.0 GB** — you've exceeded your monthly data limit, which is why your data keeps stopping or getting slowed down.
+
+There are a couple of ways I can help:
+
+1. **Refuel your data** — You can add more data to your line at **$2.00 per GB** (maximum 2 GB). This would restore your data connectivity for the rest of the billing cycle.
+2. **Change your plan** — If you regularly exceed 15 GB, you might consider moving to a plan with a higher data limit.
+
+Please note that even with refueling, the network speed you experience depends on your signal and network conditions.
+
+Would you like to refuel your data, and if so, how many GB (up to 2 GB)?
+USER: I don't want to change my plan. Let's go ahead and refuel 2 GB of data, please.
+AGENT: 2 GB at $2.00 per GB comes to **$4.00 total**. This will be added to your bill. Shall I go ahead and apply the 2 GB refuel?
+USER: Yes, please go ahead and apply the 2 GB refuel.
+AGENT_TOOL_CALL: {"name": "refuel_data", "arguments": {"customer_id": "C1001", "line_id": "L1002", "gb_amount": 2}}
+TOOL_RESULT: {"message": "Successfully added 2 GB of data for line L1002 for $4.00", "new_data_refueling_gb": "2.0", "charge": "4.0"}
+AGENT: Done! I've successfully added **2 GB** of data to your line for **$4.00**, which will be charged to your bill. Your data allowance is now topped up for the rest of this billing cycle.
+
+You may need to reboot your phone for the change to take effect. Is there anything else I can help you with?
+USER: Let me reboot my phone as you suggested, and then I'll check the speed to make sure everything's working.
+TOOL_RESULT: Restarting network services...
+Status Bar: 📶⁴ Excellent | 5G | 📵 Data Disabled | 🔋 80%
+USER: After rebooting, I checked my status bar and it shows my mobile data is disabled. Should I turn it back on?
+AGENT: Yes, please turn your mobile data back on. Your phone won't be able to use data while it's disabled.
+
+Once you've enabled it, let me know and check again — also tell me what you see in your status bar (signal strength, network type, and data status) so I can confirm everything is working properly.
+TOOL_RESULT: Mobile Data is now ON.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: Okay, mobile data is back on. My status bar now shows:
+- Signal strength: Excellent
+- Network type: 5G
+- Data status: Enabled
+- Battery: 80%
+
+Should I run a speed test now to check the connection?
+AGENT: That all looks great — excellent signal on 5G with data enabled, so everything is set up correctly on the network side. Your data has been refueled, so you should now have full-speed connectivity.
+
+Go ahead and try browsing or running a speed test to confirm. Let me know how it goes!
+TOOL_RESULT: Speed Test Result: 275.00 Mbps (Excellent). Connection is very fast.
+USER: I ran the speed test and got 275 Mbps, which is rated as "Excellent" — a very fast connection. That's exactly what I was hoping for! Thank you so much for your help, everything is working great now.
+
+###STOP###

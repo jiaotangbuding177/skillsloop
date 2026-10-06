@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Unity第一人称角色控制器</title><style>body{margin:0;background:#f3f6fb;color:#172536;font:16px/1.65 system-ui,"Microsoft YaHei",sans-serif}main{max-width:1160px;margin:32px auto;padding:0 20px}a{color:#1552aa}header,.box,article,details{background:white;border:1px solid #dce4ee;border-radius:12px;padding:18px;margin:12px 0}h1{font-size:28px}h2{font-size:22px}.meta{color:#596777;font-size:13px}.badge{display:inline-block;padding:3px 9px;border-radius:6px;background:#e9f0fa;margin-right:6px}pre{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere}input,select{font:inherit;padding:9px;border:1px solid #b9c8da;border-radius:7px}summary{cursor:pointer;font-weight:600}.muted{color:#68788b}.noise{background:#f6f6f6}table{border-collapse:collapse;width:100%}td,th{text-align:left;border-bottom:1px solid #dce4ee;padding:9px}nav{display:flex;gap:16px;flex-wrap:wrap}section{scroll-margin-top:15px}</style><main><header><h1>Unity第一人称角色控制器</h1><p>复用状态实例避免状态转换分配，对大量子弹用对象池；满屏子弹不挂TrailRenderer，效果改用Mesh拖尾并独立验证帧率</p><p>来源种子 2 组；扩入上下文 0 组。不是完整黄金轨迹，未认证时序或任务成功。</p><a href="../sessions/conv_a53e75e3ce15.html">查看完整会话及全部证据</a></header><span class="badge">种子</span><section id="u_6aa33c17f4e74fa2e2" class="box "><p class="meta">user · u_6aa33c17f4e74fa2e2 · 1次来源记录<br></p><pre>用 game-developer 技能，帮我用 Unity 写一个 FPS 的角色控制器，要求：第一人称移动+跳跃+冲刺，带状态机，敌人子弹多要对象池，性能要稳 60 帧</pre><details><summary>去包装前正文（明显凭据已隐藏）</summary><pre>[Sat 2026-09-05 13:00 GMT+8] 请使用中文回复，除非用户明确使用其他语言。
+
+用 game-developer 技能，帮我用 Unity 写一个 FPS 的角色控制器，要求：第一人称移动+跳跃+冲刺，带状态机，敌人子弹多要对象池，性能要稳 60 帧</pre></details></section><span class="badge">种子</span><section id="a_e757d62baef85a904e" class="box "><p class="meta">assistant · a_e757d62baef85a904e · 1次来源记录<br></p><pre>搞定老板 ✅ 完整方案已交付，共 16 个 C# 脚本 + README，位于：
+
+📁 `AI 工作区/成果文件/用 game-developer 技能，-conv_a53e75e3ce15/2026-09-05_UnityFPS角色控制器/`
+
+## 架构一览
+
+**状态机**（字典注册 + Exit/Enter 转移，状态实例永久复用零分配）：
+- `LocomotionState` — 待机/行走/冲刺（Shift 长按）
+- `AirborneState` — 跳跃/下落，带**土狼时间**、**跳跃缓冲**、**跳砍**（可变跳高）
+- `DashState` — 冲刺技（Ctrl/C），方向跟随输入、空中可用、撞墙提前结束、冷却 0.9s
+- 状态只改&quot;速度意图&quot;，位移统一由 `FirstPersonPlayer.Integrate()` 执行，杜绝状态间位移打架
+
+**子弹对象池**：通用 `ObjectPool&lt;T&gt;`（预热 96 + 上限 512 防刷爆）→ 场景单例 `ProjectilePool` 给所有 `EnemyShooter` 共用。子弹每帧用共享缓冲的 `SphereCastNonAlloc` 探测碰撞——**没有 Rigidbody、没有触发器回调**，高速不穿透，命中/超时自动回池。
+
+**60 FPS 保障**（代码侧已做满）：
+- Update 内零 GetComponent / Find / Instantiate / Destroy / LINQ
+- 玩家用 CharacterController（比 Rigidbody 省物理开销），重力手写
+- 敌人错峰开火防帧尖峰；`FpsStabilizer` 启动锁 60 + 防死亡螺旋
+- `PerformanceMonitor`（F3）盯着 Alloc 列——运行时每帧分配应 ≈ 0 B
+
+## 上手三步
+
+1. 工程设置切 `Input Manager (Old)`，建 `Player`/`Enemy` 两个 Layer
+2. 按 README 层级搭 Player（CC + 三脚本 + CameraRig 眼睛高度 1.6m）和 Enemy
+3. 做 Bullet 预制体（初始 inactive，挂 EnemyBullet），拖进 ProjectilePool → 开跑
+
+操作：WASD 移动 / Space 跳 / Shift 冲刺 / Ctrl 滑步 / 左键射击。手感参数全部集中在 `PlayerSettings` 资产里调。README 里有完整场景搭建表 + 引擎侧优化清单（遮挡剔除、GPU Instancing 等）。
+
+一个提醒：README 里标了**别给子弹挂 TrailRenderer**——满屏拖尾是帧率杀手，想加特效建议用 Mesh 拖尾。需要我再补脚步声、动画联动或弹药系统就说一声 🎮</pre></section></main></html>

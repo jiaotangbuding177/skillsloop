@@ -1,0 +1,128 @@
+{
+  "status": "NOT_READY_ORIGINAL_RECALC_CONTROL_FAILURE_RETAINED",
+  "model_calls": 0,
+  "credentials_read": false,
+  "system_installation": false,
+  "method": "Official MSI verified, Windows Installer /a source-image extraction only",
+  "author_recalc_script": "research/baselines/Trace2Skill/spreadsheet_agent/skills/xlsx/recalc.py",
+  "author_recalc_sha256_before": "26a130298765fb6b188892bdca8c3c82939199275cbc8d5f934e098e0790daf6",
+  "author_source_modified": false,
+  "package": {
+    "public_url": "https://download.documentfoundation.org/libreoffice/stable/26.8.0/win/x86_64/LibreOffice_26.8.0_Win_x86-64.msi",
+    "expected_bytes": 374906880,
+    "expected_sha256": "4aa6c6e1895f4055104effcb556bd3362d20c6ad707c149543304f395ef9db95",
+    "metadata_source": "https://download.documentfoundation.org/libreoffice/stable/26.8.0/win/x86_64/LibreOffice_26.8.0_Win_x86-64.msi.mirrorlist"
+  },
+  "official_references": {
+    "msiexec_admin": "https://learn.microsoft.com/en-us/windows/win32/msi/administrative-installation",
+    "targetdir": "https://learn.microsoft.com/en-us/windows/win32/msi/targetdir",
+    "cli_profile": "https://help.libreoffice.org/latest/en-US/text/shared/guide/start_parameters.html",
+    "portable_distributor": "https://www.libreoffice.org/download-other/"
+  },
+  "initial_local_checks": {
+    "soffice_on_path": false,
+    "six_common_binary_paths_present": false,
+    "project_matches": 0,
+    "project_unreachable_paths": 1,
+    "msiexec": "C:/WINDOWS/system32/msiexec.exe",
+    "sevenzip_lessmsi_found": false,
+    "system_vcruntime140_and_msvcp140_exist": true,
+    "openpyxl_actual_import": "3.1.5",
+    "D_free_bytes_observed": 347072610304
+  },
+  "source_limitations": [
+    "Original Windows recalc uses ~/.config/libreoffice/4 macro path and no subprocess timeout for final recalc.",
+    "No binary install or macro presence alone is considered formula-cache verification.",
+    "MSI /a creates a source image; executable usability is tested here, never inferred from extraction alone.",
+    "Official parallel-install Wiki and PortableApps package page were inaccessible; no unverified portable package size used."
+  ],
+  "download": {
+    "status": "DOWNLOADED_SIZE_AND_OFFICIAL_SHA256_VERIFIED",
+    "final_public_url": "https://mirror.2degrees.nz/tdf/libreoffice/stable/26.8.0/win/x86_64/LibreOffice_26.8.0_Win_x86-64.msi",
+    "bytes": 374906880,
+    "sha256": "4aa6c6e1895f4055104effcb556bd3362d20c6ad707c149543304f395ef9db95",
+    "path": "research/experiments/20261006_trace2skill_native_baseline/private/runtime_preflight/安装资源/LibreOffice_26.8.0_Win_x86-64.msi"
+  },
+  "extraction": {
+    "method": "msiexec /a /qn /norestart TARGETDIR=<project runtime>",
+    "exit_code": 0,
+    "target": "research/experiments/20261006_trace2skill_native_baseline/private/runtime_preflight/libreoffice_runtime",
+    "log": "research/experiments/20261006_trace2skill_native_baseline/private/runtime_preflight/libreoffice_admin_extract.log"
+  },
+  "extracted_binary": {
+    "path": "research/experiments/20261006_trace2skill_native_baseline/private/runtime_preflight/libreoffice_runtime/program/soffice.exe",
+    "sha256": "a2823391857db1dd8ebbd8234267f9ec58ec7e5b5fc434665c0ecec4671cb988",
+    "bytes": 523176
+  },
+  "controls": [
+    {
+      "control": "positive",
+      "constructed_not_enterprise_episode": true,
+      "file": "research/experiments/20261006_trace2skill_native_baseline/private/runtime_preflight/libreoffice_controls/positive.xlsx",
+      "formula": "=200000/12",
+      "initial_cached_value": null,
+      "cached_value_after": null,
+      "cached_cell_type_after": "n",
+      "formula_after": "=200000/12",
+      "expected": "16666.66666666666666666666667",
+      "original_recalc_report": null,
+      "exit_code": 1,
+      "outer_timeout": false,
+      "outer_timeout_seconds": 90,
+      "elapsed_seconds": 11.147,
+      "cache_predicate_pass": false,
+      "report_predicate_pass": false,
+      "status": "FAIL",
+      "file_sha256_before": "25b1c90a4b62a000eda09b464123e062549302197af691ade6cb30e8c2d86ed1",
+      "file_sha256_after": "25b1c90a4b62a000eda09b464123e062549302197af691ade6cb30e8c2d86ed1",
+      "log_stdout": "research/experiments/20261006_trace2skill_native_baseline/private/runtime_preflight/libreoffice_controls/positive.stdout.txt",
+      "log_stderr": "research/experiments/20261006_trace2skill_native_baseline/private/runtime_preflight/libreoffice_controls/positive.stderr.txt",
+      "isolated_profile": {
+        "USERPROFILE": "D:\\skillsgen-industry_track\\research\\experiments\\20261006_trace2skill_native_baseline\\private\\runtime_preflight\\lo-profile",
+        "APPDATA": "D:\\skillsgen-industry_track\\research\\experiments\\20261006_trace2skill_native_baseline\\private\\runtime_preflight\\lo-profile\\.config",
+        "LOCALAPPDATA": "D:\\skillsgen-industry_track\\research\\experiments\\20261006_trace2skill_native_baseline\\private\\runtime_preflight\\lo-profile\\.local",
+        "HOME_modified": false
+      }
+    },
+    {
+      "control": "division_by_zero",
+      "constructed_not_enterprise_episode": true,
+      "file": "research/experiments/20261006_trace2skill_native_baseline/private/runtime_preflight/libreoffice_controls/division_by_zero.xlsx",
+      "formula": "=1/0",
+      "initial_cached_value": null,
+      "cached_value_after": null,
+      "cached_cell_type_after": "n",
+      "formula_after": "=1/0",
+      "expected": "#DIV/0!",
+      "original_recalc_report": {
+        "status": "success",
+        "total_errors": 0,
+        "error_summary": {},
+        "total_formulas": 1
+      },
+      "exit_code": 0,
+      "outer_timeout": false,
+      "outer_timeout_seconds": 90,
+      "elapsed_seconds": 22.21,
+      "cache_predicate_pass": false,
+      "report_predicate_pass": false,
+      "status": "FAIL",
+      "file_sha256_before": "e082aff1e5c9244473e969a11ab82bf958902d01e3330f3e5830797fbe3ff8e3",
+      "file_sha256_after": "e082aff1e5c9244473e969a11ab82bf958902d01e3330f3e5830797fbe3ff8e3",
+      "log_stdout": "research/experiments/20261006_trace2skill_native_baseline/private/runtime_preflight/libreoffice_controls/division_by_zero.stdout.txt",
+      "log_stderr": "research/experiments/20261006_trace2skill_native_baseline/private/runtime_preflight/libreoffice_controls/division_by_zero.stderr.txt",
+      "isolated_profile": {
+        "USERPROFILE": "D:\\skillsgen-industry_track\\research\\experiments\\20261006_trace2skill_native_baseline\\private\\runtime_preflight\\lo-profile",
+        "APPDATA": "D:\\skillsgen-industry_track\\research\\experiments\\20261006_trace2skill_native_baseline\\private\\runtime_preflight\\lo-profile\\.config",
+        "LOCALAPPDATA": "D:\\skillsgen-industry_track\\research\\experiments\\20261006_trace2skill_native_baseline\\private\\runtime_preflight\\lo-profile\\.local",
+        "HOME_modified": false
+      }
+    }
+  ],
+  "macro_at_original_script_expected_path": {
+    "path": "research/experiments/20261006_trace2skill_native_baseline/private/runtime_preflight/lo-profile/.config/libreoffice/4/user/basic/Standard/Module1.xba",
+    "exists": true,
+    "sha256": "5afe5106d79a645f7c04a26d287f4b5c01c4c24dbaee3ec988e59af1a822b1c6"
+  },
+  "author_recalc_sha256_after": "26a130298765fb6b188892bdca8c3c82939199275cbc8d5f934e098e0790daf6"
+}

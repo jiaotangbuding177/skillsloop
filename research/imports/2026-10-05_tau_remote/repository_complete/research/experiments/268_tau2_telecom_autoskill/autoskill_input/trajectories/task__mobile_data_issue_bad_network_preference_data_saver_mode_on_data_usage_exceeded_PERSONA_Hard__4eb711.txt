@@ -1,0 +1,106 @@
+AGENT: Hi! How can I help you today?
+USER: Hi there. I'm hoping you can help me—my mobile data keeps acting up. Sometimes it just stops working, and other times it's really slow. I need it to work properly, especially because I like to look at photos of my grandkids. Can you help me get this fixed?
+AGENT: I'd be glad to help with your mobile data. First, I need to verify your account—could you please provide your phone number?
+USER: Oh, of course. My phone number is 555-123-2002. My name is John Smith.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT: Thanks, John — I've verified your account. I see you have three lines. Which phone number is having the mobile data trouble? Is it the 555-123-2002 number itself, or one of the others?
+USER: It's this one—the 555-123-2002 number. That's the phone I'm using right now.
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 15.1, "data_refueling_gb": 0.0, "roaming_enabled": true, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT_TOOL_CALL: {"name": "get_data_usage", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "data_used_gb": "15.1", "data_limit_gb": "15.0", "data_refueling_gb": "0.0", "cycle_end_date": "2025-02-28"}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "P1002"}}
+TOOL_RESULT: {"plan_id": "P1002", "name": "Premium Plan", "data_limit_gb": 15.0, "price_per_month": 65.0, "data_refueling_price_per_gb": 2.0}
+AGENT: I found the issue, John. Your Premium Plan includes 15 GB of data per month, and you've used **15.1 GB** — you've gone over your limit, which is why your data keeps stopping. That's also why it feels slow at times.
+
+The good news: I can add more data to your line. The rate is **$2.00 per GB**, and I can refuel up to 2 GB per request.
+
+How much data would you like to add — 1 GB ($2.00) or 2 GB ($4.00)?
+USER: Oh dear, I didn't realize I'd gone over. That would explain it. Let's go ahead and add 2 GB, please—I don't want to run out again. Will that fix the slowness too?
+AGENT_TOOL_CALL: {"name": "refuel_data", "arguments": {"customer_id": "C1001", "line_id": "L1002", "gb_amount": 2}}
+TOOL_RESULT: {"message": "Successfully added 2 GB of data for line L1002 for $4.00", "new_data_refueling_gb": "2.0", "charge": "4.0"}
+AGENT: Done! I've added **2 GB** to your line for **$4.00**, which will be added to your bill. You now have 2 GB of extra data to get you through the rest of your billing cycle (which ends February 28).
+
+Regarding the slowness — yes, going over your data limit is what was throttling your connection, so having the extra data should clear that up. You may want to reboot your phone to make sure the change takes effect right away.
+
+One handy tip: since you enjoy looking at photos of your grandkids, those images count toward your data, so it may help to keep an eye on your usage near the end of each month. Is there anything else I can help you with?
+USER: A reboot? Oh, I get so nervous doing things like that—I'm always worried I'll lose the photos of my grandkids on my phone. Is it safe to restart? Will my pictures be okay?
+AGENT: Totally understand the worry, John — but you can relax. Restarting your phone is perfectly safe. A reboot just turns the device off and back on; it doesn't erase any of your photos, contacts, messages, or apps. Everything stays right where it is.
+
+It's actually one of the safest things you can do — it's just like turning a light off and on again. Your grandkids' photos will be waiting for you right where you left them.
+
+Go ahead and restart whenever you're ready. If anything looks off afterward, just let me know. Is there anything else I can help you with?
+USER: Okay, that's a relief. Let me go ahead and restart it then.
+TOOL_RESULT: Restarting network services...
+Status Bar: 📶¹ Poor | 2G | 📱 Data Enabled | 🔽 Data Saver | 🔋 80%
+USER: Alright, it's back on now. It took a moment, but everything seems to be there.
+AGENT: That's great to hear, John — I'm glad everything came back just fine.
+
+To recap: I added 2 GB of data to your line for $4.00 (added to your bill), which resolves the data stoppage and slowness caused by exceeding your 15 GB monthly limit. Your cycle resets on February 28.
+
+Enjoy those photos of your grandkids! Is there anything else I can help you with?
+USER: Hmm, wait. I'm looking at the top of my screen and it still seems slow—there's a little "2G" showing up there, and I noticed a downward arrow icon too. That doesn't seem right for fast internet. I really need this to be excellent speed. Can you help me check it?
+AGENT: Let me help you check that. The "2G" indication means your phone is on an older network, which would explain the slow speeds — 2G isn't suitable for fast data.
+
+Could you please check your network settings for me? On your phone, go to your network/mobile settings and tell me what "network mode" or "preferred network type" is currently selected? Or, if you have a way to run a network status check on your device, that would help too — I'd like to confirm exactly what the network status shows.
+TOOL_RESULT: Airplane Mode: OFF
+SIM Card Status: active
+Cellular Connection: connected
+Cellular Signal: poor
+Cellular Network Type: 2G
+Mobile Data Enabled: Yes
+Data Roaming Enabled: No
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+TOOL_RESULT: Network Mode Preference: 2g_only
+USER: Okay, I found it. It says the "network mode preference" is set to "2G only." I'm not really sure what that means, but it sounds like that might be the problem? Also it says the signal is poor and it's connected to a 2G network. Can you fix this? I really need that excellent speed.
+AGENT: That's exactly the problem, John. Your phone is set to "2G only," and 2G is a very old network — it's slow and not built for data. To get fast internet, we need to switch your phone to a mode that includes 4G or 5G.
+
+On your phone, please go to the same network settings where you found that "network mode preference" and change it from "2G only" to **"4g_5g_preferred"**. That will let your phone use the fast modern networks.
+
+Go ahead and make that change, then let me know how it looks — I'm hoping you'll see "4G" or "5G" at the top with better signal.
+USER: Okay, let me try that. I'll change it now.
+TOOL_RESULT: Preferred Network Mode set to: 4g_5g_preferred
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔽 Data Saver | 🔋 80%
+USER: Oh, that's much better! Now it shows "5G" at the top with a full, excellent signal. That looks promising!
+
+Should I check the actual speed now to make sure it's excellent? I really want to be sure it's the best it can be.
+AGENT: That's wonderful, John — "5G" with excellent signal is exactly what we want to see!
+
+There isn't a separate speed test I can run on your behalf, but everything now looks the way it should: you're on 5G, you have a strong signal, and you have extra data to use. Together, that's the best setup for fast, reliable internet.
+
+The simplest real-world check is just to open something on your phone — try loading a website or opening an app that uses data, and it should feel snappy. If it still feels sluggish after that, let me know and we'll dig deeper.
+
+Is there anything else I can help you with?
+USER: Hmm, before I hang up, let me just run a quick speed test to be absolutely sure. I really want to confirm it's excellent.
+TOOL_RESULT: Speed Test Result: 55.00 Mbps (Good). Connection is good for most activities, including HD streaming.
+USER: Oh no, I ran the speed test and it only says "Good" — not "Excellent." That's not what I was hoping for. I really need it to be excellent speed, nothing less. Can you help me get it the rest of the way? I'm not sure what else to try.
+AGENT: I understand, John — let's see what else we can do to get you the best possible speed.
+
+A couple of things can affect your data speed even on 5G. One common one is a VPN — some VPNs can slow your connection down. Could you check whether you have a VPN connected? It would show a little "🔒 VPN Connected" indicator.
+
+Also, could you check your status bar and tell me what you see at the top — specifically whether there's anything like a VPN icon, and whether "Data Saver" is on? That'll help me figure out the next step.
+TOOL_RESULT: VPN is turned OFF.
+TOOL_RESULT: Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔽 Data Saver | 🔋 80%
+TOOL_RESULT: Data Saver mode is ON (limits data usage).
+USER: Well, I checked—the VPN is off, so that's not it. But I do see a "Data Saver" icon in my status bar, and when I checked, it says Data Saver mode is ON, which apparently limits data usage. Could that be slowing me down?
+AGENT: That could very well be it, John. Data Saver intentionally limits background data to save your usage, and it can make things feel slower or restricted.
+
+I'd suggest turning Data Saver **off** — that should let your connection run at full speed. On your phone, go to the Data Saver setting (usually under Settings → Network/Connections → Data Saver) and switch it to Off.
+
+Once that's done, run your speed test again and let me know what it says. Hopefully you'll see "Excellent" this time!
+USER: Let me turn that off now.
+TOOL_RESULT: Data Saver Mode is now OFF.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: Okay, Data Saver is off now. Let me run the speed test again.
+TOOL_RESULT: Speed Test Result: 275.00 Mbps (Excellent). Connection is very fast.
+USER: That did it! Now the speed test says "Excellent" — 275 Mbps, and it says the connection is very fast. That's exactly what I was hoping for! 
+
+Thank you so much for your patience walking me through all of that. I really appreciate your help—now I can enjoy those photos of my grandkids without any trouble. Have a wonderful day!
+
+###STOP###

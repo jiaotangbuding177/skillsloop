@@ -1,0 +1,208 @@
+{
+  "schema": "trace2skill-independent-ai-audit-v2",
+  "status": "COMPLETED_PARTIAL_OUTPUT_AUDIT_V2_RUN_FAILED",
+  "scope": "Only this frozen six-session generation experiment; post-generation audit, not generator input",
+  "reviewer_limit": "Same-AI independent source review; not human gold, overall accuracy, professional fact certification, or consumer benefit",
+  "source_reference_baseline": {
+    "path": "private/independent_audit.json",
+    "sha256": "40e5f0967cc9be2da4ecea75ad11e0f04a7cc5aacfdb02f86d82bef672b6b460",
+    "established_before_generated_outputs": true,
+    "frozen_source_sha256": "735c165a8d74b1bce9a4e8d589123526c6913c3c4f923d79d4fb688fb90e08d4",
+    "source_reference_ids": [
+      "REF_FINANCE",
+      "REF_EXPO",
+      "REF_RESEARCH_TABLE",
+      "REF_SCHOOLS",
+      "REF_TABLE_DIFF",
+      "REF_MASKING"
+    ]
+  },
+  "continuation_disclosure": "User explicitly authorized external transmission to ECNU before v2. v1 failure and v1 audit remain preserved. v2 is deterministic missing-endpoint-index normalization plus exact saved-response reuse and continued generation, not an independent clean rerun.",
+  "analysis_findings": [
+    {
+      "id": "B_FINANCE_COLUMN_SCOPE",
+      "session_id": "conv_9b78a49bd169",
+      "item_index": 4,
+      "source_ids": [
+        "m010"
+      ],
+      "assessment": "SCOPE_OVERGENERALIZATION",
+      "detail": "The source refers to this template having no beginning-of-year column. The item generalizes to balance sheets usually having only an ending column. Its limitation narrows to the particular script but does not remove the broader claim. No workbook-level verification is available."
+    },
+    {
+      "id": "B_FINANCE_SELF_REPORT_LIMIT",
+      "session_id": "conv_9b78a49bd169",
+      "item_indices": [
+        1,
+        2,
+        3
+      ],
+      "assessment": "UNCERTAINTY_PRESERVED",
+      "detail": "Mapping, formula filling and LibreOffice use are VISIBLE_METHOD_UNVERIFIED, final correctness is UNKNOWN, and command details are unavailable. Existing tool snapshots do not establish successful recalculation."
+    },
+    {
+      "id": "B_EXPO_SCORE_SCALE",
+      "session_id": "conv_7f5a1845d742",
+      "item_index": 2,
+      "source_ids": [
+        "m002"
+      ],
+      "source_group_ids": [
+        "a_d4587d55078b62678e"
+      ],
+      "assessment": "CONDITION_EXPLICIT_IN_ANALYSIS",
+      "detail": "The x10 factor is explicitly limited to raw scores whose maximum is 10; the source supports this case, not a universal conversion. No final-skill propagation assessment is possible."
+    },
+    {
+      "id": "B_EXPO_ROI_REQUIREMENT",
+      "session_id": "conv_7f5a1845d742",
+      "item_index": 4,
+      "source_ids": [
+        "m001",
+        "m002"
+      ],
+      "source_group_ids": [
+        "u_d5aca2dc7f4b963414",
+        "a_d4587d55078b62678e"
+      ],
+      "assessment": "USER_REQUIREMENT_SUPPORTED_WITH_FACT_LIMIT",
+      "detail": "The user requires assumptions to be listed. This supports distinguishing assumed inputs; it does not independently certify the booth price that the assistant labels FACT."
+    },
+    {
+      "id": "B_EXPO_FAILURE_EVIDENCE_LIMIT",
+      "session_id": "conv_7f5a1845d742",
+      "item_indices": [
+        1,
+        3
+      ],
+      "assessment": "NARRATIVE_FAILURE_NOT_INDEPENDENT_WORKBOOK_PROOF",
+      "detail": "A visible tool snapshot supports a failed python-docx import. The formula row offset and its correction come from assistant narrative; the analysis explicitly states that final artifact status is unverified. OBSERVED_LOCAL_FAILURE should be interpreted as an observed report for the formula item."
+    }
+  ],
+  "recovery_findings": [
+    {
+      "id": "B_FINANCE_ONE_TASK_CHAIN",
+      "session_id": "conv_9b78a49bd169",
+      "assessment": "PLAUSIBLE_TEXTUAL_RELATIONS_NOT_VERIFIED_TIMELINE",
+      "detail": "One task matches the user financial-filling/reconciliation request. Progress dependencies and retry link follow textual references. Selected relations preserve chronology_verified=false; task outcome UNKNOWN and semantic_validation NOT_INDEPENDENTLY_VERIFIED. No unique chronology or successful execution is established."
+    },
+    {
+      "id": "B_EXPO_THREE_SUBGOALS",
+      "session_id": "conv_7f5a1845d742",
+      "assessment": "SOURCE_SUPPORTED_DECOMPOSITION_NOT_UNIQUE_GOLD_PARTITION",
+      "detail": "Three task goals correspond to the user decision, ROI/assumptions and execution-plan subgoals; both messages belong to all three. RESPONDS_TO m002 to m001 is textually supported. This does not establish three independent physical tasks or verified chronology."
+    },
+    {
+      "id": "B_EXPO_MISSING_INDEX_NORMALIZATION",
+      "session_id": "conv_7f5a1845d742",
+      "assessment": "FORMAT_ONLY_NORMALIZATION",
+      "detail": "Only missing redundant source_ids were filled with already existing real endpoints m002,m001. The raw model relation was not changed. Free replay is not a new independent model experiment."
+    }
+  ],
+  "final_skill_findings": [
+    {
+      "id": "B_FINAL_NOT_GENERATED",
+      "assessment": "NOT_ASSESSABLE",
+      "detail": "B produced no final skill; final semantic propagation and Markdown structure cannot be reviewed or compared to A."
+    }
+  ],
+  "generated_artifacts_reviewed": [
+    {
+      "path": "private/run_v2/run.json",
+      "sha256": "ed29914c1bbacda0fc75b6c983543719c3a4fcc27a7102ef28c6a4b5a3e583d5"
+    },
+    {
+      "path": "private/run_v2/B/failure.json",
+      "sha256": "71b3337edd2ccad823e5ab4a75e25e4d4b1f02a33c9373d5c90df091163f278a"
+    },
+    {
+      "path": "private/run_v2/A/skills/spreadsheet-generation-audit/SKILL.md",
+      "sha256": "1763a3e578843479beae604dd0dd0c557ff2c74483d651a089e639ece948c008"
+    },
+    {
+      "path": "private/run_v2/B/analyses/conv_9b78a49bd169.json",
+      "sha256": "703de2bb825df6e31e88496fbf02b9538258e22a8ecde22ee42e5d1b5f434f81"
+    },
+    {
+      "path": "private/run_v2/B/recovered/conv_9b78a49bd169.json",
+      "sha256": "a98cee9d28325d52ddc338b5861f5c24607a6c0196c8af3a8c0adc8f841b9159"
+    },
+    {
+      "path": "private/run_v2/B/recovery_raw/conv_9b78a49bd169.json",
+      "sha256": "99e46d77bc6bdeb263c75477b1f8e5addbc24c03580bf9ae14023bceffed22e9"
+    },
+    {
+      "path": "private/run_v2/B/analyses/conv_7f5a1845d742.json",
+      "sha256": "4edcd6945f9be3acf93b8689f25f5c0cd8279a0ab4cbab867d0440cfe57eaac5"
+    },
+    {
+      "path": "private/run_v2/B/recovered/conv_7f5a1845d742.json",
+      "sha256": "335657190f0e0881865122146e32612d6ba0b2289d2553017ea27d9a29dbc7ec"
+    },
+    {
+      "path": "private/run_v2/B/recovery_raw/conv_7f5a1845d742.json",
+      "sha256": "c32646103afaf652e1510b3e77614a9f3d10fc76aedea811692c2d8cd8ff83c3"
+    }
+  ],
+  "pending": [],
+  "no_model_calls_by_auditor": true,
+  "no_credentials_read_by_auditor": true,
+  "no_source_prompt_or_generator_changes_by_auditor": true,
+  "audit_not_used_for_generation": true,
+  "run_status": "PARTIAL_OR_FAILED_V2",
+  "terminal_observation": {
+    "error_type": "TimeoutError",
+    "error": "The read operation timed out",
+    "completed_B_analysis_records": 2,
+    "B_final_skill_generated": false,
+    "B_aggregate_analysis_records_generated": false,
+    "cause": "UNKNOWN; read timeout is observed, not evidence of semantic contract failure or algorithm quality"
+  },
+  "A_continuation": {
+    "sha256": "1763a3e578843479beae604dd0dd0c557ff2c74483d651a089e639ece948c008",
+    "v1_v2_bytes_equal": true,
+    "new_API_calls_for_A": 0,
+    "semantic_review_reference": "private/independent_audit.json; preserve initial A scope and Markdown findings"
+  },
+  "preservation_checks": {
+    "frozen_source_unchanged": true,
+    "v1_audit_unchanged": true,
+    "artifact_byte_comparisons": [
+      {
+        "artifact": "B/recovery_raw/conv_9b78a49bd169.json",
+        "v1_v2_bytes_equal": true,
+        "v2_v3_bytes_equal": true
+      },
+      {
+        "artifact": "B/recovered/conv_9b78a49bd169.json",
+        "v1_v2_bytes_equal": true,
+        "v2_v3_bytes_equal": true
+      },
+      {
+        "artifact": "B/analyses/conv_9b78a49bd169.json",
+        "v1_v2_bytes_equal": true,
+        "v2_v3_bytes_equal": true
+      },
+      {
+        "artifact": "B/recovery_raw/conv_7f5a1845d742.json",
+        "v1_v2_bytes_equal": true,
+        "v2_v3_bytes_equal": true
+      }
+    ]
+  },
+  "usage_interpretation": {
+    "known_total_tokens_including_calibration": 157740,
+    "unknown_usage_reservation_tokens": 114592,
+    "limitation": "Reservation is a budget bound, not observed consumption or exact billed usage. Prior failed request is retained."
+  },
+  "not_generated_and_not_reviewed": {
+    "B_analysis_sessions": [
+      "conv_d2c84054d91a",
+      "conv_e6fdd2e394f4",
+      "conv_ee979d0d59fb",
+      "conv_b5e6f3d3bab9"
+    ],
+    "B_final_skill": true
+  },
+  "terminal_conclusion": "Only two B analyses and recoveries are available in v2. No final A/B skill quality comparison or overall accuracy is justified."
+}

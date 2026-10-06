@@ -1,0 +1,33 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>定时任务超时诊断与配置</title><style>body{margin:0;background:#f3f6fb;color:#172536;font:16px/1.65 system-ui,"Microsoft YaHei",sans-serif}main{max-width:1160px;margin:32px auto;padding:0 20px}a{color:#1552aa}header,.box,article,details{background:white;border:1px solid #dce4ee;border-radius:12px;padding:18px;margin:12px 0}h1{font-size:28px}h2{font-size:22px}.meta{color:#596777;font-size:13px}.badge{display:inline-block;padding:3px 9px;border-radius:6px;background:#e9f0fa;margin-right:6px}pre{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere}input,select{font:inherit;padding:9px;border:1px solid #b9c8da;border-radius:7px}summary{cursor:pointer;font-weight:600}.muted{color:#68788b}.noise{background:#f6f6f6}table{border-collapse:collapse;width:100%}td,th{text-align:left;border-bottom:1px solid #dce4ee;padding:9px}nav{display:flex;gap:16px;flex-wrap:wrap}section{scroll-margin-top:15px}</style><main><header><h1>定时任务超时诊断与配置</h1><p>先核最近失败类型与连续失败，再区分抓取和摘要生成耗时；在用户指定后从300改900秒，但不宣称增大预算必然修复或普遍适用</p><p>来源种子 4 组；扩入上下文 0 组。不是完整黄金轨迹，未认证时序或任务成功。</p><a href="../sessions/conv_1f70175010f7.html">查看完整会话及全部证据</a></header><span class="badge">种子</span><section id="u_2c764b10f7aa755a4d" class="box "><p class="meta">user · u_2c764b10f7aa755a4d · 1次来源记录<br></p><pre>帮我看一下定时任务，最近一次7月3日，运行失败原因？</pre></section><span class="badge">种子</span><section id="u_3fadefeb035814d458" class="box "><p class="meta">user · u_3fadefeb035814d458 · 1次来源记录<br></p><pre>把timeoutseconds修改为900秒</pre></section><span class="badge">种子</span><section id="a_fcf3df3b4d0bef1f4e" class="box "><p class="meta">assistant · a_fcf3df3b4d0bef1f4e · 1次来源记录<br></p><pre>金桥吴彦祖，查到了！这个定时任务是 **AI Builders Digest 每周中文摘要**（每周五 12:00 CST）。
+
+## 📋 7月3日（周五）运行情况
+
+**状态：❌ 失败**
+- **失败原因：执行超时（timeout）**
+- **实际耗时：300 秒**（刚好撞上 5 分钟超时上限）
+- **错误信息：** `cron: job execution timed out`
+
+## 📈 历史对比
+
+| 日期 | 状态 | 耗时 |
+|------|------|------|
+| 6月19日（周五） | ✅ 成功 | 83 秒 |
+| 6月26日（周五） | ❌ 超时 | 300 秒 |
+| **7月3日（周五）** | **❌ 超时** | **300 秒** |
+
+已经**连续 2 次超时失败**了（`consecutiveErrors: 2`）。
+
+## 🔍 分析
+
+这个任务的 `timeoutSeconds` 设置了 **300 秒（5 分钟）**。之前成功运行时一般在 50-160 秒内完成，说明正常情况下够用。但从 6 月 26 日开始连续超时，可能的原因：
+
+1. **follow-builders 数据源响应变慢** — prepare-digest.js 获取中心 feed 耗时增加
+2. **任务内容量变大** — 最近几周 builders 动态越来越多，生成摘要所需 token 增加
+3. **模型响应速度波动**
+
+需要我帮你做什么？
+- **A)** 把 `timeoutSeconds` 从 300 调大（比如 600 秒），给更多执行时间
+- **B)** 看看到底是 fetch 数据卡住了还是生成摘要卡住了，排查根因</pre></section><span class="badge">种子</span><section id="a_2425ed90bcd4fdecc7" class="box "><p class="meta">assistant · a_2425ed90bcd4fdecc7 · 1次来源记录<br></p><pre>已修改完成 ✅
+
+- **`timeoutSeconds`**: 300 → **900**（15 分钟）
+- 今天中午 12:00 CST 就会用新配置跑，不会再被 5 分钟卡死了</pre></section></main></html>

@@ -1,0 +1,117 @@
+AGENT: Hi! How can I help you today?
+USER: Hi there — I'm hoping you can help me. My phone has been showing "No Service" for the past few hours and I can't make any calls or use my data. It was working fine earlier today, so I'm not sure what's going on.
+AGENT: I can help with that. First, I need to identify you — could you please provide your phone number, or your full name and date of birth?
+USER: Sure thing. My name is John Smith, and my phone number is 555-123-2002.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003", "B1234321"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Suspended", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 8.7, "data_refueling_gb": 0.0, "roaming_enabled": true, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": "2025-02-25"}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT_TOOL_CALL: {"name": "get_bills_for_customer", "arguments": {"customer_id": "C1001"}}
+TOOL_RESULT: [{"bill_id": "B1003", "customer_id": "C1001", "period_start": "2025-03-01", "period_end": "2025-03-31", "issue_date": "2025-03-01", "total_due": 0.0, "due_date": "2025-03-15", "line_items": [], "status": "Draft"}, {"bill_id": "B1002", "customer_id": "C1001", "period_start": "2025-02-01", "period_end": "2025-02-28", "issue_date": "2025-02-05", "total_due": 150.0, "due_date": "2025-02-19", "line_items": [{"description": "Basic Plan - Line 555-123-2001", "amount": 40.0, "date": "2025-02-05", "item_type": "Plan Charge"}, {"description": "Premium Plan - Line 555-123-2002", "amount": 65.0, "date": "2025-02-05", "item_type": "Plan Charge"}, {"description": "Basic Plan - Line 555-123-2003", "amount": 40.0, "date": "2025-02-05", "item_type": "Plan Charge"}, {"description": "Suspension Fee - Line 555-123-2003", "amount": 5.0, "date": "2025-02-05", "item_type": "Fee"}], "status": "Issued"}, {"bill_id": "B1001", "customer_id": "C1001", "period_start": "2025-01-01", "period_end": "2025-01-31", "issue_date": "2025-01-05", "total_due": 160.5, "due_date": "2025-01-19", "line_items": [{"description": "Basic Plan - Line 555-123-2001", "amount": 40.0, "date": "2025-01-05", "item_type": "Plan Charge"}, {"description": "Premium Plan - Line 555-123-2002", "amount": 65.0, "date": "2025-01-05", "item_type": "Plan Charge"}, {"description": "Basic Plan - Line 555-123-2003", "amount": 40.0, "date": "2025-01-05", "item_type": "Plan Charge"}, {"description": "Data Overage - Line 555-123-2002", "amount": 15.5, "date": "2025-01-05", "item_type": "Overage"}], "status": "Paid"}, {"bill_id": "B1234321", "customer_id": "C1001", "period_start": "2025-01-01", "period_end": "2025-01-31", "issue_date": "2025-01-01", "total_due": 65.0, "due_date": "2025-01-15", "line_items": [{"description": "Charge for line L1002", "amount": 65.0, "date": "2025-02-25", "item_type": "Charge"}], "status": "Overdue"}]
+AGENT: I found the problem. Here's the situation:
+
+Your line **555-123-2002** is suspended because you have an **overdue bill**:
+
+- **Bill B1234321** — $65.00, due 2025-01-15, status: **Overdue**
+
+There's also another bill (B1002, $150.00) that's currently in "Issued" status, but only the overdue one is causing the suspension.
+
+To get your service back, we need to take care of that overdue bill first. Here's how it works:
+
+1. I'll send you a payment request for the **$65.00** overdue bill.
+2. You'll then be able to review and accept it from your payment requests.
+3. Once the payment goes through, I can resume your line.
+
+Would you like me to send the payment request for the $65.00 overdue bill?
+USER: Yes, that makes sense — let's take care of that overdue bill. Please go ahead and send me the payment request for the $65.00, and I'll review and accept it.
+AGENT_TOOL_CALL: {"name": "send_payment_request", "arguments": {"customer_id": "C1001", "bill_id": "B1234321"}}
+TOOL_RESULT: Payment request sent to the customer for bill B1234321
+AGENT: I've sent you the payment request for the **$65.00** overdue bill. Please check your payment requests, review it, and accept it — then let me know once it's done so I can confirm the payment and resume your line.
+TOOL_RESULT: You have a payment request for bill B1234321 of 65.0 USD.
+USER: I see the payment request for $65.00. Let me accept and pay it now.
+TOOL_RESULT: Payment of 65.0 USD has been made for bill B1234321.
+USER: Done! I've accepted and paid the $65.00 for bill B1234321. Could you please confirm the payment went through and resume my line?
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "B1234321"}}
+TOOL_RESULT: {"bill_id": "B1234321", "customer_id": "C1001", "period_start": "2025-01-01", "period_end": "2025-01-31", "issue_date": "2025-01-01", "total_due": 65.0, "due_date": "2025-01-15", "line_items": [{"description": "Charge for line L1002", "amount": 65.0, "date": "2025-02-25", "item_type": "Charge"}], "status": "Paid"}
+AGENT_TOOL_CALL: {"name": "resume_line", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: {"message": "Line resumed successfully", "line": {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 8.7, "data_refueling_gb": 0.0, "roaming_enabled": true, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}}
+AGENT: All set! ✅
+
+- **Payment confirmed:** $65.00 paid — bill B1234321 is now **Paid**.
+- **Line resumed:** Your line 555-123-2002 is back to **Active**.
+
+One important step: please **reboot your device** so it can reconnect and get service again. After the restart, your calls and data should work normally.
+
+Is there anything else I can help you with?
+USER: Great, thank you! Let me reboot my device now.
+TOOL_RESULT: Restarting network services...
+Status Bar: 📵 No Signal | 📵 Data Disabled | 🔋 80%
+USER: Hmm, I rebooted the phone, but I'm still seeing "No Signal" in my status bar — and it also shows data is disabled. That's a bit frustrating since I was hoping the restart would fix it. What should I try next?
+AGENT: Let me help troubleshoot. Could you run a couple of checks on your phone for me?
+
+1. Open your status bar check — what icons do you see (airplane mode, signal strength, network type, data status, etc.)?
+2. Check your network status as well.
+
+Specifically, I'd like to know:
+- Is **Airplane Mode** on?
+- What's the **signal strength** showing?
+- Is **Mobile Data** enabled or disabled?
+
+That'll tell us what to fix next.
+TOOL_RESULT: Status Bar: 📵 No Signal | 📵 Data Disabled | 🔋 80%
+TOOL_RESULT: Airplane Mode: OFF
+SIM Card Status: missing
+Cellular Connection: no_service
+Cellular Signal: none
+Cellular Network Type: none
+Mobile Data Enabled: Yes
+Data Roaming Enabled: No
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+USER: Okay, I ran both checks. Here's what I'm seeing:
+
+**Status bar:** No Signal, Data Disabled, battery 80%.
+
+**Network status:**
+- Airplane Mode: **OFF**
+- Signal strength: **none**
+- Mobile Data: **Enabled**
+- But here's the interesting part — the **SIM Card Status shows "missing"**, and the cellular connection says "no_service" with no network type.
+
+So it looks like my phone isn't detecting the SIM card at all. Does that explain the "No Service" issue? What should I do about that?
+AGENT: Yes, that explains it — if the phone can't detect the SIM card, it won't get any service at all.
+
+The fix for a "missing" SIM is to **reseat the SIM card**. Please:
+
+1. Power off your phone.
+2. Remove the SIM card from the tray.
+3. Reinsert it firmly and correctly into the tray (make sure it's seated properly).
+4. Power the phone back on.
+
+Once you've done that, check the status again and let me know what you see.
+TOOL_RESULT: SIM card re-seated successfully.
+Status Bar: 📵 No Signal | 📵 Data Disabled | 🔋 80%
+TOOL_RESULT: Airplane Mode: OFF
+SIM Card Status: locked_pin
+Cellular Connection: no_service
+Cellular Signal: none
+Cellular Network Type: none
+Mobile Data Enabled: Yes
+Data Roaming Enabled: No
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+USER: Okay, I reseated the SIM card and checked again. Here's the update:
+
+- The SIM card **is** being detected now (it no longer says "missing") — that's good progress!
+- But now the SIM Card Status shows **"locked_pin"**.
+- Signal strength is still **none**, and the connection still shows "no_service".
+
+So it seems the SIM is now recognized, but it's asking for a PIN. What should I do next?
+AGENT_TOOL_CALL: {"name": "transfer_to_human_agents", "arguments": {"summary": "Customer John Smith (C1001), line 555-123-2002 (L1002), reports \"No Service.\" Line was suspended for an overdue bill; bill B1234321 paid and line resumed, but service still not working. Reseated SIM card per troubleshooting — SIM now detected but shows \"locked_pin\" (SIM locked due to incorrect PIN/PUK entries). Requires technical support for SIM security/unlock assistance."}}
+TOOL_RESULT: Transfer successful
+AGENT: YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.
+USER: ###TRANSFER###

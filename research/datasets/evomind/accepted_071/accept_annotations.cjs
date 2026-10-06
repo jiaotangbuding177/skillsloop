@@ -1,0 +1,31 @@
+// Freeze the user's completed annotation export and verify it without model calls.
+const fs=require('node:fs'),p=require('node:path'),a=require('node:assert/strict'),crypto=require('node:crypto'),vm=require('node:vm');
+const R=__dirname,P=p.join(R,'private'),O=p.join(R,'../context_annotation_070'),C=require(p.join(O,'annotation_core.js'));
+const source='C:/Users/39835/Downloads/evomind-ai-assisted-annotations-2026-09-29T05-22-15-813Z.json';
+const read=x=>JSON.parse(fs.readFileSync(x,'utf8')),hash=b=>crypto.createHash('sha256').update(b).digest('hex');
+const bytes=fs.readFileSync(source),doc=JSON.parse(bytes.toString('utf8')),data=read(p.join(O,'private/review_data.json')),old=data.seed,checks=[],changes=[];
+function check(n,f){f();checks.push(n);}
+check('source_fingerprint_schema_and_target_membership',()=>C.validateImport(doc,data));
+let counts={},basis={},n=0;
+check('all_2674_review_items_complete',()=>{for(const s of data.sessions)for(const t of s.issues){const k=C.key(t.role,t.id),l=doc.labels[s.id]?.[k];a(l);a(['matched','none'].includes(l.decision));a.equal(l.targets.length,new Set(l.targets).size);counts[l.decision]=(counts[l.decision]||0)+1;basis[l.basis]=(basis[l.basis]||0)+1;n++;if(JSON.stringify(l)!==JSON.stringify(old.labels[s.id]?.[k]))changes.push({session:s.id,key:k,before:old.labels[s.id]?.[k],after:l});}a.equal(n,2674);a.equal(data.sessions.length,505);});
+check('prior_51_human_labels_identical',()=>{let n=0;for(const[s,ls]of Object.entries(old.labels))for(const[k,l]of Object.entries(ls))if(l.basis==='human_explicit_selection'){a.deepEqual(doc.labels[s][k],l);n++;}a.equal(n,51);});
+check('seven_pending_items_completed_by_user',()=>{a.equal(changes.length,7);a.equal(basis.human_explicit_selection,58);for(const c of changes){a.equal(c.before.decision,'uncertain');a.equal(c.after.basis,'human_explicit_selection');}});
+check('bidirectional_labels_consistent',()=>{for(const s of data.sessions)for(const[k,l]of Object.entries(doc.labels[s.id])){const[role,id]=k.split(':');for(const t of role==='user'?s.assistants:s.users){const r=doc.labels[s.id][C.key(t.role,t.id)];if(r)a.equal(l.targets.includes(t.id),r.targets.includes(id));}}});
+check('export_import_roundtrip',()=>a.deepEqual(C.merge(C.empty(data.fingerprint),doc,data).labels,doc.labels));
+check('no_pending_sessions',()=>{for(const s of data.sessions)a.equal(C.progress(s,doc).done,true);});
+fs.mkdirSync(P,{recursive:true});fs.writeFileSync(p.join(P,'user_final_original.json'),bytes);
+const write=(x,v)=>fs.writeFileSync(x,JSON.stringify(v,null,2));
+write(p.join(P,'changes_from_070.json'),changes);
+const summary={status:'PASS',scope_sessions:505,corpus_sessions:1466,items:n,...counts,uncertain:0,human_labels:58,other_labels:n-58,previous_human_preserved:51,new_human_labels:7,remaining_sessions:0,annotation_basis:basis,semantic_accuracy_independently_measured:false,merged_into_066:false};
+data.seed=doc;data.ai_summary={...data.ai_summary,...summary,remaining_human_items:0,sessions_needing_human:0,sessions_resolved:505};
+write(p.join(P,'review_data.json'),data);write(p.join(P,'accepted_annotations.json'),doc);write(p.join(R,'summary.json'),summary);
+const core=fs.readFileSync(p.join(O,'annotation_core.js'),'utf8');
+let html=fs.readFileSync(p.join(O,'../ai_annotation_069/review_ui_generated.html'),'utf8').replaceAll('evomind-annotation-069:','evomind-annotation-071:').replace('EvoMind · AI辅助标注与剩余核验','EvoMind · 已完成标注归档').replace('AI 已接手初标 · 默认仅显示仍需你判断的会话 · 你的原标注已保留','2674项已全部处理 · 58项人工标注保留 · 默认查看全部判断').replace('<option value="all">全部 505 条</option>','<option value="all" selected>全部 505 条</option>').replace('<option value="pending" selected>','<option value="pending">').replace('<option value="issues">','<option value="issues" selected>');
+const payload=JSON.stringify(data).replaceAll('&','\\u0026').replaceAll('<','\\u003c').replaceAll('>','\\u003e').replaceAll('\u2028','\\u2028').replaceAll('\u2029','\\u2029');
+html=html.replace('/*__CORE__*/',()=>core).replace('/*__DATA__*/',()=>payload);fs.writeFileSync(p.join(P,'index.html'),html);
+check('frozen_backup_byte_identical',()=>a.equal(hash(fs.readFileSync(p.join(P,'user_final_original.json'))),hash(bytes)));
+check('source_conversations_unchanged',()=>a.deepEqual(read(p.join(P,'review_data.json')).sessions,read(p.join(O,'private/review_data.json')).sessions));
+check('page_script_and_embedded_export',()=>{const scripts=[...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)];a.equal(scripts.length,3);for(const s of scripts)if(s[1].includes('application/json'))a.deepEqual(JSON.parse(s[2]).seed,doc);else new vm.Script(s[2]);});
+write(p.join(R,'manifest.json'),{source_file:source,source_sha256:hash(bytes),html_sha256:hash(fs.readFileSync(p.join(P,'index.html'))),dataset_fingerprint:data.fingerprint});
+write(p.join(R,'verification.json'),{status:'PASS',checks,scope:'annotation completion and structural consistency',semantic_accuracy_independently_measured:false,browser_click_test:'NOT_RUN'});
+console.log(JSON.stringify(summary,null,2));

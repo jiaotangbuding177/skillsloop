@@ -1,0 +1,30 @@
+[
+  {
+    "attempt": "initial-identifier-redaction",
+    "status": "failed_before_dataset_export",
+    "failed_check": "3578-tool-record locator comparison to frozen screening tool_refs",
+    "observed_error": "AssertionError: call identifiers mismatched after generic text redaction",
+    "cause": "The old broad standalone-string redaction pattern was applied recursively to opaque join-key metadata such as tool_call_id; this hid some legitimate long identifiers.",
+    "correction": "Preserve known structural ID fields verbatim; filter credential-bearing text and payload strings. Re-run the complete frozen tool-index/name/call-id equality check.",
+    "source_files_changed": false,
+    "historical_commands_executed": false
+  },
+  {
+    "attempt": "base-export-review",
+    "status": "structural_checks_passed_followed_by_review_corrections",
+    "checks": "16/16",
+    "findings": [
+      "Generic legacy credential rule did not cover Chinese password-is/equals phrasing; independent new-view filter added, frozen old source unchanged.",
+      "1675 same-role cleaned-text alias groups discovered; audit preserves all, source input and candidate reading view now merge exact duplicates with aliases and source occurrences.",
+      "Original candidate source anchors include 3506 unique groups whereas earlier displayed messages contained 3505 because one noise assistant group stayed in source IDs. This source-anchor and shown-content distinction is preserved."
+    ],
+    "source_files_changed": false
+  },
+  {
+    "attempt": "enriched-full-export-metadata-review",
+    "status": "structural_export_passed_but_semantic_metadata_preservation_corrected",
+    "cause": "The same generic standalone-string redaction rule also masked long categorical enum values such as skill evidence kind and annotation basis.",
+    "correction": "Explicitly preserve the known join-key and categorical-enum fields; continue filtering text and payload strings. Add original-vs-export kind counts and per-annotation basis checks.",
+    "source_files_changed": false
+  }
+]

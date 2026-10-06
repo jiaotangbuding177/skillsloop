@@ -1,0 +1,79 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Windows主显示屏复发排障</title><style>body{margin:0;background:#f3f6fb;color:#172536;font:16px/1.65 system-ui,"Microsoft YaHei",sans-serif}main{max-width:1160px;margin:32px auto;padding:0 20px}a{color:#1552aa}header,.box,article,details{background:white;border:1px solid #dce4ee;border-radius:12px;padding:18px;margin:12px 0}h1{font-size:28px}h2{font-size:22px}.meta{color:#596777;font-size:13px}.badge{display:inline-block;padding:3px 9px;border-radius:6px;background:#e9f0fa;margin-right:6px}pre{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere}input,select{font:inherit;padding:9px;border:1px solid #b9c8da;border-radius:7px}summary{cursor:pointer;font-weight:600}.muted{color:#68788b}.noise{background:#f6f6f6}table{border-collapse:collapse;width:100%}td,th{text-align:left;border-bottom:1px solid #dce4ee;padding:9px}nav{display:flex;gap:16px;flex-wrap:wrap}section{scroll-margin-top:15px}</style><main><header><h1>Windows主显示屏复发排障</h1><p>手动仅电脑屏幕重启后失效时，改查快速启动、显卡及虚拟显示驱动；先断开外设验证，未接外屏仍出现屏幕2时进入驱动诊断，而不是反复改同一显示设置。</p><p>来源种子 4 组；扩入上下文 0 组。不是完整黄金轨迹，未认证时序或任务成功。</p><a href="../sessions/conv_ec2e122cb01d.html">查看完整会话及全部证据</a></header><span class="badge">种子</span><section id="u_e8266c9ce96567938b" class="box "><p class="meta">user · u_e8266c9ce96567938b · 1次来源记录<br></p><pre>我的笔记本电脑打开后，一直是在2屏显示，笔记本屏幕1屏明明才是主屏幕，怎么办</pre><details><summary>去包装前正文（明显凭据已隐藏）</summary><pre>请使用中文回复，除非用户明确使用其他语言。
+
+我的笔记本电脑打开后，一直是在2屏显示，笔记本屏幕1屏明明才是主屏幕，怎么办</pre></details></section><span class="badge">种子</span><section id="u_24ab6edf01a39bbf83" class="box "><p class="meta">user · u_24ab6edf01a39bbf83 · 1次来源记录<br></p><pre>我一直都是手动选择仅电脑屏幕，但是每次重启开机后又是这样</pre><details><summary>去包装前正文（明显凭据已隐藏）</summary><pre>请使用中文回复，除非用户明确使用其他语言。
+
+我一直都是手动选择仅电脑屏幕，但是每次重启开机后又是这样</pre></details></section><span class="badge">种子</span><section id="a_f006a3be3b02791439" class="box "><p class="meta">assistant · a_f006a3be3b02791439 · 1次来源记录<br></p><pre>明白了，老板。既然“仅电脑屏幕”重启后会失效，就不是普通设置问题，通常是**显卡驱动、扩展坞/外接设备，或 Windows 快速启动保存了错误状态**。按下面顺序处理：
+
+### 1. 先关闭“快速启动”（最常见）
+1. 打开 **控制面板**
+2. 进入 **硬件和声音 → 电源选项**
+3. 点击左侧 **选择电源按钮的功能**
+4. 点击上方 **更改当前不可用的设置**
+5. 取消勾选 **启用快速启动**
+6. 保存后，选择一次 **关机**，再重新开机测试
+&gt; 不要只点“重启”，要完整关机再开机。
+
+### 2. 删除系统记住的“幽灵显示器”
+1. 右键开始菜单 → **设备管理器**
+2. 点击顶部 **查看 → 显示隐藏的设备**
+3. 展开 **监视器**
+4. 将灰色的、重复的 **通用即插即用监视器**卸载
+5. **不要卸载当前正在使用的笔记本屏幕**
+6. 重启电脑，再按 `Win + P` 选择 **仅电脑屏幕**
+
+### 3. 更新或重装显卡驱动
+在设备管理器中展开 **显示适配器**，看看是 Intel、AMD 还是 NVIDIA：
+
+- 优先去**笔记本品牌官网**下载对应机型的显卡驱动；
+- 不建议只依赖设备管理器里的“自动更新”；
+- 如果问题是最近更新后才出现，可进入显卡属性 → **驱动程序 → 回退驱动程序**。
+
+### 4. 排查扩展坞或虚拟显示软件
+如果连接过扩展坞、Type-C 显示器或无线投屏，先全部拔掉再开机。也检查是否装过：
+
+- DisplayLink
+- spacedesk
+- Duet Display
+- 向日葵虚拟屏
+- DeskIn、ToDesk 等远控软件的虚拟显示驱动
+
+这些程序可能在开机时重新创建“屏幕2”。不需要的话，卸载其**虚拟显示驱动**。
+
+**我判断最可能的是快速启动或虚拟显示驱动。**建议先做第1步；如果开机时即使没有接任何外屏，系统仍然显示“屏幕2”，就直接做第2和第4步。</pre></section><span class="badge">种子</span><section id="a_989e3a3494a60ffd97" class="box "><p class="meta">assistant · a_989e3a3494a60ffd97 · 1次来源记录<br></p><pre>[[reply_to_current]] 明白了，老板。既然“仅电脑屏幕”重启后会失效，就不是普通设置问题，通常是**显卡驱动、扩展坞/外接设备，或 Windows 快速启动保存了错误状态**。按下面顺序处理：
+
+### 1. 先关闭“快速启动”（最常见）
+1. 打开 **控制面板**
+2. 进入 **硬件和声音 → 电源选项**
+3. 点击左侧 **选择电源按钮的功能**
+4. 点击上方 **更改当前不可用的设置**
+5. 取消勾选 **启用快速启动**
+6. 保存后，选择一次 **关机**，再重新开机测试  
+   &gt; 不要只点“重启”，要完整关机再开机。
+
+### 2. 删除系统记住的“幽灵显示器”
+1. 右键开始菜单 → **设备管理器**
+2. 点击顶部 **查看 → 显示隐藏的设备**
+3. 展开 **监视器**
+4. 将灰色的、重复的 **通用即插即用监视器**卸载
+5. **不要卸载当前正在使用的笔记本屏幕**
+6. 重启电脑，再按 `Win + P` 选择 **仅电脑屏幕**
+
+### 3. 更新或重装显卡驱动
+在设备管理器中展开 **显示适配器**，看看是 Intel、AMD 还是 NVIDIA：
+
+- 优先去**笔记本品牌官网**下载对应机型的显卡驱动；
+- 不建议只依赖设备管理器里的“自动更新”；
+- 如果问题是最近更新后才出现，可进入显卡属性 → **驱动程序 → 回退驱动程序**。
+
+### 4. 排查扩展坞或虚拟显示软件
+如果连接过扩展坞、Type-C 显示器或无线投屏，先全部拔掉再开机。也检查是否装过：
+
+- DisplayLink
+- spacedesk
+- Duet Display
+- 向日葵虚拟屏
+- DeskIn、ToDesk 等远控软件的虚拟显示驱动
+
+这些程序可能在开机时重新创建“屏幕2”。不需要的话，卸载其**虚拟显示驱动**。
+
+**我判断最可能的是快速启动或虚拟显示驱动。**建议先做第1步；如果开机时即使没有接任何外屏，系统仍然显示“屏幕2”，就直接做第2和第4步。</pre></section></main></html>

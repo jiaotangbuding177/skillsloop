@@ -1,0 +1,170 @@
+AGENT: Hi! How can I help you today?
+USER: Hi there. My phone has been showing “No Service” for the past few hours, and I can’t make calls or use mobile data. Can you help me get this fixed?
+AGENT: I'll help you get this fixed. First I need to identify you. Can you please provide your phone number?
+USER: Sure, my phone number is 555-123-2002.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT: Thanks, John. I've found your account.
+
+Can you tell me which phone number/line is having the issue? I see you have a few lines on your account.
+USER: It’s the line tied to my number—555-123-2002. That’s the one that’s been showing “No Service.”
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 8.7, "data_refueling_gb": 0.0, "roaming_enabled": true, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT: Your line (555-123-2002) is Active, and the contract is fine, so the "No Service" isn't from a suspension. Let's troubleshoot the device directly.
+
+Could you please run a status bar check on your phone? I need to know what icons are showing — specifically:
+- Airplane mode status
+- Signal strength
+- Network technology (5G/4G/etc.)
+- Mobile data status
+
+Also, can you check your phone's network status for me?
+TOOL_RESULT: Status Bar: ✈️ Airplane Mode | 🔋 80%
+TOOL_RESULT: Airplane Mode: ON
+SIM Card Status: missing
+Cellular Connection: no_service
+Cellular Signal: none
+Cellular Network Type: none
+Mobile Data Enabled: Yes
+Data Roaming Enabled: No
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+USER: Here’s what I’m seeing on my phone:
+
+- Status bar: Airplane mode icon is showing, battery at 80%.
+- Network status:
+  - Airplane Mode: ON
+  - SIM Card Status: missing
+  - Cellular Connection: no_service
+  - Cellular Signal: none
+  - Network Type: none
+  - Mobile Data: Enabled
+  - Data Roaming: No
+  - Wi‑Fi: OFF and not connected
+
+So it looks like Airplane Mode is on and the SIM is showing as missing. What should I do next?
+AGENT: Two things to fix here:
+
+**1. Turn off Airplane Mode.** That's what's cutting off your cellular connection. Please disable Airplane Mode in your phone's settings (or quick settings panel).
+
+**2. Reseat your SIM card.** The SIM showing as "missing" also blocks service. Please power off the phone, remove the SIM card and reinsert it firmly, then power back on.
+
+Once you've done both, can you re-check the status bar and network status and tell me what you see?
+USER: I can only do one action at a time on my end. Could you please walk me through them one step at a time? Which should I do first—turn off Airplane Mode or reseat the SIM?
+AGENT: Let's start with Airplane Mode.
+
+**Step 1: Turn off Airplane Mode.** Please disable it in your phone's settings or quick settings panel.
+
+Let me know once it's off, and tell me what the status bar and network status show afterwards.
+TOOL_RESULT: Airplane Mode is now OFF.
+Status Bar: 📵 No Signal | 📵 Data Disabled | 🔋 80%
+TOOL_RESULT: Status Bar: 📵 No Signal | 📵 Data Disabled | 🔋 80%
+TOOL_RESULT: Airplane Mode: OFF
+SIM Card Status: missing
+Cellular Connection: no_service
+Cellular Signal: none
+Cellular Network Type: none
+Mobile Data Enabled: Yes
+Data Roaming Enabled: No
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+USER: Okay, I turned Airplane Mode off.
+
+Status bar now shows: No Signal, Data Disabled, battery 80%.
+Network status shows:
+- Airplane Mode: OFF
+- SIM Card Status: missing
+- Cellular Connection: no_service
+- Signal: none
+- Network Type: none
+- Mobile Data: Enabled
+- Data Roaming: No
+- Wi‑Fi: OFF, not connected
+
+Still no service, and it says the SIM is missing. That’s a bit frustrating—what should I try next?
+AGENT: Airplane Mode is off, good. Now the SIM is the blocker.
+
+**Step 2: Reseat your SIM card.** Power off the phone, remove the SIM card, reinsert it firmly (make sure it's seated properly and not upside down), then power the phone back on.
+
+Let me know once you've done that, and share the status bar and network status again.
+TOOL_RESULT: SIM card re-seated successfully.
+Status Bar: 📵 No Signal | 📵 Data Disabled | 🔋 80%
+TOOL_RESULT: Status Bar: 📵 No Signal | 📵 Data Disabled | 🔋 80%
+TOOL_RESULT: Airplane Mode: OFF
+SIM Card Status: active
+Cellular Connection: no_service
+Cellular Signal: none
+Cellular Network Type: none
+Mobile Data Enabled: Yes
+Data Roaming Enabled: No
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+USER: I reseated the SIM and powered the phone back on.
+
+Status bar now shows: No Signal, Data Disabled, battery 80%.
+Network status shows:
+- Airplane Mode: OFF
+- SIM Card Status: active
+- Cellular Connection: no_service
+- Signal: none
+- Network Type: none
+- Mobile Data: Enabled
+- Data Roaming: No
+- Wi‑Fi: OFF, not connected
+
+The SIM is recognized now, but I still have no signal. What should I try next?
+AGENT: Good progress — the SIM is recognized now. Let's check the APN settings, since incorrect APN settings can block service.
+
+Could you check your APN settings for me and tell me what they show?
+TOOL_RESULT: Current APN Name: broken
+MMSC URL (for picture messages): http://mms.carrier.com/mms/wapenc
+(These are technical settings, usually best left unchanged.)
+USER: I checked the APN settings. They show:
+
+- APN Name: broken
+- MMSC URL: http://mms.carrier.com/mms/wapenc
+
+The APN name looks wrong—it literally says “broken.” Could that be what’s causing the no-service issue? What should I set it to?
+AGENT: The skills directory is empty, so no procedure applies there. Let me reset your APN settings.
+
+Actually — I can't reset them remotely; that's a device action. Please do the following:
+
+**Step 3: Reset your APN settings.** On your phone, use the "Reset APN settings" option.
+
+After resetting, you must **reboot your device** for the changes to apply.
+
+Let me know once you've reset the APN and rebooted, then share the status bar and network status again.
+TOOL_RESULT: APN settings will reset at reboot.
+Status Bar: 📵 No Signal | 📵 Data Disabled | 🔋 80%
+TOOL_RESULT: Resetting APN settings...
+Restarting network services...
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Airplane Mode: OFF
+SIM Card Status: active
+Cellular Connection: connected
+Cellular Signal: excellent
+Cellular Network Type: 5G
+Mobile Data Enabled: Yes
+Data Roaming Enabled: No
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+USER: That did it! After resetting the APN and rebooting, everything looks good:
+
+Status bar: Strong signal (excellent), 5G, Data Enabled, battery 80%.
+Network status:
+- Airplane Mode: OFF
+- SIM: active
+- Cellular Connection: connected
+- Signal: excellent
+- Network Type: 5G
+- Mobile Data: Enabled
+- Data Roaming: No
+- Wi‑Fi: OFF, not connected
+
+I’ve got my service back now. Thanks for your help—really appreciate it!
+
+###STOP###

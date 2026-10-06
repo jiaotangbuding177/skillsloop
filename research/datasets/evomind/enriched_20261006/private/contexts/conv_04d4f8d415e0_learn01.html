@@ -1,0 +1,20 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Windows英语语音AI部署排障</title><style>body{margin:0;background:#f3f6fb;color:#172536;font:16px/1.65 system-ui,"Microsoft YaHei",sans-serif}main{max-width:1160px;margin:32px auto;padding:0 20px}a{color:#1552aa}header,.box,article,details{background:white;border:1px solid #dce4ee;border-radius:12px;padding:18px;margin:12px 0}h1{font-size:28px}h2{font-size:22px}.meta{color:#596777;font-size:13px}.badge{display:inline-block;padding:3px 9px;border-radius:6px;background:#e9f0fa;margin-right:6px}pre{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere}input,select{font:inherit;padding:9px;border:1px solid #b9c8da;border-radius:7px}summary{cursor:pointer;font-weight:600}.muted{color:#68788b}.noise{background:#f6f6f6}table{border-collapse:collapse;width:100%}td,th{text-align:left;border-bottom:1px solid #dce4ee;padding:9px}nav{display:flex;gap:16px;flex-wrap:wrap}section{scroll-margin-top:15px}</style><main><header><h1>Windows英语语音AI部署排障</h1><p>将语音合成通道故障与识别生命周期分开诊断；服务返回502时替换通道，识别断开后补自动重启，分别验证有声与连续轮次</p><p>来源种子 2 组；扩入上下文 0 组。不是完整黄金轨迹，未认证时序或任务成功。</p><a href="../sessions/conv_04d4f8d415e0.html">查看完整会话及全部证据</a></header><span class="badge">种子</span><section id="u_4ba238e64351f70002" class="box "><p class="meta">user · u_4ba238e64351f70002 · 1次来源记录<br></p><pre>你看一下我刚上传的图片，语音输入应该是ok的，但是他给我的回复是文字，没有音频。同时只有一轮问答，没有持续接收我的语音</pre></section><span class="badge">种子</span><section id="a_923dfe7028c96f5386" class="box "><p class="meta">assistant · a_923dfe7028c96f5386 · 1次来源记录<br></p><pre>先看下你的截图，同时我检查一下 TTS 服务和源码逻辑，定位这两个问题：找到两个根因了。先看最后一个关键文件（语音识别的生命周期），然后一起修：根因全部定位：
+1. **没声音**：作者内置的语音服务已死（我刚测了，返回 502 错误）→ 需要换语音通道
+2. **一轮就停**：浏览器语音识别断开后没有自动重启的逻辑 → 需要补上
+
+现在动手修，改三个文件：Now the browser-speech auto-restart fix:现在改前端 TTS fallback 和连续对话。先加状态和语音加载：Now replace `fetchTtsUrl` and add the browser-speech fallback functions:Now add speech cleanup in `endSession` and `handleInterrupt`:防御一下 `revokeObjectURL(null)` 的边界情况（清理队列时 url 可能为空）：缩进小瑕疵，顺手修正后重新构建：类型报错在 LIMIT_REACHED 分支，修掉：✅ 构建通过。重新打包：修好了，两个问题都解决了。请下载更新后的 **`NEGA-deepseek-setup.zip`**（已覆盖更新），然后：
+
+**更新步骤：**
+1. **先关掉**现在开着的黑色窗口（旧版正在运行，不关会占用文件）
+2. 重新下载 zip → 右键 → 全部解压 → **解压到原来同一个文件夹**，提示&quot;是否替换&quot;时选**替换/全部选是**（这样你之前装的依赖和 Key 都还在，不用重来）
+3. 重新双击 `start-nega.bat` 启动
+
+&gt; 如果覆盖操作搞不定，解压到新位置也行，就是会重新装依赖（2-5 分钟）并再问一次 Key，把之前那个 `sk-` Key 再粘一次就好。
+
+**这次修了什么：**
+
+🔊 **AI 有声音了**——之前没声音是因为视频作者那个在线语音服务已经挂了（我远程测试返回 502 错误码，等于人去楼空）。现在改成用**你电脑浏览器自带的英文语音**朗读，稳定不花钱。Windows 自带的是标准英文男声（David），虽然没有原来那个&quot;黑人 Andrew&quot;音色带感，但先保证能用；想要那个味儿，回头可以配个十来块钱的语音服务，我帮你接上。
+
+🎤 **连续对话修好了**——原版代码里浏览器语音识别断开后不会自己重连，所以你说一句它就&quot;聋&quot;了。我加了自动重连逻辑，现在它会**一直听着**：你说完 → 它回 → 回完继续听你说下一句，不用每次再点按钮。
+
+试的时候如果还有问题（比如还是没声音、或者识别又断了），把情况告诉我。这次改动我本地构建都验证过了，理论上直接就能用。</pre></section></main></html>

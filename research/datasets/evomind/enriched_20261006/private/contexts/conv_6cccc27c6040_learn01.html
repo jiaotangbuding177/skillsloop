@@ -1,0 +1,28 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>技能公布说明与源码可安装性核查</title><style>body{margin:0;background:#f3f6fb;color:#172536;font:16px/1.65 system-ui,"Microsoft YaHei",sans-serif}main{max-width:1160px;margin:32px auto;padding:0 20px}a{color:#1552aa}header,.box,article,details{background:white;border:1px solid #dce4ee;border-radius:12px;padding:18px;margin:12px 0}h1{font-size:28px}h2{font-size:22px}.meta{color:#596777;font-size:13px}.badge{display:inline-block;padding:3px 9px;border-radius:6px;background:#e9f0fa;margin-right:6px}pre{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere}input,select{font:inherit;padding:9px;border:1px solid #b9c8da;border-radius:7px}summary{cursor:pointer;font-weight:600}.muted{color:#68788b}.noise{background:#f6f6f6}table{border-collapse:collapse;width:100%}td,th{text-align:left;border-bottom:1px solid #dce4ee;padding:9px}nav{display:flex;gap:16px;flex-wrap:wrap}section{scroll-margin-top:15px}</style><main><header><h1>技能公布说明与源码可安装性核查</h1><p>README宣称发布数量不等实际目录，核官方版本与目录并实测安装；仅镜像安装说明无内容不能声称安装成功，有源码的另一个候选独立安装</p><p>来源种子 6 组；扩入上下文 0 组。不是完整黄金轨迹，未认证时序或任务成功。</p><a href="../sessions/conv_6cccc27c6040.html">查看完整会话及全部证据</a></header><span class="badge">种子</span><section id="u_fce8cb0732429042e2" class="box "><p class="meta">user · u_fce8cb0732429042e2 · 1次来源记录<br></p><pre>查一个skill，higgsfield-game-generation</pre><details><summary>去包装前正文（明显凭据已隐藏）</summary><pre>请使用中文回复，除非用户明确使用其他语言。
+
+查一个skill，higgsfield-game-generation</pre></details></section><span class="badge">种子</span><section id="u_88911e37015446b7ad" class="box "><p class="meta">user · u_88911e37015446b7ad · 1次来源记录<br></p><pre>game-developer呢</pre><details><summary>去包装前正文（明显凭据已隐藏）</summary><pre>请使用中文回复，除非用户明确使用其他语言。
+
+game-developer呢</pre></details></section><span class="badge">种子</span><section id="u_a98bdb5e11ad64c8c4" class="box "><p class="meta">user · u_a98bdb5e11ad64c8c4 · 1次来源记录<br></p><pre>两个都帮我装一下看看</pre><details><summary>去包装前正文（明显凭据已隐藏）</summary><pre>请使用中文回复，除非用户明确使用其他语言。
+
+两个都帮我装一下看看</pre></details></section><span class="badge">种子</span><section id="u_88f6ca8528b2e31867" class="box "><p class="meta">user · u_88f6ca8528b2e31867 · 1次来源记录<br></p><pre>没事儿，先试试game-developer，告诉我杂用</pre><details><summary>去包装前正文（明显凭据已隐藏）</summary><pre>请使用中文回复，除非用户明确使用其他语言。
+
+没事儿，先试试game-developer，告诉我杂用</pre></details></section><span class="badge">种子</span><section id="a_4307ae90cf8d7cfcd0" class="box "><p class="meta">assistant · a_4307ae90cf8d7cfcd0 · 1次来源记录<br></p><pre>Higgsfield 那边官方仓库确实还没放出文件（llmbase 等镜像站也只有安装说明没有内容）。我实测一下 npx 能不能装上，同时找官方博客的 Game Studio skill 备用方案。</pre></section><span class="badge">种子</span><section id="a_943ad8a7ceb56dfbc7" class="box "><p class="meta">assistant · a_943ad8a7ceb56dfbc7 · 1次来源记录<br></p><pre>装完了，汇报结果：
+
+## ✅ game-developer — 装好了
+
+- **位置**：`/workspace/skills/game-developer/`
+- **内容**：SKILL.md 主文件 + 5 个 references（unity-patterns、unreal-cpp、ecs-patterns、performance-optimization、multiplayer-networking），共 54KB，来自 Jeffallan/claude-skills（11.3k stars 仓库）
+- 新技能一般**下个会话/重启 gateway 后生效**，之后聊 Unity/Unreal/Godot 开发就会自动触发，也可手动 `/game-developer` 调用
+
+## ❌ higgsfield-game-generation — 装不了，原因实锤
+
+我做了几重验证，结论明确：**官方仓库里根本没有这个文件，只有&quot;预告&quot;**：
+- `higgsfield-ai/skills`（当前 v0.12.0）实际只发布 8 个 skill 目录，game-generation 不在其中（README/INSTALL.md 写着&quot;9 个技能&quot;，但目录没推送）
+- `npx skills add higgsfield-ai/skills --skill higgsfield-game-generation` 实测失败——工具只能列出那 8 个
+- 第三方镜像站（llmbase/mcpservers）也只有安装说明、没有内容；官方博客的 Game Studio skill 下载链接也无法直接抓取（动态页面）
+
+**现在想玩 Higgsfield 游戏生成，只有两条路**：
+1. **网页端 Supercomputer → Games**（higgsfield.ai/games-intro）：一句话 prompt 出游戏，自动部署，无需等 skill
+2. **Higgsfield MCP**：在 OpenClaw/Claude 里接 MCP connector 后生成素材+托管
+
+官方一旦把 game-generation 目录推上线，`npx skills add higgsfield-ai/skills --skill higgsfield-game-generation` 一条命令就能装，我可以帮你盯着仓库。要我现在设个定时检查（比如每天一次），上线就通知你吗？</pre></section></main></html>

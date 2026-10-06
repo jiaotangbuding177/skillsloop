@@ -1,0 +1,48 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>书转视频课插件状态机修订</title><style>body{margin:0;background:#f3f6fb;color:#172536;font:16px/1.65 system-ui,"Microsoft YaHei",sans-serif}main{max-width:1160px;margin:32px auto;padding:0 20px}a{color:#1552aa}header,.box,article,details{background:white;border:1px solid #dce4ee;border-radius:12px;padding:18px;margin:12px 0}h1{font-size:28px}h2{font-size:22px}.meta{color:#596777;font-size:13px}.badge{display:inline-block;padding:3px 9px;border-radius:6px;background:#e9f0fa;margin-right:6px}pre{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere}input,select{font:inherit;padding:9px;border:1px solid #b9c8da;border-radius:7px}summary{cursor:pointer;font-weight:600}.muted{color:#68788b}.noise{background:#f6f6f6}table{border-collapse:collapse;width:100%}td,th{text-align:left;border-bottom:1px solid #dce4ee;padding:9px}nav{display:flex;gap:16px;flex-wrap:wrap}section{scroll-margin-top:15px}</style><main><header><h1>书转视频课插件状态机修订</h1><p>对照实际插件规范注册工具与门控；发现门控先complete再重置pending导致流程绕时修状态转移，补完整流水线测试，真实视频适配仍留未接通边界</p><p>来源种子 6 组；扩入上下文 0 组。不是完整黄金轨迹，未认证时序或任务成功。</p><a href="../sessions/conv_97579cceae5e.html">查看完整会话及全部证据</a></header><span class="badge">种子</span><section id="u_063c0b47fbd4574b20" class="box "><p class="meta">user · u_063c0b47fbd4574b20 · 1次来源记录<br></p><pre>我要做一个Deepseek 的插件,  https://deepseek-code.com/plugins  流水线设计：书 → 视频课 → 出题</pre><details><summary>去包装前正文（明显凭据已隐藏）</summary><pre>请使用中文回复，除非用户明确使用其他语言。
+
+我要做一个Deepseek 的插件,  https://deepseek-code.com/plugins  流水线设计：书 → 视频课 → 出题</pre></details></section><span class="badge">种子</span><section id="u_ef38c53b70214c797b" class="box "><p class="meta">user · u_ef38c53b70214c797b · 1次来源记录<br></p><pre>这个是我们evomind 本身的技能 Evomind视频生成器【自研】</pre><details><summary>去包装前正文（明显凭据已隐藏）</summary><pre>请使用中文回复，除非用户明确使用其他语言。
+
+这个是我们evomind 本身的技能 Evomind视频生成器【自研】</pre></details></section><span class="badge">种子</span><section id="u_fc9b74da0921f0db83" class="box "><p class="meta">user · u_fc9b74da0921f0db83 · 1次来源记录<br></p><pre>搭插件骨架</pre><details><summary>去包装前正文（明显凭据已隐藏）</summary><pre>请使用中文回复，除非用户明确使用其他语言。
+
+搭插件骨架</pre></details></section><span class="badge">种子</span><section id="a_a2d8c40e04feff33d5" class="box "><p class="meta">assistant · a_a2d8c40e04feff33d5 · 2次来源记录<br></p><pre>测试全部通过 ✅ 不过我发现 tools.ts 里门控通过后的状态流转写得绕（先 completeStage 再重置 pending），优化一下让状态机更干净。</pre></section><span class="badge">种子</span><section id="a_320f48fea76254cab2" class="box "><p class="meta">assistant · a_320f48fea76254cab2 · 2次来源记录<br></p><pre>补一个完整流水线流程测试，然后整体验证。</pre></section><span class="badge">种子</span><section id="a_fb3fc85f61dd25b1b2" class="box "><p class="meta">assistant · a_fb3fc85f61dd25b1b2 · 2次来源记录<br></p><pre>✅ 骨架搭建完成并已提交。交付总结：
+
+## 📦 dsh-book2course 插件骨架
+
+**位置**：`AI 工作区/成果文件/帮我把下面的这段话翻译一下：我们登录进来-conv_97579cceae5e/dsh-book2course/`
+
+### 结构（完全对齐 DSH 插件规范）
+
+```
+dsh-book2course/
+├── package.json              # dsh 元数据 + cordis.patch.yml bundle 配置
+├── cordis.patch.yml          # 挂载宿主半区（storage/tools/shell）
+├── SKILL.md                  # agent 操作手册（流水线+门控+降级规范）
+├── README.md / LICENSE / .gitignore
+├── book2course.config.example.json  # 音色/主题/难度分布/门控开关
+├── assets/plugin-icon.svg
+├── src/
+│   ├── index.ts              # 插件入口（name/inject/apply，无 default 导出）
+│   ├── types.ts              # Job/蓝图/课程产物/题目 领域类型
+│   ├── domain.ts             # 状态机 + 门控校验（非法迁移拦截）
+│   ├── service.ts            # Job 持久化服务
+│   ├── tools.ts              # 11 个 book2course_* 工具
+│   ├── pipeline/             # 解析(OCR三级探测)/蓝图prompt/出题prompt/导出
+│   └── evomind/adapter.ts    # ★ Evomind 视频生成器适配层
+└── tests/domain.test.ts      # 状态机测试（4/4 通过）
+```
+
+### 关键设计点
+
+- **11 个工具**：start → parse → blueprint → 🔒门控1 → lesson → 🔒门控2 → quiz → 🔒门控3 → export + status/cancel，门控工具返回 waiting 状态、不伪造进度（book2skill 同款原则）
+- **状态机**：非法迁移直接拦截（如 pending 直接 exported 会报错），终态不可逆
+- **Evomind 对接点**（`adapter.ts`）：探测技能目录（环境变量 &gt; 常见路径）→ 蓝图 lesson 作创意简报 → 回收 `script.md/storyboard.json/slides/配音/字幕/成片`，生成器自带三重 QA 不可跳过
+- **验证**：node strip-types 跑通 4/4 测试，9 个 TS 文件语法全过
+
+### 待实现的 TODO（骨架标注清楚）
+
+1. 真实解析器（epub/pdf/md + OCR 三级探测）
+2. Evomind 适配层真实调用（`produceLesson()`）
+3. 导出转换器（问卷星/Kahoot CSV）
+4. storage-domain 持久化（跨会话恢复）
+
+下一步建议：**先做 Evomind 适配层的真实对接**（这是流水线的核心引擎），需要一台装了 remotion-video-generator 技能的环境来联调。要现在继续吗？</pre></section></main></html>

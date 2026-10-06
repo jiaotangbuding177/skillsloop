@@ -1,0 +1,41 @@
+{
+  "text": "{\n  \"sourceHash\": \"af2271258c0f2fd21bb126b59d711716549211efab54c4a91501cefbfc33eaf7\",\n  \"workflows\": [\n    {\n      \"frameIds\": [\n        \"f1\",\n        \"f3\"\n      ],\n      \"title\": \"合同/协议审阅与修订\",\n      \"trigger\": \"需要审阅合同或协议并输出修订版本时\",\n      \"inputs\": [\n        \"待审阅合同/协议文件\",\n        \"审阅视角/立场\",\n        \"修订范围/原则要求\"\n      ],\n      \"steps\": [\n        {\n          \"id\": \"s1\",\n          \"methodIds\": [\n            \"m1\",\n            \"m4\"\n          ],\n          \"action\": \"解析文件并根据指定视角识别风险事项\",\n          \"condition\": \"m1: 通用/指定视角; m4: 弱势供应商视角及最小化修订原则\",\n          \"completionCheck\": \"输出风险事项列表及分级，或核心风险列表及修订策略\"\n        },\n        {\n          \"id\": \"s2\",\n          \"methodIds\": [\n            \"m2\",\n            \"m5\"\n          ],\n          \"action\": \"根据识别结果生成带修订痕迹/标记的文件及说明\",\n          \"condition\": \"m2: 风险事项已识别; m5: 修订策略已制定\",\n          \"completionCheck\": \"生成包含修订痕迹和批注的文件，或带修订标记的文件及说明文档\"\n        }\n      ],\n      \"outputs\": [\n        \"带修订和批注/标记的合同/协议文件\",\n        \"风险分级说明/修订说明与谈判建议\"\n      ],\n      \"parameters\": [\n        \"审阅视角\",\n        \"修订范围/原则\",\n        \"合同/协议文件\"\n      ],\n      \"conditions\": [\n        \"用户指定了审阅视角和修订范围/原则\"\n      ],\n      \"dependencies\": [],\n      \"limitations\": [\n        \"业务效果未知\"\n      ],\n      \"includedMethodIds\": [\n        \"m1\",\n        \"m2\",\n        \"m4\",\n        \"m5\"\n      ]\n    },\n    {\n      \"frameIds\": [\n        \"f2\",\n        \"f4\"\n      ],\n      \"title\": \"特定条款调整与文件更新\",\n      \"trigger\": \"需要根据业务背景或选定方案调整特定条款并更新文件时\",\n      \"inputs\": [\n        \"当前合同/协议版本\",\n        \"补充的业务背景/用户选择的修订方案\",\n        \"需调整的目标条款\"\n      ],\n      \"steps\": [\n        {\n          \"id\": \"s1\",\n          \"methodIds\": [\n            \"m3\",\n            \"m6\"\n          ],\n          \"action\": \"根据业务背景设计兼容方案或应用选定方案修改特定条款\",\n          \"condition\": \"m3: 业务背景与现有条款存在冲突; m6: 用户已选择修订方案\",\n          \"completionCheck\": \"输出修改/更新后的条款文本及更新后的文件\"\n        }\n      ],\n      \"outputs\": [\n        \"修改/更新后的条款文本\",\n        \"更新后的合同/协议文件\"\n      ],\n      \"parameters\": [\n        \"业务背景/修订方案\",\n        \"目标条款\"\n      ],\n      \"conditions\": [\n        \"用户提供了补充业务背景或明确选择了修订方案\",\n        \"现有条款存在冲突或需调整\"\n      ],\n      \"dependencies\": [],\n      \"limitations\": [\n        \"业务效果未知\"\n      ],\n      \"includedMethodIds\": [\n        \"m3\",\n        \"m6\"\n      ]\n    },\n    {\n      \"frameIds\": [\n        \"f5\"\n      ],\n      \"title\": \"特定条款修改文本单独输出\",\n      \"trigger\": \"用户要求仅单独输出特定条款的修改文本而不重新生成完整文件时\",\n      \"inputs\": [\n        \"目标条款的修改内容\",\n        \"输出格式要求\"\n      ],\n      \"steps\": [\n        {\n          \"id\": \"s1\",\n          \"methodIds\": [\n            \"m7\"\n          ],\n          \"action\": \"提取特定条款的修改内容并按要求格式化输出\",\n          \"condition\": \"用户要求单独输出修改文本\",\n          \"completionCheck\": \"输出特定条款的修改文本\"\n        }\n      ],\n      \"outputs\": [\n        \"特定条款的修改文本\"\n      ],\n      \"parameters\": [\n        \"目标条款\"\n      ],\n      \"conditions\": [\n        \"用户要求单独输出修改文本\"\n      ],\n      \"dependencies\": [],\n      \"limitations\": [\n        \"业务效果未知\"\n      ],\n      \"includedMethodIds\": [\n        \"m7\"\n      ]\n    }\n  ],\n  \"ledger\": [\n    {\n      \"methodId\": \"m1\",\n      \"disposition\": \"INCLUDED\",\n      \"reason\": \"基于用户要求审阅并输出风险分级，适用于通用/指定视角的合同风险识别\",\n      \"duplicateOf\": null\n    },\n    {\n      \"methodId\": \"m2\",\n      \"disposition\": \"INCLUDED\",\n      \"reason\": \"用户要求直接输出修订和批注意见版本，适用于生成通用修订痕迹和批注文件\",\n      \"duplicateOf\": null\n    },\n    {\n      \"methodId\": \"m3\",\n      \"disposition\": \"INCLUDED\",\n      \"reason\": \"用户要求修改排他条款以兼容特定业务背景，适用于根据业务背景设计兼容方案并修改条款\",\n      \"duplicateOf\": null\n    },\n    {\n      \"methodId\": \"m4\",\n      \"disposition\": \"INCLUDED\",\n      \"reason\": \"用户要求站在供应商角度仅修改核心和重大风险，适用于弱势供应商视角的核心风险识别与最小化策略制定\",\n      \"duplicateOf\": null\n    },\n    {\n      \"methodId\": \"m5\",\n      \"disposition\": \"INCLUDED\",\n      \"reason\": \"用户要求直接以修订模式进行修改并输出，适用于生成最小化修订标记文件及说明文档\",\n      \"duplicateOf\": null\n    },\n    {\n      \"methodId\": \"m6\",\n      \"disposition\": \"INCLUDED\",\n      \"reason\": \"用户要求采用选定方案修改特定条款，适用于应用用户选定的修订方案更新条款及文件\",\n      \"duplicateOf\": null\n    },\n    {\n      \"methodId\": \"m7\",\n      \"disposition\": \"INCLUDED\",\n      \"reason\": \"用户要求不需要重新输出文件，单独输出修改文本，适用于提取并格式化输出特定条款修改内容\",\n      \"duplicateOf\": null\n    }\n  ]\n}",
+  "mode": "openclaw",
+  "usage": {
+    "total": 0
+  },
+  "costUsd": 0,
+  "modelRequestStarts": 0,
+  "runtime": "saved-response-host-replay",
+  "model": "qwen3.7-plus",
+  "provider": "anthropic-messages",
+  "elapsedMs": 74619,
+  "status": "ok",
+  "mixedExperimentNewInference": true,
+  "savedAgentResponseReplay": {
+    "sourceRunId": "workflow_merge-6336d99f21f73e54a70588b3",
+    "requestHash": "41e4f8177073565c6dc297e542e029ee3c5f887adf063d65a0c9b7d73b4b49e7",
+    "sourceUsage": {
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 4318,
+      "cache_creation_input_tokens": 0,
+      "input_tokens": 2695,
+      "cache_read_input_tokens": 0,
+      "total": 7013
+    },
+    "newInference": false,
+    "originalTextUnchanged": true
+  },
+  "savedEvidenceReplay": {
+    "sourceRunId": "workflow_merge-6336d99f21f73e54a70588b3",
+    "requestHash": "41e4f8177073565c6dc297e542e029ee3c5f887adf063d65a0c9b7d73b4b49e7",
+    "newInference": false,
+    "newOpenClawRead": false,
+    "sourceUsage": {
+      "total": 0
+    }
+  },
+  "sourceRuntime": "saved-agent-response-parser-replay"
+}

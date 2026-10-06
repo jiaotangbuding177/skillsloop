@@ -1,0 +1,169 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>conv_993b0303d2fe</title><style>body{margin:0;background:#f3f5f8;color:#203047;font:16px/1.7 system-ui,"Microsoft YaHei",sans-serif}main{max-width:1150px;margin:auto;padding:28px}h1{font-size:28px}a{color:#245abb}table{border-collapse:collapse;width:100%;background:white}td,th{padding:10px;border-bottom:1px solid #dde3ec;text-align:left}td{overflow-wrap:anywhere}.note{background:#fff1cd;padding:16px;border-radius:10px}.meta{font-size:13px;color:#627189}section,details{background:white;padding:15px;margin:18px 0;border-radius:10px}summary{cursor:pointer;font-weight:bold}.message{padding:14px;border-left:4px solid #9aaaba;background:#f4f6f8;margin:12px 0}.user{border-color:#477cd4;background:#eaf2ff}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:15px/1.8 system-ui,"Microsoft YaHei",sans-serif}input,select{padding:9px;margin:8px 8px 16px 0;max-width:90%}.bad{color:#a54217}</style><main><a href="../index.html">返回总目录</a><h1>用户输入与AI回复</h1><p class="meta">conv_993b0303d2fe</p><p class="note">清理版按用户输入展示对应AI候选，一条输入可有多条回复。相同正文只展示一次，全部出现位置保留。候选对应不是已验证的真实时间线。</p><details><summary>原始标题（不作为任务或匹配依据）</summary>安装技能，Gitee agent ski</details>
+<section id="u_22e3a462027788fe97"><h2>用户输入 1</h2><div class="message user"><p class="meta">conv_993b0303d2fe:151e0cbd</p><pre>[Mon 2026-07-20 09:56 GMT+8] 请使用中文回复，除非用户明确使用其他语言。
+
+安装技能，Gitee agent skills: Gitee agent skills via gitee mcp server</pre></div>
+<p class="note">目前没有足够证据挂接AI回复；不是判定系统没有回复。</p>
+</section>
+<section id="u_378071fe20040ddada"><h2>用户输入 2</h2><div class="message user"><p class="meta">conv_993b0303d2fe:msg_1</p><pre>请使用中文回复，除非用户明确使用其他语言。
+
+安装技能，Gitee agent skills: Gitee agent skills via gitee mcp server</pre></div>
+<div class="message" id="a_3b028c5ae18b5931a7"><strong>AI · 按原位置初配（未独立核验）</strong><p class="meta">未检出原始编号冲突，保留原位置的对应候选；不等于真实回复关系已验证。</p><details><summary>全部2次出现位置</summary><p class="meta">conv_993b0303d2fe:62b6f5b7 / 原第15367行；conv_993b0303d2fe:msg_43 / 原第15368行</p></details><pre>现在我来检查当前环境中已有的技能，并尝试安装 Gitee Agent Skills。</pre></div>
+<div class="message" id="a_0243d5ceb55ad5e698"><strong>AI · 按原位置初配（未独立核验）</strong><p class="meta">未检出原始编号冲突，保留原位置的对应候选；不等于真实回复关系已验证。</p><details><summary>全部2次出现位置</summary><p class="meta">conv_993b0303d2fe:ce93b932 / 原第15372行；conv_993b0303d2fe:msg_54 / 原第15373行</p></details><pre>好的，我来帮你梳理「Gitee Agent Skills」的安装流程。我已经查阅了 Gitee 官方文档、OpenClaw 官方指南和相关社区文章。
+
+---
+
+## Gitee Agent Skills 安装指南
+
+Gitee Agent Skills 底层基于 **Gitee MCP Server**（由 OSChina 官方维护），通过 OpenClaw 的 MCP 集成能力对接 Gitee 平台。
+
+### 总览：两种安装方式
+
+| 方式 | 难度 | 说明 |
+|------|------|------|
+| **远程连接（推荐）** ⭐ | 简单 | 直接连 Gitee 官方托管的 MCP 服务，无需本地安装服务端 |
+| **本地安装 mcp-gitee** | 中等 | 通过 npx / go install 在本地运行 MCP Server |
+
+---
+
+### 前置条件
+
+1. **Gitee 个人访问令牌（access token）**
+   - 访问：https://gitee.com/profile/personal_access_tokens
+   - 生成一个 token，保存好
+
+2. **OpenClaw 已安装并运行**
+
+---
+
+### 方式一：远程 MCP Server（最简单）
+
+在 OpenClaw 的配置文件 `~/.openclaw/openclaw.json` 中添加：
+
+```json5
+{
+  &quot;mcpServers&quot;: {
+    &quot;gitee&quot;: {
+      &quot;url&quot;: &quot;https://api.gitee.com/mcp&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer &lt;你的Gitee Access Token&gt;&quot;
+      }
+    }
+  }
+}
+```
+
+配置完成后，重启 OpenClaw Gateway，你的 Agent 即可使用 Gitee 的所有能力。
+
+**可用的工具包括：**
+- 仓库管理：列出仓库、获取文件内容、创建仓库、Fork、搜索开源仓库
+- Pull Request：创建/合并/更新 PR、获取 Diff、审阅
+- Issue：创建/更新/列出 Issue、评论
+- 通知：列出用户通知
+- 用户信息
+
+---
+
+### 方式二：本地安装 mcp-gitee Server（功能更完整）
+
+#### 步骤 1：安装 Gitee MCP Server
+
+```bash
+# 方法 A：使用 npx（推荐，无需安装）
+npx -y @gitee/mcp-gitee
+
+# 方法 B：使用 Go 安装
+go install gitee.com/oschina/mcp-gitee@latest
+
+# 方法 C：从源码构建
+git clone https://gitee.com/oschina/mcp-gitee.git
+cd mcp-gitee
+make build
+# 将 ./bin/mcp-gitee 加入 PATH
+```
+
+#### 步骤 2：在 OpenClaw 中配置
+
+在 `~/.openclaw/openclaw.json` 中添加：
+
+```json5
+{
+  &quot;mcpServers&quot;: {
+    &quot;gitee&quot;: {
+      &quot;command&quot;: &quot;npx&quot;,
+      &quot;args&quot;: [&quot;-y&quot;, &quot;@gitee/mcp-gitee@latest&quot;],
+      &quot;env&quot;: {
+        &quot;GITEE_ACCESS_TOKEN&quot;: &quot;&lt;你的Gitee Access Token&gt;&quot;
+      }
+    }
+  }
+}
+```
+
+或者使用已安装的二进制文件：
+
+```json5
+{
+  &quot;mcpServers&quot;: {
+    &quot;gitee&quot;: {
+      &quot;command&quot;: &quot;mcp-gitee&quot;,
+      &quot;args&quot;: [&quot;--token&quot;, &quot;&lt;你的Gitee Access Token&gt;&quot;]
+    }
+  }
+}
+```
+
+#### 步骤 3：重启 Gateway
+
+```bash
+openclaw gateway restart
+```
+
+---
+
+### 方式三：使用 mcporter 管理（OpenClaw 官方推荐方式）
+
+OpenClaw 官方推荐用 **mcporter** 统一管理 MCP Server。
+
+1. 先在 OpenClaw Skills 界面中安装 mcporter skill
+2. 通过 mcporter 的配置界面添加 Gitee MCP Server
+3. 在 mcporter 的配置中填入 Gitee Access Token
+
+---
+
+### 验证安装
+
+在你的 OpenClaw Agent 中提问：
+
+&gt; &quot;列出我在 Gitee 上的仓库&quot;
+
+如果 Agent 能返回仓库列表，说明安装成功。
+
+---
+
+### 企业版说明
+
+如果你使用的是 **Gitee 企业版**，需要使用 `mcp-gitee-ent`（企业版 MCP Server）：
+
+```json5
+{
+  &quot;mcpServers&quot;: {
+    &quot;gitee-ent&quot;: {
+      &quot;command&quot;: &quot;npx&quot;,
+      &quot;args&quot;: [&quot;-y&quot;, &quot;@gitee/mcp-gitee-ent@latest&quot;],
+      &quot;env&quot;: {
+        &quot;GITEE_ENT_MCP_ACCESS_TOKEN&quot;: &quot;&lt;企业版Token&gt;&quot;,
+        &quot;GITEE_ENT_API_BASE&quot;: &quot;https://api.gitee.com/enterprises&quot;
+      }
+    }
+  }
+}
+```
+
+企业版额外支持：项目管理、Scrum 迭代、团队管理、工作项类型等。
+
+---
+
+需要我帮你进一步操作吗？比如创建具体的 SKILL.md 文件来包装 Gitee 工具集，或者检查当前环境的配置？</pre></div>
+</section>
+<h2>未确定归属的AI回复</h2>
+<details><summary>清理与来源</summary><p>重试控制0条，空AI 16条。原记录及每个同文出现位置完整保留。</p><a href="conv_993b0303d2fe.json">本会话结构化数据</a></details></main></html>

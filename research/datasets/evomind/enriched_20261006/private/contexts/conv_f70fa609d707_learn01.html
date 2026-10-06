@@ -1,0 +1,55 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>企业微信CLI可执行路径适配</title><style>body{margin:0;background:#f3f6fb;color:#172536;font:16px/1.65 system-ui,"Microsoft YaHei",sans-serif}main{max-width:1160px;margin:32px auto;padding:0 20px}a{color:#1552aa}header,.box,article,details{background:white;border:1px solid #dce4ee;border-radius:12px;padding:18px;margin:12px 0}h1{font-size:28px}h2{font-size:22px}.meta{color:#596777;font-size:13px}.badge{display:inline-block;padding:3px 9px;border-radius:6px;background:#e9f0fa;margin-right:6px}pre{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere}input,select{font:inherit;padding:9px;border:1px solid #b9c8da;border-radius:7px}summary{cursor:pointer;font-weight:600}.muted{color:#68788b}.noise{background:#f6f6f6}table{border-collapse:collapse;width:100%}td,th{text-align:left;border-bottom:1px solid #dce4ee;padding:9px}nav{display:flex;gap:16px;flex-wrap:wrap}section{scroll-margin-top:15px}</style><main><header><h1>企业微信CLI可执行路径适配</h1><p>CLI命令找不到时核对实际平台二进制路径，设置命令别名并用版本和通讯录查询验收；群消息不可见要分别核对入群、七日窗口及权限</p><p>来源种子 6 组；扩入上下文 0 组。不是完整黄金轨迹，未认证时序或任务成功。</p><a href="../sessions/conv_f70fa609d707.html">查看完整会话及全部证据</a></header><span class="badge">种子</span><section id="u_c8b1e5ab6809743fcc" class="box "><p class="meta">user · u_c8b1e5ab6809743fcc · 1次来源记录<br></p><pre>安装WecomTeam/wecom-cli: 企业微信开放平台命令行工具 — 让人类和 AI Agent 都能在终端中操作企业微信</pre></section><span class="badge">种子</span><section id="u_435c59a4406783db39" class="box "><p class="meta">user · u_435c59a4406783db39 · 1次来源记录<br></p><pre>wecom-cli init</pre></section><span class="badge">种子</span><section id="u_b45a2e479c3f0ed421" class="box "><p class="meta">user · u_b45a2e479c3f0ed421 · 1次来源记录<br></p><pre>是的</pre></section><span class="badge">种子</span><section id="u_49da7bea85db962a87" class="box "><p class="meta">user · u_49da7bea85db962a87 · 1次来源记录<br></p><pre>云知师体验群的群消息能读到么</pre></section><span class="badge">种子</span><section id="a_95de85fab64beef4cf" class="box "><p class="meta">assistant · a_95de85fab64beef4cf · 1次来源记录<br></p><pre>✅ **别名设置完成！**
+
+### 🎯 配置详情
+
+已在 `~/.bashrc` 中添加别名：
+```bash
+alias wecom-cli=&quot;/usr/lib/node_modules/@wecom/cli/node_modules/@wecom/cli-linux-x64/bin/wecom-cli&quot;
+```
+
+### 📝 使用方式
+
+**当前会话**（需要手动加载）：
+```bash
+source ~/.bashrc
+wecom-cli --version
+```
+
+**新终端会话**（自动生效）：
+打开新终端后直接使用：
+```bash
+wecom-cli contact get_userlist &#x27;{}&#x27;
+wecom-cli doc --help
+wecom-cli msg --help
+```
+
+### ✅ 验证成功
+- `wecom-cli --version` → v0.1.8 ✓
+- 通讯录查询 → 正常返回 7 位成员 ✓
+
+现在你可以像使用普通命令一样使用 `wecom-cli` 了！🎉</pre></section><span class="badge">种子</span><section id="a_462b5aa7e78ee9ba64" class="box "><p class="meta">assistant · a_462b5aa7e78ee9ba64 · 1次来源记录<br></p><pre>📋 **当前可访问的会话情况：**
+
+### ✅ 能读到的
+目前只能获取到 **1 个群聊**（最近 7 天内有消息的）：
+
+| 群名 | 群 ID | 最后消息时间 | 消息数 |
+|------|-------|-------------|--------|
+| 上海胆大求索科技有限公司 | `wr3bp1HgAAi860eXEN-lGZMWeYLhxsow` | 2026-05-14 11:40:06 | 3 条 |
+
+### ❌ 没看到&quot;云知师体验群&quot;
+
+可能的原因：
+
+1. **机器人未加入该群** — 企业微信机器人需要先被邀请进群才能读取消息
+2. **群内最近 7 天无消息** — `get_msg_chat_list` 只能获取 7 天内有消息的会话
+3. **权限限制** — 机器人可能只能访问部分企业群
+
+### 🔍 建议
+
+如果要读取&quot;云知师体验群&quot;的消息，需要：
+
+1. **确认机器人已在群内** — 检查企业微信后台，确保机器人已添加到该群
+2. **在群内产生消息** — 让机器人在群里发条消息或有人@它，这样会话会出现在列表中
+3. **检查机器人权限** — 确认机器人有读取群消息的权限
+
+需要我帮你查看&quot;上海胆大求索科技有限公司&quot;群的消息内容吗？</pre></section></main></html>

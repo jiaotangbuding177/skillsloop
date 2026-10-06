@@ -1,0 +1,144 @@
+===== PROMPT SAMPLE START =====
+
+PHASE: merge_level_1
+
+LABEL: batch_0001
+
+
+
+===== SYSTEM MESSAGE 1 START =====
+
+You are a skill edit coordinator. You receive multiple independently-proposed patches that each suggest changes to a skill folder. Your job is to merge them into one coherent, non-redundant patch.
+
+Guidelines:
+1. **Deduplicate**: When multiple patches propose the same or very similar edits, keep the best version (most specific, best worded).
+2. **Resolve conflicts**: If patches propose contradictory edits to the same section, choose the one with stronger justification or synthesize both into a better edit.
+3. **Preserve unique insights**: Different patches address different experiences — include all unique, non-redundant edits.
+4. **Maintain conciseness**: The merged patch should have ≤ the sum of unique edits across all input patches. Remove redundancy.
+5. **Keep the same operation format**: Use the same edit operations as the input patches.
+6. **Ensure independence**: Edits in the merged patch MUST be line-level independent — no two edits may target overlapping lines or the same passage of text, even across different operations. Multiple edits to different sections or paragraphs of the same file are fine. Edits will be applied in parallel, so any two edits that touch the same line would conflict.
+7. **Atomic create/link pairs**: A "create" op for references/*.md and the SKILL.md edit that inserts a link to it are an inseparable pair — keep both or drop both. Never keep a SKILL.md link to a new file while dropping its "create" op, and never keep a "create" op while dropping the SKILL.md link.
+
+  ✅ DO — keep the pair together:
+    {"file":"SKILL.md","op":"append_to_section","target_section":"## Best Practices",
+     "content":"See [Guide](references/guide.md) for details."},
+    {"file":"references/guide.md","op":"create","content":"# Guide\n..."}
+
+  ❌ DON'T — keep only the SKILL.md link and drop the create:
+    {"file":"SKILL.md","op":"append_to_section","target_section":"## Best Practices",
+     "content":"See [Guide](references/guide.md) for details."}
+    (NO create op → broken link on disk)
+
+  ❌ DON'T — keep only the create and drop the SKILL.md link:
+    {"file":"references/guide.md","op":"create","content":"# Guide\n..."}
+    (NO SKILL.md link → unreachable file)
+
+Likewise, "delete_file" and the edit that removes its SKILL.md link are a pair.
+
+## Output Format
+
+Respond with JSON in a fenced `json` block:
+
+```json
+{"reasoning":"Summary of what was merged, conflicts resolved, and deduplication done","edits":[{"file":"SKILL.md","op":"append_to_section","target_section":"## Section","content":"merged content"}],"changelog_entries":["Merged: description of change"]}
+```
+
+Supported operations: insert_after, insert_before, append_to_section, replace_in_section, add_section, delete_section, create, delete_file
+企业历史适配边界：这些记录不是统一的失败日志或成功日志。保留明确用户要求、未验证参考方法、局部错误/修订及UNKNOWN整体结果；不把候选经验升级为已验证成功。不同任务条件/用户范围不混用，不把实例数值固定为普遍规范；遇到矛盾保留条件和未知。输出中文技能正文，可操作且有适用范围；不凭skill名称编造其内部实现，不链接不存在的历史文件、工具脚本或KM路径。依赖能力须说明。来源ID作为依据说明保留，但不要复制整段企业正文。
+
+
+===== SYSTEM MESSAGE 1 END =====
+
+
+
+===== USER MESSAGE 1 START =====
+
+## Original Skill Folder Contents
+
+### SKILL.md (22 lines)
+```markdown
+---
+name: spreadsheet-generation-audit
+description: 根据用户明确要求处理与核验表格，整理可参考的操作方法及其适用边界。
+---
+
+# 表格生成与核验
+
+## 适用范围
+用于用户提供表格或明确数据结构后的表格处理；具体数据、映射和验收要求由本次任务给出。
+
+## 工作流程
+1. 阅读用户目标、输入结构和交付要求。
+2. 根据本次任务处理表格。
+3. 对照用户要求检查并保存结果。
+
+## 证据与边界
+历史经验是参考材料，不代表本次任务必然成功。不可见的文件内容、技能内部实现和业务结果保持未知。
+
+## 依赖
+实际执行时需要可用的表格读写工具；生成此技能不等于已经安装这些工具。
+
+
+```
+
+## Patches to Merge (3 patches)
+
+### Patch 1
+**Reasoning**: 历史经验强调了在生成含公式的Excel表格时，需特别注意公式引用行的对齐、模板结构的保留（不破坏合并单元格/锁定区域）以及使用外部引擎（如LibreOffice）进行重算验证以捕捉潜在错误。同时，跨准则映射和空数据处理提供了具体的填充策略参考。现有技能较为通用，建议增加针对‘模板结构保留’、‘公式重算验证’及‘数据填充规范’的操作细节，但不改变其基础定位。
+**Edits** (1):
+  - {"file": "SKILL.md", "op": "append_to_section", "target_section": "## \u5de5\u4f5c\u6d41\u7a0b", "content": "   - **\u6a21\u677f\u7ed3\u6784\u68c0\u67e5**\uff1a\u82e5\u4f7f\u7528\u73b0\u6709\u6a21\u677f\uff0c\u9700\u8bc6\u522b\u5408\u5e76\u5355\u5143\u683c\u3001\u9501\u5b9a\u533a\u57df\u53ca\u81ea\u52a8\u6c47\u603b\u516c\u5f0f\u3002\u4ec5\u5411\u660e\u7ec6\u884c\uff08\u53f6\u5b50\u8282\u70b9\uff09\u586b\u5165\u6570\u636e\uff0c\u907f\u514d\u8986\u76d6\u516c\u5f0f\u6216\u7834\u574f\u683c\u5f0f\u3002\n   - **\u6570\u636e\u586b\u5145\u89c4\u8303**\uff1a\u5bf9\u4e8e\u65f6\u95f4\u5e8f\u5217\u6570\u636e\uff0c\u82e5\u586b\u62a5\u4e3b\u4f53\u5728\u90e8\u5206\u5e74\u4efd\u4e0d\u5b58\u5728\uff0c\u6839\u636e\u586b\u62a5\u987b\u77e5\u660e\u786e\u662f\u7f6e\u4e3a0/\u521d\u59cb\u503c\u8fd8\u662f\u7559\u7a7a\uff1b\u8de8\u683c\u5f0f/\u51c6\u5219\u586b\u62a5\u65f6\uff0c\u9700\u5148\u5efa\u7acb\u79d1\u76ee\u6620\u5c04\u8868\uff0c\u907f\u514d\u673a\u68b0\u7167\u642c\u3002\n   - **\u516c\u5f0f\u4e0e\u91cd\u7b97\u9a8c\u8bc1**\uff1a\u5bf9\u4e8e\u542b\u516c\u5f0f\u7684\u8868\u683c\uff0c\u786e\u4fdd\u6570\u636e\u8d77\u59cb\u884c\u4e0e\u516c\u5f0f\u5f15\u7528\u884c\u4e25\u683c\u4e00\u81f4\u3002\u751f\u6210\u540e\uff0c\u82e5\u73af\u5883\u5141\u8bb8\uff0c\u5efa\u8bae\u4f7f\u7528LibreOffice\u7b49\u5916\u90e8\u5f15\u64ce\u91cd\u7b97\u6587\u4ef6\u5e76\u8bfb\u53d6\u7ed3\u679c\uff0c\u4ee5\u9a8c\u8bc1\u516c\u5f0f\u8ba1\u7b97\u903b\u8f91\u53ca\u517c\u5bb9\u6027\u3002"}
+**Changelog**: ['在工作流程中补充了模板结构检查（保留公式/合并单元格）、数据填充规范（空年份处理/映射表）及公式重算验证的具体操作建议。']
+
+### Patch 2
+**Reasoning**: 历史经验揭示了表格生成中的具体操作陷阱（合并单元格解析、富文本对齐、命名一致性）以及交付可见性问题。基于这些局部失败或参考经验，在“工作流程”中增加关键的技术处理检查点（合并单元格、格式对齐、文件交付），并在“证据与边界”中补充数据完整性与未识别数据的处理原则，以完善技能的实操指导性。
+**Edits** (2):
+  - {"file": "SKILL.md", "op": "append_to_section", "target_section": "## \u5de5\u4f5c\u6d41\u7a0b", "content": "\n4. \u5904\u7406\u7279\u6b8a\u683c\u5f0f\uff1a\u89e3\u6790\u542b\u5408\u5e76\u5355\u5143\u683c\u7684\u6e90\u6570\u636e\u65f6\uff0c\u9700\u663e\u5f0f\u586b\u5145\u5408\u5e76\u533a\u57df\u503c\uff1b\u8bbe\u7f6e\u5bf9\u9f50\u65f6\u8986\u76d6\u6807\u9898\u884c\u4e0e\u6570\u503c\u884c\uff1b\u4e0b\u6807\u7b49\u6837\u5f0f\u4f7f\u7528\u5bcc\u6587\u672c\u800c\u975e\u7eaf\u6587\u672c\u3002\n5. \u4ea4\u4ed8\u53ef\u89c1\u6027\uff1a\u751f\u6210\u6587\u4ef6\u540e\uff0c\u4e3b\u52a8\u63d0\u4f9b\u6613\u4e8e\u8bbf\u95ee\u7684\u8def\u5f84\u6216\u4e0b\u8f7d\u94fe\u63a5\uff0c\u907f\u514d\u4ec5\u544a\u77e5\u5de5\u4f5c\u533a\u6df1\u5c42\u8def\u5f84\u3002\n6. \u5b8c\u6574\u6027\u6821\u9a8c\uff1a\u9488\u5bf9\u5927\u6570\u636e\u91cf\u6216\u7528\u6237\u6307\u5b9a\u603b\u6570\u7684\u573a\u666f\uff0c\u751f\u6210\u540e\u9700\u4e25\u683c\u6bd4\u5bf9\u8f93\u5165\u8f93\u51fa\u8bb0\u5f55\u6570\uff1b\u5bf9\u65e0\u6cd5\u81ea\u52a8\u5f52\u7c7b\u7684\u6570\u636e\u663e\u5f0f\u6807\u8bb0\u4e3a\u201c\u672a\u8bc6\u522b\u201d\u5e76\u7edf\u8ba1\u6bd4\u4f8b\uff0c\u4e0d\u76f4\u63a5\u4e22\u5f03\u3002"}
+  - {"file": "SKILL.md", "op": "append_to_section", "target_section": "## \u8bc1\u636e\u4e0e\u8fb9\u754c", "content": "\n- \u591a\u6587\u6863\u4e00\u81f4\u6027\uff1a\u82e5\u4efb\u52a1\u6d89\u53ca\u540c\u4e00\u6570\u636e\u96c6\u5728\u591a\u79cd\u683c\u5f0f\uff08\u5982Excel\u3001Word\uff09\u4e2d\u5448\u73b0\uff0c\u9700\u7ef4\u62a4\u7edf\u4e00\u547d\u540d\u5b57\u5178\uff0c\u786e\u4fdd\u5b9e\u4f53\u547d\u540d\u5177\u8c61\u4e14\u4e00\u81f4\u3002\n- \u7248\u672c\u66f4\u65b0\u5904\u7406\uff1a\u9047\u5230\u7528\u6237\u4e0a\u4f20\u5e26\u6709\u201cupdated\u201d\u7b49\u5b57\u6837\u7684\u6587\u4ef6\u65f6\uff0c\u5e94\u5148\u6bd4\u5bf9\u54c8\u5e0c\u6216\u5dee\u5f02\uff0c\u786e\u8ba4\u53d8\u66f4\u70b9\u540e\u518d\u5904\u7406\uff0c\u907f\u514d\u76f2\u76ee\u8986\u76d6\u3002"}
+**Changelog**: ['在工作流程中补充合并单元格解析、富文本对齐及文件交付可见性的具体操作指引', '在工作流程中增加数据完整性校验及未识别数据的显式标记原则', '在证据与边界中补充多文档命名一致性及文件版本哈希比对的参考经验']
+
+### Patch 3
+**Reasoning**: 历史经验揭示了表格生成/核验中的两个高频痛点：1) 结构变更时的字段映射缺失导致比对错误；2) 自动化脚本中列索引硬编码及脱敏规则（短名称、多对一冲突、残留验证）的鲁棒性问题。这些属于SKILL.md中‘工作流程’和‘依赖’部分的可操作细化建议，不改变核心定位，但能显著降低执行错误率。
+**Edits** (1):
+  - {"file": "SKILL.md", "op": "append_to_section", "target_section": "## \u5de5\u4f5c\u6d41\u7a0b", "content": "2.1. \u82e5\u6d89\u53ca\u65b0\u65e7\u7248\u672c\u5bf9\u6bd4\uff0c\u5148\u6267\u884cSchema Mapping\uff08\u5b57\u6bb5\u6620\u5c04\uff09\uff0c\u8bc6\u522b\u7ed3\u6784\u53d8\u66f4\uff08\u589e\u5220\u5217\u3001\u91cd\u547d\u540d\uff09\uff0c\u518d\u5b9a\u4e49\u4e3b\u952e\u5339\u914d\u903b\u8f91\uff08\u7ed3\u5408\u6a21\u7cca\u5339\u914d\u6216\u8f85\u52a9\u5b57\u6bb5\uff09\uff0c\u907f\u514d\u5c06\u2018\u66f4\u540d\u2019\u8bef\u5224\u4e3a\u2018\u589e\u5220\u2019\u3002\n2.2. \u82e5\u6267\u884c\u81ea\u52a8\u5316\u811a\u672c\u5904\u7406\uff0c\u4e25\u7981\u786c\u7f16\u7801\u5217\u7d22\u5f15\uff0c\u5fc5\u987b\u52a8\u6001\u6821\u9a8c\u8868\u5934\u6620\u5c04\uff1b\u5904\u7406\u654f\u611f\u6570\u636e\u8131\u654f\u65f6\uff0c\u9700\u9884\u8bbe\u77ed\u540d\u79f0\uff08\u5982<3\u5b57\uff09\u7684\u7279\u6b8a\u63a9\u7801\u89c4\u5219\u53ca\u91cd\u540d\u51b2\u7a81\u5904\u7406\u7b56\u7565\uff0c\u5e76\u5728\u6267\u884c\u540e\u8fdb\u884c\u5168\u91cf\u6b8b\u7559\u626b\u63cf\u9a8c\u8bc1\u3002"}
+**Changelog**: ['在工作流程中增加‘结构变更下的字段映射’与‘主键匹配’步骤，源自版本对比差异分析经验。', '在工作流程中增加脚本健壮性要求（动态表头校验）及脱敏特殊场景处理（短名称、冲突、残留验证），源自脱敏任务局部失败经验。']
+
+
+
+===== USER MESSAGE 1 END =====
+
+
+
+===== ASSISTANT MESSAGE 1 START =====
+
+```json
+{
+  "reasoning": "合并了三个补丁中关于表格生成与核验的操作细节。主要冲突点在于三个补丁都试图向“工作流程”部分追加内容。Patch 1 提供了模板结构、数据填充和公式验证的细节；Patch 2 提供了特殊格式、交付可见性和完整性校验；Patch 3 提供了版本对比映射和脚本/脱敏鲁棒性。为了保持逻辑清晰且避免行级冲突，我将这些内容整合为一个统一的、编号连续的列表，涵盖从版本映射、脚本健壮性、模板保留、数据填充、特殊格式到最终验证和交付的全流程。同时，将 Patch 2 中关于“证据与边界”的补充内容（多文档一致性、版本更新处理）单独保留并整合到该部分，以区分操作指引与参考边界。",
+  "edits": [
+    {
+      "file": "SKILL.md",
+      "op": "replace_in_section",
+      "target_section": "## 工作流程",
+      "content": "1. 阅读用户目标、输入结构和交付要求。\n2. 根据本次任务处理表格：\n   - **版本与映射**：若涉及新旧版本对比，先执行Schema Mapping（字段映射），识别结构变更（增删列、重命名），定义主键匹配逻辑（结合模糊匹配或辅助字段），避免将“更名”误判为“增删”。\n   - **脚本鲁棒性**：执行自动化脚本时，严禁硬编码列索引，必须动态校验表头映射。处理敏感数据脱敏时，预设短名称及重名冲突处理策略，执行后需进行全量残留扫描验证。\n   - **模板结构保留**：使用现有模板时，识别合并单元格、锁定区域及自动汇总公式。仅向明细行（叶子节点）填入数据，避免覆盖公式或破坏格式。\n   - **数据填充规范**：时间序列数据若部分年份缺失，依须知置为0/初始值或留空；跨格式/准则填报时，先建立科目映射表。\n   - **特殊格式处理**：解析含合并单元格的源数据时，显式填充合并区域值；设置对齐时覆盖标题行与数值行；下标等样式使用富文本。\n3. 对照用户要求检查并保存结果：\n   - **公式与重算验证**：确保数据起始行与公式引用行一致。若环境允许，建议使用LibreOffice等外部引擎重算文件并读取结果，验证逻辑兼容性。\n   - **完整性校验**：严格比对输入输出记录数；对无法自动归类数据显式标记为“未识别”并统计比例，不直接丢弃。\n   - **交付可见性**：主动提供易于访问的路径或下载链接，避免仅告知深层路径。"
+    },
+    {
+      "file": "SKILL.md",
+      "op": "append_to_section",
+      "target_section": "## 证据与边界",
+      "content": "\n- 多文档一致性：若同一数据集在多种格式中呈现，需维护统一命名字典，确保实体命名具象且一致。\n- 版本更新处理：遇到用户上传带有“updated”等字样的文件时，应先比对哈希或差异，确认变更点后再处理，避免盲目覆盖。"
+    }
+  ],
+  "changelog_entries": [
+    "整合工作流程：增加版本对比映射、脚本动态校验与脱敏鲁棒性要求",
+    "整合工作流程：细化模板结构保留、数据填充规范及特殊格式处理",
+    "整合工作流程：明确公式重算验证、数据完整性校验及交付可见性要求",
+    "补充证据与边界：增加多文档命名一致性及文件版本哈希比对的参考原则"
+  ]
+}
+```
+
+
+===== ASSISTANT MESSAGE 1 END =====
+
+
+
+===== PROMPT SAMPLE END =====

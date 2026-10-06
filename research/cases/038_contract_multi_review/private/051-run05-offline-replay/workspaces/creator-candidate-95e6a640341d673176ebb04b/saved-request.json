@@ -1,0 +1,148 @@
+{
+  "purpose": "workflow_creator",
+  "payload": {
+    "algorithm": "workflow-creator-v1",
+    "workflow": {
+      "frameIds": [
+        "f1",
+        "f3"
+      ],
+      "title": "合同/协议审阅与修订",
+      "trigger": "需要审阅合同或协议并输出修订版本时",
+      "inputs": [
+        "待审阅合同/协议文件",
+        "审阅视角/立场",
+        "修订范围/原则要求"
+      ],
+      "steps": [
+        {
+          "id": "s1",
+          "methodIds": [
+            "m1",
+            "m4"
+          ],
+          "action": "解析文件并根据指定视角识别风险事项",
+          "condition": "m1: 通用/指定视角; m4: 弱势供应商视角及最小化修订原则",
+          "completionCheck": "输出风险事项列表及分级，或核心风险列表及修订策略"
+        },
+        {
+          "id": "s2",
+          "methodIds": [
+            "m2",
+            "m5"
+          ],
+          "action": "根据识别结果生成带修订痕迹/标记的文件及说明",
+          "condition": "m2: 风险事项已识别; m5: 修订策略已制定",
+          "completionCheck": "生成包含修订痕迹和批注的文件，或带修订标记的文件及说明文档"
+        }
+      ],
+      "outputs": [
+        "带修订和批注/标记的合同/协议文件",
+        "风险分级说明/修订说明与谈判建议"
+      ],
+      "parameters": [
+        "审阅视角",
+        "修订范围/原则",
+        "合同/协议文件"
+      ],
+      "conditions": [
+        "用户指定了审阅视角和修订范围/原则"
+      ],
+      "dependencies": [],
+      "limitations": [
+        "业务效果未知",
+        "来源仅支持有出处的方法与可见过程；业务效果、专业正确性及真实文件交付未经独立验证，均为UNKNOWN。"
+      ],
+      "includedMethodIds": [
+        "m1",
+        "m2",
+        "m4",
+        "m5"
+      ],
+      "businessOutcome": "UNKNOWN"
+    },
+    "methods": [
+      {
+        "id": "m1",
+        "action": "解析合同文件并根据指定视角识别风险事项",
+        "inputs": [
+          "合同文件",
+          "审阅视角"
+        ],
+        "outputs": [
+          "风险事项列表",
+          "风险分级"
+        ],
+        "conditions": [
+          "合同文件可解析"
+        ],
+        "parameters": [
+          "审阅视角"
+        ],
+        "completionCheck": "输出风险事项列表及分级",
+        "reason": "基于用户要求审阅并输出风险分级"
+      },
+      {
+        "id": "m2",
+        "action": "根据识别的风险生成带修订痕迹和批注的合同文件",
+        "inputs": [
+          "风险事项列表",
+          "合同文件"
+        ],
+        "outputs": [
+          "带修订和批注的合同文件"
+        ],
+        "conditions": [
+          "风险事项已识别"
+        ],
+        "parameters": [],
+        "completionCheck": "生成包含修订痕迹和批注的文件",
+        "reason": "用户要求直接输出修订和批注意见版本"
+      },
+      {
+        "id": "m4",
+        "action": "识别协议中的核心风险并制定最小化修订策略",
+        "inputs": [
+          "协议文件",
+          "审阅视角",
+          "修订原则"
+        ],
+        "outputs": [
+          "核心风险列表",
+          "最小化修订策略"
+        ],
+        "conditions": [
+          "协议文件可解析"
+        ],
+        "parameters": [
+          "审阅视角",
+          "修订原则"
+        ],
+        "completionCheck": "输出核心风险列表及修订策略",
+        "reason": "用户要求站在供应商角度，仅修改核心和重大风险，尽可能少修订"
+      },
+      {
+        "id": "m5",
+        "action": "根据修订策略生成带修订标记的协议文件及修订说明",
+        "inputs": [
+          "核心风险列表",
+          "最小化修订策略",
+          "协议文件"
+        ],
+        "outputs": [
+          "带修订标记的协议文件",
+          "修订说明文档"
+        ],
+        "conditions": [
+          "修订策略已制定"
+        ],
+        "parameters": [],
+        "completionCheck": "生成带修订标记的文件及说明文档",
+        "reason": "用户要求直接以修订模式进行修改并输出"
+      }
+    ],
+    "workflowHash": "e3168531d200813c2f0f9587b9b71a23a4ff2edc7c8944af34c81d04e4cb8f4e",
+    "workflowId": "workflow-5bab5ba2f921850eb3f917d3"
+  },
+  "sourceRunId": "creator-candidate-95e6a640341d673176ebb04b"
+}

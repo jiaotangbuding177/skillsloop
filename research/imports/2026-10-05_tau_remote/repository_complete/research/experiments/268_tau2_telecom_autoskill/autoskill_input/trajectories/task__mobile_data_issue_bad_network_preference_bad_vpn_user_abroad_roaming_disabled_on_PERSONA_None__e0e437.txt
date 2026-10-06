@@ -1,0 +1,53 @@
+AGENT: Hi! How can I help you today?
+USER: Hi there—my mobile data keeps cutting out or is extremely slow on my phone. I’m currently abroad in France and don’t have any Wi‑Fi to fall back on. I really need to get excellent internet speed on my phone. Can you help me get this fixed?
+AGENT: I can help with that. First I need to identify you.
+
+Could you please provide your phone number, or your full name and date of birth?
+
+Also, since you're abroad in France, let me know the phone number of the line having the issue.
+USER: Sure—my name is John Smith, and the number having the issue is 555-123-2002. I don’t have my date of birth handy.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 8.7, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT_TOOL_CALL: {"name": "get_data_usage", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "data_used_gb": "8.7", "data_limit_gb": "15.0", "data_refueling_gb": "0.0", "cycle_end_date": "2025-02-28"}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "P1002"}}
+TOOL_RESULT: {"plan_id": "P1002", "name": "Premium Plan", "data_limit_gb": 15.0, "price_per_month": 65.0, "data_refueling_price_per_gb": 2.0}
+AGENT_TOOL_CALL: {"name": "enable_roaming", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: Roaming enabled successfully
+AGENT: I've enabled international roaming on your line (555-123-2002) at no cost.
+
+A few things to note:
+- Your data usage is fine — 8.7 GB of your 15 GB limit used, so you're not being throttled.
+- To make sure your phone picks up the new setting, please **reboot your device**.
+- After rebooting, your phone should connect to a local network in France and give you data service.
+
+Could you reboot your phone and let me know how the connection and speed look?
+TOOL_RESULT: Restarting network services...
+Status Bar: 📶¹ Poor | 2G | 📱 Data Enabled | 🔒 VPN Connected | 🔋 80%
+TOOL_RESULT: Speed Test Result: 0.01 Mbps (Very Poor). Connection is very slow. Basic web browsing might be difficult.
+USER: I rebooted, but it’s still not usable. My status bar shows a poor signal on 2G, data enabled, and a VPN is connected. I ran a speed test and it came back at 0.01 Mbps — very poor. This is pretty frustrating; I really need excellent speed, not this. What should I try next?
+AGENT: I understand the frustration. Let's work through this.
+
+Two things stand out: you're on **2G**, and 2G is far too slow for usable data — and a **VPN is connected**, which can throttle speeds. Let me help you fix both.
+
+**Step 1 — Switch off the VPN:**
+Please disconnect/turn off your VPN. VPNs route your traffic through a remote server and often heavily slow down data.
+
+**Step 2 — Change network mode:**
+Your phone is stuck on 2G. Please change the network mode preference to include 4G/5G — select **"4g_5g_preferred"** (or **"4g_only"**) on your device.
+
+Could you make these changes and then re-check your status bar and run the speed test again? Let me know what you see.
+TOOL_RESULT: VPN disconnected successfully.
+Status Bar: 📶¹ Poor | 2G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Preferred Network Mode set to: 4g_5g_preferred
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Speed Test Result: 275.00 Mbps (Excellent). Connection is very fast.
+USER: That did it! I turned off the VPN and switched the network mode to 4G/5G preferred. Now my status bar shows excellent signal on 5G with data enabled, and the speed test came back at 275 Mbps — rated excellent. This is exactly what I needed. Thanks so much for your help!
+
+###STOP###

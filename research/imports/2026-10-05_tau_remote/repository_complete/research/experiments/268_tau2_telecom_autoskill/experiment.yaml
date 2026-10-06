@@ -1,0 +1,52 @@
+experiment: 268_tau2_telecom_autoskill
+domain: telecom
+benchmark: tau2-bench v1.0.1 (fc0055dc)
+created: 2026-10-04
+status: preparation
+
+seed: 42
+trials_evaluate: 4
+concurrency: 12
+max_steps: 200
+max_errors: 10
+max_retries: 3
+timeout: null
+
+relay:
+  port: 8181
+  max_requests: 60000
+  routes: [consumer, user, judge, autoskill, embed, plus]
+  ledger: ledger/requests.jsonl
+
+roles:
+  consumer: deepseek-flash
+  user_simulator: deepseek-flash
+  judge_nl_assertions: glm-4-flash
+  embeddings_autoskill: ecnu-embedding-small
+
+split:
+  source: inputs/telecom_split.json (small 20 / train 74 / test 40 / full 2285 / base 114)
+  dev_ids:
+    - "[mms_issue]break_apn_mms_setting|data_mode_off|user_abroad_roaming_disabled_on[PERSONA:Hard]"
+    - "[mobile_data_issue]airplane_mode_on|user_abroad_roaming_enabled_off[PERSONA:None]"
+    - "[service_issue]airplane_mode_on|lock_sim_card_pin|unseat_sim_card[PERSONA:Hard]"
+    - "[mms_issue]airplane_mode_on|bad_network_preference|bad_wifi_calling|break_apn_mms_setting|break_app_storage_permission|data_usage_exceeded|unseat_sim_card|user_abroad_roaming_disabled_off[PERSONA:Easy]"
+  dev_rule: "one task per category [mms_issue,mobile_data_issue,service_issue] seeded shuffle; round-robin until 4"
+  evolution: 70
+  test: 40
+
+phases:
+  - dev:       {group: no_skill, tasks: dev, trials: 1, result: runs/dev/no_skill.json}
+  - collect:   {group: no_skill, tasks: evolution, trials: 1, result: runs/collect/evolution.json}
+  - learn:     {extractor: autoskill_offline_agentic_trajectory, out: frozen_skills/}
+  - evaluate:  {tasks: test, trials: 4, groups: [no_skill, autoskill_library],
+                results: [runs/test/no_skill.json, runs/test/autoskill_library.json]}
+  - analyze:   {skill_read_scan: true, paired_summary: true}
+
+env_template:
+  TAU2_RETAIL_DOMAIN: telecom
+  TAU2_RETAIL_RUN_ROOT: <root>/runs
+  TAU2_RETAIL_RELAY_PORT: "8181"
+  TAU2_RETAIL_RELAY_BASE: http://127.0.0.1:8181/tau2_retail/consumer/v1
+  TAU2_RETAIL_USER_MODEL: openai/deepseek-flash
+  TAU2_RETAIL_USER_BASE: http://127.0.0.1:8181/tau2_retail/user/v1

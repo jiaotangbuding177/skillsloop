@@ -1,0 +1,485 @@
+{
+  "purpose": "workflow_merge",
+  "payload": {
+    "algorithm": "workflow-discovery-v3",
+    "clusters": [
+      {
+        "frameIds": [
+          "f1",
+          "f3"
+        ],
+        "targetRoute": [
+          "NEW",
+          null
+        ],
+        "frames": [
+          {
+            "id": "f1",
+            "traceId": "task-33ab3f323f8863129ea85afc",
+            "goal": "审阅指定合同并输出包含修订和批注的版本",
+            "inputContract": [
+              "待审阅合同文件",
+              "审阅视角/立场",
+              "修订范围要求"
+            ],
+            "outputContract": [
+              "带修订和批注的合同文件",
+              "风险分级说明"
+            ],
+            "processSketch": [
+              "解析合同文件",
+              "识别重大风险与关注事项",
+              "生成修订建议与批注",
+              "输出修订版文件"
+            ],
+            "conditions": [
+              "用户指定了审阅视角和修订范围"
+            ],
+            "parameters": [
+              "审阅视角",
+              "修订范围",
+              "合同文件"
+            ],
+            "methodIds": [
+              "m1",
+              "m2"
+            ]
+          },
+          {
+            "id": "f3",
+            "traceId": "task-f266dc4aa8bc9f58037c0028",
+            "goal": "站在弱势供应商角度审阅协议并仅对核心和重大风险进行最小化修订",
+            "inputContract": [
+              "待审阅协议文件",
+              "供应商视角",
+              "最小化修订原则"
+            ],
+            "outputContract": [
+              "带修订标记的协议文件",
+              "修订说明与谈判建议"
+            ],
+            "processSketch": [
+              "解析协议文件",
+              "识别核心与重大风险",
+              "制定最小化修订策略",
+              "生成修订标记与批注",
+              "输出修订稿及说明"
+            ],
+            "conditions": [
+              "用户指定了供应商视角及最小化修订原则"
+            ],
+            "parameters": [
+              "审阅视角",
+              "修订原则",
+              "协议文件"
+            ],
+            "methodIds": [
+              "m4",
+              "m5"
+            ]
+          }
+        ],
+        "methods": [
+          {
+            "id": "m1",
+            "frameId": "f1",
+            "action": "解析合同文件并根据指定视角识别风险事项",
+            "inputs": [
+              "合同文件",
+              "审阅视角"
+            ],
+            "outputs": [
+              "风险事项列表",
+              "风险分级"
+            ],
+            "conditions": [
+              "合同文件可解析"
+            ],
+            "parameters": [
+              "审阅视角"
+            ],
+            "completionCheck": "输出风险事项列表及分级",
+            "evidenceRefs": [
+              "e1",
+              "e7",
+              "e8",
+              "e9"
+            ],
+            "evidenceKind": "MIXED_SOURCE",
+            "outcome": "UNKNOWN",
+            "decisionHint": "INCLUDE",
+            "reason": "基于用户要求审阅并输出风险分级",
+            "evidenceKinds": [
+              "USER_REQUIREMENT",
+              "VISIBLE_PROCESS"
+            ],
+            "evidenceAssessment": {
+              "authority": "HOST_SOURCE_CATALOG",
+              "claimedKind": "USER_REQUIREMENT",
+              "claimedOutcome": "UNKNOWN",
+              "businessOutcome": "UNKNOWN",
+              "claimWarnings": []
+            }
+          },
+          {
+            "id": "m2",
+            "frameId": "f1",
+            "action": "根据识别的风险生成带修订痕迹和批注的合同文件",
+            "inputs": [
+              "风险事项列表",
+              "合同文件"
+            ],
+            "outputs": [
+              "带修订和批注的合同文件"
+            ],
+            "conditions": [
+              "风险事项已识别"
+            ],
+            "parameters": [],
+            "completionCheck": "生成包含修订痕迹和批注的文件",
+            "evidenceRefs": [
+              "e1",
+              "e10"
+            ],
+            "evidenceKind": "MIXED_SOURCE",
+            "outcome": "UNKNOWN",
+            "decisionHint": "INCLUDE",
+            "reason": "用户要求直接输出修订和批注意见版本",
+            "evidenceKinds": [
+              "ASSISTANT_CLAIM",
+              "USER_REQUIREMENT"
+            ],
+            "evidenceAssessment": {
+              "authority": "HOST_SOURCE_CATALOG",
+              "claimedKind": "USER_REQUIREMENT",
+              "claimedOutcome": "UNKNOWN",
+              "businessOutcome": "UNKNOWN",
+              "claimWarnings": []
+            }
+          },
+          {
+            "id": "m4",
+            "frameId": "f3",
+            "action": "识别协议中的核心风险并制定最小化修订策略",
+            "inputs": [
+              "协议文件",
+              "审阅视角",
+              "修订原则"
+            ],
+            "outputs": [
+              "核心风险列表",
+              "最小化修订策略"
+            ],
+            "conditions": [
+              "协议文件可解析"
+            ],
+            "parameters": [
+              "审阅视角",
+              "修订原则"
+            ],
+            "completionCheck": "输出核心风险列表及修订策略",
+            "evidenceRefs": [
+              "e19",
+              "e25",
+              "e36"
+            ],
+            "evidenceKind": "MIXED_SOURCE",
+            "outcome": "UNKNOWN",
+            "decisionHint": "INCLUDE",
+            "reason": "用户要求站在供应商角度，仅修改核心和重大风险，尽可能少修订",
+            "evidenceKinds": [
+              "ASSISTANT_CLAIM",
+              "USER_REQUIREMENT",
+              "VISIBLE_PROCESS"
+            ],
+            "evidenceAssessment": {
+              "authority": "HOST_SOURCE_CATALOG",
+              "claimedKind": "USER_REQUIREMENT",
+              "claimedOutcome": "UNKNOWN",
+              "businessOutcome": "UNKNOWN",
+              "claimWarnings": []
+            }
+          },
+          {
+            "id": "m5",
+            "frameId": "f3",
+            "action": "根据修订策略生成带修订标记的协议文件及修订说明",
+            "inputs": [
+              "核心风险列表",
+              "最小化修订策略",
+              "协议文件"
+            ],
+            "outputs": [
+              "带修订标记的协议文件",
+              "修订说明文档"
+            ],
+            "conditions": [
+              "修订策略已制定"
+            ],
+            "parameters": [],
+            "completionCheck": "生成带修订标记的文件及说明文档",
+            "evidenceRefs": [
+              "e19",
+              "e33",
+              "e34",
+              "e35"
+            ],
+            "evidenceKind": "MIXED_SOURCE",
+            "outcome": "UNKNOWN",
+            "decisionHint": "INCLUDE",
+            "reason": "用户要求直接以修订模式进行修改并输出",
+            "evidenceKinds": [
+              "ASSISTANT_CLAIM",
+              "USER_REQUIREMENT",
+              "VISIBLE_PROCESS"
+            ],
+            "evidenceAssessment": {
+              "authority": "HOST_SOURCE_CATALOG",
+              "claimedKind": "USER_REQUIREMENT",
+              "claimedOutcome": "UNKNOWN",
+              "businessOutcome": "UNKNOWN",
+              "claimWarnings": []
+            }
+          }
+        ]
+      },
+      {
+        "frameIds": [
+          "f2",
+          "f4"
+        ],
+        "targetRoute": [
+          "NEW",
+          null
+        ],
+        "frames": [
+          {
+            "id": "f2",
+            "traceId": "task-33ab3f323f8863129ea85afc",
+            "goal": "根据补充的业务背景调整合同中的特定排他性条款",
+            "inputContract": [
+              "当前合同版本",
+              "补充的业务背景",
+              "需调整的条款类型"
+            ],
+            "outputContract": [
+              "调整后的条款文本",
+              "更新后的合同文件"
+            ],
+            "processSketch": [
+              "分析补充业务背景对现有条款的冲突",
+              "设计兼容多场景的条款修改方案",
+              "应用修改并更新文件"
+            ],
+            "conditions": [
+              "用户提供了补充业务背景",
+              "现有条款存在冲突"
+            ],
+            "parameters": [
+              "业务背景",
+              "条款类型"
+            ],
+            "methodIds": [
+              "m3"
+            ]
+          },
+          {
+            "id": "f4",
+            "traceId": "task-f266dc4aa8bc9f58037c0028",
+            "goal": "根据用户选择的修订方案更新特定条款并重新生成文件",
+            "inputContract": [
+              "当前协议版本",
+              "用户选择的修订方案",
+              "目标条款"
+            ],
+            "outputContract": [
+              "更新后的特定条款文本",
+              "更新后的协议文件"
+            ],
+            "processSketch": [
+              "解析用户选择的修订方案",
+              "应用方案修改目标条款",
+              "重新生成修订版文件"
+            ],
+            "conditions": [
+              "用户明确选择了修订方案"
+            ],
+            "parameters": [
+              "修订方案",
+              "目标条款"
+            ],
+            "methodIds": [
+              "m6"
+            ]
+          }
+        ],
+        "methods": [
+          {
+            "id": "m3",
+            "frameId": "f2",
+            "action": "根据业务背景设计兼容方案并修改特定条款",
+            "inputs": [
+              "补充业务背景",
+              "现有条款"
+            ],
+            "outputs": [
+              "修改后的条款文本",
+              "更新后的合同文件"
+            ],
+            "conditions": [
+              "业务背景与现有条款存在冲突"
+            ],
+            "parameters": [
+              "业务背景"
+            ],
+            "completionCheck": "输出修改后的条款及更新后的文件",
+            "evidenceRefs": [
+              "e2",
+              "e5",
+              "e14",
+              "e15"
+            ],
+            "evidenceKind": "MIXED_SOURCE",
+            "outcome": "UNKNOWN",
+            "decisionHint": "INCLUDE",
+            "reason": "用户要求修改排他条款以兼容原厂区继续使用老处置单位的情况",
+            "evidenceKinds": [
+              "USER_FEEDBACK",
+              "USER_REQUIREMENT",
+              "VISIBLE_PROCESS"
+            ],
+            "evidenceAssessment": {
+              "authority": "HOST_SOURCE_CATALOG",
+              "claimedKind": "USER_REQUIREMENT",
+              "claimedOutcome": "UNKNOWN",
+              "businessOutcome": "UNKNOWN",
+              "claimWarnings": []
+            }
+          },
+          {
+            "id": "m6",
+            "frameId": "f4",
+            "action": "应用用户选定的修订方案更新目标条款及协议文件",
+            "inputs": [
+              "用户选择的修订方案",
+              "目标条款",
+              "当前协议版本"
+            ],
+            "outputs": [
+              "更新后的条款文本",
+              "更新后的协议文件"
+            ],
+            "conditions": [
+              "用户已选择修订方案"
+            ],
+            "parameters": [
+              "修订方案"
+            ],
+            "completionCheck": "输出更新后的条款及协议文件",
+            "evidenceRefs": [
+              "e20",
+              "e23",
+              "e41",
+              "e43"
+            ],
+            "evidenceKind": "MIXED_SOURCE",
+            "outcome": "UNKNOWN",
+            "decisionHint": "INCLUDE",
+            "reason": "用户要求采用中策方案修改特定条款",
+            "evidenceKinds": [
+              "ASSISTANT_CLAIM",
+              "USER_FEEDBACK",
+              "USER_REQUIREMENT",
+              "VISIBLE_PROCESS"
+            ],
+            "evidenceAssessment": {
+              "authority": "HOST_SOURCE_CATALOG",
+              "claimedKind": "USER_REQUIREMENT",
+              "claimedOutcome": "UNKNOWN",
+              "businessOutcome": "UNKNOWN",
+              "claimWarnings": []
+            }
+          }
+        ]
+      },
+      {
+        "frameIds": [
+          "f5"
+        ],
+        "targetRoute": [
+          "NEW",
+          null
+        ],
+        "frames": [
+          {
+            "id": "f5",
+            "traceId": "task-f266dc4aa8bc9f58037c0028",
+            "goal": "根据用户要求仅单独输出特定条款的修改文本",
+            "inputContract": [
+              "目标条款的修改内容",
+              "输出格式要求"
+            ],
+            "outputContract": [
+              "特定条款的修改文本"
+            ],
+            "processSketch": [
+              "提取目标条款的修改内容",
+              "按指定格式输出文本"
+            ],
+            "conditions": [
+              "用户要求仅输出特定条款修改文本"
+            ],
+            "parameters": [
+              "目标条款"
+            ],
+            "methodIds": [
+              "m7"
+            ]
+          }
+        ],
+        "methods": [
+          {
+            "id": "m7",
+            "frameId": "f5",
+            "action": "提取特定条款的修改内容并按要求格式化输出",
+            "inputs": [
+              "目标条款的修改内容",
+              "输出格式要求"
+            ],
+            "outputs": [
+              "特定条款的修改文本"
+            ],
+            "conditions": [
+              "用户要求单独输出修改文本"
+            ],
+            "parameters": [],
+            "completionCheck": "输出特定条款的修改文本",
+            "evidenceRefs": [
+              "e21",
+              "e24",
+              "e46"
+            ],
+            "evidenceKind": "MIXED_SOURCE",
+            "outcome": "UNKNOWN",
+            "decisionHint": "INCLUDE",
+            "reason": "用户要求不需要重新输出文件，单独输出修改文本",
+            "evidenceKinds": [
+              "USER_FEEDBACK",
+              "USER_REQUIREMENT",
+              "VISIBLE_PROCESS"
+            ],
+            "evidenceAssessment": {
+              "authority": "HOST_SOURCE_CATALOG",
+              "claimedKind": "USER_REQUIREMENT",
+              "claimedOutcome": "UNKNOWN",
+              "businessOutcome": "UNKNOWN",
+              "claimWarnings": []
+            }
+          }
+        ]
+      }
+    ],
+    "sourceHash": "af2271258c0f2fd21bb126b59d711716549211efab54c4a91501cefbfc33eaf7"
+  },
+  "sourceRunId": "workflow_merge-6336d99f21f73e54a70588b3"
+}

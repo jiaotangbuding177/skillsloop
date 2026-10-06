@@ -1,0 +1,140 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>研发改动转Gitee工作项</title><style>body{margin:0;background:#f3f6fb;color:#172536;font:16px/1.65 system-ui,"Microsoft YaHei",sans-serif}main{max-width:1160px;margin:32px auto;padding:0 20px}a{color:#1552aa}header,.box,article,details{background:white;border:1px solid #dce4ee;border-radius:12px;padding:18px;margin:12px 0}h1{font-size:28px}h2{font-size:22px}.meta{color:#596777;font-size:13px}.badge{display:inline-block;padding:3px 9px;border-radius:6px;background:#e9f0fa;margin-right:6px}pre{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere}input,select{font:inherit;padding:9px;border:1px solid #b9c8da;border-radius:7px}summary{cursor:pointer;font-weight:600}.muted{color:#68788b}.noise{background:#f6f6f6}table{border-collapse:collapse;width:100%}td,th{text-align:left;border-bottom:1px solid #dce4ee;padding:9px}nav{display:flex;gap:16px;flex-wrap:wrap}section{scroll-margin-top:15px}</style><main><header><h1>研发改动转Gitee工作项</h1><p>按缺陷/任务/需求分单，同一类不同问题也分别建；未指定负责人默认用户，项目先搜再问不猜</p><p>来源种子 7 组；扩入上下文 2 组。不是完整黄金轨迹，未认证时序或任务成功。</p><a href="../sessions/conv_143452559f75.html">查看完整会话及全部证据</a></header><span class="badge">种子</span><section id="u_430fdf64ed18c9fb97" class="box "><p class="meta">user · u_430fdf64ed18c9fb97 · 1次来源记录<br></p><pre>根据这些改动点，给张文新建任务工作项。### 1. useEffect 循环依赖导致重复请求
+
+- 现象：切换会话时/api/zclaw/chat/sessions/{id} 被重复请求
+
+- 根因shouldReuseCurrentConversation 计算值依赖 state.messages，effect 内 dispatch(SET_MESSAGES) 修改 state → 循环
+
+- 修复：移除 shouldReuseCurrentConversation，改用 loadingSessionIdRef 防御性守卫
+
+- 文件SuperLobsterPage.tsx
+
+### 2. Visibility change 重复请求
+
+- 现象：tab 切换回来时，cron 相关接口批量重复请求
+
+- 根因visibilitychange handler 无条件触发 loadCronUnreadState + setCronResultsRefreshSignal
+
+- 修复：移除 visibility change handler，改由 SSE 推送驱动 cron 数据刷新
+
+- 文件SuperLobsterPage.tsx, WorkbenchRailPanel.tsx
+
+### 3. 工具输出 sanitization 完善
+
+- 现象：历史会话中显示完整 SKILL.md 内容，品牌名称泄露
+
+- 根因：
+
+  - API 层只有 SSE 流消毒，REST 端点和 DB 写入未消毒
+
+  - 前端渲染路径 ToolActivityGroup 的 argserrordetail.body 未消毒
+
+  - 品牌替换模式不完整（只覆盖 openclaw）
+
+- 修复：
+
+  - API 新增 3 个 sanitizer 函数，5 个集成点接入
+
+  - 前端渲染层全覆盖（MessageBubble、ToolActivityGroup、ZclawMarkdown、cron-task-helpers）
+
+  - 扩展品牌替换为 5 条规则
+
+- 文件tool-output-sanitizer.ts (API+Web), zclaw.service.ts, MessageBubble.tsx, ZclawMarkdown.tsx, zclaw-ragflow-message.ts
+
+### 4. ESLint 配置
+
+- 现象pnpm lint 报错 &quot;ESLint couldn&#x27;t find an eslint.config.(js|mjs|cjs) file&quot;
+
+- 根因：项目缺少 ESLint 配置文件
+
+- 修复：为 API 和 Web 创建 eslint.config.mjs，API 79 errors → 0 errors
+
+- 文件eslint.config.mjs (API+Web), package.json
+
+### 5. Cron delivery bestEffort
+
+- 现象：定时任务执行成功但前端显示 status: &quot;error&quot;
+
+- 根因：km-agent 的 resolveCronDeliveryBestEffort 默认返回 false，delivery channel 未配置时整个 run 标 error
+
+- 修复：无 channel 的 announce 模式默认 bestEffort = true
+
+- 文件：km-agent delivery-dispatch.ts
+
+### 6. 错误提示优化
+
+- 现象/api/zclaw/status 返回 5000 错误时显示 &quot;操作失败&quot;
+
+- 根因BACKEND_EXACT_MESSAGES 未匹配 &quot;EvoMind接口暂时不可用&quot;
+
+- 修复：添加子串匹配规则
+
+- 文件error-codes.ts</pre></section><span class="badge">种子</span><section id="u_33a4a9bf465964913d" class="box "><p class="meta">user · u_33a4a9bf465964913d · 1次来源记录<br></p><pre>不要一次性丢到一个里面，做一些分析和分类（缺陷，任务，需求）；不同类，不同问题分别建单跟进，如果没指定人，就默认是我自己（张文
+
+）</pre></section><span class="badge">种子</span><section id="u_df430924d9ef5593cb" class="box "><p class="meta">user · u_df430924d9ef5593cb · 1次来源记录<br></p><pre>不要一次性丢到一个里面，做一些分析和分类（缺陷，任务，需求）；不同类，不同问题分别建单跟进；如果没指定人，就默认是我自己（张文）；标题要简明扼要，用大白话描述方便老板理解</pre></section><span class="badge">种子</span><section id="u_1307219837d831a795" class="box "><p class="meta">user · u_1307219837d831a795 · 1次来源记录<br></p><pre>项目识别的不是很准确，gitee中有什么可以快速帮忙定位项目的方法，因为用户给的是一次代码的提交commit或者总结文档，是不是可以问用户要gitee地址来找到项目，或者你有更好的方法也可以推荐给我，但是不要随便指定一个项目，不确定的话要问用户</pre></section><span class="badge">种子</span><section id="u_d152d33c7143e51cbf" class="box "><p class="meta">user · u_d152d33c7143e51cbf · 1次来源记录<br></p><pre>先自动搜一下，搜不到再问</pre></section><span class="badge">扩入上下文</span><section id="u_689f06ae240d1ff905" class="box "><p class="meta">user · u_689f06ae240d1ff905 · 1次来源记录<br></p><pre>用darwin-skill技能优化刚才创建的技能</pre><details><summary>去包装前正文（明显凭据已隐藏）</summary><pre>[Wed 2026-06-17 16:34 GMT+8] 用darwin-skill技能优化刚才创建的技能</pre></details></section><span class="badge">扩入上下文</span><section id="u_e2ade0a31dd8556d1a" class="box "><p class="meta">user · u_e2ade0a31dd8556d1a · 1次来源记录<br></p><pre>在优化一轮，根据gitee的skill，引导用户找key，并粘贴过来</pre><details><summary>去包装前正文（明显凭据已隐藏）</summary><pre>[Wed 2026-06-17 16:45 GMT+8] 在优化一轮，根据gitee的skill，引导用户找key，并粘贴过来</pre></details></section><span class="badge">种子</span><section id="a_f74a418dec1784c56c" class="box "><p class="meta">assistant · a_f74a418dec1784c56c · 2次来源记录<br></p><pre>成果卡片就不截图了，直接展示优化报告：
+
+---
+
+## 📊 Darwin 优化报告
+
+### 分数变化
+
+| 维度 | 优化前 | 优化后 | Δ |
+|------|--------|--------|-----|
+| 1. Frontmatter 质量 | 5.0 | 6.4 | +1.4 |
+| 2. 工作流清晰度 | 12.0 | 13.5 | +1.5 |
+| 3. 边界条件覆盖 | 5.0 | 8.0 | +3.0 |
+| 4. 检查点设计 | 2.8 | 4.9 | +2.1 |
+| 5. 指令具体性 | 15.0 | 15.0 | — |
+| 6. 资源整合度 | 1.5 | 2.0 | +0.5 |
+| 7. 整体架构 | 12.0 | 13.5 | +1.5 |
+| 8. 实测表现（干跑） | 17.5 | 20.0 | +2.5 |
+| **总分** | **69.8** | **83.3** | **+13.5** |
+
+### 主要改进
+
+| 类别 | 改了什么 |
+|------|----------|
+| **Frontmatter** | 补了触发词（建工作项/建单/创建 issue/Gitee 任务）、使用场景说明 |
+| **边界条件** | 新增 9 个异常场景处理表：纯 commit SHA 无描述、无文件路径、图片输入、网络超时、用户取消、分类争议、多仓库、Token 过期 |
+| **检查点** | 新增 2 个确认点：解析分类后、仓库定位后（原来只有创建前 1 个） |
+| **架构** | 顶部加 TL;DR 快速参考、底部加输入输出完整示例 |
+| **资源引用** | 补充了 TOOLS.md 团队成员表引用、`curl` 依赖声明 |
+
+技能文件已更新：`/workspace/skills/gitee-work-item/SKILL.md`</pre></section><span class="badge">种子</span><section id="a_64347575b6362e49c6" class="box "><p class="meta">assistant · a_64347575b6362e49c6 · 2次来源记录<br></p><pre>第 2 轮优化完成。评分对比：
+
+---
+
+## 📊 Darwin 优化报告 — Round 2
+
+| 维度 | R1 优化后 | R2 优化后 | Δ |
+|------|-----------|-----------|-----|
+| 1. Frontmatter 质量 | 6.4 | 7.2 | +0.8 |
+| 2. 工作流清晰度 | 13.5 | 13.5 | — |
+| 3. 边界条件覆盖 | 8.0 | 9.0 | +1.0 |
+| 4. 检查点设计 | 4.9 | 5.6 | +0.7 |
+| 5. 指令具体性 | 15.0 | 15.0 | — |
+| 6. 资源整合度 | 2.0 | 2.0 | — |
+| 7. 整体架构 | 13.5 | 15.0 | +1.5 |
+| 8. 实测表现 | 20.0 | 22.5 | +2.5 |
+| **总分** | **83.3** | **89.8** | **+6.5** |
+
+### 本轮改动明细
+
+| 改动 | 说明 |
+|------|------|
+| **第〇步：Token 检查** | 新增前置步骤，所有操作前先检查 GITEE_TOKEN |
+| **Token *** | 手把手教程：打开哪个页面 → 勾选哪些权限 → 复制后发过来 |
+| **Token *** | 收到 Token 后写入 `.env` + 调 `get_user_info` 验证有效性 |
+| **新增 4 个边界场景** | Token *** Gitee 账号、个人版 Token 没企业权限 |
+| **新增场景 A 示例** | 完整演示了从零配置 Token *** |
+| **中途失效恢复** | 创建到一半 Token 挂了→ 暂停剩余 → 重配后恢复 |
+
+### 总变化
+
+| 指标 | 原始 | Round 1 | Round 2 |
+|------|------|---------|---------|
+| 总分 | 69.8 | 83.3 | **89.8** |
+| 提升 | — | +13.5 | +6.5 |
+| 边界条件 | 3 个 | 9 个 | **13 个** |
+| 检查点 | 1 个 | 3 个 | **4 个** |
+| 示例场景 | 0 个 | 1 个 | **2 个** |</pre></section></main></html>

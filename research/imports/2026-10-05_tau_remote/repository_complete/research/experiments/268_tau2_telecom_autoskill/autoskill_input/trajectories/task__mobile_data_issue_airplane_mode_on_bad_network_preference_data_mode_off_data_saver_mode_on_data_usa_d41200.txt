@@ -1,0 +1,143 @@
+AGENT: Hi! How can I help you today?
+USER: Hi there. I'm having trouble with my mobile data while I'm abroad in France. It either stops working completely or gets really slow. I need to get excellent internet speed on my phone. Can you help me fix this?
+AGENT: I can help with that. First, I need to identify you — could you please provide your phone number?
+
+Also, since you're abroad, a couple of questions:
+- Are you currently in France on a trip (outside your home network)?
+- Do you have cellular service at all (can you make calls/texts), or is it only data that's affected?
+TOOL_RESULT: Airplane Mode: ON
+SIM Card Status: active
+Cellular Connection: no_service
+Cellular Signal: none
+Cellular Network Type: none
+Mobile Data Enabled: No
+Data Roaming Enabled: Yes
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+USER: Sure — my number is 555-123-2002, and the name's John Smith.
+
+Yes, I'm in France on a trip, so I'm outside my home network. As for cellular service, I just checked and it looks like Airplane Mode is currently ON, so there's no service at all right now. Does that matter for my data issue?
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT: Thanks, John — I've found your account. Yes, Airplane Mode absolutely matters: while it's ON, your phone can't connect to any cellular network, so you'll have no service and no data at all.
+
+Please turn **Airplane Mode OFF**, then reboot your device and check your status bar. Let me know what it shows afterward. You'll likely need to also make sure data roaming is enabled on your line for it to work in France — I'll check that for you.
+
+Could you first confirm which of your lines you're using?
+USER: That's a lot of steps at once — could you walk me through them one at a time? Let's start with the first one: should I turn Airplane Mode OFF now?
+AGENT: Yes — please turn **Airplane Mode OFF** now. Once it's off, tell me what you see on your status bar (signal bars, network type, and data icon).
+TOOL_RESULT: Airplane Mode is now OFF.
+Status Bar: 📶¹ Poor | 2G | 📵 Data Disabled | 🔋 80%
+USER: Okay, Airplane Mode is now OFF. On my status bar I'm seeing:
+
+- Signal: Poor (1 bar)
+- Network: 2G
+- Mobile data: Disabled
+- Battery: 80%
+
+So it looks like mobile data is currently off. What should I do next?
+AGENT: Good progress. Next step: please turn **Mobile Data ON**.
+
+After that, tell me what your status bar shows (signal, network type, and data icon).
+TOOL_RESULT: Mobile Data is now ON.
+Status Bar: 📶¹ Poor | 2G | 📱 Data Enabled | 🔽 Data Saver | 🔋 80%
+USER: Mobile data is now ON. My status bar shows:
+
+- Signal: Poor (1 bar)
+- Network: 2G
+- Data: Enabled
+- Data Saver: On
+- Battery: 80%
+
+Hmm, it's still showing 2G and there's a Data Saver icon. What's next?
+AGENT: Next, let's deal with that 2G network — it's too slow for good data speeds, and it's also not suitable for MMS. Please switch your network mode to one that prefers 4G/5G.
+
+On your device, use the network mode preference setting and select **"4g_5g_preferred"**.
+
+Once done, tell me what your status bar shows (especially the network type and signal).
+TOOL_RESULT: Preferred Network Mode set to: 4g_5g_preferred
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔽 Data Saver | 🔋 80%
+USER: Done — I set the network mode to 4G/5G preferred. Now my status bar shows:
+
+- Signal: Excellent (4 bars)
+- Network: 5G
+- Data: Enabled
+- Data Saver: Still On
+- Battery: 80%
+
+That looks much better! Should I test the speed now?
+AGENT: You're on 5G with excellent signal now — great. Let's clear that Data Saver too, since it can restrict background data and slow things down. Please turn **Data Saver OFF**, then try browsing the web to test your speed.
+
+Let me know how it goes.
+TOOL_RESULT: Data Saver Mode is now OFF.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: Data Saver is now OFF. My status bar shows:
+
+- Signal: Excellent (4 bars)
+- Network: 5G
+- Data: Enabled
+- Battery: 80%
+
+Now let me test my speed.
+TOOL_RESULT: Speed test failed: No Connection.
+USER: Hmm, that's strange — the speed test failed. It says "No Connection," even though my status bar shows 5G with data enabled. That's frustrating. What else could be going on?
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 15.1, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1003"}}
+TOOL_RESULT: {"line_id": "L1003", "phone_number": "555-123-2003", "status": "Suspended", "plan_id": "P1001", "device_id": "D1003", "data_used_gb": 0.0, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-06-30", "last_plan_change_date": "2024-10-05", "last_sim_replacement_date": null, "suspension_start_date": "2025-02-01"}
+AGENT: I found the likely cause. Your line for **555-123-2002** has **roaming disabled**, so even though you're on 5G, your phone can't actually use data on a foreign network — that's why the speed test says "No Connection."
+
+Since you're traveling outside your home network, I can enable roaming on that line at no cost. Would you like me to do that now?
+USER: Yes, please go ahead and enable roaming on my line — that would be great, especially since it's at no cost. Thanks!
+AGENT_TOOL_CALL: {"name": "enable_roaming", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: Roaming enabled successfully
+AGENT: Roaming is now enabled on your line. Please reboot your device, then try the speed test again and let me know the result.
+TOOL_RESULT: Restarting network services...
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Speed test failed: No Connection.
+USER: That didn't work either — the speed test still says "No Connection." This is getting a bit frustrating. Let me check my network status to see what's going on.
+TOOL_RESULT: Airplane Mode: OFF
+SIM Card Status: active
+Cellular Connection: connected
+Cellular Signal: excellent
+Cellular Network Type: 5G
+Mobile Data Enabled: Yes
+Data Roaming Enabled: Yes
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+USER: Okay, I checked my network status and here's what it shows:
+
+- Airplane Mode: OFF
+- SIM Card: active
+- Cellular Connection: Connected
+- Signal: Excellent
+- Network Type: 5G
+- Mobile Data: Enabled
+- Data Roaming: Enabled
+
+So everything looks like it should work, but the speed test still fails with "No Connection." What else could be causing this?
+AGENT_TOOL_CALL: {"name": "get_data_usage", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "data_used_gb": "15.1", "data_limit_gb": "15.0", "data_refueling_gb": "0.0", "cycle_end_date": "2025-02-28"}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "P1002"}}
+TOOL_RESULT: {"plan_id": "P1002", "name": "Premium Plan", "data_limit_gb": 15.0, "price_per_month": 65.0, "data_refueling_price_per_gb": 2.0}
+AGENT: Found it. Your line has used **15.1 GB** against a **15 GB** monthly limit — so you've exceeded your plan's data cap, and that's why data connectivity is lost despite everything else looking correct.
+
+You can add more data by refueling. On your plan, refueling costs **$2 per GB**, and the maximum I can add is **2 GB** total.
+
+How much data would you like to refuel — 1 GB ($2) or 2 GB ($4)?
+USER: Ah, that explains it — I've gone over my data cap. Let's refuel the full **2 GB** for $4, please. I want to make sure I have enough for excellent speeds.
+AGENT_TOOL_CALL: {"name": "refuel_data", "arguments": {"customer_id": "C1001", "line_id": "L1002", "gb_amount": 2}}
+TOOL_RESULT: {"message": "Successfully added 2 GB of data for line L1002 for $4.00", "new_data_refueling_gb": "2.0", "charge": "4.0"}
+AGENT: Done — I've added **2 GB** to your line for **$4.00**, which will be charged to your account.
+
+Please reboot your device, then run the speed test again and let me know how it goes.
+TOOL_RESULT: Restarting network services...
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Speed Test Result: 275.00 Mbps (Excellent). Connection is very fast.
+USER: Excellent — that did it! The speed test now returns **275 Mbps** with a rating of **Excellent**. That's exactly what I was hoping for. 
+
+Thank you so much for your help — everything's working perfectly now. 
+
+###STOP###

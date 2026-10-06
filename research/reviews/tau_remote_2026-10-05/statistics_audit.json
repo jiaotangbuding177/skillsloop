@@ -1,0 +1,3605 @@
+{
+  "source_commit_sha": "14f5b59ab29351973429777fb013afafd15297ce",
+  "created_utc": "2026-10-04T23:49:06.834304+00:00",
+  "scope": "Six explicitly selected saved final result JSONs; offline independent recomputation; no model/service/experiment calls",
+  "definitions": {
+    "success": "saved reward_info.reward == 1; success_rate denominator all saved simulations; mean_reward denominator valid finite numeric reward",
+    "pairing": "unique string(task_id), trial; duplicate keys preserved as anomalies and excluded from unique pair statistics",
+    "exact_McNemar": "two-sided doubled binomial tail with min(wins,losses), p capped at1; binary paired reward only; scene correlation caveat",
+    "task_bootstrap": "per-task mean paired deltas; random.Random(42), 10000 resamples; preserve B0 first appearance order; indexes250,9749; round4; source-script equivalent",
+    "pass_power_k": "average C(c,k)/C(4,k), all-success estimator from four observed binary trials per task",
+    "pass_at_k": "average 1-C(4-c,k)/C(4,k), any-success estimator from four observed binary trials per task",
+    "duration": "saved duration seconds; percentile interpolation index p*(n-1)",
+    "business_tools": "tool_calls in saved tau2 messages, all requestor roles; excludes external skills Read/LLM requests",
+    "native_tool_error": "tool reply.error is true; no inferred semantic-error classifier",
+    "unknown_cost": "assistant usage and sim costs null do not establish zero token/monetary cost; no all-ledger cost attribution",
+    "subgroups": "telecom issue/persona parsed from task_id; post hoc descriptive, no multiplicity-adjusted claims"
+  },
+  "cohorts": [
+    {
+      "domain": "retail",
+      "domain_zh": "零售",
+      "experiment": "148_tau2_retail_autoskill",
+      "run_directory": "test_v4",
+      "groups": {
+        "B0": {
+          "raw_simulations": 160,
+          "unique_task_trial_keys": 160,
+          "unique_tasks": 40,
+          "duplicate_task_trial": [],
+          "reward_valid_numeric_count": 160,
+          "reward_binary_count": 160,
+          "success_count_reward_eq_1": 126,
+          "success_rate_over_all_saved_simulations": 0.7875,
+          "mean_reward_over_valid_numeric": 0.7875,
+          "reward_distribution": {
+            "0.0": 34,
+            "1.0": 126
+          },
+          "score_audit": {
+            "missing_reward_info": [],
+            "missing_reward": [],
+            "invalid_reward": [],
+            "nonbinary_reward": [],
+            "missing_reward_breakdown": [],
+            "reward_basis_distribution": {
+              "DB": 4,
+              "DB+NL_ASSERTION": 156
+            },
+            "reward_breakdown_joint_distribution": {
+              "DB=0.0;NL_ASSERTION=1.0": 34,
+              "DB=1.0": 4,
+              "DB=1.0;NL_ASSERTION=1.0": 122
+            },
+            "reward_breakdown_components": {
+              "DB": {
+                "present_simulations": 160,
+                "value_distribution": {
+                  "0.0": 34,
+                  "1.0": 126
+                },
+                "numeric": {
+                  "n": 160,
+                  "mean": 0.7875,
+                  "median": 1.0,
+                  "p95": 1.0,
+                  "min": 0.0,
+                  "max": 1.0,
+                  "sum": 126.0
+                }
+              },
+              "NL_ASSERTION": {
+                "present_simulations": 156,
+                "value_distribution": {
+                  "1.0": 156
+                },
+                "numeric": {
+                  "n": 156,
+                  "mean": 1.0,
+                  "median": 1.0,
+                  "p95": 1.0,
+                  "min": 1.0,
+                  "max": 1.0,
+                  "sum": 156.0
+                }
+              }
+            },
+            "basis_component_absent_counts": {},
+            "basis_component_absent_records": [],
+            "breakdown_product_mismatch": [],
+            "db_reward_distribution": {
+              "0.0": 34,
+              "1.0": 126
+            },
+            "db_match_distribution": {
+              "False": 34,
+              "True": 126
+            },
+            "subcheck_diagnostics": {
+              "action_checks": {
+                "simulation_count_nonnull": 160,
+                "check_count": 740,
+                "positive_count": 650,
+                "reward_distribution": {
+                  "0.0": 90,
+                  "1.0": 650
+                }
+              },
+              "env_assertions": {
+                "simulation_count_nonnull": 160,
+                "check_count": 0,
+                "positive_count": 0,
+                "reward_distribution": {}
+              },
+              "nl_assertions": {
+                "simulation_count_nonnull": 156,
+                "check_count": 60,
+                "positive_count": 60,
+                "reward_distribution": {}
+              },
+              "communicate_checks": {
+                "simulation_count_nonnull": 44,
+                "check_count": 60,
+                "positive_count": 60,
+                "reward_distribution": {}
+              }
+            },
+            "note": "子检查只是诊断；正式成功由保存的reward==1定义。basis缺项可能是可选断言未应用，不直接定性评分错误。"
+          },
+          "trial_distribution": {
+            "0": 40,
+            "1": 40,
+            "2": 40,
+            "3": 40
+          },
+          "seed_distribution": {
+            "116739": 40,
+            "26225": 40,
+            "670487": 40,
+            "777572": 40
+          },
+          "termination_reason_distribution": {
+            "user_stop": 160
+          },
+          "duration_seconds": {
+            "n": 160,
+            "mean": 468.4286857601069,
+            "median": 446.36776671100233,
+            "p95": 660.7993854226513,
+            "min": 337.41895424900576,
+            "max": 792.6517140649958,
+            "sum": 74948.5897216171,
+            "missing_or_invalid": 0
+          },
+          "messages": {
+            "roles": {
+              "assistant": 2045,
+              "user": 872,
+              "tool": 1173
+            },
+            "nonempty_content_by_role": {
+              "assistant": 872,
+              "user": 872,
+              "tool": 1173
+            },
+            "user_control_marker_counts": {
+              "###STOP###": 137,
+              "###TRANSFER###": 20,
+              "###OUT-OF-SCOPE###": 3
+            }
+          },
+          "business_tools": {
+            "calls_by_message_role": {
+              "assistant": 1173,
+              "user": 0,
+              "tool": 0
+            },
+            "reply_by_requestor": {
+              "assistant": 1173
+            },
+            "native_error_true_by_requestor": {
+              "assistant": 23
+            },
+            "error_true_count": 23,
+            "error_true_fraction_of_tool_replies": 0.0196078431372549,
+            "error_affected_simulations": 21,
+            "error_affected_simulation_fraction": 0.13125
+          },
+          "per_simulation_counts": {
+            "messages": {
+              "n": 160,
+              "mean": 25.5625,
+              "median": 24.0,
+              "p95": 36.0,
+              "min": 14.0,
+              "max": 52.0,
+              "sum": 4090.0
+            },
+            "messages_assistant": {
+              "n": 160,
+              "mean": 12.78125,
+              "median": 12.0,
+              "p95": 18.0,
+              "min": 7.0,
+              "max": 26.0,
+              "sum": 2045.0
+            },
+            "messages_user": {
+              "n": 160,
+              "mean": 5.45,
+              "median": 5.0,
+              "p95": 8.0,
+              "min": 3.0,
+              "max": 13.0,
+              "sum": 872.0
+            },
+            "messages_tool": {
+              "n": 160,
+              "mean": 7.33125,
+              "median": 7.0,
+              "p95": 11.049999999999983,
+              "min": 3.0,
+              "max": 13.0,
+              "sum": 1173.0
+            },
+            "business_tool_calls": {
+              "n": 160,
+              "mean": 7.33125,
+              "median": 7.0,
+              "p95": 11.049999999999983,
+              "min": 3.0,
+              "max": 13.0,
+              "sum": 1173.0
+            },
+            "business_tool_calls_assistant": {
+              "n": 160,
+              "mean": 7.33125,
+              "median": 7.0,
+              "p95": 11.049999999999983,
+              "min": 3.0,
+              "max": 13.0,
+              "sum": 1173.0
+            },
+            "business_tool_calls_user": {
+              "n": 160,
+              "mean": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "sum": 0.0
+            },
+            "tool_replies": {
+              "n": 160,
+              "mean": 7.33125,
+              "median": 7.0,
+              "p95": 11.049999999999983,
+              "min": 3.0,
+              "max": 13.0,
+              "sum": 1173.0
+            },
+            "native_tool_errors_true": {
+              "n": 160,
+              "mean": 0.14375,
+              "median": 0.0,
+              "p95": 1.0,
+              "min": 0.0,
+              "max": 2.0,
+              "sum": 23.0
+            },
+            "user_nonterminal_messages_including_initial": {
+              "n": 160,
+              "mean": 4.45,
+              "median": 4.0,
+              "p95": 7.0,
+              "min": 2.0,
+              "max": 12.0,
+              "sum": 712.0
+            },
+            "user_nonterminal_messages_after_initial_assumed": {
+              "n": 160,
+              "mean": 3.45,
+              "median": 3.0,
+              "p95": 6.0,
+              "min": 1.0,
+              "max": 11.0,
+              "sum": 552.0
+            }
+          },
+          "usage": {
+            "assistant": {
+              "message_count": 2045,
+              "nonnull_usage_message_count": 0,
+              "numeric_fields": {}
+            },
+            "user": {
+              "message_count": 872,
+              "nonnull_usage_message_count": 872,
+              "numeric_fields": {
+                "completion_tokens": {
+                  "present_messages": 872,
+                  "sum": 241331
+                },
+                "prompt_tokens": {
+                  "present_messages": 872,
+                  "sum": 806155
+                }
+              }
+            },
+            "tool": {
+              "message_count": 1173,
+              "nonnull_usage_message_count": 0,
+              "numeric_fields": {}
+            }
+          },
+          "saved_simulation_cost": {
+            "agent_cost": {
+              "nonnull_simulations": 0,
+              "numeric": {
+                "n": 0,
+                "mean": null,
+                "median": null,
+                "p95": null,
+                "min": null,
+                "max": null,
+                "sum": null
+              }
+            },
+            "user_cost": {
+              "nonnull_simulations": 0,
+              "numeric": {
+                "n": 0,
+                "mean": null,
+                "median": null,
+                "p95": null,
+                "min": null,
+                "max": null,
+                "sum": null
+              }
+            }
+          },
+          "saved_message_cost": {
+            "assistant": {
+              "nonnull_count": 160,
+              "value_distribution": {
+                "0.0": 160
+              }
+            },
+            "user": {
+              "nonnull_count": 872,
+              "value_distribution": {
+                "0.0": 872
+              }
+            }
+          },
+          "actual_monetary_cost": null,
+          "pass_metrics": {
+            "eligible_four_trial_binary_tasks": 40,
+            "excluded_tasks": [],
+            "success_count_histogram_over_four_trials": {
+              "0": 1,
+              "1": 5,
+              "2": 3,
+              "3": 9,
+              "4": 22
+            },
+            "observed_any_success_tasks": 39,
+            "observed_all_four_success_tasks": 22,
+            "observed_some_but_not_all_success_tasks": 17,
+            "pass_power_k_all_success_estimator": {
+              "1": 0.7875,
+              "2": 0.675,
+              "3": 0.60625,
+              "4": 0.55
+            },
+            "pass_at_k_any_success_estimator": {
+              "1": 0.7875,
+              "2": 0.9,
+              "3": 0.94375,
+              "4": 0.975
+            }
+          },
+          "safe_configuration": {
+            "seed": 42,
+            "max_steps": 200,
+            "max_errors": 10,
+            "domain": null,
+            "num_trials": 4,
+            "agent_info": {
+              "implementation": "openclaw_retail",
+              "llm_alias": "openai/deepseek-flash",
+              "temperature": 0.0
+            },
+            "user_info": {
+              "implementation": "user_simulator",
+              "llm_alias": "openai/deepseek-flash",
+              "temperature": 0.0
+            }
+          }
+        },
+        "B1": {
+          "raw_simulations": 160,
+          "unique_task_trial_keys": 160,
+          "unique_tasks": 40,
+          "duplicate_task_trial": [],
+          "reward_valid_numeric_count": 160,
+          "reward_binary_count": 160,
+          "success_count_reward_eq_1": 134,
+          "success_rate_over_all_saved_simulations": 0.8375,
+          "mean_reward_over_valid_numeric": 0.8375,
+          "reward_distribution": {
+            "0.0": 26,
+            "1.0": 134
+          },
+          "score_audit": {
+            "missing_reward_info": [],
+            "missing_reward": [],
+            "invalid_reward": [],
+            "nonbinary_reward": [],
+            "missing_reward_breakdown": [],
+            "reward_basis_distribution": {
+              "DB": 4,
+              "DB+NL_ASSERTION": 156
+            },
+            "reward_breakdown_joint_distribution": {
+              "DB=0.0;NL_ASSERTION=0.0": 1,
+              "DB=0.0;NL_ASSERTION=1.0": 24,
+              "DB=1.0": 4,
+              "DB=1.0;NL_ASSERTION=0.0": 1,
+              "DB=1.0;NL_ASSERTION=1.0": 130
+            },
+            "reward_breakdown_components": {
+              "DB": {
+                "present_simulations": 160,
+                "value_distribution": {
+                  "0.0": 25,
+                  "1.0": 135
+                },
+                "numeric": {
+                  "n": 160,
+                  "mean": 0.84375,
+                  "median": 1.0,
+                  "p95": 1.0,
+                  "min": 0.0,
+                  "max": 1.0,
+                  "sum": 135.0
+                }
+              },
+              "NL_ASSERTION": {
+                "present_simulations": 156,
+                "value_distribution": {
+                  "0.0": 2,
+                  "1.0": 154
+                },
+                "numeric": {
+                  "n": 156,
+                  "mean": 0.9871794871794872,
+                  "median": 1.0,
+                  "p95": 1.0,
+                  "min": 0.0,
+                  "max": 1.0,
+                  "sum": 154.0
+                }
+              }
+            },
+            "basis_component_absent_counts": {},
+            "basis_component_absent_records": [],
+            "breakdown_product_mismatch": [],
+            "db_reward_distribution": {
+              "0.0": 25,
+              "1.0": 135
+            },
+            "db_match_distribution": {
+              "False": 25,
+              "True": 135
+            },
+            "subcheck_diagnostics": {
+              "action_checks": {
+                "simulation_count_nonnull": 160,
+                "check_count": 740,
+                "positive_count": 653,
+                "reward_distribution": {
+                  "0.0": 87,
+                  "1.0": 653
+                }
+              },
+              "env_assertions": {
+                "simulation_count_nonnull": 160,
+                "check_count": 0,
+                "positive_count": 0,
+                "reward_distribution": {}
+              },
+              "nl_assertions": {
+                "simulation_count_nonnull": 156,
+                "check_count": 60,
+                "positive_count": 58,
+                "reward_distribution": {}
+              },
+              "communicate_checks": {
+                "simulation_count_nonnull": 44,
+                "check_count": 60,
+                "positive_count": 60,
+                "reward_distribution": {}
+              }
+            },
+            "note": "子检查只是诊断；正式成功由保存的reward==1定义。basis缺项可能是可选断言未应用，不直接定性评分错误。"
+          },
+          "trial_distribution": {
+            "0": 40,
+            "1": 40,
+            "2": 40,
+            "3": 40
+          },
+          "seed_distribution": {
+            "116739": 40,
+            "26225": 40,
+            "670487": 40,
+            "777572": 40
+          },
+          "termination_reason_distribution": {
+            "user_stop": 160
+          },
+          "duration_seconds": {
+            "n": 160,
+            "mean": 600.9204827031938,
+            "median": 596.9977975024998,
+            "p95": 697.00792764365,
+            "min": 366.392474831,
+            "max": 733.2801055099999,
+            "sum": 96147.277232511,
+            "missing_or_invalid": 0
+          },
+          "messages": {
+            "roles": {
+              "assistant": 2085,
+              "user": 835,
+              "tool": 1250
+            },
+            "nonempty_content_by_role": {
+              "assistant": 835,
+              "user": 835,
+              "tool": 1250
+            },
+            "user_control_marker_counts": {
+              "###STOP###": 134,
+              "###TRANSFER###": 24,
+              "###OUT-OF-SCOPE###": 2
+            }
+          },
+          "business_tools": {
+            "calls_by_message_role": {
+              "assistant": 1250,
+              "user": 0,
+              "tool": 0
+            },
+            "reply_by_requestor": {
+              "assistant": 1250
+            },
+            "native_error_true_by_requestor": {
+              "assistant": 38
+            },
+            "error_true_count": 38,
+            "error_true_fraction_of_tool_replies": 0.0304,
+            "error_affected_simulations": 28,
+            "error_affected_simulation_fraction": 0.175
+          },
+          "per_simulation_counts": {
+            "messages": {
+              "n": 160,
+              "mean": 26.0625,
+              "median": 25.0,
+              "p95": 38.0,
+              "min": 4.0,
+              "max": 50.0,
+              "sum": 4170.0
+            },
+            "messages_assistant": {
+              "n": 160,
+              "mean": 13.03125,
+              "median": 12.5,
+              "p95": 19.0,
+              "min": 2.0,
+              "max": 25.0,
+              "sum": 2085.0
+            },
+            "messages_user": {
+              "n": 160,
+              "mean": 5.21875,
+              "median": 5.0,
+              "p95": 7.0,
+              "min": 2.0,
+              "max": 14.0,
+              "sum": 835.0
+            },
+            "messages_tool": {
+              "n": 160,
+              "mean": 7.8125,
+              "median": 7.0,
+              "p95": 12.049999999999983,
+              "min": 0.0,
+              "max": 14.0,
+              "sum": 1250.0
+            },
+            "business_tool_calls": {
+              "n": 160,
+              "mean": 7.8125,
+              "median": 7.0,
+              "p95": 12.049999999999983,
+              "min": 0.0,
+              "max": 14.0,
+              "sum": 1250.0
+            },
+            "business_tool_calls_assistant": {
+              "n": 160,
+              "mean": 7.8125,
+              "median": 7.0,
+              "p95": 12.049999999999983,
+              "min": 0.0,
+              "max": 14.0,
+              "sum": 1250.0
+            },
+            "business_tool_calls_user": {
+              "n": 160,
+              "mean": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "sum": 0.0
+            },
+            "tool_replies": {
+              "n": 160,
+              "mean": 7.8125,
+              "median": 7.0,
+              "p95": 12.049999999999983,
+              "min": 0.0,
+              "max": 14.0,
+              "sum": 1250.0
+            },
+            "native_tool_errors_true": {
+              "n": 160,
+              "mean": 0.2375,
+              "median": 0.0,
+              "p95": 2.0,
+              "min": 0.0,
+              "max": 3.0,
+              "sum": 38.0
+            },
+            "user_nonterminal_messages_including_initial": {
+              "n": 160,
+              "mean": 4.21875,
+              "median": 4.0,
+              "p95": 6.0,
+              "min": 1.0,
+              "max": 13.0,
+              "sum": 675.0
+            },
+            "user_nonterminal_messages_after_initial_assumed": {
+              "n": 160,
+              "mean": 3.21875,
+              "median": 3.0,
+              "p95": 5.0,
+              "min": 0.0,
+              "max": 12.0,
+              "sum": 515.0
+            }
+          },
+          "usage": {
+            "assistant": {
+              "message_count": 2085,
+              "nonnull_usage_message_count": 0,
+              "numeric_fields": {}
+            },
+            "user": {
+              "message_count": 835,
+              "nonnull_usage_message_count": 835,
+              "numeric_fields": {
+                "completion_tokens": {
+                  "present_messages": 835,
+                  "sum": 268425
+                },
+                "prompt_tokens": {
+                  "present_messages": 835,
+                  "sum": 882677
+                }
+              }
+            },
+            "tool": {
+              "message_count": 1250,
+              "nonnull_usage_message_count": 0,
+              "numeric_fields": {}
+            }
+          },
+          "saved_simulation_cost": {
+            "agent_cost": {
+              "nonnull_simulations": 0,
+              "numeric": {
+                "n": 0,
+                "mean": null,
+                "median": null,
+                "p95": null,
+                "min": null,
+                "max": null,
+                "sum": null
+              }
+            },
+            "user_cost": {
+              "nonnull_simulations": 0,
+              "numeric": {
+                "n": 0,
+                "mean": null,
+                "median": null,
+                "p95": null,
+                "min": null,
+                "max": null,
+                "sum": null
+              }
+            }
+          },
+          "saved_message_cost": {
+            "assistant": {
+              "nonnull_count": 160,
+              "value_distribution": {
+                "0.0": 160
+              }
+            },
+            "user": {
+              "nonnull_count": 835,
+              "value_distribution": {
+                "0.0": 835
+              }
+            }
+          },
+          "actual_monetary_cost": null,
+          "pass_metrics": {
+            "eligible_four_trial_binary_tasks": 40,
+            "excluded_tasks": [],
+            "success_count_histogram_over_four_trials": {
+              "0": 1,
+              "1": 2,
+              "2": 4,
+              "3": 8,
+              "4": 25
+            },
+            "observed_any_success_tasks": 39,
+            "observed_all_four_success_tasks": 25,
+            "observed_some_but_not_all_success_tasks": 14,
+            "pass_power_k_all_success_estimator": {
+              "1": 0.8375,
+              "2": 0.7416666666666667,
+              "3": 0.675,
+              "4": 0.625
+            },
+            "pass_at_k_any_success_estimator": {
+              "1": 0.8375,
+              "2": 0.9333333333333333,
+              "3": 0.9625,
+              "4": 0.975
+            }
+          },
+          "safe_configuration": {
+            "seed": 42,
+            "max_steps": 200,
+            "max_errors": 10,
+            "domain": null,
+            "num_trials": 4,
+            "agent_info": {
+              "implementation": "openclaw_retail",
+              "llm_alias": "openai/deepseek-flash",
+              "temperature": 0.0
+            },
+            "user_info": {
+              "implementation": "user_simulator",
+              "llm_alias": "openai/deepseek-flash",
+              "temperature": 0.0
+            }
+          }
+        }
+      },
+      "sources": {
+        "B0": {
+          "path": "D:/skillsgen-industry_track/research/imports/2026-10-05_tau_remote/repository_complete/research/experiments/148_tau2_retail_autoskill/runs/test_v4/no_skill.json",
+          "sha256": "cd10e6d910772f52ce6fd4005e7983ea79cd7f05c3515560ccf3291869e151b2",
+          "bytes": 10325651,
+          "json_simulations_path": "$.simulations"
+        },
+        "B1": {
+          "path": "D:/skillsgen-industry_track/research/imports/2026-10-05_tau_remote/repository_complete/research/experiments/148_tau2_retail_autoskill/runs/test_v4/autoskill_library.json",
+          "sha256": "49ec025591721ba9d3e93e0f15897d4e19043bccd9051be25d97c61ec158cfdb",
+          "bytes": 10771329,
+          "json_simulations_path": "$.simulations"
+        }
+      },
+      "paired": {
+        "unique_matched_task_trial_pairs": 160,
+        "valid_numeric_reward_pairs": 160,
+        "binary_reward_pairs": 160,
+        "B0_unmatched": [],
+        "B1_unmatched": [],
+        "invalid_reward_pairs": [],
+        "same_seed_pairs": 160,
+        "seed_mismatches": [],
+        "missing_seed_pairs": [],
+        "B1_wins_binary": 20,
+        "B1_losses_binary": 12,
+        "ties_binary": 128,
+        "both_success_binary": 114,
+        "both_failure_binary": 14,
+        "mean_reward_delta_B1_minus_B0": 0.05,
+        "exact_McNemar_two_sided_p_binary_pairs": 0.21532714972272515,
+        "task_count": 40,
+        "task_mean_delta_positive": 15,
+        "task_mean_delta_negative": 7,
+        "task_mean_delta_tied": 18,
+        "task_level_exact_sign_two_sided_p": 0.13380050659179688,
+        "mean_of_task_mean_deltas": 0.05,
+        "task_bootstrap_ci95": [
+          -0.025,
+          0.125
+        ],
+        "task_bootstrap_ci95_percentage_points": [
+          -2.5,
+          12.5
+        ],
+        "task_bootstrap_method": {
+          "iterations": 10000,
+          "seed": 42,
+          "rng": "Python random.Random; randrange task index",
+          "ordering": "B0 saved simulations first-appearance task order, after unique paired numeric filtering",
+          "quantile_indices_zero_based": [
+            250,
+            9749
+          ],
+          "rounding": "4 decimals in reward units, matching source paired_summary_v4.py",
+          "unit": "task mean paired reward delta, resample nTasks tasks with replacement"
+        },
+        "task_records": [
+          {
+            "task_id": "17",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "12",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "9",
+            "paired_trials": 4,
+            "B0_successes": 2,
+            "B1_successes": 3,
+            "mean_delta": 0.25
+          },
+          {
+            "task_id": "26",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "27",
+            "paired_trials": 4,
+            "B0_successes": 0,
+            "B1_successes": 1,
+            "mean_delta": 0.25
+          },
+          {
+            "task_id": "5",
+            "paired_trials": 4,
+            "B0_successes": 1,
+            "B1_successes": 1,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "18",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 3,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "32",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "33",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "39",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 2,
+            "mean_delta": -0.5
+          },
+          {
+            "task_id": "36",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 4,
+            "mean_delta": 0.25
+          },
+          {
+            "task_id": "42",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "40",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "49",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 4,
+            "mean_delta": 0.25
+          },
+          {
+            "task_id": "38",
+            "paired_trials": 4,
+            "B0_successes": 1,
+            "B1_successes": 0,
+            "mean_delta": -0.25
+          },
+          {
+            "task_id": "45",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "51",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "53",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "60",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 2,
+            "mean_delta": -0.5
+          },
+          {
+            "task_id": "61",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "55",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 3,
+            "mean_delta": -0.25
+          },
+          {
+            "task_id": "56",
+            "paired_trials": 4,
+            "B0_successes": 2,
+            "B1_successes": 3,
+            "mean_delta": 0.25
+          },
+          {
+            "task_id": "64",
+            "paired_trials": 4,
+            "B0_successes": 1,
+            "B1_successes": 4,
+            "mean_delta": 0.75
+          },
+          {
+            "task_id": "62",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "65",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "68",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 3,
+            "mean_delta": -0.25
+          },
+          {
+            "task_id": "70",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "71",
+            "paired_trials": 4,
+            "B0_successes": 1,
+            "B1_successes": 2,
+            "mean_delta": 0.25
+          },
+          {
+            "task_id": "74",
+            "paired_trials": 4,
+            "B0_successes": 2,
+            "B1_successes": 3,
+            "mean_delta": 0.25
+          },
+          {
+            "task_id": "79",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 4,
+            "mean_delta": 0.25
+          },
+          {
+            "task_id": "77",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 3,
+            "mean_delta": -0.25
+          },
+          {
+            "task_id": "86",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "90",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 4,
+            "mean_delta": 0.25
+          },
+          {
+            "task_id": "94",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "108",
+            "paired_trials": 4,
+            "B0_successes": 1,
+            "B1_successes": 3,
+            "mean_delta": 0.5
+          },
+          {
+            "task_id": "97",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 4,
+            "mean_delta": 0.25
+          },
+          {
+            "task_id": "102",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 4,
+            "mean_delta": 0.25
+          },
+          {
+            "task_id": "100",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 4,
+            "mean_delta": 0.25
+          },
+          {
+            "task_id": "101",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 4,
+            "mean_delta": 0.25
+          },
+          {
+            "task_id": "111",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 2,
+            "mean_delta": -0.5
+          }
+        ]
+      },
+      "source_report_comparison": {
+        "path": "D:/skillsgen-industry_track/research/imports/2026-10-05_tau_remote/repository_complete/research/experiments/148_tau2_retail_autoskill/reports/v4_paired_summary.json",
+        "exists": true,
+        "saved_report_paired_fields": {
+          "pairs": 160,
+          "B1_better": 20,
+          "B0_better": 12,
+          "ties": 128,
+          "mean_diff_B1_minus_B0": 0.05,
+          "sign_test_two_sided_p": 0.215327,
+          "bootstrap_ci95_task_level": [
+            -0.025,
+            0.125
+          ],
+          "bootstrap_note": "10k resamples over task-level mean deltas"
+        },
+        "independent_numeric_fields_match": {
+          "pairs": true,
+          "B1_better": true,
+          "B0_better": true,
+          "ties": true,
+          "mean_diff_B1_minus_B0": true,
+          "sign_test_two_sided_p": true,
+          "bootstrap_ci95_task_level": true
+        }
+      },
+      "collect_source_descriptive": {
+        "source": {
+          "path": "D:/skillsgen-industry_track/research/imports/2026-10-05_tau_remote/repository_complete/research/experiments/148_tau2_retail_autoskill/runs/collect/evolution.json",
+          "exists": true,
+          "sha256": "f6d5d49d713e4d5e0796cf1ac9709f71c2c2c96557c4185bfa23dce5964918f0",
+          "bytes": 5272206
+        },
+        "raw_simulations": 70,
+        "unique_tasks": 70,
+        "success_count_reward_eq_1": 5,
+        "reward_eq_0_count": 65,
+        "reward_missing_or_invalid_count": 0,
+        "mean_reward_over_valid_numeric": 0.07142857142857142,
+        "success_rate_over_all_saved_simulations": 0.07142857142857142,
+        "reward_distribution": {
+          "0.0": 65,
+          "1.0": 5
+        },
+        "termination_reason_distribution": {
+          "timeout": 10,
+          "too_many_errors": 5,
+          "user_stop": 55
+        },
+        "reward_termination_joint_counts": {
+          "reward=0.0;termination=user_stop": 50,
+          "reward=1.0;termination=user_stop": 5,
+          "reward=0.0;termination=timeout": 10,
+          "reward=0.0;termination=too_many_errors": 5
+        },
+        "reward_breakdown_missing_count": 15,
+        "reward_breakdown_joint_distribution": {
+          "DB=0.0": 1,
+          "DB=0.0;NL_ASSERTION=0.0": 12,
+          "DB=0.0;NL_ASSERTION=1.0": 36,
+          "DB=1.0;NL_ASSERTION=0.0": 1,
+          "DB=1.0;NL_ASSERTION=1.0": 5,
+          "missing_or_empty": 15
+        },
+        "reward_basis_distribution": {
+          "": 15,
+          "DB": 1,
+          "DB+NL_ASSERTION": 54
+        },
+        "reward_breakdown_missing_records": [
+          {
+            "id": "e95f8b98-62f3-44c0-8ab9-1b4d00b6bd63",
+            "task_id": "20",
+            "trial": 0,
+            "seed": 670487,
+            "termination_reason": "timeout"
+          },
+          {
+            "id": "590bc5ef-0351-4b02-92ec-4b8117590e45",
+            "task_id": "21",
+            "trial": 0,
+            "seed": 670487,
+            "termination_reason": "too_many_errors"
+          },
+          {
+            "id": "8c37347e-87d1-480a-92c0-f4e1d8d240eb",
+            "task_id": "44",
+            "trial": 0,
+            "seed": 670487,
+            "termination_reason": "timeout"
+          },
+          {
+            "id": "1991baf5-baa1-4239-ba80-0f9a6d12f937",
+            "task_id": "88",
+            "trial": 0,
+            "seed": 670487,
+            "termination_reason": "timeout"
+          },
+          {
+            "id": "56cc218e-5c1a-473d-9c20-96d66c54254f",
+            "task_id": "104",
+            "trial": 0,
+            "seed": 670487,
+            "termination_reason": "timeout"
+          },
+          {
+            "id": "6bc81811-13ab-47a6-bb82-e14fbfd4c22f",
+            "task_id": "110",
+            "trial": 0,
+            "seed": 670487,
+            "termination_reason": "too_many_errors"
+          },
+          {
+            "id": "c458ea62-43a6-48ed-bfb5-122233ae4d81",
+            "task_id": "43",
+            "trial": 0,
+            "seed": 670487,
+            "termination_reason": "timeout"
+          },
+          {
+            "id": "eec9ddb1-f51a-49e6-a531-bd517ce792e2",
+            "task_id": "4",
+            "trial": 0,
+            "seed": 670487,
+            "termination_reason": "timeout"
+          },
+          {
+            "id": "64ad47b3-b979-4b65-b9bc-b530b4751afb",
+            "task_id": "29",
+            "trial": 0,
+            "seed": 670487,
+            "termination_reason": "timeout"
+          },
+          {
+            "id": "b9ab5906-7575-4423-91c7-178325973d7e",
+            "task_id": "54",
+            "trial": 0,
+            "seed": 670487,
+            "termination_reason": "timeout"
+          },
+          {
+            "id": "df8ef5ab-d488-4aec-a3c9-8295b91abdca",
+            "task_id": "47",
+            "trial": 0,
+            "seed": 670487,
+            "termination_reason": "too_many_errors"
+          },
+          {
+            "id": "4dcb3f37-c8ff-4be0-9cfa-3789bcd602ce",
+            "task_id": "105",
+            "trial": 0,
+            "seed": 670487,
+            "termination_reason": "too_many_errors"
+          },
+          {
+            "id": "e6e02d78-0f93-4ca5-a9c5-f20cdb23abd1",
+            "task_id": "63",
+            "trial": 0,
+            "seed": 670487,
+            "termination_reason": "timeout"
+          },
+          {
+            "id": "e49a7d2a-765a-4d0b-af54-fd1bfec46854",
+            "task_id": "37",
+            "trial": 0,
+            "seed": 670487,
+            "termination_reason": "timeout"
+          },
+          {
+            "id": "77257877-61f4-4454-bc94-dfb72808e24c",
+            "task_id": "95",
+            "trial": 0,
+            "seed": 670487,
+            "termination_reason": "too_many_errors"
+          }
+        ],
+        "model_aliases": {
+          "agent_info": "openai/glm-4-flash",
+          "user_info": "openai/glm-4-flash"
+        },
+        "note": "学习源采集阶段，单独列出，不能混入正式B0/B1分母。timeout/too_many_errors是保存的原生终态；它们本身不足以认定细分机制或基础设施根因。"
+      }
+    },
+    {
+      "domain": "airline",
+      "domain_zh": "航空",
+      "experiment": "267_tau2_airline_autoskill",
+      "run_directory": "test",
+      "groups": {
+        "B0": {
+          "raw_simulations": 80,
+          "unique_task_trial_keys": 80,
+          "unique_tasks": 20,
+          "duplicate_task_trial": [],
+          "reward_valid_numeric_count": 80,
+          "reward_binary_count": 80,
+          "success_count_reward_eq_1": 54,
+          "success_rate_over_all_saved_simulations": 0.675,
+          "mean_reward_over_valid_numeric": 0.675,
+          "reward_distribution": {
+            "0.0": 26,
+            "1.0": 54
+          },
+          "score_audit": {
+            "missing_reward_info": [],
+            "missing_reward": [],
+            "invalid_reward": [],
+            "nonbinary_reward": [],
+            "missing_reward_breakdown": [],
+            "reward_basis_distribution": {
+              "DB+COMMUNICATE": 80
+            },
+            "reward_breakdown_joint_distribution": {
+              "COMMUNICATE=0.0;DB=0.0": 2,
+              "COMMUNICATE=1.0;DB=0.0": 24,
+              "COMMUNICATE=1.0;DB=1.0": 54
+            },
+            "reward_breakdown_components": {
+              "COMMUNICATE": {
+                "present_simulations": 80,
+                "value_distribution": {
+                  "0.0": 2,
+                  "1.0": 78
+                },
+                "numeric": {
+                  "n": 80,
+                  "mean": 0.975,
+                  "median": 1.0,
+                  "p95": 1.0,
+                  "min": 0.0,
+                  "max": 1.0,
+                  "sum": 78.0
+                }
+              },
+              "DB": {
+                "present_simulations": 80,
+                "value_distribution": {
+                  "0.0": 26,
+                  "1.0": 54
+                },
+                "numeric": {
+                  "n": 80,
+                  "mean": 0.675,
+                  "median": 1.0,
+                  "p95": 1.0,
+                  "min": 0.0,
+                  "max": 1.0,
+                  "sum": 54.0
+                }
+              }
+            },
+            "basis_component_absent_counts": {},
+            "basis_component_absent_records": [],
+            "breakdown_product_mismatch": [],
+            "db_reward_distribution": {
+              "0.0": 26,
+              "1.0": 54
+            },
+            "db_match_distribution": {
+              "False": 26,
+              "True": 54
+            },
+            "subcheck_diagnostics": {
+              "action_checks": {
+                "simulation_count_nonnull": 72,
+                "check_count": 232,
+                "positive_count": 164,
+                "reward_distribution": {
+                  "0.0": 68,
+                  "1.0": 164
+                }
+              },
+              "env_assertions": {
+                "simulation_count_nonnull": 80,
+                "check_count": 0,
+                "positive_count": 0,
+                "reward_distribution": {}
+              },
+              "nl_assertions": {
+                "simulation_count_nonnull": 0,
+                "check_count": 0,
+                "positive_count": 0,
+                "reward_distribution": {}
+              },
+              "communicate_checks": {
+                "simulation_count_nonnull": 4,
+                "check_count": 4,
+                "positive_count": 2,
+                "reward_distribution": {}
+              }
+            },
+            "note": "子检查只是诊断；正式成功由保存的reward==1定义。basis缺项可能是可选断言未应用，不直接定性评分错误。"
+          },
+          "trial_distribution": {
+            "0": 20,
+            "1": 20,
+            "2": 20,
+            "3": 20
+          },
+          "seed_distribution": {
+            "116739": 20,
+            "26225": 20,
+            "670487": 20,
+            "777572": 20
+          },
+          "termination_reason_distribution": {
+            "user_stop": 80
+          },
+          "duration_seconds": {
+            "n": 80,
+            "mean": 835.6108157892376,
+            "median": 750.8207666325006,
+            "p95": 1165.3962788477008,
+            "min": 582.7744798399999,
+            "max": 1214.5642809439996,
+            "sum": 66848.865263139,
+            "missing_or_invalid": 0
+          },
+          "messages": {
+            "roles": {
+              "assistant": 1062,
+              "user": 438,
+              "tool": 624
+            },
+            "nonempty_content_by_role": {
+              "assistant": 438,
+              "user": 438,
+              "tool": 624
+            },
+            "user_control_marker_counts": {
+              "###TRANSFER###": 27,
+              "###STOP###": 49,
+              "###OUT-OF-SCOPE###": 4
+            }
+          },
+          "business_tools": {
+            "calls_by_message_role": {
+              "assistant": 624,
+              "user": 0,
+              "tool": 0
+            },
+            "reply_by_requestor": {
+              "assistant": 624
+            },
+            "native_error_true_by_requestor": {
+              "assistant": 5
+            },
+            "error_true_count": 5,
+            "error_true_fraction_of_tool_replies": 0.008012820512820512,
+            "error_affected_simulations": 5,
+            "error_affected_simulation_fraction": 0.0625
+          },
+          "per_simulation_counts": {
+            "messages": {
+              "n": 80,
+              "mean": 26.55,
+              "median": 22.0,
+              "p95": 60.29999999999998,
+              "min": 8.0,
+              "max": 70.0,
+              "sum": 2124.0
+            },
+            "messages_assistant": {
+              "n": 80,
+              "mean": 13.275,
+              "median": 11.0,
+              "p95": 30.14999999999999,
+              "min": 4.0,
+              "max": 35.0,
+              "sum": 1062.0
+            },
+            "messages_user": {
+              "n": 80,
+              "mean": 5.475,
+              "median": 5.0,
+              "p95": 10.0,
+              "min": 3.0,
+              "max": 11.0,
+              "sum": 438.0
+            },
+            "messages_tool": {
+              "n": 80,
+              "mean": 7.8,
+              "median": 5.0,
+              "p95": 26.14999999999999,
+              "min": 1.0,
+              "max": 31.0,
+              "sum": 624.0
+            },
+            "business_tool_calls": {
+              "n": 80,
+              "mean": 7.8,
+              "median": 5.0,
+              "p95": 26.14999999999999,
+              "min": 1.0,
+              "max": 31.0,
+              "sum": 624.0
+            },
+            "business_tool_calls_assistant": {
+              "n": 80,
+              "mean": 7.8,
+              "median": 5.0,
+              "p95": 26.14999999999999,
+              "min": 1.0,
+              "max": 31.0,
+              "sum": 624.0
+            },
+            "business_tool_calls_user": {
+              "n": 80,
+              "mean": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "sum": 0.0
+            },
+            "tool_replies": {
+              "n": 80,
+              "mean": 7.8,
+              "median": 5.0,
+              "p95": 26.14999999999999,
+              "min": 1.0,
+              "max": 31.0,
+              "sum": 624.0
+            },
+            "native_tool_errors_true": {
+              "n": 80,
+              "mean": 0.0625,
+              "median": 0.0,
+              "p95": 1.0,
+              "min": 0.0,
+              "max": 1.0,
+              "sum": 5.0
+            },
+            "user_nonterminal_messages_including_initial": {
+              "n": 80,
+              "mean": 4.475,
+              "median": 4.0,
+              "p95": 9.0,
+              "min": 2.0,
+              "max": 10.0,
+              "sum": 358.0
+            },
+            "user_nonterminal_messages_after_initial_assumed": {
+              "n": 80,
+              "mean": 3.475,
+              "median": 3.0,
+              "p95": 8.0,
+              "min": 1.0,
+              "max": 9.0,
+              "sum": 278.0
+            }
+          },
+          "usage": {
+            "assistant": {
+              "message_count": 1062,
+              "nonnull_usage_message_count": 0,
+              "numeric_fields": {}
+            },
+            "user": {
+              "message_count": 438,
+              "nonnull_usage_message_count": 438,
+              "numeric_fields": {
+                "completion_tokens": {
+                  "present_messages": 438,
+                  "sum": 164715
+                },
+                "prompt_tokens": {
+                  "present_messages": 438,
+                  "sum": 466655
+                }
+              }
+            },
+            "tool": {
+              "message_count": 624,
+              "nonnull_usage_message_count": 0,
+              "numeric_fields": {}
+            }
+          },
+          "saved_simulation_cost": {
+            "agent_cost": {
+              "nonnull_simulations": 0,
+              "numeric": {
+                "n": 0,
+                "mean": null,
+                "median": null,
+                "p95": null,
+                "min": null,
+                "max": null,
+                "sum": null
+              }
+            },
+            "user_cost": {
+              "nonnull_simulations": 0,
+              "numeric": {
+                "n": 0,
+                "mean": null,
+                "median": null,
+                "p95": null,
+                "min": null,
+                "max": null,
+                "sum": null
+              }
+            }
+          },
+          "saved_message_cost": {
+            "assistant": {
+              "nonnull_count": 80,
+              "value_distribution": {
+                "0.0": 80
+              }
+            },
+            "user": {
+              "nonnull_count": 438,
+              "value_distribution": {
+                "0.0": 438
+              }
+            }
+          },
+          "actual_monetary_cost": null,
+          "pass_metrics": {
+            "eligible_four_trial_binary_tasks": 20,
+            "excluded_tasks": [],
+            "success_count_histogram_over_four_trials": {
+              "0": 3,
+              "1": 2,
+              "2": 1,
+              "3": 6,
+              "4": 8
+            },
+            "observed_any_success_tasks": 17,
+            "observed_all_four_success_tasks": 8,
+            "observed_some_but_not_all_success_tasks": 9,
+            "pass_power_k_all_success_estimator": {
+              "1": 0.675,
+              "2": 0.5583333333333333,
+              "3": 0.475,
+              "4": 0.4
+            },
+            "pass_at_k_any_success_estimator": {
+              "1": 0.675,
+              "2": 0.7916666666666667,
+              "3": 0.825,
+              "4": 0.85
+            }
+          },
+          "safe_configuration": {
+            "seed": 42,
+            "max_steps": 200,
+            "max_errors": 10,
+            "domain": null,
+            "num_trials": 4,
+            "agent_info": {
+              "implementation": "openclaw_retail",
+              "llm_alias": "openai/deepseek-flash",
+              "temperature": 0.0
+            },
+            "user_info": {
+              "implementation": "user_simulator",
+              "llm_alias": "openai/deepseek-flash",
+              "temperature": 0.0
+            }
+          }
+        },
+        "B1": {
+          "raw_simulations": 80,
+          "unique_task_trial_keys": 80,
+          "unique_tasks": 20,
+          "duplicate_task_trial": [],
+          "reward_valid_numeric_count": 80,
+          "reward_binary_count": 80,
+          "success_count_reward_eq_1": 58,
+          "success_rate_over_all_saved_simulations": 0.725,
+          "mean_reward_over_valid_numeric": 0.725,
+          "reward_distribution": {
+            "0.0": 22,
+            "1.0": 58
+          },
+          "score_audit": {
+            "missing_reward_info": [],
+            "missing_reward": [],
+            "invalid_reward": [],
+            "nonbinary_reward": [],
+            "missing_reward_breakdown": [],
+            "reward_basis_distribution": {
+              "DB+COMMUNICATE": 80
+            },
+            "reward_breakdown_joint_distribution": {
+              "COMMUNICATE=1.0;DB=0.0": 22,
+              "COMMUNICATE=1.0;DB=1.0": 58
+            },
+            "reward_breakdown_components": {
+              "COMMUNICATE": {
+                "present_simulations": 80,
+                "value_distribution": {
+                  "1.0": 80
+                },
+                "numeric": {
+                  "n": 80,
+                  "mean": 1.0,
+                  "median": 1.0,
+                  "p95": 1.0,
+                  "min": 1.0,
+                  "max": 1.0,
+                  "sum": 80.0
+                }
+              },
+              "DB": {
+                "present_simulations": 80,
+                "value_distribution": {
+                  "0.0": 22,
+                  "1.0": 58
+                },
+                "numeric": {
+                  "n": 80,
+                  "mean": 0.725,
+                  "median": 1.0,
+                  "p95": 1.0,
+                  "min": 0.0,
+                  "max": 1.0,
+                  "sum": 58.0
+                }
+              }
+            },
+            "basis_component_absent_counts": {},
+            "basis_component_absent_records": [],
+            "breakdown_product_mismatch": [],
+            "db_reward_distribution": {
+              "0.0": 22,
+              "1.0": 58
+            },
+            "db_match_distribution": {
+              "False": 22,
+              "True": 58
+            },
+            "subcheck_diagnostics": {
+              "action_checks": {
+                "simulation_count_nonnull": 72,
+                "check_count": 232,
+                "positive_count": 179,
+                "reward_distribution": {
+                  "0.0": 53,
+                  "1.0": 179
+                }
+              },
+              "env_assertions": {
+                "simulation_count_nonnull": 80,
+                "check_count": 0,
+                "positive_count": 0,
+                "reward_distribution": {}
+              },
+              "nl_assertions": {
+                "simulation_count_nonnull": 0,
+                "check_count": 0,
+                "positive_count": 0,
+                "reward_distribution": {}
+              },
+              "communicate_checks": {
+                "simulation_count_nonnull": 4,
+                "check_count": 4,
+                "positive_count": 4,
+                "reward_distribution": {}
+              }
+            },
+            "note": "子检查只是诊断；正式成功由保存的reward==1定义。basis缺项可能是可选断言未应用，不直接定性评分错误。"
+          },
+          "trial_distribution": {
+            "0": 20,
+            "1": 20,
+            "2": 20,
+            "3": 20
+          },
+          "seed_distribution": {
+            "116739": 20,
+            "26225": 20,
+            "670487": 20,
+            "777572": 20
+          },
+          "termination_reason_distribution": {
+            "user_stop": 80
+          },
+          "duration_seconds": {
+            "n": 80,
+            "mean": 848.3274105293624,
+            "median": 816.3309277244991,
+            "p95": 1181.5151547203498,
+            "min": 558.4590584969992,
+            "max": 1215.0592355589997,
+            "sum": 67866.19284234899,
+            "missing_or_invalid": 0
+          },
+          "messages": {
+            "roles": {
+              "assistant": 1184,
+              "user": 411,
+              "tool": 773
+            },
+            "nonempty_content_by_role": {
+              "assistant": 411,
+              "user": 411,
+              "tool": 773
+            },
+            "user_control_marker_counts": {
+              "###STOP###": 54,
+              "###TRANSFER###": 23,
+              "###OUT-OF-SCOPE###": 3
+            }
+          },
+          "business_tools": {
+            "calls_by_message_role": {
+              "assistant": 773,
+              "user": 0,
+              "tool": 0
+            },
+            "reply_by_requestor": {
+              "assistant": 773
+            },
+            "native_error_true_by_requestor": {
+              "assistant": 8
+            },
+            "error_true_count": 8,
+            "error_true_fraction_of_tool_replies": 0.01034928848641656,
+            "error_affected_simulations": 8,
+            "error_affected_simulation_fraction": 0.1
+          },
+          "per_simulation_counts": {
+            "messages": {
+              "n": 80,
+              "mean": 29.6,
+              "median": 24.0,
+              "p95": 72.0,
+              "min": 4.0,
+              "max": 116.0,
+              "sum": 2368.0
+            },
+            "messages_assistant": {
+              "n": 80,
+              "mean": 14.8,
+              "median": 12.0,
+              "p95": 36.0,
+              "min": 2.0,
+              "max": 58.0,
+              "sum": 1184.0
+            },
+            "messages_user": {
+              "n": 80,
+              "mean": 5.1375,
+              "median": 5.0,
+              "p95": 9.0,
+              "min": 2.0,
+              "max": 10.0,
+              "sum": 411.0
+            },
+            "messages_tool": {
+              "n": 80,
+              "mean": 9.6625,
+              "median": 6.5,
+              "p95": 31.049999999999997,
+              "min": 0.0,
+              "max": 53.0,
+              "sum": 773.0
+            },
+            "business_tool_calls": {
+              "n": 80,
+              "mean": 9.6625,
+              "median": 6.5,
+              "p95": 31.049999999999997,
+              "min": 0.0,
+              "max": 53.0,
+              "sum": 773.0
+            },
+            "business_tool_calls_assistant": {
+              "n": 80,
+              "mean": 9.6625,
+              "median": 6.5,
+              "p95": 31.049999999999997,
+              "min": 0.0,
+              "max": 53.0,
+              "sum": 773.0
+            },
+            "business_tool_calls_user": {
+              "n": 80,
+              "mean": 0.0,
+              "median": 0.0,
+              "p95": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "sum": 0.0
+            },
+            "tool_replies": {
+              "n": 80,
+              "mean": 9.6625,
+              "median": 6.5,
+              "p95": 31.049999999999997,
+              "min": 0.0,
+              "max": 53.0,
+              "sum": 773.0
+            },
+            "native_tool_errors_true": {
+              "n": 80,
+              "mean": 0.1,
+              "median": 0.0,
+              "p95": 1.0,
+              "min": 0.0,
+              "max": 1.0,
+              "sum": 8.0
+            },
+            "user_nonterminal_messages_including_initial": {
+              "n": 80,
+              "mean": 4.1375,
+              "median": 4.0,
+              "p95": 8.0,
+              "min": 1.0,
+              "max": 9.0,
+              "sum": 331.0
+            },
+            "user_nonterminal_messages_after_initial_assumed": {
+              "n": 80,
+              "mean": 3.1375,
+              "median": 3.0,
+              "p95": 7.0,
+              "min": 0.0,
+              "max": 8.0,
+              "sum": 251.0
+            }
+          },
+          "usage": {
+            "assistant": {
+              "message_count": 1184,
+              "nonnull_usage_message_count": 0,
+              "numeric_fields": {}
+            },
+            "user": {
+              "message_count": 411,
+              "nonnull_usage_message_count": 411,
+              "numeric_fields": {
+                "completion_tokens": {
+                  "present_messages": 411,
+                  "sum": 172290
+                },
+                "prompt_tokens": {
+                  "present_messages": 411,
+                  "sum": 485604
+                }
+              }
+            },
+            "tool": {
+              "message_count": 773,
+              "nonnull_usage_message_count": 0,
+              "numeric_fields": {}
+            }
+          },
+          "saved_simulation_cost": {
+            "agent_cost": {
+              "nonnull_simulations": 0,
+              "numeric": {
+                "n": 0,
+                "mean": null,
+                "median": null,
+                "p95": null,
+                "min": null,
+                "max": null,
+                "sum": null
+              }
+            },
+            "user_cost": {
+              "nonnull_simulations": 0,
+              "numeric": {
+                "n": 0,
+                "mean": null,
+                "median": null,
+                "p95": null,
+                "min": null,
+                "max": null,
+                "sum": null
+              }
+            }
+          },
+          "saved_message_cost": {
+            "assistant": {
+              "nonnull_count": 80,
+              "value_distribution": {
+                "0.0": 80
+              }
+            },
+            "user": {
+              "nonnull_count": 411,
+              "value_distribution": {
+                "0.0": 411
+              }
+            }
+          },
+          "actual_monetary_cost": null,
+          "pass_metrics": {
+            "eligible_four_trial_binary_tasks": 20,
+            "excluded_tasks": [],
+            "success_count_histogram_over_four_trials": {
+              "0": 1,
+              "1": 3,
+              "2": 3,
+              "3": 3,
+              "4": 10
+            },
+            "observed_any_success_tasks": 19,
+            "observed_all_four_success_tasks": 10,
+            "observed_some_but_not_all_success_tasks": 9,
+            "pass_power_k_all_success_estimator": {
+              "1": 0.725,
+              "2": 0.6,
+              "3": 0.5375,
+              "4": 0.5
+            },
+            "pass_at_k_any_success_estimator": {
+              "1": 0.725,
+              "2": 0.85,
+              "3": 0.9125,
+              "4": 0.95
+            }
+          },
+          "safe_configuration": {
+            "seed": 42,
+            "max_steps": 200,
+            "max_errors": 10,
+            "domain": null,
+            "num_trials": 4,
+            "agent_info": {
+              "implementation": "openclaw_retail",
+              "llm_alias": "openai/deepseek-flash",
+              "temperature": 0.0
+            },
+            "user_info": {
+              "implementation": "user_simulator",
+              "llm_alias": "openai/deepseek-flash",
+              "temperature": 0.0
+            }
+          }
+        }
+      },
+      "sources": {
+        "B0": {
+          "path": "D:/skillsgen-industry_track/research/imports/2026-10-05_tau_remote/repository_complete/research/experiments/267_tau2_airline_autoskill/runs/test/no_skill.json",
+          "sha256": "127edc34ddefd0901a5ac837bd27dfb5e7a35d2729b1191dc1bf00e3661f62cf",
+          "bytes": 5488578,
+          "json_simulations_path": "$.simulations"
+        },
+        "B1": {
+          "path": "D:/skillsgen-industry_track/research/imports/2026-10-05_tau_remote/repository_complete/research/experiments/267_tau2_airline_autoskill/runs/test/autoskill_library.json",
+          "sha256": "dc2c6f7945c52e0c2c2819a205edbb35314967087e19be205e10e165c830fd7f",
+          "bytes": 5823641,
+          "json_simulations_path": "$.simulations"
+        }
+      },
+      "paired": {
+        "unique_matched_task_trial_pairs": 80,
+        "valid_numeric_reward_pairs": 80,
+        "binary_reward_pairs": 80,
+        "B0_unmatched": [],
+        "B1_unmatched": [],
+        "invalid_reward_pairs": [],
+        "same_seed_pairs": 80,
+        "seed_mismatches": [],
+        "missing_seed_pairs": [],
+        "B1_wins_binary": 12,
+        "B1_losses_binary": 8,
+        "ties_binary": 60,
+        "both_success_binary": 46,
+        "both_failure_binary": 14,
+        "mean_reward_delta_B1_minus_B0": 0.05,
+        "exact_McNemar_two_sided_p_binary_pairs": 0.5034446716308594,
+        "task_count": 20,
+        "task_mean_delta_positive": 7,
+        "task_mean_delta_negative": 3,
+        "task_mean_delta_tied": 10,
+        "task_level_exact_sign_two_sided_p": 0.34375,
+        "mean_of_task_mean_deltas": 0.05,
+        "task_bootstrap_ci95": [
+          -0.05,
+          0.1375
+        ],
+        "task_bootstrap_ci95_percentage_points": [
+          -5.0,
+          13.750000000000002
+        ],
+        "task_bootstrap_method": {
+          "iterations": 10000,
+          "seed": 42,
+          "rng": "Python random.Random; randrange task index",
+          "ordering": "B0 saved simulations first-appearance task order, after unique paired numeric filtering",
+          "quantile_indices_zero_based": [
+            250,
+            9749
+          ],
+          "rounding": "4 decimals in reward units, matching source paired_summary_v4.py",
+          "unit": "task mean paired reward delta, resample nTasks tasks with replacement"
+        },
+        "task_records": [
+          {
+            "task_id": "13",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "22",
+            "paired_trials": 4,
+            "B0_successes": 0,
+            "B1_successes": 1,
+            "mean_delta": 0.25
+          },
+          {
+            "task_id": "16",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 1,
+            "mean_delta": -0.5
+          },
+          {
+            "task_id": "19",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "2",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "18",
+            "paired_trials": 4,
+            "B0_successes": 1,
+            "B1_successes": 2,
+            "mean_delta": 0.25
+          },
+          {
+            "task_id": "26",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "25",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "31",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "24",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 2,
+            "mean_delta": -0.25
+          },
+          {
+            "task_id": "30",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "29",
+            "paired_trials": 4,
+            "B0_successes": 1,
+            "B1_successes": 3,
+            "mean_delta": 0.5
+          },
+          {
+            "task_id": "32",
+            "paired_trials": 4,
+            "B0_successes": 0,
+            "B1_successes": 0,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "48",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 4,
+            "mean_delta": 0.25
+          },
+          {
+            "task_id": "44",
+            "paired_trials": 4,
+            "B0_successes": 0,
+            "B1_successes": 1,
+            "mean_delta": 0.25
+          },
+          {
+            "task_id": "37",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 2,
+            "mean_delta": -0.25
+          },
+          {
+            "task_id": "45",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "35",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 3,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "6",
+            "paired_trials": 4,
+            "B0_successes": 2,
+            "B1_successes": 3,
+            "mean_delta": 0.25
+          },
+          {
+            "task_id": "8",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 4,
+            "mean_delta": 0.25
+          }
+        ]
+      },
+      "source_report_comparison": {
+        "path": "D:/skillsgen-industry_track/research/imports/2026-10-05_tau_remote/repository_complete/research/experiments/267_tau2_airline_autoskill/reports/paired_summary_267.json",
+        "exists": true,
+        "saved_report_paired_fields": {
+          "pairs": 80,
+          "B1_better": 12,
+          "B0_better": 8,
+          "ties": 60,
+          "mean_diff_B1_minus_B0": 0.05,
+          "sign_test_two_sided_p": 0.503445,
+          "bootstrap_ci95_task_level": [
+            -0.05,
+            0.1375
+          ],
+          "bootstrap_note": "10k resamples over task-level mean deltas"
+        },
+        "independent_numeric_fields_match": {
+          "pairs": true,
+          "B1_better": true,
+          "B0_better": true,
+          "ties": true,
+          "mean_diff_B1_minus_B0": true,
+          "sign_test_two_sided_p": true,
+          "bootstrap_ci95_task_level": true
+        }
+      },
+      "collect_source_descriptive": {
+        "source": {
+          "path": "D:/skillsgen-industry_track/research/imports/2026-10-05_tau_remote/repository_complete/research/experiments/267_tau2_airline_autoskill/runs/collect/evolution.json",
+          "exists": true,
+          "sha256": "46fec258c5b475de33c65055867a2862668074eec606a6ef8fbb3bb7141d8816",
+          "bytes": 1674771
+        },
+        "raw_simulations": 26,
+        "unique_tasks": 26,
+        "success_count_reward_eq_1": 19,
+        "reward_eq_0_count": 7,
+        "reward_missing_or_invalid_count": 0,
+        "mean_reward_over_valid_numeric": 0.7307692307692307,
+        "success_rate_over_all_saved_simulations": 0.7307692307692307,
+        "reward_distribution": {
+          "0.0": 7,
+          "1.0": 19
+        },
+        "termination_reason_distribution": {
+          "user_stop": 26
+        },
+        "reward_termination_joint_counts": {
+          "reward=1.0;termination=user_stop": 19,
+          "reward=0.0;termination=user_stop": 7
+        },
+        "reward_breakdown_missing_count": 0,
+        "reward_breakdown_joint_distribution": {
+          "COMMUNICATE=0.0;DB=0.0": 2,
+          "COMMUNICATE=1.0;DB=0.0": 5,
+          "COMMUNICATE=1.0;DB=1.0": 19
+        },
+        "reward_basis_distribution": {
+          "DB+COMMUNICATE": 26
+        },
+        "reward_breakdown_missing_records": [],
+        "model_aliases": {
+          "agent_info": "openai/deepseek-flash",
+          "user_info": "openai/deepseek-flash"
+        },
+        "note": "学习源采集阶段，单独列出，不能混入正式B0/B1分母。timeout/too_many_errors是保存的原生终态；它们本身不足以认定细分机制或基础设施根因。"
+      }
+    },
+    {
+      "domain": "telecom",
+      "domain_zh": "电信",
+      "experiment": "268_tau2_telecom_autoskill",
+      "run_directory": "test",
+      "groups": {
+        "B0": {
+          "raw_simulations": 160,
+          "unique_task_trial_keys": 160,
+          "unique_tasks": 40,
+          "duplicate_task_trial": [],
+          "reward_valid_numeric_count": 160,
+          "reward_binary_count": 160,
+          "success_count_reward_eq_1": 127,
+          "success_rate_over_all_saved_simulations": 0.79375,
+          "mean_reward_over_valid_numeric": 0.79375,
+          "reward_distribution": {
+            "0.0": 33,
+            "1.0": 127
+          },
+          "score_audit": {
+            "missing_reward_info": [],
+            "missing_reward": [],
+            "invalid_reward": [],
+            "nonbinary_reward": [],
+            "missing_reward_breakdown": [],
+            "reward_basis_distribution": {
+              "ENV_ASSERTION": 112,
+              "ENV_ASSERTION+ACTION": 48
+            },
+            "reward_breakdown_joint_distribution": {
+              "ACTION=0.0;ENV_ASSERTION=1.0": 2,
+              "ACTION=1.0;ENV_ASSERTION=1.0": 46,
+              "ENV_ASSERTION=0.0": 31,
+              "ENV_ASSERTION=1.0": 81
+            },
+            "reward_breakdown_components": {
+              "ACTION": {
+                "present_simulations": 48,
+                "value_distribution": {
+                  "0.0": 2,
+                  "1.0": 46
+                },
+                "numeric": {
+                  "n": 48,
+                  "mean": 0.9583333333333334,
+                  "median": 1.0,
+                  "p95": 1.0,
+                  "min": 0.0,
+                  "max": 1.0,
+                  "sum": 46.0
+                }
+              },
+              "ENV_ASSERTION": {
+                "present_simulations": 160,
+                "value_distribution": {
+                  "0.0": 31,
+                  "1.0": 129
+                },
+                "numeric": {
+                  "n": 160,
+                  "mean": 0.80625,
+                  "median": 1.0,
+                  "p95": 1.0,
+                  "min": 0.0,
+                  "max": 1.0,
+                  "sum": 129.0
+                }
+              }
+            },
+            "basis_component_absent_counts": {},
+            "basis_component_absent_records": [],
+            "breakdown_product_mismatch": [],
+            "db_reward_distribution": {
+              "0.0": 124,
+              "1.0": 36
+            },
+            "db_match_distribution": {
+              "False": 124,
+              "True": 36
+            },
+            "subcheck_diagnostics": {
+              "action_checks": {
+                "simulation_count_nonnull": 160,
+                "check_count": 648,
+                "positive_count": 608,
+                "reward_distribution": {
+                  "0.0": 40,
+                  "1.0": 608
+                }
+              },
+              "env_assertions": {
+                "simulation_count_nonnull": 160,
+                "check_count": 256,
+                "positive_count": 213,
+                "reward_distribution": {
+                  "0.0": 43,
+                  "1.0": 213
+                }
+              },
+              "nl_assertions": {
+                "simulation_count_nonnull": 0,
+                "check_count": 0,
+                "positive_count": 0,
+                "reward_distribution": {}
+              },
+              "communicate_checks": {
+                "simulation_count_nonnull": 0,
+                "check_count": 0,
+                "positive_count": 0,
+                "reward_distribution": {}
+              }
+            },
+            "note": "子检查只是诊断；正式成功由保存的reward==1定义。basis缺项可能是可选断言未应用，不直接定性评分错误。"
+          },
+          "trial_distribution": {
+            "0": 40,
+            "1": 40,
+            "2": 40,
+            "3": 40
+          },
+          "seed_distribution": {
+            "116739": 40,
+            "26225": 40,
+            "670487": 40,
+            "777572": 40
+          },
+          "termination_reason_distribution": {
+            "user_stop": 160
+          },
+          "duration_seconds": {
+            "n": 160,
+            "mean": 749.3695461248498,
+            "median": 675.4062177209998,
+            "p95": 1230.4479816101016,
+            "min": 449.0645692129983,
+            "max": 1304.1194730909992,
+            "sum": 119899.12737997597,
+            "missing_or_invalid": 0
+          },
+          "messages": {
+            "roles": {
+              "assistant": 2798,
+              "user": 3169,
+              "tool": 2708
+            },
+            "nonempty_content_by_role": {
+              "assistant": 1739,
+              "user": 2357,
+              "tool": 2708
+            },
+            "user_control_marker_counts": {
+              "###TRANSFER###": 80,
+              "###STOP###": 80
+            }
+          },
+          "business_tools": {
+            "calls_by_message_role": {
+              "assistant": 1059,
+              "user": 1649,
+              "tool": 0
+            },
+            "reply_by_requestor": {
+              "assistant": 1059,
+              "user": 1649
+            },
+            "native_error_true_by_requestor": {
+              "assistant": 5
+            },
+            "error_true_count": 5,
+            "error_true_fraction_of_tool_replies": 0.001846381093057607,
+            "error_affected_simulations": 4,
+            "error_affected_simulation_fraction": 0.025
+          },
+          "per_simulation_counts": {
+            "messages": {
+              "n": 160,
+              "mean": 54.21875,
+              "median": 51.0,
+              "p95": 98.0,
+              "min": 14.0,
+              "max": 109.0,
+              "sum": 8675.0
+            },
+            "messages_assistant": {
+              "n": 160,
+              "mean": 17.4875,
+              "median": 17.0,
+              "p95": 27.0,
+              "min": 5.0,
+              "max": 32.0,
+              "sum": 2798.0
+            },
+            "messages_user": {
+              "n": 160,
+              "mean": 19.80625,
+              "median": 18.0,
+              "p95": 41.0,
+              "min": 3.0,
+              "max": 51.0,
+              "sum": 3169.0
+            },
+            "messages_tool": {
+              "n": 160,
+              "mean": 16.925,
+              "median": 16.0,
+              "p95": 30.049999999999983,
+              "min": 4.0,
+              "max": 39.0,
+              "sum": 2708.0
+            },
+            "business_tool_calls": {
+              "n": 160,
+              "mean": 16.925,
+              "median": 16.0,
+              "p95": 30.049999999999983,
+              "min": 4.0,
+              "max": 39.0,
+              "sum": 2708.0
+            },
+            "business_tool_calls_assistant": {
+              "n": 160,
+              "mean": 6.61875,
+              "median": 7.0,
+              "p95": 11.0,
+              "min": 1.0,
+              "max": 15.0,
+              "sum": 1059.0
+            },
+            "business_tool_calls_user": {
+              "n": 160,
+              "mean": 10.30625,
+              "median": 10.0,
+              "p95": 23.049999999999983,
+              "min": 0.0,
+              "max": 31.0,
+              "sum": 1649.0
+            },
+            "tool_replies": {
+              "n": 160,
+              "mean": 16.925,
+              "median": 16.0,
+              "p95": 30.049999999999983,
+              "min": 4.0,
+              "max": 39.0,
+              "sum": 2708.0
+            },
+            "native_tool_errors_true": {
+              "n": 160,
+              "mean": 0.03125,
+              "median": 0.0,
+              "p95": 0.0,
+              "min": 0.0,
+              "max": 2.0,
+              "sum": 5.0
+            },
+            "user_nonterminal_messages_including_initial": {
+              "n": 160,
+              "mean": 18.80625,
+              "median": 17.0,
+              "p95": 40.0,
+              "min": 2.0,
+              "max": 50.0,
+              "sum": 3009.0
+            },
+            "user_nonterminal_messages_after_initial_assumed": {
+              "n": 160,
+              "mean": 17.80625,
+              "median": 16.0,
+              "p95": 39.0,
+              "min": 1.0,
+              "max": 49.0,
+              "sum": 2849.0
+            }
+          },
+          "usage": {
+            "assistant": {
+              "message_count": 2798,
+              "nonnull_usage_message_count": 0,
+              "numeric_fields": {}
+            },
+            "user": {
+              "message_count": 3169,
+              "nonnull_usage_message_count": 3169,
+              "numeric_fields": {
+                "completion_tokens": {
+                  "present_messages": 3169,
+                  "sum": 350025
+                },
+                "prompt_tokens": {
+                  "present_messages": 3169,
+                  "sum": 15897128
+                }
+              }
+            },
+            "tool": {
+              "message_count": 2708,
+              "nonnull_usage_message_count": 0,
+              "numeric_fields": {}
+            }
+          },
+          "saved_simulation_cost": {
+            "agent_cost": {
+              "nonnull_simulations": 0,
+              "numeric": {
+                "n": 0,
+                "mean": null,
+                "median": null,
+                "p95": null,
+                "min": null,
+                "max": null,
+                "sum": null
+              }
+            },
+            "user_cost": {
+              "nonnull_simulations": 0,
+              "numeric": {
+                "n": 0,
+                "mean": null,
+                "median": null,
+                "p95": null,
+                "min": null,
+                "max": null,
+                "sum": null
+              }
+            }
+          },
+          "saved_message_cost": {
+            "assistant": {
+              "nonnull_count": 160,
+              "value_distribution": {
+                "0.0": 160
+              }
+            },
+            "user": {
+              "nonnull_count": 3169,
+              "value_distribution": {
+                "0.0": 3169
+              }
+            }
+          },
+          "actual_monetary_cost": null,
+          "pass_metrics": {
+            "eligible_four_trial_binary_tasks": 40,
+            "excluded_tasks": [],
+            "success_count_histogram_over_four_trials": {
+              "0": 1,
+              "1": 5,
+              "2": 2,
+              "3": 10,
+              "4": 22
+            },
+            "observed_any_success_tasks": 39,
+            "observed_all_four_success_tasks": 22,
+            "observed_some_but_not_all_success_tasks": 17,
+            "pass_power_k_all_success_estimator": {
+              "1": 0.79375,
+              "2": 0.6833333333333333,
+              "3": 0.6125,
+              "4": 0.55
+            },
+            "pass_at_k_any_success_estimator": {
+              "1": 0.79375,
+              "2": 0.9041666666666666,
+              "3": 0.94375,
+              "4": 0.975
+            }
+          },
+          "safe_configuration": {
+            "seed": 42,
+            "max_steps": 200,
+            "max_errors": 10,
+            "domain": null,
+            "num_trials": 4,
+            "agent_info": {
+              "implementation": "openclaw_retail",
+              "llm_alias": "openai/deepseek-flash",
+              "temperature": 0.0
+            },
+            "user_info": {
+              "implementation": "user_simulator",
+              "llm_alias": "openai/deepseek-flash",
+              "temperature": 0.0
+            }
+          }
+        },
+        "B1": {
+          "raw_simulations": 160,
+          "unique_task_trial_keys": 160,
+          "unique_tasks": 40,
+          "duplicate_task_trial": [],
+          "reward_valid_numeric_count": 160,
+          "reward_binary_count": 160,
+          "success_count_reward_eq_1": 119,
+          "success_rate_over_all_saved_simulations": 0.74375,
+          "mean_reward_over_valid_numeric": 0.74375,
+          "reward_distribution": {
+            "0.0": 41,
+            "1.0": 119
+          },
+          "score_audit": {
+            "missing_reward_info": [],
+            "missing_reward": [],
+            "invalid_reward": [],
+            "nonbinary_reward": [],
+            "missing_reward_breakdown": [],
+            "reward_basis_distribution": {
+              "ENV_ASSERTION": 112,
+              "ENV_ASSERTION+ACTION": 48
+            },
+            "reward_breakdown_joint_distribution": {
+              "ACTION=1.0;ENV_ASSERTION=1.0": 48,
+              "ENV_ASSERTION=0.0": 41,
+              "ENV_ASSERTION=1.0": 71
+            },
+            "reward_breakdown_components": {
+              "ACTION": {
+                "present_simulations": 48,
+                "value_distribution": {
+                  "1.0": 48
+                },
+                "numeric": {
+                  "n": 48,
+                  "mean": 1.0,
+                  "median": 1.0,
+                  "p95": 1.0,
+                  "min": 1.0,
+                  "max": 1.0,
+                  "sum": 48.0
+                }
+              },
+              "ENV_ASSERTION": {
+                "present_simulations": 160,
+                "value_distribution": {
+                  "0.0": 41,
+                  "1.0": 119
+                },
+                "numeric": {
+                  "n": 160,
+                  "mean": 0.74375,
+                  "median": 1.0,
+                  "p95": 1.0,
+                  "min": 0.0,
+                  "max": 1.0,
+                  "sum": 119.0
+                }
+              }
+            },
+            "basis_component_absent_counts": {},
+            "basis_component_absent_records": [],
+            "breakdown_product_mismatch": [],
+            "db_reward_distribution": {
+              "0.0": 129,
+              "1.0": 31
+            },
+            "db_match_distribution": {
+              "False": 129,
+              "True": 31
+            },
+            "subcheck_diagnostics": {
+              "action_checks": {
+                "simulation_count_nonnull": 160,
+                "check_count": 648,
+                "positive_count": 503,
+                "reward_distribution": {
+                  "0.0": 145,
+                  "1.0": 503
+                }
+              },
+              "env_assertions": {
+                "simulation_count_nonnull": 160,
+                "check_count": 256,
+                "positive_count": 189,
+                "reward_distribution": {
+                  "0.0": 67,
+                  "1.0": 189
+                }
+              },
+              "nl_assertions": {
+                "simulation_count_nonnull": 0,
+                "check_count": 0,
+                "positive_count": 0,
+                "reward_distribution": {}
+              },
+              "communicate_checks": {
+                "simulation_count_nonnull": 0,
+                "check_count": 0,
+                "positive_count": 0,
+                "reward_distribution": {}
+              }
+            },
+            "note": "子检查只是诊断；正式成功由保存的reward==1定义。basis缺项可能是可选断言未应用，不直接定性评分错误。"
+          },
+          "trial_distribution": {
+            "0": 40,
+            "1": 40,
+            "2": 40,
+            "3": 40
+          },
+          "seed_distribution": {
+            "116739": 40,
+            "26225": 40,
+            "670487": 40,
+            "777572": 40
+          },
+          "termination_reason_distribution": {
+            "user_stop": 160
+          },
+          "duration_seconds": {
+            "n": 160,
+            "mean": 776.2321451596188,
+            "median": 705.9298017389992,
+            "p95": 1205.449221582701,
+            "min": 469.1057178589981,
+            "max": 1336.5967249919995,
+            "sum": 124197.143225539,
+            "missing_or_invalid": 0
+          },
+          "messages": {
+            "roles": {
+              "assistant": 2545,
+              "user": 2619,
+              "tool": 2414
+            },
+            "nonempty_content_by_role": {
+              "assistant": 1440,
+              "user": 2006,
+              "tool": 2414
+            },
+            "user_control_marker_counts": {
+              "###TRANSFER###": 89,
+              "###STOP###": 71
+            }
+          },
+          "business_tools": {
+            "calls_by_message_role": {
+              "assistant": 1105,
+              "user": 1309,
+              "tool": 0
+            },
+            "reply_by_requestor": {
+              "assistant": 1105,
+              "user": 1309
+            },
+            "native_error_true_by_requestor": {
+              "assistant": 30
+            },
+            "error_true_count": 30,
+            "error_true_fraction_of_tool_replies": 0.012427506213753107,
+            "error_affected_simulations": 27,
+            "error_affected_simulation_fraction": 0.16875
+          },
+          "per_simulation_counts": {
+            "messages": {
+              "n": 160,
+              "mean": 47.3625,
+              "median": 45.0,
+              "p95": 98.04999999999998,
+              "min": 6.0,
+              "max": 110.0,
+              "sum": 7578.0
+            },
+            "messages_assistant": {
+              "n": 160,
+              "mean": 15.90625,
+              "median": 16.5,
+              "p95": 30.0,
+              "min": 3.0,
+              "max": 34.0,
+              "sum": 2545.0
+            },
+            "messages_user": {
+              "n": 160,
+              "mean": 16.36875,
+              "median": 14.0,
+              "p95": 38.0,
+              "min": 2.0,
+              "max": 47.0,
+              "sum": 2619.0
+            },
+            "messages_tool": {
+              "n": 160,
+              "mean": 15.0875,
+              "median": 15.0,
+              "p95": 30.049999999999983,
+              "min": 1.0,
+              "max": 37.0,
+              "sum": 2414.0
+            },
+            "business_tool_calls": {
+              "n": 160,
+              "mean": 15.0875,
+              "median": 15.0,
+              "p95": 30.049999999999983,
+              "min": 1.0,
+              "max": 37.0,
+              "sum": 2414.0
+            },
+            "business_tool_calls_assistant": {
+              "n": 160,
+              "mean": 6.90625,
+              "median": 8.0,
+              "p95": 12.0,
+              "min": 1.0,
+              "max": 16.0,
+              "sum": 1105.0
+            },
+            "business_tool_calls_user": {
+              "n": 160,
+              "mean": 8.18125,
+              "median": 7.0,
+              "p95": 22.0,
+              "min": 0.0,
+              "max": 26.0,
+              "sum": 1309.0
+            },
+            "tool_replies": {
+              "n": 160,
+              "mean": 15.0875,
+              "median": 15.0,
+              "p95": 30.049999999999983,
+              "min": 1.0,
+              "max": 37.0,
+              "sum": 2414.0
+            },
+            "native_tool_errors_true": {
+              "n": 160,
+              "mean": 0.1875,
+              "median": 0.0,
+              "p95": 1.0,
+              "min": 0.0,
+              "max": 2.0,
+              "sum": 30.0
+            },
+            "user_nonterminal_messages_including_initial": {
+              "n": 160,
+              "mean": 15.36875,
+              "median": 13.0,
+              "p95": 37.0,
+              "min": 1.0,
+              "max": 46.0,
+              "sum": 2459.0
+            },
+            "user_nonterminal_messages_after_initial_assumed": {
+              "n": 160,
+              "mean": 14.36875,
+              "median": 12.0,
+              "p95": 36.0,
+              "min": 0.0,
+              "max": 45.0,
+              "sum": 2299.0
+            }
+          },
+          "usage": {
+            "assistant": {
+              "message_count": 2545,
+              "nonnull_usage_message_count": 0,
+              "numeric_fields": {}
+            },
+            "user": {
+              "message_count": 2619,
+              "nonnull_usage_message_count": 2619,
+              "numeric_fields": {
+                "completion_tokens": {
+                  "present_messages": 2619,
+                  "sum": 307061
+                },
+                "prompt_tokens": {
+                  "present_messages": 2619,
+                  "sum": 13686717
+                }
+              }
+            },
+            "tool": {
+              "message_count": 2414,
+              "nonnull_usage_message_count": 0,
+              "numeric_fields": {}
+            }
+          },
+          "saved_simulation_cost": {
+            "agent_cost": {
+              "nonnull_simulations": 0,
+              "numeric": {
+                "n": 0,
+                "mean": null,
+                "median": null,
+                "p95": null,
+                "min": null,
+                "max": null,
+                "sum": null
+              }
+            },
+            "user_cost": {
+              "nonnull_simulations": 0,
+              "numeric": {
+                "n": 0,
+                "mean": null,
+                "median": null,
+                "p95": null,
+                "min": null,
+                "max": null,
+                "sum": null
+              }
+            }
+          },
+          "saved_message_cost": {
+            "assistant": {
+              "nonnull_count": 160,
+              "value_distribution": {
+                "0.0": 160
+              }
+            },
+            "user": {
+              "nonnull_count": 2619,
+              "value_distribution": {
+                "0.0": 2619
+              }
+            }
+          },
+          "actual_monetary_cost": null,
+          "pass_metrics": {
+            "eligible_four_trial_binary_tasks": 40,
+            "excluded_tasks": [],
+            "success_count_histogram_over_four_trials": {
+              "0": 0,
+              "1": 6,
+              "2": 6,
+              "3": 11,
+              "4": 17
+            },
+            "observed_any_success_tasks": 40,
+            "observed_all_four_success_tasks": 17,
+            "observed_some_but_not_all_success_tasks": 23,
+            "pass_power_k_all_success_estimator": {
+              "1": 0.74375,
+              "2": 0.5875,
+              "3": 0.49375,
+              "4": 0.425
+            },
+            "pass_at_k_any_success_estimator": {
+              "1": 0.74375,
+              "2": 0.9,
+              "3": 0.9625,
+              "4": 1.0
+            }
+          },
+          "safe_configuration": {
+            "seed": 42,
+            "max_steps": 200,
+            "max_errors": 10,
+            "domain": null,
+            "num_trials": 4,
+            "agent_info": {
+              "implementation": "openclaw_retail",
+              "llm_alias": "openai/deepseek-flash",
+              "temperature": 0.0
+            },
+            "user_info": {
+              "implementation": "user_simulator",
+              "llm_alias": "openai/deepseek-flash",
+              "temperature": 0.0
+            }
+          }
+        }
+      },
+      "sources": {
+        "B0": {
+          "path": "D:/skillsgen-industry_track/research/imports/2026-10-05_tau_remote/repository_complete/research/experiments/268_tau2_telecom_autoskill/runs/test/no_skill.json",
+          "sha256": "2c71a8e0165ec24c29d436c21d0b37655ef70339800819523f4ed8bb47896a13",
+          "bytes": 20813911,
+          "json_simulations_path": "$.simulations"
+        },
+        "B1": {
+          "path": "D:/skillsgen-industry_track/research/imports/2026-10-05_tau_remote/repository_complete/research/experiments/268_tau2_telecom_autoskill/runs/test/autoskill_library.json",
+          "sha256": "589e1d9f321ebc8b11a08b1310122a66ffa3c7e54e507dc2b4f3a4ed72affe91",
+          "bytes": 18780385,
+          "json_simulations_path": "$.simulations"
+        }
+      },
+      "paired": {
+        "unique_matched_task_trial_pairs": 160,
+        "valid_numeric_reward_pairs": 160,
+        "binary_reward_pairs": 160,
+        "B0_unmatched": [],
+        "B1_unmatched": [],
+        "invalid_reward_pairs": [],
+        "same_seed_pairs": 160,
+        "seed_mismatches": [],
+        "missing_seed_pairs": [],
+        "B1_wins_binary": 23,
+        "B1_losses_binary": 31,
+        "ties_binary": 106,
+        "both_success_binary": 96,
+        "both_failure_binary": 10,
+        "mean_reward_delta_B1_minus_B0": -0.05,
+        "exact_McNemar_two_sided_p_binary_pairs": 0.34089094122009733,
+        "task_count": 40,
+        "task_mean_delta_positive": 10,
+        "task_mean_delta_negative": 13,
+        "task_mean_delta_tied": 17,
+        "task_level_exact_sign_two_sided_p": 0.6776394844055176,
+        "mean_of_task_mean_deltas": -0.05,
+        "task_bootstrap_ci95": [
+          -0.1625,
+          0.0563
+        ],
+        "task_bootstrap_ci95_percentage_points": [
+          -16.25,
+          5.63
+        ],
+        "task_bootstrap_method": {
+          "iterations": 10000,
+          "seed": 42,
+          "rng": "Python random.Random; randrange task index",
+          "ordering": "B0 saved simulations first-appearance task order, after unique paired numeric filtering",
+          "quantile_indices_zero_based": [
+            250,
+            9749
+          ],
+          "rounding": "4 decimals in reward units, matching source paired_summary_v4.py",
+          "unit": "task mean paired reward delta, resample nTasks tasks with replacement"
+        },
+        "task_records": [
+          {
+            "task_id": "[mms_issue]airplane_mode_on|bad_network_preference|break_app_storage_permission|data_mode_off|user_abroad_roaming_enabled_off[PERSONA:Easy]",
+            "paired_trials": 4,
+            "B0_successes": 2,
+            "B1_successes": 1,
+            "mean_delta": -0.25
+          },
+          {
+            "task_id": "[mms_issue]airplane_mode_on|bad_network_preference|break_app_both_permissions|data_usage_exceeded|unseat_sim_card|user_abroad_roaming_disabled_on[PERSONA:Hard]",
+            "paired_trials": 4,
+            "B0_successes": 1,
+            "B1_successes": 3,
+            "mean_delta": 0.5
+          },
+          {
+            "task_id": "[mms_issue]airplane_mode_on|bad_network_preference|bad_wifi_calling|break_apn_mms_setting|break_app_storage_permission|data_mode_off|data_usage_exceeded|unseat_sim_card|user_abroad_roaming_disabled_on[PERSONA:Easy]",
+            "paired_trials": 4,
+            "B0_successes": 1,
+            "B1_successes": 3,
+            "mean_delta": 0.5
+          },
+          {
+            "task_id": "[mms_issue]airplane_mode_on|bad_network_preference|bad_wifi_calling|break_apn_mms_setting|break_app_both_permissions|unseat_sim_card|user_abroad_roaming_enabled_off[PERSONA:Hard]",
+            "paired_trials": 4,
+            "B0_successes": 1,
+            "B1_successes": 4,
+            "mean_delta": 0.75
+          },
+          {
+            "task_id": "[mms_issue]airplane_mode_on|bad_wifi_calling|break_app_both_permissions|data_mode_off|data_usage_exceeded|unseat_sim_card|user_abroad_roaming_enabled_off[PERSONA:None]",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 1,
+            "mean_delta": -0.5
+          },
+          {
+            "task_id": "[mms_issue]airplane_mode_on|bad_wifi_calling|user_abroad_roaming_enabled_off[PERSONA:Easy]",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 1,
+            "mean_delta": -0.75
+          },
+          {
+            "task_id": "[mms_issue]airplane_mode_on|break_app_both_permissions[PERSONA:Hard]",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "[mms_issue]bad_network_preference|break_app_both_permissions[PERSONA:Easy]",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 3,
+            "mean_delta": -0.25
+          },
+          {
+            "task_id": "[mms_issue]bad_network_preference|bad_wifi_calling|break_app_sms_permission|data_mode_off|data_usage_exceeded|unseat_sim_card|user_abroad_roaming_enabled_off[PERSONA:Easy]",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 2,
+            "mean_delta": -0.5
+          },
+          {
+            "task_id": "[mms_issue]airplane_mode_on|bad_network_preference|bad_wifi_calling|break_apn_mms_setting|break_app_sms_permission|data_mode_off|data_usage_exceeded|unseat_sim_card|user_abroad_roaming_disabled_on[PERSONA:None]",
+            "paired_trials": 4,
+            "B0_successes": 1,
+            "B1_successes": 3,
+            "mean_delta": 0.5
+          },
+          {
+            "task_id": "[mms_issue]airplane_mode_on|break_app_both_permissions|data_usage_exceeded|user_abroad_roaming_disabled_off[PERSONA:None]",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 3,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "[mms_issue]bad_network_preference|break_app_sms_permission|user_abroad_roaming_disabled_on[PERSONA:Hard]",
+            "paired_trials": 4,
+            "B0_successes": 1,
+            "B1_successes": 2,
+            "mean_delta": 0.25
+          },
+          {
+            "task_id": "[mms_issue]bad_network_preference|data_mode_off|user_abroad_roaming_disabled_on[PERSONA:None]",
+            "paired_trials": 4,
+            "B0_successes": 0,
+            "B1_successes": 2,
+            "mean_delta": 0.5
+          },
+          {
+            "task_id": "[mms_issue]bad_wifi_calling|break_apn_mms_setting|break_app_both_permissions|data_mode_off|data_usage_exceeded|user_abroad_roaming_disabled_off[PERSONA:None]",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 2,
+            "mean_delta": -0.25
+          },
+          {
+            "task_id": "[mms_issue]break_app_sms_permission|data_mode_off[PERSONA:None]",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 3,
+            "mean_delta": -0.25
+          },
+          {
+            "task_id": "[mms_issue]break_apn_mms_setting|user_abroad_roaming_enabled_off[PERSONA:Hard]",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 1,
+            "mean_delta": -0.5
+          },
+          {
+            "task_id": "[mobile_data_issue]airplane_mode_on|bad_network_preference|bad_vpn|data_mode_off|data_saver_mode_on|data_usage_exceeded|user_abroad_roaming_enabled_off[PERSONA:Easy]",
+            "paired_trials": 4,
+            "B0_successes": 2,
+            "B1_successes": 3,
+            "mean_delta": 0.25
+          },
+          {
+            "task_id": "[mobile_data_issue]airplane_mode_on|bad_network_preference|data_mode_off|data_saver_mode_on[PERSONA:Hard]",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 1,
+            "mean_delta": -0.75
+          },
+          {
+            "task_id": "[mobile_data_issue]airplane_mode_on|data_saver_mode_on|user_abroad_roaming_disabled_on[PERSONA:None]",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 3,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "[mobile_data_issue]airplane_mode_on|data_mode_off|data_saver_mode_on|data_usage_exceeded|user_abroad_roaming_enabled_off[PERSONA:Hard]",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 1,
+            "mean_delta": -0.75
+          },
+          {
+            "task_id": "[mobile_data_issue]bad_network_preference|bad_vpn|user_abroad_roaming_disabled_off[PERSONA:Hard]",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 3,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "[mobile_data_issue]bad_vpn|data_mode_off|data_usage_exceeded|user_abroad_roaming_disabled_off[PERSONA:None]",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 3,
+            "mean_delta": -0.25
+          },
+          {
+            "task_id": "[service_issue]airplane_mode_on|break_apn_settings|contract_end_suspension|lock_sim_card_pin[PERSONA:None]",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "[mobile_data_issue]data_saver_mode_on|user_abroad_roaming_enabled_off[PERSONA:Easy]",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 2,
+            "mean_delta": -0.5
+          },
+          {
+            "task_id": "[mobile_data_issue]bad_network_preference|bad_vpn|data_mode_off|data_saver_mode_on|data_usage_exceeded|user_abroad_roaming_enabled_off[PERSONA:Easy]",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 3,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "[service_issue]airplane_mode_on|break_apn_settings|contract_end_suspension|lock_sim_card_pin|unseat_sim_card[PERSONA:Easy]",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "[mobile_data_issue]bad_network_preference|bad_vpn|data_saver_mode_on|data_usage_exceeded|user_abroad_roaming_disabled_off[PERSONA:Easy]",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 2,
+            "mean_delta": -0.5
+          },
+          {
+            "task_id": "[service_issue]airplane_mode_on|break_apn_settings|lock_sim_card_pin|overdue_bill_suspension[PERSONA:Hard]",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "[service_issue]airplane_mode_on|contract_end_suspension|lock_sim_card_pin|unseat_sim_card[PERSONA:Hard]",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 4,
+            "mean_delta": 0.25
+          },
+          {
+            "task_id": "[service_issue]airplane_mode_on|lock_sim_card_pin[PERSONA:Easy]",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "[service_issue]airplane_mode_on|lock_sim_card_pin|overdue_bill_suspension[PERSONA:Easy]",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "[service_issue]airplane_mode_on|break_apn_settings|lock_sim_card_pin|unseat_sim_card[PERSONA:None]",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "[service_issue]break_apn_settings|contract_end_suspension|lock_sim_card_pin[PERSONA:Hard]",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 4,
+            "mean_delta": 0.25
+          },
+          {
+            "task_id": "[service_issue]break_apn_settings|contract_end_suspension|lock_sim_card_pin|unseat_sim_card[PERSONA:Hard]",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "[service_issue]airplane_mode_on|break_apn_settings|overdue_bill_suspension[PERSONA:None]",
+            "paired_trials": 4,
+            "B0_successes": 3,
+            "B1_successes": 4,
+            "mean_delta": 0.25
+          },
+          {
+            "task_id": "[service_issue]break_apn_settings|lock_sim_card_pin[PERSONA:None]",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "[service_issue]airplane_mode_on|overdue_bill_suspension[PERSONA:None]",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "[service_issue]break_apn_settings|lock_sim_card_pin|overdue_bill_suspension[PERSONA:Easy]",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "[service_issue]contract_end_suspension|unseat_sim_card[PERSONA:Hard]",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          },
+          {
+            "task_id": "[service_issue]overdue_bill_suspension|unseat_sim_card[PERSONA:Easy]",
+            "paired_trials": 4,
+            "B0_successes": 4,
+            "B1_successes": 4,
+            "mean_delta": 0.0
+          }
+        ]
+      },
+      "exploratory_subgroups": {
+        "problem_type_from_task_id": [
+          {
+            "label": "mms_issue",
+            "B0": {
+              "tasks": 16,
+              "simulations": 64,
+              "successes": 39,
+              "success_rate": 0.609375
+            },
+            "B1": {
+              "tasks": 16,
+              "simulations": 64,
+              "successes": 38,
+              "success_rate": 0.59375
+            },
+            "delta_percentage_points": -1.5625
+          },
+          {
+            "label": "mobile_data_issue",
+            "B0": {
+              "tasks": 9,
+              "simulations": 36,
+              "successes": 31,
+              "success_rate": 0.8611111111111112
+            },
+            "B1": {
+              "tasks": 9,
+              "simulations": 36,
+              "successes": 21,
+              "success_rate": 0.5833333333333334
+            },
+            "delta_percentage_points": -27.77777777777778
+          },
+          {
+            "label": "service_issue",
+            "B0": {
+              "tasks": 15,
+              "simulations": 60,
+              "successes": 57,
+              "success_rate": 0.95
+            },
+            "B1": {
+              "tasks": 15,
+              "simulations": 60,
+              "successes": 60,
+              "success_rate": 1.0
+            },
+            "delta_percentage_points": 5.000000000000004
+          }
+        ],
+        "persona_from_task_id": [
+          {
+            "label": "Easy",
+            "B0": {
+              "tasks": 14,
+              "simulations": 56,
+              "successes": 48,
+              "success_rate": 0.8571428571428571
+            },
+            "B1": {
+              "tasks": 14,
+              "simulations": 56,
+              "successes": 40,
+              "success_rate": 0.7142857142857143
+            },
+            "delta_percentage_points": -14.28571428571428
+          },
+          {
+            "label": "Hard",
+            "B0": {
+              "tasks": 13,
+              "simulations": 52,
+              "successes": 39,
+              "success_rate": 0.75
+            },
+            "B1": {
+              "tasks": 13,
+              "simulations": 52,
+              "successes": 39,
+              "success_rate": 0.75
+            },
+            "delta_percentage_points": 0.0
+          },
+          {
+            "label": "None",
+            "B0": {
+              "tasks": 13,
+              "simulations": 52,
+              "successes": 40,
+              "success_rate": 0.7692307692307693
+            },
+            "B1": {
+              "tasks": 13,
+              "simulations": 52,
+              "successes": 40,
+              "success_rate": 0.7692307692307693
+            },
+            "delta_percentage_points": 0.0
+          }
+        ],
+        "note": "事后描述性诊断，未进行多重比较校正，不把子组差值当显著算法优势。"
+      },
+      "source_report_comparison": {
+        "path": "D:/skillsgen-industry_track/research/imports/2026-10-05_tau_remote/repository_complete/research/experiments/268_tau2_telecom_autoskill/reports/paired_summary_268.json",
+        "exists": true,
+        "saved_report_paired_fields": {
+          "pairs": 160,
+          "B1_better": 23,
+          "B0_better": 31,
+          "ties": 106,
+          "mean_diff_B1_minus_B0": -0.05,
+          "sign_test_two_sided_p": 0.340891,
+          "bootstrap_ci95_task_level": [
+            -0.1625,
+            0.0563
+          ],
+          "bootstrap_note": "10k resamples over task-level mean deltas"
+        },
+        "independent_numeric_fields_match": {
+          "pairs": true,
+          "B1_better": true,
+          "B0_better": true,
+          "ties": true,
+          "mean_diff_B1_minus_B0": true,
+          "sign_test_two_sided_p": true,
+          "bootstrap_ci95_task_level": true
+        }
+      },
+      "collect_source_descriptive": {
+        "source": {
+          "path": "D:/skillsgen-industry_track/research/imports/2026-10-05_tau_remote/repository_complete/research/experiments/268_tau2_telecom_autoskill/runs/collect/evolution.json",
+          "exists": true,
+          "sha256": "2c9661cf0ce1b851467be1e1178aeb8fc529b80240be0cc41288b5b8e9d9ead8",
+          "bytes": 10502031
+        },
+        "raw_simulations": 70,
+        "unique_tasks": 70,
+        "success_count_reward_eq_1": 53,
+        "reward_eq_0_count": 17,
+        "reward_missing_or_invalid_count": 0,
+        "mean_reward_over_valid_numeric": 0.7571428571428571,
+        "success_rate_over_all_saved_simulations": 0.7571428571428571,
+        "reward_distribution": {
+          "0.0": 17,
+          "1.0": 53
+        },
+        "termination_reason_distribution": {
+          "user_stop": 70
+        },
+        "reward_termination_joint_counts": {
+          "reward=1.0;termination=user_stop": 53,
+          "reward=0.0;termination=user_stop": 17
+        },
+        "reward_breakdown_missing_count": 0,
+        "reward_breakdown_joint_distribution": {
+          "ACTION=0.0;ENV_ASSERTION=1.0": 1,
+          "ACTION=1.0;ENV_ASSERTION=1.0": 6,
+          "ENV_ASSERTION=0.0": 16,
+          "ENV_ASSERTION=1.0": 47
+        },
+        "reward_basis_distribution": {
+          "ENV_ASSERTION": 63,
+          "ENV_ASSERTION+ACTION": 7
+        },
+        "reward_breakdown_missing_records": [],
+        "model_aliases": {
+          "agent_info": "openai/deepseek-flash",
+          "user_info": "openai/deepseek-flash"
+        },
+        "note": "学习源采集阶段，单独列出，不能混入正式B0/B1分母。timeout/too_many_errors是保存的原生终态；它们本身不足以认定细分机制或基础设施根因。"
+      }
+    }
+  ],
+  "script_sha256": "7901df1ac3d398adb676813e197d589a903c9eb253cd8709552adc7c422c8ceb"
+}

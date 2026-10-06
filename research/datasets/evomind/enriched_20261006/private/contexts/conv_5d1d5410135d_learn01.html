@@ -1,0 +1,210 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>第三方技能安装完整性修复</title><style>body{margin:0;background:#f3f6fb;color:#172536;font:16px/1.65 system-ui,"Microsoft YaHei",sans-serif}main{max-width:1160px;margin:32px auto;padding:0 20px}a{color:#1552aa}header,.box,article,details{background:white;border:1px solid #dce4ee;border-radius:12px;padding:18px;margin:12px 0}h1{font-size:28px}h2{font-size:22px}.meta{color:#596777;font-size:13px}.badge{display:inline-block;padding:3px 9px;border-radius:6px;background:#e9f0fa;margin-right:6px}pre{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere}input,select{font:inherit;padding:9px;border:1px solid #b9c8da;border-radius:7px}summary{cursor:pointer;font-weight:600}.muted{color:#68788b}.noise{background:#f6f6f6}table{border-collapse:collapse;width:100%}td,th{text-align:left;border-bottom:1px solid #dce4ee;padding:9px}nav{display:flex;gap:16px;flex-wrap:wrap}section{scroll-margin-top:15px}</style><main><header><h1>第三方技能安装完整性修复</h1><p>安装前核作者版本与包内容，发布包只有说明缺脚本时从声明的官方同版本源码补齐，再做真实核心调用并清空示例监控防误报</p><p>来源种子 4 组；扩入上下文 1 组。不是完整黄金轨迹，未认证时序或任务成功。</p><a href="../sessions/conv_5d1d5410135d.html">查看完整会话及全部证据</a></header><span class="badge">种子</span><section id="u_0ab7df274889a9cbeb" class="box "><p class="meta">user · u_0ab7df274889a9cbeb · 1次来源记录<br></p><pre>安装1、4</pre><details><summary>去包装前正文（明显凭据已隐藏）</summary><pre>请使用中文回复，除非用户明确使用其他语言。
+
+安装1、4</pre></details></section><span class="badge">种子</span><section id="u_74268c5f9fc2dbf326" class="box "><p class="meta">user · u_74268c5f9fc2dbf326 · 1次来源记录<br></p><pre>这个技能如何使用</pre><details><summary>去包装前正文（明显凭据已隐藏）</summary><pre>[Tue 2026-08-18 16:18 GMT+8] 请使用中文回复，除非用户明确使用其他语言。
+
+请使用技能「AI News Aggregator」协助当前任务。
+这个技能如何使用</pre></details></section><span class="badge">种子</span><section id="a_8fe2ff6d54ca6e775b" class="box "><p class="meta">assistant · a_8fe2ff6d54ca6e775b · 2次来源记录<br></p><pre>发现一个需要处理的问题：`AI News Aggregator v2.2.0` 的 ClawHub 发布包只带了说明文件，**漏打包了 README 中声称存在的 scripts**，直接安装并不能运行。我会从它声明的官方 GitHub 仓库核对同版本源码，补齐后再测试；Topic Monitor 包本身完整。</pre></section><span class="badge">种子</span><section id="a_e1f143b7d529dda400" class="box "><p class="meta">assistant · a_e1f143b7d529dda400 · 2次来源记录<br></p><pre>两个 Skill 的核心测试都跑通了：新闻聚合已抓到最新 OpenAI 条目，Topic Monitor 已成功读取 GitHub Release 并完成告警评分。现在只剩收尾：把 `feedparser` 固定到 Skill 自带目录、清空示例监控项（避免误报），然后提交安装记录。</pre></section><span class="badge">扩入上下文</span><section id="a_8f7bb397f058b5dea8" class="box "><p class="meta">assistant · a_8f7bb397f058b5dea8 · 2次来源记录<br></p><pre>[[reply_to_current]] 老板，这个 Skill 有两种用法：**直接对我说自然语言**，或者自己运行脚本。平时推荐第一种。
+
+## 一、直接告诉我你想看什么
+
+### 1. AI 新闻日报
+
+你可以说：
+
+&gt; 帮我整理今天的 AI 新闻，选最重要的 10 条。
+
+我会抓取最近 1 天的公司博客、媒体、社区和中文资讯，去重后整理成中文摘要。
+
+### 2. AI 公司动态
+
+&gt; 查一下最近 3 天 OpenAI、Anthropic、Google 和 Meta 有什么重要更新。
+
+对应 `company` 分类，优先抓官方博客，适合跟踪模型发布、产品更新和公司动态。
+
+### 3. AI Agent 专题
+
+&gt; 汇总最近一周 AI Agent 领域的重要动态。
+
+对应 `ai-agent` 分类，重点覆盖 LangChain、LlamaIndex、Ollama、vLLM、Mem0 等来源。
+
+### 4. 中文科技资讯
+
+&gt; 看一下最近 3 天国内 AI 媒体在关注什么。
+
+对应 `cn_media`，主要覆盖机器之心、量子位、36氪、少数派和 InfoQ。
+
+### 5. 最新论文
+
+&gt; 找最近多智能体方向值得关注的 10 篇论文。
+
+或者：
+
+&gt; 查一下具身智能、RAG、世界模型最近有什么论文。
+
+它会调用 arXiv 检索，并可按主题筛选。
+
+### 6. GitHub 热门项目
+
+&gt; 看看本周 GitHub 上有哪些值得关注的 AI 项目。
+
+可以选择今日或本周榜单，并过滤非 AI 项目。
+
+---
+
+## 二、你可以指定输出要求
+
+建议在问题中加入下面几个维度。
+
+### 时间范围
+
+- 今天：最近 1 天
+- 本周：最近 7 天
+- 本月：最近 30 天
+
+例如：
+
+&gt; 汇总最近 7 天 AI Agent 新闻。
+
+### 数量
+
+&gt; 只选最重要的 8 条。
+
+### 内容分类
+
+可指定：
+
+- `company`：AI 公司官方动态
+- `papers`：论文和研究
+- `media`：科技媒体
+- `newsletter`：专家博客和通讯
+- `community`：社区热点
+- `cn_media`：中文媒体
+- `ai-agent`：Agent 生态
+- `twitter`：AI 业界人物动态
+- `all`：全部来源
+
+### 输出形式
+
+你可以要求：
+
+- 一句话摘要
+- 详细摘要
+- 按重要性排序
+- 按公司分类
+- 表格输出
+- 投资人视角点评
+- 只保留原始信源
+- 附原文链接
+- 区分事实与我的判断
+
+例如：
+
+&gt; 抓取最近一周 AI Agent 新闻，选 10 条，按重要性排序。每条包含事件摘要、原文链接、影响判断和投资机会，不要收录纯营销内容。
+
+这类指令最适合你。
+
+---
+
+## 三、我建议你常用的几个模板
+
+### AI 每日情报
+
+&gt; 使用 AI News Aggregator 汇总最近 24 小时 AI 行业最重要的 10 条动态。优先使用公司官方来源，合并重复报道。每条给出摘要、原文链接、重要性和对企业 AI 行业的影响。
+
+### AI Builders Digest
+
+&gt; 汇总最近 7 天 AI 模型、Agent、开发工具和开源项目动态，选出 15 条。按模型、Agent、工具、开源项目分类，说明为什么值得 Builders 关注。
+
+### 投资人视角周报
+
+&gt; 抓取最近一周 AI 行业新闻、论文和 GitHub 热门项目，筛选具有投资或成果转化价值的事件。每条分析技术变化、商业机会、成熟度和潜在风险。
+
+### 指定公司监控
+
+&gt; 汇总最近 7 天 OpenAI、Anthropic、Google DeepMind、Meta、Mistral 和 NVIDIA 的官方动态，按公司分类，不采用二手媒体作为主要依据。
+
+### 学术成果线索
+
+&gt; 检索最近 30 天多智能体、具身智能和医疗 AI 论文，筛选具有产业化潜力的 10 篇，分析技术创新、应用场景、成熟度和成果转化可能性。
+
+---
+
+## 四、命令行用法
+
+当前实际安装目录带作者作用域，因此命令如下。
+
+### RSS 新闻聚合
+
+```bash
+python3 skills/@lanyasheng/ai-news-aggregator/scripts/rss_aggregator.py \
+  --category all \
+  --days 3 \
+  --limit 10
+```
+
+只看 AI 公司：
+
+```bash
+python3 skills/@lanyasheng/ai-news-aggregator/scripts/rss_aggregator.py \
+  --category company \
+  --days 1 \
+  --limit 10
+```
+
+只看中文媒体：
+
+```bash
+python3 skills/@lanyasheng/ai-news-aggregator/scripts/rss_aggregator.py \
+  --category cn_media \
+  --days 3 \
+  --limit 10
+```
+
+输出为 JSON：
+
+```bash
+python3 skills/@lanyasheng/ai-news-aggregator/scripts/rss_aggregator.py \
+  --category all \
+  --days 1 \
+  --json
+```
+
+### arXiv 论文
+
+```bash
+python3 skills/@lanyasheng/ai-news-aggregator/scripts/arxiv_papers.py \
+  --query &quot;multi-agent&quot; \
+  --top 10
+```
+
+### GitHub Trending
+
+今日 AI 热门项目：
+
+```bash
+python3 skills/@lanyasheng/ai-news-aggregator/scripts/github_trending.py \
+  --ai-only
+```
+
+本周热门项目：
+
+```bash
+python3 skills/@lanyasheng/ai-news-aggregator/scripts/github_trending.py \
+  --since weekly \
+  --ai-only
+```
+
+## 最简单的使用方式
+
+以后你只要说：
+
+&gt; **小明，帮我做今天的 AI 新闻简报。**
+
+如果没有额外要求，我会默认：
+
+- 时间：最近 24 小时
+- 范围：公司、媒体、Agent、社区和中文资讯
+- 数量：10 条左右
+- 排序：按重要性，而不是发布时间
+- 处理：跨来源去重
+- 输出：中文摘要＋原文链接＋简短影响判断</pre></section></main></html>

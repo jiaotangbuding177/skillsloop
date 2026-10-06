@@ -1,0 +1,477 @@
+{
+  "workflows": [
+    {
+      "id": "workflow-5bab5ba2f921850eb3f917d3",
+      "owner": "alice",
+      "org": "acme",
+      "schemaVersion": "workflow-candidate-v1",
+      "action": "NEW",
+      "targetBase": null,
+      "workflow": {
+        "frameIds": [
+          "f1",
+          "f3"
+        ],
+        "title": "合同/协议审阅与修订",
+        "trigger": "需要审阅合同或协议并输出修订版本时",
+        "inputs": [
+          "待审阅合同/协议文件",
+          "审阅视角/立场",
+          "修订范围/原则要求"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "methodIds": [
+              "m1",
+              "m4"
+            ],
+            "action": "解析文件并根据指定视角识别风险事项",
+            "condition": "m1: 通用/指定视角; m4: 弱势供应商视角及最小化修订原则",
+            "completionCheck": "输出风险事项列表及分级，或核心风险列表及修订策略"
+          },
+          {
+            "id": "s2",
+            "methodIds": [
+              "m2",
+              "m5"
+            ],
+            "action": "根据识别结果生成带修订痕迹/标记的文件及说明",
+            "condition": "m2: 风险事项已识别; m5: 修订策略已制定",
+            "completionCheck": "生成包含修订痕迹和批注的文件，或带修订标记的文件及说明文档"
+          }
+        ],
+        "outputs": [
+          "带修订和批注/标记的合同/协议文件",
+          "风险分级说明/修订说明与谈判建议"
+        ],
+        "parameters": [
+          "审阅视角",
+          "修订范围/原则",
+          "合同/协议文件"
+        ],
+        "conditions": [
+          "用户指定了审阅视角和修订范围/原则"
+        ],
+        "dependencies": [],
+        "limitations": [
+          "业务效果未知",
+          "来源仅支持有出处的方法与可见过程；业务效果、专业正确性及真实文件交付未经独立验证，均为UNKNOWN。"
+        ],
+        "includedMethodIds": [
+          "m1",
+          "m2",
+          "m4",
+          "m5"
+        ],
+        "businessOutcome": "UNKNOWN"
+      },
+      "workflowHash": "e3168531d200813c2f0f9587b9b71a23a4ff2edc7c8944af34c81d04e4cb8f4e",
+      "sourceRefs": [
+        {
+          "id": "task-33ab3f323f8863129ea85afc",
+          "revision": 1,
+          "hash": "656df6aac982f642f0157fb9af587ac284938276b241236508d33a00ea00e300"
+        },
+        {
+          "id": "task-f266dc4aa8bc9f58037c0028",
+          "revision": 1,
+          "hash": "7f95aafbd5820bba77a1e727cb28b0925aa80e6414b41780261701aab1e26a99"
+        }
+      ],
+      "analysisId": "workflow_extract-074b5a5ee9445cb946f74d6a",
+      "mergeId": "workflow_merge-6336d99f21f73e54a70588b3",
+      "methodLedger": [
+        {
+          "methodId": "m1",
+          "disposition": "INCLUDED",
+          "reason": "基于用户要求审阅并输出风险分级，适用于通用/指定视角的合同风险识别",
+          "duplicateOf": null
+        },
+        {
+          "methodId": "m2",
+          "disposition": "INCLUDED",
+          "reason": "用户要求直接输出修订和批注意见版本，适用于生成通用修订痕迹和批注文件",
+          "duplicateOf": null
+        },
+        {
+          "methodId": "m4",
+          "disposition": "INCLUDED",
+          "reason": "用户要求站在供应商角度仅修改核心和重大风险，适用于弱势供应商视角的核心风险识别与最小化策略制定",
+          "duplicateOf": null
+        },
+        {
+          "methodId": "m5",
+          "disposition": "INCLUDED",
+          "reason": "用户要求直接以修订模式进行修改并输出，适用于生成最小化修订标记文件及说明文档",
+          "duplicateOf": null
+        }
+      ],
+      "created": 1790437066.5566604,
+      "status": "PACKAGED",
+      "candidateId": "candidate-95e6a640341d673176ebb04b"
+    },
+    {
+      "id": "workflow-c3228cf0ebf48e565ecfd750",
+      "owner": "alice",
+      "org": "acme",
+      "schemaVersion": "workflow-candidate-v1",
+      "action": "NEW",
+      "targetBase": null,
+      "workflow": {
+        "frameIds": [
+          "f2",
+          "f4"
+        ],
+        "title": "特定条款调整与文件更新",
+        "trigger": "需要根据业务背景或选定方案调整特定条款并更新文件时",
+        "inputs": [
+          "当前合同/协议版本",
+          "补充的业务背景/用户选择的修订方案",
+          "需调整的目标条款"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "methodIds": [
+              "m3",
+              "m6"
+            ],
+            "action": "根据业务背景设计兼容方案或应用选定方案修改特定条款",
+            "condition": "m3: 业务背景与现有条款存在冲突; m6: 用户已选择修订方案",
+            "completionCheck": "输出修改/更新后的条款文本及更新后的文件"
+          }
+        ],
+        "outputs": [
+          "修改/更新后的条款文本",
+          "更新后的合同/协议文件"
+        ],
+        "parameters": [
+          "业务背景/修订方案",
+          "目标条款"
+        ],
+        "conditions": [
+          "用户提供了补充业务背景或明确选择了修订方案",
+          "现有条款存在冲突或需调整"
+        ],
+        "dependencies": [],
+        "limitations": [
+          "业务效果未知",
+          "来源仅支持有出处的方法与可见过程；业务效果、专业正确性及真实文件交付未经独立验证，均为UNKNOWN。"
+        ],
+        "includedMethodIds": [
+          "m3",
+          "m6"
+        ],
+        "businessOutcome": "UNKNOWN"
+      },
+      "workflowHash": "c37afb74efa107ae200ff64b287e1f2152b52086c92407df91cdc6a33d9ecbce",
+      "sourceRefs": [
+        {
+          "id": "task-33ab3f323f8863129ea85afc",
+          "revision": 1,
+          "hash": "656df6aac982f642f0157fb9af587ac284938276b241236508d33a00ea00e300"
+        },
+        {
+          "id": "task-f266dc4aa8bc9f58037c0028",
+          "revision": 1,
+          "hash": "7f95aafbd5820bba77a1e727cb28b0925aa80e6414b41780261701aab1e26a99"
+        }
+      ],
+      "analysisId": "workflow_extract-074b5a5ee9445cb946f74d6a",
+      "mergeId": "workflow_merge-6336d99f21f73e54a70588b3",
+      "methodLedger": [
+        {
+          "methodId": "m3",
+          "disposition": "INCLUDED",
+          "reason": "用户要求修改排他条款以兼容特定业务背景，适用于根据业务背景设计兼容方案并修改条款",
+          "duplicateOf": null
+        },
+        {
+          "methodId": "m6",
+          "disposition": "INCLUDED",
+          "reason": "用户要求采用选定方案修改特定条款，适用于应用用户选定的修订方案更新条款及文件",
+          "duplicateOf": null
+        }
+      ],
+      "created": 1790437066.5579343,
+      "status": "PACKAGED",
+      "candidateId": "candidate-17027d85bd2b65a14a29e067"
+    },
+    {
+      "id": "workflow-11a3986f4aa8876294d3b99a",
+      "owner": "alice",
+      "org": "acme",
+      "schemaVersion": "workflow-candidate-v1",
+      "action": "NEW",
+      "targetBase": null,
+      "workflow": {
+        "frameIds": [
+          "f5"
+        ],
+        "title": "特定条款修改文本单独输出",
+        "trigger": "用户要求仅单独输出特定条款的修改文本而不重新生成完整文件时",
+        "inputs": [
+          "目标条款的修改内容",
+          "输出格式要求"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "methodIds": [
+              "m7"
+            ],
+            "action": "提取特定条款的修改内容并按要求格式化输出",
+            "condition": "用户要求单独输出修改文本",
+            "completionCheck": "输出特定条款的修改文本"
+          }
+        ],
+        "outputs": [
+          "特定条款的修改文本"
+        ],
+        "parameters": [
+          "目标条款"
+        ],
+        "conditions": [
+          "用户要求单独输出修改文本"
+        ],
+        "dependencies": [],
+        "limitations": [
+          "业务效果未知",
+          "来源仅支持有出处的方法与可见过程；业务效果、专业正确性及真实文件交付未经独立验证，均为UNKNOWN。"
+        ],
+        "includedMethodIds": [
+          "m7"
+        ],
+        "businessOutcome": "UNKNOWN"
+      },
+      "workflowHash": "3716930f4fda0de4c37377e6a28c5937af92d5b470d26283c59e8d5a340c9c61",
+      "sourceRefs": [
+        {
+          "id": "task-f266dc4aa8bc9f58037c0028",
+          "revision": 1,
+          "hash": "7f95aafbd5820bba77a1e727cb28b0925aa80e6414b41780261701aab1e26a99"
+        }
+      ],
+      "analysisId": "workflow_extract-074b5a5ee9445cb946f74d6a",
+      "mergeId": "workflow_merge-6336d99f21f73e54a70588b3",
+      "methodLedger": [
+        {
+          "methodId": "m7",
+          "disposition": "INCLUDED",
+          "reason": "用户要求不需要重新输出文件，单独输出修改文本，适用于提取并格式化输出特定条款修改内容",
+          "duplicateOf": null
+        }
+      ],
+      "created": 1790437066.5584435,
+      "status": "FROZEN"
+    }
+  ],
+  "learningDecisions": [
+    {
+      "id": "decision-b95af03aba53d4574ab63988",
+      "owner": "alice",
+      "sourceHash": "0d5cf3af6bf33b2d1e0d46357af73067af1ff2eaeb5c5bf7023eb164e6cba313",
+      "analysisId": "workflow_extract-074b5a5ee9445cb946f74d6a",
+      "mergeId": "workflow_merge-6336d99f21f73e54a70588b3",
+      "frameRelations": [
+        {
+          "left": "f1",
+          "right": "f3",
+          "kind": "SHARE_CORE",
+          "sharedSteps": [
+            "解析合同/协议文件",
+            "识别风险事项",
+            "生成带修订标记和批注的文件"
+          ],
+          "condition": "审阅视角和修订范围/原则不同",
+          "reason": "两者均包含合同审阅、风险识别和生成修订版文件的核心流程，可复用相同的文件解析和修订标记生成逻辑"
+        },
+        {
+          "left": "f2",
+          "right": "f4",
+          "kind": "SHARE_CORE",
+          "sharedSteps": [
+            "解析用户输入的调整方案/背景",
+            "修改目标条款",
+            "更新合同/协议文件"
+          ],
+          "condition": "调整依据不同（业务背景冲突 vs 用户选择的谈判方案）",
+          "reason": "两者均涉及根据用户反馈修改特定条款并更新文件的流程，可复用条款定位和文件更新逻辑"
+        }
+      ],
+      "clusters": [
+        [
+          "f1",
+          "f3"
+        ],
+        [
+          "f2",
+          "f4"
+        ],
+        [
+          "f5"
+        ]
+      ],
+      "routes": {
+        "f1": [
+          "NEW",
+          null
+        ],
+        "f2": [
+          "NEW",
+          null
+        ],
+        "f3": [
+          "NEW",
+          null
+        ],
+        "f4": [
+          "NEW",
+          null
+        ],
+        "f5": [
+          "NEW",
+          null
+        ]
+      },
+      "methodLedger": [
+        {
+          "methodId": "m1",
+          "disposition": "INCLUDED",
+          "reason": "基于用户要求审阅并输出风险分级，适用于通用/指定视角的合同风险识别",
+          "duplicateOf": null
+        },
+        {
+          "methodId": "m2",
+          "disposition": "INCLUDED",
+          "reason": "用户要求直接输出修订和批注意见版本，适用于生成通用修订痕迹和批注文件",
+          "duplicateOf": null
+        },
+        {
+          "methodId": "m3",
+          "disposition": "INCLUDED",
+          "reason": "用户要求修改排他条款以兼容特定业务背景，适用于根据业务背景设计兼容方案并修改条款",
+          "duplicateOf": null
+        },
+        {
+          "methodId": "m4",
+          "disposition": "INCLUDED",
+          "reason": "用户要求站在供应商角度仅修改核心和重大风险，适用于弱势供应商视角的核心风险识别与最小化策略制定",
+          "duplicateOf": null
+        },
+        {
+          "methodId": "m5",
+          "disposition": "INCLUDED",
+          "reason": "用户要求直接以修订模式进行修改并输出，适用于生成最小化修订标记文件及说明文档",
+          "duplicateOf": null
+        },
+        {
+          "methodId": "m6",
+          "disposition": "INCLUDED",
+          "reason": "用户要求采用选定方案修改特定条款，适用于应用用户选定的修订方案更新条款及文件",
+          "duplicateOf": null
+        },
+        {
+          "methodId": "m7",
+          "disposition": "INCLUDED",
+          "reason": "用户要求不需要重新输出文件，单独输出修改文本，适用于提取并格式化输出特定条款修改内容",
+          "duplicateOf": null
+        }
+      ],
+      "workflowIds": [
+        "workflow-5bab5ba2f921850eb3f917d3",
+        "workflow-c3228cf0ebf48e565ecfd750",
+        "workflow-11a3986f4aa8876294d3b99a"
+      ],
+      "excludedTraceIds": []
+    }
+  ],
+  "pools": [
+    {
+      "id": "pool-candidate-95e6a640341d673176ebb04b",
+      "owner": "alice",
+      "candidateId": "candidate-95e6a640341d673176ebb04b",
+      "members": [
+        {
+          "taskId": "task-33ab3f323f8863129ea85afc",
+          "revision": 1,
+          "hash": "656df6aac982f642f0157fb9af587ac284938276b241236508d33a00ea00e300"
+        },
+        {
+          "taskId": "task-f266dc4aa8bc9f58037c0028",
+          "revision": 1,
+          "hash": "7f95aafbd5820bba77a1e727cb28b0925aa80e6414b41780261701aab1e26a99"
+        }
+      ],
+      "algorithm": "workflow-frame-complete-link-v1",
+      "snapshotHash": "e3168531d200813c2f0f9587b9b71a23a4ff2edc7c8944af34c81d04e4cb8f4e",
+      "state": "READY"
+    },
+    {
+      "id": "pool-candidate-17027d85bd2b65a14a29e067",
+      "owner": "alice",
+      "candidateId": "candidate-17027d85bd2b65a14a29e067",
+      "members": [
+        {
+          "taskId": "task-33ab3f323f8863129ea85afc",
+          "revision": 1,
+          "hash": "656df6aac982f642f0157fb9af587ac284938276b241236508d33a00ea00e300"
+        },
+        {
+          "taskId": "task-f266dc4aa8bc9f58037c0028",
+          "revision": 1,
+          "hash": "7f95aafbd5820bba77a1e727cb28b0925aa80e6414b41780261701aab1e26a99"
+        }
+      ],
+      "algorithm": "workflow-frame-complete-link-v1",
+      "snapshotHash": "c37afb74efa107ae200ff64b287e1f2152b52086c92407df91cdc6a33d9ecbce",
+      "state": "READY"
+    },
+    {
+      "id": "pool-candidate-ffd24764648b2376594ce589",
+      "owner": "alice",
+      "candidateId": "candidate-ffd24764648b2376594ce589",
+      "members": [
+        {
+          "taskId": "task-f266dc4aa8bc9f58037c0028",
+          "revision": 1,
+          "hash": "7f95aafbd5820bba77a1e727cb28b0925aa80e6414b41780261701aab1e26a99"
+        }
+      ],
+      "algorithm": "workflow-frame-complete-link-v1",
+      "snapshotHash": "3716930f4fda0de4c37377e6a28c5937af92d5b470d26283c59e8d5a340c9c61",
+      "state": "FAILED"
+    }
+  ],
+  "workflowStatuses": [
+    {
+      "id": "stage4-82a056749341de0f97043532",
+      "owner": "alice",
+      "traceIds": [
+        "task-33ab3f323f8863129ea85afc",
+        "task-f266dc4aa8bc9f58037c0028"
+      ],
+      "sourceRefs": [
+        {
+          "id": "task-33ab3f323f8863129ea85afc",
+          "hash": "656df6aac982f642f0157fb9af587ac284938276b241236508d33a00ea00e300"
+        },
+        {
+          "id": "task-f266dc4aa8bc9f58037c0028",
+          "hash": "7f95aafbd5820bba77a1e727cb28b0925aa80e6414b41780261701aab1e26a99"
+        }
+      ],
+      "state": "PROCESSED",
+      "updated": 1790437066.5588741,
+      "analysisId": "workflow_extract-074b5a5ee9445cb946f74d6a",
+      "mergeId": "workflow_merge-6336d99f21f73e54a70588b3",
+      "learningDecisionId": "decision-b95af03aba53d4574ab63988",
+      "workflowIds": [
+        "workflow-5bab5ba2f921850eb3f917d3",
+        "workflow-c3228cf0ebf48e565ecfd750",
+        "workflow-11a3986f4aa8876294d3b99a"
+      ]
+    }
+  ]
+}

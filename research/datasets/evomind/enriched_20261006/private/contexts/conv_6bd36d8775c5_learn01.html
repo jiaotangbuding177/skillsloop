@@ -1,0 +1,18 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>数字人视频抠像与验收纠偏</title><style>body{margin:0;background:#f3f6fb;color:#172536;font:16px/1.65 system-ui,"Microsoft YaHei",sans-serif}main{max-width:1160px;margin:32px auto;padding:0 20px}a{color:#1552aa}header,.box,article,details{background:white;border:1px solid #dce4ee;border-radius:12px;padding:18px;margin:12px 0}h1{font-size:28px}h2{font-size:22px}.meta{color:#596777;font-size:13px}.badge{display:inline-block;padding:3px 9px;border-radius:6px;background:#e9f0fa;margin-right:6px}pre{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere}input,select{font:inherit;padding:9px;border:1px solid #b9c8da;border-radius:7px}summary{cursor:pointer;font-weight:600}.muted{color:#68788b}.noise{background:#f6f6f6}table{border-collapse:collapse;width:100%}td,th{text-align:left;border-bottom:1px solid #dce4ee;padding:9px}nav{display:flex;gap:16px;flex-wrap:wrap}section{scroll-margin-top:15px}</style><main><header><h1>数字人视频抠像与验收纠偏</h1><p>不能按素材名keyed就认定透明：探测实际像素格式和宽高，发现绿幕不能用screen混合当抠像，应色度键转换透明后重渲染；先技术与视觉检查再交付</p><p>来源种子 7 组；扩入上下文 0 组。不是完整黄金轨迹，未认证时序或任务成功。</p><a href="../sessions/conv_6bd36d8775c5.html">查看完整会话及全部证据</a></header><span class="badge">种子</span><section id="u_07854690a0d05c5296" class="box "><p class="meta">user · u_07854690a0d05c5296 · 1次来源记录<br></p><pre>请使用「Evomind视频生成器【自研】」协助我完成当前任务。完成后通过飞书发送给余知秋
+[附加文件: 天辰-易知_科技产业匹配_Agent制作包.zip (共享工作区/易知视频/合集/天辰-易知_科技产业匹配_Agent制作包.zip)]</pre><details><summary>去包装前正文（明显凭据已隐藏）</summary><pre>请使用中文回复，除非用户明确使用其他语言。
+
+请使用技能「Evomind视频生成器【自研】」协助当前任务。
+请使用「Evomind视频生成器【自研】」协助我完成当前任务。完成后通过飞书发送给余知秋
+[附加文件: 天辰-易知_科技产业匹配_Agent制作包.zip (共享工作区/易知视频/合集/天辰-易知_科技产业匹配_Agent制作包.zip)]</pre></details></section><span class="badge">种子</span><section id="u_36e5a2b27fd3830c6a" class="box "><p class="meta">user · u_36e5a2b27fd3830c6a · 1次来源记录<br></p><pre>你完成该任务了吗</pre><details><summary>去包装前正文（明显凭据已隐藏）</summary><pre>请使用中文回复，除非用户明确使用其他语言。
+
+你完成该任务了吗</pre></details></section><span class="badge">种子</span><section id="u_d585ef9be91a70c06f" class="box "><p class="meta">user · u_d585ef9be91a70c06f · 1次来源记录<br></p><pre>进度到哪了</pre><details><summary>去包装前正文（明显凭据已隐藏）</summary><pre>请使用中文回复，除非用户明确使用其他语言。
+
+进度到哪了</pre></details></section><span class="badge">种子</span><section id="a_fc7aefcc46948ceb6f" class="box "><p class="meta">assistant · a_fc7aefcc46948ceb6f · 2次来源记录<br></p><pre>关键发现：数字人 WebM 是 **720×720 方形**（VP9，无 alpha 通道，yuv420p——说明背景被处理成黑色，用 screen 混合模式抠除）。但我的代码用了 16:9 的盒子，会导致数字人被横向拉伸！
+
+先提取 WebM 一帧，分析人物实际占比，再修正尺寸：</pre></section><span class="badge">种子</span><section id="a_89b9e6c88780c53428" class="box "><p class="meta">assistant · a_89b9e6c88780c53428 · 2次来源记录<br></p><pre>⚠️ 重大问题：keyed.webm 实际仍是绿幕视频（82.7% 纯绿色像素）！需要确认我之前的合成是否真的去掉了绿幕。检查之前渲染的关键帧中数字人区域是否有绿色残留：</pre></section><span class="badge">种子</span><section id="a_35832810a60cab4a74" class="box "><p class="meta">assistant · a_35832810a60cab4a74 · 2次来源记录<br></p><pre>数字人区域几乎融入了明亮背景——**screen 混合模式并没有真正抠掉绿幕**，人物被洗白了。之前的&quot;看起来正常&quot;是误判。必须用 ffmpeg 正确做色度键抠像。
+
+先看参考布局图确认设计意图：</pre></section><span class="badge">种子</span><section id="a_bd7577a45effc0354a" class="box "><p class="meta">assistant · a_bd7577a45effc0354a · 1次来源记录<br></p><pre>还没有完成，渲染过程中发现了一个**关键问题**：数字人 WebM 实际仍是**绿幕素材**（82.7% 纯绿色），`screen` 混合模式无法去除绿色，导致数字人被洗白，合成效果不达标。
+
+需要修复：用 ffmpeg 做色度键抠像，把绿幕转为透明通道，重新渲染。
+
+我现在继续修复，需要一些时间。要等修完确认效果 OK 后，再通过飞书发给余知秋。</pre></section></main></html>

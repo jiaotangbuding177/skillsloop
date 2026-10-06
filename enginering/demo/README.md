@@ -1,8 +1,10 @@
 # Skills Loop：独立科研 Demo
 
-这是企业会话驱动 skills 涌现与持续演化的独立原型。无 InsightWeaver、KM Agent、Redis、PostgreSQL 依赖。真实对话、技能生成与消费由 OpenClaw 执行；任务识别、轨迹恢复和workflow聚合由有界结构化模型请求提出语义判断，再由宿主程序核验来源、聚类边界与版本。Python 标准库负责SQLite事务、版本治理和本地页面。
+纯文件实验入口：`python -X utf8 trace_to_skills.py --input <X文件> --output <新目录> --max-calls 2`。当前默认是关系恢复、局部证据核对、程序工作流归纳和冻结技能库；每批两次模型提议，聚合／封装不调用模型，无账号／数据库前提。先用 `--preflight-only` 核对实际批次数与预算。见[直接实验管道说明](DIRECT_PIPELINE_README.md)及[实施计划与验收矩阵](DIRECT_PIPELINE_PLAN.md)。原十二阶段入口和 `--algorithm legacy` 继续保留。
 
-新版链路已接通原始事件整理、任务识别、轨迹恢复、workflow轮廓聚类与方法台账、独立creator会话封装；旧schema的逐轨迹patch链路保留。程序执行聚类、引用及版本检查，模型提供语义提议。个人工作台 `/skills` 与 `/chat` 支持采纳、查看、下载、选版和真实对话，研究后台在 `/`。[阶段4/5验收](STAGES_45_ACCEPTANCE.md)、[旧方法契约](MULTITRACE_SPEC.md)、[Windows兼容](OPENCLAW_COMPATIBILITY.md)。
+这是企业会话驱动 skills 涌现与持续演化的独立原型。真实对话、技能封装草稿与消费由 OpenClaw 执行。新的启发式管道把原消息、工具调用与结果、公开政策和稀疏评价一起输入：一次模型请求提出任务与关系，程序进行有界联合恢复，再用关系和结果范围约束workflow聚类与技能条款。重复聚合材料按无损索引传输；新技能正文由程序按冻结步骤及范围组装，保留模型草稿审计，仍由官方校验打包。Python 标准库负责SQLite事务、版本治理和本地页面。无 InsightWeaver、KM Agent、Redis、PostgreSQL 依赖。
+
+真实模式默认使用 `heuristic`，旧路径保留为 `legacy`。新旧算法必须使用独立数据目录，不迁移旧库或覆盖旧实验。个人工作台 `/skills` 与 `/chat` 继续支持采纳、查看、下载、选版和真实对话，研究后台在 `/`。新算法见[实施规格](HEURISTIC_PIPELINE_SPEC.md)、[计划](HEURISTIC_PIPELINE_PLAN.md)与[本轮验收](HEURISTIC_PIPELINE_ACCEPTANCE.md)，历史验收见[阶段4/5](STAGES_45_ACCEPTANCE.md)、[旧方法契约](MULTITRACE_SPEC.md)、[Windows兼容](OPENCLAW_COMPATIBILITY.md)。
 
 ## 快速启动
 
@@ -30,7 +32,7 @@ python demo.py serve --mode replay --port 8765
 $env:DEMO_MODEL = '你的模型ID'
 $env:DEMO_BASE_URL = 'https://api.openai.com/v1'
 # 通过本地安全配置设置 DEMO_API_KEY；不要把密钥提交到仓库或发到聊天。
-python demo.py serve --mode openclaw --port 8766
+python demo.py serve --mode openclaw --learning-algorithm heuristic --port 8766
 ```
 
 `DEMO_MODEL_API` 默认 `openai-completions`，要求服务提供兼容的 Chat Completions 接口；任务识别还支持 `anthropic-messages`。`DEMO_AGENT_TIMEOUT` 默认 180 秒，本机真实封装任务设为 300 秒；任务识别单请求超时由 `DEMO_DETECT_TIMEOUT` 控制（默认180秒，上限240秒）。未配置模型／密钥时真实模式明确失败，不退回夹具。启动时默认读取本目录 `.env`，进程环境优先；修改配置后重启服务。`DEMO_NETWORK_MODE=direct` 可绕开无效代理。配置模板、真实技能读取回执和 `live-check` 见 [真实模型操作说明](LIVE_AGENT.md)。
@@ -41,13 +43,14 @@ python demo.py serve --mode openclaw --port 8766
 
 ```mermaid
 flowchart TD
- A[原始事件] --> B[问答配对]
- B --> C[逐对任务识别与多目标分片]
- C --> D[关系恢复与TaskTrace]
+ A[原始消息与工具事件] --> B[来源 / 调用索引与问答视图]
+ V[公开上下文与稀疏评价 可为空] --> B
+ B --> C[一次模型提议任务 / 要求 / 关系 / 结果绑定]
+ C --> D[程序联合恢复 / 要求继承 / 尝试与反馈轨迹]
  D --> E[用途/权限/使用基准门禁]
  E --> F[LLM提取workflow轮廓和方法]
  F --> G[程序约束聚类]
- G --> H[LLM簇内方法合并、程序完整台账]
+ G --> H[簇内方法合并 / 来源与关系依赖条款台账]
  H -->|NEW| I[冻结workflow]
  H -->|UPDATE| J[阶段9精确版本更新入口]
  I --> K[独立OpenClaw会话读取creator并写出SKILL.md]
@@ -57,11 +60,13 @@ flowchart TD
  N --> O[反馈和后续演化]
 ```
 
-真实模式前三阶段按[047验收](STAGES_123_ACCEPTANCE.md)形成新版TaskTrace；第4阶段由模型提出具体流程兼容关系，再由程序执行complete-link约束聚类，第二次结构化请求合并方法并保存完整台账；第5阶段只接收冻结NEW workflow。旧schema词法聚类和patch模式保留为历史/回放路径，不充当新版语义聚类。高频/重要性排序尚未实现，当前机制也不是Trace2Skill独立并行分析器的严格复现。
+启发式模式形成兼容当前治理的标准轨迹，保留要求的不同维度、真实动作与可见交付、反馈指向、稀疏评价范围和未决项。失败轨迹可保存高质量经验，缺结果的过程保持未验证；任务总分不会证明每个步骤都成功，准备做与自称完成不会变成已执行能力。阶段4仍由模型提出流程兼容关系，程序检查complete-link及全簇关系约束，合并时生成可回查的条款台账；阶段5沿用独立creator和官方包格式。历史047/049测试对应legacy路径，高频/重要性排序和训练模型尚未实现。
 
 候选 `UNKNOWN` 可以正常生成和审核；不需要用户说“满意”。`SEALED` 仅表示暂时稳定；`COMPLETED` 仅表示运行结束；`CONTEXT_INJECTED` 仅证明把选中版本交给 agent，不能证明遵循技能或取得收益。只有实际反馈才改变证据。
 
-技能包采用 `SKILL.md`（YAML name/description）与辅助文本文件；保留原项目市场信息五节，不把轨迹 JSON 当技能格式。UPDATE 必须保留未涉及文件；个人更新与组织发布检查基准版本及哈希；回滚产生新版本。组织 skill 的个人采纳形成个人分支，更新组织库仍须提审。
+技能包采用 `SKILL.md`（YAML name/description）与辅助文本文件；保留原项目市场信息五节，不把轨迹 JSON 当技能格式。新封装检查每个方法与每个工作流步骤的范围。UPDATE 必须保留未涉及文件；个人更新与组织发布检查基准版本及哈希；回滚产生新版本。组织 skill 的个人采纳形成个人分支，更新组织库仍须提审。
+
+同会话上一稿经权限和哈希检查后交接到新工作区的 `inputs/history`，由agent读取后写本次 `outputs`；历史输入副本不计新交付。缺失或被修改的旧文件保持不可用，不猜内容。未来个人偏好仍通过后台候选与个人采纳更新技能库。
 
 旧schema的提炼/更新在冻结基准上提出patch并由宿主应用；新版NEW workflow交独立creator会话制作文件，再由宿主验证、打包。个人/组织注册指 demo 版本库；选用时将获准的具体版本安装到该次 OpenClaw 工作区。对话中显式调用 `/skill-creator` 不会自动获得组织共享权限。技能库提供 `.skill` 下载，任务会话和运行记录提供交付文件下载。
 
@@ -79,16 +84,20 @@ flowchart TD
 python -m unittest discover -s tests -v
 python demo.py replay --data artifacts/my-replay
 python scripts/check_openclaw.py
-python scripts/check_038_task_detection.py
+python scripts/check_heuristic_pipeline.py
 ```
 
-`check_openclaw.py`使用真实 OpenClaw 进程连接本地合成模型接口，不付费、不代表模型质量。`check_038_task_detection.py`会读取受控038案例原文，使用当前真实模型配置并产生模型资源消耗；仅验收任务识别，不生成技能。全部验证口径见 [TEST.md](TEST.md)。
+`check_heuristic_pipeline.py`默认使用明确标记的合成模型夹具，实际执行宿主校验、文件读取和官方打包，验完整使用反馈与版本治理。`--live`使用现有真实配置完成阶段1—5；`--live --exercise-use-and-update`追加有限真实消费与合成用户反馈验收。每次创建新目录、冻结输入和代码快照、保存全部失败attempt，不自动付费重试。这些是通路验收，算法语义准确率与benchmark增益另行测量。
+
+启发式入口 `Loop.import_experience` 或 `/api/import-experience` 接收 `events/context/evaluations`。context是带来源的公开文本数组；evaluations是明确对象、要求版本和作用范围的评价数组，可为空。完整格式见实施规格；禁止直接传入整个benchmark的reward_info或隐藏金标。脚本支持 `--live --input-experience path.json` 处理显式指定的数据，原始企业正文应保留在受控运行目录。
 
 ## 文件职责与边界
 
 - `skilldemo/core.py`：任务、候选、额度、个人／组织版本状态机。
 - `skilldemo/detection.py`：第2阶段结构化任务抽取契约、分窗与来源校验。
 - `skilldemo/recovery.py`：第3阶段轨迹关系、尝试、反馈及执行引用恢复。
+- `skilldemo/evidence.py`、`relational.py`：新E/C/V证据规范化与一次提议后的有界关系恢复。
+- `skilldemo/relational_workflow.py`：新轨迹对方法、结果范围、聚类和条款的程序约束。
 - `skilldemo/workflow.py`、`workflow_bridge.py`：第4阶段轮廓/方法聚合及第5阶段交接。
 - `skilldemo/creator.py`：公开文件、覆盖、引用、内容及打包验证。
 - `skilldemo/runtime.py`：真实 OpenClaw CLI 适配、合成夹具、包校验。

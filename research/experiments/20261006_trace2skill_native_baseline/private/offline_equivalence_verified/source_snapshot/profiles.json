@@ -1,0 +1,58 @@
+{
+  "schema": "trace2skill-native-profiles-v1",
+  "official_commit": "3d0b52a140f002a512930252b613c49048f7d5ac",
+  "paper_version": "arXiv:2603.25158v5 (2026-06-04)",
+  "source_commit_date": "2026-05-02T01:35:09+08:00",
+  "scope": "Configuration and offline mechanism preparation; no model result or exact numerical reproduction claim.",
+  "common": {
+    "analysis_max_turns": 100,
+    "service_workers": 4,
+    "paper_workers": 128,
+    "latency_equivalence": false,
+    "generation_files": {
+      "instruct": "gen_config/qwen3.5_35B_122B_instruct_reasoning.json",
+      "thinking": "gen_config/qwen3.5_35B_122B_thinking_reasoning.json"
+    },
+    "seed_policy": {
+      "candidate_evolution_seeds": [41, 42, 43],
+      "default_seed": 41,
+      "readme_analysis_seed_sent": false,
+      "cache_isolation_required": true,
+      "selection": "Select on training validation before independent held-out evaluation; never select on held-out outcomes."
+    },
+    "evolver": {
+      "batch_size": 1,
+      "max_workers": 4,
+      "max_merge_levels": 5,
+      "temperature": 0.6,
+      "max_tokens": null,
+      "prompt_variant": "generic",
+      "max_skill_lines": 500,
+      "max_references": 5,
+      "max_verification_rounds": 3,
+      "skip_translation": false,
+      "patch_pipeline": "json",
+      "enable_json_format_self_fix": true
+    },
+    "native_call_defaults": {"max_continuations": 2, "max_format_fix_rounds": 2},
+    "expected_effective_temperatures": {"react": 0.7, "success_analysis": 1.0, "evolution": 0.6},
+    "output_and_thinking_token_limits": "Not set by released reproduction configs; server limits remain unknown.",
+    "consumer_isolation": "A dedicated parent root containing exactly the intended S0 or S1 skill; freeze selected content and rendered prompt hashes.",
+    "notes": [
+      "Do not change author temperature override logic. Record final merged request configuration, not only the input JSON.",
+      "Workers=4 is a service-resource deviation and cannot reproduce the paper's 128-worker latency.",
+      "Published commit predates paper v5; exact paper-to-commit mapping is not established.",
+      "Default verification checks skill format and is distinct from task-level train/held-out validation."
+    ]
+  },
+  "profiles": {
+    "release_readme": {
+      "merge_batch_size": 5,
+      "basis": "Fixed README reproduction command omits --merge-batch-size, so the released CLI default 5 applies."
+    },
+    "paper_v5": {
+      "merge_batch_size": 32,
+      "basis": "Paper v5 Appendix A explicitly reports merge batch 32; all other mechanisms retain released native defaults."
+    }
+  }
+}

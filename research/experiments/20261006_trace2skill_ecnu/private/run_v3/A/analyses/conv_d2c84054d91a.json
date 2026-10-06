@@ -1,0 +1,86 @@
+{
+  "instance_id": "conv_d2c84054d91a",
+  "task_outcome": "UNKNOWN",
+  "items": [
+    {
+      "title": "结题材料跨文档实体命名一致性",
+      "content": "在生成结题类多文档（Excel表格、Word报告、网页表单）时，必须建立同一套数据集的统一命名字典，确保三处呈现的数据集名称严格一致，且名称需具象（禁止使用笼统命名，如避免“论文相关数据”“检测数据”等泛化名称）。",
+      "evidence_status": "OBSERVED_LOCAL_FAILURE",
+      "source_ids": [
+        "m019",
+        "m030"
+      ],
+      "conditions": [
+        "涉及同一批数据在不同材料（如DMP、自评价报告、系统填报）中重复呈现的场景"
+      ],
+      "limitations": [
+        "无法确认最终提交给官方审核的通过状态"
+      ]
+    },
+    {
+      "title": "Excel组名合并单元格读取陷阱",
+      "content": "从带有合并单元格的Excel源文件（如科研图表的分组表头）中提取数据时，默认读取会导致非首个合并单元格为空。需编写逻辑在读取时解析合并单元格坐标，将组名自动向右向下填充至所有列，以准确展开生物学重复等子表头。",
+      "evidence_status": "OBSERVED_LOCAL_FAILURE",
+      "source_ids": [
+        "tool002",
+        "m046"
+      ],
+      "conditions": [
+        "使用Python（如openpyxl或pandas）解析含有合并单元格的分组表头"
+      ],
+      "limitations": [
+        "未明确展示底层修复的具体代码实现"
+      ]
+    },
+    {
+      "title": "Excel排版与表名特殊字符适配",
+      "content": "在生成按特定指标分类的Excel多Sheet文件时，工作表（Sheet）名称不能包含 `/` 等特殊字符，遇指标简称如“TG/T-CHO”需主动替换为中文顿号“、”。此外，若表头组仅有1列数据，应取消多余的序号（如 No.1）子表头，避免视觉误导。",
+      "evidence_status": "VISIBLE_METHOD_UNVERIFIED",
+      "source_ids": [
+        "m054",
+        "m055"
+      ],
+      "conditions": [
+        "使用脚本自动化动态生成具有多级表头、指标分类的Excel工作簿"
+      ],
+      "limitations": [
+        "无法确认最终生成的文件样式是否完全符合用户的审美预期（用户后续依然指出了居中问题）"
+      ]
+    },
+    {
+      "title": "Excel富文本下标与对齐规范",
+      "content": "在Excel中还原学术名词下标（如 GIFTLux -> GIFT<sub>Lux</sub>）时，需要应用富文本（Rich Text）格式而非纯文本字符替换。若要求表块“全部居中”，不仅要对表头和数值应用水平居中，还必须显式对上方的中文说明标题行执行居中设置，避免仅凭“表头居中”的字面理解漏掉标题。",
+      "evidence_status": "OBSERVED_LOCAL_FAILURE",
+      "source_ids": [
+        "m055",
+        "m056",
+        "m061"
+      ],
+      "conditions": [
+        "要求精确还原论文排版格式（下标、居中）的Excel表格生成任务"
+      ],
+      "limitations": [
+        "无法验证用户是否已停止要求修改表格样式"
+      ]
+    },
+    {
+      "title": "源文件更新时的哈希比对与差异定位",
+      "content": "当用户上传带有“updated”、“-updata”等字样的数据文件要求更新表格时，不应盲目覆盖。应首先通过MD5或哈希值对上传文件与本地基线文件进行比对，若完全一致则直接回复无需修改；若不一致，需提取具体差异点（指出具体图号、行列或数值变更），并向用户确认应采用哪个版本。",
+      "evidence_status": "VERIFIED_LOCAL_RESULT",
+      "source_ids": [
+        "m058",
+        "m061"
+      ],
+      "conditions": [
+        "处理科研数据整理任务中涉及多版本文件更迭的场景"
+      ],
+      "limitations": [
+        "无"
+      ]
+    }
+  ],
+  "uncertainties": [
+    "无法确认用户最终是否成功向系统提交了所有材料并顺利通过审核",
+    "缺乏对具体Excel生成脚本（特别是合并单元格读取和富文本处理代码）的底层细节可见度"
+  ]
+}

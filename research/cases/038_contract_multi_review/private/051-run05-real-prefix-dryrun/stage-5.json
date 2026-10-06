@@ -1,0 +1,577 @@
+{
+  "candidates": [
+    {
+      "id": "candidate-95e6a640341d673176ebb04b",
+      "owner": "alice",
+      "org": "acme",
+      "mode": "openclaw",
+      "action": "NEW",
+      "target": null,
+      "baseHash": null,
+      "baseVersion": null,
+      "status": "READY",
+      "input": {
+        "algorithm": "workflow-creator-v1",
+        "workflow": {
+          "frameIds": [
+            "f1",
+            "f3"
+          ],
+          "title": "合同/协议审阅与修订",
+          "trigger": "需要审阅合同或协议并输出修订版本时",
+          "inputs": [
+            "待审阅合同/协议文件",
+            "审阅视角/立场",
+            "修订范围/原则要求"
+          ],
+          "steps": [
+            {
+              "id": "s1",
+              "methodIds": [
+                "m1",
+                "m4"
+              ],
+              "action": "解析文件并根据指定视角识别风险事项",
+              "condition": "m1: 通用/指定视角; m4: 弱势供应商视角及最小化修订原则",
+              "completionCheck": "输出风险事项列表及分级，或核心风险列表及修订策略"
+            },
+            {
+              "id": "s2",
+              "methodIds": [
+                "m2",
+                "m5"
+              ],
+              "action": "根据识别结果生成带修订痕迹/标记的文件及说明",
+              "condition": "m2: 风险事项已识别; m5: 修订策略已制定",
+              "completionCheck": "生成包含修订痕迹和批注的文件，或带修订标记的文件及说明文档"
+            }
+          ],
+          "outputs": [
+            "带修订和批注/标记的合同/协议文件",
+            "风险分级说明/修订说明与谈判建议"
+          ],
+          "parameters": [
+            "审阅视角",
+            "修订范围/原则",
+            "合同/协议文件"
+          ],
+          "conditions": [
+            "用户指定了审阅视角和修订范围/原则"
+          ],
+          "dependencies": [],
+          "limitations": [
+            "业务效果未知",
+            "来源仅支持有出处的方法与可见过程；业务效果、专业正确性及真实文件交付未经独立验证，均为UNKNOWN。"
+          ],
+          "includedMethodIds": [
+            "m1",
+            "m2",
+            "m4",
+            "m5"
+          ],
+          "businessOutcome": "UNKNOWN"
+        },
+        "methods": [
+          {
+            "id": "m1",
+            "action": "解析合同文件并根据指定视角识别风险事项",
+            "inputs": [
+              "合同文件",
+              "审阅视角"
+            ],
+            "outputs": [
+              "风险事项列表",
+              "风险分级"
+            ],
+            "conditions": [
+              "合同文件可解析"
+            ],
+            "parameters": [
+              "审阅视角"
+            ],
+            "completionCheck": "输出风险事项列表及分级",
+            "reason": "基于用户要求审阅并输出风险分级"
+          },
+          {
+            "id": "m2",
+            "action": "根据识别的风险生成带修订痕迹和批注的合同文件",
+            "inputs": [
+              "风险事项列表",
+              "合同文件"
+            ],
+            "outputs": [
+              "带修订和批注的合同文件"
+            ],
+            "conditions": [
+              "风险事项已识别"
+            ],
+            "parameters": [],
+            "completionCheck": "生成包含修订痕迹和批注的文件",
+            "reason": "用户要求直接输出修订和批注意见版本"
+          },
+          {
+            "id": "m4",
+            "action": "识别协议中的核心风险并制定最小化修订策略",
+            "inputs": [
+              "协议文件",
+              "审阅视角",
+              "修订原则"
+            ],
+            "outputs": [
+              "核心风险列表",
+              "最小化修订策略"
+            ],
+            "conditions": [
+              "协议文件可解析"
+            ],
+            "parameters": [
+              "审阅视角",
+              "修订原则"
+            ],
+            "completionCheck": "输出核心风险列表及修订策略",
+            "reason": "用户要求站在供应商角度，仅修改核心和重大风险，尽可能少修订"
+          },
+          {
+            "id": "m5",
+            "action": "根据修订策略生成带修订标记的协议文件及修订说明",
+            "inputs": [
+              "核心风险列表",
+              "最小化修订策略",
+              "协议文件"
+            ],
+            "outputs": [
+              "带修订标记的协议文件",
+              "修订说明文档"
+            ],
+            "conditions": [
+              "修订策略已制定"
+            ],
+            "parameters": [],
+            "completionCheck": "生成带修订标记的文件及说明文档",
+            "reason": "用户要求直接以修订模式进行修改并输出"
+          }
+        ],
+        "workflowHash": "e3168531d200813c2f0f9587b9b71a23a4ff2edc7c8944af34c81d04e4cb8f4e",
+        "workflowId": "workflow-5bab5ba2f921850eb3f917d3",
+        "traces": [
+          {
+            "id": "task-33ab3f323f8863129ea85afc",
+            "revision": 1,
+            "hash": "656df6aac982f642f0157fb9af587ac284938276b241236508d33a00ea00e300"
+          },
+          {
+            "id": "task-f266dc4aa8bc9f58037c0028",
+            "revision": 1,
+            "hash": "7f95aafbd5820bba77a1e727cb28b0925aa80e6414b41780261701aab1e26a99"
+          }
+        ],
+        "trace": {
+          "id": "task-33ab3f323f8863129ea85afc",
+          "revision": 1,
+          "hash": "656df6aac982f642f0157fb9af587ac284938276b241236508d33a00ea00e300"
+        }
+      },
+      "signature": "95e6a640341d673176ebb04b1f0030f308aac45f1d6e2682b2d5ac608e5ce421",
+      "signatures": [
+        "workflow-5bab5ba2f921850eb3f917d3"
+      ],
+      "created": 1790437066.5570035,
+      "notBefore": 0,
+      "title": "合同/协议审阅与修订",
+      "reason": "STAGE4_WORKFLOW",
+      "workflowId": "workflow-5bab5ba2f921850eb3f917d3",
+      "analysisId": "workflow_extract-074b5a5ee9445cb946f74d6a",
+      "poolId": "pool-candidate-95e6a640341d673176ebb04b",
+      "runId": "creator-candidate-95e6a640341d673176ebb04b",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "content": "---\nname: contract-agreement-review-revision\ndescription: \"审阅合同或协议并输出修订版本时使用，包括根据指定视角识别风险事项、生成带修订痕迹/标记的文件及说明。\"\n---\n\n# 合同/协议审阅与修订\n\n## 触发\n\n需要审阅合同或协议并输出修订版本时触发本技能。用户需指定审阅视角和修订范围/原则，并提供待审阅的合同或协议文件。\n\n## 输入\n\n- 待审阅合同/协议文件\n- 审阅视角/立场\n- 修订范围/原则要求\n\n## 步骤\n\n### 步骤一：解析文件并识别风险事项\n\n<!-- SKILLSLOOP_METHOD:m1 -->\n解析用户提供的合同文件，根据指定视角（通用或用户指定的特定立场）逐项识别潜在风险事项，并对每个风险事项进行分级（如高/中/低），最终输出风险事项列表及其分级结果。前置条件：合同文件可解析（用户已提供可读文本或文件）。\n\n<!-- SKILLSLOOP_METHOD:m4 -->\n识别协议中的核心风险并制定最小化修订策略。在弱势供应商视角及最小化修订原则下，仅针对核心风险和重大风险提出修订策略，尽可能减少修订范围。前置条件：协议文件可解析（用户已提供可读文本或文件）。\n\n步骤一完成检查：输出风险事项列表及分级（m1），或输出核心风险列表及修订策略（m4）。\n\n### 步骤二：生成修订标记文件及说明文档\n\n<!-- SKILLSLOOP_METHOD:m2 -->\n根据步骤一识别的风险事项，在原合同文件中生成带修订痕迹和批注的修订版本文件。前置条件：风险事项已识别（步骤一已完成）。\n\n<!-- SKILLSLOOP_METHOD:m5 -->\n根据步骤一制定的修订策略，在协议文件中生成带修订标记的修订版本，并同步输出修订说明文档，解释每处修订的理由和依据。前置条件：修订策略已制定（步骤一已完成）。\n\n步骤二完成检查：生成包含修订痕迹和批注的文件（m2），或生成带修订标记的文件及说明文档（m5）。\n\n## 条件\n\n- 用户指定了审阅视角和修订范围/原则。\n\n## 完成检查\n\n- 已输出带修订和批注/标记的合同/协议文件。\n- 已输出风险分级说明/修订说明与谈判建议。\n\n## 限制\n\n- 业务效果未知；本技能仅提供文本审阅与修订标记流程，不保证商业结果。\n- 来源仅支持有出处的方法与可见过程；业务效果、专业正确性及真实文件交付未经独立验证，均为UNKNOWN。\n- 本技能仅承诺文本流程，不承诺对真实文件的实际写入成功；文件操作需用户自行提供可解析的合同/协议文本。\n\n## 市场信息\n\n### 适合人群\n\n需要审阅合同或协议的供应商、业务人员、法务人员及管理者，尤其适合处于弱势谈判地位、希望以最小化修订方式保护自身权益的供应商。\n\n### 核心亮点\n\n- 支持从通用视角或用户自定义视角识别合同风险事项并进行分级。\n- 支持弱势供应商视角下的核心风险识别与最小化修订策略制定。\n- 自动输出带修订痕迹/标记的文件及修订说明文档，便于谈判和沟通。\n\n### 典型输入/需求\n\n- 待审阅的合同或协议文本文件（如PDF、Word、纯文本）。\n- 用户指定的审阅视角（如通用、供应商、采购方等）。\n- 修订范围与原则要求（如仅修改核心风险、最小化修订等）。\n\n### 输入预填模板\n\n```\n审阅视角：供应商（弱势方）\n修订原则：仅修改核心风险，最小化修订\n合同文件：[用户提供的合同/协议文件]\n```\n\n### 预期输出/成果\n\n- 风险事项列表及分级结果，或核心风险列表及最小化修订策略。\n- 包含修订痕迹和批注的合同/协议文件。\n- 修订说明文档，解释修订理由和依据。\n- 谈判建议，帮助用户理解风险点和应对策略。\n"
+        }
+      ],
+      "hash": "368b46cbd5f4138102647d6e4f2f066c80983207e3b77556d85726ef7e27890c",
+      "validation": {
+        "creatorRead": {
+          "status": "FILE_READ",
+          "entry": ".foundation/skill-creator/SKILL.md",
+          "replayedHistoricalReceipt": true,
+          "newReadObserved": false,
+          "sourceRunId": "creator-candidate-95e6a640341d673176ebb04b"
+        },
+        "hostBundle": {
+          "status": "PASS",
+          "methodCoverage": [
+            {
+              "methodId": "m1",
+              "file": "SKILL.md",
+              "actionQuote": "解析用户提供的合同文件，根据指定视角（通用或用户指定的特定立场）逐项识别潜在风险事项，并对每个风险事项进行分级（如高/中/低），最终输出风险事项列表及其分级结果。",
+              "conditionQuotes": [
+                "合同文件可解析（用户已提供可读文本或文件）"
+              ],
+              "completionCheckQuote": "输出风险事项列表及分级（m1）",
+              "status": "CONTENT_ANCHORED",
+              "semanticStatus": "DECLARED_NOT_INDEPENDENTLY_VERIFIED"
+            },
+            {
+              "methodId": "m2",
+              "file": "SKILL.md",
+              "actionQuote": "根据步骤一识别的风险事项，在原合同文件中生成带修订痕迹和批注的修订版本文件。",
+              "conditionQuotes": [
+                "风险事项已识别（步骤一已完成）"
+              ],
+              "completionCheckQuote": "生成包含修订痕迹和批注的文件（m2）",
+              "status": "CONTENT_ANCHORED",
+              "semanticStatus": "DECLARED_NOT_INDEPENDENTLY_VERIFIED"
+            },
+            {
+              "methodId": "m4",
+              "file": "SKILL.md",
+              "actionQuote": "识别协议中的核心风险并制定最小化修订策略。",
+              "conditionQuotes": [
+                "协议文件可解析（用户已提供可读文本或文件）"
+              ],
+              "completionCheckQuote": "输出核心风险列表及修订策略（m4）",
+              "status": "CONTENT_ANCHORED",
+              "semanticStatus": "DECLARED_NOT_INDEPENDENTLY_VERIFIED"
+            },
+            {
+              "methodId": "m5",
+              "file": "SKILL.md",
+              "actionQuote": "根据步骤一制定的修订策略，在协议文件中生成带修订标记的修订版本，并同步输出修订说明文档，解释每处修订的理由和依据。",
+              "conditionQuotes": [
+                "修订策略已制定（步骤一已完成）"
+              ],
+              "completionCheckQuote": "生成带修订标记的文件及说明文档（m5）",
+              "status": "CONTENT_ANCHORED",
+              "semanticStatus": "DECLARED_NOT_INDEPENDENTLY_VERIFIED"
+            }
+          ],
+          "semanticValidation": "NOT_INDEPENDENTLY_VERIFIED",
+          "fileCount": 1,
+          "files": [
+            {
+              "path": "SKILL.md",
+              "sha256": "e96593830068ac66e66ab34e352295e814633897e61f79ac8bff71dddd06a9b3",
+              "bytes": 3895
+            }
+          ]
+        },
+        "officialPackage": {
+          "status": "PASS",
+          "sha256": "ae83bb930c2b0ef2ca21f7eafdb31ef9a3bba18d7d4cdbc53480335e83af2cae",
+          "fileCount": 1
+        },
+        "businessOutcome": "NOT_RUN",
+        "consumerExecution": "NOT_RUN"
+      },
+      "package": {
+        "path": "packages\\validated-eb436360.skill",
+        "bytes": 1754,
+        "sha256": "ae83bb930c2b0ef2ca21f7eafdb31ef9a3bba18d7d4cdbc53480335e83af2cae",
+        "validator": "OpenClaw bundled skill-creator",
+        "log": "Packaging skill: D:\\skillsgen-industry_track\\research\\cases\\038_contract_multi_review\\private\\051-run05-real-prefix-dryrun\\workspaces\\creator-candidate-95e6a640341d673176ebb04b\\validated-eb436360\n   Output directory: D:\\skillsgen-industry_track\\research\\cases\\038_contract_multi_review\\private\\051-run05-real-prefix-dryrun\\workspaces\\creator-candidate-95e6a640341d673176ebb04b\\packages\n\nValidating skill...\n[OK] Skill is valid!\n\n  Added: validated-eb436360\\SKILL.md\n\n[OK] Successfully packaged skill to: D:\\skillsgen-industry_track\\research\\cases\\038_contract_multi_review\\private\\051-run05-real-prefix-dryrun\\workspaces\\creator-candidate-95e6a640341d673176ebb04b\\packages\\validated-eb436360.skill\n"
+      }
+    },
+    {
+      "id": "candidate-17027d85bd2b65a14a29e067",
+      "owner": "alice",
+      "org": "acme",
+      "mode": "openclaw",
+      "action": "NEW",
+      "target": null,
+      "baseHash": null,
+      "baseVersion": null,
+      "status": "READY",
+      "input": {
+        "algorithm": "workflow-creator-v1",
+        "workflow": {
+          "frameIds": [
+            "f2",
+            "f4"
+          ],
+          "title": "特定条款调整与文件更新",
+          "trigger": "需要根据业务背景或选定方案调整特定条款并更新文件时",
+          "inputs": [
+            "当前合同/协议版本",
+            "补充的业务背景/用户选择的修订方案",
+            "需调整的目标条款"
+          ],
+          "steps": [
+            {
+              "id": "s1",
+              "methodIds": [
+                "m3",
+                "m6"
+              ],
+              "action": "根据业务背景设计兼容方案或应用选定方案修改特定条款",
+              "condition": "m3: 业务背景与现有条款存在冲突; m6: 用户已选择修订方案",
+              "completionCheck": "输出修改/更新后的条款文本及更新后的文件"
+            }
+          ],
+          "outputs": [
+            "修改/更新后的条款文本",
+            "更新后的合同/协议文件"
+          ],
+          "parameters": [
+            "业务背景/修订方案",
+            "目标条款"
+          ],
+          "conditions": [
+            "用户提供了补充业务背景或明确选择了修订方案",
+            "现有条款存在冲突或需调整"
+          ],
+          "dependencies": [],
+          "limitations": [
+            "业务效果未知",
+            "来源仅支持有出处的方法与可见过程；业务效果、专业正确性及真实文件交付未经独立验证，均为UNKNOWN。"
+          ],
+          "includedMethodIds": [
+            "m3",
+            "m6"
+          ],
+          "businessOutcome": "UNKNOWN"
+        },
+        "methods": [
+          {
+            "id": "m3",
+            "action": "根据业务背景设计兼容方案并修改特定条款",
+            "inputs": [
+              "补充业务背景",
+              "现有条款"
+            ],
+            "outputs": [
+              "修改后的条款文本",
+              "更新后的合同文件"
+            ],
+            "conditions": [
+              "业务背景与现有条款存在冲突"
+            ],
+            "parameters": [
+              "业务背景"
+            ],
+            "completionCheck": "输出修改后的条款及更新后的文件",
+            "reason": "用户要求修改排他条款以兼容原厂区继续使用老处置单位的情况"
+          },
+          {
+            "id": "m6",
+            "action": "应用用户选定的修订方案更新目标条款及协议文件",
+            "inputs": [
+              "用户选择的修订方案",
+              "目标条款",
+              "当前协议版本"
+            ],
+            "outputs": [
+              "更新后的条款文本",
+              "更新后的协议文件"
+            ],
+            "conditions": [
+              "用户已选择修订方案"
+            ],
+            "parameters": [
+              "修订方案"
+            ],
+            "completionCheck": "输出更新后的条款及协议文件",
+            "reason": "用户要求采用中策方案修改特定条款"
+          }
+        ],
+        "workflowHash": "c37afb74efa107ae200ff64b287e1f2152b52086c92407df91cdc6a33d9ecbce",
+        "workflowId": "workflow-c3228cf0ebf48e565ecfd750",
+        "traces": [
+          {
+            "id": "task-33ab3f323f8863129ea85afc",
+            "revision": 1,
+            "hash": "656df6aac982f642f0157fb9af587ac284938276b241236508d33a00ea00e300"
+          },
+          {
+            "id": "task-f266dc4aa8bc9f58037c0028",
+            "revision": 1,
+            "hash": "7f95aafbd5820bba77a1e727cb28b0925aa80e6414b41780261701aab1e26a99"
+          }
+        ],
+        "trace": {
+          "id": "task-33ab3f323f8863129ea85afc",
+          "revision": 1,
+          "hash": "656df6aac982f642f0157fb9af587ac284938276b241236508d33a00ea00e300"
+        }
+      },
+      "signature": "17027d85bd2b65a14a29e0679441de68fb1ecac9c006ce3d88f8e22bcc66a054",
+      "signatures": [
+        "workflow-c3228cf0ebf48e565ecfd750"
+      ],
+      "created": 1790437066.5581071,
+      "notBefore": 0,
+      "title": "特定条款调整与文件更新",
+      "reason": "STAGE4_WORKFLOW",
+      "workflowId": "workflow-c3228cf0ebf48e565ecfd750",
+      "analysisId": "workflow_extract-074b5a5ee9445cb946f74d6a",
+      "poolId": "pool-candidate-17027d85bd2b65a14a29e067",
+      "runId": "creator-candidate-17027d85bd2b65a14a29e067",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "content": "---\nname: contract-clause-adjustment\ndescription: \"当需要根据业务背景或选定方案调整合同/协议中的特定条款并更新文件时使用本技能，覆盖条款设计兼容方案与选定方案应用两类场景。\"\n---\n\n# 特定条款调整与文件更新\n\n## 触发\n\n当用户需要根据补充的业务背景或已选定的修订方案，对合同/协议中的特定条款进行调整并同步更新文件时，调用本技能。\n\n## 输入\n\n- 当前合同/协议版本（文本形式）\n- 补充的业务背景或用户选择的修订方案\n- 需调整的目标条款\n\n## 步骤\n\n### 步骤 1：根据业务背景设计兼容方案并修改特定条款\n\n<!-- SKILLSLOOP_METHOD:m3 -->\n\n当业务背景与现有条款存在冲突时，根据业务背景设计兼容方案，并据此修改目标条款，输出修改后的条款文本及更新后的合同文件。\n\n**适用条件：** 业务背景与现有条款存在冲突。\n\n**完成检查：** 输出修改后的条款及更新后的文件。\n\n> 注意：本步骤仅处理文本层面的条款调整，实际文件写入需由用户在本地环境中执行，本技能不直接操作文件系统。业务效果与专业正确性未经独立验证。\n\n### 步骤 2：应用用户选定的修订方案更新目标条款及协议文件\n\n<!-- SKILLSLOOP_METHOD:m6 -->\n\n当用户已选择修订方案时，应用该方案对目标条款及当前协议版本进行更新，输出更新后的条款文本及更新后的协议文件。\n\n**适用条件：** 用户已选择修订方案。\n\n**完成检查：** 输出更新后的条款及协议文件。\n\n> 注意：本步骤仅输出文本结果，文件更新需用户自行在本地执行。业务效果未经独立验证。\n\n## 完成检查\n\n- 每个目标条款均有对应的修改/更新后文本\n- 合同/协议文件的修改内容已完整呈现\n- 所有修改均基于用户提供的业务背景或选定方案\n\n## 限制\n\n- 业务效果未知\n- 来源仅支持有出处的方法与可见过程；业务效果、专业正确性及真实文件交付未经独立验证，均为 UNKNOWN\n- 本技能仅输出文本形式的条款修改建议，不直接创建或修改用户本地文件\n- 文件操作前置条件：用户需将输出文本手动复制到目标文件中，或通过其他工具完成文件写入\n\n## 市场信息\n\n### 适合人群\n\n需要在现有合同或协议基础上，对特定条款进行定向调整的法律、商务、合规相关人员，以及需要快速生成条款修订文本的团队。\n\n### 核心亮点\n\n- 支持两类修订路径：基于业务背景设计兼容方案，或直接应用用户选定的修订方案\n- 输出结构化的条款文本，便于用户直接复制到目标文件\n- 明确区分适用条件，避免错误触发\n\n### 典型输入/需求\n\n- 当前合同/协议文本\n- 需调整的目标条款（如排他条款、责任条款等）\n- 补充的业务背景说明或用户已选定的修订方案文本\n\n### 输入预填模板\n\n```\n当前合同/协议版本：<粘贴当前文本>\n需调整的目标条款：<粘贴目标条款原文>\n补充业务背景：<描述业务冲突或调整需求>\n或\n用户选择的修订方案：<粘贴选定的方案文本>\n```\n\n### 预期输出/成果\n\n- 修改/更新后的条款文本（结构化、可直接使用）\n- 更新后的合同/协议文件内容（文本形式，用户需自行写入本地文件）\n- 业务效果与专业正确性未经独立验证，结果仅供参考\n"
+        }
+      ],
+      "hash": "95cc1e7794cdab5d9b45665f5b08e2af24f793b7cc7bcc8885577539df5a0cb1",
+      "validation": {
+        "creatorRead": {
+          "status": "FILE_READ",
+          "entry": ".foundation/skill-creator/SKILL.md",
+          "replayedHistoricalReceipt": true,
+          "newReadObserved": false,
+          "sourceRunId": "creator-candidate-17027d85bd2b65a14a29e067"
+        },
+        "hostBundle": {
+          "status": "PASS",
+          "methodCoverage": [
+            {
+              "methodId": "m3",
+              "file": "SKILL.md",
+              "actionQuote": "当业务背景与现有条款存在冲突时，根据业务背景设计兼容方案，并据此修改目标条款，输出修改后的条款文本及更新后的合同文件。",
+              "conditionQuotes": [
+                "业务背景与现有条款存在冲突。"
+              ],
+              "completionCheckQuote": "输出修改后的条款及更新后的文件。",
+              "status": "CONTENT_ANCHORED",
+              "semanticStatus": "DECLARED_NOT_INDEPENDENTLY_VERIFIED"
+            },
+            {
+              "methodId": "m6",
+              "file": "SKILL.md",
+              "actionQuote": "当用户已选择修订方案时，应用该方案对目标条款及当前协议版本进行更新，输出更新后的条款文本及更新后的协议文件。",
+              "conditionQuotes": [
+                "用户已选择修订方案。"
+              ],
+              "completionCheckQuote": "输出更新后的条款及协议文件。",
+              "status": "CONTENT_ANCHORED",
+              "semanticStatus": "DECLARED_NOT_INDEPENDENTLY_VERIFIED"
+            }
+          ],
+          "semanticValidation": "NOT_INDEPENDENTLY_VERIFIED",
+          "fileCount": 1,
+          "files": [
+            {
+              "path": "SKILL.md",
+              "sha256": "33e418d2664091abbd57f845eb08aa6856b27e3241c161ad0fe1e7d8a297e3f7",
+              "bytes": 3503
+            }
+          ]
+        },
+        "officialPackage": {
+          "status": "PASS",
+          "sha256": "54abe1cc6df4884c70e13fd5f1552d77e0b5e997860ba101db603ad32cf7bedc",
+          "fileCount": 1
+        },
+        "businessOutcome": "NOT_RUN",
+        "consumerExecution": "NOT_RUN"
+      },
+      "package": {
+        "path": "packages\\validated-3fc1b176.skill",
+        "bytes": 1645,
+        "sha256": "54abe1cc6df4884c70e13fd5f1552d77e0b5e997860ba101db603ad32cf7bedc",
+        "validator": "OpenClaw bundled skill-creator",
+        "log": "Packaging skill: D:\\skillsgen-industry_track\\research\\cases\\038_contract_multi_review\\private\\051-run05-real-prefix-dryrun\\workspaces\\creator-candidate-17027d85bd2b65a14a29e067\\validated-3fc1b176\n   Output directory: D:\\skillsgen-industry_track\\research\\cases\\038_contract_multi_review\\private\\051-run05-real-prefix-dryrun\\workspaces\\creator-candidate-17027d85bd2b65a14a29e067\\packages\n\nValidating skill...\n[OK] Skill is valid!\n\n  Added: validated-3fc1b176\\SKILL.md\n\n[OK] Successfully packaged skill to: D:\\skillsgen-industry_track\\research\\cases\\038_contract_multi_review\\private\\051-run05-real-prefix-dryrun\\workspaces\\creator-candidate-17027d85bd2b65a14a29e067\\packages\\validated-3fc1b176.skill\n"
+      }
+    },
+    {
+      "id": "candidate-ffd24764648b2376594ce589",
+      "owner": "alice",
+      "org": "acme",
+      "mode": "openclaw",
+      "action": "NEW",
+      "target": null,
+      "baseHash": null,
+      "baseVersion": null,
+      "status": "FAILED",
+      "input": {
+        "algorithm": "workflow-creator-v1",
+        "workflow": {
+          "frameIds": [
+            "f5"
+          ],
+          "title": "特定条款修改文本单独输出",
+          "trigger": "用户要求仅单独输出特定条款的修改文本而不重新生成完整文件时",
+          "inputs": [
+            "目标条款的修改内容",
+            "输出格式要求"
+          ],
+          "steps": [
+            {
+              "id": "s1",
+              "methodIds": [
+                "m7"
+              ],
+              "action": "提取特定条款的修改内容并按要求格式化输出",
+              "condition": "用户要求单独输出修改文本",
+              "completionCheck": "输出特定条款的修改文本"
+            }
+          ],
+          "outputs": [
+            "特定条款的修改文本"
+          ],
+          "parameters": [
+            "目标条款"
+          ],
+          "conditions": [
+            "用户要求单独输出修改文本"
+          ],
+          "dependencies": [],
+          "limitations": [
+            "业务效果未知",
+            "来源仅支持有出处的方法与可见过程；业务效果、专业正确性及真实文件交付未经独立验证，均为UNKNOWN。"
+          ],
+          "includedMethodIds": [
+            "m7"
+          ],
+          "businessOutcome": "UNKNOWN"
+        },
+        "methods": [
+          {
+            "id": "m7",
+            "action": "提取特定条款的修改内容并按要求格式化输出",
+            "inputs": [
+              "目标条款的修改内容",
+              "输出格式要求"
+            ],
+            "outputs": [
+              "特定条款的修改文本"
+            ],
+            "conditions": [
+              "用户要求单独输出修改文本"
+            ],
+            "parameters": [],
+            "completionCheck": "输出特定条款的修改文本",
+            "reason": "用户要求不需要重新输出文件，单独输出修改文本"
+          }
+        ],
+        "workflowHash": "3716930f4fda0de4c37377e6a28c5937af92d5b470d26283c59e8d5a340c9c61",
+        "workflowId": "workflow-11a3986f4aa8876294d3b99a",
+        "traces": [
+          {
+            "id": "task-f266dc4aa8bc9f58037c0028",
+            "revision": 1,
+            "hash": "7f95aafbd5820bba77a1e727cb28b0925aa80e6414b41780261701aab1e26a99"
+          }
+        ],
+        "trace": {
+          "id": "task-f266dc4aa8bc9f58037c0028",
+          "revision": 1,
+          "hash": "7f95aafbd5820bba77a1e727cb28b0925aa80e6414b41780261701aab1e26a99"
+        }
+      },
+      "signature": "ffd24764648b2376594ce5895671f0765f5059df6d3f1cac58cd903d07e8bfb0",
+      "signatures": [
+        "workflow-11a3986f4aa8876294d3b99a"
+      ],
+      "created": 1790437066.5585587,
+      "notBefore": 0,
+      "title": "特定条款修改文本单独输出",
+      "reason": "STAGE4_WORKFLOW",
+      "workflowId": "workflow-11a3986f4aa8876294d3b99a",
+      "analysisId": "workflow_extract-074b5a5ee9445cb946f74d6a",
+      "poolId": "pool-candidate-ffd24764648b2376594ce589",
+      "runId": "creator-candidate-ffd24764648b2376594ce589",
+      "error": "OFFLINE_CONTROL_REACHED_ONLY_NEW_CREATOR"
+    }
+  ]
+}

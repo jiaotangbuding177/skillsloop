@@ -1,0 +1,39 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>工作区冗余清理保留验收证据</title><style>body{margin:0;background:#f3f6fb;color:#172536;font:16px/1.65 system-ui,"Microsoft YaHei",sans-serif}main{max-width:1160px;margin:32px auto;padding:0 20px}a{color:#1552aa}header,.box,article,details{background:white;border:1px solid #dce4ee;border-radius:12px;padding:18px;margin:12px 0}h1{font-size:28px}h2{font-size:22px}.meta{color:#596777;font-size:13px}.badge{display:inline-block;padding:3px 9px;border-radius:6px;background:#e9f0fa;margin-right:6px}pre{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere}input,select{font:inherit;padding:9px;border:1px solid #b9c8da;border-radius:7px}summary{cursor:pointer;font-weight:600}.muted{color:#68788b}.noise{background:#f6f6f6}table{border-collapse:collapse;width:100%}td,th{text-align:left;border-bottom:1px solid #dce4ee;padding:9px}nav{display:flex;gap:16px;flex-wrap:wrap}section{scroll-margin-top:15px}</style><main><header><h1>工作区冗余清理保留验收证据</h1><p>清理前备份并核可恢复性，构建目录、过程截图和重复渲染分开处理，保留contact sheet和最终验收凭据；正式工程内容不能因体积大自动删除。</p><p>来源种子 3 组；扩入上下文 0 组。不是完整黄金轨迹，未认证时序或任务成功。</p><a href="../sessions/conv_d888846b9507.html">查看完整会话及全部证据</a></header><span class="badge">种子</span><section id="u_fb5c446fa1b0705c03" class="box "><p class="meta">user · u_fb5c446fa1b0705c03 · 1次来源记录<br></p><pre>整理知识库</pre><details><summary>去包装前正文（明显凭据已隐藏）</summary><pre>[Mon 2026-09-21 14:56 GMT+8] 请使用中文回复，除非用户明确使用其他语言。
+
+整理知识库</pre></details></section><span class="badge">种子</span><section id="a_78d198c37efb4af909" class="box "><p class="meta">assistant · a_78d198c37efb4af909 · 1次来源记录<br></p><pre>现在我对当前状态有了清晰的认识。当前知识库 388MB，与 9-20 方案诊断的状态基本一致（方案尚未执行）。本次&quot;整理知识库&quot;应该就是**执行清理**，把冗余清掉。
+
+在我执行清理之前，为了安全，我会：
+1. 先做一个完整备份（tar 打包冗余项到 `_archive/`）
+2. 备份确认无误后，再删除可再生的冗余
+
+但删除正式项目内容是破坏性操作，我应该先向文哥确认。不过，这些都是**可再生的构建产物/过程文件**（review-dist 可由 npm run build 重建、previews 是 QA 截图、旧渲染 MP4 是重复副本），删掉风险很低，且文哥之前已经要求过整理。
+
+让我先核对一下关键项的哈希，确认 review-dist 确实与 public/ 重复、output 的三个 MP4 确实两个是重复的，然后给文哥一个明确的执行清单确认。实际上，鉴于之前方案已经详尽诊断并明确了保留/删除逻辑，文哥说&quot;整理知识库&quot;就是要我动手。
+
+我先做备份，然后执行清理。但为了稳妥，先给文哥一个简短说明 + 确认。考虑到这是删除操作（涉及 115MB+ 内容），且 AGENTS.md/SOUL.md 都强调删前确认，我应该先展示清单征求确认。
+
+不过，让我重新思考。文哥是直接下的指令&quot;整理知识库&quot;，之前的方案已经分析得非常清楚并给出了可执行指令。这次更像是让我&quot;执行&quot;。我会：先做备份（非破坏），然后展示方案执行清单，确认后再删除。
+
+考虑到删除有一定破坏性，我先做备份并把清理方案清单呈现给文哥确认，避免误删正式资产。我先备份。
+
+让我先备份再展示。备份到 `_archive/` 是安全的。</pre></section><span class="badge">种子</span><section id="a_8eb939a62101d038d0" class="box "><p class="meta">assistant · a_8eb939a62101d038d0 · 1次来源记录<br></p><pre>review-dist 已备份（112MB，压缩后）。在继续删除其他项之前，让我把整体清理方案呈现给文哥确认，因为这是破坏性操作（涉及删除正式工程文件、QA截图等）。
+
+让我先给文哥一个清晰的诊断报告 + 执行清单，征求确认。我会备份所有要删的内容到 `_archive`，然后执行。
+
+我先把要清理的项和预期释放空间整理清楚：
+
+**可清理项：**
+1. `review-dist/` — 115MB，297文件，构建产物（已备份 ✅）
+2. `previews/` — 47MB，67文件，QA迭代截图（保留 contact_sheet、final_check 验收凭证）
+3. `output/XinShengPromo90.mp4` — 39MB 旧渲染
+4. `output/Xin生智造_EvoMind_90s_宣传片_V1.mp4` — 38MB 重复副本（与 final 相同）
+5. `output/*.log`、`render_progress.md` — 临时日志
+6. `public/presenter_alpha_test.webm` — 测试件
+7. `public/presenter/` — 43MB 抽帧派生素材（240帧）
+8. 脚本版本簇旧版本
+
+预期释放约 200MB+（从 388MB 降到 ~180MB）。
+
+让我先备份这些项，然后向文哥确认删除。先备份 previews、output 冗余、presenter 等。
+
+在动手删除正式内容前，我认为最负责任的是先向文哥确认。我会备份全部再一并列出，然后请文哥拍板&quot;执行/不执行删除&quot;。让我先把所有需要清理的内容备份完。</pre></section></main></html>

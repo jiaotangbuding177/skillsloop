@@ -1,0 +1,168 @@
+AGENT: Hi! How can I help you today?
+USER: Hi, I’m having trouble sending MMS messages on my phone. It’s been going on for the past few hours, and I’m currently abroad in France. Can you help me fix this so I can send MMS again?
+AGENT: I can help with that. First, I need to identify you. Could you please provide your phone number?
+USER: Sure, my phone number is 555-123-2002.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT: Thanks, John. I've located your account. Let me look into your line and MMS issue. Could you confirm which phone number you're trying to send MMS from — is it the same one (555-123-2002)?
+USER: Yes, it’s the same number — 555-123-2002.
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1001"}}
+TOOL_RESULT: {"line_id": "L1001", "phone_number": "555-123-2001", "status": "Active", "plan_id": "P1001", "device_id": "D1001", "data_used_gb": 3.2, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2025-01-10", "last_sim_replacement_date": null, "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 15.1, "data_refueling_gb": 0.0, "roaming_enabled": false, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT_TOOL_CALL: {"name": "get_data_usage", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "data_used_gb": "15.1", "data_limit_gb": "15.0", "data_refueling_gb": "0.0", "cycle_end_date": "2025-02-28"}
+AGENT_TOOL_CALL: {"name": "enable_roaming", "arguments": {"customer_id": "C1001", "line_id": "L1002"}}
+TOOL_RESULT: Roaming enabled successfully
+AGENT: I've enabled roaming on your line at no cost. 
+
+However, MMS still requires working data, and your line has used up its 15 GB data limit for this billing cycle (15.1 GB used). Data connectivity stays off until more data is added.
+
+You can refuel data at the rate specified by your plan. Would you like me to refuel data for you? If so, how many GB would you like to add? (Note: the maximum that can be refueled is 2 GB.)
+USER: Yes, please refuel 2 GB of data for me. I don’t want to change my plan, just add the data so I can send MMS again.
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "P1002"}}
+TOOL_RESULT: {"plan_id": "P1002", "name": "Premium Plan", "data_limit_gb": 15.0, "price_per_month": 65.0, "data_refueling_price_per_gb": 2.0}
+AGENT: Your plan's refueling rate is **$2 per GB**, so 2 GB would be **$4**. 
+
+Should I go ahead and add 2 GB for $4?
+USER: Yes, please go ahead and add 2 GB for $4.
+AGENT_TOOL_CALL: {"name": "refuel_data", "arguments": {"customer_id": "C1001", "line_id": "L1002", "gb_amount": 2}}
+TOOL_RESULT: {"message": "Successfully added 2 GB of data for line L1002 for $4.00", "new_data_refueling_gb": "2.0", "charge": "4.0"}
+AGENT: Done! Here's a summary of what I've fixed:
+
+- ✅ **Roaming enabled** — at no cost, so your data works abroad.
+- ✅ **2 GB of data added** — a $4 charge has been applied to your account.
+
+Your line now has 2 GB of refueled data available. To get service working again, please **reboot your device**.
+
+After rebooting, try sending an MMS again. If it still doesn't work, let me know and we'll troubleshoot further (there are a few other common MMS issues we can check).
+TOOL_RESULT: Restarting network services...
+Status Bar: ✈️ Airplane Mode | 🔋 80%
+TOOL_RESULT: Your messaging app cannot send MMS messages.
+USER: I rebooted, but I still can’t send MMS. Also, I noticed my status bar is showing that Airplane Mode is on. Could that be causing the problem?
+AGENT: Yes, that would definitely cause the problem — Airplane Mode turns off all cellular connections, so MMS (and everything else) can't work while it's on.
+
+Please turn **Airplane Mode off** on your device, then try sending an MMS again. Let me know if it works.
+TOOL_RESULT: Airplane Mode is now OFF.
+Status Bar: 📵 No Signal | 📵 Data Disabled | 🔋 80%
+TOOL_RESULT: Your messaging app cannot send MMS messages.
+USER: Okay, I turned Airplane Mode off, but I still can’t send MMS. I’m also seeing “No Signal” and that my mobile data is disabled in the status bar. What should I try next?
+AGENT: Thanks for checking. Let's work through this step by step.
+
+"No Signal" means your phone isn't connecting to the cellular network. Let's make sure your SIM card is properly seated and your APN settings are correct.
+
+Could you please run **`check_apn_settings`** on your device and tell me what it shows?
+TOOL_RESULT: Current APN Name: internet
+MMSC URL (for picture messages): http://mms.carrier.com/mms/wapenc
+(These are technical settings, usually best left unchanged.)
+USER: The APN settings show:
+
+- APN Name: internet
+- MMSC URL: http://mms.carrier.com/mms/wapenc
+
+Those seem normal. But I’m still stuck on “No Signal” and mobile data looks disabled. What should I do next?
+AGENT: Your APN settings look fine (the MMSC URL is set correctly).
+
+The "No Signal" issue is the priority — MMS can't work without cellular service. Let's check the SIM status.
+
+Could you please run **`check_sim_status`** on your device and tell me what it shows?
+TOOL_RESULT: No SIM card detected in the phone.
+USER: It says there’s no SIM card detected in the phone. Hmm, that’s odd — what should I do now?
+AGENT: That explains the "No Signal" — the phone isn't detecting your SIM card at all. This can happen if the card has shifted slightly out of place.
+
+Please **reseat your SIM card** (take it out and put it back in firmly), then let me know if the phone detects it.
+TOOL_RESULT: SIM card re-seated successfully.
+Status Bar: 📶¹ Poor | 2G | 📵 Data Disabled | 🔋 80%
+USER: Okay, I reseated the SIM card. It looks like the phone detects it now. My status bar is showing a weak signal, 2G, and that mobile data is still disabled. What should I do next?
+AGENT: Good progress — the SIM is detected now, so service is back. But two things still need attention:
+
+1. **You're on a 2G network** — MMS requires at least 3G, so we'll need to switch to a network mode that includes 4G/5G.
+2. **Mobile data is disabled** — MMS needs mobile data on.
+
+Please do the following:
+1. Turn **mobile data ON**.
+2. Set your **network mode** to a 4G/5G-preferred option (e.g., "4g_5g_preferred" or "4g_only").
+
+Then try sending an MMS again and let me know how it goes.
+USER: I can’t perform multiple actions at once. Could you please instruct me one action at a time? Which should I do first?
+AGENT: No problem — let's do one at a time.
+
+First, please **turn mobile data ON**. Let me know once that's done.
+TOOL_RESULT: Mobile Data is now ON.
+Status Bar: 📶¹ Poor | 2G | 📱 Data Enabled | 🔋 80%
+USER: Mobile data is now ON. My status bar shows weak signal, 2G, and data enabled. What’s next?
+AGENT: Good. Next, please **set your network mode to 4G/5G preferred** (or "4G only"). Let me know once that's done.
+TOOL_RESULT: Preferred Network Mode set to: 4g_5g_preferred
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Your messaging app cannot send MMS messages.
+USER: Okay, I set it to 4G/5G preferred — I’ve got excellent signal on 5G now and mobile data is on. But I still can’t send an MMS. This is getting a bit frustrating. What else can we try?
+AGENT: I understand the frustration, John — but we're close. Your signal and data are now good, so let's check the remaining common MMS causes.
+
+Please run **`check_wifi_calling_status`** on your device and tell me what it shows.
+TOOL_RESULT: Wi-Fi Calling is currently turned ON.
+USER: It shows that Wi-Fi Calling is currently turned ON. Could that be interfering with MMS?
+AGENT: Yes, it can — Wi-Fi Calling sometimes conflicts with MMS. Please **turn Wi-Fi Calling OFF**, then let me know.
+TOOL_RESULT: Wi-Fi Calling is now OFF.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Your messaging app cannot send MMS messages.
+USER: I turned Wi-Fi Calling off, but I still can’t send an MMS. What should we check next?
+AGENT: Let's check the messaging app's permissions next — it needs storage and SMS access to handle MMS.
+
+Please run **`check_app_permissions(app_name="messaging")`** and tell me what it shows.
+TOOL_RESULT: App 'messaging' has permission for: storage, phone.
+USER: The messaging app currently has permission for storage and phone, but not SMS. Should I grant the SMS permission?
+AGENT: Yes, please grant the **SMS** permission to the messaging app, then let me know.
+TOOL_RESULT: Success. Permission 'sms' granted to app 'messaging'.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Your messaging app cannot send MMS messages.
+USER: I granted the SMS permission to the messaging app, but I still can’t send an MMS. What else should we try?
+AGENT_TOOL_CALL: {"name": "get_details_by_id", "arguments": {"id": "L1002"}}
+TOOL_RESULT: {"line_id": "L1002", "phone_number": "555-123-2002", "status": "Active", "plan_id": "P1002", "device_id": "D1002", "data_used_gb": 15.1, "data_refueling_gb": 2.0, "roaming_enabled": true, "contract_end_date": "2026-12-31", "last_plan_change_date": "2024-12-15", "last_sim_replacement_date": "2025-01-20", "suspension_start_date": null}
+AGENT: Everything looks correct on our side — your line is active, roaming is on, and your 2 GB of refueled data is in place.
+
+Let's do one more check on the device. Could you try the **`can_send_mms`** test on your phone and tell me the result?
+TOOL_RESULT: Your messaging app cannot send MMS messages.
+USER: I ran the `can_send_mms` test again, and it still says my messaging app cannot send MMS messages. Since I’m abroad, could it be something like data roaming on the device, a VPN, or Data Saver mode?
+AGENT: Those are worth checking. Let me have you look at a couple of device settings that can block MMS while abroad.
+
+Please run **`check_status_bar`** and tell me everything it shows — I want to see your VPN, Data Saver, and roaming status.
+TOOL_RESULT: Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: The status bar shows:
+
+- Excellent signal
+- 5G
+- Data Enabled
+- Battery 80%
+
+I don’t see any icons for VPN, Data Saver, or roaming in the status bar. What should I check next?
+AGENT: Thanks. Everything there looks clean — no VPN, no Data Saver, good signal.
+
+One more thing to verify: since you're abroad, let's make sure **data roaming is enabled on the device** (this is a device setting, separate from the roaming we enabled on your account). Please check your device's mobile network settings for "Data Roaming" and make sure it's **ON**, then let me know.
+TOOL_RESULT: Airplane Mode: OFF
+SIM Card Status: active
+Cellular Connection: connected
+Cellular Signal: excellent
+Cellular Network Type: 5G
+Mobile Data Enabled: Yes
+Data Roaming Enabled: No
+Wi-Fi Radio: OFF
+Wi-Fi Connected: No
+USER: I checked my mobile network settings, and Data Roaming is currently OFF. Should I turn it on?
+AGENT: Yes, please **turn Data Roaming ON** on your device, then try sending an MMS again and let me know how it goes.
+TOOL_RESULT: Data Roaming is now ON.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+TOOL_RESULT: Your messaging app can send MMS messages.
+USER: That did it! I turned Data Roaming ON, and now my messaging app can send MMS messages. Thanks for helping me get this sorted out!
+AGENT: You're very welcome, John! Glad we got it sorted out. 🎉
+
+Quick recap of what we fixed:
+- Enabled roaming on your account (at no cost)
+- Refueled 2 GB of data ($4)
+- Turned off Airplane Mode
+- Reseated your SIM card
+- Turned on mobile data and switched to 4G/5G
+- Turned off Wi-Fi Calling and granted SMS permission to your messaging app
+- Enabled Data Roaming on your device
+
+Enjoy the rest of your trip in France! Let me know if you need anything else.
+USER: Thanks again — everything’s working now. I appreciate your help! ###STOP###

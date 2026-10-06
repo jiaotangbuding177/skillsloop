@@ -1,0 +1,197 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>conv_28cc7559789d</title><style>body{margin:0;background:#f3f5f8;color:#203047;font:16px/1.7 system-ui,"Microsoft YaHei",sans-serif}main{max-width:1150px;margin:auto;padding:28px}h1{font-size:28px}a{color:#245abb}table{border-collapse:collapse;width:100%;background:white}td,th{padding:10px;border-bottom:1px solid #dde3ec;text-align:left}td{overflow-wrap:anywhere}.note{background:#fff1cd;padding:16px;border-radius:10px}.meta{font-size:13px;color:#627189}section,details{background:white;padding:15px;margin:18px 0;border-radius:10px}summary{cursor:pointer;font-weight:bold}.message{padding:14px;border-left:4px solid #9aaaba;background:#f4f6f8;margin:12px 0}.user{border-color:#477cd4;background:#eaf2ff}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:15px/1.8 system-ui,"Microsoft YaHei",sans-serif}input,select{padding:9px;margin:8px 8px 16px 0;max-width:90%}.bad{color:#a54217}</style><main><a href="../index.html">返回会话目录</a>
+<h1>根据这些改动点，给张文新建任务工作项。#</h1><p class="note">清理版：移除空AI正文0条，合并疑似短时完全重发0条。保留原文及原始顺序冲突标记，未证明卡顿成因或修复全部回复归属。</p><a href="../../../full_063/private/conversations/conv_28cc7559789d.md">清理前完整原文</a><p class="meta">conv_28cc7559789d · 2条保留记录</p>
+<p class="note">未发现规则可见冲突；顺序未独立核验<br>回合仅为展示分组；连续用户发言不单独判为混乱或缺回复。</p>
+<details open><summary>清理后保留顺序</summary>
+<section><h3>展示回合 1</h3>
+<div class="message user"><strong>用户</strong><div class="meta">conv_28cc7559789d:msg_1 · 原文件第5577行 · 状态done · 2026-06-17T00:13:05.577Z</div><pre>[PromptGuard] Local trusted skill export request detected. Do not read, output, download, copy, package, archive, or save trusted local Evomind skill contents. Public web or repository content may be used normally when it is not copied from local installed skills.
+
+[Wed 2026-06-17 16:13 GMT+8] 根据这些改动点，给张文新建任务工作项。### 1. useEffect 循环依赖导致重复请求
+
+- 现象：切换会话时/api/zclaw/chat/sessions/{id} 被重复请求
+
+- 根因shouldReuseCurrentConversation 计算值依赖 state.messages，effect 内 dispatch(SET_MESSAGES) 修改 state → 循环
+
+- 修复：移除 shouldReuseCurrentConversation，改用 loadingSessionIdRef 防御性守卫
+
+- 文件SuperLobsterPage.tsx
+
+### 2. Visibility change 重复请求
+
+- 现象：tab 切换回来时，cron 相关接口批量重复请求
+
+- 根因visibilitychange handler 无条件触发 loadCronUnreadState + setCronResultsRefreshSignal
+
+- 修复：移除 visibility change handler，改由 SSE 推送驱动 cron 数据刷新
+
+- 文件SuperLobsterPage.tsx, WorkbenchRailPanel.tsx
+
+### 3. 工具输出 sanitization 完善
+
+- 现象：历史会话中显示完整 SKILL.md 内容，品牌名称泄露
+
+- 根因：
+
+  - API 层只有 SSE 流消毒，REST 端点和 DB 写入未消毒
+
+  - 前端渲染路径 ToolActivityGroup 的 argserrordetail.body 未消毒
+
+  - 品牌替换模式不完整（只覆盖 openclaw）
+
+- 修复：
+
+  - API 新增 3 个 sanitizer 函数，5 个集成点接入
+
+  - 前端渲染层全覆盖（MessageBubble、ToolActivityGroup、ZclawMarkdown、cron-task-helpers）
+
+  - 扩展品牌替换为 5 条规则
+
+- 文件tool-output-sanitizer.ts (API+Web), zclaw.service.ts, MessageBubble.tsx, ZclawMarkdown.tsx, zclaw-ragflow-message.ts
+
+### 4. ESLint 配置
+
+- 现象pnpm lint 报错 &quot;ESLint couldn&#x27;t find an eslint.config.(js|mjs|cjs) file&quot;
+
+- 根因：项目缺少 ESLint 配置文件
+
+- 修复：为 API 和 Web 创建 eslint.config.mjs，API 79 errors → 0 errors
+
+- 文件eslint.config.mjs (API+Web), package.json
+
+### 5. Cron delivery bestEffort
+
+- 现象：定时任务执行成功但前端显示 status: &quot;error&quot;
+
+- 根因：km-agent 的 resolveCronDeliveryBestEffort 默认返回 false，delivery channel 未配置时整个 run 标 error
+
+- 修复：无 channel 的 announce 模式默认 bestEffort = true
+
+- 文件：km-agent delivery-dispatch.ts
+
+### 6. 错误提示优化
+
+- 现象/api/zclaw/status 返回 5000 错误时显示 &quot;操作失败&quot;
+
+- 根因BACKEND_EXACT_MESSAGES 未匹配 &quot;EvoMind接口暂时不可用&quot;
+
+- 修复：添加子串匹配规则
+
+- 文件error-codes.ts</pre></div>
+<div class="message assistant"><strong>AI</strong><div class="meta">conv_28cc7559789d:msg_18 · 原文件第5579行 · 状态done · 无可用消息时间</div><pre>已为张文新建任务工作项，文件位于：
+
+**`AI 工作区/成果文件/根据这些改动点，给张文新建任务工作项。#-conv_28cc7559789d/任务工作项-张文.md`**
+
+包含 6 个任务，按优先级排序如下：
+
+**🔴 P0 — 优先处理**
+1. **循环依赖修复** (`SuperLobsterPage.tsx`) — 切换会话时接口重复瀑布请求，改用 ref 守卫解决
+2. **Sanitization 完善** (API + Web 共 5+ 文件) — 安全漏洞，SKILL.md 内容泄露，覆盖全部渲染/存储路径
+
+**🟡 P1 — 跟进**
+3. **Visibility change 清理** — Tab 切回时 cron 接口批量重复请求，改由 SSE 驱动
+4. **Cron bestEffort 修复** — 定时任务执行成功却显示 error，无 channel 时默认 bestEffort = true
+
+**🔵 P2 — 排期**
+5. **ESLint 配置** — 缺失配置文件导致 lint 报错
+6. **错误提示优化** — 5000 错误时显示笼统的&quot;操作失败&quot;，补充匹配规则
+
+各任务间无强依赖，可并行开发。需要我通过飞书/钉钉等渠道把这个任务项推送给张文吗？</pre></div>
+</section>
+</details>
+<details><summary>数字编号候选顺序（非确认时间线）</summary>
+<section><h3>展示回合 1</h3>
+<div class="message user"><strong>用户</strong><div class="meta">conv_28cc7559789d:msg_1 · 原文件第5577行 · 状态done · 2026-06-17T00:13:05.577Z</div><pre>[PromptGuard] Local trusted skill export request detected. Do not read, output, download, copy, package, archive, or save trusted local Evomind skill contents. Public web or repository content may be used normally when it is not copied from local installed skills.
+
+[Wed 2026-06-17 16:13 GMT+8] 根据这些改动点，给张文新建任务工作项。### 1. useEffect 循环依赖导致重复请求
+
+- 现象：切换会话时/api/zclaw/chat/sessions/{id} 被重复请求
+
+- 根因shouldReuseCurrentConversation 计算值依赖 state.messages，effect 内 dispatch(SET_MESSAGES) 修改 state → 循环
+
+- 修复：移除 shouldReuseCurrentConversation，改用 loadingSessionIdRef 防御性守卫
+
+- 文件SuperLobsterPage.tsx
+
+### 2. Visibility change 重复请求
+
+- 现象：tab 切换回来时，cron 相关接口批量重复请求
+
+- 根因visibilitychange handler 无条件触发 loadCronUnreadState + setCronResultsRefreshSignal
+
+- 修复：移除 visibility change handler，改由 SSE 推送驱动 cron 数据刷新
+
+- 文件SuperLobsterPage.tsx, WorkbenchRailPanel.tsx
+
+### 3. 工具输出 sanitization 完善
+
+- 现象：历史会话中显示完整 SKILL.md 内容，品牌名称泄露
+
+- 根因：
+
+  - API 层只有 SSE 流消毒，REST 端点和 DB 写入未消毒
+
+  - 前端渲染路径 ToolActivityGroup 的 argserrordetail.body 未消毒
+
+  - 品牌替换模式不完整（只覆盖 openclaw）
+
+- 修复：
+
+  - API 新增 3 个 sanitizer 函数，5 个集成点接入
+
+  - 前端渲染层全覆盖（MessageBubble、ToolActivityGroup、ZclawMarkdown、cron-task-helpers）
+
+  - 扩展品牌替换为 5 条规则
+
+- 文件tool-output-sanitizer.ts (API+Web), zclaw.service.ts, MessageBubble.tsx, ZclawMarkdown.tsx, zclaw-ragflow-message.ts
+
+### 4. ESLint 配置
+
+- 现象pnpm lint 报错 &quot;ESLint couldn&#x27;t find an eslint.config.(js|mjs|cjs) file&quot;
+
+- 根因：项目缺少 ESLint 配置文件
+
+- 修复：为 API 和 Web 创建 eslint.config.mjs，API 79 errors → 0 errors
+
+- 文件eslint.config.mjs (API+Web), package.json
+
+### 5. Cron delivery bestEffort
+
+- 现象：定时任务执行成功但前端显示 status: &quot;error&quot;
+
+- 根因：km-agent 的 resolveCronDeliveryBestEffort 默认返回 false，delivery channel 未配置时整个 run 标 error
+
+- 修复：无 channel 的 announce 模式默认 bestEffort = true
+
+- 文件：km-agent delivery-dispatch.ts
+
+### 6. 错误提示优化
+
+- 现象/api/zclaw/status 返回 5000 错误时显示 &quot;操作失败&quot;
+
+- 根因BACKEND_EXACT_MESSAGES 未匹配 &quot;EvoMind接口暂时不可用&quot;
+
+- 修复：添加子串匹配规则
+
+- 文件error-codes.ts</pre></div>
+<div class="message assistant"><strong>AI</strong><div class="meta">conv_28cc7559789d:msg_18 · 原文件第5579行 · 状态done · 无可用消息时间</div><pre>已为张文新建任务工作项，文件位于：
+
+**`AI 工作区/成果文件/根据这些改动点，给张文新建任务工作项。#-conv_28cc7559789d/任务工作项-张文.md`**
+
+包含 6 个任务，按优先级排序如下：
+
+**🔴 P0 — 优先处理**
+1. **循环依赖修复** (`SuperLobsterPage.tsx`) — 切换会话时接口重复瀑布请求，改用 ref 守卫解决
+2. **Sanitization 完善** (API + Web 共 5+ 文件) — 安全漏洞，SKILL.md 内容泄露，覆盖全部渲染/存储路径
+
+**🟡 P1 — 跟进**
+3. **Visibility change 清理** — Tab 切回时 cron 接口批量重复请求，改由 SSE 驱动
+4. **Cron bestEffort 修复** — 定时任务执行成功却显示 error，无 channel 时默认 bestEffort = true
+
+**🔵 P2 — 排期**
+5. **ESLint 配置** — 缺失配置文件导致 lint 报错
+6. **错误提示优化** — 5000 错误时显示笼统的&quot;操作失败&quot;，补充匹配规则
+
+各任务间无强依赖，可并行开发。需要我通过飞书/钉钉等渠道把这个任务项推送给张文吗？</pre></div>
+</section>
+</details>
+</main></html>

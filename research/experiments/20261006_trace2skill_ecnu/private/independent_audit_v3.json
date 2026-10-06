@@ -1,0 +1,496 @@
+{
+  "schema": "trace2skill-independent-ai-audit-v3",
+  "status": "COMPLETED_PARTIAL_OUTPUT_AUDIT_V3_RUN_FAILED",
+  "scope": "Only this frozen six-session generation experiment; post-generation audit, not generator input",
+  "reviewer_limit": "Same-AI independent source review; not human gold, overall accuracy, professional fact certification, or consumer benefit",
+  "source_reference_baseline": {
+    "path": "private/independent_audit.json",
+    "sha256": "40e5f0967cc9be2da4ecea75ad11e0f04a7cc5aacfdb02f86d82bef672b6b460",
+    "established_before_generated_outputs": true,
+    "frozen_source_sha256": "735c165a8d74b1bce9a4e8d589123526c6913c3c4f923d79d4fb688fb90e08d4",
+    "source_reference_ids": [
+      "REF_FINANCE",
+      "REF_EXPO",
+      "REF_RESEARCH_TABLE",
+      "REF_SCHOOLS",
+      "REF_TABLE_DIFF",
+      "REF_MASKING"
+    ]
+  },
+  "v1_v2_audits_preserved": true,
+  "protocol_source": "private/frozen_protocol_v3.json",
+  "continuation_disclosure": "Transport-only timeout change 120 to 600 seconds. One explicit retry of known failed request, successful responses replayed without calls; cumulative budget and unknown prior usage preserved. Same payload/input/semantic algorithm per frozen protocol; independently verify available hashes. Not a fresh independent algorithm comparison. Any further failure ends this batch, no v4.",
+  "analysis_findings": [
+    {
+      "id": "B_FINANCE_COLUMN_SCOPE",
+      "session_id": "conv_9b78a49bd169",
+      "item_index": 4,
+      "source_ids": [
+        "m010"
+      ],
+      "assessment": "SCOPE_OVERGENERALIZATION",
+      "detail": "The source refers to this template having no beginning-of-year column. The item generalizes to balance sheets usually having only an ending column. Its limitation narrows to the particular script but does not remove the broader claim. No workbook-level verification is available.",
+      "source_group_ids": [
+        "a_5f7186f4b121d3e26b"
+      ]
+    },
+    {
+      "id": "B_FINANCE_SELF_REPORT_LIMIT",
+      "session_id": "conv_9b78a49bd169",
+      "item_indices": [
+        1,
+        2,
+        3
+      ],
+      "assessment": "UNCERTAINTY_PRESERVED",
+      "detail": "Mapping, formula filling and LibreOffice use are VISIBLE_METHOD_UNVERIFIED, final correctness is UNKNOWN, and command details are unavailable. Existing tool snapshots do not establish successful recalculation."
+    },
+    {
+      "id": "B_EXPO_SCORE_SCALE",
+      "session_id": "conv_7f5a1845d742",
+      "item_index": 2,
+      "source_ids": [
+        "m002"
+      ],
+      "source_group_ids": [
+        "a_d4587d55078b62678e"
+      ],
+      "assessment": "CONDITION_EXPLICIT_IN_ANALYSIS",
+      "detail": "The x10 factor is explicitly limited to raw scores whose maximum is 10; the source supports this case, not a universal conversion. No final-skill propagation assessment is possible."
+    },
+    {
+      "id": "B_EXPO_ROI_REQUIREMENT",
+      "session_id": "conv_7f5a1845d742",
+      "item_index": 4,
+      "source_ids": [
+        "m001",
+        "m002"
+      ],
+      "source_group_ids": [
+        "u_d5aca2dc7f4b963414",
+        "a_d4587d55078b62678e"
+      ],
+      "assessment": "USER_REQUIREMENT_SUPPORTED_WITH_FACT_LIMIT",
+      "detail": "The user requires assumptions to be listed. This supports distinguishing assumed inputs; it does not independently certify the booth price that the assistant labels FACT."
+    },
+    {
+      "id": "B_EXPO_FAILURE_EVIDENCE_LIMIT",
+      "session_id": "conv_7f5a1845d742",
+      "item_indices": [
+        1,
+        3
+      ],
+      "assessment": "NARRATIVE_FAILURE_NOT_INDEPENDENT_WORKBOOK_PROOF",
+      "detail": "A visible tool snapshot supports a failed python-docx import. The formula row offset and its correction come from assistant narrative; the analysis explicitly states that final artifact status is unverified. OBSERVED_LOCAL_FAILURE should be interpreted as an observed report for the formula item."
+    },
+    {
+      "id": "B_RESEARCH_UNVERIFIED_MD5",
+      "session_id": "conv_d2c84054d91a",
+      "item_index": 4,
+      "source_ids": [
+        "m058",
+        "m061"
+      ],
+      "assessment": "ASSISTANT_REPORT_PROMOTED_TO_VERIFIED",
+      "detail": "VERIFIED_LOCAL_RESULT and interception of a false update request have no independent comparison receipts. Source m058/m061 contains only assistant statements about byte/MD5 equality, no actual hashes; the user update request cannot be called false from this evidence.",
+      "source_group_ids": [
+        "a_e2cc5353ecb545b807",
+        "a_97cb42b24c113fd375"
+      ]
+    },
+    {
+      "id": "B_RESEARCH_RICHTEXT_CAUSAL_LINK",
+      "session_id": "conv_d2c84054d91a",
+      "item_index": 5,
+      "source_ids": [
+        "m007",
+        "m055",
+        "m008",
+        "m056"
+      ],
+      "assessment": "REQUIREMENT_SUPPORTED_CAUSE_UNVERIFIED",
+      "detail": "User explicitly requires subscripts and later centering of a Chinese explanation title. The failure does not establish that rich text alignment caused the miss. Source m055 explicitly keeps Chinese explanation titles left-aligned; m056 admits missing the centering requirement.",
+      "source_group_ids": [
+        "u_28804bc75cb77b92e1",
+        "a_d03f86e724d736bb05",
+        "u_3172375633abbb37bd",
+        "a_6eb0fd2ac7016dfea8"
+      ]
+    },
+    {
+      "id": "B_RESEARCH_ENTITY_FEEDBACK",
+      "session_id": "conv_d2c84054d91a",
+      "item_index": 6,
+      "source_ids": [
+        "m004"
+      ],
+      "assessment": "LOCAL_USER_FEEDBACK_SUPPORTED",
+      "detail": "The user explicitly says the table lacked concrete data and asks to fill values from the example. This local feedback is directly supported without certifying the unseen workbook.",
+      "source_group_ids": [
+        "u_0f7c35c6e71f1fd641"
+      ]
+    },
+    {
+      "id": "B_RESEARCH_ASSISTANT_METHOD_LIMIT",
+      "session_id": "conv_d2c84054d91a",
+      "item_indices": [
+        1,
+        2,
+        3,
+        7
+      ],
+      "assessment": "METHOD_OR_FAILURE_SELF_REPORT",
+      "detail": "Merged group headers, title-case defect, sheet-name replacement and caption translation have visible assistant narratives, but no independent file or code verification. Failure status for items1/2 is an observed narrative; item7 says it ensured semantic correspondence while its status/limitations keep implementation unverified."
+    }
+  ],
+  "recovery_findings": [
+    {
+      "id": "B_FINANCE_ONE_TASK_CHAIN",
+      "session_id": "conv_9b78a49bd169",
+      "assessment": "PLAUSIBLE_TEXTUAL_RELATIONS_NOT_VERIFIED_TIMELINE",
+      "detail": "One task matches the user financial-filling/reconciliation request. Progress dependencies and retry link follow textual references. Selected relations preserve chronology_verified=false; task outcome UNKNOWN and semantic_validation NOT_INDEPENDENTLY_VERIFIED. No unique chronology or successful execution is established."
+    },
+    {
+      "id": "B_EXPO_THREE_SUBGOALS",
+      "session_id": "conv_7f5a1845d742",
+      "assessment": "SOURCE_SUPPORTED_DECOMPOSITION_NOT_UNIQUE_GOLD_PARTITION",
+      "detail": "Three task goals correspond to the user decision, ROI/assumptions and execution-plan subgoals; both messages belong to all three. RESPONDS_TO m002 to m001 is textually supported. This does not establish three independent physical tasks or verified chronology."
+    },
+    {
+      "id": "B_EXPO_MISSING_INDEX_NORMALIZATION",
+      "session_id": "conv_7f5a1845d742",
+      "assessment": "FORMAT_ONLY_NORMALIZATION",
+      "detail": "Only missing redundant source_ids were filled with already existing real endpoints m002,m001. The raw model relation was not changed. Free replay is not a new independent model experiment."
+    },
+    {
+      "id": "B_RESEARCH_FEEDBACK_FRAGMENTATION",
+      "session_id": "conv_d2c84054d91a",
+      "assessment": "TEN_SUBTASKS_WITH_NINE_UNRESOLVED_CROSS_TASK_LINKS",
+      "detail": "Each of ten user messages becomes a separate task with one selected assistant response. The original ongoing table revisions support candidate subgoals, but task fragmentation leaves all nine cross-task user feedback/dependency/reference candidates unresolved. In particular m008 REJECTS m055 is not in a selected task graph; this is not evidence of a fully restored feedback chain. All original messages and unresolved candidates nevertheless remain in the analysis request; no deletion of feedback from model context is claimed."
+    },
+    {
+      "id": "B_RESEARCH_KIND_VOCABULARY",
+      "session_id": "conv_d2c84054d91a",
+      "assessment": "RAW_KIND_VALUES_OUTSIDE_DECLARED_MEMBERSHIP_VOCABULARY",
+      "detail": "Compiled kinds m002=ADDS_CONSTRAINT and m004/m008=REJECTS are relationship labels rather than allowed REQUEST|FEEDBACK|ANSWER|PROGRESS|CLAIM|OTHER membership labels in the frozen recovery prompt. The adapter retained them; document as observed schema laxness, not a tested downstream failure."
+    },
+    {
+      "id": "B_RESEARCH_MD5_UNCERTAINTY",
+      "session_id": "conv_d2c84054d91a",
+      "assessment": "UNVERIFIED_REPORT_PASSED_THROUGH_RECOVERY",
+      "detail": "Recovery uncertainty says m061 reported MD5 equality and the update may not have changed values. Overall outcome remains UNKNOWN and semantic_validation NOT_INDEPENDENTLY_VERIFIED; the later analysis nevertheless promotes the same report to verified."
+    },
+    {
+      "id": "B_SCHOOL_RAW_ROLE_CONTRACT_FAILURE",
+      "session_id": "conv_e6fdd2e394f4",
+      "assessment": "RAW_ONLY_NOT_FORMALLY_COMPILED",
+      "detail": "Five RESPONDS_TO candidates have user sources and assistant targets, contrary to the explicit frozen interface direction. The adapter rejects rather than silently reversing or renaming relations. The raw response preserves one task, all34 message membership entries and UNKNOWN outcome, but no official compiled recovery or analysis was produced."
+    },
+    {
+      "id": "B_SCHOOL_RAW_SOURCE_LIMIT",
+      "session_id": "conv_e6fdd2e394f4",
+      "assessment": "REPORTED_COUNTS_REMAIN_UNVERIFIED",
+      "detail": "The raw response labels assistant completion/statistics as CLAIM and notes inconsistent 657/893 counts and unknown final artifact correctness. It does not independently establish geographic accuracy or confirm that2958 records were conserved. Local user requirements of2958 and uncertain-school fallback are supported; no final-skill propagation can be reviewed."
+    },
+    {
+      "id": "B_SCHOOL_RAW_UNVERIFIED_ORDER_LANGUAGE",
+      "session_id": "conv_e6fdd2e394f4",
+      "source_ids": [
+        "m002",
+        "m012",
+        "m006",
+        "m025"
+      ],
+      "assessment": "RAW_REASON_PRESUPPOSES_PHYSICAL_ORDER",
+      "detail": "Raw reasons state that m002 follows closely after m012 and m006 occurs after m025, although the frozen input explicitly says source order is not confirmed chronology. Those relations are not formally compiled and no actual order is established."
+    }
+  ],
+  "final_skill_findings": [
+    {
+      "id": "B_FINAL_NOT_GENERATED",
+      "assessment": "NOT_ASSESSABLE",
+      "detail": "B terminates with three analyses and no final skill. Condition leakage, historical verification claims and Markdown topology cannot be evaluated in a B final or compared to A final."
+    },
+    {
+      "id": "A_FINAL_UNCHANGED",
+      "assessment": "PRIOR_FINDINGS_PRESERVED",
+      "detail": "A v1/v2/v3 final bytes match. Line16 is conditional on actual instructions, line31 proposes future hash/difference checks without certifying old equality. Line14 absolute hard-coded index prohibition and line15 leaf-only rule have overly broad triggers; line21 runs into a workflow heading and lines22-24 repeat the flow. See preserved v1 audit."
+    }
+  ],
+  "generated_artifacts_reviewed": [
+    {
+      "path": "private/run_v3/run.json",
+      "sha256": "9e98cba4391b69f6e5b078832f2c02e629ac5b0213a4f5ea223a542c7e018571"
+    },
+    {
+      "path": "private/run_v3/B/failure.json",
+      "sha256": "0ec07df133a9f4c2f53db9448e1b9f9b2c8c5eaa5ad97d0eb30848351197fca7"
+    },
+    {
+      "path": "private/run_v3/A/skills/spreadsheet-generation-audit/SKILL.md",
+      "sha256": "1763a3e578843479beae604dd0dd0c557ff2c74483d651a089e639ece948c008"
+    },
+    {
+      "path": "private/run_v3/explicit_transport_retry.json",
+      "sha256": "3b088c4ca96e1a0e115998df9982fc9c28f6a0c2acbc0e3e57246b505b2bf2c5"
+    },
+    {
+      "path": "private/run_v3/response_replay.json",
+      "sha256": "c49e374de6b7c64ec41ea7fb0282f3f4263467756908dd571fdb0530b5e907a1"
+    },
+    {
+      "path": "private/frozen_protocol_v3.json",
+      "sha256": "d4ffe3e0d0cc90cefd1620c1dfb16e8fcd0a77863a53218feaa9e4090e3bdea5"
+    },
+    {
+      "path": "private/run_v3/B/analyses/conv_9b78a49bd169.json",
+      "sha256": "703de2bb825df6e31e88496fbf02b9538258e22a8ecde22ee42e5d1b5f434f81"
+    },
+    {
+      "path": "private/run_v3/B/recovered/conv_9b78a49bd169.json",
+      "sha256": "a98cee9d28325d52ddc338b5861f5c24607a6c0196c8af3a8c0adc8f841b9159"
+    },
+    {
+      "path": "private/run_v3/B/recovery_raw/conv_9b78a49bd169.json",
+      "sha256": "99e46d77bc6bdeb263c75477b1f8e5addbc24c03580bf9ae14023bceffed22e9"
+    },
+    {
+      "path": "private/run_v3/B/normalization/conv_9b78a49bd169.json",
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+    },
+    {
+      "path": "private/run_v3/B/analyses/conv_7f5a1845d742.json",
+      "sha256": "4edcd6945f9be3acf93b8689f25f5c0cd8279a0ab4cbab867d0440cfe57eaac5"
+    },
+    {
+      "path": "private/run_v3/B/recovered/conv_7f5a1845d742.json",
+      "sha256": "335657190f0e0881865122146e32612d6ba0b2289d2553017ea27d9a29dbc7ec"
+    },
+    {
+      "path": "private/run_v3/B/recovery_raw/conv_7f5a1845d742.json",
+      "sha256": "c32646103afaf652e1510b3e77614a9f3d10fc76aedea811692c2d8cd8ff83c3"
+    },
+    {
+      "path": "private/run_v3/B/normalization/conv_7f5a1845d742.json",
+      "sha256": "cacab34e0583a74a18ba8f57681534ceefd1d1cad7e02707cb56b963bb7f70f4"
+    },
+    {
+      "path": "private/run_v3/B/analyses/conv_d2c84054d91a.json",
+      "sha256": "e702be623e32af0d3f109a73ded7caa3f90300f2a40e9bc0b20070e2f9aa0855"
+    },
+    {
+      "path": "private/run_v3/B/recovered/conv_d2c84054d91a.json",
+      "sha256": "6baa7de1666742b880af0a178271fae33bfe9c647a856d4568202d42422c290f"
+    },
+    {
+      "path": "private/run_v3/B/recovery_raw/conv_d2c84054d91a.json",
+      "sha256": "915c46c0930f69e86fdf1fe9a8a39209a9a5ba19e52c76caac72fee6908c4109"
+    },
+    {
+      "path": "private/run_v3/B/normalization/conv_d2c84054d91a.json",
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+    },
+    {
+      "path": "private/run_v3/B/recovery_raw/conv_e6fdd2e394f4.json",
+      "sha256": "8eedbfa41a3dc4213379b0b52d896f11dd92859f8a3009010b004d751de743d5"
+    }
+  ],
+  "no_model_calls_by_auditor": true,
+  "no_credentials_read_by_auditor": true,
+  "audit_not_used_for_generation": true,
+  "transport_integrity": {
+    "prior_request_index": 15,
+    "new_request_index": 16,
+    "raw_request_bytes_equal": true,
+    "raw_request_file_sha256": "dae1a67e742e59ceb8f714771dcf8dbd68a029ac923f97fe342e564abab87aac",
+    "ledger_request_sha256": "50eebed36c84d59a8958acf734a61d1a93164e98e3febfe1777c4b28b5163e0c",
+    "timeout_seconds_before": 120,
+    "timeout_seconds_after": 600,
+    "snapshot_bytes_equal": {
+      "recovery_adapter.py": true,
+      "prompts.json": true,
+      "initial_skill.md": true,
+      "continue_v2.py": true,
+      "run_experiment.py": true
+    },
+    "frozen_source_sha256": "735c165a8d74b1bce9a4e8d589123526c6913c3c4f923d79d4fb688fb90e08d4",
+    "protocol_sha256": "d4ffe3e0d0cc90cefd1620c1dfb16e8fcd0a77863a53218feaa9e4090e3bdea5",
+    "same_payload_is_not_same_response_or_independent_trial": true
+  },
+  "research_recovery_structure": {
+    "task_count": 10,
+    "messages": 63,
+    "selected_relations": 11,
+    "unresolved_relations": 9,
+    "membership_option_counts": [
+      1
+    ],
+    "relation_option_counts": [
+      1
+    ],
+    "chronology_verified": false,
+    "semantic_validation": "NOT_INDEPENDENTLY_VERIFIED",
+    "unresolved_candidates_retained_in_analysis_input": true,
+    "complete_source_messages_retained_in_analysis_input": true,
+    "interpretation": "Not selected in a task graph does not mean removed from analysis context; raw source messages and unresolved candidates are still shown.",
+    "single_candidate_limit": "Every membership and relation proposal has only one option. This output does not test whether the beam/constraints resolve competing task assignments."
+  },
+  "terminal_observation": {
+    "status": "PARTIAL_OR_FAILED_V3",
+    "stage": "B.recovery.conv_e6fdd2e394f4",
+    "error_type": "ValueError",
+    "error": "Response relation roles invalid",
+    "completed_B_analysis_records": 3,
+    "B_final_skill_generated": false,
+    "B_aggregate_analysis_records_generated": false,
+    "explicit_stop_rule": "Any further failure ends this batch; no v4 retry",
+    "failure_class": "Observed role-contract failure, distinct from v2 read timeout",
+    "invalid_role_relations": [
+      {
+        "source": "m002",
+        "target": "m012",
+        "source_role": "user",
+        "target_role": "assistant",
+        "source_group_id": "u_481904990d1e22a11a",
+        "target_group_id": "a_7d6514f603972e9da1",
+        "kind": "RESPONDS_TO",
+        "role_contract": "source assistant, target user"
+      },
+      {
+        "source": "m003",
+        "target": "m013",
+        "source_role": "user",
+        "target_role": "assistant",
+        "source_group_id": "u_3d1e266a1a4accac49",
+        "target_group_id": "a_39a2c72343f5edfa13",
+        "kind": "RESPONDS_TO",
+        "role_contract": "source assistant, target user"
+      },
+      {
+        "source": "m004",
+        "target": "m017",
+        "source_role": "user",
+        "target_role": "assistant",
+        "source_group_id": "u_2598cdee11305e8df9",
+        "target_group_id": "a_f76a8a64c264fca1a1",
+        "kind": "RESPONDS_TO",
+        "role_contract": "source assistant, target user"
+      },
+      {
+        "source": "m006",
+        "target": "m025",
+        "source_role": "user",
+        "target_role": "assistant",
+        "source_group_id": "u_47f056663bd53ee74d",
+        "target_group_id": "a_872165461a494659e6",
+        "kind": "RESPONDS_TO",
+        "role_contract": "source assistant, target user"
+      },
+      {
+        "source": "m009",
+        "target": "m030",
+        "source_role": "user",
+        "target_role": "assistant",
+        "source_group_id": "u_e0f832e763ba079053",
+        "target_group_id": "a_fa66271d00b757b52c",
+        "kind": "RESPONDS_TO",
+        "role_contract": "source assistant, target user"
+      }
+    ]
+  },
+  "A_continuation": {
+    "sha256": "1763a3e578843479beae604dd0dd0c557ff2c74483d651a089e639ece948c008",
+    "v1_v2_v3_final_bytes_equal": true,
+    "new_API_calls_for_A": 0,
+    "semantic_review_reference": "private/independent_audit.json"
+  },
+  "prior_audits": [
+    {
+      "path": "private/independent_audit.json",
+      "sha256": "40e5f0967cc9be2da4ecea75ad11e0f04a7cc5aacfdb02f86d82bef672b6b460"
+    },
+    {
+      "path": "private/independent_audit.md",
+      "sha256": "9467112b209df798d07ab0a1b5d99e34dacba384c94c1d7fea004dded986d006"
+    },
+    {
+      "path": "private/independent_audit_v2.json",
+      "sha256": "37da46a6490e4f2308978a89488a5c48421e08bbbfb1a27487c4b6d23fd3daf9"
+    },
+    {
+      "path": "private/independent_audit_v2.md",
+      "sha256": "7b9e343159189778bd146aaf6b40008c2d119bb71b682aecc2f53ad72ffc941b"
+    }
+  ],
+  "preservation_checks": {
+    "frozen_source_unchanged": true,
+    "v1_audit_unchanged": true,
+    "all14_prior_response_files_match_frozen_v3_hashes": {
+      "001_response.json": true,
+      "002_response.json": true,
+      "003_response.json": true,
+      "004_response.json": true,
+      "005_response.json": true,
+      "006_response.json": true,
+      "007_response.json": true,
+      "008_response.json": true,
+      "009_response.json": true,
+      "010_response.json": true,
+      "011_response.json": true,
+      "012_response.json": true,
+      "013_response.json": true,
+      "014_response.json": true
+    },
+    "A_v1_v2_v3_final_bytes_equal": true
+  },
+  "usage_interpretation": {
+    "generation_requests_started_excluding_calibration": 18,
+    "new_requests_v3": 3,
+    "known_total_tokens_including_calibration": 265639,
+    "unknown_usage_reservation_tokens": 114592,
+    "limitation": "Unknown-use reservation is a budget bound, not actual additional consumption or exact billing. Prior failed transmission is preserved, not zero-cost."
+  },
+  "pending": [],
+  "not_generated_and_not_reviewed": {
+    "B_analysis_sessions": [
+      "conv_e6fdd2e394f4",
+      "conv_ee979d0d59fb",
+      "conv_b5e6f3d3bab9"
+    ],
+    "B_final_skill": true,
+    "school_recovery": "Raw response only; compilation rejected; no formal graph"
+  },
+  "terminal_conclusion": "Three completed B analyses and a fourth raw recovery with role-contract failure. Source calibration risks persist in the research-table analysis. No B final, final A/B quality comparison, overall accuracy or consumer benefit is established.",
+  "B_available_output_counts": {
+    "analysis_record_count": 3,
+    "analysis_item_count": 15,
+    "task_candidates": 14,
+    "unique_selected_relations": 24,
+    "selected_task_relation_memberships_including_duplicates": 26,
+    "unresolved_relation_candidates": 9,
+    "interpretation": "Descriptive counts in this partial generation only, not gold accuracy, verified chronology, competing-candidate resolution, or consumer benefit."
+  },
+  "cross_arm_observations": [
+    {
+      "id": "A_B_MD5_SAME_SOURCE_STATUS_UPGRADE",
+      "session_id": "conv_d2c84054d91a",
+      "A_item_index": 5,
+      "B_item_index": 4,
+      "source_ids": [
+        "m058",
+        "m061"
+      ],
+      "source_group_ids": [
+        "a_e2cc5353ecb545b807",
+        "a_97cb42b24c113fd375"
+      ],
+      "assessment": "BOTH_ANALYSES_PROMOTE_UNVERIFIED_ASSISTANT_HASH_REPORT",
+      "detail": "Both A and B mark the same assistant byte/MD5 comparison statements VERIFIED_LOCAL_RESULT without actual hashes, comparison tool receipts or available workbooks. A final line31 only recommends a future comparison and does not certify the old claim; B final was not generated, so its propagation is unknown."
+    },
+    {
+      "id": "NO_FINAL_AB_COMPARISON",
+      "assessment": "NOT_AVAILABLE",
+      "detail": "A final exists unchanged. B final is absent. Differences among the15 B items and corresponding A analysis items cannot support a final-skill quality improvement claim."
+    }
+  ]
+}

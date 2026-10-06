@@ -1,0 +1,116 @@
+AGENT: Hi! How can I help you today?
+USER: Hi, I'm having trouble with my mobile data. It keeps either stopping completely or getting really slow. I need to get this fixed — I really want excellent internet speed on my phone. I don't have any Wi-Fi to fall back on, so this is important to me.
+AGENT: I can help with that. First, I need to verify your account.
+
+Could you please provide your **phone number**, or your **full name and date of birth**?
+USER: Sure — my name is John Smith, and my phone number is 555-123-2002.
+AGENT_TOOL_CALL: {"name": "get_customer_by_phone", "arguments": {"phone_number": "555-123-2002"}}
+TOOL_RESULT: {"customer_id": "C1001", "full_name": "John Smith", "date_of_birth": "1985-06-15", "email": "john.smith@example.com", "phone_number": "555-123-2002", "address": {"street": "123 Main St", "city": "Anytown", "state": "CA", "zip_code": "90210"}, "account_status": "Active", "payment_methods": [{"method_type": "Credit Card", "account_number_last_4": "1235", "expiration_date": "12/2026"}], "line_ids": ["L1001", "L1002", "L1003"], "bill_ids": ["B1001", "B1002", "B1003"], "created_at": "2025-01-15 10:30:00", "last_extension_date": null, "goodwill_credit_used_this_year": 25.0}
+AGENT: Thanks, John — I've verified your account.
+
+Now, let's troubleshoot your mobile data. Could you run a **status bar check** on your phone and tell me what icons you see? I'm especially interested in:
+
+- Signal strength (No Signal / Poor / Fair / Good / Excellent)
+- Network technology (5G, 4G, etc.)
+- Mobile data status (Enabled / Disabled)
+- Airplane mode
+- Data saver
+- VPN status
+
+You can do this from your phone's diagnostic actions. What does it show?
+TOOL_RESULT: Status Bar: 📶¹ Poor | 2G | 📵 Data Disabled | 🔒 VPN Connected | 🔋 80%
+USER: Here's what my status bar shows:
+
+- Signal strength: Poor
+- Network technology: 2G
+- Mobile data: Disabled
+- VPN: Connected
+- Battery: 80%
+
+That's concerning — data is disabled and I'm only on 2G. What should I do?
+AGENT: Let's fix this step by step.
+
+**First, enable mobile data** on your phone (turn Data on).
+
+**Second, your network is on 2G** — that's not suitable for mobile data connectivity. Please switch your network mode to one that includes 4G/5G (for example, **4g_5g_preferred** or **4g_only**) using your phone's network mode setting.
+
+**Third, your VPN is connected.** A VPN encrypts your traffic and can slow down or interfere with your data connection. Please **disconnect/turn off the VPN**.
+
+Also, your signal shows **Poor**. Let me know once you've done the above, and tell me what the status bar shows after each change — we'll keep going from there.
+
+Could you go ahead and make those changes now?
+USER: That's a few things at once — I can only do one action at a time on my end. Could you please walk me through them one at a time? Which one should I start with?
+AGENT: No problem — let's do one at a time.
+
+**Step 1: Turn on mobile data.** Please enable Data on your phone.
+
+Let me know once that's done and what the status bar shows.
+TOOL_RESULT: Mobile Data is now ON.
+Status Bar: 📶¹ Poor | 2G | 📱 Data Enabled | 🔽 Data Saver | 🔒 VPN Connected | 🔋 80%
+USER: Okay, mobile data is now ON. The status bar now shows:
+
+- Signal strength: Poor
+- Network technology: 2G
+- Mobile data: Enabled
+- Data saver: On
+- VPN: Connected
+- Battery: 80%
+
+What's next?
+AGENT: Good — mobile data is on.
+
+**Step 2: Change your network mode.** Your phone is on 2G, which isn't suitable for mobile data. Please switch your network mode to one that includes 4G/5G — use **4g_5g_preferred** (or **4g_only** if that's not available).
+
+Let me know once that's done and what the status bar shows.
+TOOL_RESULT: Preferred Network Mode set to: 4g_5g_preferred
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔽 Data Saver | 🔒 VPN Connected | 🔋 80%
+USER: Done — network mode is now set to 4g_5g_preferred. The status bar now shows:
+
+- Signal strength: Excellent
+- Network technology: 5G
+- Mobile data: Enabled
+- Data saver: On
+- VPN: Connected
+- Battery: 80%
+
+That looks much better on the signal side. What's next?
+AGENT: Excellent — now you're on 5G with excellent signal.
+
+**Step 3: Turn off the VPN.** A VPN can slow down or interfere with your mobile data connection. Please **disconnect/turn off the VPN**.
+
+Let me know once that's done and what the status bar shows.
+TOOL_RESULT: VPN disconnected successfully.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔽 Data Saver | 🔋 80%
+USER: VPN is now disconnected. The status bar shows:
+
+- Signal strength: Excellent
+- Network technology: 5G
+- Mobile data: Enabled
+- Data saver: On
+- Battery: 80%
+
+What's next?
+AGENT: Great — VPN is off.
+
+**Step 4: Turn off Data Saver.** Data Saver restricts background data and can slow down or limit your connectivity. Please **turn off Data Saver**.
+
+Let me know once that's done and what the status bar shows.
+TOOL_RESULT: Data Saver Mode is now OFF.
+Status Bar: 📶⁴ Excellent | 5G | 📱 Data Enabled | 🔋 80%
+USER: Data Saver is now OFF. The status bar shows:
+
+- Signal strength: Excellent
+- Network technology: 5G
+- Mobile data: Enabled
+- Battery: 80%
+
+Everything looks clean now. Should I run a speed test to check my internet speed?
+AGENT: That looks clean. Yes — go ahead and check your mobile data connection (browse the web or run a speed test) and let me know how it performs.
+
+If it's still slow or dropping, we'll dig further — one thing I'd want to check next is your data usage against your plan limit, since exceeding it would cut off or throttle your data. Let me know what you see.
+TOOL_RESULT: Speed Test Result: 275.00 Mbps (Excellent). Connection is very fast.
+USER: I ran a speed test and got **275 Mbps — rated Excellent**. The connection is very fast now.
+
+That's exactly what I was hoping for. Thank you so much for your help — the 5G signal, VPN off, and Data Saver off did the trick. Everything's working great now!
+
+###STOP###
