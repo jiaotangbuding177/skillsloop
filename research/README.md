@@ -6,7 +6,7 @@
 
 ## 轮次记忆索引
 
-- [全量原始与整理数据Git迁移（2026-10-06—07）](memory/2026-10-07_git_full_data_migration.md)：用户授权全部数据随研究记忆上传供新环境接续；65外部源文件归档SHA通过，原始20＋人工3及源文档保留。历史数据/LFS、原生实验private证据、作者固定子模块和实际检查器纳入；37文件上传副本仅遮蔽凭据，本地原件不改。独立LF checkout225项严格换行恢复、550历史SHA和S0通过；[迁移说明](../MIGRATION.md)。提交与远端核验状态见记忆后续记录。
+- [全量原始与整理数据Git迁移（2026-10-06—07）](memory/2026-10-07_git_full_data_migration.md)：已推送数据提交80f54800并核远端同号，11/11 LFS上传成功，main未改。31662份数据／研究文件索引SHA核验；65外部源归档（原始20＋人工3＋资料42）保留。历史数据、原生实验private证据、作者固定子模块和实际检查器纳入；37文件上传副本仅遮蔽凭据，本地原件不改。独立LF checkout225项严格换行恢复、550历史SHA和S0通过；[迁移说明](../MIGRATION.md)。完成记录与清单元数据另作小提交。
 
 - [原生Trace2Skill接通与真实企业单经验验收（2026-10-06）](memory/2026-10-06_trace2skill_native_baseline_execution.md)：[本轮报告](reports/2026-10-06_trace2skill_native_baseline_execution.md)／[原生skill](experiments/20261006_trace2skill_native_baseline/deliverables/enterprise_monthly_salary/xlsx/SKILL.md)。原源码550哈希一致，真实Success1经验→MAP1→定位翻译1→APPLY／格式检查；作者人工xlsx深化，不冒称Creation，单补丁原MERGE跳过。5真实请求11148tokens（含探针），719来源及4042成员复核。三真实响应0新调用精确回放，3文件SHA全等；旧wrapper仅hash缺全文如实披露，检查器OpenClaw来源非论文同版认证。原机制合成控制通过；评分表名、非空技能注入、run缓存已修外层。WindowsLO三轮缓存／独立转换未过，5条项目崩溃记录非算法失败；Docker有界／延迟快照未ready，待Linux资源。公开校准与消费尚未启动，公式入口API前阻断。
 
