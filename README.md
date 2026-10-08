@@ -15,3 +15,5 @@
 逐文件source/published SHA、脱敏及省略项见[PUBLICATION_MANIFEST.json](PUBLICATION_MANIFEST.json)，验收见[PUBLICATION_VERIFICATION.json](PUBLICATION_VERIFICATION.json)。凭据、依赖/缓存、大型公开来源镜像、不透明压缩工作区不上传，来源URL/commit/哈希和原freeze清单保留。原始工作区不改；脱敏副本不能当原freeze字节或完整学习输入验收。
 
 不要运行历史launcher或启用监控；恢复须用户明确授权。此分支为独立归档，不含完整业务仓库及其他研究材料。
+
+首次归档提交：`52049afed438432e74300ef0223ca79931129c8f`，远端SHA已核对。完成记录和回执随后同步：[研究记忆](research/memory/2026-10-08_recreation_remote_branch_archive.md)、[推送回执](research/reports/2026-10-08_recreation_remote_archive_receipt.json)。
