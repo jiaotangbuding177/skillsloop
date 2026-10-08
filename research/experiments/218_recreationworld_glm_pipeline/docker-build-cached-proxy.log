@@ -1,0 +1,422 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  5.669MB
+Step 1/31 : FROM ubuntu:24.04
+ ---> a853f94d2263
+Step 2/31 : ARG NODE_VERSION=22.18.0
+ ---> Using cache
+ ---> 485d0d149e8d
+Step 3/31 : ARG PLAYWRIGHT_VERSION=1.60.0
+ ---> Using cache
+ ---> 0adf07809c38
+Step 4/31 : ARG PLAYWRIGHT_MCP_VERSION=0.0.79
+ ---> Using cache
+ ---> 390e64a20489
+Step 5/31 : ARG CLAUDE_CODE_VERSION=2.1.177
+ ---> Using cache
+ ---> a86609ceac0b
+Step 6/31 : ARG CODEX_VERSION=0.145.0
+ ---> Using cache
+ ---> aaa071280fe2
+Step 7/31 : ARG CLAUDE_CODE_PROXY_REF=acabbf6bb6ec33bb31ce17ca90ba83dbd16239aa
+ ---> Using cache
+ ---> ce0cd125ffa4
+Step 8/31 : ARG PLAYWRIGHT_DOWNLOAD_HOST=
+ ---> Using cache
+ ---> 181347fcba11
+Step 9/31 : ENV DEBIAN_FRONTEND=noninteractive     PYTHONUNBUFFERED=1     LANG=C.UTF-8     PLAYWRIGHT_DOWNLOAD_HOST=${PLAYWRIGHT_DOWNLOAD_HOST}     PLAYWRIGHT_BROWSERS_PATH=/ms-playwright     DISPLAY=:99     RB_PIPELINE_DIR=/workspace/RecreationBench     RB_OUTPUT_DIR=/tmp/recreationbench-output
+ ---> Using cache
+ ---> 915387a705df
+Step 10/31 : RUN apt-get update && apt-get install -y --no-install-recommends         python3 python3-pip python3-venv python3-dev         curl ca-certificates git unzip xz-utils rsync jq util-linux sudo         build-essential pkg-config         xvfb x11-utils openbox xfce4 x11vnc novnc websockify netcat-openbsd         libnspr4 libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2         libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1         libpango-1.0-0 libcairo2 libasound2t64 fonts-liberation     && rm -rf /var/lib/apt/lists/*
+ ---> Using cache
+ ---> 0e96bdb11e39
+Step 11/31 : RUN mkdir -p /opt/noVNC/utils     && ln -sfn /usr/share/novnc/app /opt/noVNC/app     && ln -sfn /usr/share/novnc/core /opt/noVNC/core     && ln -sfn /usr/share/novnc/include /opt/noVNC/include     && ln -sfn /usr/share/novnc/vendor /opt/noVNC/vendor     && ln -sfn /usr/share/novnc/vnc.html /opt/noVNC/vnc.html     && ln -sfn /usr/share/novnc/vnc_lite.html /opt/noVNC/vnc_lite.html     && printf '%s\n'         '#!/usr/bin/env sh'         'set -eu'         'vnc="localhost:5900"'         'listen="6080"'         'web="/opt/noVNC"'         'while [ "$#" -gt 0 ]; do'         '  case "$1" in'         '    --vnc) vnc="$2"; shift 2 ;;'         '    --listen) listen="$2"; shift 2 ;;'         '    --web) web="$2"; shift 2 ;;'         '    *) shift ;;'         '  esac'         'done'         'exec websockify --web "$web" "0.0.0.0:${listen}" "$vnc"'         >/opt/noVNC/utils/novnc_proxy     && chmod +x /opt/noVNC/utils/novnc_proxy
+ ---> Using cache
+ ---> da44d653d746
+Step 12/31 : RUN arch="$(dpkg --print-architecture)";     case "$arch" in         amd64) node_arch="x64" ;;         arm64) node_arch="arm64" ;;         *) echo "unsupported arch: $arch" >&2; exit 1 ;;     esac;     curl -fsSL "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${node_arch}.tar.xz"         | tar -xJ -C /usr/local --strip-components=1
+ ---> Using cache
+ ---> 4c9950e26ad6
+Step 13/31 : RUN npm install -g --no-audit --no-fund         "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}"         "@openai/codex@${CODEX_VERSION}"         "@playwright/test@${PLAYWRIGHT_VERSION}"         "@playwright/mcp@${PLAYWRIGHT_MCP_VERSION}"
+ ---> Using cache
+ ---> 473c374d4414
+Step 14/31 : RUN mkdir -p /opt/mockweb-bench/batch_run     && cd /opt/mockweb-bench/batch_run     && npm init -y --silent     && npm install --no-audit --no-fund --silent "@playwright/test@${PLAYWRIGHT_VERSION}"
+ ---> Using cache
+ ---> 64ebdc6930bc
+Step 15/31 : COPY .rw218-proxy /opt/rw218-proxy
+ ---> a5ab1bdfda85
+Step 16/31 : RUN pip install --no-cache-dir --break-system-packages --ignore-installed         "playwright==${PLAYWRIGHT_VERSION}"         pydantic pyyaml requests numpy Pillow opencv-python-headless scikit-image         beautifulsoup4 lxml cssutils openai         /opt/rw218-proxy     && python3 -m playwright install chromium
+ ---> Running in aef04297e55a
+Processing /opt/rw218-proxy
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Collecting playwright==1.60.0
+  Downloading playwright-1.60.0-py3-none-manylinux1_x86_64.whl.metadata (3.5 kB)
+Collecting pydantic
+  Downloading pydantic-2.13.5-py3-none-any.whl.metadata (110 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 110.2/110.2 kB 309.9 kB/s eta 0:00:00
+Collecting pyyaml
+  Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+Collecting requests
+  Downloading requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+Collecting numpy
+  Downloading numpy-2.5.3-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)
+Collecting Pillow
+  Downloading pillow-12.3.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)
+Collecting opencv-python-headless
+  Downloading opencv_python_headless-5.0.0.93-cp37-abi3-manylinux_2_28_x86_64.whl.metadata (19 kB)
+Collecting scikit-image
+  Downloading scikit_image-0.26.0-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (15 kB)
+Collecting beautifulsoup4
+  Downloading beautifulsoup4-4.15.0-py3-none-any.whl.metadata (3.8 kB)
+Collecting lxml
+  Downloading lxml-6.1.3-cp312-cp312-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl.metadata (3.3 kB)
+Collecting cssutils
+  Downloading cssutils-2.15.0-py3-none-any.whl.metadata (9.0 kB)
+Collecting openai
+  Downloading openai-3.24.0-py3-none-any.whl.metadata (44 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 44.3/44.3 kB 1.4 MB/s eta 0:00:00
+Collecting pyee<14,>=13 (from playwright==1.60.0)
+  Downloading pyee-13.0.1-py3-none-any.whl.metadata (3.0 kB)
+Collecting greenlet<4.0.0,>=3.1.1 (from playwright==1.60.0)
+  Downloading greenlet-3.5.6-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+Collecting annotated-types>=0.6.0 (from pydantic)
+  Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+Collecting pydantic-core==2.46.5 (from pydantic)
+  Downloading pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+Collecting typing-extensions>=4.14.1 (from pydantic)
+  Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting typing-inspection>=0.4.2 (from pydantic)
+  Downloading typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+Collecting charset_normalizer<4,>=2 (from requests)
+  Downloading charset_normalizer-3.5.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (46 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 46.4/46.4 kB 1.5 MB/s eta 0:00:00
+Collecting idna<4,>=2.5 (from requests)
+  Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+Collecting urllib3<3,>=1.26 (from requests)
+  Downloading urllib3-2.8.0-py3-none-any.whl.metadata (7.4 kB)
+Collecting certifi>=2023.5.7 (from requests)
+  Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+Collecting scipy>=1.11.4 (from scikit-image)
+  Downloading scipy-1.18.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.4/62.4 kB 1.5 MB/s eta 0:00:00
+Collecting networkx>=3.0 (from scikit-image)
+  Downloading networkx-3.7-py3-none-any.whl.metadata (6.7 kB)
+Collecting imageio!=2.35.0,>=2.33 (from scikit-image)
+  Downloading imageio-2.38.0-py3-none-any.whl.metadata (9.7 kB)
+Collecting tifffile>=2022.8.12 (from scikit-image)
+  Downloading tifffile-2026.9.20-py3-none-any.whl.metadata (34 kB)
+Collecting packaging>=21 (from scikit-image)
+  Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+Collecting lazy-loader>=0.4 (from scikit-image)
+  Downloading lazy_loader-0.6-py3-none-any.whl.metadata (6.0 kB)
+Collecting soupsieve>=1.6.1 (from beautifulsoup4)
+  Downloading soupsieve-2.10-py3-none-any.whl.metadata (4.4 kB)
+Collecting more_itertools (from cssutils)
+  Downloading more_itertools-11.1.0-py3-none-any.whl.metadata (41 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 41.4/41.4 kB 1.6 MB/s eta 0:00:00
+Collecting encutils (from cssutils)
+  Downloading encutils-1.0.0-py3-none-any.whl.metadata (1.1 kB)
+Collecting anyio<5,>=4.10.0 (from openai)
+  Downloading anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)
+Collecting httpx2<3,>=2.12.0 (from openai)
+  Downloading httpx2-2.13.1-py3-none-any.whl.metadata (9.8 kB)
+Collecting jiter<1,>=0.16.0 (from openai)
+  Downloading jiter-0.17.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.2 kB)
+Collecting sniffio (from openai)
+  Downloading sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+Collecting fastapi<1.0.0,>=0.115.0 (from claude-code-proxy==0.1.0)
+  Downloading fastapi-0.142.2-py3-none-any.whl.metadata (27 kB)
+Collecting httpx<1.0.0,>=0.28.0 (from claude-code-proxy==0.1.0)
+  Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+Collecting rich<15.0.0,>=14.0.0 (from claude-code-proxy==0.1.0)
+  Downloading rich-14.3.4-py3-none-any.whl.metadata (18 kB)
+Collecting uvicorn<1.0.0,>=0.35.0 (from claude-code-proxy==0.1.0)
+  Downloading uvicorn-0.54.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting starlette>=0.46.0 (from fastapi<1.0.0,>=0.115.0->claude-code-proxy==0.1.0)
+  Downloading starlette-1.7.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting annotated-doc>=0.0.2 (from fastapi<1.0.0,>=0.115.0->claude-code-proxy==0.1.0)
+  Downloading annotated_doc-0.0.5-py3-none-any.whl.metadata (6.5 kB)
+Collecting opentelemetry-api>=1.44.0 (from fastapi<1.0.0,>=0.115.0->claude-code-proxy==0.1.0)
+  Downloading opentelemetry_api-1.45.0-py3-none-any.whl.metadata (1.4 kB)
+Collecting httpcore==1.* (from httpx<1.0.0,>=0.28.0->claude-code-proxy==0.1.0)
+  Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+Collecting h11>=0.16 (from httpcore==1.*->httpx<1.0.0,>=0.28.0->claude-code-proxy==0.1.0)
+  Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+Collecting httpcore2==2.13.1 (from httpx2<3,>=2.12.0->openai)
+  Downloading httpcore2-2.13.1-py3-none-any.whl.metadata (26 kB)
+Collecting truststore>=0.10 (from httpx2<3,>=2.12.0->openai)
+  Downloading truststore-0.10.4-py3-none-any.whl.metadata (4.4 kB)
+Collecting markdown-it-py>=2.2.0 (from rich<15.0.0,>=14.0.0->claude-code-proxy==0.1.0)
+  Downloading markdown_it_py-4.2.0-py3-none-any.whl.metadata (7.4 kB)
+Collecting pygments<3.0.0,>=2.13.0 (from rich<15.0.0,>=14.0.0->claude-code-proxy==0.1.0)
+  Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting click>=7.0 (from uvicorn<1.0.0,>=0.35.0->claude-code-proxy==0.1.0)
+  Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+Collecting chardet (from encutils->cssutils)
+  Downloading chardet-7.6.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (9.6 kB)
+Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich<15.0.0,>=14.0.0->claude-code-proxy==0.1.0)
+  Downloading mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+Downloading playwright-1.60.0-py3-none-manylinux1_x86_64.whl (47.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 47.5/47.5 MB 19.5 MB/s eta 0:00:00
+Downloading pydantic-2.13.5-py3-none-any.whl (472 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 472.6/472.6 kB 94.6 MB/s eta 0:00:00
+Downloading pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 82.5 MB/s eta 0:00:00
+Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.9/807.9 kB 77.2 MB/s eta 0:00:00
+Downloading requests-2.34.2-py3-none-any.whl (73 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 73.1/73.1 kB 584.3 MB/s eta 0:00:00
+Downloading numpy-2.5.3-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.7/16.7 MB 19.2 MB/s eta 0:00:00
+Downloading pillow-12.3.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.9/6.9 MB 23.9 MB/s eta 0:00:00
+Downloading opencv_python_headless-5.0.0.93-cp37-abi3-manylinux_2_28_x86_64.whl (61.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.2/61.2 MB 16.0 MB/s eta 0:00:00
+Downloading scikit_image-0.26.0-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (13.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.6/13.6 MB 14.7 MB/s eta 0:00:00
+Downloading beautifulsoup4-4.15.0-py3-none-any.whl (109 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 109.9/109.9 kB 608.4 MB/s eta 0:00:00
+Downloading lxml-6.1.3-cp312-cp312-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl (5.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.2/5.2 MB 20.7 MB/s eta 0:00:00
+Downloading cssutils-2.15.0-py3-none-any.whl (180 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 180.6/180.6 kB 627.9 MB/s eta 0:00:00
+Downloading openai-3.24.0-py3-none-any.whl (2.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 77.7 MB/s eta 0:00:00
+Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+Downloading anyio-4.15.1-py3-none-any.whl (132 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 132.1/132.1 kB 628.4 MB/s eta 0:00:00
+Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 137.0/137.0 kB 562.5 MB/s eta 0:00:00
+Downloading charset_normalizer-3.5.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (257 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 257.6/257.6 kB 119.6 MB/s eta 0:00:00
+Downloading fastapi-0.142.2-py3-none-any.whl (144 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 144.4/144.4 kB 431.3 MB/s eta 0:00:00
+Downloading greenlet-3.5.6-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (621 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 621.4/621.4 kB 65.6 MB/s eta 0:00:00
+Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 73.5/73.5 kB 589.7 MB/s eta 0:00:00
+Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 78.8/78.8 kB 596.6 MB/s eta 0:00:00
+Downloading httpx2-2.13.1-py3-none-any.whl (95 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 95.6/95.6 kB 466.6 MB/s eta 0:00:00
+Downloading httpcore2-2.13.1-py3-none-any.whl (83 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 83.4/83.4 kB 315.7 MB/s eta 0:00:00
+Downloading idna-3.20-py3-none-any.whl (69 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 69.6/69.6 kB 387.6 MB/s eta 0:00:00
+Downloading imageio-2.38.0-py3-none-any.whl (328 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 328.1/328.1 kB 50.5 MB/s eta 0:00:00
+Downloading jiter-0.17.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (345 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 345.0/345.0 kB 90.1 MB/s eta 0:00:00
+Downloading lazy_loader-0.6-py3-none-any.whl (8.8 kB)
+Downloading networkx-3.7-py3-none-any.whl (2.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 92.8 MB/s eta 0:00:00
+Downloading packaging-26.3-py3-none-any.whl (129 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 130.0/130.0 kB 160.2 MB/s eta 0:00:00
+Downloading pyee-13.0.1-py3-none-any.whl (15 kB)
+Downloading rich-14.3.4-py3-none-any.whl (310 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 310.5/310.5 kB 110.8 MB/s eta 0:00:00
+Downloading scipy-1.18.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (35.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.3/35.3 MB 18.4 MB/s eta 0:00:00
+Downloading soupsieve-2.10-py3-none-any.whl (38 kB)
+Downloading tifffile-2026.9.20-py3-none-any.whl (275 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 275.0/275.0 kB 24.9 MB/s eta 0:00:00
+Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 45.6/45.6 kB 12.4 MB/s eta 0:00:00
+Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+Downloading urllib3-2.8.0-py3-none-any.whl (135 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 135.7/135.7 kB 25.9 MB/s eta 0:00:00
+Downloading uvicorn-0.54.0-py3-none-any.whl (87 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 87.4/87.4 kB 429.3 MB/s eta 0:00:00
+Downloading encutils-1.0.0-py3-none-any.whl (21 kB)
+Downloading more_itertools-11.1.0-py3-none-any.whl (72 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 72.2/72.2 kB 19.0 MB/s eta 0:00:00
+Downloading sniffio-1.3.1-py3-none-any.whl (10 kB)
+Downloading annotated_doc-0.0.5-py3-none-any.whl (5.3 kB)
+Downloading click-8.5.0-py3-none-any.whl (125 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 125.3/125.3 kB 624.1 MB/s eta 0:00:00
+Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+Downloading markdown_it_py-4.2.0-py3-none-any.whl (91 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 91.7/91.7 kB 36.2 MB/s eta 0:00:00
+Downloading opentelemetry_api-1.45.0-py3-none-any.whl (60 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 60.0/60.0 kB 77.6 MB/s eta 0:00:00
+Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 20.8 MB/s eta 0:00:00
+Downloading starlette-1.7.0-py3-none-any.whl (78 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 79.0/79.0 kB 51.7 MB/s eta 0:00:00
+Downloading truststore-0.10.4-py3-none-any.whl (18 kB)
+Downloading chardet-7.6.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (1.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.5/1.5 MB 22.8 MB/s eta 0:00:00
+Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+Building wheels for collected packages: claude-code-proxy
+  Building wheel for claude-code-proxy (pyproject.toml): started
+  Building wheel for claude-code-proxy (pyproject.toml): finished with status 'done'
+  Created wheel for claude-code-proxy: filename=claude_code_proxy-0.1.0-py3-none-any.whl size=17752 sha256=bb748b1fa54b5045b44efba75211a099a614911342a6f76893f666342d2b8e07
+  Stored in directory: /tmp/pip-ephem-wheel-cache-xtga2vta/wheels/72/e8/b4/ccbd267fad7cfdbf308c5302acdaeab7117b5bac439b8f3bf9
+Successfully built claude-code-proxy
+Installing collected packages: urllib3, typing-extensions, truststore, soupsieve, sniffio, pyyaml, pygments, Pillow, packaging, numpy, networkx, more_itertools, mdurl, lxml, jiter, idna, h11, greenlet, click, charset_normalizer, chardet, certifi, annotated-types, annotated-doc, uvicorn, typing-inspection, tifffile, scipy, requests, pyee, pydantic-core, opentelemetry-api, opencv-python-headless, markdown-it-py, lazy-loader, imageio, httpcore2, httpcore, encutils, beautifulsoup4, anyio, starlette, scikit-image, rich, pydantic, playwright, httpx2, httpx, cssutils, openai, fastapi, claude-code-proxy
+Successfully installed Pillow-12.3.0 annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.15.1 beautifulsoup4-4.15.0 certifi-2026.7.22 chardet-7.6.0 charset_normalizer-3.5.2 claude-code-proxy-0.1.0 click-8.5.0 cssutils-2.15.0 encutils-1.0.0 fastapi-0.142.2 greenlet-3.5.6 h11-0.16.0 httpcore-1.0.9 httpcore2-2.13.1 httpx-0.28.1 httpx2-2.13.1 idna-3.20 imageio-2.38.0 jiter-0.17.0 lazy-loader-0.6 lxml-6.1.3 markdown-it-py-4.2.0 mdurl-0.1.2 more_itertools-11.1.0 networkx-3.7 numpy-2.5.3 openai-3.24.0 opencv-python-headless-5.0.0.93 opentelemetry-api-1.45.0 packaging-26.3 playwright-1.60.0 pydantic-2.13.5 pydantic-core-2.46.5 pyee-13.0.1 pygments-2.21.0 pyyaml-6.0.3 requests-2.34.2 rich-14.3.4 scikit-image-0.26.0 scipy-1.18.1 sniffio-1.3.1 soupsieve-2.10 starlette-1.7.0 tifffile-2026.9.20 truststore-0.10.4 typing-extensions-4.16.0 typing-inspection-0.4.4 urllib3-2.8.0 uvicorn-0.54.0
+[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+[0mDownloading Chrome for Testing 148.0.7778.96 (playwright chromium v1223) from https://cdn.playwright.dev/builds/cft/148.0.7778.96/linux64/chrome-linux64.zip
+|                                                                                |   0% of 175.4 MiB
+|■■■■■■■■                                                                        |  10% of 175.4 MiB
+|■■■■■■■■■■■■■■■■                                                                |  20% of 175.4 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 175.4 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 175.4 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 175.4 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 175.4 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 175.4 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 175.4 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 175.4 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 175.4 MiB
+Chrome for Testing 148.0.7778.96 (playwright chromium v1223) downloaded to /ms-playwright/chromium-1223
+Downloading FFmpeg (playwright ffmpeg v1011) from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1011/ffmpeg-linux.zip
+|                                                                                |   0% of 2.3 MiB
+|■■■■■■■■                                                                        |  10% of 2.3 MiB
+|■■■■■■■■■■■■■■■■                                                                |  20% of 2.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 2.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 2.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 2.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 2.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 2.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 2.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 2.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 2.3 MiB
+FFmpeg (playwright ffmpeg v1011) downloaded to /ms-playwright/ffmpeg-1011
+Downloading Chrome Headless Shell 148.0.7778.96 (playwright chromium-headless-shell v1223) from https://cdn.playwright.dev/builds/cft/148.0.7778.96/linux64/chrome-headless-shell-linux64.zip
+|                                                                                |   0% of 113.2 MiB
+|■■■■■■■■                                                                        |  10% of 113.2 MiB
+|■■■■■■■■■■■■■■■■                                                                |  20% of 113.2 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 113.2 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 113.2 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 113.2 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 113.2 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 113.2 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 113.2 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 113.2 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 113.2 MiB
+Chrome Headless Shell 148.0.7778.96 (playwright chromium-headless-shell v1223) downloaded to /ms-playwright/chromium_headless_shell-1223
+ ---> Removed intermediate container aef04297e55a
+ ---> 87db14baa458
+Step 17/31 : RUN pip install --no-cache-dir --break-system-packages         --index-url https://download.pytorch.org/whl/cpu         torch torchvision     && pip install --no-cache-dir --break-system-packages scipy lpips
+ ---> Running in bd14a9ba7dfc
+Looking in indexes: https://download.pytorch.org/whl/cpu
+Collecting torch
+  Downloading https://download-r2.pytorch.org/whl/cpu/torch-2.14.1%2Bcpu-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (37 kB)
+Collecting torchvision
+  Downloading https://download-r2.pytorch.org/whl/cpu/torchvision-0.29.1%2Bcpu-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (5.7 kB)
+Collecting filelock (from torch)
+  Downloading filelock-3.32.3-py3-none-any.whl.metadata (2.0 kB)
+Requirement already satisfied: typing-extensions>=4.10.0 in /usr/local/lib/python3.12/dist-packages (from torch) (4.16.0)
+Collecting setuptools>=77.0.3 (from torch)
+  Downloading https://download.pytorch.org/whl/setuptools-78.1.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting sympy>=1.13.3 (from torch)
+  Downloading sympy-1.14.0-py3-none-any.whl.metadata (12 kB)
+Requirement already satisfied: networkx>=2.5.1 in /usr/local/lib/python3.12/dist-packages (from torch) (3.7)
+Collecting jinja2 (from torch)
+  Downloading https://download.pytorch.org/whl/jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+Collecting fsspec>=0.8.5 (from torch)
+  Downloading fsspec-2026.7.0-py3-none-any.whl.metadata (10 kB)
+Requirement already satisfied: numpy in /usr/local/lib/python3.12/dist-packages (from torchvision) (2.5.3)
+Requirement already satisfied: pillow!=8.3.*,>=5.3.0 in /usr/local/lib/python3.12/dist-packages (from torchvision) (12.3.0)
+Collecting mpmath<1.4,>=1.1.0 (from sympy>=1.13.3->torch)
+  Downloading mpmath-1.3.0-py3-none-any.whl.metadata (8.6 kB)
+Collecting MarkupSafe>=2.0 (from jinja2->torch)
+  Downloading https://download.pytorch.org/whl/markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+Downloading https://download-r2.pytorch.org/whl/cpu/torch-2.14.1%2Bcpu-cp312-cp312-manylinux_2_28_x86_64.whl (196.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 196.3/196.3 MB 27.2 MB/s eta 0:00:00
+Downloading https://download-r2.pytorch.org/whl/cpu/torchvision-0.29.1%2Bcpu-cp312-cp312-manylinux_2_28_x86_64.whl (1.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.7/1.7 MB 28.1 MB/s eta 0:00:00
+Downloading fsspec-2026.7.0-py3-none-any.whl (206 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 206.6/206.6 kB 358.2 kB/s eta 0:00:00
+Downloading https://download.pytorch.org/whl/setuptools-78.1.0-py3-none-any.whl (1.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 14.4 MB/s eta 0:00:00
+Downloading sympy-1.14.0-py3-none-any.whl (6.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.3/6.3 MB 5.8 MB/s eta 0:00:00
+Downloading filelock-3.32.3-py3-none-any.whl (98 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 98.9/98.9 kB 204.5 MB/s eta 0:00:00
+Downloading https://download.pytorch.org/whl/jinja2-3.1.6-py3-none-any.whl (134 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 134.9/134.9 kB 51.7 MB/s eta 0:00:00
+Downloading https://download.pytorch.org/whl/markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+Downloading mpmath-1.3.0-py3-none-any.whl (536 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 536.2/536.2 kB 56.9 MB/s eta 0:00:00
+Installing collected packages: mpmath, sympy, setuptools, MarkupSafe, fsspec, filelock, jinja2, torch, torchvision
+  Attempting uninstall: setuptools
+    Found existing installation: setuptools 68.1.2
+    Uninstalling setuptools-68.1.2:
+      Successfully uninstalled setuptools-68.1.2
+Successfully installed MarkupSafe-3.0.3 filelock-3.32.3 fsspec-2026.7.0 jinja2-3.1.6 mpmath-1.3.0 setuptools-78.1.0 sympy-1.14.0 torch-2.14.1+cpu torchvision-0.29.1+cpu
+[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+[0mRequirement already satisfied: scipy in /usr/local/lib/python3.12/dist-packages (1.18.1)
+Collecting lpips
+  Downloading lpips-0.1.4-py3-none-any.whl.metadata (10 kB)
+Requirement already satisfied: numpy<2.8,>=2.0.0 in /usr/local/lib/python3.12/dist-packages (from scipy) (2.5.3)
+Requirement already satisfied: torch>=0.4.0 in /usr/local/lib/python3.12/dist-packages (from lpips) (2.14.1+cpu)
+Requirement already satisfied: torchvision>=0.2.1 in /usr/local/lib/python3.12/dist-packages (from lpips) (0.29.1+cpu)
+Collecting tqdm>=4.28.1 (from lpips)
+  Downloading tqdm-4.70.1-py3-none-any.whl.metadata (57 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.4/57.4 kB 288.8 kB/s eta 0:00:00
+Requirement already satisfied: filelock in /usr/local/lib/python3.12/dist-packages (from torch>=0.4.0->lpips) (3.32.3)
+Requirement already satisfied: typing-extensions>=4.10.0 in /usr/local/lib/python3.12/dist-packages (from torch>=0.4.0->lpips) (4.16.0)
+Requirement already satisfied: setuptools>=77.0.3 in /usr/local/lib/python3.12/dist-packages (from torch>=0.4.0->lpips) (78.1.0)
+Requirement already satisfied: sympy>=1.13.3 in /usr/local/lib/python3.12/dist-packages (from torch>=0.4.0->lpips) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /usr/local/lib/python3.12/dist-packages (from torch>=0.4.0->lpips) (3.7)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.12/dist-packages (from torch>=0.4.0->lpips) (3.1.6)
+Requirement already satisfied: fsspec>=0.8.5 in /usr/local/lib/python3.12/dist-packages (from torch>=0.4.0->lpips) (2026.7.0)
+Requirement already satisfied: pillow!=8.3.*,>=5.3.0 in /usr/local/lib/python3.12/dist-packages (from torchvision>=0.2.1->lpips) (12.3.0)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.12/dist-packages (from sympy>=1.13.3->torch>=0.4.0->lpips) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.12/dist-packages (from jinja2->torch>=0.4.0->lpips) (3.0.3)
+Downloading lpips-0.1.4-py3-none-any.whl (53 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 53.8/53.8 kB 1.3 MB/s eta 0:00:00
+Downloading tqdm-4.70.1-py3-none-any.whl (80 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 80.2/80.2 kB 1.4 MB/s eta 0:00:00
+Installing collected packages: tqdm, lpips
+Successfully installed lpips-0.1.4 tqdm-4.70.1
+[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+[0m ---> Removed intermediate container bd14a9ba7dfc
+ ---> dfcf7927d095
+Step 18/31 : RUN useradd -m -s /bin/bash user     && useradd -m -s /bin/bash agent     && usermod --lock user     && printf 'user ALL=(ALL) NOPASSWD:ALL\n' >/etc/sudoers.d/recreationbench-user     && chmod 0440 /etc/sudoers.d/recreationbench-user     && mkdir -p /workspace /tmp/recreationbench-output /ms-playwright     && chmod 0755 /ms-playwright     && chown -R user:user /workspace /tmp/recreationbench-output     && chown -R agent:agent /home/agent
+ ---> Running in 77b6173e1001
+ ---> Removed intermediate container 77b6173e1001
+ ---> aff35be0bbcd
+Step 19/31 : COPY providers/web/scripts/rb-web-verify /usr/local/bin/rb-web-verify
+ ---> b676dc65fad7
+Step 20/31 : COPY providers/web/scripts/rb-start-visual /usr/local/bin/rb-start-visual
+ ---> 7e360528ddcd
+Step 21/31 : COPY providers/web/bin/rb-web-sandbox-run /usr/local/bin/rb-web-sandbox-run
+ ---> 25c6fbb01f2d
+Step 22/31 : COPY providers/web/scripts/rb-claude-code-proxy /usr/local/bin/rb-claude-code-proxy
+ ---> 5d757170d2db
+Step 23/31 : COPY providers/common/controller_helper.py /usr/local/bin/rb-controller-helper
+ ---> 3fe8b281e515
+Step 24/31 : COPY scripts /workspace/RecreationBench/scripts
+ ---> 0c3b74f78830
+Step 25/31 : COPY src /workspace/RecreationBench/src
+ ---> 38e00f679228
+Step 26/31 : COPY tasks /workspace/RecreationBench/tasks
+ ---> 2d4d80dde648
+Step 27/31 : COPY pyproject.toml README.md LICENSE THIRD_PARTY_NOTICES.md /workspace/RecreationBench/
+ ---> 0a0959e78106
+Step 28/31 : RUN chmod +x /usr/local/bin/rb-web-verify /usr/local/bin/rb-start-visual /usr/local/bin/rb-web-sandbox-run /usr/local/bin/rb-claude-code-proxy /usr/local/bin/rb-controller-helper
+ ---> Running in 6f7eb39fd4f0
+ ---> Removed intermediate container 6f7eb39fd4f0
+ ---> 683d2300d2de
+Step 29/31 : WORKDIR /workspace
+ ---> Running in f65e7401dfc8
+ ---> Removed intermediate container f65e7401dfc8
+ ---> ff176713f778
+Step 30/31 : EXPOSE 6080
+ ---> Running in 7df8be714e30
+ ---> Removed intermediate container 7df8be714e30
+ ---> 6b926d5bdf6b
+Step 31/31 : CMD ["sleep", "infinity"]
+ ---> Running in d57313b52bc5
+ ---> Removed intermediate container d57313b52bc5
+ ---> 704c05522f2d
+Successfully built 704c05522f2d
+Successfully tagged skillloop-rw-web:218-v1

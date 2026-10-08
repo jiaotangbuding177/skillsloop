@@ -1,0 +1,18 @@
+Delivery complete.
+
+## Summary
+
+I recreated the Corravale University site from the loopback reference at `http://localhost:44929`, improving the restored candidate rather than rebuilding it.
+
+**Pages discovered and implemented (19 routes):** Home, About, Academics, Life at Corravale, Athletics, Research, Health & Medicine, Initiatives, Giving, Prospective Students, Current Students, Faculty and Staff, Parents, Alumni, Schools & Colleges, Facts & Figures, Contact Us, Search (`/search/?keywords=`), Privacy Notice, plus the `/_404.html` offline notice.
+
+**Key corrections made this session:**
+- **Header chrome fidelity** — the reference varies per route: the skip-link label, the "Report Misconduct…" phrasing, the search field label, the quick-links panel title (`Quick Links` / `Handy Links` / `Quick Access`), the main-menu nav landmark name (`Main Menu` / `Site Menu`), and the audience nav name (`Audiences` / `Visitors`). Added a `routeChrome` table keyed by path with the exact observed labels and quick-link lists for each page.
+- **Expandable sidebar groups** — the reference's `All Colleges & Schools`, `Executive Offices`, `Flagship Schools & Colleges`, `Undergraduate/Graduate Schools & Colleges`, `Exhibits`, `Leadership Offices`, etc. are real accordions with distinct rosters per page. Implemented them as expandable `button` entries rendering each page's observed list.
+- **Contact page** — rebuilt to the reference's two-column layout (department table panel + "More Contact Options" / "Mailing Addresses" / "Getting Here").
+- **Search** — the header search is now a real GET-style form that navigates to `/search/?keywords=…`, and the router preserves query strings.
+- **Galleries** — added the 17-item current-students gallery (fetched the extra 7 binary images) and the parents-specific "All Corravale, all day long" variant with its own image set.
+
+**Verification:** the self-contained `output/index.html` builds cleanly, loads with **0 console errors**, internal navigation (header, footer, infographics, accordions) works via path-based routing, and mobile (375×812) and desktop (1920×1080) layouts were compared side by side against the reference.
+
+Build: `npm install && npm run build` → `dist/index.html` copied to `/workspace/recreation/output/index.html`.

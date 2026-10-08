@@ -1,0 +1,138 @@
+[mockweb] === RecreationBench Web Evaluation ===
+[mockweb] domain=minipaint.training scaffold=claude-code browser_mcp=playwright allow_image_read=true enhanced_prompt=false replicate_all_pages=false
+[mockweb] Phase 1: Materialising frozen unified instance...
+[mockweb]   unified instance ← released/web/minipaint.training
+[mockweb]   materialised: {"domain": "minipaint.training", "task_json": true, "site_meta": true, "site": 52, "specs": 1, "eval_config": true, "needs_gt": false, "notes": [], "gt_dom": 2, "gt_layout": 3, "gt_regions": 2, "gt_screenshots": 3}
+[mockweb]   repacked unified dataset → /var/lib/mockweb-scorer/minipaint.training.tar.gz
+[mockweb]   reclaimed 10 MiB of unified staging
+[mockweb]   disk: overlay        1007G   74G  883G   8% /
+[mockweb]   Extracted agent-visible tree to /workspace/dataset/minipaint.training (evaluation/ withheld)
+[mockweb] Phase 1.4: validating the prepared RecreationBench runtime...
+[mockweb]   web code: /workspace/RecreationBench/scripts/web (25 py files)
+[mockweb]   installing template dependencies from rb lock 6a59ae7d8857...
+
+added 95 packages in 5s
+[mockweb]   template dependencies ready: lock=6a59ae7d8857 source=rb-bootstrap
+MCP package ready: @playwright/mcp@0.0.79 (/usr/local/bin/playwright-mcp)
+[mockweb] Phase 2: Configuring claude-code...
+[mockweb]   claude-code → http://127.0.0.1:8788 (prepared endpoint)
+[mockweb]   compaction: window=Claude default, pct=Claude default (80%), max_output=128000
+2.1.177 (Claude Code)
+[mockweb] Phase 3: Running rollout + evaluation...
+[mockweb]   VLM judge DISABLED (default) — visual dim scored via SSIM/LPIPS
+[mockweb]   Reference isolation ON — agent=non-root uid 1002; /workspace/dataset + tarball + evaluation/ root-0700 (HTTP-only reference)
+2026-10-04 15:10:01,435 INFO Server started at http://localhost:41615 serving /workspace/dataset/minipaint.training/site
+2026-10-04 15:10:01,440 INFO Wrote shared workspace settings (MCP=playwright, BASE_URL=http://127.0.0.1:8788, MODEL=claude-opus-4-8, allow_image_read=True)
+2026-10-04 15:10:01,449 INFO Agent Claude state write probe passed: /home/agent/.claude/session-env
+2026-10-04 15:10:01,449 INFO Wrote MCP config for playwright to /home/agent/.claude/mcp.json (allow_image_read=True)
+2026-10-04 15:10:01,450 INFO Playwright MCP will use bundled Chromium at /ms-playwright/chromium-1223/chrome-linux64/chrome
+2026-10-04 15:10:03,764 INFO Strict playwright reference MCP preflight passed: url=http://localhost:41615 snapshot_chars=5938 screenshot_bytes=54422
+2026-10-04 15:10:03,799 INFO relay up: /tmp/mockweb-relays/ANTHROPIC_BASE_URL-8788.sock -> 127.0.0.1:8788
+2026-10-04 15:10:03,799 INFO relay up: /tmp/mockweb-relays/reference-site-41615.sock -> 127.0.0.1:41615
+2026-10-04 15:10:03,799 INFO network isolation ON (claude-code scaffold, netns route (CAP_SYS_ADMIN)): namespace has no egress; relayed ANTHROPIC_BASE_URL:8788, reference-site:41615
+2026-10-04 15:10:04,674 INFO no native agent transcript dirs; preserving the stream copy only
+2026-10-04 15:10:04,674 INFO collected 1 session transcript(s) -> /workspace/recreation/sessions
+2026-10-04 15:10:04,710 INFO Server stopped on port 41615
+[mockweb] FATAL: recreation agent phase failed before producing a valid result (exit=2)
+[mockweb] Phase 4: Writing metrics.json...
+{
+  "eval_target": "recreation",
+  "task_score": 0.0,
+  "passed": false,
+  "metrics": {
+    "status": "agent_error",
+    "eval_target": "recreation",
+    "final_score": 0.0,
+    "domain": "minipaint.training",
+    "task_id": "minipaint.training",
+    "difficulty": null,
+    "model": "deepseek-v4-flash-vision-exp",
+    "scaffold": "claude-code",
+    "scores": {},
+    "anti_cheat": null,
+    "submitted": false,
+    "no_submission_reason": null,
+    "rollout": {
+      "status": "error",
+      "returncode": 2,
+      "output_length": 0,
+      "native_returncode": 1,
+      "agent_verdict": "infra_error",
+      "protocol_status": "unknown",
+      "sessions": 1,
+      "tool_use_screenshots": "/workspace/.recreation-tool-use-screenshots",
+      "net_isolation": "netns"
+    },
+    "api_error": null,
+    "build_result": {},
+    "eval_error": null
+  }
+}
+[recreation] WARN: manifest declares files that do not exist under /workspace/recreation: output/index.html
+[recreation] manifest -> /workspace/recreation/recreation_manifest.json
+[mockweb] Phase 5: Removing bulky build artifacts from workspace...
+[mockweb]   recreation artifact staged: /results/recreation
+[trajectory] surfaced 2 file(s) from /results/recreation -> /results
+[mockweb] Diag: SHARED_DIR=/workspace/shared
+total 16
+drwxr-xr-x 3 root root 4096 Oct  4 15:09 .
+drwxr-xr-x 1 user user 4096 Oct  4 15:10 ..
+drwxr-xr-x 3 root root 4096 Oct  4 15:09 mockweb-template-deps
+[mockweb] No proxy pair-log dir at /workspace/shared/logs/claudecode
+[mockweb] Done. Output dir contents:
+total 16
+drwxrwxrwx 1 ubuntu ubuntu 4096 Oct  4 15:10 .
+drwxr-xr-x 1 root   root   4096 Oct  4 15:09 ..
+-rwxrwxrwx 1 ubuntu ubuntu 4843 Oct  4 15:10 controller.log
+-rwxrwxrwx 1 ubuntu ubuntu  853 Oct  4 15:10 metrics.json
+-rwxrwxrwx 1 ubuntu ubuntu  255 Oct  4 15:09 model_proxy.log
+drwxrwxrwx 1 ubuntu ubuntu 4096 Oct  4 15:10 recreation
+-rwxrwxrwx 1 ubuntu ubuntu  495 Oct  4 15:10 run.json
+-rwxrwxrwx 1 ubuntu ubuntu  495 Oct  4 15:10 run_agent_only.json
+drwxrwxrwx 1 ubuntu ubuntu 4096 Oct  4 15:10 sessions
+-rwxrwxrwx 1 ubuntu ubuntu    0 Oct  4 15:10 trajectory.jsonl
+{
+  "task_id": "minipaint.training",
+  "model": "deepseek-v4-flash-vision-exp",
+  "sandbox_id": null,
+  "sandbox_ip": null,
+  "pipeline_exit_code": 2,
+  "stage": "recreation_eval",
+  "task_score": 0.0,
+  "program_score": 0.0,
+  "vlm_score": null,
+  "scoring_eval": null,
+  "passed": false,
+  "exit_code": "stage:recreation_failed",
+  "error": "recreation failed",
+  "exit_reason": "recreation failed",
+  "stage_recreation": "failed",
+  "stage_eval": "failed",
+  "prog_vlm_avg": 0.0,
+  "score_passed": false,
+  "platform": "web",
+  "native_exit_code": 2,
+  "stage_outcomes": {
+    "recreation": {
+      "status": "error",
+      "outcome_class": "infra_error",
+      "reason_code": "agent_process_failed",
+      "native_exit_code": 1,
+      "result_complete": false,
+      "retryable": true
+    },
+    "eval": {
+      "status": "not_run",
+      "outcome_class": "infra_error",
+      "reason_code": "upstream_stage_failed",
+      "native_exit_code": null,
+      "result_complete": false,
+      "retryable": true
+    }
+  },
+  "outcome_class": "infra_error",
+  "reason_code": "agent_process_failed",
+  "result_complete": false,
+  "retryable": true,
+  "process_exit_code": 2
+}

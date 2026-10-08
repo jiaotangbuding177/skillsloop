@@ -1,0 +1,1 @@
+var e=`/assets/footer-background.BIgtbvhx.jpg`;export{e as t};

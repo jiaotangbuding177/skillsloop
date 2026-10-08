@@ -1,0 +1,13 @@
+All tasks complete. Final delivery statement:
+
+## Delivery
+
+I inspected the restored source-only build, found the two flagged self-inflicted gaps, observed the corresponding public reference behavior with ordinary browser tools, and repaired my own implementation.
+
+**Issues fixed**
+1. **SearchPage no-op form.** `MorePages.tsx` SearchPage called `e.preventDefault()` with no effect. Observed the reference: submitting (Enter or the submit control) navigates to `/search/?keywords=<query>` and re-renders the same search form (no offline result list, input not re-prefilled). Rewrote SearchPage to submit through the router to `/search/?keywords=<encoded>`, preserving the observed accessible structure (`search` → `list` → `listitem` → label "Keywords" + textbox) and the inline magnifier submit control.
+2. **Missing `/about/privacy-statement/` route.** PrivacyPage linked to it but `App.routeFor` fell through to home. Observed the reference page ("Privacy Statement › Corravale University"), including its two collapsible "Special Notices" disclosures and the exact `#coppa`/`#eu` anchors targeted by the Privacy Notice page. Implemented `src/pages/PrivacyStatementPage.tsx` (title band, prose body, Overview/Scope/Categories/Use/Access/Security/Changes/Contact sections, COPPA + EU-GDPR disclosure content), registered the route + document title, and added its per-route header chrome (report label "Report Sexual Misconduct, Discrimination or Harassment", Quick Links with "Learn").
+
+**Public-behavior checks completed** (reference action → observed → candidate parity, recorded in `public_behavior_checklist.md`): header Quick Links open/close (desktop + mobile, per-route labels), header search Enter/button → `/search/?keywords=`, search-page Enter/button submission, footer links (Privacy Notice `/about/privacy/`, Contact us `/contact/`, `tel:` phone, campuses, `/_404.html` destinations), main nav + audiences, expandable About sidebar rosters (`aria-expanded`), the privacy-notice → privacy-statement link, `#coppa`/`#eu` anchor navigation + scroll + disclosure toggle, the `/_404.html` offline notice, and direct-route/reload/back navigation.
+
+**Verification**: built with `npm install && npm run build` (Vite + React 19 + Tailwind 4 + TS), copied `dist/index.html` → `output/index.html` (md5 identical, single self-contained file). Tested that exact file over a preview server at desktop 1920×1080 and mobile 375×812 — client-side routing, anchors, search submission, and Quick Links all functional, with **0 console errors** across interactions.

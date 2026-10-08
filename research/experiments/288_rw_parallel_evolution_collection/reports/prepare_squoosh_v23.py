@@ -1,0 +1,22 @@
+import json,shutil,time
+from pathlib import Path
+root=Path(__file__).resolve().parents[1];dst=root/'datasets_v23/released/web/squoosh.training';assert not dst.exists()
+shutil.copytree(root/'datasets/released/web/squoosh.training',dst)
+spec=dst/'tests/static/content.scripted.spec.ts';s=spec.read_text(encoding='utf-8')
+s=s.replace('test.setTimeout(25000);','test.setTimeout(45000);')
+s=s.replace('async function upload(p:Page){','async function dismiss(p:Page){const d=p.getByRole(\'button\',{name:/^dismiss$/i});if(await d.isVisible())await d.click();}\nasync function upload(p:Page){')
+s=s.replace("await expect(p.getByTitle('Download',{exact:true}).last()).toHaveAttribute('href',/^blob:/);}","await expect(p.getByTitle('Download',{exact:true}).last()).toHaveAttribute('href',/^blob:/);await dismiss(p);}")
+s=s.replace("async function output(p:Page){","async function output(p:Page){await dismiss(p);").replace("async function choose(p:Page,codec:string){","async function choose(p:Page,codec:string){await dismiss(p);")
+s=s.replace("page.setDefaultTimeout(5000)","page.setDefaultTimeout(10000);page.setDefaultNavigationTimeout(20000)")
+s=s.replace("await page.goto('/');});","await page.goto('/');await dismiss(page);});")
+spec.write_text(s,encoding='utf-8')
+j=json.loads((dst/'reference/task.json').read_text());j['version']='rw_parallel_evolution_v2.3';(dst/'reference/task.json').write_text(json.dumps(j,indent=2))
+scripts=root/'scripts_v23';assert not scripts.exists();scripts.mkdir()
+for p in (root/'scripts_v22').glob('*.py'):
+ s=p.read_text(encoding='utf-8').replace('scripts_v22','scripts_v23').replace('datasets/released/web','datasets_v23/released/web').replace('freeze_{task}_v22','freeze_{task}_v23').replace('frozen_{task}_v22','frozen_{task}_v23').replace('family_budget_v22','family_budget_v23')
+ if p.name=='worker.py':s=s.replace("assert task in ('minipaint','squoosh')","assert task=='squoosh'").replace("src={ROOT}/datasets,dst=","src={ROOT}/datasets_v23,dst=")
+ if p.name=='freeze_worker.py':s=s.replace("assert task in ('minipaint','squoosh')","assert task=='squoosh'").replace("'rw_parallel_evolution_v2'","'rw_parallel_evolution_v2.3'")
+ (scripts/p.name).write_text(s,encoding='utf-8')
+launcher=(root/'reports/launch_worker_v22.py').read_text(encoding='utf-8').replace('scripts_v22','scripts_v23').replace('family_budget_v22','family_budget_v23');(root/'reports/launch_worker_v23.py').write_text(launcher,encoding='utf-8')
+(root/'reports/squoosh_v23_change_record.json').write_text(json.dumps({'version':'rw_parallel_evolution_v2.3','prior_model_rounds':0,'native_v22_self_check_retained':'squoosh_eval_1791128197331372710','diagnostic':'native_diagnostic/actual_playwright_report.json','observed_error':'Ready to work offline snack-bar intercepts Rotate pointer event for 5000ms; independent tests fluctuate 6/6 and 5/6','changes':['dismiss publicly visible dismiss button when present','training verifier action timeout10s/navigation20s/test45s'],'assertions_and_cases_unchanged':6,'vendor_or_application_source_changed':False,'minipaint_v22_running_unchanged':True,'created_epoch':time.time()},indent=2))
+print(json.dumps({'prepared_version':'v2.3','model_rounds_squoosh':0}))

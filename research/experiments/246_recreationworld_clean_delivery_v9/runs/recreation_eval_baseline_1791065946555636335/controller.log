@@ -1,0 +1,224 @@
+[mockweb] === RecreationBench Web Evaluation ===
+[mockweb] domain=corravale.example scaffold=claude-code browser_mcp=playwright allow_image_read=true enhanced_prompt=false replicate_all_pages=false
+[mockweb] Phase 1: Materialising frozen unified instance...
+[mockweb]   unified instance ← released/web/corravale.example
+[mockweb]   materialised: {"domain": "corravale.example", "task_json": true, "site_meta": true, "site": 386, "specs": 8, "eval_config": true, "needs_gt": false, "notes": [], "kit_placed": 1, "gt_dom": 40, "gt_layout": 60, "vlm_assertions": true, "vlm_views": 40, "vlm_items": 981}
+[mockweb]   repacked unified dataset → /var/lib/mockweb-scorer/corravale.example.tar.gz
+[mockweb]   reclaimed 57 MiB of unified staging
+[mockweb]   disk: overlay        1007G   47G  910G   5% /
+[mockweb]   Extracted agent-visible tree to /workspace/dataset/corravale.example (evaluation/ withheld)
+[mockweb] Phase 1.4: validating the prepared RecreationBench runtime...
+[mockweb]   web code: /workspace/RecreationBench/scripts/web (25 py files)
+[mockweb]   installing template dependencies from rb lock 6a59ae7d8857...
+
+added 95 packages in 4s
+[mockweb]   template dependencies ready: lock=6a59ae7d8857 source=rb-bootstrap
+MCP package ready: @playwright/mcp@0.0.79 (/usr/local/bin/playwright-mcp)
+[mockweb] Phase 2: Configuring claude-code...
+[mockweb]   claude-code → http://127.0.0.1:8795 (prepared endpoint)
+[mockweb]   compaction: window=Claude default, pct=Claude default (80%), max_output=128000
+2.1.177 (Claude Code)
+[mockweb] Phase 3: Running rollout + evaluation...
+[mockweb]   VLM judge DISABLED (default) — visual dim scored via SSIM/LPIPS
+[mockweb]   Reference isolation ON — agent=non-root uid 1002; /workspace/dataset + tarball + evaluation/ root-0700 (HTTP-only reference)
+2026-10-03 22:19:17,342 INFO Server started at http://localhost:35963 serving /workspace/dataset/corravale.example/site
+2026-10-03 22:19:17,345 INFO Wrote shared workspace settings (MCP=playwright, BASE_URL=http://127.0.0.1:8795, MODEL=claude-opus-4-8, allow_image_read=True)
+2026-10-03 22:19:17,351 INFO Agent Claude state write probe passed: /home/agent/.claude/session-env
+2026-10-03 22:19:17,351 INFO Wrote MCP config for playwright to /home/agent/.claude/mcp.json (allow_image_read=True)
+2026-10-03 22:19:17,351 INFO Playwright MCP will use bundled Chromium at /ms-playwright/chromium-1223/chrome-linux64/chrome
+2026-10-03 22:19:18,565 INFO Strict playwright reference MCP preflight passed: url=http://localhost:35963 snapshot_chars=24031 screenshot_bytes=854602
+2026-10-03 22:19:18,585 INFO relay up: /tmp/mockweb-relays/ANTHROPIC_BASE_URL-8795.sock -> 127.0.0.1:8795
+2026-10-03 22:19:18,585 INFO relay up: /tmp/mockweb-relays/reference-site-35963.sock -> 127.0.0.1:35963
+2026-10-03 22:19:18,585 INFO network isolation ON (claude-code scaffold, netns route (CAP_SYS_ADMIN)): namespace has no egress; relayed ANTHROPIC_BASE_URL:8795, reference-site:35963
+2026-10-03 23:06:54,888 INFO collected 2 session transcript(s) -> /workspace/recreation/sessions
+2026-10-03 23:06:54,988 INFO build runs with no network at all (isolated netns route (CAP_SYS_ADMIN), no relays)
+2026-10-03 23:06:57,092 INFO Server stopped on port 35963
+2026-10-03 23:06:57,119 INFO Skipping evaluation for corravale.example (--skip-eval)
+[mockweb] Phase 3b: Extracting evaluation/ for scorer...
+2026-10-03 23:06:57,365 INFO Server started at http://localhost:37053 serving /workspace/dataset/corravale.example/site
+2026-10-03 23:06:57,385 INFO build runs with no network at all (isolated netns route (CAP_SYS_ADMIN), no relays)
+2026-10-03 23:06:59,044 INFO Server stopped on port 37053
+2026-10-03 23:06:59,080 INFO VLM judge runtime override applied: enabled=False model=None backend=None
+2026-10-03 23:06:59,167 INFO Server started at http://localhost:34133 serving /workspace/recreation/output
+2026-10-03 23:12:11,790 INFO Server stopped on port 34133
+2026-10-03 23:12:14,096 INFO Server started at http://localhost:44433 serving /workspace/recreation/output
+2026-10-03 23:12:29,134 INFO Dimension functional [scripted]: 110/140 passed (78.6%)
+2026-10-03 23:16:56,319 INFO Dimension functional [agent_gen]: 20/89 passed (22.5%)
+2026-10-03 23:16:56,319 INFO Dimension functional: 130/229 passed (56.8%)
+2026-10-03 23:17:04,056 INFO Dimension structural [scripted]: 59/61 passed (96.7%)
+2026-10-03 23:17:45,009 INFO Dimension structural [agent_gen]: 11/26 passed (42.3%)
+2026-10-03 23:17:45,010 INFO Dimension structural: 70/87 passed (80.5%)
+2026-10-03 23:17:59,548 INFO Dimension quality [scripted]: 76/76 passed (100.0%)
+2026-10-03 23:18:15,449 INFO Dimension quality [agent_gen]: 26/26 passed (100.0%)
+2026-10-03 23:18:15,449 INFO Dimension quality: 102/102 passed (100.0%)
+2026-10-03 23:18:15,451 INFO Server stopped on port 44433
+2026-10-03 23:18:17,420 INFO Evaluation complete for mockweb_corravale_example: final_score=0.2751
+[mockweb] Phase 4: Writing metrics.json...
+{
+  "eval_target": "recreation",
+  "task_score": 0.2751,
+  "passed": false,
+  "metrics": {
+    "status": "success",
+    "eval_target": "recreation",
+    "final_score": 0.2751,
+    "domain": "corravale.example",
+    "task_id": "mockweb_corravale_example",
+    "difficulty": null,
+    "model": "deepseek-v4-flash-vision-exp",
+    "scaffold": "claude-code",
+    "scores": {
+      "final_score": 0.2751,
+      "test_score": 0.2751,
+      "breakdown": {
+        "functional": 0.5502,
+        "visual": 0.0,
+        "structural": 0.7819,
+        "quality": 0.8962
+      },
+      "weights": {
+        "functional": 0.5,
+        "visual": 0.5,
+        "structural": 0.0,
+        "quality": 0.0
+      },
+      "dimension_details": {
+        "functional": {
+          "pass_rate": 0.5502292621925783,
+          "method": "tier_weighted",
+          "total": 229,
+          "passed": 130,
+          "failed": 99,
+          "continuous": false
+        },
+        "visual": {
+          "pass_rate": 0.0,
+          "method": "ssim",
+          "total": 20,
+          "passed": 0,
+          "failed": 20,
+          "continuous": true
+        },
+        "structural": {
+          "pass_rate": 0.7819193103448275,
+          "method": "dom_similarity",
+          "total": 20,
+          "passed": 20,
+          "failed": 0,
+          "continuous": true
+        },
+        "quality": {
+          "pass_rate": 0.8962,
+          "method": "qs_continuous",
+          "total": 20,
+          "passed": 20,
+          "failed": 0,
+          "continuous": true
+        }
+      },
+      "has_compile_errors": false,
+      "vlm_score": null,
+      "vlm_enabled": false,
+      "vlm_mode": "assertion",
+      "visual_ssim_score": 0.0,
+      "functional_subscores": {
+        "scripted/functional": {
+          "pass_rate": 0.7857,
+          "weighted": 0.6862,
+          "total": 140,
+          "passed": 110,
+          "failed": 30
+        },
+        "agent_gen/functional_interaction": {
+          "pass_rate": 0.0328,
+          "weighted": 0.0328,
+          "total": 61,
+          "passed": 2,
+          "failed": 59
+        },
+        "agent_gen/functional": {
+          "pass_rate": 0.6429,
+          "weighted": 0.6429,
+          "total": 28,
+          "passed": 18,
+          "failed": 10
+        }
+      }
+    },
+    "anti_cheat": null,
+    "submitted": true,
+    "no_submission_reason": null,
+    "rollout": {},
+    "api_error": null,
+    "build_result": {
+      "status": "success",
+      "output": "/workspace/recreation/output/index.html"
+    },
+    "eval_error": null
+  }
+}
+[recreation] manifest -> /workspace/recreation/recreation_manifest.json
+[mockweb] Phase 5: Removing bulky build artifacts from workspace...
+[mockweb]   recreation artifact staged: /results/recreation
+[trajectory] surfaced 3 file(s) from /results/recreation -> /results
+[mockweb] Diag: SHARED_DIR=/workspace/shared
+total 16
+drwxr-xr-x 3 root root 4096 Oct  3 22:19 .
+drwxr-xr-x 1 user user 4096 Oct  3 23:06 ..
+drwxr-xr-x 3 root root 4096 Oct  3 22:19 mockweb-template-deps
+[mockweb] No proxy pair-log dir at /workspace/shared/logs/claudecode
+[mockweb] Done. Output dir contents:
+total 19700
+drwxrwxrwx 1 ubuntu ubuntu     4096 Oct  3 23:18 .
+drwxr-xr-x 1 root   root       4096 Oct  3 22:19 ..
+-rwxrwxrwx 1 ubuntu ubuntu     8084 Oct  3 23:18 controller.log
+-rwxrwxrwx 1 ubuntu ubuntu     2552 Oct  3 23:18 metrics.json
+-rwxrwxrwx 1 ubuntu ubuntu    20021 Oct  3 23:06 model_proxy.log
+drwxrwxrwx 1 ubuntu ubuntu     4096 Oct  3 23:18 recreation
+-rwxrwxrwx 1 ubuntu ubuntu     2072 Oct  3 23:18 run.json
+-rwxrwxrwx 1 ubuntu ubuntu      663 Oct  3 23:06 run_agent_only.json
+drwxrwxrwx 1 ubuntu ubuntu     4096 Oct  3 23:18 sessions
+-rwxrwxrwx 1 ubuntu ubuntu      811 Oct  3 22:19 skill_context.md
+-rwxrwxrwx 1 ubuntu ubuntu 20114140 Oct  3 23:06 trajectory.jsonl
+{
+  "task_id": "corravale.example",
+  "model": "deepseek-v4-flash-vision-exp",
+  "sandbox_id": null,
+  "sandbox_ip": null,
+  "pipeline_exit_code": 0,
+  "stage": "recreation_eval",
+  "task_score": 0.2751,
+  "program_score": 0.5502,
+  "vlm_score": null,
+  "scoring_eval": null,
+  "passed": true,
+  "stage_recreation": "succeeded",
+  "stage_eval": "succeeded",
+  "prog_vlm_avg": 0.5502,
+  "score_passed": false,
+  "platform": "web",
+  "native_exit_code": 0,
+  "stage_outcomes": {
+    "recreation": {
+      "status": "pass",
+      "outcome_class": "completed",
+      "reason_code": "completed",
+      "native_exit_code": null,
+      "result_complete": true,
+      "retryable": false
+    },
+    "eval": {
+      "status": "pass",
+      "outcome_class": "completed",
+      "reason_code": "completed",
+      "native_exit_code": null,
+      "result_complete": true,
+      "retryable": false
+    }
+  },
+  "outcome_class": "completed",
+  "reason_code": "completed",
+  "result_complete": true,
+  "retryable": false,
+  "process_exit_code": 0
+}

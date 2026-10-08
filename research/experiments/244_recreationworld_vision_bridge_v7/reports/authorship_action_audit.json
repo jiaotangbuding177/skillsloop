@@ -1,0 +1,360 @@
+{
+  "review_required": true,
+  "flagged": [
+    {
+      "record": 75,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "className",
+        "getComputedStyle",
+        "getBoundingClientRect",
+        "querySelectorAll"
+      ],
+      "input": {
+        "function": "() => {\n  const h = [...document.querySelectorAll('h2')].find(x=>/Fighting infection/i.test(x.textContent));\n  const cs = getComputedStyle(h);\n  const out = { tag:h.tagName, textTransform:cs.textTransform, fontSize:cs.fontSize, fontFamily:cs.fontFamily, fontWeight:cs.fontWeight, color:cs.color, bg:cs.backgroundColor, lineHeight:cs.lineHeight, display:cs.display, padding:cs.padding, maxWidth:cs.maxWidth, letterSpacing:cs.letterSpacing };\n  // walk up 3 parents for bg\n  let p = h.parentElement, chain=[];\n  for(let i=0;i<4 && p;i++){ const c=getComputedStyle(p); chain.push({tag:p.tagName, cls:p.className, bg:c.backgroundColor, bgImg:c.backgroundImage.slice(0,60), pad:c.padding, width:p.getBoundingClientRect().width}); p=p.parentElement; }\n  return {h:out, chain};\n}"
+      }
+    },
+    {
+      "record": 77,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "getComputedStyle",
+        "getBoundingClientRect",
+        "querySelectorAll"
+      ],
+      "input": {
+        "function": "() => {\n  const b = getComputedStyle(document.body);\n  const res = { bodyFont:b.fontFamily, bodySize:b.fontSize, bodyColor:b.color, bodyBg:b.backgroundColor };\n  // hero region\n  const region = document.querySelector('section[role=\"region\"], .features, #features') || document.querySelector('main');\n  // find the wrapper that has the big background image\n  const btns = [...document.querySelectorAll('h2')].map(h=>h.textContent.slice(0,30));\n  // find feature list\n  const feat = document.querySelector('.feature-copy')?.closest('li');\n  if(feat){ const c=getComputedStyle(feat); res.featLi = {h:feat.getBoundingClientRect().height, bgImg:c.backgroundImage.slice(0,80), bgSize:c.backgroundSize}; }\n  // wrapper max width\n  const w = document.querySelector('.wrapper');\n  if(w){ const c=getComputedStyle(w); res.wrapper={maxWidth:c.maxWidth,width:c.width,margin:c.margin,padding:c.padding}; }\n  return res;\n}"
+      }
+    },
+    {
+      "record": 78,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "querySelectorAll"
+      ],
+      "input": {
+        "function": "() => {\n  // lookup font faces loaded\n  const faces = [...document.fonts].map(f=>f.family+\"|\"+f.weight+\"|\"+f.style);\n  return {faces:[...new Set(faces)], links:[...document.querySelectorAll('link[rel=stylesheet],style')].map(n=>n.getAttribute('href')||'inline-style').slice(0,20)};\n}"
+      }
+    },
+    {
+      "record": 100,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "getComputedStyle",
+        "querySelectorAll"
+      ],
+      "input": {
+        "function": "() => {\n  const pick = (el) => { if(!el) return null; const c=getComputedStyle(el); return {t:(el.textContent||'').trim().slice(0,40), ff:c.fontFamily.split(',')[0], fs:c.fontSize, fw:c.fontWeight, tt:c.textTransform, ls:c.letterSpacing, color:c.color, bg:c.backgroundColor, pad:c.padding}; };\n  const res={};\n  // section headings\n  document.querySelectorAll('h2,h3').forEach(h=>{ const t=h.textContent.trim(); if(/^(News|In the News|Videos|Happening|Events|Academic Calendar|Visit Today|All Corravale)/i.test(t)){ res['H:'+t.slice(0,25)] = pick(h); } });\n  // news link\n  const nl = document.querySelector('a');\n  res.misconduct = pick([...document.querySelectorAll('a')].find(a=>/Report Sexual/.test(a.textContent)));\n  res.navItem = pick([...document.querySelectorAll('nav a')].find(a=>a.textContent.trim()==='About'));\n  res.audience = pick([...document.querySelectorAll('a')].find(a=>/Prospective Students/.test(a.textContent)));\n  // infographic\n  const info = [...document.querySelectorAll('*')].find(e=>/18 schools and colleges/.test(e.textContent) && e.children.length<3 && e.tagName!=='BODY');\n  res.infographic = pick(info);\n  return res;\n}"
+      }
+    },
+    {
+      "record": 104,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "getComputedStyle",
+        "getBoundingClientRect",
+        "querySelectorAll"
+      ],
+      "input": {
+        "function": "() => {\n  const pick = (el) => { if(!el) return null; const c=getComputedStyle(el); return {t:(el.textContent||'').trim().slice(0,30), ff:c.fontFamily.split(',')[0], fs:c.fontSize, fw:c.fontWeight, tt:c.textTransform, ls:c.letterSpacing, color:c.color, pad:c.padding, h:el.getBoundingClientRect().height}; };\n  const res={};\n  const nav = document.querySelector('nav[aria-label*=\"Main\"], .main-menu, #main-menu') || document.querySelectorAll('nav')[document.querySelectorAll('nav').length-1];\n  const about = [...document.querySelectorAll('a')].find(a=>a.textContent.trim()==='About');\n  res.aboutLink = pick(about);\n  res.aboutLi = about ? pick(about.parentElement) : null;\n  res.homeLink = pick([...document.querySelectorAll('a')].find(a=>a.textContent.trim()==='Home'));\n  // search input\n  res.searchInput = pick(document.querySelector('input[type=search],input[type=text]'));\n  // title h1 logo\n  res.logo = pick(document.querySelector('h1 a,.logo a'));\n  // news date/links\n  const newsA = [...document.querySelectorAll('a')].find(a=>a.textContent.trim().length>30 && a.closest('[class*=news]'));\n  res.newsLink = pick(newsA);\n  // body sections backgrounds\n  const secs = [...document.querySelectorAll('main > *, main section, main div')].slice(0,0);\n  return res;\n}"
+      }
+    },
+    {
+      "record": 106,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "className",
+        "getComputedStyle",
+        "getBoundingClientRect",
+        "querySelectorAll"
+      ],
+      "input": {
+        "function": "() => {\n  const h = [...document.querySelectorAll('h2')].find(x=>/Fighting infection/i.test(x.textContent));\n  const copy = h.closest('.feature-copy') || h.parentElement;\n  const li = copy.closest('li');\n  const ul = li.parentElement;\n  const region = ul.closest('section,div[role=region],.panel');\n  const r = el => el ? {w:Math.round(el.getBoundingClientRect().width), h:Math.round(el.getBoundingClientRect().height), top:Math.round(el.getBoundingClientRect().top)} : null;\n  // bg image source\n  const bs = getComputedStyle(li).backgroundImage || getComputedStyle(copy).backgroundImage;\n  const all = [...document.querySelectorAll('*')].filter(e=>{const c=getComputedStyle(e).backgroundImage; return c && c!=='none' && /url/.test(c) && e.getBoundingClientRect().height>300;}).slice(0,3).map(e=>({cls:e.className, h:Math.round(e.getBoundingClientRect().height), bg:getComputedStyle(e).backgroundImage.slice(0,150)}));\n  return {copy:r(copy), li:r(li), ul:r(ul), region:r(region), bgEls:all, copyPad:getComputedStyle(copy).padding};\n}"
+      }
+    },
+    {
+      "record": 109,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "innerHTML",
+        "className",
+        "getComputedStyle",
+        "getBoundingClientRect",
+        "querySelectorAll"
+      ],
+      "input": {
+        "function": "() => {\n  const h = [...document.querySelectorAll('h2')].find(x=>/Fighting infection/i.test(x.textContent));\n  const copy = h.closest('.feature-copy');\n  const c = copy.getBoundingClientRect();\n  const p = copy.querySelector('p');\n  const a = copy.querySelector('a');\n  const g = el => { if(!el) return null; const s=getComputedStyle(el); return {ff:s.fontFamily.split(',')[0], fs:s.fontSize, fw:s.fontWeight, lh:s.lineHeight, color:s.color, mb:s.marginBottom, tt:s.textTransform, td:s.textDecorationLine}; };\n  // hero nav / dots\n  const navs = [...document.querySelectorAll('button,a')].filter(e=>/prev|next|slide/i.test(e.className+e.getAttribute('aria-label'))).slice(0,4).map(e=>({cls:e.className, label:e.getAttribute('aria-label'), html:e.innerHTML.slice(0,80)}));\n  // list items count\n  const ul = copy.closest('li').parentElement;\n  return { copyLeft: Math.round(c.left), copyTop: Math.round(c.top), p:g(p), a:g(a), heroNavs:navs, slides: ul.children.length, ulCls: ul.className, liCls: copy.closest('li').className };\n}"
+      }
+    },
+    {
+      "record": 142,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "getBoundingClientRect"
+      ],
+      "input": {
+        "function": "() => {\n  const c = document.querySelector('.hero-copy'); const r=c.getBoundingClientRect();\n  return {left:Math.round(r.left), top:Math.round(r.top), w:Math.round(r.width), h:Math.round(r.height), docW:document.documentElement.clientWidth};\n}"
+      }
+    },
+    {
+      "record": 144,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "getBoundingClientRect"
+      ],
+      "input": {
+        "function": "() => {\n  const h=document.querySelector('.hero'); const c=document.querySelector('.hero-copy');\n  return {heroTop:Math.round(h.getBoundingClientRect().top), heroH:Math.round(h.getBoundingClientRect().height), copyTopRel:Math.round(c.getBoundingClientRect().top-h.getBoundingClientRect().top), copyLeft:Math.round(c.getBoundingClientRect().left), wrapLeft:Math.round(document.querySelector('.wrap').getBoundingClientRect().left)};\n}"
+      }
+    },
+    {
+      "record": 174,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "querySelectorAll"
+      ],
+      "input": {
+        "function": "() => {\n  const el = [...document.querySelectorAll('h3,strong,b,dt')].find(e=>/Academic Units/i.test(e.textContent));\n  const block = el.closest('div,section,li')?.parentElement;\n  const txt = block ? block.innerText.split('\\n').map(s=>s.trim()).filter(Boolean).slice(0,20) : null;\n  // is there a details/summary or expand?\n  const details = block ? block.querySelectorAll('details,summary,[class*=toggle],[class*=expand]').length : 0;\n  return {found:!!el, txt, details};\n}"
+      }
+    },
+    {
+      "record": 176,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "className",
+        "querySelectorAll"
+      ],
+      "input": {
+        "function": "() => {\n  const el = [...document.querySelectorAll('*')].find(e=>e.children.length===0 && /^All Colleges & Schools$/i.test(e.textContent.trim()));\n  const det = el.closest('details');\n  const wrap = el.parentElement;\n  return { tag:el.tagName, open: det? det.open : null, hasDetails: !!det, parentTag: wrap.tagName, parentCls: wrap.className };\n}"
+      }
+    },
+    {
+      "record": 185,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "querySelectorAll"
+      ],
+      "input": {
+        "function": "() => {\n  const s = [...document.querySelectorAll('summary')].map(x=>({t:x.textContent.trim(), open:x.parentElement.open, n:x.parentElement.querySelectorAll('.dropdown-content li').length}));\n  return s;\n}"
+      }
+    },
+    {
+      "record": 211,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "className",
+        "getBoundingClientRect",
+        "querySelectorAll"
+      ],
+      "input": {
+        "function": "() => {\n  const vw = document.documentElement.clientWidth;\n  const bad = [];\n  document.querySelectorAll('*').forEach(e=>{ const r=e.getBoundingClientRect(); if(r.width>vw+2 && r.width>0){ bad.push({tag:e.tagName, cls:(e.className||'').toString().slice(0,40), w:Math.round(r.width), left:Math.round(r.left)}); } });\n  return {vw, scrollW:document.documentElement.scrollWidth, bad: bad.slice(0,15)};\n}"
+      }
+    },
+    {
+      "record": 213,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "className",
+        "getBoundingClientRect",
+        "querySelectorAll"
+      ],
+      "input": {
+        "function": "() => {\n  const vw = document.documentElement.clientWidth;\n  const bad = [];\n  document.querySelectorAll('*').forEach(e=>{ const r=e.getBoundingClientRect(); if(r.right>vw+2){ bad.push({tag:e.tagName, cls:(e.className||'').toString().slice(0,45), right:Math.round(r.right), w:Math.round(r.width), left:Math.round(r.left)}); } });\n  // also check body children\n  return {vw, scrollW:document.documentElement.scrollWidth, bad: bad.slice(0,20)};\n}"
+      }
+    },
+    {
+      "record": 222,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "getBoundingClientRect"
+      ],
+      "input": {
+        "function": "() => ({vw:document.documentElement.clientWidth, scrollW:document.documentElement.scrollWidth, logo: (()=>{const l=document.querySelector('.logo,header a'); const r=l?.getBoundingClientRect(); return r?{w:Math.round(r.width),h:Math.round(r.height)}:null})()})"
+      }
+    },
+    {
+      "record": 228,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "getComputedStyle",
+        "getBoundingClientRect",
+        "querySelectorAll"
+      ],
+      "input": {
+        "function": "() => {\n  const h=[...document.querySelectorAll('h2')].find(x=>/Fighting infection/i.test(x.textContent));\n  const copy=h.closest('.feature-copy'); const li=copy.closest('li');\n  const bg=[...document.querySelectorAll('*')].find(e=>{const c=getComputedStyle(e).backgroundImage; return c&&c!=='none'&&/url/.test(c)&&e.getBoundingClientRect().height>200;});\n  const R=el=>el?{top:Math.round(el.getBoundingClientRect().top),left:Math.round(el.getBoundingClientRect().left),w:Math.round(el.getBoundingClientRect().width),h:Math.round(el.getBoundingClientRect().height)}:null;\n  return {copy:R(copy), li:R(li), bg:R(bg), copyBg:getComputedStyle(copy).backgroundColor, h2fs:getComputedStyle(h).fontSize, h2ls:getComputedStyle(h).letterSpacing, liBg:getComputedStyle(li).backgroundColor, liBgImg:getComputedStyle(li).backgroundImage.slice(0,80)};\n}"
+      }
+    },
+    {
+      "record": 253,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "getComputedStyle",
+        "getBoundingClientRect"
+      ],
+      "input": {
+        "function": "() => {\n  const i=document.querySelector('.site-search input'); const c=getComputedStyle(i); const r=i.getBoundingClientRect();\n  const m=document.querySelector('.misconduct-link').getBoundingClientRect();\n  return {inputBg:c.backgroundColor, inputColor:c.color, rect:{l:Math.round(r.left),t:Math.round(r.top),w:Math.round(r.width),h:Math.round(r.height)}, misconduct:{l:Math.round(m.left),t:Math.round(m.top),w:Math.round(m.width),h:Math.round(m.height)}};\n}"
+      }
+    },
+    {
+      "record": 284,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "className",
+        "getBoundingClientRect",
+        "querySelectorAll"
+      ],
+      "input": {
+        "function": "() => {\n  const t = [...document.querySelectorAll('*')].find(e=>e.children.length===0 && /Most Frequently Reached Campus/i.test(e.textContent.trim()));\n  const col = t.closest('div,nav,section');\n  const prim = col.parentElement;\n  const R=el=>el?{w:Math.round(el.getBoundingClientRect().width),l:Math.round(el.getBoundingClientRect().left),cls:(el.className||'').toString()}:null;\n  // find sibling secondary\n  const sib = prim.nextElementSibling;\n  return {title:R(t), col:R(col), prim:R(prim), sib:R(sib), primParent:R(prim.parentElement), sibText:sib?sib.innerText.slice(0,120):null};\n}"
+      }
+    },
+    {
+      "record": 286,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "className",
+        "getBoundingClientRect",
+        "querySelectorAll"
+      ],
+      "input": {
+        "function": "() => {\n  const sec = [...document.querySelectorAll('.secondary, [class*=secondary]')].slice(0,3).map(e=>({cls:e.className, w:Math.round(e.getBoundingClientRect().width), l:Math.round(e.getBoundingClientRect().left), txt:e.innerText.split('\\n').filter(Boolean).slice(0,6)}));\n  const rail = [...document.querySelectorAll('[class*=rail],[class*=aside],[class*=sidebar]')].slice(0,3).map(e=>({cls:e.className,w:Math.round(e.getBoundingClientRect().width)}));\n  return {sec, rail};\n}"
+      }
+    },
+    {
+      "record": 327,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "getComputedStyle",
+        "getBoundingClientRect",
+        "querySelectorAll"
+      ],
+      "input": {
+        "function": "() => {\n  const t=[...document.querySelectorAll('*')].find(e=>e.children.length===0 && /^SCHOOLS, COLLEGES & CAMPUSES$/i.test(e.textContent.trim()));\n  const nav=t.closest('.nav-block')||t.parentElement.parentElement;\n  const cards=[...document.querySelectorAll('.nav-block')].slice(0,8).map(e=>({w:Math.round(e.getBoundingClientRect().width),h:Math.round(e.getBoundingClientRect().height),l:Math.round(e.getBoundingClientRect().left),first:e.innerText.split('\\n').filter(Boolean)[0]}));\n  const inner=nav.querySelector('div'); const c=getComputedStyle(inner);\n  return {cards, innerBg:c.backgroundColor, innerBorder:c.border, innerPad:c.padding, innerMinH:c.minHeight, navW:Math.round(nav.getBoundingClientRect().width)};\n}"
+      }
+    },
+    {
+      "record": 330,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "querySelectorAll"
+      ],
+      "input": {
+        "function": "() => {\n  return [...document.querySelectorAll('.nav-block')].map(nb=>{\n    const h = nb.querySelector('h3')?.textContent.trim();\n    const items = [...nb.querySelectorAll(':scope ul > li')].map(li=>{\n      const s = li.querySelector(':scope > details > summary');\n      if (s) return {k:'d', label:s.textContent.trim(), kids:[...s.parentElement.querySelectorAll('.dropdown-content li')].map(c=>c.textContent.trim())};\n      const a = li.querySelector(':scope > a');\n      if (a) return {k:'a', label:a.textContent.trim()};\n      return {k:'?', label:li.textContent.trim().slice(0,40)};\n    });\n    const extra=[...nb.querySelectorAll('h3')].slice(1).map(x=>x.textContent.trim());\n    const paras=[...nb.querySelectorAll('p')].map(p=>p.textContent.trim());\n    return {h, extra, items, paras};\n  });\n}"
+      }
+    },
+    {
+      "record": 335,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "className",
+        "querySelectorAll"
+      ],
+      "input": {
+        "function": "() => {\n  const cards=[...document.querySelectorAll('.nav-block')];\n  const n=cards.length;\n  // internal scroll?\n  const scroller=[...document.querySelectorAll('.nav-block > div, .dropdown-content, ul')].filter(e=>e.scrollHeight>e.clientHeight+5).slice(0,4).map(e=>({cls:e.className, sh:e.scrollHeight, ch:e.clientHeight}));\n  return {count:n, first:cards[0]?.innerText.split('\\n').filter(Boolean).slice(0,4), scroller};\n}"
+      }
+    },
+    {
+      "record": 337,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "querySelectorAll"
+      ],
+      "input": {
+        "function": "() => {\n  return [...document.querySelectorAll('.nav-block')].map(nb=>({\n    h: nb.querySelector('h3')?.textContent.trim(),\n    items: [...nb.querySelectorAll(':scope > div > ul > li')].map(li=>{\n      const s=li.querySelector('summary'); if(s) return 'D:'+s.textContent.trim();\n      const a=li.querySelector('a'); if(a) return a.textContent.trim();\n      return '?'+li.textContent.trim().slice(0,25);\n    })\n  }));\n}"
+      }
+    },
+    {
+      "record": 342,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "querySelectorAll"
+      ],
+      "input": {
+        "function": "() => {\n  const links = [...document.querySelectorAll('a[href]')].map(a=>a.getAttribute('href'));\n  const internal = [...new Set(links.filter(h=>h && !/^(https?:|mailto:|tel:|#|javascript)/.test(h)))];\n  return internal;\n}"
+      }
+    },
+    {
+      "record": 347,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "querySelectorAll"
+      ],
+      "input": {
+        "function": "() => {\n  const abs = u => { try { return new URL(u, location.href).pathname; } catch { return u; } };\n  const out = {\n    title: document.querySelector('.panel-header h2')?.textContent.trim() || document.title,\n    description: document.querySelector('.panel-description, .panel p, .content > p')?.textContent.trim() || '',\n    blocks: [],\n    secondary: [],\n    featureImg: '', caption: '', captionLink: null,\n    sharingImg: '', sharingCaption: ''\n  };\n  const blocks = [...document.querySelectorAll('.nav-block')];\n  // primary vs secondary split by ancestor\n  blocks.forEach(nb=>{\n    const paras = [...nb.querySelectorAll(':scope > div > p, :scope > div > ul > li > p')].map(p=>p.textContent.trim());\n    const items = [...nb.querySelectorAll(':scope > div > ul > li')].map(li=>{\n      const s = li.querySelector(':scope > details > summary, summary');\n      if (s) {\n        const kids = [...(s.parentElement.querySelector('.dropdown-content')?.querySelectorAll('li')||[])].map(x=>x.textContent.trim());\n        return {k:'d', label:s.textContent.trim(), children:kids};\n      }\n      const a = li.querySelector(':scope > a, a');\n      return a ? {k:'a', href:abs(a.getAttribute('href')), label:a.textContent.trim()} : {k:'p', label:li.textContent.trim()};\n    });\n    const rec = {title: nb.querySelector('h3')?.textContent.trim()||'', extraTitles:[...nb.querySelectorAll('h3')].slice(1).map(x=>x.textContent.trim()), items, paras};\n    (nb.closest('.secondary')||nb.closest('[class*=second]') ? out.secondary : out.blocks).push(rec);\n  });\n  const feat = document.querySelector('.secondary .feature, .feature');\n  if (feat) { const img=feat.querySelector('img'); if(img) out.featureImg=abs(img.getAttribute('src')||img.src); const cap=feat.querySelector('.caption'); if(cap){ out.caption=cap.textContent.trim(); const l=cap.querySelector('a'); if(l) out.captionLink={href:abs(l.getAttribute('href')),label:l.textContent.trim()}; } }\n  const sh = document.querySelector('.sharing');\n  if (sh) { const img=sh.querySelector('img'); if(img) out.sharingImg=abs(img.getAttribute('src')||img.src); out.sharingCaption=sh.querySelector('.sharing-caption p')?.textContent.trim()||''; }\n  return out;\n}",
+        "filename": "ref-academics.json"
+      }
+    },
+    {
+      "record": 359,
+      "tool": "mcp__playwright__browser_run_code_unsafe",
+      "patterns": [
+        "className",
+        "querySelectorAll"
+      ],
+      "input": {
+        "code": "async (page) => {\n  const paths = [\"/about/\",\"/academics/\",\"/life-at-michigan/\",\"/athletics/\",\"/research/\",\"/health-medicine/\",\"/initiatives/\",\"/giving/\",\"/prospective-students/\",\"/current-students/\",\"/faculty-staff/\",\"/parents/\",\"/alumni/\",\"/schools-colleges/\"];\n  const extractor = () => {\n    const abs = u => { try { return new URL(u, location.href).pathname; } catch { return u; } };\n    const out = { route: location.pathname };\n    const panel = document.querySelector('.panel');\n    out.panelClass = panel ? panel.className : '';\n    const ph = document.querySelector('.panel-header h2') || document.querySelector('.panel-header');\n    out.title = ph ? ph.textContent.trim() : document.title.split('\u203a')[0].trim();\n    const desc = document.querySelector('.panel-description');\n    out.description = desc ? desc.textContent.replace(/\\s+/g,' ').trim() : '';\n    const rec = nb => {\n      const h = nb.querySelector('h3');\n      const items = [...nb.querySelectorAll(':scope > div > ul > li')].map(li=>{\n        const s = li.querySelector('summary');\n        if (s) { const dc = s.parentElement.querySelector('.dropdown-content'); return {k:'d', label:s.textContent.trim(), children: dc ? [...dc.querySelectorAll('li')].map(x=>x.textContent.trim()) : []}; }\n        const a = li.querySelector('a');\n        if (a) return {k:'a', href:abs(a.getAttribute('href')), label:a.textContent.trim()};\n        return {k:'p', label:li.textContent.replace(/\\s+/g,' ').trim()};\n      });\n      return { title: h ? h.textContent.trim() : '', extraTitles: [...nb.querySelectorAll('h3')].slice(1).map(x=>x.textContent.trim()), items, paras: [...nb.querySelectorAll(':scope > div > p')].map(p=>p.textContent.replace(/\\s+/g,' ').trim()) };\n    };\n    const all = [...document.querySelectorAll('.nav-block')];\n    out.blocks = all.filter(nb=>!nb.closest('.secondary')).map(rec);\n    out.secondaryBlocks = all.filter(nb=>nb.closest('.secondary')).map(rec);\n    const feat = document.querySelector('.feature');\n    if (feat) {\n      const img = feat.querySelector('img');\n      out.featureImg = img ? abs(img.getAttribute('src')) : '';\n      const cap = feat.querySelector('.caption');\n      if (cap) {\n        const l = cap.querySelector('a');\n        out.caption = [...cap.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join(' ').replace(/\\s+/g,' ').trim();\n        out.captionLink = l ? { href: abs(l.getAttribute('href')), label: l.textContent.trim() } : null;\n      }\n    }\n    const sh = document.querySelector('.sharing');\n    if (sh) { const img = sh.querySelector('img'); out.sharingImg = img ? abs(img.getAttribute('src')) : ''; out.sharingCaption = sh.querySelector('.sharing-caption p') ? sh.querySelector('.sharing-caption p').textContent.trim() : ''; }\n    return out;\n  };\n  const results = {};\n  for (const p of paths) {\n    await page.goto('http://localhost:37557' + p, { waitUntil: 'domcontentloaded' });\n    results[p] = await page.evaluate(extractor);\n  }\n  return JSON.stringify(results);\n}"
+      }
+    },
+    {
+      "record": 362,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "outerHTML",
+        "querySelectorAll"
+      ],
+      "input": {
+        "function": "() => {\n  const nb=[...document.querySelectorAll('.nav-block')][0];\n  return {html: nb.outerHTML.slice(0,700)};\n}"
+      }
+    },
+    {
+      "record": 365,
+      "tool": "mcp__playwright__browser_run_code_unsafe",
+      "patterns": [
+        "querySelectorAll"
+      ],
+      "input": {
+        "code": "async (page) => {\n  const paths = [\"/about/\",\"/academics/\",\"/life-at-michigan/\",\"/athletics/\",\"/research/\",\"/health-medicine/\",\"/initiatives/\",\"/giving/\",\"/prospective-students/\",\"/current-students/\",\"/faculty-staff/\",\"/parents/\",\"/alumni/\",\"/schools-colleges/\"];\n  const extractor = () => {\n    const abs = u => { try { return new URL(u, location.href).pathname; } catch { return u; } };\n    const out = { route: location.pathname };\n    const ph = document.querySelector('.panel-header h2');\n    out.title = ph ? ph.textContent.trim() : '';\n    out.description = document.querySelector('.panel-description') ? document.querySelector('.panel-description').textContent.replace(/\\s+/g,' ').trim() : '';\n    const rec = nb => {\n      const hs = [...nb.querySelectorAll('h3,h4')];\n      const mgroups = [];\n      const primaryUl = nb.querySelector(':scope > div > ul');\n      if (primaryUl) {\n        let curTitle = hs[0] ? hs[0].textContent.trim() : '';\n        let cur = { title: curTitle, items: [] };\n        mgroups.push(cur);\n        let node = primaryUl.previousElementSibling;\n        [...primaryUl.children].forEach(li=>{\n          const s = li.querySelector('summary');\n          if (s) { const dc = s.parentElement.querySelector('.dropdown-content'); cur.items.push({k:'d', label:s.textContent.trim(), children: dc ? [...dc.querySelectorAll('li')].map(x=>x.textContent.replace(/\\s+/g,' ').trim()) : []}); return; }\n          const a = li.querySelector('a');\n          if (a) cur.items.push({k:'a', href:abs(a.getAttribute('href')), label:a.textContent.replace(/\\s+/g,' ').trim()});\n          else if (li.querySelector('p')) cur.items.push({k:'p', label:li.textContent.replace(/\\s+/g,' ').trim()});\n        });\n      } else {\n        // multiple h4 + ul groups\n        let cur = null;\n        [...nb.querySelector(':scope > div').children].forEach(ch=>{\n          if (/^H[34]$/.test(ch.tagName)) { cur = { title: ch.textContent.trim(), items: [] }; mgroups.push(cur); }\n          else if (ch.tagName==='UL' && cur) {\n            [...ch.children].forEach(li=>{\n              const s = li.querySelector('summary');\n              if (s) { const dc = s.parentElement.querySelector('.dropdown-content'); cur.items.push({k:'d', label:s.textContent.trim(), children: dc ? [...dc.querySelectorAll('li')].map(x=>x.textContent.replace(/\\s+/g,' ').trim()) : []}); return; }\n              const a = li.querySelector('a'); if (a) cur.items.push({k:'a', href:abs(a.getAttribute('href')), label:a.textContent.replace(/\\s+/g,' ').trim()});\n            });\n          } else if (ch.tagName==='P' && cur) cur.items.push({k:'p', label:ch.textContent.replace(/\\s+/g,' ').trim()});\n        });\n      }\n      const paras = [...nb.querySelectorAll(':scope > div > p')].map(p=>p.textContent.replace(/\\s+/g,' ').trim());\n      return { groups: mgroups.filter(g=>g.title||g.items.length), paras };\n    };\n    const all = [...document.querySelectorAll('.nav-block')];\n    out.blocks = all.filter(nb=>!nb.closest('.secondary')).map(rec);\n    out.secondaryBlocks = all.filter(nb=>nb.closest('.secondary')).map(rec);\n    const feat = document.querySelector('.feature');\n    if (feat) { const img=feat.querySelector('img'); out.featureImg = img?abs(img.getAttribute('src')):''; const cap=feat.querySelector('.caption'); if(cap){ const l=cap.querySelector('a'); out.caption=[...cap.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join(' ').replace(/\\s+/g,' ').trim(); out.captionLink=l?{href:abs(l.getAttribute('href')),label:l.textContent.trim()}:null; } }\n    return out;\n  };\n  const results = {};\n  for (const p of paths) { await page.goto('http://localhost:37557'+p,{waitUntil:'domcontentloaded'}); results[p]=await page.evaluate(extractor); }\n  return JSON.stringify(results);\n}",
+        "filename": "ref-pages-all.json"
+      }
+    },
+    {
+      "record": 367,
+      "tool": "mcp__playwright__browser_run_code_unsafe",
+      "patterns": [
+        "querySelectorAll"
+      ],
+      "input": {
+        "code": "async (page) => {\n  const fs = require('fs');\n  const paths = [\"/about/\",\"/academics/\",\"/life-at-michigan/\",\"/athletics/\",\"/research/\",\"/health-medicine/\",\"/initiatives/\",\"/giving/\",\"/prospective-students/\",\"/current-students/\",\"/faculty-staff/\",\"/parents/\",\"/alumni/\",\"/schools-colleges/\"];\n  const extractor = () => {\n    const abs = u => { try { return new URL(u, location.href).pathname; } catch { return u; } };\n    const out = { route: location.pathname };\n    const ph = document.querySelector('.panel-header h2');\n    out.title = ph ? ph.textContent.trim() : '';\n    out.description = document.querySelector('.panel-description') ? document.querySelector('.panel-description').textContent.replace(/\\s+/g,' ').trim() : '';\n    const rec = nb => {\n      const mgroups = [];\n      let cur = null;\n      [...nb.querySelector(':scope > div').children].forEach(ch=>{\n        if (/^H[234]$/.test(ch.tagName)) { cur = { title: ch.textContent.trim(), items: [] }; mgroups.push(cur); }\n        else if (ch.tagName==='UL' && cur) {\n          [...ch.children].forEach(li=>{\n            const s = li.querySelector('summary');\n            if (s) { const dc = s.parentElement.querySelector('.dropdown-content'); cur.items.push({k:'d', label:s.textContent.trim(), children: dc ? [...dc.querySelectorAll('li')].map(x=>x.textContent.replace(/\\s+/g,' ').trim()) : []}); return; }\n            const a = li.querySelector('a'); if (a) cur.items.push({k:'a', href:abs(a.getAttribute('href')), label:a.textContent.replace(/\\s+/g,' ').trim()});\n            else cur.items.push({k:'p', label:li.textContent.replace(/\\s+/g,' ').trim()});\n          });\n        } else if (ch.tagName==='P' && cur) cur.items.push({k:'p', label:ch.textContent.replace(/\\s+/g,' ').trim()});\n      });\n      return { groups: mgroups.filter(g=>g.title||g.items.length) };\n    };\n    const all = [...document.querySelectorAll('.nav-block')];\n    out.blocks = all.filter(nb=>!nb.closest('.secondary')).map(rec);\n    out.secondaryBlocks = all.filter(nb=>nb.closest('.secondary')).map(rec);\n    const feat = document.querySelector('.feature');\n    if (feat) { const img=feat.querySelector('img'); out.featureImg = img?abs(img.getAttribute('src')):''; const cap=feat.querySelector('.caption'); if(cap){ const l=cap.querySelector('a'); out.caption=[...cap.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join(' ').replace(/\\s+/g,' ').trim(); out.captionLink=l?{href:abs(l.getAttribute('href')),label:l.textContent.trim()}:null; } }\n    return out;\n  };\n  const results = {};\n  for (const p of paths) { await page.goto('http://localhost:37557'+p,{waitUntil:'domcontentloaded'}); results[p]=await page.evaluate(extractor); }\n  fs.writeFileSync('/workspace/recreation/ref-pages-all.json', JSON.stringify(results));\n  return 'wrote ' + Object.keys(results).length + ' pages';\n}"
+      }
+    },
+    {
+      "record": 370,
+      "tool": "mcp__playwright__browser_run_code_unsafe",
+      "patterns": [
+        "querySelectorAll"
+      ],
+      "input": {
+        "code": "async (page) => {\n  const fs = (await import('node:fs'));\n  const paths = [\"/about/\",\"/academics/\",\"/life-at-michigan/\",\"/athletics/\",\"/research/\",\"/health-medicine/\",\"/initiatives/\",\"/giving/\",\"/prospective-students/\",\"/current-students/\",\"/faculty-staff/\",\"/parents/\",\"/alumni/\",\"/schools-colleges/\"];\n  const extractor = () => {\n    const abs = u => { try { return new URL(u, location.href).pathname; } catch { return u; } };\n    const out = { route: location.pathname };\n    const ph = document.querySelector('.panel-header h2');\n    out.title = ph ? ph.textContent.trim() : '';\n    out.description = document.querySelector('.panel-description') ? document.querySelector('.panel-description').textContent.replace(/\\s+/g,' ').trim() : '';\n    const rec = nb => {\n      const mgroups = []; let cur = null;\n      [...nb.querySelector(':scope > div').children].forEach(ch=>{\n        if (/^H[234]$/.test(ch.tagName)) { cur = { title: ch.textContent.trim(), items: [] }; mgroups.push(cur); }\n        else if (ch.tagName==='UL' && cur) {\n          [...ch.children].forEach(li=>{\n            const s = li.querySelector('summary');\n            if (s) { const dc = s.parentElement.querySelector('.dropdown-content'); cur.items.push({k:'d', label:s.textContent.trim(), children: dc ? [...dc.querySelectorAll('li')].map(x=>x.textContent.replace(/\\s+/g,' ').trim()) : []}); return; }\n            const a = li.querySelector('a'); if (a) cur.items.push({k:'a', href:abs(a.getAttribute('href')), label:a.textContent.replace(/\\s+/g,' ').trim()});\n            else cur.items.push({k:'p', label:li.textContent.replace(/\\s+/g,' ').trim()});\n          });\n        } else if (ch.tagName==='P' && cur) cur.items.push({k:'p', label:ch.textContent.replace(/\\s+/g,' ').trim()});\n      });\n      return { groups: mgroups.filter(g=>g.title||g.items.length) };\n    };\n    const all = [...document.querySelectorAll('.nav-block')];\n    out.blocks = all.filter(nb=>!nb.closest('.secondary')).map(rec);\n    out.secondaryBlocks = all.filter(nb=>nb.closest('.secondary')).map(rec);\n    const feat = document.querySelector('.feature');\n    if (feat) { const img=feat.querySelector('img'); out.featureImg = img?abs(img.getAttribute('src')):''; const cap=feat.querySelector('.caption'); if(cap){ const l=cap.querySelector('a'); out.caption=[...cap.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join(' ').replace(/\\s+/g,' ').trim(); out.captionLink=l?{href:abs(l.getAttribute('href')),label:l.textContent.trim()}:null; } }\n    return out;\n  };\n  const results = {};\n  for (const p of paths) { await page.goto('http://localhost:37557'+p,{waitUntil:'domcontentloaded'}); results[p]=await page.evaluate(extractor); }\n  fs.writeFileSync('/workspace/recreation/ref-pages-all.json', JSON.stringify(results));\n  return 'wrote ' + Object.keys(results).length;\n}"
+      }
+    },
+    {
+      "record": 380,
+      "tool": "mcp__playwright__browser_evaluate",
+      "patterns": [
+        "querySelectorAll"
+      ],
+      "input": {
+        "filename": "/workspace/recreation/ref-about.json",
+        "function": "() => {\n  const abs = u => { try { return new URL(u, location.href).pathname; } catch { return u; } };\n  const rec = nb => {\n    const mgroups = []; let cur = null;\n    [...nb.querySelector(':scope > div').children].forEach(ch=>{\n      if (/^H[234]$/.test(ch.tagName)) { cur = { title: ch.textContent.trim(), items: [] }; mgroups.push(cur); }\n      else if (ch.tagName==='UL' && cur) {\n        [...ch.children].forEach(li=>{\n          const s = li.querySelector('summary');\n          if (s) { const dc = s.parentElement.querySelector('.dropdown-content'); cur.items.push({k:'d', label:s.textContent.trim(), children: dc ? [...dc.querySelectorAll('li')].map(x=>x.textContent.replace(/\\s+/g,' ').trim()) : []}); return; }\n          const a = li.querySelector('a'); if (a) cur.items.push({k:'a', href:abs(a.getAttribute('href')), label:a.textContent.replace(/\\s+/g,' ').trim()});\n          else cur.items.push({k:'p', label:li.textContent.replace(/\\s+/g,' ').trim()});\n        });\n      } else if (ch.tagName==='P' && cur) cur.items.push({k:'p', label:ch.textContent.replace(/\\s+/g,' ').trim()});\n    });\n    return { groups: mgroups.filter(g=>g.title||g.items.length) };\n  };\n  const out = { route: location.pathname, title: document.querySelector('.panel-header h2')?.textContent.trim()||'' };\n  const all = [...document.querySelectorAll('.nav-block')];\n  out.blocks = all.filter(nb=>!nb.closest('.secondary')).map(rec);\n  out.secondaryBlocks = all.filter(nb=>nb.closest('.secondary')).map(rec);\n  const feat = document.querySelector('.feature');\n  if (feat) { const img=feat.querySelector('img'); out.featureImg = img?abs(img.getAttribute('src')):''; const cap=feat.querySelector('.caption'); if(cap){ const l=cap.querySelector('a'); out.caption=[...cap.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join(' ').replace(/\\s+/g,' ').trim(); out.captionLink=l?{href:abs(l.getAttribute('href')),label:l.textContent.trim()}:null; } }\n  return out;\n}"
+      }
+    },
+    {
+      "record": 385,
+      "tool": "mcp__playwright__browser_run_code_unsafe",
+      "patterns": [
+        "querySelectorAll"
+      ],
+      "input": {
+        "code": "async (page) => {\n  await page.addInitScript(() => {\n    window.__ex = () => {\n      const abs = u => { try { return new URL(u, location.href).pathname; } catch { return u; } };\n      const rec = nb => {\n        const groups = []; let cur = null;\n        [...nb.querySelector(':scope > div').children].forEach(ch=>{\n          if (/^H[234]$/.test(ch.tagName)) { cur = { title: ch.textContent.trim(), items: [] }; groups.push(cur); }\n          else if (ch.tagName==='UL' && cur) {\n            [...ch.children].forEach(li=>{\n              const s = li.querySelector('summary');\n              if (s) { const dc = s.parentElement.querySelector('.dropdown-content'); cur.items.push({k:'d', label:s.textContent.trim(), children: dc ? [...dc.querySelectorAll('li')].map(x=>x.textContent.replace(/\\s+/g,' ').trim()) : []}); return; }\n              const a = li.querySelector('a');\n              if (a) cur.items.push({k:'a', href:abs(a.getAttribute('href')), label:a.textContent.replace(/\\s+/g,' ').trim()});\n              else cur.items.push({k:'p', label:li.textContent.replace(/\\s+/g,' ').trim()});\n            });\n          } else if (ch.tagName==='P' && cur) cur.items.push({k:'p', label:ch.textContent.replace(/\\s+/g,' ').trim()});\n        });\n        return { groups: groups.filter(g=>g.title||g.items.length) };\n      };\n      const out = { route: location.pathname, title: document.querySelector('.panel-header h2')?.textContent.trim()||'', description: document.querySelector('.panel-description')?.textContent.replace(/\\s+/g,' ').trim()||'' };\n      const all = [...document.querySelectorAll('.nav-block')];\n      out.blocks = all.filter(nb=>!nb.closest('.secondary')).map(rec);\n      out.secondaryBlocks = all.filter(nb=>nb.closest('.secondary')).map(rec);\n      const feat = document.querySelector('.feature');\n      if (feat) { const img=feat.querySelector('img'); out.featureImg = img?abs(img.getAttribute('src')):''; const cap=feat.querySelector('.caption'); if(cap){ const l=cap.querySelector('a'); out.caption=[...cap.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join(' ').replace(/\\s+/g,' ').trim(); out.captionLink=l?{href:abs(l.getAttribute('href')),label:l.textContent.trim()}:null; } }\n      return out;\n    };\n  });\n  await page.goto('http://localhost:37557/academics/', {waitUntil:'domcontentloaded'});\n  return 'installed';\n}"
+      }
+    }
+  ]
+}

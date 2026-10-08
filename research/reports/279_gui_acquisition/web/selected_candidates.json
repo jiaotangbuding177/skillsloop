@@ -1,0 +1,358 @@
+{
+  "date": "2026-10-04",
+  "scope": "Public source acquisition and source-side documentation audit only; no model, task, scoring or learning execution",
+  "bench_catalog": "../bench_source_catalog.json",
+  "selected_candidates": [
+    {
+      "id": "web_squoosh",
+      "platform": "web",
+      "name": "Squoosh",
+      "repo": "https://github.com/GoogleChromeLabs/squoosh",
+      "commit": "e8d35e0fb66eb16eff6fe8fc773eabcbb7128de3",
+      "license": "Apache-2.0",
+      "license_evidence": "evidence/GoogleChromeLabs__squoosh__LICENSE",
+      "selection": "source_acquisition_candidate_not_runtime_admitted",
+      "build_evidence": {
+        "official_readme": "npm install; npm run build; npm run dev",
+        "fixed_source": "package.json build is rollup -c then lib/move-output.js; output build/ static; .nvmrc 20.16.0",
+        "runtime_expected": "client-side Preact/TypeScript; image processing local and WASM workers; no required user account",
+        "executed": false,
+        "limitations": [
+          "Installation/WASM assets and isolated offline static serving not yet validated.",
+          "README discloses Google Analytics; runtime must block external analytics without replacing image processing.",
+          "Image import/compression widgets are richer than many Web benchmark documentation/marketing pages; platform correspondence does not prove same task distribution."
+        ]
+      },
+      "workflows": [
+        {
+          "sequence": [
+            "import a synthetic local PNG",
+            "change resize dimensions",
+            "choose JPEG/WebP and quality",
+            "inspect before/after preview and dimensions",
+            "download and reopen output"
+          ],
+          "validator_expected": [
+            "expected output MIME and dimensions",
+            "controlled file import/download works",
+            "changing quality updates artifact and reported size"
+          ],
+          "evidence": "README.md local processing; full controls need public UI observation before task freeze"
+        },
+        {
+          "sequence": [
+            "compare left and right codec options",
+            "move image comparison divider",
+            "zoom then reset",
+            "replace image and recheck settings"
+          ],
+          "validator_expected": [
+            "preview controls cause visible state transitions",
+            "new file replaces prior input",
+            "reset changes only expected viewport state"
+          ],
+          "evidence": "proposed workflow from known application function; exact version controls pending UI admission"
+        }
+      ],
+      "skill_expectation": [
+        "Observe input-control-output dependencies before implementing a visually similar form.",
+        "Implement local binary file import/export and asynchronous image state without sending user data to a cloud service.",
+        "Verify functional output along with screenshot/desktop-mobile state."
+      ],
+      "bench_correspondence": {
+        "same_task_form": "RecreationWorld Web target observation -> independent code recreation -> functional/visual verification, not a GUI-operating-only benchmark",
+        "web_public_capabilities": [
+          "forms and control state",
+          "desktop/mobile layout",
+          "browser keyboard and pointer interaction",
+          "asset/preview and download behavior"
+        ],
+        "cross_platform_capability_examples": [
+          "macos/stefansl-image-shrinker",
+          "macos/photoflare-photoflare",
+          "windows/dragonofmercy-image-viewer"
+        ],
+        "inference_only": true,
+        "no_skill_gain_claim": true
+      },
+      "source_caveats": [
+        "No repository match against 200 native benchmark canonical repo identities; case-insensitive candidate names also absent from all 250 public task identities and 266 public reference filenames.",
+        "50 Web metadata entries omit original repos and many are .example aliases: original-source/template de-duplication remains pending.",
+        "Do not supply target source to recreation actor; downloaded source is for environment/license/provenance only.",
+        "No native official benchmark validator exists for this new training application; independently author and freeze validators after public behavior admission."
+      ],
+      "github_repository_size_kib": 177228,
+      "source_archive_bytes": 22350386,
+      "source_archive_sha256": "8a4caf8744066d08005ce32034ba654d8114aa6875ff3267b56a68a9021d1c08",
+      "source_archive_note": "Actually acquired by root; see ../source_acquisition_manifest.json. GitHub size includes repository history.",
+      "max_corrective_rounds_including_first": 3
+    },
+    {
+      "id": "web_minipaint",
+      "platform": "web",
+      "name": "miniPaint",
+      "repo": "https://github.com/viliusle/miniPaint",
+      "commit": "a79733eb803fc97084ef0ee4faa96b031e69e1c0",
+      "license": "MIT",
+      "license_evidence": "evidence/viliusle__miniPaint__MIT-LICENSE.txt",
+      "selection": "source_acquisition_candidate_not_runtime_admitted",
+      "build_evidence": {
+        "official_readme": "Browser-local editor; Wiki Build instructions linked.",
+        "fixed_source": "package.json build is webpack --mode production; server uses webpack serve; index.html loads local dist/bundle.js; repository includes dist/",
+        "runtime_expected": "browser Canvas/JavaScript; upload/draw/filter/layers/undo/save; no required account",
+        "executed": false,
+        "limitations": [
+          "Pinned hermite-resize dependency references git rather than a package semver; lockfile and dist artifact must be preserved for admission.",
+          "webfontloader may fetch optional fonts; local defaults and external network denial need validation.",
+          "Static files present does not prove the pinned UI starts successfully."
+        ]
+      },
+      "workflows": [
+        {
+          "sequence": [
+            "import synthetic PNG",
+            "resize/crop",
+            "undo last transformation",
+            "save PNG",
+            "reopen and check dimensions"
+          ],
+          "validator_expected": [
+            "image dimensions track control changes",
+            "undo returns prior image state",
+            "export produces valid image matching final visible state"
+          ],
+          "evidence": "fixed README Features Files/Edit/Image"
+        },
+        {
+          "sequence": [
+            "create two layers",
+            "draw shape on active layer",
+            "toggle or reorder layer",
+            "undo",
+            "save JSON layers and reopen"
+          ],
+          "validator_expected": [
+            "operations target selected layer",
+            "layer visibility/order changes composited image",
+            "round-trip preserves layer count and geometry"
+          ],
+          "evidence": "fixed README Features Layers/Files/Edit"
+        },
+        {
+          "sequence": [
+            "choose text/drawing tool",
+            "change color and size",
+            "edit on canvas",
+            "change zoom",
+            "navigate menus using keyboard"
+          ],
+          "validator_expected": [
+            "selected tool state is reflected in control panel",
+            "canvas pointer coordinates remain correct under zoom",
+            "menus and Undo are accessible"
+          ],
+          "evidence": "fixed README Tools/Help; exact controls pending observation"
+        }
+      ],
+      "skill_expectation": [
+        "Recover menu/dialog/canvas/active-layer state from public observations rather than copying target HTML.",
+        "Model undo as prior state restoration across several interacting controls.",
+        "Check pointer coordinate transforms and responsive toolbar/panel behavior before accepting a clone."
+      ],
+      "bench_correspondence": {
+        "same_task_form": "Official Web observation -> recreate -> verify, with Canvas-heavy content.",
+        "web_public_capabilities": [
+          "menus and dialogs",
+          "click/drag/keyboard behavior",
+          "state-dependent panels",
+          "asset handling and responsive visual layout"
+        ],
+        "cross_platform_capability_examples": [
+          "ubuntu/ksnip-ksnip",
+          "macos/photoflare-photoflare",
+          "windows/0xmartin-bmpeditor"
+        ],
+        "inference_only": true,
+        "no_skill_gain_claim": true
+      },
+      "source_caveats": [
+        "Complete MIT text was downloaded and inspected; GitHub license API reports NOASSERTION, overridden by explicit MIT-LICENSE.txt plus README/package license.",
+        "No canonical repository match against 200 native entries; candidate names absent from 250 task index and 266 reference paths.",
+        "Anonymous Web origin/template de-duplication remains pending.",
+        "Its image-editing domain differs from much of Web50: shared UI capabilities are a hypothesis, not evidence of transfer.",
+        "Downloaded target source is researcher-side reference only, never actor input."
+      ],
+      "github_repository_size_kib": 22679,
+      "source_archive_bytes": 4252920,
+      "source_archive_sha256": "21f1cadb54397f21927194d762fcef32282b0b2ec501a2cfaf65af9008c34fb4",
+      "max_corrective_rounds_including_first": 3
+    },
+    {
+      "id": "web_stackedit",
+      "platform": "web",
+      "name": "StackEdit",
+      "repo": "https://github.com/benweet/stackedit",
+      "commit": "6dce2a5e36b755a0c244522b48a06c91a2df0f59",
+      "license": "Apache-2.0",
+      "license_evidence": "evidence/benweet__stackedit__LICENSE",
+      "selection": "source_acquisition_candidate_not_runtime_admitted",
+      "build_evidence": {
+        "official_readme": "npm install; npm start for localhost:8080; npm run build",
+        "fixed_source": "Vue2/webpack; localDbSvc.js opens IndexedDB and maintains localStorage; client-local file workspace is separate from optional cloud sync.",
+        "runtime_expected": "browser Markdown editor with local workspace and preview; cloud integrations require optional credentials but are excluded from local task scope",
+        "executed": false,
+        "limitations": [
+          "Pinned commit dated 2023-05-27 and old webpack/Vue2/dependencies: isolated Node/toolchain compatibility not yet validated.",
+          "README contains Helm cloud provider key configuration: do not infer such keys are mandatory for local editing; verify actual local unauthenticated UI.",
+          "Disable remote sync/publishing/analytics in isolated network without substituting the core Markdown editor."
+        ]
+      },
+      "workflows": [
+        {
+          "sequence": [
+            "create local Markdown file",
+            "type heading/list/code text",
+            "check rendered preview",
+            "rename file",
+            "refresh and reopen"
+          ],
+          "validator_expected": [
+            "preview reflects local text",
+            "renamed file persists across reload",
+            "Markdown code remains text rather than unexpected markup"
+          ],
+          "evidence": "README editor/build; pinned IndexedDB/localStorage source; UI controls pending"
+        },
+        {
+          "sequence": [
+            "create folder and two files",
+            "move a file",
+            "switch documents",
+            "search local workspace",
+            "delete and restore if supported"
+          ],
+          "validator_expected": [
+            "workspace selection and folder relationship are consistent",
+            "content does not move into wrong file",
+            "search/filter returns expected public fixture"
+          ],
+          "evidence": "proposed workspace workflow; exact delete/restore capability must be confirmed from UI before freeze"
+        },
+        {
+          "sequence": [
+            "import public synthetic .md",
+            "edit text with undo/redo",
+            "export Markdown",
+            "reimport and compare text"
+          ],
+          "validator_expected": [
+            "text round-trip is preserved",
+            "undo/redo matches last operations",
+            "export works without cloud login"
+          ],
+          "evidence": "application editor/local workspace; exact import/export paths pending UI admission"
+        }
+      ],
+      "skill_expectation": [
+        "Map multi-pane editor, navigation tree and rendered preview into separate synchronized state responsibilities.",
+        "Test persistence and document selection after reload, not only the initial rendered page.",
+        "Distinguish optional network integration from local core; validate text import/export and undo before completion."
+      ],
+      "bench_correspondence": {
+        "same_task_form": "Web target observation -> independent code recreation -> frozen functional/visual verification.",
+        "web_public_capabilities": [
+          "navigation tree",
+          "search/forms",
+          "keyboard editing",
+          "split-pane responsive layout",
+          "persistent local state"
+        ],
+        "cross_platform_capability_examples": [
+          "ubuntu/notepadqq-notepadqq",
+          "macos/glushchenko-fsnotes",
+          "android/kin69-easynotes",
+          "windows/plaintool-notetask"
+        ],
+        "inference_only": true,
+        "no_skill_gain_claim": true
+      },
+      "source_caveats": [
+        "No canonical match against 200 native repos and no name match in full 250 task index or 266 public reference filenames.",
+        "Many .example Web aliases have no source identity; absence of string match is not full original-application/template deduplication.",
+        "Some proposed workspace workflows are not yet empirically observed; remove unsupported flows before freezing.",
+        "Do not hand target code or official test assertions to actor."
+      ],
+      "github_repository_size_kib": 37527,
+      "source_archive_bytes": 1896539,
+      "source_archive_sha256": "99624b392a7a6842166be5be8fc87d76f543c2d3fe8e1772d9cdc583bec22e9d",
+      "max_corrective_rounds_including_first": 3
+    },
+    {
+      "id": "web_vite_docs",
+      "platform": "web",
+      "name": "Vite documentation site",
+      "repo": "https://github.com/vitejs/vite",
+      "commit": "fdb2e6f63894d8c458c1778f3df77afe537f2bb2",
+      "release": "v8.0.7",
+      "target_subdirectory": "docs/",
+      "license": "MIT",
+      "license_evidence": "evidence/vitejs__vite__LICENSE",
+      "selection": "source_acquisition_candidate_not_runtime_admitted",
+      "build_evidence": {
+        "official_fixed_source": "docs/package.json: docs=vitepress dev, docs-build=vitepress build, docs-serve=vitepress serve. Root ci-docs=pnpm build && pnpm docs-build; Node ^20.19.0 || >=22.12.0, pnpm@10.33.0.",
+        "runtime_expected": "Locally built static VitePress documentation with Guide/Config/Plugins navigation, per-section sidebars and heading outlines; no account needed for these routes.",
+        "public_ui_evidence": "Fixed docs/.vitepress/config.ts lines 215-218 nav, 286 onward sidebar, 493-495 outline levels [2,3].",
+        "executed": false,
+        "limitations": [
+          "Monorepo build/workspace dependencies and alpha VitePress/custom theme must be validated in isolation; no successful build claim.",
+          "Algolia search is external; it is explicitly outside offline task scope, with no fake local search replacement.",
+          "Fathom analytics, ads, remote fonts, languages and social/plugin links appear in the original site configuration. Offline network denial and local-route independence must be measured before runtime admission.",
+          "MIT repository license is explicit and has no blanket image exclusion; individual third-party assets and theme dependency licenses still require inventory review before redistribution."
+        ]
+      },
+      "workflows": [
+        {
+          "sequence": ["open Guide from top navigation", "select Philosophy from sidebar", "follow an in-page heading outline", "use browser Back", "directly reload the selected local route"],
+          "validator_expected": ["URL route and active navigation agree", "heading anchor scrolls to intended section", "Back and direct reload retain correct page content"],
+          "evidence": "Fixed site config declares Guide/Philosophy, section sidebar and outline; precise browser behavior pending admission."
+        },
+        {
+          "sequence": ["switch Guide to Config", "navigate a nested local document", "open local Blog through Resources", "return to previous document", "inspect desktop and narrow viewport menus"],
+          "validator_expected": ["sidebar follows current section", "local routes resolve without cloud calls", "responsive navigation can reach the same local route"],
+          "evidence": "Fixed local nav and sidebar config; responsive theme behavior is an expected observation target, not yet empirical."
+        },
+        {
+          "sequence": ["inspect code block and heading link controls", "try theme toggle if present", "reload and compare theme state", "inspect keyboard navigation and focus"],
+          "validator_expected": ["only observed supported code/theme controls enter frozen task", "visible state and storage persistence match reference behavior", "keyboard focus and link destination are testable"],
+          "evidence": "VitePress/theme dependency indicates these as candidates; exact controls and persistence must be publicly observed before inclusion."
+        }
+      ],
+      "skill_expectation": [
+        "Build route-content-sidebar-active-link relationships from public observations and verify deep links/history, instead of reproducing only a homepage screenshot.",
+        "Reconstruct documentation layout at desktop and narrow widths, with in-page anchors and stateful menus.",
+        "Separate local UI requirements from optional hosted search, telemetry and external destinations when specifying an offline clone."
+      ],
+      "bench_correspondence": {
+        "same_task_form": "Official Web observation -> independent recreation -> functional/visual verification; target is the documentation GUI, not Vite CLI.",
+        "web_public_capabilities": ["content/documentation site", "multi-route navigation", "sidebar and heading anchors", "responsive layout", "browser history and optional theme state"],
+        "public_source_examples": ["webpack.js.org", "www.keycloak.org", "www.rust-lang.org"],
+        "inference_only": true,
+        "no_skill_gain_claim": true
+      },
+      "source_caveats": [
+        "Canonical Vite repo not matched in native 200 source catalog; public Web homepage audit has no explicit Vite repo/title identity match.",
+        "Many Web targets remain anonymous and shared VitePress/theme/fork lineage cannot be fully excluded from title/link metadata alone; family-isolation is not yet accepted.",
+        "External Algolia/ads/fonts must not become hidden prerequisites of local navigation tasks.",
+        "Downloaded target source remains researcher-side reference; actor receives normal public UI observations only.",
+        "New training validators require independent specification and freeze; official benchmark assertions are excluded."
+      ],
+      "source_archive_bytes": 12699216,
+      "source_archive_sha256": "af8e9929808b5414cc0a6e5b7287d07bc63e1404ca4d7ddee3cf721127febfd9",
+      "source_archive_note": "Root acquired fixed release monorepo: 2600 regular files / 16952726 expanded bytes, one symlink skipped; candidate GUI is docs/ only. See parent acquisition manifest.",
+      "max_corrective_rounds_including_first": 3
+    }
+  ],
+  "selection_count": 4,
+  "runtime_admitted_count": 0,
+  "skill_outputs_observed": 0
+}

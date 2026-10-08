@@ -1,0 +1,40 @@
+{
+  "attempt": "recreation_eval_baseline_1791094782714342213",
+  "network_commands": [
+    {
+      "record": 99,
+      "description": "Start preview server",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "(npm run preview -- --port 4173 >/tmp/preview.log 2>&1 &) ; sleep 3; curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4173/"
+    },
+    {
+      "record": 145,
+      "description": "Check candidate routes",
+      "binary_helper": false,
+      "tool_error": true,
+      "command": "for p in / /about/ /contact/ /facts-figures/ /about/privacy/; do echo -n \"$p -> \"; curl -s -o /dev/null -w \"%{http_code}\\n\" \"http://localhost:4173$p\"; done"
+    }
+  ],
+  "network_non_binary_helper": [
+    {
+      "record": 99,
+      "description": "Start preview server",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "(npm run preview -- --port 4173 >/tmp/preview.log 2>&1 &) ; sleep 3; curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4173/"
+    },
+    {
+      "record": 145,
+      "description": "Check candidate routes",
+      "binary_helper": false,
+      "tool_error": true,
+      "command": "for p in / /about/ /contact/ /facts-figures/ /about/privacy/; do echo -n \"$p -> \"; curl -s -o /dev/null -w \"%{http_code}\\n\" \"http://localhost:4173$p\"; done"
+    }
+  ],
+  "written_network_or_dom_scripts": [],
+  "private_evaluation_reads": [],
+  "scripted_browser_calls": [],
+  "automated_security_proof": false,
+  "manual_source_review_required": true
+}

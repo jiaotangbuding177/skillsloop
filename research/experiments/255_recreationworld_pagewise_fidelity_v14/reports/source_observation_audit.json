@@ -1,0 +1,32 @@
+[
+  {
+    "record": 144,
+    "description": "Read contact main content",
+    "command": "cd /workspace/recreation/.playwright-mcp && f=$(ls -t *.yml | head -1); sed -n '/- main \\[/,/- contentinfo \\[/p' $f | sed 's/^ *//' | grep -v \"ref=\" | head -200",
+    "blocked": false
+  },
+  {
+    "record": 146,
+    "description": "Read contact text content",
+    "command": "f=$(ls -t *.yml | head -1); sed -n '/- main \\[/,/- contentinfo \\[/p' $f | sed 's/^ *//' | grep -E \"text:|heading|paragraph|/url:|Ref\" | head -250",
+    "blocked": false
+  },
+  {
+    "record": 148,
+    "description": "Read contact link labels",
+    "command": "f=$(ls -t *.yml | head -1); sed -n '/- main \\[/,/- contentinfo \\[/p' $f | sed 's/^ *//' | grep -E \"link \\\"|listitem|generic \\\"\" | head -80",
+    "blocked": false
+  },
+  {
+    "record": 197,
+    "description": "List quick links items",
+    "command": "cd /workspace/recreation/.playwright-mcp; f=$(ls -t *.yml | head -1); sed -n '/navigation \\[ref=f29e364\\]/,/navigation \\[ref=f29e2/p' $f | grep 'link \"' ",
+    "blocked": false
+  },
+  {
+    "record": 315,
+    "description": "Read Executive Offices submenu",
+    "command": "cd /workspace/recreation/.playwright-mcp; f=$(ls -t *.yml | head -1); sed -n '/generic \"Executive Offices\"/,/- generic \\[ref=f47e1/p' $f | sed 's/^ *//' | grep -E \"link \\\"|text:\" | head -30",
+    "blocked": false
+  }
+]

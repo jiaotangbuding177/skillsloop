@@ -1,0 +1,23 @@
+Delivery complete.
+
+## Delivery statement
+
+I rebuilt the Corravale University site as an original React 19 + TypeScript + Tailwind 4 implementation, verified against the loopback reference at `http://localhost:33615` using screenshots, accessibility snapshots, and ordinary clicks.
+
+**What was fixed from the restored source (the actual functional defects):**
+- **`chromeFor()` key mismatch** — the header looked up per-route chrome with a trailing-slash key (`/about/`) against a table keyed without it (`/about`), so *every* page silently fell back to the homepage's chrome. Now normalized, and every route's observed skip-link text, report-link text, search field label, quick-links title, menu landmark name ("Main Menu" vs "Site Menu"), and audience landmark name ("Audiences" vs "Visitors" on `/academics/`) is reproduced.
+- **Header search submit** — verified the reference lands on `/search/?keywords=<q>`; the router was collapsing the trailing slash, so the address bar now preserves the observed URL. Added the observed `Lookup` submit-label variant on `/giving/` and `/contact/`.
+- **Header logo semantics** — reference wraps the logo link in an `h1`; matched (and removed the duplicate sr-only h1 in main).
+- **Mobile menu toggle** — matched the reference's `h3` "Main Menu" landmark.
+- **Offline `/_404.html`** — matched its structure exactly, including the `javascript:history.back()` "Go Back" link.
+- **Content fidelity fixes** — About sidebar caption + "View Our Facts & Figures" link; Facts & Figures missing Corravale Medicine detail lines ("Honor Roll of Top Hospitals", specialties ranking, employment/patient stats) and Impact rows ("Total Employment: 30,800", research-corridor $11.8B); corrected the botched Promise block; 2-column ranking grid; alt text vs caption split for every sidebar and Voices image; exact gallery alts and timestamps; contact page converted to `nav` + definition-list semantics.
+
+**All public link destinations were observed, not assumed** — every unavailable target navigates to `/_404.html` (the offline notice), never a suppressed click or a `#` no-op. No `innerHTML`, `dangerouslySetInnerHTML`, `DOMParser`, `querySelectorAll`, computed-style or geometry harvesting was used; all components and class names are original.
+
+**Routes built (19):** `/`, `/about`, `/academics`, `/life-at-michigan`, `/athletics`, `/research`, `/health-medicine`, `/initiatives`, `/giving`, `/prospective-students`, `/current-students`, `/faculty-staff`, `/parents`, `/alumni`, `/schools-colleges`, `/facts-figures`, `/contact`, `/search`, `/about/privacy` (plus the `/_404.html` offline page).
+
+**Build & artifact:** `npm run build` succeeds; `output/index.html` is byte-identical to `dist/index.html`, fully self-contained (71 inlined images, 4 inlined fonts, zero external CDNs), responsive at 1920×1080 and 375×812, with zero console errors in the built output.
+
+One inherent limitation: `output/index.html` is a single self-contained file, so a hard server reload of a directory path like `/about/` depends on server-side rewrites; in-app path-based routing and direct entry at `index.html` both work correctly.
+
+Note: the `/_404.html` reference page's own console logged a 404 for a missing cookie-consent stylesheet — that's the reference's error, not mine; my output produces no console errors.

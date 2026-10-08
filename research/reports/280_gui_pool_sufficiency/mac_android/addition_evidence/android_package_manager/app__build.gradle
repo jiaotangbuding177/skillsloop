@@ -1,0 +1,92 @@
+plugins {
+    alias(libs.plugins.androidApplication)
+}
+
+def keystoreFile = rootProject.file("app/sp.jks")
+
+android {
+
+    if (keystoreFile.exists()) {
+        signingConfigs {
+            release {
+                storeFile file("sp.jks")
+                storePassword "smartpack"
+                keyAlias "sp_key1"
+                keyPassword "smartpack"
+            }
+        }
+    }
+
+    namespace 'com.smartpack.packagemanager'
+    compileSdk 37
+
+    defaultConfig {
+        applicationId "com.smartpack.packagemanager"
+        minSdkVersion 24
+        targetSdk 37
+        versionCode 79
+        versionName "v7.9"
+        vectorDrawables.useSupportLibrary = true
+        testFunctionalTest = false
+        testHandleProfiling = false
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix '.debug'
+        }
+
+        release {
+            if (keystoreFile.exists()) {
+                signingConfig signingConfigs.release
+            }
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        viewBinding = true
+        buildConfig = true
+        aidl true
+    }
+
+    flavorDimensions.add("release")
+    productFlavors {
+        play {
+            dimension "release"
+        }
+        pro {
+            dimension "release"
+            applicationIdSuffix '.pro'
+        }
+        fdroid {
+            dimension "release"
+        }
+    }
+    lint {
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation libs.axml
+
+    implementation libs.documentfile
+
+    implementation libs.crashreporter
+    implementation libs.credits
+    implementation libs.installerutils
+    implementation libs.permissionutils
+    implementation libs.themeutils
+    implementation libs.translatorutils
+
+    implementation libs.core
+    implementation libs.material
+
+    implementation libs.api
+    implementation libs.provider
+
+    implementation libs.zip4j
+}

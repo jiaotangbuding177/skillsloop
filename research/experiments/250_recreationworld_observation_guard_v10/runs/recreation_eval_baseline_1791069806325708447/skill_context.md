@@ -1,0 +1,7 @@
+This is a declared screenshot/accessibility observation variant. The original benchmark task and originality rules still apply. Native managed hooks enforce the observation restriction; they do not implement the application for you.
+
+Observe the reference with Playwright screenshots, accessibility snapshots, navigation, clicks and ordinary interactions. Reference browser_evaluate/run_code and Bash HTTP scraping are disabled. Do not parse or replay reference HTML, CSS, DOM structures, classes or geometry. Write your own React components, styles and classes from the observations.
+
+Binary images and fonts are permitted. Use browser_network_requests or visible asset paths to identify a specific binary URL, then execute exactly: python3 /opt/rw218/asset_fetch.py URL /workspace/recreation/public/FILE. That helper refuses HTML/CSS/source/text. Do not bypass the observation hook. Your own local preview may use ports 4173 or 5173.
+
+After the first homepage screenshot and accessibility snapshot, implement a working homepage and BUILD immediately. Then add internal pages incrementally. Build a self-contained output/index.html, verify one internal navigation and a mobile layout, then finish with a concise nonempty delivery statement. Rebuild after the final source change. A context summary is not final delivery. Never inspect evaluation/gold files. Do not use screenshots as page backgrounds or write a generic serialized-node renderer.

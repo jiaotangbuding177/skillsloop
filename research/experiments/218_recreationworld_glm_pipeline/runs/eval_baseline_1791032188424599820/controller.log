@@ -1,0 +1,179 @@
+[mockweb] === RecreationBench Web Evaluation ===
+[mockweb] domain=corravale.example scaffold=claude-code browser_mcp=playwright allow_image_read=true enhanced_prompt=false replicate_all_pages=false
+[mockweb] Phase 1: Materialising frozen unified instance...
+[mockweb]   unified instance ← released/web/corravale.example
+[mockweb]   materialised: {"domain": "corravale.example", "task_json": true, "site_meta": true, "site": 386, "specs": 8, "eval_config": true, "needs_gt": false, "notes": [], "kit_placed": 1, "gt_dom": 40, "gt_layout": 60, "vlm_assertions": true, "vlm_views": 40, "vlm_items": 981}
+[mockweb]   repacked unified dataset → /var/lib/mockweb-scorer/corravale.example.tar.gz
+[mockweb]   reclaimed 57 MiB of unified staging
+[mockweb]   disk: overlay        1007G   73G  883G   8% /
+[mockweb]   Extracted agent-visible tree to /workspace/dataset/corravale.example (evaluation/ withheld)
+[mockweb] Phase 1.4: validating the prepared RecreationBench runtime...
+[mockweb]   web code: /workspace/RecreationBench/scripts/web (25 py files)
+[mockweb] Phase 3: Running rollout + evaluation...
+[mockweb]   VLM judge DISABLED (default) — visual dim scored via SSIM/LPIPS
+[mockweb] Phase 3: Evaluating frozen reference candidate...
+2026-10-03 12:56:35,040 INFO VLM judge runtime override applied: enabled=False model=None backend=None
+2026-10-03 12:56:35,143 INFO Server started at http://localhost:35263 serving /workspace/dataset/corravale.example/site
+2026-10-03 13:02:14,770 INFO Server stopped on port 35263
+2026-10-03 13:02:17,464 INFO Server started at http://localhost:37441 serving /workspace/dataset/corravale.example/site
+2026-10-03 13:02:31,985 INFO Dimension functional [scripted]: 140/140 passed (100.0%)
+2026-10-03 13:03:10,432 INFO Dimension functional [agent_gen]: 88/89 passed (98.9%)
+2026-10-03 13:03:10,433 INFO Dimension functional: 228/229 passed (99.6%)
+2026-10-03 13:03:20,450 INFO Dimension structural [scripted]: 61/61 passed (100.0%)
+2026-10-03 13:03:42,221 INFO Dimension structural [agent_gen]: 26/26 passed (100.0%)
+2026-10-03 13:03:42,221 INFO Dimension structural: 87/87 passed (100.0%)
+2026-10-03 13:04:02,583 INFO Dimension quality [scripted]: 56/76 passed (73.7%)
+2026-10-03 13:04:21,241 INFO Dimension quality [agent_gen]: 26/26 passed (100.0%)
+2026-10-03 13:04:21,242 INFO Dimension quality: 82/102 passed (80.4%)
+2026-10-03 13:04:21,244 INFO Server stopped on port 37441
+2026-10-03 13:04:21,308 WARNING egress scan found no agent trajectory log to scan
+2026-10-03 13:04:21,408 INFO originality high-overlap signal recorded (monitoring-only)
+2026-10-03 13:04:21,411 INFO Evaluation complete for mockweb_corravale_example: final_score=0.4987
+[mockweb] Phase 4: Writing metrics.json...
+{
+  "eval_target": "reference",
+  "task_score": 0.4987,
+  "passed": false,
+  "metrics": {
+    "status": "success",
+    "eval_target": "reference",
+    "final_score": 0.4987,
+    "domain": "corravale.example",
+    "task_id": "mockweb_corravale_example",
+    "difficulty": null,
+    "model": "GLM-5.3-Flash",
+    "scaffold": "claude-code",
+    "scores": {
+      "final_score": 0.4987,
+      "test_score": 0.4987,
+      "breakdown": {
+        "functional": 0.9975,
+        "visual": 0.0,
+        "structural": 1.0,
+        "quality": 0.889
+      },
+      "weights": {
+        "functional": 0.5,
+        "visual": 0.5,
+        "structural": 0.0,
+        "quality": 0.0
+      },
+      "dimension_details": {
+        "functional": {
+          "pass_rate": 0.9974989578991247,
+          "method": "tier_weighted",
+          "total": 229,
+          "passed": 228,
+          "failed": 1,
+          "continuous": false
+        },
+        "visual": {
+          "pass_rate": 0.0,
+          "method": "ssim",
+          "total": 20,
+          "passed": 0,
+          "failed": 20,
+          "continuous": true
+        },
+        "structural": {
+          "pass_rate": 1.0,
+          "method": "dom_similarity",
+          "total": 20,
+          "passed": 20,
+          "failed": 0,
+          "continuous": true
+        },
+        "quality": {
+          "pass_rate": 0.8890486274509803,
+          "method": "qs_continuous",
+          "total": 20,
+          "passed": 20,
+          "failed": 0,
+          "continuous": true
+        }
+      },
+      "has_compile_errors": false,
+      "vlm_score": null,
+      "vlm_enabled": false,
+      "vlm_mode": "assertion",
+      "visual_ssim_score": 0.0,
+      "functional_subscores": {
+        "scripted/functional": {
+          "pass_rate": 1.0,
+          "weighted": 1.0,
+          "total": 140,
+          "passed": 140,
+          "failed": 0
+        },
+        "agent_gen/functional_interaction": {
+          "pass_rate": 1.0,
+          "weighted": 1.0,
+          "total": 61,
+          "passed": 61,
+          "failed": 0
+        },
+        "agent_gen/functional": {
+          "pass_rate": 0.9643,
+          "weighted": 0.9643,
+          "total": 28,
+          "passed": 27,
+          "failed": 1
+        }
+      }
+    },
+    "anti_cheat": null,
+    "submitted": true,
+    "no_submission_reason": null,
+    "rollout": {},
+    "api_error": null,
+    "build_result": {
+      "status": "not_applicable",
+      "candidate": "reference"
+    },
+    "eval_error": null
+  }
+}
+[mockweb] Diag: SHARED_DIR=/workspace/shared
+ls: cannot access '/workspace/shared': No such file or directory
+[mockweb] No proxy pair-log dir at /workspace/shared/logs/claudecode
+[mockweb] Done. Output dir contents:
+total 20
+drwxrwxrwx 1 ubuntu ubuntu 4096 Oct  3 13:04 .
+drwxr-xr-x 1 root   root   4096 Oct  3 12:56 ..
+-rwxrwxrwx 1 ubuntu ubuntu 5438 Oct  3 13:04 controller.log
+drwxrwxrwx 1 ubuntu ubuntu 4096 Oct  3 13:04 eval_results
+-rwxrwxrwx 1 ubuntu ubuntu 2493 Oct  3 13:04 metrics.json
+-rwxrwxrwx 1 ubuntu ubuntu 2046 Oct  3 13:04 run.json
+{
+  "task_id": "corravale.example",
+  "model": "GLM-5.3-Flash",
+  "sandbox_id": null,
+  "sandbox_ip": null,
+  "pipeline_exit_code": 0,
+  "stage": "eval",
+  "task_score": 0.4987,
+  "program_score": 0.9975,
+  "vlm_score": null,
+  "scoring_eval": null,
+  "passed": true,
+  "stage_eval": "succeeded",
+  "prog_vlm_avg": 0.9975,
+  "score_passed": false,
+  "platform": "web",
+  "native_exit_code": 0,
+  "stage_outcomes": {
+    "eval": {
+      "status": "pass",
+      "outcome_class": "completed",
+      "reason_code": "completed",
+      "native_exit_code": null,
+      "result_complete": true,
+      "retryable": false
+    }
+  },
+  "outcome_class": "completed",
+  "reason_code": "completed",
+  "result_complete": true,
+  "retryable": false,
+  "process_exit_code": 0
+}

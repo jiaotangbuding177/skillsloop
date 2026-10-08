@@ -1,0 +1,143 @@
+[mockweb] === RecreationBench Web Evaluation ===
+[mockweb] domain=minipaint.training scaffold=claude-code browser_mcp=playwright allow_image_read=true enhanced_prompt=false replicate_all_pages=false
+[mockweb] Phase 1: Materialising frozen unified instance...
+[mockweb]   unified instance ← released/web/minipaint.training
+[mockweb]   materialised: {"domain": "minipaint.training", "task_json": true, "site_meta": true, "site": 52, "specs": 1, "eval_config": true, "needs_gt": false, "notes": [], "gt_dom": 2, "gt_layout": 3, "gt_regions": 2, "gt_screenshots": 3}
+[mockweb]   repacked unified dataset → /var/lib/mockweb-scorer/minipaint.training.tar.gz
+[mockweb]   reclaimed 10 MiB of unified staging
+[mockweb]   disk: overlay        1007G   68G  889G   8% /
+[mockweb]   Extracted agent-visible tree to /workspace/dataset/minipaint.training (evaluation/ withheld)
+[mockweb] Phase 1.4: validating the prepared RecreationBench runtime...
+[mockweb]   web code: /workspace/RecreationBench/scripts/web (25 py files)
+[mockweb]   installing template dependencies from rb lock 6a59ae7d8857...
+
+added 95 packages in 3s
+[mockweb]   template dependencies ready: lock=6a59ae7d8857 source=rb-bootstrap
+MCP package ready: @playwright/mcp@0.0.79 (/usr/local/bin/playwright-mcp)
+[mockweb] Phase 2: Configuring claude-code...
+[mockweb]   claude-code → http://127.0.0.1:8788 (prepared endpoint)
+[mockweb]   compaction: window=Claude default, pct=Claude default (80%), max_output=128000
+2.1.177 (Claude Code)
+[mockweb] Phase 3: Running rollout + evaluation...
+[mockweb]   VLM judge DISABLED (default) — visual dim scored via SSIM/LPIPS
+[mockweb]   Reference isolation ON — agent=non-root uid 1002; /workspace/dataset + tarball + evaluation/ root-0700 (HTTP-only reference)
+2026-10-04 13:47:32,542 INFO Server started at http://localhost:44433 serving /workspace/dataset/minipaint.training/site
+2026-10-04 13:47:32,545 INFO Wrote shared workspace settings (MCP=playwright, BASE_URL=http://127.0.0.1:8788, MODEL=claude-opus-4-8, allow_image_read=True)
+2026-10-04 13:47:32,553 INFO Agent Claude state write probe passed: /home/agent/.claude/session-env
+2026-10-04 13:47:32,553 INFO Wrote MCP config for playwright to /home/agent/.claude/mcp.json (allow_image_read=True)
+2026-10-04 13:47:32,553 INFO Playwright MCP will use bundled Chromium at /ms-playwright/chromium-1223/chrome-linux64/chrome
+2026-10-04 13:47:33,845 INFO Strict playwright reference MCP preflight passed: url=http://localhost:44433 snapshot_chars=5938 screenshot_bytes=54422
+2026-10-04 13:47:33,872 INFO relay up: /tmp/mockweb-relays/ANTHROPIC_BASE_URL-8788.sock -> 127.0.0.1:8788
+2026-10-04 13:47:33,873 INFO relay up: /tmp/mockweb-relays/reference-site-44433.sock -> 127.0.0.1:44433
+2026-10-04 13:47:33,873 INFO network isolation ON (claude-code scaffold, netns route (CAP_SYS_ADMIN)): namespace has no egress; relayed ANTHROPIC_BASE_URL:8788, reference-site:44433
+2026-10-04 14:20:43,230 INFO collected 2 session transcript(s) -> /workspace/recreation/sessions
+2026-10-04 14:20:43,302 INFO build runs with no network at all (isolated netns route (CAP_SYS_ADMIN), no relays)
+2026-10-04 14:20:44,997 INFO Server stopped on port 44433
+2026-10-04 14:20:45,024 INFO Skipping evaluation for minipaint.training (--skip-eval)
+[mockweb] Phase 3b: Extracting evaluation/ for scorer...
+2026-10-04 14:20:45,257 INFO Server started at http://localhost:34419 serving /workspace/dataset/minipaint.training/site
+2026-10-04 14:20:45,283 INFO build runs with no network at all (isolated netns route (CAP_SYS_ADMIN), no relays)
+2026-10-04 14:20:46,951 INFO Server stopped on port 34419
+2026-10-04 14:20:46,994 INFO VLM judge runtime override applied: enabled=False model=None backend=None
+2026-10-04 14:20:47,115 INFO Server started at http://localhost:45613 serving /workspace/recreation/output
+2026-10-04 14:21:21,598 INFO Server stopped on port 45613
+/usr/local/lib/python3.12/dist-packages/torchvision/models/_utils.py:207: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/usr/local/lib/python3.12/dist-packages/torchvision/models/_utils.py:222: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+  0%|          | 0.00/233M [00:00<?, ?B/s]  0%|          | 128k/233M [00:00<05:03, 806kB/s]  0%|          | 384k/233M [00:00<02:28, 1.64MB/s]  0%|          | 1.00M/233M [00:00<01:08, 3.53MB/s]  1%|          | 2.50M/233M [00:00<00:30, 7.83MB/s]  3%|▎         | 6.50M/233M [00:00<00:12, 19.2MB/s]  5%|▌         | 12.2M/233M [00:00<00:07, 31.6MB/s]  8%|▊         | 18.1M/233M [00:00<00:05, 40.6MB/s] 10%|█         | 23.5M/233M [00:00<00:04, 44.4MB/s] 12%|█▏        | 29.0M/233M [00:00<00:04, 47.3MB/s] 15%|█▍        | 34.4M/233M [00:01<00:04, 49.4MB/s] 17%|█▋        | 39.6M/233M [00:01<00:03, 51.0MB/s] 19%|█▉        | 44.9M/233M [00:01<00:03, 51.2MB/s] 21%|██▏       | 50.0M/233M [00:01<00:03, 51.4MB/s] 24%|██▍       | 55.5M/233M [00:01<00:03, 52.2MB/s] 26%|██▋       | 61.5M/233M [00:01<00:03, 55.2MB/s] 29%|██▊       | 66.9M/233M [00:01<00:03, 54.4MB/s] 31%|███       | 72.5M/233M [00:01<00:03, 55.6MB/s] 33%|███▎      | 77.9M/233M [00:01<00:02, 54.6MB/s] 36%|███▌      | 83.5M/233M [00:02<00:02, 55.6MB/s] 38%|███▊      | 88.9M/233M [00:02<00:02, 55.3MB/s] 40%|████      | 94.2M/233M [00:02<00:02, 49.3MB/s] 43%|████▎     | 99.9M/233M [00:02<00:02, 51.8MB/s] 45%|████▌     | 105M/233M [00:02<00:02, 51.1MB/s]  48%|████▊     | 111M/233M [00:02<00:02, 53.8MB/s] 50%|████▉     | 116M/233M [00:02<00:02, 53.2MB/s] 52%|█████▏    | 121M/233M [00:02<00:02, 51.1MB/s] 54%|█████▍    | 126M/233M [00:02<00:02, 51.1MB/s] 56%|█████▋    | 132M/233M [00:03<00:02, 51.7MB/s] 59%|█████▊    | 136M/233M [00:03<00:01, 51.4MB/s] 61%|██████    | 142M/233M [00:03<00:01, 51.9MB/s] 63%|██████▎   | 147M/233M [00:03<00:01, 52.6MB/s] 65%|██████▌   | 153M/233M [00:03<00:01, 54.6MB/s] 68%|██████▊   | 158M/233M [00:03<00:01, 53.5MB/s] 70%|███████   | 163M/233M [00:03<00:01, 52.2MB/s] 72%|███████▏  | 168M/233M [00:03<00:01, 52.6MB/s] 75%|███████▍  | 174M/233M [00:03<00:01, 53.1MB/s] 77%|███████▋  | 179M/233M [00:03<00:01, 51.4MB/s] 79%|███████▉  | 184M/233M [00:04<00:00, 53.2MB/s] 81%|████████▏ | 190M/233M [00:04<00:00, 52.9MB/s] 83%|████████▎ | 195M/233M [00:04<00:00, 49.1MB/s] 86%|████████▌ | 200M/233M [00:04<00:00, 51.4MB/s] 88%|████████▊ | 205M/233M [00:04<00:00, 50.9MB/s] 90%|█████████ | 211M/233M [00:04<00:00, 52.7MB/s] 93%|█████████▎| 216M/233M [00:04<00:00, 53.5MB/s] 95%|█████████▌| 222M/233M [00:04<00:00, 53.3MB/s] 97%|█████████▋| 227M/233M [00:04<00:00, 52.4MB/s]100%|█████████▉| 232M/233M [00:05<00:00, 53.5MB/s]100%|██████████| 233M/233M [00:05<00:00, 48.5MB/s]
+2026-10-04 14:21:33,650 INFO LPIPS(alex) loaded for visual scoring
+2026-10-04 14:21:36,513 INFO Server started at http://localhost:34749 serving /workspace/recreation/output
+2026-10-04 14:21:49,873 INFO Dimension functional [scripted]: 3/6 passed (50.0%)
+2026-10-04 14:21:49,873 INFO Dimension functional: 3/6 passed (50.0%)
+2026-10-04 14:21:49,877 INFO Server stopped on port 34749
+2026-10-04 14:21:51,294 INFO Evaluation complete for minipaint.training: final_score=0.3394
+[mockweb] Phase 4: Writing metrics.json...
+[mockweb] ERROR: failed to parse run.json: Expecting value: line 1 column 1 (char 0)
+{
+  "eval_target": "recreation",
+  "task_score": 0.0,
+  "passed": false,
+  "metrics": {
+    "status": "unknown",
+    "eval_target": "recreation",
+    "final_score": 0.0,
+    "domain": null,
+    "task_id": null,
+    "difficulty": null,
+    "model": null,
+    "scaffold": "claude-code",
+    "scores": {},
+    "anti_cheat": null,
+    "submitted": null,
+    "no_submission_reason": null,
+    "rollout": {},
+    "api_error": null,
+    "build_result": {},
+    "eval_error": null
+  }
+}
+[recreation] manifest -> /workspace/recreation/recreation_manifest.json
+[mockweb] Phase 5: Removing bulky build artifacts from workspace...
+[mockweb]   recreation artifact staged: /results/recreation
+[trajectory] surfaced 3 file(s) from /results/recreation -> /results
+[mockweb] Diag: SHARED_DIR=/workspace/shared
+total 16
+drwxr-xr-x 3 root root 4096 Oct  4 13:47 .
+drwxr-xr-x 1 user user 4096 Oct  4 14:20 ..
+drwxr-xr-x 3 root root 4096 Oct  4 13:47 mockweb-template-deps
+[mockweb] No proxy pair-log dir at /workspace/shared/logs/claudecode
+[mockweb] Done. Output dir contents:
+total 11556
+drwxrwxrwx 1 ubuntu ubuntu     4096 Oct  4 14:22 .
+drwxr-xr-x 1 root   root       4096 Oct  4 14:21 ..
+-rwxrwxrwx 1 ubuntu ubuntu     9183 Oct  4 14:22 controller.log
+-rwxrwxrwx 1 ubuntu ubuntu      478 Oct  4 14:21 metrics.json
+-rwxrwxrwx 1 ubuntu ubuntu    18406 Oct  4 14:20 model_proxy.log
+drwxrwxrwx 1 ubuntu ubuntu     4096 Oct  4 14:21 recreation
+-rwxrwxrwx 1 ubuntu ubuntu     1850 Oct  4 14:21 run.json
+-rwxrwxrwx 1 ubuntu ubuntu      657 Oct  4 14:20 run_agent_only.json
+drwxrwxrwx 1 ubuntu ubuntu     4096 Oct  4 14:22 sessions
+-rwxrwxrwx 1 ubuntu ubuntu 11775343 Oct  4 14:20 trajectory.jsonl
+{
+  "task_id": "minipaint.training",
+  "model": "deepseek-v4-flash-vision-exp",
+  "sandbox_id": null,
+  "sandbox_ip": null,
+  "pipeline_exit_code": 0,
+  "stage": "recreation_eval",
+  "task_score": 0.0,
+  "program_score": 0.0,
+  "vlm_score": null,
+  "scoring_eval": null,
+  "passed": true,
+  "stage_recreation": "succeeded",
+  "stage_eval": "succeeded",
+  "prog_vlm_avg": 0.0,
+  "score_passed": false,
+  "platform": "web",
+  "native_exit_code": 0,
+  "stage_outcomes": {
+    "recreation": {
+      "status": "pass",
+      "outcome_class": "completed",
+      "reason_code": "completed",
+      "native_exit_code": null,
+      "result_complete": true,
+      "retryable": false
+    },
+    "eval": {
+      "status": "pass",
+      "outcome_class": "completed",
+      "reason_code": "completed",
+      "native_exit_code": null,
+      "result_complete": true,
+      "retryable": false
+    }
+  },
+  "outcome_class": "completed",
+  "reason_code": "completed",
+  "result_complete": true,
+  "retryable": false,
+  "process_exit_code": 0
+}

@@ -1,0 +1,119 @@
+{
+  "scope": "Public documentation and fixed source acquisition candidates only; no build, GUI, model, learning or scoring runs",
+  "selected_candidates": [
+    {
+      "id": "macos_today",
+      "platform": "macos",
+      "name": "To-Day",
+      "repo": "https://github.com/trozware/To-Day",
+      "tag": "release-2.0",
+      "commit": "7d98f4ca02d630474cab88233b2d80b476ba6ca1",
+      "license": "MIT",
+      "license_evidence": "addition_evidence/macos_today/LICENSE.md",
+      "build_evidence": {
+        "official_readme": "SwiftUI macOS 13+ menu-bar checklist; local add/edit/move/complete, title/date sorting and completed visibility.",
+        "fixed_source": "Today.xcodeproj declares deployment targets 13.0 and 13.1; source uses a Sparkle package version range beginning at 2.0.0. README documents archive/notarization/update distribution, not a complete reproducible build command.",
+        "runtime_expected": "Local checklist core needs no account; Sparkle updater/network features are excluded from proposed tasks. No timer is claimed.",
+        "executed": false,
+        "limitations": ["Xcode/Swift packages and bundle signing remain unverified.", "README acknowledges missing VoiceOver menu text; AX and coordinate interaction must be admitted on a real macOS host.", "Todo state persistence, reset and backend storage must be observed before any task is frozen."]
+      },
+      "workflows": [
+        {"sequence": ["Observe three synthetic todo items in the menu and editor, including add/edit/move and completion transitions.", "Independently recreate the observed menu/editor state machine without reading implementation or any benchmark tests.", "Selfcheck item text, ordering and complete/incomplete state after reopening."], "validator_expected": ["Controlled item set and exact ordering", "Completed state persists and can be reversed", "Editor and menu agree"], "evidence": "Pinned README lines 3-9; future reference observation required."},
+        {"sequence": ["Observe sorting by title versus creation time and the display/hide/delete completed settings.", "Recreate the menu changes from controlled item fixtures.", "Verify expected list membership and order across settings changes and confirmation cancellation."], "validator_expected": ["Title/date order", "Hide leaves data recoverable", "Deletion affects only the intended completed items"], "evidence": "Pinned README sorting and visibility features; not an existing official validator."}
+      ],
+      "skill_expectation": ["Inspect menu-bar UI and editor as coupled views of persistent state", "Disentangle filtering, sorting and destructive state changes", "Use local fixtures and reopen checks"],
+      "bench_correspondence": [{"task_id": "macos/onix-systems-osx-status-bar-todo", "capability": "Native menu-bar task list state", "rationale_inference": true}, {"task_id": "macos/dongdongbh-mindwtr", "capability": "Task CRUD/completion and ordering, not the complete GTD backend", "rationale_inference": true}, {"task_id": "macos/shabang-systems-condution", "capability": "List form state only, not project scheduling", "rationale_inference": true}],
+      "source_isolation": {"aliases": [], "known_upstream": ["https://github.com/sparkle-project/Sparkle"], "manual_evidence": "README presents an independently authored SwiftUI checklist; Sparkle is an updater dependency, not the product family.", "family_risk": "Full dependency and code-similarity isolation are not proven by repository identity checks.", "full_code_audit_pending": true, "identity_audit_file": "source_identity_audit.json"},
+      "references": ["https://github.com/trozware/To-Day/releases/tag/release-2.0", "https://github.com/trozware/To-Day/tree/7d98f4ca02d630474cab88233b2d80b476ba6ca1"],
+      "skill_expectation_is_hypothesis": true,
+      "download_size": "Use root 280 source-acquisition manifest for actual archive/file bytes; documentation only acquired by this subagent."
+    },
+    {
+      "id": "android_opencalc",
+      "platform": "android",
+      "name": "OpenCalc",
+      "repo": "https://github.com/clementwzk/OpenCalc",
+      "tag": "v3.2.1",
+      "commit": "e80aef9452992ce46b3931edd562cae567bb7a6f",
+      "license": "GPL-3.0",
+      "license_evidence": "addition_evidence/android_opencalc/LICENSE",
+      "build_evidence": {
+        "official_readme": "Android calculator with scientific mode, history, portrait/landscape and quick-settings entry. README lists Android 5+.",
+        "fixed_source": "app/build.gradle.kts declares compile/target SDK 35 and min SDK 21. Java/Kotlin targets 1.8. The v3.2.1 source tag declares versionName 3.2.0, a retained release-label discrepancy. No claimed official CLI build recipe; Android Gradle project import is a source-side build inference.",
+        "runtime_expected": "Offline arithmetic uses local inputs and no application account. Manifest/merged-permission and scientific-mode semantics still require admission.",
+        "executed": false,
+        "limitations": ["SDK 35, Gradle plugins and Android dependencies are not built or locked here.", "No unit conversion capability is claimed; CalcYou unit-converter behavior remains unknown.", "UiAutomator selectors, numeric precision, invalid expressions, DEG/RAD semantics and history persistence must be observed."]
+      },
+      "workflows": [
+        {"sequence": ["Observe controlled arithmetic expressions, precedence, backspace/clear and result/history transitions.", "Independently implement the observed numeric UI behavior with an explicit state model.", "Selfcheck exact known inputs, result display, invalid-input handling and replayed history."], "validator_expected": ["Known arithmetic outputs", "Editing changes the intended expression", "History replay preserves input/result relationship"], "evidence": "Pinned README scientific/history features; exact parser behavior requires public UI observation."},
+        {"sequence": ["Observe portrait/landscape and scientific panel state, using only controls actually present in the fixed app.", "Independently recreate panel switching and a small set of observed scientific functions.", "Check that switching views does not silently reset the expression and that controlled numeric results agree."], "validator_expected": ["Stable expression across orientation/panel changes", "Observed scientific results", "Consistent theme/history state"], "evidence": "Pinned README orientation/scientific features; DEG/RAD is conditional on observed controls."}
+      ],
+      "skill_expectation": ["Probe input-output contracts separately from button appearance", "Maintain expression, edit and history states coherently", "Use controlled numeric oracles and edge cases"],
+      "bench_correspondence": [{"task_id": "android/woheller69-arity", "capability": "Scientific calculator expression/result interaction; graphing remains unknown", "rationale_inference": true}, {"task_id": "android/you-apps-calcyou", "capability": "Calculator input/output; unit conversion remains unknown", "rationale_inference": true}],
+      "source_isolation": {"aliases": ["https://github.com/Darkempire78/OpenCalc"], "known_upstream": [], "manual_evidence": "Canonical owner redirect treated as an alias. Current source is not identified as an Arity/CalcYou product fork; common Android libraries do not establish family independence.", "family_risk": "Parser/dependency and code-copy provenance must be reviewed before strict family-isolated evaluation.", "full_code_audit_pending": true, "identity_audit_file": "source_identity_audit.json"},
+      "references": ["https://github.com/clementwzk/OpenCalc/releases/tag/v3.2.1", "https://github.com/clementwzk/OpenCalc/tree/e80aef9452992ce46b3931edd562cae567bb7a6f"],
+      "skill_expectation_is_hypothesis": true,
+      "download_size": "Official README's approximately 2 MB APK is a product description, not the actual downloaded source size. Use root acquisition manifest."
+    },
+    {
+      "id": "android_shattered_pixel_dungeon",
+      "platform": "android",
+      "additional_platforms": ["macos", "ubuntu", "windows"],
+      "name": "Shattered Pixel Dungeon",
+      "repo": "https://github.com/00-Evan/shattered-pixel-dungeon",
+      "tag": "v4.0.1",
+      "commit": "e9defd0444c96d2fce3de5ec297c3398be8b7c55",
+      "license": "GPL-3.0",
+      "license_evidence": "addition_evidence/android_shattered_pixel_dungeon/LICENSE.txt",
+      "build_evidence": {
+        "official_readme": "Roguelike with randomized levels/items; official source supports Android and desktop.",
+        "fixed_source": "Pinned desktop guide explicitly documents ./gradlew desktop:debug and ./gradlew desktop:release. Android guide documents Android Studio import/build. Root Gradle uses AGP 9.2.0, SDK 36 compile/target, min SDK 21, Java source compatibility 11 and LibGDX 1.14.0; actual Gradle runtime JDK compatibility must be resolved from pinned toolchain.",
+        "runtime_expected": "Local game/menu core needs no account; platform stores, news and update links excluded. macOS desktop JAR/app is possible per official guide, but is not an AppKit-native AX claim.",
+        "executed": false,
+        "limitations": ["AGP 9.2/Gradle/JDK/SDK 36 and native LibGDX dependencies remain a build risk.", "Randomized levels require reset/replay admission; no deterministic gameplay, complete-game success or RNG-control patch is assumed.", "Canvas AX/UiAutomator tree may be sparse; screenshots/coordinates and macOS graphics availability need runtime checks.", "No audio transport, countdown timer, scientific plotting, Minesweeper or Go-rule fidelity is inferred from this game."]
+      },
+      "workflows": [
+        {"sequence": ["Observe opening menu, new-game/class selection and bounded help/settings overlays on a reset reference.", "Independently recreate these menu and overlay transitions without copying source.", "Verify selected state, back/cancel paths and restored screen after closing overlays."], "validator_expected": ["Menu selection state", "Overlay back/cancel transition", "Settings state consistency"], "evidence": "Official game purpose/platform docs; particular controls must first be publicly observed."},
+        {"sequence": ["Observe a short local turn sequence and visible inventory/item/use states, avoiding a full campaign objective.", "Build an independent bounded recreation of the observed rule/state transitions.", "Replay the observed initial state and compare movement, inventory and visible counters; distinguish seed-dependent outcomes."], "validator_expected": ["Bounded observed turn effects", "Inventory state consistency", "Explicitly documented reset/seed dependence"], "evidence": "Pinned README documents roguelike levels/items; precise mechanics and replay contract remain future observation work."}
+      ],
+      "skill_expectation": ["Discover rules through controlled action/observation pairs", "Represent game state separately from canvas rendering", "Validate deterministic parts and disclose stochastic outcomes"],
+      "bench_correspondence": [{"task_id": "android/tristinbaker-idlefantasy", "capability": "RPG menu/inventory/progression state, not identical game mechanics", "rationale_inference": true}, {"task_id": "android/chrisboyle-sgtpuzzles", "capability": "Bounded game-rule probes and reset behavior, not puzzle rules", "rationale_inference": true}, {"task_id": "macos/kaya-go-kaya", "capability": "Desktop game board/action/state separation, not Go rules", "rationale_inference": true}],
+      "source_isolation": {"aliases": [], "known_upstream": ["https://github.com/00-Evan/pixel-dungeon-gradle", "https://github.com/watabou/pixel-dungeon"], "manual_evidence": "Pinned README explicitly derives from Pixel Dungeon. Both upstream identities are included in the full native/web audit.", "family_risk": "Derivative game family is known and retained; no exact matching benchmark identity is insufficient to rule out copied dependencies/assets.", "full_code_audit_pending": true, "identity_audit_file": "source_identity_audit.json"},
+      "references": ["https://github.com/00-Evan/shattered-pixel-dungeon/releases/tag/v4.0.1", "https://github.com/00-Evan/shattered-pixel-dungeon/tree/e9defd0444c96d2fce3de5ec297c3398be8b7c55", "https://github.com/00-Evan/shattered-pixel-dungeon/blob/e9defd0444c96d2fce3de5ec297c3398be8b7c55/docs/getting-started-desktop.md"],
+      "skill_expectation_is_hypothesis": true,
+      "download_size": "Root acquisition manifest records actual source bytes; no size estimate is substituted for an acquired archive."
+    },
+    {
+      "id": "android_package_manager",
+      "platform": "android",
+      "name": "Package Manager",
+      "repo": "https://github.com/SmartPack/PackageManager",
+      "tag": "v7.0",
+      "commit": "f13008b9204ce916fc9773b8ae52376db585457b",
+      "license": "GPL-3.0-or-later",
+      "license_evidence": "addition_evidence/android_package_manager_v7/LICENSE and README.md lines 74-81",
+      "build_evidence": {
+        "official_readme": "System/user app listing and details include package name, paths, granted/denied permissions, activities, dates, certificates and manifests. Root access is required only for some advanced features.",
+        "fixed_source": "v7.0 app Gradle uses compile/target SDK 33, min SDK 23, build tools 30.0.3; root AGP 7.3.1 with Maven/JitPack dependencies. F-Droid flavor exists and avoids the Play billing dependency. README does not provide a complete CLI recipe; Gradle flavor build is a source-side inference.",
+        "runtime_expected": "Use read-only listing/detail workflows on an isolated emulator with controlled installed fixtures. No root, adb privilege escalation, uninstall, install, enable/disable or debloating task is authorized.",
+        "executed": false,
+        "limitations": ["v7.9 initial candidate rejected for SDK 37 and retained independently; v7.0 replaces it without editing a frozen experiment.", "Old AGP/JDK/Gradle compatibility and JitPack availability remain unverified.", "Manifest requests package-query/install/delete/superuser permissions; tasks and harness must stay within read-only app/permission inspection.", "Package visibility and OS version alter reported details; fixtures and expected values require admission."]
+      },
+      "workflows": [
+        {"sequence": ["Observe user/system/all list filters and a controlled fixture's detail page.", "Independently recreate list/filter/navigation state using synthetic package metadata.", "Check list membership, package identity and back navigation against the controlled fixture."], "validator_expected": ["Correct filtered list membership", "Detail identity agrees with selected item", "Read-only navigation does not mutate installed applications"], "evidence": "Pinned README lines 25-35; exact controls must be publicly observed."},
+        {"sequence": ["Observe granted/denied permission and manifest/activity panels for a synthetic fixture app.", "Independently implement the observed detail views with an explicit permission state model.", "Verify displayed permission classification and stability across view switching, without granting or revoking permissions."], "validator_expected": ["Granted/denied classification", "Fixture manifest metadata", "No mutation of app installation or permission state"], "evidence": "Pinned README permission/manifest features; no official evaluator is inspected."}
+      ],
+      "skill_expectation": ["Inspect OS-derived state through read-only GUI views", "Separate permission declaration from grant state", "Use deterministic local fixtures and avoid accidental system changes"],
+      "bench_correspondence": [{"task_id": "android/hamza417-inure", "capability": "Package list/detail and permission inspection", "rationale_inference": true}, {"task_id": "android/nitishgadangi-privacy-indicator-app", "capability": "Permission/system-state reasoning only; live privacy indicators remain unknown", "rationale_inference": true}, {"task_id": "android/rbn-apps-quick-tile-settings", "capability": "System-derived state distinction only; quick-tile operations remain unknown", "rationale_inference": true}],
+      "source_isolation": {"aliases": [], "known_upstream": ["https://github.com/Grarak/KernelAdiutor", "https://github.com/Aefyr/SAI", "https://github.com/nkalra0123/Split-APK-Installer", "https://github.com/topjohnwu/libsu", "https://github.com/sunilpaulmathew/sCommon", "https://github.com/apk-editor/aXML"], "manual_evidence": "Pinned Credits.md discloses borrowed Kernel Adiutor and split-APK installer code; dependencies and guessed canonical upstream repository identities require full provenance review. Only explicitly resolvable public repo URLs are compared mechanically.", "family_risk": "Shared or borrowed library code with benchmark applications may exist; read-only scope does not prove strict source isolation.", "full_code_audit_pending": true, "identity_audit_file": "source_identity_audit.json"},
+      "references": ["https://github.com/SmartPack/PackageManager/releases/tag/v7.0", "https://github.com/SmartPack/PackageManager/tree/f13008b9204ce916fc9773b8ae52376db585457b"],
+      "skill_expectation_is_hypothesis": true,
+      "download_size": "Use root acquisition manifest; rejected v7.9 documentation stays separate from the accepted v7.0 source pin."
+    }
+  ],
+  "runtime_ready_applications": 0,
+  "trajectories_generated": 0,
+  "skills_generated": 0,
+  "macpass_status": "279 history preserved; conditional reserve for 280, excluded from formal sufficiency because KeePass-family risk remains unresolved",
+  "all_expected_workflow_and_skill_transfer_claims_are_hypotheses": true
+}

@@ -1,0 +1,139 @@
+[mockweb] === RecreationBench Web Evaluation ===
+[mockweb] domain=corravale.example scaffold=claude-code browser_mcp=playwright allow_image_read=true enhanced_prompt=false replicate_all_pages=false
+[mockweb] Phase 1: Materialising frozen unified instance...
+[mockweb]   unified instance ← released/web/corravale.example
+[mockweb]   materialised: {"domain": "corravale.example", "task_json": true, "site_meta": true, "site": 386, "specs": 8, "eval_config": true, "needs_gt": false, "notes": [], "kit_placed": 1, "gt_dom": 40, "gt_layout": 60, "vlm_assertions": true, "vlm_views": 40, "vlm_items": 981}
+[mockweb]   repacked unified dataset → /var/lib/mockweb-scorer/corravale.example.tar.gz
+[mockweb]   reclaimed 57 MiB of unified staging
+[mockweb]   disk: overlay        1007G   41G  915G   5% /
+[mockweb]   Extracted agent-visible tree to /workspace/dataset/corravale.example (evaluation/ withheld)
+[mockweb] Phase 1.4: validating the prepared RecreationBench runtime...
+[mockweb]   web code: /workspace/RecreationBench/scripts/web (25 py files)
+[mockweb]   installing template dependencies from rb lock 6a59ae7d8857...
+
+added 95 packages in 4s
+[mockweb]   template dependencies ready: lock=6a59ae7d8857 source=rb-bootstrap
+MCP package ready: @playwright/mcp@0.0.79 (/usr/local/bin/playwright-mcp)
+[mockweb] Phase 2: Configuring claude-code...
+[mockweb]   claude-code → http://127.0.0.1:8789 (prepared endpoint)
+[mockweb]   compaction: window=Claude default, pct=Claude default (80%), max_output=128000
+2.1.177 (Claude Code)
+[mockweb] Phase 3: Running rollout + evaluation...
+[mockweb]   VLM judge DISABLED (default) — visual dim scored via SSIM/LPIPS
+[mockweb]   Reference isolation ON — agent=non-root uid 1002; /workspace/dataset + tarball + evaluation/ root-0700 (HTTP-only reference)
+2026-10-03 19:22:02,525 INFO Server started at http://localhost:42941 serving /workspace/dataset/corravale.example/site
+2026-10-03 19:22:02,528 INFO Wrote shared workspace settings (MCP=playwright, BASE_URL=http://127.0.0.1:8789, MODEL=claude-opus-4-8, allow_image_read=True)
+2026-10-03 19:22:02,534 INFO Agent Claude state write probe passed: /home/agent/.claude/session-env
+2026-10-03 19:22:02,534 INFO Wrote MCP config for playwright to /home/agent/.claude/mcp.json (allow_image_read=True)
+2026-10-03 19:22:02,534 INFO Playwright MCP will use bundled Chromium at /ms-playwright/chromium-1223/chrome-linux64/chrome
+2026-10-03 19:22:03,757 INFO Strict playwright reference MCP preflight passed: url=http://localhost:42941 snapshot_chars=24031 screenshot_bytes=854602
+2026-10-03 19:22:03,779 INFO relay up: /tmp/mockweb-relays/ANTHROPIC_BASE_URL-8789.sock -> 127.0.0.1:8789
+2026-10-03 19:22:03,779 INFO relay up: /tmp/mockweb-relays/reference-site-42941.sock -> 127.0.0.1:42941
+2026-10-03 19:22:03,779 INFO network isolation ON (claude-code scaffold, netns route (CAP_SYS_ADMIN)): namespace has no egress; relayed ANTHROPIC_BASE_URL:8789, reference-site:42941
+2026-10-03 20:24:06,413 INFO collected 2 session transcript(s) -> /workspace/recreation/sessions
+2026-10-03 20:24:06,512 INFO Server stopped on port 42941
+[mockweb] FATAL: recreation agent phase failed before producing a valid result (exit=2)
+[mockweb] Phase 4: Writing metrics.json...
+{
+  "eval_target": "recreation",
+  "task_score": 0.0,
+  "passed": false,
+  "metrics": {
+    "status": "api_error",
+    "eval_target": "recreation",
+    "final_score": 0.0,
+    "domain": "corravale.example",
+    "task_id": "mockweb_corravale_example",
+    "difficulty": null,
+    "model": "deepseek-v4-flash-vision-exp",
+    "scaffold": "claude-code",
+    "scores": {},
+    "anti_cheat": null,
+    "submitted": true,
+    "no_submission_reason": null,
+    "rollout": {
+      "status": "error",
+      "returncode": 2,
+      "output_length": 2941788,
+      "native_returncode": 1,
+      "agent_verdict": "infra_error",
+      "protocol_status": "error",
+      "api_error": "API Error: The socket connection was closed unexpectedly. For more information, pass `verbose: true` in the second argument to fetch()",
+      "sessions": 2,
+      "tool_use_screenshots": "/workspace/.recreation-tool-use-screenshots",
+      "net_isolation": "netns"
+    },
+    "api_error": "API Error: The socket connection was closed unexpectedly. For more information, pass `verbose: true` in the second argument to fetch()",
+    "build_result": {},
+    "eval_error": null
+  }
+}
+[recreation] WARN: manifest declares files that do not exist under /workspace/recreation: output/index.html
+[recreation] manifest -> /workspace/recreation/recreation_manifest.json
+[mockweb] Phase 5: Removing bulky build artifacts from workspace...
+[mockweb]   recreation artifact staged: /results/recreation
+[trajectory] surfaced 3 file(s) from /results/recreation -> /results
+[mockweb] Diag: SHARED_DIR=/workspace/shared
+total 16
+drwxr-xr-x 3 root root 4096 Oct  3 19:21 .
+drwxr-xr-x 1 user user 4096 Oct  3 20:24 ..
+drwxr-xr-x 3 root root 4096 Oct  3 19:21 mockweb-template-deps
+[mockweb] No proxy pair-log dir at /workspace/shared/logs/claudecode
+[mockweb] Done. Output dir contents:
+total 2932
+drwxrwxrwx 1 ubuntu ubuntu    4096 Oct  3 20:24 .
+drwxr-xr-x 1 root   root      4096 Oct  3 19:21 ..
+-rwxrwxrwx 1 ubuntu ubuntu    5082 Oct  3 20:24 controller.log
+-rwxrwxrwx 1 ubuntu ubuntu    1149 Oct  3 20:24 metrics.json
+-rwxrwxrwx 1 ubuntu ubuntu   19387 Oct  3 20:24 model_proxy.log
+drwxrwxrwx 1 ubuntu ubuntu    4096 Oct  3 20:24 recreation
+-rwxrwxrwx 1 ubuntu ubuntu     810 Oct  3 20:24 run.json
+-rwxrwxrwx 1 ubuntu ubuntu     810 Oct  3 20:24 run_agent_only.json
+drwxrwxrwx 1 ubuntu ubuntu    4096 Oct  3 20:24 sessions
+-rwxrwxrwx 1 ubuntu ubuntu     502 Oct  3 19:21 skill_context.md
+-rwxrwxrwx 1 ubuntu ubuntu 2941788 Oct  3 20:24 trajectory.jsonl
+{
+  "task_id": "corravale.example",
+  "model": "deepseek-v4-flash-vision-exp",
+  "sandbox_id": null,
+  "sandbox_ip": null,
+  "pipeline_exit_code": 2,
+  "stage": "recreation_eval",
+  "task_score": 0.0,
+  "program_score": 0.0,
+  "vlm_score": null,
+  "scoring_eval": null,
+  "passed": false,
+  "exit_code": "stage:recreation_failed",
+  "error": "recreation failed",
+  "exit_reason": "API Error: The socket connection was closed unexpectedly. For more information, pass `verbose: true` in the second argument to fetch()",
+  "stage_recreation": "failed",
+  "stage_eval": "failed",
+  "prog_vlm_avg": 0.0,
+  "score_passed": false,
+  "platform": "web",
+  "native_exit_code": 2,
+  "stage_outcomes": {
+    "recreation": {
+      "status": "error",
+      "outcome_class": "infra_error",
+      "reason_code": "model_api_exhausted",
+      "native_exit_code": 1,
+      "result_complete": false,
+      "retryable": true
+    },
+    "eval": {
+      "status": "not_run",
+      "outcome_class": "infra_error",
+      "reason_code": "upstream_stage_failed",
+      "native_exit_code": null,
+      "result_complete": false,
+      "retryable": true
+    }
+  },
+  "outcome_class": "infra_error",
+  "reason_code": "model_api_exhausted",
+  "result_complete": false,
+  "retryable": true,
+  "process_exit_code": 2
+}

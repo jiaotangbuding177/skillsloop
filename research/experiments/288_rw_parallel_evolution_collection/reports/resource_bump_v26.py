@@ -1,0 +1,9 @@
+import subprocess,json,time,hashlib
+from pathlib import Path
+root=Path(__file__).resolve().parents[1];name='rw288-squoosh_recreation_eval_1791129536850164583';j=json.loads(subprocess.check_output(['docker','inspect',name],text=True))[0]
+assert j['Id']=='eac7784b1f4fd2acb35b3705e204b0f86f84c2a66ee264c496a09ae376802ed4' and j['State']['Running'] and j['State']['OOMKilled']
+top=subprocess.check_output(['docker','top',name,'-eo','pid,args'],text=True);assert '/usr/local/bin/claude' in top
+path=root/'reports/external_resource_v26_manifest.json';assert not path.exists()
+report={'version':'rw_external_resource_repair_v2.6','container_id':j['Id'],'attempt':'squoosh_recreation_eval_1791129536850164583','before_state':j['State'],'before_limits':{k:j['HostConfig'][k] for k in ['Memory','MemorySwap','NanoCpus']},'reason':'kernel exact cgroup MEMCG OOM killed only reference/browser chrome hostPID129212 at00:08:57, uid1002, anonRSS1342612kB; model actor and controller still alive','actor_or_controller_restarted':False,'full_round_remains':1,'new_full_round':False,'frozen_code_prompt_model_candidate_unchanged':True,'new_external_memory_mib':3072,'new_swap_mib':3072,'max_active_model_workers':2,'script_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'created_epoch':time.time(),'state':'prepared'}
+path.write_text(json.dumps(report,indent=2));subprocess.run(['docker','update','--memory','3g','--memory-swap','3g',name],check=True);j=json.loads(subprocess.check_output(['docker','inspect',name],text=True))[0];assert j['HostConfig']['Memory']==3221225472
+report.update(state='applied',after_limits={k:j['HostConfig'][k] for k in ['Memory','MemorySwap','NanoCpus']},applied_epoch=time.time());path.write_text(json.dumps(report,indent=2));print(json.dumps({'repair_version':'v2.6','external_memory_mib':3072,'actor_still_same_round':1,'new_model_round':False}))

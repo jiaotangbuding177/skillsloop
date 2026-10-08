@@ -1,0 +1,94 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  5.595MB
+Step 1/31 : FROM ubuntu:24.04
+ ---> a853f94d2263
+Step 2/31 : ARG NODE_VERSION=22.18.0
+ ---> Using cache
+ ---> 485d0d149e8d
+Step 3/31 : ARG PLAYWRIGHT_VERSION=1.60.0
+ ---> Using cache
+ ---> 0adf07809c38
+Step 4/31 : ARG PLAYWRIGHT_MCP_VERSION=0.0.79
+ ---> Using cache
+ ---> 390e64a20489
+Step 5/31 : ARG CLAUDE_CODE_VERSION=2.1.177
+ ---> Using cache
+ ---> a86609ceac0b
+Step 6/31 : ARG CODEX_VERSION=0.145.0
+ ---> Using cache
+ ---> aaa071280fe2
+Step 7/31 : ARG CLAUDE_CODE_PROXY_REF=acabbf6bb6ec33bb31ce17ca90ba83dbd16239aa
+ ---> Using cache
+ ---> ce0cd125ffa4
+Step 8/31 : ARG PLAYWRIGHT_DOWNLOAD_HOST=
+ ---> Using cache
+ ---> 181347fcba11
+Step 9/31 : ENV DEBIAN_FRONTEND=noninteractive     PYTHONUNBUFFERED=1     LANG=C.UTF-8     PLAYWRIGHT_DOWNLOAD_HOST=${PLAYWRIGHT_DOWNLOAD_HOST}     PLAYWRIGHT_BROWSERS_PATH=/ms-playwright     DISPLAY=:99     RB_PIPELINE_DIR=/workspace/RecreationBench     RB_OUTPUT_DIR=/tmp/recreationbench-output
+ ---> Using cache
+ ---> 915387a705df
+Step 10/31 : RUN apt-get update && apt-get install -y --no-install-recommends         python3 python3-pip python3-venv python3-dev         curl ca-certificates git unzip xz-utils rsync jq util-linux sudo         build-essential pkg-config         xvfb x11-utils openbox xfce4 x11vnc novnc websockify netcat-openbsd         libnspr4 libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2         libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1         libpango-1.0-0 libcairo2 libasound2t64 fonts-liberation     && rm -rf /var/lib/apt/lists/*
+ ---> Using cache
+ ---> 0e96bdb11e39
+Step 11/31 : RUN mkdir -p /opt/noVNC/utils     && ln -sfn /usr/share/novnc/app /opt/noVNC/app     && ln -sfn /usr/share/novnc/core /opt/noVNC/core     && ln -sfn /usr/share/novnc/include /opt/noVNC/include     && ln -sfn /usr/share/novnc/vendor /opt/noVNC/vendor     && ln -sfn /usr/share/novnc/vnc.html /opt/noVNC/vnc.html     && ln -sfn /usr/share/novnc/vnc_lite.html /opt/noVNC/vnc_lite.html     && printf '%s\n'         '#!/usr/bin/env sh'         'set -eu'         'vnc="localhost:5900"'         'listen="6080"'         'web="/opt/noVNC"'         'while [ "$#" -gt 0 ]; do'         '  case "$1" in'         '    --vnc) vnc="$2"; shift 2 ;;'         '    --listen) listen="$2"; shift 2 ;;'         '    --web) web="$2"; shift 2 ;;'         '    *) shift ;;'         '  esac'         'done'         'exec websockify --web "$web" "0.0.0.0:${listen}" "$vnc"'         >/opt/noVNC/utils/novnc_proxy     && chmod +x /opt/noVNC/utils/novnc_proxy
+ ---> Using cache
+ ---> da44d653d746
+Step 12/31 : RUN arch="$(dpkg --print-architecture)";     case "$arch" in         amd64) node_arch="x64" ;;         arm64) node_arch="arm64" ;;         *) echo "unsupported arch: $arch" >&2; exit 1 ;;     esac;     curl -fsSL "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${node_arch}.tar.xz"         | tar -xJ -C /usr/local --strip-components=1
+ ---> Using cache
+ ---> 4c9950e26ad6
+Step 13/31 : RUN npm install -g --no-audit --no-fund         "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}"         "@openai/codex@${CODEX_VERSION}"         "@playwright/test@${PLAYWRIGHT_VERSION}"         "@playwright/mcp@${PLAYWRIGHT_MCP_VERSION}"
+ ---> Using cache
+ ---> 473c374d4414
+Step 14/31 : RUN mkdir -p /opt/mockweb-bench/batch_run     && cd /opt/mockweb-bench/batch_run     && npm init -y --silent     && npm install --no-audit --no-fund --silent "@playwright/test@${PLAYWRIGHT_VERSION}"
+ ---> Using cache
+ ---> 64ebdc6930bc
+Step 15/31 : COPY .rw218-proxy /opt/rw218-proxy
+ ---> Using cache
+ ---> a5ab1bdfda85
+Step 16/31 : RUN pip install --no-cache-dir --break-system-packages --ignore-installed         "playwright==${PLAYWRIGHT_VERSION}"         pydantic pyyaml requests numpy Pillow opencv-python-headless scikit-image         beautifulsoup4 lxml cssutils openai         /opt/rw218-proxy     && python3 -m playwright install chromium
+ ---> Using cache
+ ---> 87db14baa458
+Step 17/31 : RUN pip install --no-cache-dir --break-system-packages         --index-url https://download.pytorch.org/whl/cpu         torch torchvision     && pip install --no-cache-dir --break-system-packages scipy lpips
+ ---> Using cache
+ ---> dfcf7927d095
+Step 18/31 : RUN useradd -m -s /bin/bash user     && useradd -m -s /bin/bash agent     && usermod --lock user     && printf 'user ALL=(ALL) NOPASSWD:ALL\n' >/etc/sudoers.d/recreationbench-user     && chmod 0440 /etc/sudoers.d/recreationbench-user     && mkdir -p /workspace /tmp/recreationbench-output /ms-playwright     && chmod 0755 /ms-playwright     && chown -R user:user /workspace /tmp/recreationbench-output     && chown -R agent:agent /home/agent
+ ---> Using cache
+ ---> aff35be0bbcd
+Step 19/31 : COPY providers/web/scripts/rb-web-verify /usr/local/bin/rb-web-verify
+ ---> d2fa21ced421
+Step 20/31 : COPY providers/web/scripts/rb-start-visual /usr/local/bin/rb-start-visual
+ ---> 035b84e08741
+Step 21/31 : COPY providers/web/bin/rb-web-sandbox-run /usr/local/bin/rb-web-sandbox-run
+ ---> b094be7b1121
+Step 22/31 : COPY providers/web/scripts/rb-claude-code-proxy /usr/local/bin/rb-claude-code-proxy
+ ---> 9e477190dd11
+Step 23/31 : COPY providers/common/controller_helper.py /usr/local/bin/rb-controller-helper
+ ---> 07ce16c21b9d
+Step 24/31 : COPY scripts /workspace/RecreationBench/scripts
+ ---> 71c8d77814f3
+Step 25/31 : COPY src /workspace/RecreationBench/src
+ ---> dc76bfc22868
+Step 26/31 : COPY tasks /workspace/RecreationBench/tasks
+ ---> 23388ad46049
+Step 27/31 : COPY pyproject.toml README.md LICENSE THIRD_PARTY_NOTICES.md /workspace/RecreationBench/
+ ---> 2f61698f9a1f
+Step 28/31 : RUN chmod +x /usr/local/bin/rb-web-verify /usr/local/bin/rb-start-visual /usr/local/bin/rb-web-sandbox-run /usr/local/bin/rb-claude-code-proxy /usr/local/bin/rb-controller-helper
+ ---> Running in 6f05011a017a
+ ---> Removed intermediate container 6f05011a017a
+ ---> dccdcae97ad0
+Step 29/31 : WORKDIR /workspace
+ ---> Running in 6188ac59c44a
+ ---> Removed intermediate container 6188ac59c44a
+ ---> 8f90c81d02fe
+Step 30/31 : EXPOSE 6080
+ ---> Running in 80af338112dd
+ ---> Removed intermediate container 80af338112dd
+ ---> 4ea2cee36777
+Step 31/31 : CMD ["sleep", "infinity"]
+ ---> Running in 1b2217175cac
+ ---> Removed intermediate container 1b2217175cac
+ ---> 603d4b4f22fc
+Successfully built 603d4b4f22fc
+Successfully tagged skillloop-rw-web:218-v2

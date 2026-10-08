@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="RecreationWorld: scalable, verifiable environments for hybrid computer-use agents. Explore 250 application recreation tasks, benchmark results, and live reference comparisons.">
+  <meta name="theme-color" content="#fafbf9">
+  <title>RecreationWorld — Explore. Build. Verify.</title>
+  <link rel="icon" type="image/svg+xml" href="assets/mark.svg">
+  <link rel="stylesheet" href="styles.css?v=20260920-thresholds">
+  <script type="module" src="main.js?v=20260920-thresholds"></script>
+  <script type="module" src="analysis.js?v=20260920-clean-labels"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./" aria-label="RecreationWorld home"><img src="assets/mark.svg" width="34" height="34" alt="">Recreation<span>World</span></a>
+      <nav aria-label="Main navigation">
+        <a class="section-nav" href="#software-reel">Benchmark</a><a class="section-nav" href="#leaderboard">Leaderboard</a><a class="section-nav" href="#analysis">Analysis</a><a href="/live">Live comparison <span aria-hidden="true">↗</span></a>
+        <a class="paper-nav" href="https://arxiv.org/pdf/2609.22000" target="_blank" rel="noopener">Paper <span aria-hidden="true">↗</span></a><a href="https://github.com/QwenLM/RecreationWorld" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a><a href="https://huggingface.co/datasets/Qwen/RecreationBench" target="_blank" rel="noopener">Dataset <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Hybrid computer-use agents</p>
+        <h1 id="hero-title">Explore.<br>Build. <span>Verify.</span></h1>
+        <p class="hero-description">Can an agent recreate an application<br class="desktop-break"> just by using it?</p>
+        <div class="hero-actions"><a class="button primary" href="#leaderboard">Explore the results <span aria-hidden="true">↓</span></a><a class="button secondary" href="/live">Try a live comparison <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <figure class="hero-demo">
+        <div class="demo-title"><span>Real software. Recreated by an agent.</span><span id="compare-platform">macOS</span></div>
+        <div class="compare-view" id="compare-view" role="slider" tabindex="0" aria-label="Reference image coverage" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50% reference, 50% recreation" aria-orientation="horizontal" aria-describedby="compare-instructions">
+          <img class="compare-base" id="compare-recreation" src="assets/comparisons/foodtruck_recreation.webp" width="1920" height="1080" alt="GPT-6 Astra recreation of Food Truck" draggable="false">
+          <div class="compare-overlay" id="compare-overlay"><img id="compare-reference" src="assets/comparisons/foodtruck_reference.webp" width="1920" height="1080" alt="Original Food Truck on macOS" draggable="false"></div>
+          <span class="image-label left">Reference</span><span class="image-label right">Agent recreation</span>
+          <div class="compare-line" aria-hidden="true"><span class="compare-handle"><svg viewBox="0 0 32 24" fill="none"><path d="m11 5-7 7 7 7m10-14 7 7-7 7M4 12h24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+        </div>
+        <p class="sr-only" id="compare-instructions">Drag anywhere on the image to compare. Use arrow keys for small steps, Page Up or Page Down for larger steps, or Home and End to reveal one full image.</p>
+        <div class="comparison-groups"><div class="comparison-choices platform-comparison-choices" role="group" aria-label="Platform comparisons"><button type="button" data-comparison="foodtruck" aria-pressed="true">macOS <span>Food Truck</span></button><button type="button" data-comparison="qdirstat" aria-pressed="false">Ubuntu <span>QDirStat</span></button><button type="button" data-comparison="bboxeditor" aria-pressed="false">Windows <span>Bounding Box Editor</span></button><button type="button" data-comparison="timeplanner" aria-pressed="false">Android <span>TimePlanner</span></button><button type="button" data-comparison="detox" aria-pressed="false">Web <span>Detox</span></button></div></div>
+        <figcaption><span id="compare-caption"><strong>Food Truck</strong> · GPT-6 Astra</span><span class="comparison-originals">Full images: <a id="compare-full-reference" href="assets/comparisons/foodtruck_reference.webp" target="_blank" rel="noopener">Reference ↗</a><a id="compare-full-recreation" href="assets/comparisons/foodtruck_recreation.webp" target="_blank" rel="noopener">Recreation ↗</a></span></figcaption>
+      </figure>
+    </section>
+    <section class="reel-section" id="software-reel" aria-labelledby="reel-title" hidden>
+      <div class="reel-heading wrap"><h2 id="reel-title">A world of real applications.</h2></div>
+      <div class="reel-window"><div class="reel-track" id="reel-row-one"></div></div>
+      <div class="reel-window"><div class="reel-track reverse" id="reel-row-two"></div></div>
+    </section>
+    <div class="stats wrap" aria-label="Benchmark overview">
+      <div><strong>250</strong><span>held-out applications</span></div><div><strong>5</strong><span>native platforms</span></div><div><strong>2</strong><span>scoring channels</span></div>
+      <p>Ubuntu · macOS · Windows<br>Android · Web</p>
+    </div>
+    <section id="leaderboard" class="results-section section" aria-labelledby="results-title">
+      <div class="wrap">
+        <div class="section-heading"><div><p class="eyebrow">RecreationBench</p><h2 id="results-title">How well do agents recreate?</h2></div></div>
+        <p class="leaderboard-contact">Interested in evaluating self-hosted models or curious about how other models perform? Please contact <a href="mailto:xiezhihui.xzh@alibaba-inc.com">xiezhihui.xzh@alibaba-inc.com</a> or <a href="mailto:gaochang.gao@alibaba-inc.com">gaochang.gao@alibaba-inc.com</a>.</p>
+        <div class="results-toolbar">
+          <label class="select-label" for="result-scope">Evaluation scope<select id="result-scope"><option value="comparison">Overall</option><option value="linux">Ubuntu</option><option value="macos">macOS</option><option value="windows">Windows</option><option value="android">Android</option><option value="web">Web</option></select></label>
+          <label class="search-label"><span class="sr-only">Search models</span><input type="search" id="model-search" placeholder="Search models" autocomplete="off"></label>
+        </div>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="RecreationBench scores, scroll horizontally on small screens">
+          <table id="results-table">
+            <caption class="sr-only">RecreationBench model scores, programmatic threshold coverage, and estimated API cost per task. Threshold coverage is the percentage of applications reaching the stated Prog score; Overall averages platform rates equally. Higher scores and coverage are better; lower costs are cheaper. Cost bars share a linear scale across all models. Sorting by cost retains Average score ranks.</caption>
+            <thead><tr>
+              <th scope="col" class="rank-col">Rank</th>
+              <th scope="col" aria-sort="none"><button data-sort="name" type="button">Model <span aria-hidden="true">↕</span></button></th>
+              <th scope="col" class="numeric" aria-sort="none"><button data-sort="prog" type="button">Prog <span aria-hidden="true">↕</span></button></th>
+              <th scope="col" class="numeric" aria-sort="none"><button data-sort="vlm" type="button">Visual <span aria-hidden="true">↕</span></button></th>
+              <th scope="col" class="numeric" aria-sort="descending"><button data-sort="average" type="button">Average <span aria-hidden="true">↓</span></button></th>
+              <th scope="col" class="numeric" aria-sort="none" title="Percentage of applications with a programmatic score of at least 90%"><button data-sort="prog_ge90" type="button">Prog ≥90% (%) <span aria-hidden="true">↕</span></button></th>
+              <th scope="col" class="numeric" aria-sort="none" title="Percentage of applications with a perfect programmatic score"><button data-sort="prog_eq100" type="button">Prog =100% (%) <span aria-hidden="true">↕</span></button></th>
+              <th scope="col" class="numeric cost-heading" aria-sort="none"><button data-sort="cost" type="button">Mean cost (USD/task) <span aria-hidden="true">↕</span></button></th>
+            </tr></thead>
+            <tbody id="results-body"><tr><td colspan="8" class="empty-state">Loading scores…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <section id="analysis" class="analysis-section section" aria-labelledby="analysis-title">
+      <div class="wrap">
+        <div class="section-heading analysis-heading"><div><p class="eyebrow">Paper analysis</p><h2 id="analysis-title">What do the results reveal?</h2></div></div>
+        <div class="analysis-shell">
+          <div class="analysis-tabs" role="tablist" aria-label="Analysis chart">
+            <button type="button" role="tab" id="analysis-tab-cost_performance" data-analysis-tab="cost_performance" aria-selected="true" aria-controls="analysis-panel">Cost &amp; score</button>
+            <button type="button" role="tab" id="analysis-tab-features" data-analysis-tab="features" aria-selected="false" aria-controls="analysis-panel" tabindex="-1">Exploration</button>
+            <button type="button" role="tab" id="analysis-tab-source_growth" data-analysis-tab="source_growth" aria-selected="false" aria-controls="analysis-panel" tabindex="-1">Source growth</button>
+            <button type="button" role="tab" id="analysis-tab-boundaries" data-analysis-tab="boundaries" aria-selected="false" aria-controls="analysis-panel" tabindex="-1">Boundaries</button>
+            <button type="button" role="tab" id="analysis-tab-resources" data-analysis-tab="resources" aria-selected="false" aria-controls="analysis-panel" tabindex="-1">Resources</button>
+            <button type="button" role="tab" id="analysis-tab-actions" data-analysis-tab="actions" aria-selected="false" aria-controls="analysis-panel" tabindex="-1">Actions</button>
+            <button type="button" role="tab" id="analysis-tab-source_size" data-analysis-tab="source_size" aria-selected="false" aria-controls="analysis-panel" tabindex="-1">Source size</button>
+            <button type="button" role="tab" id="analysis-tab-implementation" data-analysis-tab="implementation" aria-selected="false" aria-controls="analysis-panel" tabindex="-1">Implementation</button>
+            <button type="button" role="tab" id="analysis-tab-failure_categories" data-analysis-tab="failure_categories" aria-selected="false" aria-controls="analysis-panel" tabindex="-1">Functional checks</button>
+          </div>
+          <div id="analysis-panel" class="analysis-panel" role="tabpanel" aria-labelledby="analysis-tab-cost_performance">
+            <div class="analysis-toolbar"><div id="analysis-controls" class="analysis-controls"></div><div id="analysis-legend" class="analysis-legend" aria-label="Model legend"></div></div>
+            <figure class="analysis-figure" aria-labelledby="analysis-chart-title analysis-caption">
+              <h3 id="analysis-chart-title">Cost and benchmark performance</h3>
+              <div class="analysis-chart-wrap">
+                <div id="analysis-chart" class="analysis-chart-grid" role="group" aria-label="Interactive analysis charts"></div>
+                <div id="analysis-tooltip" class="analysis-tooltip" role="status" hidden></div>
+              </div>
+              <figcaption id="analysis-caption">Loading paper analysis data…</figcaption>
+            </figure>
+          </div>
+          <p id="analysis-status" class="sr-only" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+    <section id="citation" class="citation-section wrap section" aria-labelledby="citation-title">
+      <h2 id="citation-title">Citation</h2>
+      <div class="citation-block">
+        <div class="citation-toolbar"><span>BibTeX</span><div><a href="data/recreationworld.bib" download>Download .bib</a><button id="copy-citation" type="button" hidden>Copy</button></div></div>
+        <pre tabindex="0" aria-label="RecreationWorld BibTeX citation"><code id="citation-code">@misc{qwen2026recreationworld,
+      title={RecreationWorld: Scalable and Verifiable Environments for Hybrid Computer-Use Agents},
+      author={Shuai Bai and Jiayong Deng and Sicheng Fan and Yikun Fu and Chang Gao and Xuhao Hu and Mianqiu Huang and Yizhen Jiang and Yuheng Jing and Dehui Kong and Keliang Li and Ning Li and Wanli Li and Dayiheng Liu and Dunjie Lu and Changwei Luo and Que Shen and Zheyuan Wang and Zijian Wang and Jie Wu and Gao Wu and Zhihui Xie and Rui Xie and Haiyang Xu and An Yang and Jiakang Yuan and Yanming Zhang and Jiajun Zhang and Xi Zhang and Zhenru Zhang and Zhuo Zhen and Mingkang Zhu and Bowen Zhou},
+      year={2026},
+      eprint={2609.22000},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2609.22000},
+}</code></pre>
+      </div>
+      <p class="sr-only" id="citation-status" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+  <footer class="site-footer wrap"><span>RecreationWorld <span class="quiet">/</span> RecreationBench <span class="quiet">· A Qwen research project</span></span><div><a href="#leaderboard">Results</a><a href="#analysis">Analysis</a><a href="https://github.com/QwenLM/RecreationWorld" target="_blank" rel="noopener">GitHub</a><a href="https://huggingface.co/datasets/Qwen/RecreationBench" target="_blank" rel="noopener">Dataset</a><a href="/live">Live comparison</a><a href="https://arxiv.org/pdf/2609.22000" target="_blank" rel="noopener">Paper</a><a href="#citation">Citation</a></div></footer>
+  <dialog id="image-dialog" aria-labelledby="dialog-title"><div class="dialog-header"><div><h2 id="dialog-title"></h2><p id="dialog-platform"></p></div><button class="close-button" id="dialog-close" type="button" aria-label="Close screenshot">×</button></div><img id="dialog-image" alt=""><p class="dialog-note">Reference application screenshot · <a href="/live">Try the live comparison ↗</a></p></dialog>
+  <noscript><p class="noscript-note">Enable JavaScript to explore the interactive leaderboard and screenshots. You can still <a href="https://arxiv.org/pdf/2609.22000" target="_blank" rel="noopener">read the paper</a> or <a href="/live">open the live comparison</a>.</p></noscript>
+</body>
+</html>

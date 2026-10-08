@@ -1,0 +1,3052 @@
+{
+  "created_at_utc": "2026-10-04T10:13:33.606898+00:00",
+  "official_training_set": false,
+  "source_sufficiency": "Enough independent candidate material for a first controlled skills-evolution study targeting all250 benchmark tasks; runtime readiness, skill yield and effect remain unproven.",
+  "stop_source_expansion": true,
+  "runtime_accepted_count": 0,
+  "model_calls": 0,
+  "trajectory_count": 0,
+  "verified_skill_count": 0,
+  "legacy_RW_STOP_preserved": true,
+  "other_chat_services_modified": false,
+  "all250_unseen_clean_test_claimed": false,
+  "historic_corravale_exposure_requires_evaluation_audit": true,
+  "schema": "skillloop.gui_evolution_source_pool.v2",
+  "application_count": 27,
+  "main_candidate_count": 26,
+  "conditional_reserve_count": 1,
+  "platform_counts_all_sources": {
+    "ubuntu": 7,
+    "windows": 5,
+    "web": 5,
+    "macos": 4,
+    "android": 6
+  },
+  "platform_counts_main": {
+    "ubuntu": 7,
+    "windows": 5,
+    "web": 5,
+    "macos": 3,
+    "android": 6
+  },
+  "archive_bytes": 311322152,
+  "regular_files": 26742,
+  "proposed_workflow_count_including_reserve": 64,
+  "exact_native_benchmark_repo_overlap": [],
+  "family_deduplication_proven": false,
+  "bench_correspondence_id_audit": {
+    "referenced_unique_ids": 74,
+    "invalid_ids": [],
+    "is_task_coverage_rate": false,
+    "transfer_measured": false
+  },
+  "applications": [
+    {
+      "platform": "ubuntu",
+      "repo": "https://github.com/xournalpp/xournalpp",
+      "commit": "938bdb8de4d32f38f48dd7f6544886722157a848",
+      "tag": "v1.3.8",
+      "license": "GPL-2.0文本（LICENSE）；原笔迹组件来自Xournal，图像/字库/依赖各自许可证需保留",
+      "fixed_commit_date": "2026-09-25",
+      "priority": "主候选/构建较重",
+      "build_evidence": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/xournalpp/xournalpp/blob/938bdb8de4d32f38f48dd7f6544886722157a848/README.md"
+        },
+        {
+          "path": "CMakeLists.txt",
+          "url": "https://github.com/xournalpp/xournalpp/blob/938bdb8de4d32f38f48dd7f6544886722157a848/CMakeLists.txt"
+        }
+      ],
+      "offline": "本地空白文档、PNG/PDF fixture、笔/文字/形状、保存与导出核心工作无需账号/网络；LaTeX、audio和mobile不纳入初始任务。",
+      "build_risk": "CMake>=3.18/C++20，GTK3>=3.18.9/GLib/Poppler/libxml/libzip/librsvg；默认还含audio/qpdf/Lua/GtkSourceView。非Release cpptrace FetchContent v1.0.4会网络拉取。Ubuntu依赖与字体固定后才能声明离线可构建。",
+      "observation": "GTK工具条/对话框拟用AT-SPI；笔迹画布需要截图与坐标/键盘观察，不能声称画布天然语义可访问。",
+      "bench_correspondence": [
+        {
+          "task": "ubuntu/pencil2d-pencil",
+          "capability": "绘制对象/工具状态/撤销与保存",
+          "relation": "能力类别相关，非同源"
+        },
+        {
+          "task": "ubuntu/fabiocolacio-marker",
+          "capability": "文档编辑/预览/保存路径",
+          "relation": "文本编辑状态迁移假设"
+        },
+        {
+          "task": "macos/photoflare-photoflare",
+          "capability": "图像操作、视口与导出",
+          "relation": "跨平台能力迁移假设"
+        }
+      ],
+      "workflows": [
+        {
+          "name": "工具属性与选择状态",
+          "observe": "切换笔/形状/文本，改变颜色与宽度，观察选中工具与对象属性",
+          "implement": "分离当前工具默认值、对象属性、选区状态；实现菜单/快捷键一致状态更新",
+          "check": "创建两个对象，改变一个属性，撤销/重做后验证另一对象不变",
+          "skill_hypothesis": "用最小干预区分全局工具默认值与选中对象属性",
+          "negative_example": "只改变工具条颜色却不更新实际对象，或把所有对象一并改色"
+        },
+        {
+          "name": "文档持久化与重新打开",
+          "observe": "新建两页，加入形状/文本并保存，再关闭重开",
+          "implement": "将文档内容和页/对象顺序建模，dirty标志与Save-As/原路径一致",
+          "check": "比较重开后的页数、对象文本与导出图；确认未保存关闭提示",
+          "skill_hypothesis": "保存不是成功的充分证据，要重新打开核对语义状态",
+          "negative_example": "显示Saved但仅截屏或未序列化对象"
+        },
+        {
+          "name": "视口与导出一致性",
+          "observe": "缩放/滚动/页面切换，观察选区/画布坐标和PNG/PDF导出",
+          "implement": "实现view坐标↔model坐标转换，导出由文档模型产生",
+          "check": "换缩放仍在同对象命中；导出不是工具条截图",
+          "skill_hypothesis": "把屏幕坐标和文档坐标分开，再验证输出工件",
+          "negative_example": "以某个固定分辨率坐标硬编码，换缩放画错位置"
+        }
+      ],
+      "source_caveats": [
+        "本轮raw未取得.gitmodules文件；这不证明完整source无gitlink，根线程归档还需检查submodules/externals。",
+        "原README声明衍生自Xournal，原bench200repo无xournal/xournalpp精确来源。",
+        "字体/GTK主题/Poppler渲染会影响视觉，应固定；不沿用系统实际私人文档。"
+      ],
+      "runtime_accepted": false,
+      "archive_url": "https://codeload.github.com/xournalpp/xournalpp/zip/938bdb8de4d32f38f48dd7f6544886722157a848",
+      "evidence_dir": "D:/skillloop/research/reports/279_gui_acquisition/desktop/xournalpp__xournalpp",
+      "source_acquisition": {
+        "application_id": "ubuntu--xournalpp--xournalpp",
+        "platform": "ubuntu",
+        "repo": "https://github.com/xournalpp/xournalpp",
+        "commit": "938bdb8de4d32f38f48dd7f6544886722157a848",
+        "source_url": "https://codeload.github.com/xournalpp/xournalpp/tar.gz/938bdb8de4d32f38f48dd7f6544886722157a848",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\archives\\ubuntu--xournalpp--xournalpp--938bdb8de4d32f38f48dd7f6544886722157a848.tar.gz",
+        "archive_bytes": 17210406,
+        "archive_sha256": "bf30418baa5f71d62236c1ccff5cc1844dec37deb0110fb561587f363441e0f8",
+        "source_directory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\sources\\ubuntu--xournalpp--xournalpp",
+        "regular_files": 1424,
+        "expanded_bytes": 27005911,
+        "skipped_links": 0,
+        "inventory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\inventories\\ubuntu--xournalpp--xournalpp.json",
+        "inventory_sha256": "5152508846877c2c30a75f1ea44fd052057b32282b7637ed76701caafdf9f9f8",
+        "runtime_accepted": false
+      },
+      "trajectory_count": 0,
+      "verified_skill_count": 0,
+      "max_corrective_rounds_including_first": 3,
+      "origin_report": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\application_pool.json",
+      "selection_status": "main_source_candidate_runtime_pending",
+      "source_phase_correction": "Web44 synthetic/6 public-site-derived; full family/near-duplicate audit still pending."
+    },
+    {
+      "platform": "ubuntu",
+      "repo": "https://github.com/flameshot-org/flameshot",
+      "commit": "e408812d77ff1835957f85796c4cf737466bd69d",
+      "tag": "v14.0.0",
+      "license": "主代码GPL-3.0-or-later；logo Free Art License1.3，按钮Apache2，部分代码GPL2/LGPL（README明确）",
+      "fixed_commit_date": "2026-06-10",
+      "priority": "主候选/需隔离桌面",
+      "build_evidence": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/flameshot-org/flameshot/blob/e408812d77ff1835957f85796c4cf737466bd69d/README.md"
+        },
+        {
+          "path": "CMakeLists.txt",
+          "url": "https://github.com/flameshot-org/flameshot/blob/e408812d77ff1835957f85796c4cf737466bd69d/CMakeLists.txt"
+        }
+      ],
+      "offline": "截图选区/标注/保存可离线；Imgur上传不选，ENABLE_IMGUR默认OFF。用sandbox固定背景fixture，不捕获用户真实桌面。",
+      "build_risk": "Qt6/C++20/CMake>=3.22；Qt-Color-Widgets固定SHA FetchContent，KDSingleApplication v1.2.0需预取；自定义安装prefix文档要求CMake>=3.29。X11优先，Wayland portal/权限差异可能破坏自动化；Windows/macOS还会拉QHotkey master，故本候选仅Ubuntu。",
+      "observation": "Qt可访问工具/按钮拟用AT-SPI，截图区域/overlay需已固定虚拟显示、DPI与鼠标坐标，实际可访问性尚未验收。",
+      "bench_correspondence": [
+        {
+          "task": "ubuntu/ksnip-ksnip",
+          "capability": "截图区域、标注属性、撤销/输出",
+          "relation": "直接能力对应但独立项目"
+        },
+        {
+          "task": "windows/obiwankennedy-hotshots",
+          "capability": "图像标注/区域/保存",
+          "relation": "跨平台相关"
+        },
+        {
+          "task": "windows/thejoefin-screenshot-stager",
+          "capability": "截图编辑/队列与导出",
+          "relation": "状态管理相关"
+        }
+      ],
+      "workflows": [
+        {
+          "name": "区域选择与局部操作",
+          "observe": "在固定背景拖选区域、调整边缘，分别加箭头/框/文字",
+          "implement": "将选区模型、标注对象和屏幕DPI变换分离",
+          "check": "导出实际尺寸与选区一致，标注边缘不越界，取消不产生文件",
+          "skill_hypothesis": "通过一组区域调整定位坐标/裁剪语义，而非复制截图",
+          "negative_example": "只有overlay视觉变化，保存仍为整张屏幕"
+        },
+        {
+          "name": "属性与撤销",
+          "observe": "调整线宽/颜色后添加第二个标注，再undo/redo",
+          "implement": "实现对象级属性与命令历史，保留已存在对象的原属性",
+          "check": "逐步撤销到起始状态，redo恢复同图，取消不写入",
+          "skill_hypothesis": "辨别工具默认值、选中对象与操作历史三个状态",
+          "negative_example": "全局样式覆盖全部标注，或undo只隐藏工具条"
+        },
+        {
+          "name": "输出路径/格式检查",
+          "observe": "保存本地PNG到受控路径，观察取消/重名处理和clipboard独立行为",
+          "implement": "实现原样观察到的保存对话框/错误提示，不用上传绕过",
+          "check": "文件头/尺寸/hash验证，取消与overwrite行为分开",
+          "skill_hypothesis": "输出必须验证文件而非只看成功通知",
+          "negative_example": "日志说success但文件不存在，误把clipboard当落盘"
+        }
+      ],
+      "source_caveats": [
+        "README明确复用了Lightscreen/KSnapshot/Qt-Color-Widgets片段；这些来源在本地200bench repo无精确同源命中，完整相似性仍pending。",
+        "屏幕权限/virtual desktop等设施风险高于普通窗口，不在用户桌面运行。",
+        "构建网络获取与运行离线是不同资格，不把源码zip当依赖齐备。"
+      ],
+      "runtime_accepted": false,
+      "archive_url": "https://codeload.github.com/flameshot-org/flameshot/zip/e408812d77ff1835957f85796c4cf737466bd69d",
+      "evidence_dir": "D:/skillloop/research/reports/279_gui_acquisition/desktop/flameshot-org__flameshot",
+      "source_acquisition": {
+        "application_id": "ubuntu--flameshot-org--flameshot",
+        "platform": "ubuntu",
+        "repo": "https://github.com/flameshot-org/flameshot",
+        "commit": "e408812d77ff1835957f85796c4cf737466bd69d",
+        "source_url": "https://codeload.github.com/flameshot-org/flameshot/tar.gz/e408812d77ff1835957f85796c4cf737466bd69d",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\archives\\ubuntu--flameshot-org--flameshot--e408812d77ff1835957f85796c4cf737466bd69d.tar.gz",
+        "archive_bytes": 16396313,
+        "archive_sha256": "d2fc6e588c43d18cf95920272e0eb3aeeb30dc7cfccd3e58d58d15c20992e717",
+        "source_directory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\sources\\ubuntu--flameshot-org--flameshot",
+        "regular_files": 502,
+        "expanded_bytes": 23868866,
+        "skipped_links": 0,
+        "inventory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\inventories\\ubuntu--flameshot-org--flameshot.json",
+        "inventory_sha256": "2bb70cf80a7210f7d8c21e69f150e42e907a0e3ceaa6c11650284aa01d7f6eb7",
+        "runtime_accepted": false
+      },
+      "trajectory_count": 0,
+      "verified_skill_count": 0,
+      "max_corrective_rounds_including_first": 3,
+      "origin_report": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\application_pool.json",
+      "selection_status": "main_source_candidate_runtime_pending",
+      "source_phase_correction": "Web44 synthetic/6 public-site-derived; full family/near-duplicate audit still pending."
+    },
+    {
+      "platform": "ubuntu",
+      "repo": "https://github.com/juzzlin/Heimer",
+      "commit": "d3153c52f27c23d4ec4143205e9b84c7321e0a7e",
+      "tag": "4.5.0",
+      "license": "代码GPLv3；未另注明图像CC BY-SA3.0",
+      "fixed_commit_date": "2025-03-16",
+      "priority": "主候选/小型较易固定",
+      "build_evidence": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/juzzlin/Heimer/blob/d3153c52f27c23d4ec4143205e9b84c7321e0a7e/README.md"
+        },
+        {
+          "path": "CMakeLists.txt",
+          "url": "https://github.com/juzzlin/Heimer/blob/d3153c52f27c23d4ec4143205e9b84c7321e0a7e/CMakeLists.txt"
+        }
+      ],
+      "offline": "本地图/笔记及XML.ALZ保存、PNG/SVG导出不要求账号或外部服务；禁用与此次task无关网络菜单。",
+      "build_risk": "C++17/CMake/Qt5>=5.9.5（Core Xml Widgets LinguistTools Svg Test Network）；Qt6>=6.2.4可显式BUILD_WITH_QT6。图像版权与fixed font/DPI应保留。发行版本在2025，不能据此声称2026持续发布。",
+      "observation": "Qt菜单/对话框拟AT-SPI，画布节点命名/边连接可能需坐标+公开图像；自动布局需固定seed/版本/输入以保证确定性。",
+      "bench_correspondence": [
+        {
+          "task": "ubuntu/gnome-dia",
+          "capability": "节点/边编辑、选择、布局、撤销与导出",
+          "relation": "直接能力相关独立应用"
+        },
+        {
+          "task": "ubuntu/camunda-camunda-modeler",
+          "capability": "图模型与标签/连接状态",
+          "relation": "图编辑相关非BPMN协议等价"
+        },
+        {
+          "task": "windows/prmr-jetuml",
+          "capability": "图形工具、关联关系、保存",
+          "relation": "跨平台编辑能力迁移假设"
+        }
+      ],
+      "workflows": [
+        {
+          "name": "图结构与界面状态",
+          "observe": "创建3个带文本节点及两条带label边，移动节点，删除一个",
+          "implement": "分离节点/边model与view位置，节点删除时处理关联边",
+          "check": "保存重开与图结构计数一致，边终点跟随节点，undo恢复关系",
+          "skill_hypothesis": "先探测对象关系与连带删除，再实现图状态而不是仅绘图",
+          "negative_example": "节点移走边不跟随、删除后悬空边"
+        },
+        {
+          "name": "视图变换与历史",
+          "observe": "缩放/fit后选择节点并drag，再undo/redo",
+          "implement": "实现坐标变换、选区与历史原子事务",
+          "check": "fit/zoom不改ALZ文档结构，undo一次对应一次用户操作",
+          "skill_hypothesis": "把布局/视口与内容修改分开，避免复刻界面不复刻状态",
+          "negative_example": "zoom改变文档坐标或drag形成几十次undo"
+        },
+        {
+          "name": "序列化与导出",
+          "observe": "ALZ保存重开、PNG/SVG导出同一图",
+          "implement": "使用结构化持久化并为导出复用图模型",
+          "check": "检查label、连边、文本转义及导出尺寸，不只存在文件",
+          "skill_hypothesis": "用重开/结构比较检验持久化、导出与UI同源",
+          "negative_example": "标签带特殊字符破坏XML，导出只含背景"
+        }
+      ],
+      "source_caveats": [
+        "选用独立Heimer而非bench已有Dia/JetUML本身；Qt通用依赖不当同题。",
+        "未进行实际build/run；声称controls可访问前必须AT-SPI树验收。",
+        "未发现Notepad++式同产品复刻声明；完整fork图/近重复hash还待根线程来源审计。"
+      ],
+      "runtime_accepted": false,
+      "archive_url": "https://codeload.github.com/juzzlin/Heimer/zip/d3153c52f27c23d4ec4143205e9b84c7321e0a7e",
+      "evidence_dir": "D:/skillloop/research/reports/279_gui_acquisition/desktop/juzzlin__Heimer",
+      "source_acquisition": {
+        "application_id": "ubuntu--juzzlin--Heimer",
+        "platform": "ubuntu",
+        "repo": "https://github.com/juzzlin/Heimer",
+        "commit": "d3153c52f27c23d4ec4143205e9b84c7321e0a7e",
+        "source_url": "https://codeload.github.com/juzzlin/Heimer/tar.gz/d3153c52f27c23d4ec4143205e9b84c7321e0a7e",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\archives\\ubuntu--juzzlin--Heimer--d3153c52f27c23d4ec4143205e9b84c7321e0a7e.tar.gz",
+        "archive_bytes": 2039879,
+        "archive_sha256": "feba42cfa7a064cdf9ae8900d95725c1769d388cdbae8c29221cffd6e56eafd3",
+        "source_directory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\sources\\ubuntu--juzzlin--Heimer",
+        "regular_files": 290,
+        "expanded_bytes": 3332838,
+        "skipped_links": 0,
+        "inventory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\inventories\\ubuntu--juzzlin--Heimer.json",
+        "inventory_sha256": "0445072c03ad8521878a02007fab055dbd0683d4d1be222aac02e2a70d00e015",
+        "runtime_accepted": false
+      },
+      "trajectory_count": 0,
+      "verified_skill_count": 0,
+      "max_corrective_rounds_including_first": 3,
+      "origin_report": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\application_pool.json",
+      "selection_status": "main_source_candidate_runtime_pending",
+      "source_phase_correction": "Web44 synthetic/6 public-site-derived; full family/near-duplicate audit still pending."
+    },
+    {
+      "platform": "windows",
+      "repo": "https://github.com/WinMerge/winmerge",
+      "commit": "5f689ef907ec427192bb17d120f0dbb24f1e213b",
+      "tag": "v2.16.58.2",
+      "license": "GPL-2.0文本/LICENSE.md；third-party externals/plugins不同许可证需全量notice",
+      "fixed_commit_date": "2026-08-27",
+      "priority": "主候选/reference build重，建议固定官方portable再验",
+      "build_evidence": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/WinMerge/winmerge/blob/5f689ef907ec427192bb17d120f0dbb24f1e213b/README.md"
+        },
+        {
+          "path": ".gitmodules",
+          "url": "https://github.com/WinMerge/winmerge/blob/5f689ef907ec427192bb17d120f0dbb24f1e213b/.gitmodules"
+        }
+      ],
+      "offline": "本地纯文本/目录compare和merge，无需账号；不选shell-extension安装/在线webdiff/zip扩展，工作区仅fixture copies。",
+      "build_risk": "MSVC v143/VisualStudio2022+、MFC/ATL、Windows10 SDK；完整发行还需7Zip/Inno/Python/Pandoc/MSYS2。13gitlink externals含frhed/winimerge/patch/sevenzip/freeimage/tidy/jq/wil/winwebdiff/md4c/darkmodelib/cliphcat/tree-sitter；DownloadDeps网络预取未做。Codeload空submodules不能称build-ready。",
+      "observation": "MFC菜单/标准dialog拟UIA，文本比较自绘view需实际TextPattern/selection可访问验证；不凭Windows平台就假设全部控件语义可访问。",
+      "bench_correspondence": [
+        {
+          "task": "windows/alessio-vivaldelli-filemanager",
+          "capability": "目录树/文件列表/selection与文件操作",
+          "relation": "文件管理相关非同源"
+        },
+        {
+          "task": "windows/couchcoding-logbert",
+          "capability": "多窗格文本/筛选/定位/状态",
+          "relation": "文本view能力相关"
+        },
+        {
+          "task": "windows/mukunku-parquetviewer",
+          "capability": "表列排序/selection/格式与预览",
+          "relation": "有限列表model能力相关非文件格式等价"
+        }
+      ],
+      "workflows": [
+        {
+          "name": "差异导航与选择",
+          "observe": "两文件含3处确定差异，用next/prev跳转与merge一个差异",
+          "implement": "split-view文本model、difference range与selection同步，合并更新后重新计算",
+          "check": "只所选块改变，difference count递减/dirty标识正确，undo恢复",
+          "skill_hypothesis": "关联视图的选择/定位必须用model范围而非像素",
+          "negative_example": "merge错一侧、内容变了差异计数没变"
+        },
+        {
+          "name": "筛选语义",
+          "observe": "比较两目录，增同名/新增/空白差异文件，改变ignore whitespace与filter",
+          "implement": "区分ignored/equal/modified/left-only/right-only且保留原输入",
+          "check": "fixture结果类别与选项切换一一对应，取消filter回到原状态",
+          "skill_hypothesis": "按最小对照fixture区分过滤与比较等价规则",
+          "negative_example": "隐藏行冒充文件相同，ignore选项改了实际保存内容"
+        },
+        {
+          "name": "持久化与安全输出",
+          "observe": "编辑merge结果，Save-As到受控路径，关闭重开再compare",
+          "implement": "明确source左右只读权限/dirty/目标路径，独立状态保存",
+          "check": "输出内容准确，原fixturehash不变，取消不写文件",
+          "skill_hypothesis": "把观察源与输出工件分离，用hash验证未破坏输入",
+          "negative_example": "把合并结果写回参考source或只更新UI不落盘"
+        }
+      ],
+      "source_caveats": [
+        "WinMerge自身/declared externals在200 benchrepo无精确来源匹配；完整fork graph API未取，依赖非任务产品仍区分。",
+        "构建较重不意味着应选小而近重复的Notepad++克隆；若runtime准入失败保留失败再换候补，不能假称已跑通。",
+        "不安装shell integration或对真实用户目录扫描/合并。"
+      ],
+      "runtime_accepted": false,
+      "archive_url": "https://codeload.github.com/WinMerge/winmerge/zip/5f689ef907ec427192bb17d120f0dbb24f1e213b",
+      "evidence_dir": "D:/skillloop/research/reports/279_gui_acquisition/desktop/WinMerge__winmerge",
+      "source_acquisition": {
+        "application_id": "windows--WinMerge--winmerge",
+        "platform": "windows",
+        "repo": "https://github.com/WinMerge/winmerge",
+        "commit": "5f689ef907ec427192bb17d120f0dbb24f1e213b",
+        "source_url": "https://codeload.github.com/WinMerge/winmerge/tar.gz/5f689ef907ec427192bb17d120f0dbb24f1e213b",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\archives\\windows--WinMerge--winmerge--5f689ef907ec427192bb17d120f0dbb24f1e213b.tar.gz",
+        "archive_bytes": 20833019,
+        "archive_sha256": "fae199226c247d0fa81dd59fad07a1e777e23017bbe98274a4bddce93ee4097c",
+        "source_directory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\sources\\windows--WinMerge--winmerge",
+        "regular_files": 6820,
+        "expanded_bytes": 85811518,
+        "skipped_links": 0,
+        "inventory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\inventories\\windows--WinMerge--winmerge.json",
+        "inventory_sha256": "87b14669615f2bd0a43b1326989c2cc158df674a86f67282104bf3b3a14ccede",
+        "runtime_accepted": false
+      },
+      "trajectory_count": 0,
+      "verified_skill_count": 0,
+      "max_corrective_rounds_including_first": 3,
+      "origin_report": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\application_pool.json",
+      "selection_status": "main_source_candidate_runtime_pending",
+      "source_phase_correction": "Web44 synthetic/6 public-site-derived; full family/near-duplicate audit still pending."
+    },
+    {
+      "platform": "windows",
+      "repo": "https://github.com/NickeManarin/ScreenToGif",
+      "commit": "a4d0a67c2131cd048ceec86cd40afc2f1a06f2fd",
+      "tag": "2.43.2",
+      "license": "Microsoft Public License (Ms-PL)，LICENSE.txt；第三方encoder/library各自notice另审",
+      "fixed_commit_date": "2026-07-26",
+      "priority": "主候选/Windows专属",
+      "build_evidence": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/NickeManarin/ScreenToGif/blob/a4d0a67c2131cd048ceec86cd40afc2f1a06f2fd/README.md"
+        },
+        {
+          "path": "ScreenToGif/ScreenToGif.csproj",
+          "url": "https://github.com/NickeManarin/ScreenToGif/blob/a4d0a67c2131cd048ceec86cd40afc2f1a06f2fd/ScreenToGif/ScreenToGif.csproj"
+        }
+      ],
+      "offline": "只导入受控本地图片/动画→帧编辑→GIF/PNG导出；不选webcam/实际屏幕/云上传。核心editor预计无需账户，但需实际断网核验。",
+      "build_risk": "固定csproj target net9.0-windows7.0，UseWPF=true和WinForms；README .NET9 Desktop Runtime或更高。参考binary应冻结runtime；构建需.NET9 SDK、项目引用/NuGet/native libraries完整。视频encoder额外依赖未验，初始仅内置GIF/PNG，不把FFmpeg可用当当然。",
+      "observation": "WPF普通控件拟UIA可访问，frame timeline/自绘图仍需实际UIA pattern与截图；避免依赖现实录屏实时/设备造成非确定性。",
+      "bench_correspondence": [
+        {
+          "task": "windows/thejoefin-screenshot-stager",
+          "capability": "截图/帧资源序列、导入编辑与导出",
+          "relation": "直接能力相关独立应用"
+        },
+        {
+          "task": "windows/obiwankennedy-hotshots",
+          "capability": "标注/图像操作/保存",
+          "relation": "图像编辑相关"
+        },
+        {
+          "task": "ubuntu/mifi-lossless-cut",
+          "capability": "媒体时间线/选区/导出状态",
+          "relation": "跨平台时间线能力相关，非codec等价"
+        }
+      ],
+      "workflows": [
+        {
+          "name": "序列与选择模型",
+          "observe": "导入3张本地帧，改变顺序、选择区间、删除一帧并undo",
+          "implement": "实现有稳定ID的帧model与selection，不用index作为全部身份",
+          "check": "帧数/顺序/缩略图与导出帧序对应，undo恢复",
+          "skill_hypothesis": "先核对selection与集合变化，防止删错元素/状态漂移",
+          "negative_example": "重新排序后selection指向另一帧，撤销只恢复缩略图"
+        },
+        {
+          "name": "帧时长与局部批量属性",
+          "observe": "对单帧/多选改变delay，对比预览和导出",
+          "implement": "明确单位ms与批量范围，先原始数据再渲染",
+          "check": "用GIF decoder读实际帧delay，总时长允许原生量化误差但不可丢帧",
+          "skill_hypothesis": "单位与多选作用域必须通过输出工件核验",
+          "negative_example": "秒/毫秒混用或只改变显示标签"
+        },
+        {
+          "name": "编辑持久化与输出",
+          "observe": "裁剪/文字操作后保存项目、重开、导出GIF/PNG",
+          "implement": "将编辑operation与project持久化、output progress状态分离",
+          "check": "重开后内容与帧关系保持；输出可解码并有预期尺寸",
+          "skill_hypothesis": "验证长操作完成与工件语义，而非点Export就宣告完成",
+          "negative_example": "按钮触发即报success，导出空GIF"
+        }
+      ],
+      "source_caveats": [
+        "本轮未下载NuGet/SDK或运行UIA；runtime/依赖资格pending。",
+        "参考source不得提供给复刻agent照搬；只公开GUI观察进入正式轨迹。",
+        "使用合成公开本地图像以避开用户屏幕/设备/隐私；视频支持不作首批要求。"
+      ],
+      "runtime_accepted": false,
+      "archive_url": "https://codeload.github.com/NickeManarin/ScreenToGif/zip/a4d0a67c2131cd048ceec86cd40afc2f1a06f2fd",
+      "evidence_dir": "D:/skillloop/research/reports/279_gui_acquisition/desktop/NickeManarin__ScreenToGif",
+      "source_acquisition": {
+        "application_id": "windows--NickeManarin--ScreenToGif",
+        "platform": "windows",
+        "repo": "https://github.com/NickeManarin/ScreenToGif",
+        "commit": "a4d0a67c2131cd048ceec86cd40afc2f1a06f2fd",
+        "source_url": "https://codeload.github.com/NickeManarin/ScreenToGif/tar.gz/a4d0a67c2131cd048ceec86cd40afc2f1a06f2fd",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\archives\\windows--NickeManarin--ScreenToGif--a4d0a67c2131cd048ceec86cd40afc2f1a06f2fd.tar.gz",
+        "archive_bytes": 1875642,
+        "archive_sha256": "421a4503197ebd8da9cabdf134856113ef311807512e0101d74e91d2751db672",
+        "source_directory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\sources\\windows--NickeManarin--ScreenToGif",
+        "regular_files": 810,
+        "expanded_bytes": 12107642,
+        "skipped_links": 0,
+        "inventory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\inventories\\windows--NickeManarin--ScreenToGif.json",
+        "inventory_sha256": "97db372280b3dabdb7ec777314d66e5aadd7b6225c26d7c06dc723575e3de7da",
+        "runtime_accepted": false
+      },
+      "trajectory_count": 0,
+      "verified_skill_count": 0,
+      "max_corrective_rounds_including_first": 3,
+      "origin_report": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\application_pool.json",
+      "selection_status": "main_source_candidate_runtime_pending",
+      "source_phase_correction": "Web44 synthetic/6 public-site-derived; full family/near-duplicate audit still pending."
+    },
+    {
+      "platform": "windows",
+      "repo": "https://github.com/Lymphatus/caesium-image-compressor",
+      "commit": "bc4f6bbb4bbe128bb09345454592affa5d6eb79b",
+      "tag": "v2.8.5",
+      "license": "GPL-3.0文本（LICENSE）；libcaesium/WinSparkle/Qt依赖许可证分别保留",
+      "fixed_commit_date": "2025-05-07",
+      "priority": "主候选/Qt+Rust依赖",
+      "build_evidence": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/Lymphatus/caesium-image-compressor/blob/bc4f6bbb4bbe128bb09345454592affa5d6eb79b/README.md"
+        },
+        {
+          "path": "CMakeLists.txt",
+          "url": "https://github.com/Lymphatus/caesium-image-compressor/blob/bc4f6bbb4bbe128bb09345454592affa5d6eb79b/CMakeLists.txt"
+        }
+      ],
+      "offline": "本地JPG/PNG/WebP队列压缩、resize与导出，选Windows portable，避免网络update菜单；不采用浏览器caesium.app版。",
+      "build_risk": "Qt6 SDK（官方binary用6.8.0）/CMake>=3.16/C++17/Rust cargo；CMake ExternalProject libcaesium由libcaesium.conf给tag，WinSparkle0.7.0.zip，cargo targetcache须提前固定，主repozip不是完整离线build source。Windows10 1809+64bit。稳定tag2025、main宣称开发v3，不能说v2.8.5最新改动在2026。",
+      "observation": "Qt queue/tree/model、dialogs拟UIA；spinner/progress/preview需实际pattern验证。不同encoder参数可能非字节稳定，验功能/尺寸/可解码而非强求JPEG字节完全一致。",
+      "bench_correspondence": [
+        {
+          "task": "windows/dragonofmercy-image-viewer",
+          "capability": "图像导入/预览/视口",
+          "relation": "直接图像类对应独立应用"
+        },
+        {
+          "task": "windows/derek-rein-exr-converter",
+          "capability": "批量格式处理/输出参数/错误状态",
+          "relation": "队列与转换能力，不把EXR格式等同JPEGcodec"
+        },
+        {
+          "task": "windows/rajitharanasinghe-automatic_thresholding",
+          "capability": "参数-预览-输出一致性",
+          "relation": "能力相关"
+        }
+      ],
+      "workflows": [
+        {
+          "name": "导入队列与批量作用域",
+          "observe": "导入2个不同尺寸PNG和1个坏文件，切换单选/多选设置quality/resize",
+          "implement": "queue稳定ID，区分全局设置与per-item设置，错误不阻断其他项目",
+          "check": "三个item各自terminal status，坏文件error不记0成功，其余尺寸可验证",
+          "skill_hypothesis": "以异构输入探测全局/局部参数和错误隔离",
+          "negative_example": "一项失败清空整个queue或把失败状态报成功"
+        },
+        {
+          "name": "纵横比与预览",
+          "observe": "改变目标width，切换keep aspect，比较原图/预览",
+          "implement": "参数归一化/有效范围/ratio约束与preview/encoder使用同model",
+          "check": "decode输出实际width/height与模式对应，quality合法范围",
+          "skill_hypothesis": "约束不是视觉checkbox，需要验证实际输出",
+          "negative_example": "checkbox有外观无效果，resize预览改了文件未改"
+        },
+        {
+          "name": "异步完成与输出路径",
+          "observe": "指定受控输出目录/命名规则，运行批量转换，观察progress、完成与取消",
+          "implement": "分离queued/running/succeeded/failed/cancelled及overwrite处理",
+          "check": "文件实际存在可解码，取消不把未完成工件算success",
+          "skill_hypothesis": "以真实工件与terminal state交叉确认长操作",
+          "negative_example": "100%只是进度条动画，重复名字静默覆写输入"
+        }
+      ],
+      "source_caveats": [
+        "官方canonical Lymphatus仓库不是旧SaeraSoft/Caesium或third-partyLinuxbuild；归档必须此fixedSHA。",
+        "libcaesium version与Rustdependency完整性未取得验收；不热改上游CMake。",
+        "通用图像处理与Image-Shrinker类别接近但未发现repo/产品族相同证据；近重复仍要源码hash检查。"
+      ],
+      "runtime_accepted": false,
+      "archive_url": "https://codeload.github.com/Lymphatus/caesium-image-compressor/zip/bc4f6bbb4bbe128bb09345454592affa5d6eb79b",
+      "evidence_dir": "D:/skillloop/research/reports/279_gui_acquisition/desktop/Lymphatus__caesium-image-compressor",
+      "source_acquisition": {
+        "application_id": "windows--Lymphatus--caesium-image-compressor",
+        "platform": "windows",
+        "repo": "https://github.com/Lymphatus/caesium-image-compressor",
+        "commit": "bc4f6bbb4bbe128bb09345454592affa5d6eb79b",
+        "source_url": "https://codeload.github.com/Lymphatus/caesium-image-compressor/tar.gz/bc4f6bbb4bbe128bb09345454592affa5d6eb79b",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\archives\\windows--Lymphatus--caesium-image-compressor--bc4f6bbb4bbe128bb09345454592affa5d6eb79b.tar.gz",
+        "archive_bytes": 576943,
+        "archive_sha256": "3f77599d2419300a07680cf984d3bae53ab6f60c0b21bffc8f811d6258d18d67",
+        "source_directory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\sources\\windows--Lymphatus--caesium-image-compressor",
+        "regular_files": 155,
+        "expanded_bytes": 1627159,
+        "skipped_links": 0,
+        "inventory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\inventories\\windows--Lymphatus--caesium-image-compressor.json",
+        "inventory_sha256": "87e1c58fb66089f3a4849e26453661d65935c9d6db753ec142d2e9ecbe27dc7f",
+        "runtime_accepted": false
+      },
+      "trajectory_count": 0,
+      "verified_skill_count": 0,
+      "max_corrective_rounds_including_first": 3,
+      "origin_report": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\application_pool.json",
+      "selection_status": "main_source_candidate_runtime_pending",
+      "source_phase_correction": "Web44 synthetic/6 public-site-derived; full family/near-duplicate audit still pending."
+    },
+    {
+      "id": "web_squoosh",
+      "platform": "web",
+      "name": "Squoosh",
+      "repo": "https://github.com/GoogleChromeLabs/squoosh",
+      "commit": "e8d35e0fb66eb16eff6fe8fc773eabcbb7128de3",
+      "license": "Apache-2.0",
+      "license_evidence": "evidence/GoogleChromeLabs__squoosh__LICENSE",
+      "selection": "source_acquisition_candidate_not_runtime_admitted",
+      "build_evidence": {
+        "official_readme": "npm install; npm run build; npm run dev",
+        "fixed_source": "package.json build is rollup -c then lib/move-output.js; output build/ static; .nvmrc 20.16.0",
+        "runtime_expected": "client-side Preact/TypeScript; image processing local and WASM workers; no required user account",
+        "executed": false,
+        "limitations": [
+          "Installation/WASM assets and isolated offline static serving not yet validated.",
+          "README discloses Google Analytics; runtime must block external analytics without replacing image processing.",
+          "Image import/compression widgets are richer than many Web benchmark documentation/marketing pages; platform correspondence does not prove same task distribution."
+        ]
+      },
+      "workflows": [
+        {
+          "sequence": [
+            "import a synthetic local PNG",
+            "change resize dimensions",
+            "choose JPEG/WebP and quality",
+            "inspect before/after preview and dimensions",
+            "download and reopen output"
+          ],
+          "validator_expected": [
+            "expected output MIME and dimensions",
+            "controlled file import/download works",
+            "changing quality updates artifact and reported size"
+          ],
+          "evidence": "README.md local processing; full controls need public UI observation before task freeze"
+        },
+        {
+          "sequence": [
+            "compare left and right codec options",
+            "move image comparison divider",
+            "zoom then reset",
+            "replace image and recheck settings"
+          ],
+          "validator_expected": [
+            "preview controls cause visible state transitions",
+            "new file replaces prior input",
+            "reset changes only expected viewport state"
+          ],
+          "evidence": "proposed workflow from known application function; exact version controls pending UI admission"
+        }
+      ],
+      "skill_expectation": [
+        "Observe input-control-output dependencies before implementing a visually similar form.",
+        "Implement local binary file import/export and asynchronous image state without sending user data to a cloud service.",
+        "Verify functional output along with screenshot/desktop-mobile state."
+      ],
+      "bench_correspondence": {
+        "same_task_form": "RecreationWorld Web target observation -> independent code recreation -> functional/visual verification, not a GUI-operating-only benchmark",
+        "web_public_capabilities": [
+          "forms and control state",
+          "desktop/mobile layout",
+          "browser keyboard and pointer interaction",
+          "asset/preview and download behavior"
+        ],
+        "cross_platform_capability_examples": [
+          "macos/stefansl-image-shrinker",
+          "macos/photoflare-photoflare",
+          "windows/dragonofmercy-image-viewer"
+        ],
+        "inference_only": true,
+        "no_skill_gain_claim": true
+      },
+      "source_caveats": [
+        "No repository match against 200 native benchmark canonical repo identities; case-insensitive candidate names also absent from all 250 public task identities and 266 public reference filenames.",
+        "50 Web metadata entries omit original repos and many are .example aliases: original-source/template de-duplication remains pending.",
+        "Do not supply target source to recreation actor; downloaded source is for environment/license/provenance only.",
+        "No native official benchmark validator exists for this new training application; independently author and freeze validators after public behavior admission."
+      ],
+      "github_repository_size_kib": 177228,
+      "source_archive_bytes": 22350386,
+      "source_archive_sha256": "8a4caf8744066d08005ce32034ba654d8114aa6875ff3267b56a68a9021d1c08",
+      "source_archive_note": "Actually acquired by root; see ../source_acquisition_manifest.json. GitHub size includes repository history.",
+      "max_corrective_rounds_including_first": 3,
+      "source_acquisition": {
+        "application_id": "web--GoogleChromeLabs--squoosh",
+        "platform": "web",
+        "repo": "https://github.com/GoogleChromeLabs/squoosh",
+        "commit": "e8d35e0fb66eb16eff6fe8fc773eabcbb7128de3",
+        "source_url": "https://codeload.github.com/GoogleChromeLabs/squoosh/tar.gz/e8d35e0fb66eb16eff6fe8fc773eabcbb7128de3",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\archives\\web--GoogleChromeLabs--squoosh--e8d35e0fb66eb16eff6fe8fc773eabcbb7128de3.tar.gz",
+        "archive_bytes": 22350386,
+        "archive_sha256": "8a4caf8744066d08005ce32034ba654d8114aa6875ff3267b56a68a9021d1c08",
+        "source_directory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\sources\\web--GoogleChromeLabs--squoosh",
+        "regular_files": 428,
+        "expanded_bytes": 43370978,
+        "skipped_links": 0,
+        "inventory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\inventories\\web--GoogleChromeLabs--squoosh.json",
+        "inventory_sha256": "fe48f08be20d70084190229e8c356a06efd14bfc3439812e84cd221f4d78fd8c",
+        "runtime_accepted": false
+      },
+      "runtime_accepted": false,
+      "trajectory_count": 0,
+      "verified_skill_count": 0,
+      "origin_report": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\application_pool.json",
+      "selection_status": "main_source_candidate_runtime_pending",
+      "source_phase_correction": "Web44 synthetic/6 public-site-derived; full family/near-duplicate audit still pending."
+    },
+    {
+      "id": "web_stackedit",
+      "platform": "web",
+      "name": "StackEdit",
+      "repo": "https://github.com/benweet/stackedit",
+      "commit": "6dce2a5e36b755a0c244522b48a06c91a2df0f59",
+      "license": "Apache-2.0",
+      "license_evidence": "evidence/benweet__stackedit__LICENSE",
+      "selection": "source_acquisition_candidate_not_runtime_admitted",
+      "build_evidence": {
+        "official_readme": "npm install; npm start for localhost:8080; npm run build",
+        "fixed_source": "Vue2/webpack; localDbSvc.js opens IndexedDB and maintains localStorage; client-local file workspace is separate from optional cloud sync.",
+        "runtime_expected": "browser Markdown editor with local workspace and preview; cloud integrations require optional credentials but are excluded from local task scope",
+        "executed": false,
+        "limitations": [
+          "Pinned commit dated 2023-05-27 and old webpack/Vue2/dependencies: isolated Node/toolchain compatibility not yet validated.",
+          "README contains Helm cloud provider key configuration: do not infer such keys are mandatory for local editing; verify actual local unauthenticated UI.",
+          "Disable remote sync/publishing/analytics in isolated network without substituting the core Markdown editor."
+        ]
+      },
+      "workflows": [
+        {
+          "sequence": [
+            "create local Markdown file",
+            "type heading/list/code text",
+            "check rendered preview",
+            "rename file",
+            "refresh and reopen"
+          ],
+          "validator_expected": [
+            "preview reflects local text",
+            "renamed file persists across reload",
+            "Markdown code remains text rather than unexpected markup"
+          ],
+          "evidence": "README editor/build; pinned IndexedDB/localStorage source; UI controls pending"
+        },
+        {
+          "sequence": [
+            "create folder and two files",
+            "move a file",
+            "switch documents",
+            "search local workspace",
+            "delete and restore if supported"
+          ],
+          "validator_expected": [
+            "workspace selection and folder relationship are consistent",
+            "content does not move into wrong file",
+            "search/filter returns expected public fixture"
+          ],
+          "evidence": "proposed workspace workflow; exact delete/restore capability must be confirmed from UI before freeze"
+        },
+        {
+          "sequence": [
+            "import public synthetic .md",
+            "edit text with undo/redo",
+            "export Markdown",
+            "reimport and compare text"
+          ],
+          "validator_expected": [
+            "text round-trip is preserved",
+            "undo/redo matches last operations",
+            "export works without cloud login"
+          ],
+          "evidence": "application editor/local workspace; exact import/export paths pending UI admission"
+        }
+      ],
+      "skill_expectation": [
+        "Map multi-pane editor, navigation tree and rendered preview into separate synchronized state responsibilities.",
+        "Test persistence and document selection after reload, not only the initial rendered page.",
+        "Distinguish optional network integration from local core; validate text import/export and undo before completion."
+      ],
+      "bench_correspondence": {
+        "same_task_form": "Web target observation -> independent code recreation -> frozen functional/visual verification.",
+        "web_public_capabilities": [
+          "navigation tree",
+          "search/forms",
+          "keyboard editing",
+          "split-pane responsive layout",
+          "persistent local state"
+        ],
+        "cross_platform_capability_examples": [
+          "ubuntu/notepadqq-notepadqq",
+          "macos/glushchenko-fsnotes",
+          "android/kin69-easynotes",
+          "windows/plaintool-notetask"
+        ],
+        "inference_only": true,
+        "no_skill_gain_claim": true
+      },
+      "source_caveats": [
+        "No canonical match against 200 native repos and no name match in full 250 task index or 266 public reference filenames.",
+        "Many .example Web aliases have no source identity; absence of string match is not full original-application/template deduplication.",
+        "Some proposed workspace workflows are not yet empirically observed; remove unsupported flows before freezing.",
+        "Do not hand target code or official test assertions to actor."
+      ],
+      "github_repository_size_kib": 37527,
+      "source_archive_bytes": 1896539,
+      "source_archive_sha256": "99624b392a7a6842166be5be8fc87d76f543c2d3fe8e1772d9cdc583bec22e9d",
+      "max_corrective_rounds_including_first": 3,
+      "source_acquisition": {
+        "application_id": "web--benweet--stackedit",
+        "platform": "web",
+        "repo": "https://github.com/benweet/stackedit",
+        "commit": "6dce2a5e36b755a0c244522b48a06c91a2df0f59",
+        "source_url": "https://codeload.github.com/benweet/stackedit/tar.gz/6dce2a5e36b755a0c244522b48a06c91a2df0f59",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\archives\\web--benweet--stackedit--6dce2a5e36b755a0c244522b48a06c91a2df0f59.tar.gz",
+        "archive_bytes": 1896539,
+        "archive_sha256": "99624b392a7a6842166be5be8fc87d76f543c2d3fe8e1772d9cdc583bec22e9d",
+        "source_directory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\sources\\web--benweet--stackedit",
+        "regular_files": 370,
+        "expanded_bytes": 3522929,
+        "skipped_links": 0,
+        "inventory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\inventories\\web--benweet--stackedit.json",
+        "inventory_sha256": "205009f6a222f0081aaef64cc3ef7538d384665355d5dcdb4ca7310df425e964",
+        "runtime_accepted": false
+      },
+      "runtime_accepted": false,
+      "trajectory_count": 0,
+      "verified_skill_count": 0,
+      "origin_report": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\application_pool.json",
+      "selection_status": "main_source_candidate_runtime_pending",
+      "source_phase_correction": "Web44 synthetic/6 public-site-derived; full family/near-duplicate audit still pending."
+    },
+    {
+      "id": "web_minipaint",
+      "platform": "web",
+      "name": "miniPaint",
+      "repo": "https://github.com/viliusle/miniPaint",
+      "commit": "a79733eb803fc97084ef0ee4faa96b031e69e1c0",
+      "license": "MIT",
+      "license_evidence": "evidence/viliusle__miniPaint__MIT-LICENSE.txt",
+      "selection": "source_acquisition_candidate_not_runtime_admitted",
+      "build_evidence": {
+        "official_readme": "Browser-local editor; Wiki Build instructions linked.",
+        "fixed_source": "package.json build is webpack --mode production; server uses webpack serve; index.html loads local dist/bundle.js; repository includes dist/",
+        "runtime_expected": "browser Canvas/JavaScript; upload/draw/filter/layers/undo/save; no required account",
+        "executed": false,
+        "limitations": [
+          "Pinned hermite-resize dependency references git rather than a package semver; lockfile and dist artifact must be preserved for admission.",
+          "webfontloader may fetch optional fonts; local defaults and external network denial need validation.",
+          "Static files present does not prove the pinned UI starts successfully."
+        ]
+      },
+      "workflows": [
+        {
+          "sequence": [
+            "import synthetic PNG",
+            "resize/crop",
+            "undo last transformation",
+            "save PNG",
+            "reopen and check dimensions"
+          ],
+          "validator_expected": [
+            "image dimensions track control changes",
+            "undo returns prior image state",
+            "export produces valid image matching final visible state"
+          ],
+          "evidence": "fixed README Features Files/Edit/Image"
+        },
+        {
+          "sequence": [
+            "create two layers",
+            "draw shape on active layer",
+            "toggle or reorder layer",
+            "undo",
+            "save JSON layers and reopen"
+          ],
+          "validator_expected": [
+            "operations target selected layer",
+            "layer visibility/order changes composited image",
+            "round-trip preserves layer count and geometry"
+          ],
+          "evidence": "fixed README Features Layers/Files/Edit"
+        },
+        {
+          "sequence": [
+            "choose text/drawing tool",
+            "change color and size",
+            "edit on canvas",
+            "change zoom",
+            "navigate menus using keyboard"
+          ],
+          "validator_expected": [
+            "selected tool state is reflected in control panel",
+            "canvas pointer coordinates remain correct under zoom",
+            "menus and Undo are accessible"
+          ],
+          "evidence": "fixed README Tools/Help; exact controls pending observation"
+        }
+      ],
+      "skill_expectation": [
+        "Recover menu/dialog/canvas/active-layer state from public observations rather than copying target HTML.",
+        "Model undo as prior state restoration across several interacting controls.",
+        "Check pointer coordinate transforms and responsive toolbar/panel behavior before accepting a clone."
+      ],
+      "bench_correspondence": {
+        "same_task_form": "Official Web observation -> recreate -> verify, with Canvas-heavy content.",
+        "web_public_capabilities": [
+          "menus and dialogs",
+          "click/drag/keyboard behavior",
+          "state-dependent panels",
+          "asset handling and responsive visual layout"
+        ],
+        "cross_platform_capability_examples": [
+          "ubuntu/ksnip-ksnip",
+          "macos/photoflare-photoflare",
+          "windows/0xmartin-bmpeditor"
+        ],
+        "inference_only": true,
+        "no_skill_gain_claim": true
+      },
+      "source_caveats": [
+        "Complete MIT text was downloaded and inspected; GitHub license API reports NOASSERTION, overridden by explicit MIT-LICENSE.txt plus README/package license.",
+        "No canonical repository match against 200 native entries; candidate names absent from 250 task index and 266 reference paths.",
+        "Anonymous Web origin/template de-duplication remains pending.",
+        "Its image-editing domain differs from much of Web50: shared UI capabilities are a hypothesis, not evidence of transfer.",
+        "Downloaded target source is researcher-side reference only, never actor input."
+      ],
+      "github_repository_size_kib": 22679,
+      "source_archive_bytes": 4252920,
+      "source_archive_sha256": "21f1cadb54397f21927194d762fcef32282b0b2ec501a2cfaf65af9008c34fb4",
+      "max_corrective_rounds_including_first": 3,
+      "source_acquisition": {
+        "application_id": "web--viliusle--miniPaint",
+        "platform": "web",
+        "repo": "https://github.com/viliusle/miniPaint",
+        "commit": "a79733eb803fc97084ef0ee4faa96b031e69e1c0",
+        "source_url": "https://codeload.github.com/viliusle/miniPaint/tar.gz/a79733eb803fc97084ef0ee4faa96b031e69e1c0",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\archives\\web--viliusle--miniPaint--a79733eb803fc97084ef0ee4faa96b031e69e1c0.tar.gz",
+        "archive_bytes": 4252920,
+        "archive_sha256": "21f1cadb54397f21927194d762fcef32282b0b2ec501a2cfaf65af9008c34fb4",
+        "source_directory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\sources\\web--viliusle--miniPaint",
+        "regular_files": 292,
+        "expanded_bytes": 6887663,
+        "skipped_links": 0,
+        "inventory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\inventories\\web--viliusle--miniPaint.json",
+        "inventory_sha256": "b4c19879ffb1577374b5e2152612af5434b073bd63c7f0ce7aa027c963c030fa",
+        "runtime_accepted": false
+      },
+      "runtime_accepted": false,
+      "trajectory_count": 0,
+      "verified_skill_count": 0,
+      "origin_report": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\application_pool.json",
+      "selection_status": "main_source_candidate_runtime_pending",
+      "source_phase_correction": "Web44 synthetic/6 public-site-derived; full family/near-duplicate audit still pending."
+    },
+    {
+      "id": "macos_hexfiend",
+      "platform": "macos",
+      "name": "Hex Fiend",
+      "repo": "https://github.com/HexFiend/HexFiend",
+      "tag": "v2.18.1",
+      "commit": "e2f91f1b7aff9a473c3b5aaf7c2e0cf3cb9e027e",
+      "license": "BSD-2-Clause",
+      "license_evidence": "HexFiend__HexFiend/License.txt",
+      "build_evidence": {
+        "official_readme": "Native macOS hex editor; local binary editing, searching and comparison.",
+        "fixed_source": "Makefile invokes xcodebuild for documentation; .gitmodules is empty. Guessed project paths returned HTTP 404, so full project/build dependency admission remains pending.",
+        "runtime_expected": "macOS AppKit application using local synthetic files; no account needed for proposed core workflows.",
+        "executed": false,
+        "limitations": [
+          "Build, deployment target and signing have not been executed or fully admitted.",
+          "Custom byte-grid accessibility may require screenshots and coordinates; macOS AX capability is unverified.",
+          "Source archive alone does not include a verified runnable application."
+        ]
+      },
+      "workflows": [
+        {
+          "sequence": [
+            "Observe byte grid, character panel and inspector using a small synthetic binary.",
+            "Observe select, replace and save-as state transitions.",
+            "Implement the observed editor behavior independently, then reopen and compare saved bytes."
+          ],
+          "validator_expected": [
+            "Exact expected byte sequence and file length.",
+            "Selection/view state agrees with input.",
+            "Save/reopen preserves edited content."
+          ],
+          "evidence": "Pinned README documents binary editing and inspector; exact task controls require reference UI observation."
+        },
+        {
+          "sequence": [
+            "Observe search and compare panels on two small controlled binaries.",
+            "Record no-match, next-match and changed-byte states.",
+            "Recreate these states, then selfcheck offsets and diff outputs."
+          ],
+          "validator_expected": [
+            "Expected matching offsets.",
+            "Correct changed byte regions.",
+            "No-match state does not mutate data."
+          ],
+          "evidence": "Pinned README documents search and binary comparison; proposed task contract, not an existing official validator."
+        }
+      ],
+      "skill_expectation": [
+        "Observe coupled grid/inspector/selection states before recreating a desktop UI.",
+        "Treat binary data as bytes and verify saved artifacts.",
+        "Separate viewport state from persistent document changes."
+      ],
+      "bench_correspondence": [
+        {
+          "task_id": "macos/abentele-erbele",
+          "capability": "Desktop text/selection/menu/document state.",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "macos/pawelsalawa-letos",
+          "capability": "Structured local editing and state inspection.",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "ubuntu/kde-okteta",
+          "capability": "Binary editor capabilities on another native platform; strongest functional correspondence.",
+          "rationale_inference": true
+        }
+      ],
+      "source_isolation": {
+        "aliases": [
+          "https://github.com/ridiculousfish/HexFiend"
+        ],
+        "known_upstream": [],
+        "manual_evidence": "Canonical project moved organization; the old owner is treated as an alias.",
+        "family_risk": "Text/hex editor domain overlap is expected. No exact candidate/alias source identity matched the native catalog, but code similarity is not proven absent.",
+        "full_code_audit_pending": true,
+        "exact_repo_matches": [],
+        "identity_audit_file": "source_identity_audit.json"
+      },
+      "references": [
+        "https://github.com/HexFiend/HexFiend",
+        "https://github.com/HexFiend/HexFiend/releases/tag/v2.18.1",
+        "https://github.com/HexFiend/HexFiend/tree/e2f91f1b7aff9a473c3b5aaf7c2e0cf3cb9e027e"
+      ],
+      "skill_expectation_is_hypothesis": true,
+      "download_size": "Root acquired source archive; use root acquisition manifest for exact bytes. No source download or build by this subagent.",
+      "source_acquisition": {
+        "application_id": "macos--HexFiend--HexFiend",
+        "platform": "macos",
+        "repo": "https://github.com/HexFiend/HexFiend",
+        "commit": "e2f91f1b7aff9a473c3b5aaf7c2e0cf3cb9e027e",
+        "source_url": "https://codeload.github.com/HexFiend/HexFiend/tar.gz/e2f91f1b7aff9a473c3b5aaf7c2e0cf3cb9e027e",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\archives\\macos--HexFiend--HexFiend--e2f91f1b7aff9a473c3b5aaf7c2e0cf3cb9e027e.tar.gz",
+        "archive_bytes": 4676977,
+        "archive_sha256": "1d8f5fcac686edfc5452b49716c8ac8d64a1c003aca39b23536d94004b80b73c",
+        "source_directory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\sources\\macos--HexFiend--HexFiend",
+        "regular_files": 767,
+        "expanded_bytes": 8634123,
+        "skipped_links": 0,
+        "inventory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\inventories\\macos--HexFiend--HexFiend.json",
+        "inventory_sha256": "72e0c68039e3de442dce55ba7bb25a344f50a1e33f09c03995c85cd3d89129c6",
+        "runtime_accepted": false
+      },
+      "runtime_accepted": false,
+      "trajectory_count": 0,
+      "verified_skill_count": 0,
+      "max_corrective_rounds_including_first": 3,
+      "origin_report": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\application_pool.json",
+      "selection_status": "main_source_candidate_runtime_pending",
+      "source_phase_correction": "Web44 synthetic/6 public-site-derived; full family/near-duplicate audit still pending."
+    },
+    {
+      "id": "macos_gifski",
+      "platform": "macos",
+      "name": "Gifski",
+      "repo": "https://github.com/sindresorhus/Gifski",
+      "tag": "v2.23.0",
+      "commit": "6fd12595617d1854c59f4ddca8e068fefa66c397",
+      "license": "MIT for GUI source; AGPL-3.0-or-later for gifski encoder dependency",
+      "license_evidence": "sindresorhus__Gifski/license",
+      "build_evidence": {
+        "official_readme": "Convert local videos into GIFs; older compatible v2.23.0 selected rather than current macOS 26 release.",
+        "fixed_source": "Pinned README says macOS 13+; project deployment target is 13.3. Build uses Xcode, Rust and SwiftLint with Swift package dependencies.",
+        "runtime_expected": "macOS 14.7.5 reference host can satisfy the declared deployment target; local video/GIF core needs no application account.",
+        "executed": false,
+        "limitations": [
+          "Build/toolchain, signing, Rust library resolution and reference UI not executed.",
+          "Dependency revision/license audit must include the AGPL encoder; do not label the whole bundle MIT.",
+          "Latest v3 cropping/macOS 26 features are outside selected v2.23.0.",
+          "Video decode support and output inspection need admission using a synthetic input."
+        ]
+      },
+      "workflows": [
+        {
+          "sequence": [
+            "Observe local short-video import, settings, preview and save dialog.",
+            "Change dimensions, FPS and quality one at a time.",
+            "Recreate the observed pipeline and selfcheck decoded GIF dimensions, frame count and saved file."
+          ],
+          "validator_expected": [
+            "Output is a decodable GIF.",
+            "Expected dimensions and bounded frame count.",
+            "Settings visibly update preview and output."
+          ],
+          "evidence": "Pinned README documents conversion controls; concrete values and preview behavior require UI admission."
+        },
+        {
+          "sequence": [
+            "Observe loop, bounce and playback speed behavior on a short synthetic video.",
+            "Record reset/new-input transitions.",
+            "Implement the observed state handling, then verify animation order and loop metadata."
+          ],
+          "validator_expected": [
+            "Expected loop behavior.",
+            "Expected forward/reverse frame ordering for admitted bounce control.",
+            "Replacing source does not export stale frames."
+          ],
+          "evidence": "Pinned v2 README features; no v3-only crop requirement."
+        }
+      ],
+      "skill_expectation": [
+        "Map asynchronous media settings to preview and generated artifacts.",
+        "Verify output format and metadata in addition to screenshots.",
+        "Manage import/export dialogs and stale media state."
+      ],
+      "bench_correspondence": [
+        {
+          "task_id": "macos/mifi-lossless-cut",
+          "capability": "Local media import, parameter selection, preview and export.",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "macos/stefansl-image-shrinker",
+          "capability": "Dimension settings and transformed local image artifacts.",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "macos/sappharad-mp3gainosx",
+          "capability": "Media parameter changes with persistent output.",
+          "rationale_inference": true
+        }
+      ],
+      "source_isolation": {
+        "aliases": [],
+        "known_upstream": [
+          "https://github.com/ImageOptim/gifski"
+        ],
+        "manual_evidence": "Native Swift GUI is a distinct wrapper around the ImageOptim encoder; both identities are audited against native benchmark sources.",
+        "family_risk": "Shared codec library/source dependency must be pinned and audited; distinct GUI repo alone does not eliminate transitive source overlap.",
+        "full_code_audit_pending": true,
+        "exact_repo_matches": [],
+        "identity_audit_file": "source_identity_audit.json"
+      },
+      "references": [
+        "https://github.com/sindresorhus/Gifski/releases/tag/v2.23.0",
+        "https://raw.githubusercontent.com/sindresorhus/Gifski/6fd12595617d1854c59f4ddca8e068fefa66c397/readme.md",
+        "https://github.com/ImageOptim/gifski/blob/main/README.md",
+        "https://github.com/sindresorhus/Gifski/tree/6fd12595617d1854c59f4ddca8e068fefa66c397"
+      ],
+      "skill_expectation_is_hypothesis": true,
+      "download_size": "Root acquired source archive; use root acquisition manifest for exact bytes. No source download or build by this subagent.",
+      "source_acquisition": {
+        "application_id": "macos--sindresorhus--Gifski",
+        "platform": "macos",
+        "repo": "https://github.com/sindresorhus/Gifski",
+        "commit": "6fd12595617d1854c59f4ddca8e068fefa66c397",
+        "source_url": "https://codeload.github.com/sindresorhus/Gifski/tar.gz/6fd12595617d1854c59f4ddca8e068fefa66c397",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\archives\\macos--sindresorhus--Gifski--6fd12595617d1854c59f4ddca8e068fefa66c397.tar.gz",
+        "archive_bytes": 3204845,
+        "archive_sha256": "b510cd552558579a39b9a1813aadb0154da3e23e3f35c53f3cac8a684fef6260",
+        "source_directory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\sources\\macos--sindresorhus--Gifski",
+        "regular_files": 106,
+        "expanded_bytes": 3670991,
+        "skipped_links": 0,
+        "inventory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\inventories\\macos--sindresorhus--Gifski.json",
+        "inventory_sha256": "dc705aee2f9aefe37b0f969f8a0de90c217212f6dcc99f1918ac5b642ea28bca",
+        "runtime_accepted": false
+      },
+      "runtime_accepted": false,
+      "trajectory_count": 0,
+      "verified_skill_count": 0,
+      "max_corrective_rounds_including_first": 3,
+      "origin_report": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\application_pool.json",
+      "selection_status": "main_source_candidate_runtime_pending",
+      "source_phase_correction": "Web44 synthetic/6 public-site-derived; full family/near-duplicate audit still pending."
+    },
+    {
+      "id": "macos_macpass",
+      "platform": "macos",
+      "name": "MacPass",
+      "repo": "https://github.com/MacPass/MacPass",
+      "tag": "0.8.2",
+      "commit": "3256bc93ea94eb20b618c155e6a1b08e6fabe663",
+      "license": "GPL-3.0-or-later",
+      "license_evidence": "MacPass__MacPass/LICENSE.txt",
+      "build_evidence": {
+        "official_readme": "Native macOS KeePass database client; recursive Git checkout, Carthage and Xcode build.",
+        "fixed_source": "Deployment target 10.13. DDHotKey Git submodule plus Carthage dependencies including KeePassKit, KissXML, TransformerKit, HNHUi and Sparkle.",
+        "runtime_expected": "Local synthetic password database and dummy values, with no application account or cloud integration.",
+        "executed": false,
+        "limitations": [
+          "Build with recursive dependencies and code signing not yet admitted.",
+          "Only GitHub source/release is selected; the project reports abandonment of old macpassapp.org and fixes the update domain in 0.8.2.",
+          "AutoType, browser integrations, plugins, external cloud/password stores and real secrets are excluded.",
+          "Protocol/source-family risk with benchmark KeeWeb is explicitly unresolved at code/dependency level."
+        ]
+      },
+      "workflows": [
+        {
+          "sequence": [
+            "Observe group and entry forms in an isolated synthetic KeePass database.",
+            "Create groups and dummy entries, edit fields, then observe search and selection states.",
+            "Independently implement the observed CRUD/search UI and selfcheck local persistence after reopening."
+          ],
+          "validator_expected": [
+            "Expected group/entry structure and dummy fields.",
+            "Search returns correct controlled entries.",
+            "Edited values survive save/reopen."
+          ],
+          "evidence": "Pinned README documents local KeePass management; exact forms and validation need UI observation."
+        },
+        {
+          "sequence": [
+            "Observe moving an entry between groups and locking/reopening the local database.",
+            "Record focus, selection and locked/unlocked state transitions.",
+            "Recreate only these admitted behaviors and check that move and lock preserve data."
+          ],
+          "validator_expected": [
+            "Correct destination group.",
+            "Locked UI hides editable entries.",
+            "Reopen restores controlled database structure."
+          ],
+          "evidence": "Proposed reference task; lock/move controls and validation must be admitted, without plugins."
+        }
+      ],
+      "skill_expectation": [
+        "Recreate nested list/detail editors and persistence contracts.",
+        "Separate lock/session state from stored records.",
+        "Use synthetic fixtures and verify structure instead of memorizing literal passwords."
+      ],
+      "bench_correspondence": [
+        {
+          "task_id": "macos/saturneric-gpgfrontend",
+          "capability": "Local structured security records, forms and saved state.",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "macos/p0deje-maccy",
+          "capability": "Selection/search and transient desktop state.",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "ubuntu/keeweb-keeweb",
+          "capability": "Same KeePass file-format domain; deliberate capability overlap and family-risk disclosure.",
+          "rationale_inference": true
+        }
+      ],
+      "source_isolation": {
+        "aliases": [],
+        "known_upstream": [],
+        "manual_evidence": "Official README presents MacPass as a native client and KeeWeb as an alternative; no claim of a KeeWeb product fork is present. KeePassKit is a separate dependency.",
+        "family_risk": "MacPass and benchmark KeeWeb share KeePass/KDBX format and may share algorithms or libraries. This supports capability transfer but does not establish strict family isolation. A family/source dependency review is required before accepting strong isolation claims.",
+        "full_code_audit_pending": true,
+        "exact_repo_matches": [],
+        "identity_audit_file": "source_identity_audit.json"
+      },
+      "references": [
+        "https://github.com/MacPass/MacPass",
+        "https://github.com/MacPass/MacPass/releases/tag/0.8.2",
+        "https://raw.githubusercontent.com/MacPass/MacPass/3256bc93ea94eb20b618c155e6a1b08e6fabe663/README.md",
+        "https://github.com/MacPass/MacPass/tree/3256bc93ea94eb20b618c155e6a1b08e6fabe663"
+      ],
+      "skill_expectation_is_hypothesis": true,
+      "download_size": "Root acquired source archive; use root acquisition manifest for exact bytes. No source download or build by this subagent.",
+      "source_acquisition": {
+        "application_id": "macos--MacPass--MacPass",
+        "platform": "macos",
+        "repo": "https://github.com/MacPass/MacPass",
+        "commit": "3256bc93ea94eb20b618c155e6a1b08e6fabe663",
+        "source_url": "https://codeload.github.com/MacPass/MacPass/tar.gz/3256bc93ea94eb20b618c155e6a1b08e6fabe663",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\archives\\macos--MacPass--MacPass--3256bc93ea94eb20b618c155e6a1b08e6fabe663.tar.gz",
+        "archive_bytes": 11047609,
+        "archive_sha256": "a5be7eb0b749121a17dc9d4c73e8db5924f351c08ae2137c8ec03a9be68456c4",
+        "source_directory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\sources\\macos--MacPass--MacPass",
+        "regular_files": 1079,
+        "expanded_bytes": 15220010,
+        "skipped_links": 0,
+        "inventory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\inventories\\macos--MacPass--MacPass.json",
+        "inventory_sha256": "109ded7819ebade6def8ae6267ed501c39eb7150741097bb517db540da3d9901",
+        "runtime_accepted": false
+      },
+      "runtime_accepted": false,
+      "trajectory_count": 0,
+      "verified_skill_count": 0,
+      "max_corrective_rounds_including_first": 3,
+      "origin_report": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\application_pool.json",
+      "selection_status": "conditional_reserve_family_risk",
+      "source_phase_correction": "Web44 synthetic/6 public-site-derived; full family/near-duplicate audit still pending."
+    },
+    {
+      "id": "android_fossify_gallery",
+      "platform": "android",
+      "name": "Fossify Gallery",
+      "repo": "https://github.com/FossifyOrg/Gallery",
+      "tag": "1.13.1",
+      "commit": "b28299dc33821eee8d108a9880ce87876cf31443",
+      "license": "GPL-3.0 (repository license; header grant audit pending)",
+      "license_evidence": "FossifyOrg__Gallery/LICENSE",
+      "build_evidence": {
+        "official_readme": "Offline local photo/gallery core with albums, editing, resize, rotate, flip and recycle bin.",
+        "fixed_source": "compileSdk 36, targetSdk 36, minSdk 26; foss/gplay flavors. Main manifest removes ACCESS_NETWORK_STATE; merged APK manifest not audited.",
+        "runtime_expected": "Android API 35 benchmark host meets declared minimum; SDK 36 is required to build selected version. foss debug flavor avoids store publishing.",
+        "executed": false,
+        "limitations": [
+          "No APK build, installation, merged manifest or UiAutomator/UI hierarchy validation.",
+          "SDK 36 build prerequisites and API 35 scoped-storage/media permissions must be admitted.",
+          "Canvas editing may need screenshot coordinates.",
+          "Only synthetic local media; no PIN/protected albums, external sharing or online components."
+        ]
+      },
+      "workflows": [
+        {
+          "sequence": [
+            "Observe seeded local album/list/detail states and file picker permissions.",
+            "Observe a controlled rotate or resize operation and save result.",
+            "Recreate these states and check resulting image orientation/dimensions plus local file persistence."
+          ],
+          "validator_expected": [
+            "Expected image dimensions/orientation.",
+            "Saved artifact readable in local album.",
+            "Album selection and new-media refresh are consistent."
+          ],
+          "evidence": "Pinned README lists local gallery/editing; exact controls and permissions need reference UI admission."
+        },
+        {
+          "sequence": [
+            "Observe creating/renaming an album and moving selected synthetic images.",
+            "Observe delete-to-recycle and restore states if supported by selected UI.",
+            "Implement admitted list-selection/dialog/storage transitions and compare expected filenames and membership."
+          ],
+          "validator_expected": [
+            "Correct album membership.",
+            "Selected items move once.",
+            "Admitted recycle/restore operation preserves controlled bytes."
+          ],
+          "evidence": "Proposed task from pinned gallery/recycle-bin capabilities; confirm selected release UI before task freeze."
+        }
+      ],
+      "skill_expectation": [
+        "Observe Android scoped-storage and multi-selection flows.",
+        "Recreate media list/detail/editor transitions with persistent files.",
+        "Validate generated artifacts and list refresh, not only image similarity."
+      ],
+      "bench_correspondence": [
+        {
+          "task_id": "android/patzly-doodle-android",
+          "capability": "Touch/canvas drawing or editing state.",
+          "rationale_inference": true,
+          "correction_280": "Doodle is a dynamic wallpaper/theme app, not drawing/touch canvas; this old mapping is not evidence of drawing transfer.",
+          "mapping_withdrawn_from_sufficiency": true
+        },
+        {
+          "task_id": "android/swati4star-images-to-pdf",
+          "capability": "Local image selection and generated file outputs.",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "android/teamamaze-amazefilemanager",
+          "capability": "Albums/files, selection, move and permission dialogs.",
+          "rationale_inference": true
+        }
+      ],
+      "source_isolation": {
+        "aliases": [],
+        "known_upstream": [
+          "https://github.com/SimpleMobileTools/Simple-Gallery"
+        ],
+        "manual_evidence": "Fossify Gallery is a continuation/fork of Simple Gallery; the family must be treated as one unit across candidate versions or sister apps.",
+        "family_risk": "No candidate/upstream exact repo identity in native catalog. Common Android libraries and Fossify Commons remain a transitive similarity risk; no second Fossify app is selected.",
+        "full_code_audit_pending": true,
+        "exact_repo_matches": [],
+        "identity_audit_file": "source_identity_audit.json"
+      },
+      "references": [
+        "https://github.com/FossifyOrg/Gallery",
+        "https://github.com/FossifyOrg/Gallery/releases/tag/1.13.1",
+        "https://raw.githubusercontent.com/FossifyOrg/Gallery/b28299dc33821eee8d108a9880ce87876cf31443/app/build.gradle.kts",
+        "https://github.com/FossifyOrg/Gallery/tree/b28299dc33821eee8d108a9880ce87876cf31443"
+      ],
+      "skill_expectation_is_hypothesis": true,
+      "download_size": "Root acquired source archive; use root acquisition manifest for exact bytes. No source download or build by this subagent.",
+      "source_acquisition": {
+        "application_id": "android--FossifyOrg--Gallery",
+        "platform": "android",
+        "repo": "https://github.com/FossifyOrg/Gallery",
+        "commit": "b28299dc33821eee8d108a9880ce87876cf31443",
+        "source_url": "https://codeload.github.com/FossifyOrg/Gallery/tar.gz/b28299dc33821eee8d108a9880ce87876cf31443",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\archives\\android--FossifyOrg--Gallery--b28299dc33821eee8d108a9880ce87876cf31443.tar.gz",
+        "archive_bytes": 30046447,
+        "archive_sha256": "13cb8b4a673569145975805322dbfd6128aad0a70b2d050e0af78bb02380842d",
+        "source_directory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\sources\\android--FossifyOrg--Gallery",
+        "regular_files": 598,
+        "expanded_bytes": 33079307,
+        "skipped_links": 0,
+        "inventory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\inventories\\android--FossifyOrg--Gallery.json",
+        "inventory_sha256": "2546b0b38089d5c270e7ec1d241e60df591e0cec562259e1522a9eaa586587ff",
+        "runtime_accepted": false
+      },
+      "runtime_accepted": false,
+      "trajectory_count": 0,
+      "verified_skill_count": 0,
+      "max_corrective_rounds_including_first": 3,
+      "origin_report": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\application_pool.json",
+      "selection_status": "main_source_candidate_runtime_pending",
+      "source_phase_correction": "Web44 synthetic/6 public-site-derived; full family/near-duplicate audit still pending."
+    },
+    {
+      "id": "android_activity_diary",
+      "platform": "android",
+      "name": "Activity Diary",
+      "repo": "https://github.com/ramack/ActivityDiary",
+      "tag": "v1.4.2",
+      "commit": "22593ca02b897132c5649f1219aa93448dc18b06",
+      "license": "GPL-3.0-or-later",
+      "license_evidence": "ramack__ActivityDiary/LICENSE",
+      "build_evidence": {
+        "official_readme": "Local activity tracking, notes, pictures and history; privacy policy says data stays local unless the user requests transmission.",
+        "fixed_source": "compileSdk 30, targetSdk 30, minSdk 21; applicationId de.rampro.activitydiary. Older Gradle/dependencies include map, charts and optional mail crash reporting.",
+        "runtime_expected": "Local activity/notes/history workflows without account, location lookup, maps or crash-report transmission.",
+        "executed": false,
+        "limitations": [
+          "Old Android build toolchain/dependency repository and API 35 runtime compatibility not admitted.",
+          "Publishing Gradle configuration refers to a service-account file; publishing tasks are excluded, and debug configuration must be checked without any credential.",
+          "No installation/UiAutomator testing has occurred.",
+          "Timing-sensitive numeric duration scoring is avoided; deterministic activity/notes/history state is proposed."
+        ]
+      },
+      "workflows": [
+        {
+          "sequence": [
+            "Observe creating activities, choosing color/icon and current-activity selection.",
+            "Observe start/change/stop states and adding a short synthetic note.",
+            "Recreate the admitted state machine, then verify selected activity, note content and history sequence."
+          ],
+          "validator_expected": [
+            "Correct mutually exclusive current activity.",
+            "Expected note attached to correct event.",
+            "History order agrees with observed transitions."
+          ],
+          "evidence": "Pinned README and local privacy policy; exact forms/buttons need UI observation."
+        },
+        {
+          "sequence": [
+            "Observe activity search/filter and editing a controlled history note.",
+            "Record empty-result and restored-list states.",
+            "Independently implement these transitions and selfcheck persistence after reopening."
+          ],
+          "validator_expected": [
+            "Expected matched activity names.",
+            "Edited note persists.",
+            "Empty search does not delete stored records."
+          ],
+          "evidence": "Proposed task; search/edit availability must be admitted in selected release."
+        }
+      ],
+      "skill_expectation": [
+        "Infer a timer/activity state machine from observable transitions.",
+        "Implement local CRUD/filtering and history persistence.",
+        "Avoid treating wall-clock timing noise as task success evidence."
+      ],
+      "bench_correspondence": [
+        {
+          "task_id": "android/razeeman-android-simpletimetracker",
+          "capability": "Activity/timer/history state machine.",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "android/v1tzor-timeplanner",
+          "capability": "Local planning records and multiple screens.",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "android/goodtime-productivity-goodtime",
+          "capability": "Start/stop and active-session state.",
+          "rationale_inference": true
+        }
+      ],
+      "source_isolation": {
+        "aliases": [],
+        "known_upstream": [],
+        "manual_evidence": "Official project has its own Activity Diary implementation; exact repository identities were compared across all public benchmark source rows.",
+        "family_risk": "Functional domain overlaps timer/planning benchmark apps. Exact identity non-overlap is not a source-copy or full product-lineage guarantee.",
+        "full_code_audit_pending": true,
+        "exact_repo_matches": [],
+        "identity_audit_file": "source_identity_audit.json"
+      },
+      "references": [
+        "https://github.com/ramack/ActivityDiary",
+        "https://raw.githubusercontent.com/ramack/ActivityDiary/22593ca02b897132c5649f1219aa93448dc18b06/Privacy-Policy.md",
+        "https://raw.githubusercontent.com/ramack/ActivityDiary/22593ca02b897132c5649f1219aa93448dc18b06/app/build.gradle",
+        "https://github.com/ramack/ActivityDiary/tree/22593ca02b897132c5649f1219aa93448dc18b06"
+      ],
+      "skill_expectation_is_hypothesis": true,
+      "download_size": "Root acquired source archive; use root acquisition manifest for exact bytes. No source download or build by this subagent.",
+      "source_acquisition": {
+        "application_id": "android--ramack--ActivityDiary",
+        "platform": "android",
+        "repo": "https://github.com/ramack/ActivityDiary",
+        "commit": "22593ca02b897132c5649f1219aa93448dc18b06",
+        "source_url": "https://codeload.github.com/ramack/ActivityDiary/tar.gz/22593ca02b897132c5649f1219aa93448dc18b06",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\archives\\android--ramack--ActivityDiary--22593ca02b897132c5649f1219aa93448dc18b06.tar.gz",
+        "archive_bytes": 3385447,
+        "archive_sha256": "b38a1b78b0c0187088dfc37eff230cadaf6552702e58b39059ee2b79fd7335b0",
+        "source_directory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\sources\\android--ramack--ActivityDiary",
+        "regular_files": 477,
+        "expanded_bytes": 5243998,
+        "skipped_links": 0,
+        "inventory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\inventories\\android--ramack--ActivityDiary.json",
+        "inventory_sha256": "30805ddd9e9f67fdb9690cce8084ff3bd6ce4807b83af3b6c0d5a0a0e694f955",
+        "runtime_accepted": false
+      },
+      "runtime_accepted": false,
+      "trajectory_count": 0,
+      "verified_skill_count": 0,
+      "max_corrective_rounds_including_first": 3,
+      "origin_report": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\application_pool.json",
+      "selection_status": "main_source_candidate_runtime_pending",
+      "source_phase_correction": "Web44 synthetic/6 public-site-derived; full family/near-duplicate audit still pending."
+    },
+    {
+      "id": "android_family_gem",
+      "platform": "android",
+      "name": "Family Gem",
+      "repo": "https://github.com/michelesalvador/FamilyGem",
+      "tag": "v1.2",
+      "commit": "3aeb97f00cfe6b8f8efbb5c0164529f0a0e16c62",
+      "license": "GPL-3.0-or-later",
+      "license_evidence": "michelesalvador__FamilyGem__v1.2/LICENSE.txt",
+      "build_evidence": {
+        "official_readme": "Create/edit local family trees, people, events, photos and GEDCOM files; online sharing and place lookup are optional separate facilities.",
+        "fixed_source": "v1.2 compileSdk/targetSdk 35, minSdk 21, app.familygem; v1.3 was inspected and rejected because compile/target SDK 37.2 is less compatible.",
+        "runtime_expected": "Offline fictional three-person family tree and GEDCOM import/export on Android API 35, without online sharing, place suggestions or premium tree merge.",
+        "executed": false,
+        "limitations": [
+          "Build/installation/UiAutomator and file-picker compatibility remain unverified.",
+          "Vendored gedcomgraph/geonames JARs need source/license provenance audit before final redistribution.",
+          "Network permission exists for optional services; proposed runtime uses blocked network and local core.",
+          "Diagram canvas may lack detailed accessibility nodes; use bounded small graph and observable editor forms."
+        ]
+      },
+      "workflows": [
+        {
+          "sequence": [
+            "Observe creating three fictional people and parent-child links in local forms.",
+            "Observe switching between person detail and relationship diagram.",
+            "Recreate the observed small graph UI/persistence and verify exported GEDCOM records and relationships."
+          ],
+          "validator_expected": [
+            "Exactly expected people and links.",
+            "Person data survives reopen.",
+            "Exported GEDCOM references resolve to controlled records."
+          ],
+          "evidence": "Pinned v1.2 README local tree and GEDCOM features; selected-release UI needs observation."
+        },
+        {
+          "sequence": [
+            "Observe import of a tiny synthetic GEDCOM and editing a note/date event.",
+            "Observe export and local save dialog.",
+            "Implement the admitted import/edit/export transitions and selfcheck structured records after round trip."
+          ],
+          "validator_expected": [
+            "Expected event/note edits in exported records.",
+            "No unintended duplicate people.",
+            "Reimport/reopen preserves edited relationships."
+          ],
+          "evidence": "Proposed local-only task; no geolocation/autocomplete or online account feature."
+        }
+      ],
+      "skill_expectation": [
+        "Recreate nested forms and graph/detail state transitions.",
+        "Preserve linked records and identifiers through local import/export.",
+        "Use structured artifact validation in addition to visual diagram matching."
+      ],
+      "bench_correspondence": [
+        {
+          "task_id": "android/v1tzor-timeplanner",
+          "capability": "Multi-screen linked local records and editing.",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "android/mhss1-mybrain",
+          "capability": "Structured local CRUD, detail forms and persistence; capability-level analogy, not genealogy-domain equivalence.",
+          "rationale_inference": true
+        }
+      ],
+      "source_isolation": {
+        "aliases": [],
+        "known_upstream": [],
+        "manual_evidence": "Canonical repository and public local genealogy workflow; no exact candidate source identity in native benchmark catalog.",
+        "family_risk": "There is no directly corresponding genealogy benchmark domain. Similarity is at interaction/state/persistence level and shared dependencies still need audit.",
+        "full_code_audit_pending": true,
+        "exact_repo_matches": [],
+        "identity_audit_file": "source_identity_audit.json"
+      },
+      "references": [
+        "https://github.com/michelesalvador/FamilyGem",
+        "https://raw.githubusercontent.com/michelesalvador/FamilyGem/3aeb97f00cfe6b8f8efbb5c0164529f0a0e16c62/README.md",
+        "https://raw.githubusercontent.com/michelesalvador/FamilyGem/3aeb97f00cfe6b8f8efbb5c0164529f0a0e16c62/app/build.gradle",
+        "https://github.com/michelesalvador/FamilyGem/tree/3aeb97f00cfe6b8f8efbb5c0164529f0a0e16c62"
+      ],
+      "skill_expectation_is_hypothesis": true,
+      "download_size": "Root acquired source archive; use root acquisition manifest for exact bytes. No source download or build by this subagent.",
+      "source_acquisition": {
+        "application_id": "android--michelesalvador--FamilyGem",
+        "platform": "android",
+        "repo": "https://github.com/michelesalvador/FamilyGem",
+        "commit": "3aeb97f00cfe6b8f8efbb5c0164529f0a0e16c62",
+        "source_url": "https://codeload.github.com/michelesalvador/FamilyGem/tar.gz/3aeb97f00cfe6b8f8efbb5c0164529f0a0e16c62",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\archives\\android--michelesalvador--FamilyGem--3aeb97f00cfe6b8f8efbb5c0164529f0a0e16c62.tar.gz",
+        "archive_bytes": 746825,
+        "archive_sha256": "69bc1b42cb28b190b94ee35c4ec37fb33be7b17323690289b37800424d77fddf",
+        "source_directory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\sources\\android--michelesalvador--FamilyGem--3aeb97f00cfe",
+        "regular_files": 346,
+        "expanded_bytes": 2289152,
+        "skipped_links": 0,
+        "inventory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\inventories\\android--michelesalvador--FamilyGem--3aeb97f00cfe.json",
+        "inventory_sha256": "f0288fe77cd3b7e03d9dd4f38dd2ea4da1ca41cc04a060f27069d3eeff232806",
+        "runtime_accepted": false
+      },
+      "runtime_accepted": false,
+      "trajectory_count": 0,
+      "verified_skill_count": 0,
+      "max_corrective_rounds_including_first": 3,
+      "origin_report": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\application_pool.json",
+      "selection_status": "main_source_candidate_runtime_pending",
+      "source_phase_correction": "Web44 synthetic/6 public-site-derived; full family/near-duplicate audit still pending."
+    },
+    {
+      "id": "web_vite_docs",
+      "platform": "web",
+      "name": "Vite documentation site",
+      "repo": "https://github.com/vitejs/vite",
+      "commit": "fdb2e6f63894d8c458c1778f3df77afe537f2bb2",
+      "release": "v8.0.7",
+      "target_subdirectory": "docs/",
+      "license": "MIT",
+      "license_evidence": "evidence/vitejs__vite__LICENSE",
+      "selection": "source_acquisition_candidate_not_runtime_admitted",
+      "build_evidence": {
+        "official_fixed_source": "docs/package.json: docs=vitepress dev, docs-build=vitepress build, docs-serve=vitepress serve. Root ci-docs=pnpm build && pnpm docs-build; Node ^20.19.0 || >=22.12.0, pnpm@10.33.0.",
+        "runtime_expected": "Locally built static VitePress documentation with Guide/Config/Plugins navigation, per-section sidebars and heading outlines; no account needed for these routes.",
+        "public_ui_evidence": "Fixed docs/.vitepress/config.ts lines 215-218 nav, 286 onward sidebar, 493-495 outline levels [2,3].",
+        "executed": false,
+        "limitations": [
+          "Monorepo build/workspace dependencies and alpha VitePress/custom theme must be validated in isolation; no successful build claim.",
+          "Algolia search is external; it is explicitly outside offline task scope, with no fake local search replacement.",
+          "Fathom analytics, ads, remote fonts, languages and social/plugin links appear in the original site configuration. Offline network denial and local-route independence must be measured before runtime admission.",
+          "MIT repository license is explicit and has no blanket image exclusion; individual third-party assets and theme dependency licenses still require inventory review before redistribution."
+        ]
+      },
+      "workflows": [
+        {
+          "sequence": [
+            "open Guide from top navigation",
+            "select Philosophy from sidebar",
+            "follow an in-page heading outline",
+            "use browser Back",
+            "directly reload the selected local route"
+          ],
+          "validator_expected": [
+            "URL route and active navigation agree",
+            "heading anchor scrolls to intended section",
+            "Back and direct reload retain correct page content"
+          ],
+          "evidence": "Fixed site config declares Guide/Philosophy, section sidebar and outline; precise browser behavior pending admission."
+        },
+        {
+          "sequence": [
+            "switch Guide to Config",
+            "navigate a nested local document",
+            "open local Blog through Resources",
+            "return to previous document",
+            "inspect desktop and narrow viewport menus"
+          ],
+          "validator_expected": [
+            "sidebar follows current section",
+            "local routes resolve without cloud calls",
+            "responsive navigation can reach the same local route"
+          ],
+          "evidence": "Fixed local nav and sidebar config; responsive theme behavior is an expected observation target, not yet empirical."
+        },
+        {
+          "sequence": [
+            "inspect code block and heading link controls",
+            "try theme toggle if present",
+            "reload and compare theme state",
+            "inspect keyboard navigation and focus"
+          ],
+          "validator_expected": [
+            "only observed supported code/theme controls enter frozen task",
+            "visible state and storage persistence match reference behavior",
+            "keyboard focus and link destination are testable"
+          ],
+          "evidence": "VitePress/theme dependency indicates these as candidates; exact controls and persistence must be publicly observed before inclusion."
+        }
+      ],
+      "skill_expectation": [
+        "Build route-content-sidebar-active-link relationships from public observations and verify deep links/history, instead of reproducing only a homepage screenshot.",
+        "Reconstruct documentation layout at desktop and narrow widths, with in-page anchors and stateful menus.",
+        "Separate local UI requirements from optional hosted search, telemetry and external destinations when specifying an offline clone."
+      ],
+      "bench_correspondence": {
+        "same_task_form": "Official Web observation -> independent recreation -> functional/visual verification; target is the documentation GUI, not Vite CLI.",
+        "web_public_capabilities": [
+          "content/documentation site",
+          "multi-route navigation",
+          "sidebar and heading anchors",
+          "responsive layout",
+          "browser history and optional theme state"
+        ],
+        "public_source_examples": [
+          "webpack.js.org",
+          "www.keycloak.org",
+          "www.rust-lang.org"
+        ],
+        "inference_only": true,
+        "no_skill_gain_claim": true
+      },
+      "source_caveats": [
+        "Canonical Vite repo not matched in native 200 source catalog; public Web homepage audit has no explicit Vite repo/title identity match.",
+        "Many Web targets remain anonymous and shared VitePress/theme/fork lineage cannot be fully excluded from title/link metadata alone; family-isolation is not yet accepted.",
+        "External Algolia/ads/fonts must not become hidden prerequisites of local navigation tasks.",
+        "Downloaded target source remains researcher-side reference; actor receives normal public UI observations only.",
+        "New training validators require independent specification and freeze; official benchmark assertions are excluded."
+      ],
+      "source_archive_bytes": 12699216,
+      "source_archive_sha256": "af8e9929808b5414cc0a6e5b7287d07bc63e1404ca4d7ddee3cf721127febfd9",
+      "source_archive_note": "Root acquired fixed release monorepo: 2600 regular files / 16952726 expanded bytes, one symlink skipped; candidate GUI is docs/ only. See parent acquisition manifest.",
+      "max_corrective_rounds_including_first": 3,
+      "source_acquisition": {
+        "application_id": "web--vitejs--vite",
+        "platform": "web",
+        "repo": "https://github.com/vitejs/vite",
+        "commit": "fdb2e6f63894d8c458c1778f3df77afe537f2bb2",
+        "source_url": "https://codeload.github.com/vitejs/vite/tar.gz/fdb2e6f63894d8c458c1778f3df77afe537f2bb2",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\archives\\web--vitejs--vite--fdb2e6f63894d8c458c1778f3df77afe537f2bb2.tar.gz",
+        "archive_bytes": 12699216,
+        "archive_sha256": "af8e9929808b5414cc0a6e5b7287d07bc63e1404ca4d7ddee3cf721127febfd9",
+        "source_directory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\sources\\web--vitejs--vite--fdb2e6f63894",
+        "regular_files": 2600,
+        "expanded_bytes": 16952726,
+        "skipped_links": 1,
+        "inventory": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\inventories\\web--vitejs--vite--fdb2e6f63894.json",
+        "inventory_sha256": "006e0c035d8baf3d11e6956b2d219232f1f8b244eebdcdb69015df5e66c250da",
+        "runtime_accepted": false
+      },
+      "runtime_accepted": false,
+      "trajectory_count": 0,
+      "verified_skill_count": 0,
+      "origin_report": "D:\\skillloop\\research\\reports\\279_gui_acquisition\\application_pool.json",
+      "selection_status": "main_source_candidate_runtime_pending",
+      "source_phase_correction": "Web44 synthetic/6 public-site-derived; full family/near-duplicate audit still pending."
+    },
+    {
+      "id": "web_actual_budget",
+      "platform": "web",
+      "name": "Actual Budget browser client",
+      "repo": "https://github.com/actualbudget/actual",
+      "release": "v26.9.0",
+      "commit": "59fe126f637d858c061e1eeedbef5436c8f2225a",
+      "commit_evidence": "https://github.com/actualbudget/actual/releases/tag/v26.9.0 links this full commit",
+      "license": "MIT",
+      "license_evidence": "evidence/actualbudget__actual__LICENSE.txt",
+      "license_sha256": "71e4b3053e4622e1f5fc5d8aa5336350de32ead39247924c596d659b89b47b6f",
+      "selection": "minimal_source_supplement_not_runtime_admitted",
+      "build_evidence": {
+        "fixed_root_package": "Yarn workspace; start=start:browser; build:browser=./bin/package-browser; build=lage build",
+        "fixed_web_package": "packages/desktop-client aliases @actual-app/web, React/Vite; build:browser=vite build --mode=browser",
+        "local_core": "loot-core dependency includes @jlongster/sql.js; official install docs explain browser-local data and server-optional budgeting",
+        "fixed_validation_source": "packages/desktop-client/src/components/util/accountValidation.ts trims names, rejects blank and duplicate account names",
+        "official_install_documentation": "https://actualbudget.org/docs/install/",
+        "runtime_expected": "loopback-hosted browser client with synthetic budget only; do not use hosted demo, bank sync, real account data or cloud credentials",
+        "executed": false,
+        "caveats": [
+          "Local browser build, isolated dependency installation, sql.js/WASM and worker headers are pending actual admission.",
+          "Official documentation is current; exact pinned release UI must be observed before final workflow/validator freeze.",
+          "Native server or plugin service if required must remain loopback and isolated; this is not an external API key prerequisite.",
+          "Build evidence does not establish successful startup; no credentials read and no model called."
+        ]
+      },
+      "workflows": [
+        {
+          "name": "dependent form and visible validation",
+          "observe": [
+            "create local synthetic budget",
+            "open Add Account multi-step form",
+            "probe blank and duplicate names",
+            "set account type/on-budget state/balance",
+            "save and reopen"
+          ],
+          "recreate": "independently implement observed fields, dependency/reset behavior, validation feedback, navigation and persistence",
+          "verify_expected": [
+            "blank/duplicate names produce feedback and do not create extra account",
+            "accepted local input appears in sidebar with expected balance",
+            "field dependency and save/reopen behavior match public reference"
+          ],
+          "evidence": [
+            "https://actualbudget.org/docs/accounts/",
+            "fixed accountValidation.ts"
+          ],
+          "exact_behavior_admitted": false
+        },
+        {
+          "name": "conditional list and saved state",
+          "observe": [
+            "import synthetic dated/category transaction fixture",
+            "apply date and category conditions",
+            "save a named filter",
+            "clear conditions",
+            "reapply saved filter"
+          ],
+          "recreate": "independently implement query-control-list-total dependencies and saved-filter selection",
+          "verify_expected": [
+            "expected fixture rows and totals change with combined conditions",
+            "clear restores all applicable rows",
+            "saved conditions can be reselected without bank/cloud calls"
+          ],
+          "evidence": [
+            "https://actualbudget.org/docs/transactions/filters/"
+          ],
+          "exact_behavior_admitted": false
+        },
+        {
+          "name": "data view, temporal boundaries and responsive state",
+          "observe": [
+            "change transaction date/amount",
+            "switch account and budget/report view",
+            "change date range",
+            "inspect narrow viewport and return"
+          ],
+          "recreate": "independently preserve selected context and numeric/date semantics across views",
+          "verify_expected": [
+            "only intended rows/context change",
+            "date boundaries and computed amount agree with controlled fixture",
+            "desktop/narrow layout exposes the same underlying state"
+          ],
+          "evidence": [
+            "fixed package UI/core structure",
+            "official release and account documentation"
+          ],
+          "exact_behavior_admitted": false
+        }
+      ],
+      "skill_expectation": [
+        "Observe dependent input states and negative validation before coding a multi-step form.",
+        "Represent filter conditions independently of visible table rows, and verify clear/reapply behavior against a controlled fixture.",
+        "Check route/context/date/numeric state and responsive UI together after the final edit."
+      ],
+      "bench_correspondence": {
+        "form_static_evidence": "sonelio.example public account-register reference contains text/password/email/country inputs and 3 required controls",
+        "search_static_evidence": "aperlio.example public index contains search form; sentorra index contains search form, and public filename inventory contains combined topic/content query routes",
+        "data_interface_evidence": "climatewatch.org public title and homepage structure include data/filter controls; detailed live chart behavior was not executed",
+        "task_form": "reference observation -> independent application recreation -> functional/visual verification, not mere clicking of reference",
+        "same_distribution_proven": false,
+        "private_tests_accessed": false,
+        "mapping_is_not_250_task_coverage_fraction": true
+      },
+      "source_caveats": [
+        "No canonical actualbudget/actual match in public 200 native repo catalog; no explicit Actual Budget identity in 50 Web homepage audit.",
+        "Web contains 44 synthetic references plus 6 public websites per paper; 44 synthetic identities are not presumed hidden original commercial sites.",
+        "Shared components, template ancestry and near-duplicates remain unresolved; generic React/Vite alone is not a source-family match.",
+        "Actual is finance-domain GUI, while many Web tests are content/catalog/marketing pages. Capability correspondence is a study hypothesis, not gain evidence.",
+        "Reference-source archive is researcher-side infrastructure; actor sees only protocol-allowed public observation and own code, never benchmark private assertions."
+      ],
+      "max_corrective_rounds_including_first": 3,
+      "runtime_accepted": false,
+      "trajectory_observed": false,
+      "skill_extracted": false,
+      "stop_further_web_source_expansion_after_this_supplement": true,
+      "source_acquisition": {
+        "application_id": "web--actualbudget--actual",
+        "platform": "web",
+        "repo": "https://github.com/actualbudget/actual",
+        "commit": "59fe126f637d858c061e1eeedbef5436c8f2225a",
+        "source_url": "https://codeload.github.com/actualbudget/actual/tar.gz/59fe126f637d858c061e1eeedbef5436c8f2225a",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\archives\\web--actualbudget--actual--59fe126f637d858c061e1eeedbef5436c8f2225a.tar.gz",
+        "archive_bytes": 57115545,
+        "archive_sha256": "0822649dd140a67dc410c42a2b8c557a86452263419b09308c841c5d7dae0074",
+        "source_directory": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\sources\\web--actualbudget--actual--59fe126f637d",
+        "regular_files": 4074,
+        "expanded_bytes": 72263841,
+        "skipped_links": 5,
+        "inventory": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\inventories\\web--actualbudget--actual--59fe126f637d.json",
+        "inventory_sha256": "34f0a63373c19a4c9f1e0d9b3d683941c425378adb5b205b6745fd4642a29802",
+        "runtime_accepted": false
+      },
+      "selection_status": "main_source_candidate_runtime_pending",
+      "trajectory_count": 0,
+      "verified_skill_count": 0
+    },
+    {
+      "platform": "ubuntu",
+      "name": "GNOME Calculator",
+      "repo": "https://github.com/GNOME/gnome-calculator",
+      "tag": "46.3",
+      "commit": "496cb9aa220b4cafe06d6b41452355c68492479c",
+      "license": "GPL-3.0-or-later",
+      "build_evidence": [
+        {
+          "path": "README.md",
+          "bytes": 739,
+          "sha256": "098a1d6d7794cf444126d4f69c5b7a716852a5a9b7b33a87ab76a1e452148389",
+          "url": "https://github.com/GNOME/gnome-calculator/blob/496cb9aa220b4cafe06d6b41452355c68492479c/README.md"
+        },
+        {
+          "path": "COPYING",
+          "bytes": 35147,
+          "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+          "url": "https://github.com/GNOME/gnome-calculator/blob/496cb9aa220b4cafe06d6b41452355c68492479c/COPYING"
+        },
+        {
+          "path": "meson.build",
+          "bytes": 3186,
+          "sha256": "599093e0666eaba3659dda1fb07eab3bc983765cd8727c6984b6680be1ba7999",
+          "url": "https://github.com/GNOME/gnome-calculator/blob/496cb9aa220b4cafe06d6b41452355c68492479c/meson.build"
+        },
+        {
+          "path": "meson_options.txt",
+          "bytes": 1058,
+          "sha256": "3b10da9855f8771d818bb884cec5f1f068c059fc36e04d10ba9f30500881a593",
+          "url": "https://github.com/GNOME/gnome-calculator/blob/496cb9aa220b4cafe06d6b41452355c68492479c/meson_options.txt"
+        }
+      ],
+      "build_requirements": "Meson>=0.57; C/Vala; GTK4>=4.11.4; Adwaita>=1.4.alpha; GtkSourceView>=5.3; Soup>=3.4; Gee>=0.20; MPC/MPFR. 46.3 selected for Ubuntu24.04 compatibility, 51.0 retained as too-new candidate.",
+      "source_caveats": "Ubuntu24.04 baseline comparison suggests build feasible; no build/run proof. Exact apt packages, fonts, locale and all transitive dependencies must still be fixed. Currency rate fetching excluded from offline tasks.",
+      "workflows": [
+        {
+          "name": "表达式与错误恢复",
+          "observe": "在基本/高级模式键入2+3×4与带括号变体、删除重输和非法表达式，记录结果与错误标识",
+          "implement": "独立实现输入buffer、运算优先级、错误态与清除/纠正路径",
+          "check": "同数值输入的键盘与按钮结果一致；非法输入不返回虚假有效值，改正后恢复",
+          "negative_example": "只拼接按钮文本或以从左至右求值冒充优先级",
+          "status": "proposed public behavior; reference runtime observation and independent verifier not yet admitted"
+        },
+        {
+          "name": "数值模式与历史",
+          "observe": "观察角度单位/数值进制切换与历史条目复用，记录显示和值的变化",
+          "implement": "分开数值、格式、角度模式和历史，切换格式不破坏数值",
+          "check": "已知角度与整数进制fixture符合参考结果；历史重新选用可再次计算",
+          "negative_example": "将格式后的字符串当实际数值，切换模式重置或污染历史",
+          "status": "proposed public behavior; reference runtime observation and independent verifier not yet admitted"
+        }
+      ],
+      "bench_correspondence": [
+        {
+          "task_id": "ubuntu/qalculate-qalculate-qt",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        },
+        {
+          "task_id": "windows/rubendavidroy-calculator",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        },
+        {
+          "task_id": "windows/sj14-calculon",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        }
+      ],
+      "source_isolation": {
+        "all200native_exact_matches": [],
+        "aliases": [
+          "https://gitlab.gnome.org/GNOME/gnome-calculator"
+        ],
+        "all50web_explicit_source_matches": [],
+        "web_anonymized_origins_unresolved": true,
+        "full_fork_or_code_similarity_checked": false,
+        "generic_framework_overlap": "Shared GTK/KDE/Qt/React libraries are disclosed; independent source product does not prove complete absence of common code."
+      },
+      "runtime_accepted": false,
+      "reference_application_run": false,
+      "model_or_task_execution": false,
+      "proposed_workflow_count": 2,
+      "source_acquisition": {
+        "application_id": "ubuntu--GNOME--gnome-calculator",
+        "platform": "ubuntu",
+        "repo": "https://github.com/GNOME/gnome-calculator",
+        "commit": "496cb9aa220b4cafe06d6b41452355c68492479c",
+        "source_url": "https://codeload.github.com/GNOME/gnome-calculator/tar.gz/496cb9aa220b4cafe06d6b41452355c68492479c",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\archives\\ubuntu--GNOME--gnome-calculator--496cb9aa220b4cafe06d6b41452355c68492479c.tar.gz",
+        "archive_bytes": 2489444,
+        "archive_sha256": "08ea89e4f65a258c9e796036bd19084e6a91a1c56bdee924250fad77a13b700f",
+        "source_directory": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\sources\\ubuntu--GNOME--gnome-calculator--496cb9aa220b",
+        "regular_files": 329,
+        "expanded_bytes": 12246639,
+        "skipped_links": 0,
+        "inventory": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\inventories\\ubuntu--GNOME--gnome-calculator--496cb9aa220b.json",
+        "inventory_sha256": "a287103a5b9b5e854c9b4b53b7c10fee1b921a0ad28c4e56a8b84184aca22a99",
+        "runtime_accepted": false
+      },
+      "selection_status": "main_source_candidate_runtime_pending",
+      "trajectory_count": 0,
+      "verified_skill_count": 0
+    },
+    {
+      "platform": "ubuntu",
+      "name": "KReversi",
+      "repo": "https://github.com/KDE/kreversi",
+      "tag": "v26.08.1",
+      "commit": "ae30d8e7171ec9fa5b2861afd403ebeb075ebfc4",
+      "license": "GPL-2.0-or-later code; GFDL docs and separately licensed themes/assets",
+      "build_evidence": [
+        {
+          "path": "CMakeLists.txt",
+          "bytes": 1742,
+          "sha256": "b2792fab1da630605e31b04c003554c99794b1635cd11e4773e0c7d7338d7c66",
+          "url": "https://github.com/KDE/kreversi/blob/ae30d8e7171ec9fa5b2861afd403ebeb075ebfc4/CMakeLists.txt"
+        },
+        {
+          "path": "LICENSES/GPL-2.0-or-later.txt",
+          "bytes": 17277,
+          "sha256": "b58671fb4d9e9efeb9a6af1bdba02e61ac69af654855b45a372efe8f52413f83",
+          "url": "https://github.com/KDE/kreversi/blob/ae30d8e7171ec9fa5b2861afd403ebeb075ebfc4/LICENSES/GPL-2.0-or-later.txt"
+        },
+        {
+          "path": "doc/index.docbook",
+          "bytes": 16887,
+          "sha256": "a955df7a1c41eef0afc98028295e1f9890a659de95af5d32af0c1f90bc3016be",
+          "url": "https://github.com/KDE/kreversi/blob/ae30d8e7171ec9fa5b2861afd403ebeb075ebfc4/doc/index.docbook"
+        }
+      ],
+      "build_requirements": "CMake>=3.16; Qt6>=6.5 Widgets/Qml/Quick/QuickWidgets/Svg; ECM/KF6>=6.0 and KDEGames6. Source tag26.08.1 is fixed; future Ubuntu24 package/Flatpak runtime must include KDE6 stack.",
+      "source_caveats": "Stock Ubuntu24.04 KDE5 packages are insufficient for this fixed modern KDE6 source; use pinned official KDE6 runtime/dependency container. QML board accessibility and deterministic human-vs-human mode require admission. Computer AI timing/choice excluded from deterministic first workflows.",
+      "workflows": [
+        {
+          "name": "合法与非法落子",
+          "observe": "在人对人模式观察合法提示、合法落子的连续翻子、非法格点击与当前玩家",
+          "implement": "独立实现board状态和方向捕获规则，不从截图颜色硬编码下一盘",
+          "check": "固定初始局面合法/非法路径中棋子数、翻转集合和turn一致；非法行动不改变状态",
+          "negative_example": "允许所有空格或只翻一个邻居、无合法动作仍强制玩家落子",
+          "status": "proposed public behavior; reference runtime observation and independent verifier not yet admitted"
+        },
+        {
+          "name": "撤销与新局隔离",
+          "observe": "观察多步后撤销、提示开关与重新开始",
+          "implement": "实现完整状态历史与reset，提示只是视图",
+          "check": "撤销恢复棋盘/分数/turn；新局清除旧history且再次首步不受上一盘污染",
+          "negative_example": "只撤销最后一个落子不恢复翻子、reset保留旧轮次",
+          "status": "proposed public behavior; reference runtime observation and independent verifier not yet admitted"
+        }
+      ],
+      "bench_correspondence": [
+        {
+          "task_id": "ubuntu/kde-ksudoku",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        },
+        {
+          "task_id": "windows/beryx-fxgl-sliding-puzzle",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        },
+        {
+          "task_id": "windows/blueskyson-qt-pac-man",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        },
+        {
+          "task_id": "windows/sauce-code-cuckoo",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        }
+      ],
+      "source_isolation": {
+        "all200native_exact_matches": [],
+        "aliases": [
+          "https://invent.kde.org/games/kreversi"
+        ],
+        "all50web_explicit_source_matches": [],
+        "web_anonymized_origins_unresolved": true,
+        "full_fork_or_code_similarity_checked": false,
+        "generic_framework_overlap": "Shared GTK/KDE/Qt/React libraries are disclosed; independent source product does not prove complete absence of common code."
+      },
+      "runtime_accepted": false,
+      "reference_application_run": false,
+      "model_or_task_execution": false,
+      "proposed_workflow_count": 2,
+      "source_acquisition": {
+        "application_id": "ubuntu--KDE--kreversi",
+        "platform": "ubuntu",
+        "repo": "https://github.com/KDE/kreversi",
+        "commit": "ae30d8e7171ec9fa5b2861afd403ebeb075ebfc4",
+        "source_url": "https://codeload.github.com/KDE/kreversi/tar.gz/ae30d8e7171ec9fa5b2861afd403ebeb075ebfc4",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\archives\\ubuntu--KDE--kreversi--ae30d8e7171ec9fa5b2861afd403ebeb075ebfc4.tar.gz",
+        "archive_bytes": 1208790,
+        "archive_sha256": "2671699a692f16385f8aab2bc6e213b27775ed2436ec12ac024aa99c9594dbd2",
+        "source_directory": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\sources\\ubuntu--KDE--kreversi--ae30d8e7171e",
+        "regular_files": 204,
+        "expanded_bytes": 3108849,
+        "skipped_links": 0,
+        "inventory": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\inventories\\ubuntu--KDE--kreversi--ae30d8e7171e.json",
+        "inventory_sha256": "0cec648dabd79d46818f3af2674eaea16aebc406048f20b56f575ed15062c9cb",
+        "runtime_accepted": false
+      },
+      "selection_status": "main_source_candidate_runtime_pending",
+      "trajectory_count": 0,
+      "verified_skill_count": 0
+    },
+    {
+      "platform": "windows",
+      "name": "Tad",
+      "repo": "https://github.com/antonycourtney/tad",
+      "tag": "v0.14.0",
+      "commit": "a144c545a7126652d1a0ac7b1e0d9b0ee9cfb809",
+      "license": "MIT",
+      "build_evidence": [
+        {
+          "path": "README.md",
+          "bytes": 5331,
+          "sha256": "2057291ef62494e2705428040ccc3156565cb016e54324d094e3382ba7a4320f",
+          "url": "https://github.com/antonycourtney/tad/blob/a144c545a7126652d1a0ac7b1e0d9b0ee9cfb809/README.md"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1072,
+          "sha256": "a242ac627b07bec45c06620e20a5d046b6b31433cdf0a8011da35760b9a54b0e",
+          "url": "https://github.com/antonycourtney/tad/blob/a144c545a7126652d1a0ac7b1e0d9b0ee9cfb809/LICENSE"
+        },
+        {
+          "path": "package.json",
+          "bytes": 430,
+          "sha256": "003b099055cf8d5d6dd32e5a1053b07b335f262c3c3af7c63bd158b8c794b07f",
+          "url": "https://github.com/antonycourtney/tad/blob/a144c545a7126652d1a0ac7b1e0d9b0ee9cfb809/package.json"
+        },
+        {
+          "path": "doc/building.md",
+          "bytes": 3614,
+          "sha256": "225f867e3296e61fa38404120cbeb3c55a3fd69893754bfe6c084a9cde6b93bb",
+          "url": "https://github.com/antonycourtney/tad/blob/a144c545a7126652d1a0ac7b1e0d9b0ee9cfb809/doc/building.md"
+        },
+        {
+          "path": "packages/tad-app/package.json",
+          "bytes": 5051,
+          "sha256": "de44ab644fd3fe4697380fadc2975bc298be76d629fa3993c6779b2e9cc5b047",
+          "url": "https://github.com/antonycourtney/tad/blob/a144c545a7126652d1a0ac7b1e0d9b0ee9cfb809/packages/tad-app/package.json"
+        }
+      ],
+      "build_requirements": "Official source build: Node19.3/npm9.2 documentation, Lerna bootstrap and build-all.sh, desktop Electron31.0.1 and DuckDB; native dependencies and old node-sass require fixed versions.",
+      "source_caveats": "Windows2022 build is not verified; use controlled packaged runtime or admitted node/native toolchain. Only local CSV/Parquet fixture; cloud SQL backends excluded; updater/DuckDB extension auto-fetch must be disabled or precached and verified offline.",
+      "workflows": [
+        {
+          "name": "过滤排序与真实导出",
+          "observe": "导入含稳定ID、文本、数字、空值的CSV，单列过滤、数值排序、取消条件，再导出可见表",
+          "implement": "独立建模source行、视图条件、排序与输出行集",
+          "check": "输出CSV/Parquet解码后ID集合/顺序/空值与公开界面一致；取消过滤恢复全部行",
+          "negative_example": "只隐藏行而导出全表、数字按字符串排序、空值当零",
+          "status": "proposed public behavior; reference runtime observation and independent verifier not yet admitted"
+        },
+        {
+          "name": "透视聚合与列状态",
+          "observe": "观察按类别分组、总计/数量、展开折叠、选列与列顺序",
+          "implement": "独立实现聚合层与显示状态，避免把汇总值再次计入",
+          "check": "对小fixture人工确定组数/总计；展开不改总计、隐藏列不改源数据",
+          "negative_example": "只画相同表头或将聚合结果叠加重复计算",
+          "status": "proposed public behavior; reference runtime observation and independent verifier not yet admitted"
+        }
+      ],
+      "bench_correspondence": [
+        {
+          "task_id": "windows/mukunku-parquetviewer",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        },
+        {
+          "task_id": "windows/viniciussanchez-dataset-serialize",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        },
+        {
+          "task_id": "ubuntu/sqlitebrowser-sqlitebrowser",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        },
+        {
+          "task_id": "ubuntu/amalshaji-dbcooper",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        },
+        {
+          "task_id": "ubuntu/kde-labplot",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        }
+      ],
+      "source_isolation": {
+        "all200native_exact_matches": [],
+        "aliases": [],
+        "all50web_explicit_source_matches": [],
+        "web_anonymized_origins_unresolved": true,
+        "full_fork_or_code_similarity_checked": false,
+        "generic_framework_overlap": "Shared GTK/KDE/Qt/React libraries are disclosed; independent source product does not prove complete absence of common code."
+      },
+      "runtime_accepted": false,
+      "reference_application_run": false,
+      "model_or_task_execution": false,
+      "proposed_workflow_count": 2,
+      "source_acquisition": {
+        "application_id": "windows--antonycourtney--tad",
+        "platform": "windows",
+        "repo": "https://github.com/antonycourtney/tad",
+        "commit": "a144c545a7126652d1a0ac7b1e0d9b0ee9cfb809",
+        "source_url": "https://codeload.github.com/antonycourtney/tad/tar.gz/a144c545a7126652d1a0ac7b1e0d9b0ee9cfb809",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\archives\\windows--antonycourtney--tad--a144c545a7126652d1a0ac7b1e0d9b0ee9cfb809.tar.gz",
+        "archive_bytes": 8432557,
+        "archive_sha256": "3eaa1d9834ef533ce88383eb890915f8bf78eea94d2807c6b257a27569d2115d",
+        "source_directory": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\sources\\windows--antonycourtney--tad--a144c545a712",
+        "regular_files": 308,
+        "expanded_bytes": 16175778,
+        "skipped_links": 1,
+        "inventory": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\inventories\\windows--antonycourtney--tad--a144c545a712.json",
+        "inventory_sha256": "037325894aa3bc46d94b4a6a7f5837bd8332769128a845b5ad47a59e329aff68",
+        "runtime_accepted": false
+      },
+      "selection_status": "main_source_candidate_runtime_pending",
+      "trajectory_count": 0,
+      "verified_skill_count": 0
+    },
+    {
+      "id": "macos_today",
+      "platform": "macos",
+      "name": "To-Day",
+      "repo": "https://github.com/trozware/To-Day",
+      "tag": "release-2.0",
+      "commit": "7d98f4ca02d630474cab88233b2d80b476ba6ca1",
+      "license": "MIT",
+      "license_evidence": "addition_evidence/macos_today/LICENSE.md",
+      "build_evidence": {
+        "official_readme": "SwiftUI macOS 13+ menu-bar checklist; local add/edit/move/complete, title/date sorting and completed visibility.",
+        "fixed_source": "Today.xcodeproj declares deployment targets 13.0 and 13.1; source uses a Sparkle package version range beginning at 2.0.0. README documents archive/notarization/update distribution, not a complete reproducible build command.",
+        "runtime_expected": "Local checklist core needs no account; Sparkle updater/network features are excluded from proposed tasks. No timer is claimed.",
+        "executed": false,
+        "limitations": [
+          "Xcode/Swift packages and bundle signing remain unverified.",
+          "README acknowledges missing VoiceOver menu text; AX and coordinate interaction must be admitted on a real macOS host.",
+          "Todo state persistence, reset and backend storage must be observed before any task is frozen."
+        ]
+      },
+      "workflows": [
+        {
+          "sequence": [
+            "Observe three synthetic todo items in the menu and editor, including add/edit/move and completion transitions.",
+            "Independently recreate the observed menu/editor state machine without reading implementation or any benchmark tests.",
+            "Selfcheck item text, ordering and complete/incomplete state after reopening."
+          ],
+          "validator_expected": [
+            "Controlled item set and exact ordering",
+            "Completed state persists and can be reversed",
+            "Editor and menu agree"
+          ],
+          "evidence": "Pinned README lines 3-9; future reference observation required."
+        },
+        {
+          "sequence": [
+            "Observe sorting by title versus creation time and the display/hide/delete completed settings.",
+            "Recreate the menu changes from controlled item fixtures.",
+            "Verify expected list membership and order across settings changes and confirmation cancellation."
+          ],
+          "validator_expected": [
+            "Title/date order",
+            "Hide leaves data recoverable",
+            "Deletion affects only the intended completed items"
+          ],
+          "evidence": "Pinned README sorting and visibility features; not an existing official validator."
+        }
+      ],
+      "skill_expectation": [
+        "Inspect menu-bar UI and editor as coupled views of persistent state",
+        "Disentangle filtering, sorting and destructive state changes",
+        "Use local fixtures and reopen checks"
+      ],
+      "bench_correspondence": [
+        {
+          "task_id": "macos/onix-systems-osx-status-bar-todo",
+          "capability": "Native menu-bar task list state",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "macos/dongdongbh-mindwtr",
+          "capability": "Task CRUD/completion and ordering, not the complete GTD backend",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "macos/shabang-systems-condution",
+          "capability": "List form state only, not project scheduling",
+          "rationale_inference": true
+        }
+      ],
+      "source_isolation": {
+        "aliases": [],
+        "known_upstream": [
+          "https://github.com/sparkle-project/Sparkle"
+        ],
+        "manual_evidence": "README presents an independently authored SwiftUI checklist; Sparkle is an updater dependency, not the product family.",
+        "family_risk": "Full dependency and code-similarity isolation are not proven by repository identity checks.",
+        "full_code_audit_pending": true,
+        "identity_audit_file": "source_identity_audit.json"
+      },
+      "references": [
+        "https://github.com/trozware/To-Day/releases/tag/release-2.0",
+        "https://github.com/trozware/To-Day/tree/7d98f4ca02d630474cab88233b2d80b476ba6ca1"
+      ],
+      "skill_expectation_is_hypothesis": true,
+      "download_size": "Use root 280 source-acquisition manifest for actual archive/file bytes; documentation only acquired by this subagent.",
+      "source_acquisition": {
+        "application_id": "macos--trozware--To-Day",
+        "platform": "macos",
+        "repo": "https://github.com/trozware/To-Day",
+        "commit": "7d98f4ca02d630474cab88233b2d80b476ba6ca1",
+        "source_url": "https://codeload.github.com/trozware/To-Day/tar.gz/7d98f4ca02d630474cab88233b2d80b476ba6ca1",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\archives\\macos--trozware--To-Day--7d98f4ca02d630474cab88233b2d80b476ba6ca1.tar.gz",
+        "archive_bytes": 9619708,
+        "archive_sha256": "5fb482be081141564795f7e757ae66c5ca48e75a1e22ee4addad9110d7cd0c16",
+        "source_directory": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\sources\\macos--trozware--To-Day--7d98f4ca02d6",
+        "regular_files": 47,
+        "expanded_bytes": 16515083,
+        "skipped_links": 0,
+        "inventory": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\inventories\\macos--trozware--To-Day--7d98f4ca02d6.json",
+        "inventory_sha256": "ce63bcdc01d75f9ee8acb6769a928b12f66e85887e9bcaff087e723e73d26de3",
+        "runtime_accepted": false
+      },
+      "selection_status": "main_source_candidate_runtime_pending",
+      "runtime_accepted": false,
+      "trajectory_count": 0,
+      "verified_skill_count": 0
+    },
+    {
+      "id": "android_opencalc",
+      "platform": "android",
+      "name": "OpenCalc",
+      "repo": "https://github.com/clementwzk/OpenCalc",
+      "tag": "v3.2.1",
+      "commit": "e80aef9452992ce46b3931edd562cae567bb7a6f",
+      "license": "GPL-3.0",
+      "license_evidence": "addition_evidence/android_opencalc/LICENSE",
+      "build_evidence": {
+        "official_readme": "Android calculator with scientific mode, history, portrait/landscape and quick-settings entry. README lists Android 5+.",
+        "fixed_source": "app/build.gradle.kts declares compile/target SDK 35 and min SDK 21. Java/Kotlin targets 1.8. The v3.2.1 source tag declares versionName 3.2.0, a retained release-label discrepancy. No claimed official CLI build recipe; Android Gradle project import is a source-side build inference.",
+        "runtime_expected": "Offline arithmetic uses local inputs and no application account. Manifest/merged-permission and scientific-mode semantics still require admission.",
+        "executed": false,
+        "limitations": [
+          "SDK 35, Gradle plugins and Android dependencies are not built or locked here.",
+          "No unit conversion capability is claimed; CalcYou unit-converter behavior remains unknown.",
+          "UiAutomator selectors, numeric precision, invalid expressions, DEG/RAD semantics and history persistence must be observed."
+        ]
+      },
+      "workflows": [
+        {
+          "sequence": [
+            "Observe controlled arithmetic expressions, precedence, backspace/clear and result/history transitions.",
+            "Independently implement the observed numeric UI behavior with an explicit state model.",
+            "Selfcheck exact known inputs, result display, invalid-input handling and replayed history."
+          ],
+          "validator_expected": [
+            "Known arithmetic outputs",
+            "Editing changes the intended expression",
+            "History replay preserves input/result relationship"
+          ],
+          "evidence": "Pinned README scientific/history features; exact parser behavior requires public UI observation."
+        },
+        {
+          "sequence": [
+            "Observe portrait/landscape and scientific panel state, using only controls actually present in the fixed app.",
+            "Independently recreate panel switching and a small set of observed scientific functions.",
+            "Check that switching views does not silently reset the expression and that controlled numeric results agree."
+          ],
+          "validator_expected": [
+            "Stable expression across orientation/panel changes",
+            "Observed scientific results",
+            "Consistent theme/history state"
+          ],
+          "evidence": "Pinned README orientation/scientific features; DEG/RAD is conditional on observed controls."
+        }
+      ],
+      "skill_expectation": [
+        "Probe input-output contracts separately from button appearance",
+        "Maintain expression, edit and history states coherently",
+        "Use controlled numeric oracles and edge cases"
+      ],
+      "bench_correspondence": [
+        {
+          "task_id": "android/woheller69-arity",
+          "capability": "Scientific calculator expression/result interaction; graphing remains unknown",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "android/you-apps-calcyou",
+          "capability": "Calculator input/output; unit conversion remains unknown",
+          "rationale_inference": true
+        }
+      ],
+      "source_isolation": {
+        "aliases": [
+          "https://github.com/Darkempire78/OpenCalc"
+        ],
+        "known_upstream": [],
+        "manual_evidence": "Canonical owner redirect treated as an alias. Current source is not identified as an Arity/CalcYou product fork; common Android libraries do not establish family independence.",
+        "family_risk": "Parser/dependency and code-copy provenance must be reviewed before strict family-isolated evaluation.",
+        "full_code_audit_pending": true,
+        "identity_audit_file": "source_identity_audit.json"
+      },
+      "references": [
+        "https://github.com/clementwzk/OpenCalc/releases/tag/v3.2.1",
+        "https://github.com/clementwzk/OpenCalc/tree/e80aef9452992ce46b3931edd562cae567bb7a6f"
+      ],
+      "skill_expectation_is_hypothesis": true,
+      "download_size": "Official README's approximately 2 MB APK is a product description, not the actual downloaded source size. Use root acquisition manifest.",
+      "source_acquisition": {
+        "application_id": "android--clementwzk--OpenCalc",
+        "platform": "android",
+        "repo": "https://github.com/clementwzk/OpenCalc",
+        "commit": "e80aef9452992ce46b3931edd562cae567bb7a6f",
+        "source_url": "https://codeload.github.com/clementwzk/OpenCalc/tar.gz/e80aef9452992ce46b3931edd562cae567bb7a6f",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\archives\\android--clementwzk--OpenCalc--e80aef9452992ce46b3931edd562cae567bb7a6f.tar.gz",
+        "archive_bytes": 4468840,
+        "archive_sha256": "e003e509ea46753419893abd62f3d561ff23e08d0324df38fd7e153022d0678d",
+        "source_directory": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\sources\\android--clementwzk--OpenCalc--e80aef945299",
+        "regular_files": 1224,
+        "expanded_bytes": 5520932,
+        "skipped_links": 0,
+        "inventory": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\inventories\\android--clementwzk--OpenCalc--e80aef945299.json",
+        "inventory_sha256": "8f3c295e14e3b6f7b74cbe13707af7978e5858fe9eb5447bccd1be5116257928",
+        "runtime_accepted": false
+      },
+      "selection_status": "main_source_candidate_runtime_pending",
+      "runtime_accepted": false,
+      "trajectory_count": 0,
+      "verified_skill_count": 0
+    },
+    {
+      "id": "android_shattered_pixel_dungeon",
+      "platform": "android",
+      "additional_platforms": [
+        "macos",
+        "ubuntu",
+        "windows"
+      ],
+      "name": "Shattered Pixel Dungeon",
+      "repo": "https://github.com/00-Evan/shattered-pixel-dungeon",
+      "tag": "v4.0.1",
+      "commit": "e9defd0444c96d2fce3de5ec297c3398be8b7c55",
+      "license": "GPL-3.0",
+      "license_evidence": "addition_evidence/android_shattered_pixel_dungeon/LICENSE.txt",
+      "build_evidence": {
+        "official_readme": "Roguelike with randomized levels/items; official source supports Android and desktop.",
+        "fixed_source": "Pinned desktop guide explicitly documents ./gradlew desktop:debug and ./gradlew desktop:release. Android guide documents Android Studio import/build. Root Gradle uses AGP 9.2.0, SDK 36 compile/target, min SDK 21, Java source compatibility 11 and LibGDX 1.14.0; actual Gradle runtime JDK compatibility must be resolved from pinned toolchain.",
+        "runtime_expected": "Local game/menu core needs no account; platform stores, news and update links excluded. macOS desktop JAR/app is possible per official guide, but is not an AppKit-native AX claim.",
+        "executed": false,
+        "limitations": [
+          "AGP 9.2/Gradle/JDK/SDK 36 and native LibGDX dependencies remain a build risk.",
+          "Randomized levels require reset/replay admission; no deterministic gameplay, complete-game success or RNG-control patch is assumed.",
+          "Canvas AX/UiAutomator tree may be sparse; screenshots/coordinates and macOS graphics availability need runtime checks.",
+          "No audio transport, countdown timer, scientific plotting, Minesweeper or Go-rule fidelity is inferred from this game."
+        ]
+      },
+      "workflows": [
+        {
+          "sequence": [
+            "Observe opening menu, new-game/class selection and bounded help/settings overlays on a reset reference.",
+            "Independently recreate these menu and overlay transitions without copying source.",
+            "Verify selected state, back/cancel paths and restored screen after closing overlays."
+          ],
+          "validator_expected": [
+            "Menu selection state",
+            "Overlay back/cancel transition",
+            "Settings state consistency"
+          ],
+          "evidence": "Official game purpose/platform docs; particular controls must first be publicly observed."
+        },
+        {
+          "sequence": [
+            "Observe a short local turn sequence and visible inventory/item/use states, avoiding a full campaign objective.",
+            "Build an independent bounded recreation of the observed rule/state transitions.",
+            "Replay the observed initial state and compare movement, inventory and visible counters; distinguish seed-dependent outcomes."
+          ],
+          "validator_expected": [
+            "Bounded observed turn effects",
+            "Inventory state consistency",
+            "Explicitly documented reset/seed dependence"
+          ],
+          "evidence": "Pinned README documents roguelike levels/items; precise mechanics and replay contract remain future observation work."
+        }
+      ],
+      "skill_expectation": [
+        "Discover rules through controlled action/observation pairs",
+        "Represent game state separately from canvas rendering",
+        "Validate deterministic parts and disclose stochastic outcomes"
+      ],
+      "bench_correspondence": [
+        {
+          "task_id": "android/tristinbaker-idlefantasy",
+          "capability": "RPG menu/inventory/progression state, not identical game mechanics",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "android/chrisboyle-sgtpuzzles",
+          "capability": "Bounded game-rule probes and reset behavior, not puzzle rules",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "macos/kaya-go-kaya",
+          "capability": "Desktop game board/action/state separation, not Go rules",
+          "rationale_inference": true
+        }
+      ],
+      "source_isolation": {
+        "aliases": [],
+        "known_upstream": [
+          "https://github.com/00-Evan/pixel-dungeon-gradle",
+          "https://github.com/watabou/pixel-dungeon"
+        ],
+        "manual_evidence": "Pinned README explicitly derives from Pixel Dungeon. Both upstream identities are included in the full native/web audit.",
+        "family_risk": "Derivative game family is known and retained; no exact matching benchmark identity is insufficient to rule out copied dependencies/assets.",
+        "full_code_audit_pending": true,
+        "identity_audit_file": "source_identity_audit.json"
+      },
+      "references": [
+        "https://github.com/00-Evan/shattered-pixel-dungeon/releases/tag/v4.0.1",
+        "https://github.com/00-Evan/shattered-pixel-dungeon/tree/e9defd0444c96d2fce3de5ec297c3398be8b7c55",
+        "https://github.com/00-Evan/shattered-pixel-dungeon/blob/e9defd0444c96d2fce3de5ec297c3398be8b7c55/docs/getting-started-desktop.md"
+      ],
+      "skill_expectation_is_hypothesis": true,
+      "download_size": "Root acquisition manifest records actual source bytes; no size estimate is substituted for an acquired archive.",
+      "source_acquisition": {
+        "application_id": "android--00-Evan--shattered-pixel-dungeon",
+        "platform": "android",
+        "repo": "https://github.com/00-Evan/shattered-pixel-dungeon",
+        "commit": "e9defd0444c96d2fce3de5ec297c3398be8b7c55",
+        "source_url": "https://codeload.github.com/00-Evan/shattered-pixel-dungeon/tar.gz/e9defd0444c96d2fce3de5ec297c3398be8b7c55",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\archives\\android--00-Evan--shattered-pixel-dungeon--e9defd0444c96d2fce3de5ec297c3398be8b7c55.tar.gz",
+        "archive_bytes": 64363004,
+        "archive_sha256": "a3b2e158ed12a8e3198b79a4becfe88c22c8d7d86f5c0f6d72e7074d27fb93aa",
+        "source_directory": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\sources\\android--00-Evan--shattered-pixel-dungeon--e9defd0444c9",
+        "regular_files": 1944,
+        "expanded_bytes": 85958791,
+        "skipped_links": 0,
+        "inventory": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\inventories\\android--00-Evan--shattered-pixel-dungeon--e9defd0444c9.json",
+        "inventory_sha256": "cf37b2b0508885fb5a6948f1ad3f9e37f02d1cc19a04460f670001dc116fed06",
+        "runtime_accepted": false
+      },
+      "selection_status": "main_source_candidate_runtime_pending",
+      "runtime_accepted": false,
+      "trajectory_count": 0,
+      "verified_skill_count": 0
+    },
+    {
+      "id": "android_package_manager",
+      "platform": "android",
+      "name": "Package Manager",
+      "repo": "https://github.com/SmartPack/PackageManager",
+      "tag": "v7.0",
+      "commit": "f13008b9204ce916fc9773b8ae52376db585457b",
+      "license": "GPL-3.0-or-later",
+      "license_evidence": "addition_evidence/android_package_manager_v7/LICENSE and README.md lines 74-81",
+      "build_evidence": {
+        "official_readme": "System/user app listing and details include package name, paths, granted/denied permissions, activities, dates, certificates and manifests. Root access is required only for some advanced features.",
+        "fixed_source": "v7.0 app Gradle uses compile/target SDK 33, min SDK 23, build tools 30.0.3; root AGP 7.3.1 with Maven/JitPack dependencies. F-Droid flavor exists and avoids the Play billing dependency. README does not provide a complete CLI recipe; Gradle flavor build is a source-side inference.",
+        "runtime_expected": "Use read-only listing/detail workflows on an isolated emulator with controlled installed fixtures. No root, adb privilege escalation, uninstall, install, enable/disable or debloating task is authorized.",
+        "executed": false,
+        "limitations": [
+          "v7.9 initial candidate rejected for SDK 37 and retained independently; v7.0 replaces it without editing a frozen experiment.",
+          "Old AGP/JDK/Gradle compatibility and JitPack availability remain unverified.",
+          "Manifest requests package-query/install/delete/superuser permissions; tasks and harness must stay within read-only app/permission inspection.",
+          "Package visibility and OS version alter reported details; fixtures and expected values require admission."
+        ]
+      },
+      "workflows": [
+        {
+          "sequence": [
+            "Observe user/system/all list filters and a controlled fixture's detail page.",
+            "Independently recreate list/filter/navigation state using synthetic package metadata.",
+            "Check list membership, package identity and back navigation against the controlled fixture."
+          ],
+          "validator_expected": [
+            "Correct filtered list membership",
+            "Detail identity agrees with selected item",
+            "Read-only navigation does not mutate installed applications"
+          ],
+          "evidence": "Pinned README lines 25-35; exact controls must be publicly observed."
+        },
+        {
+          "sequence": [
+            "Observe granted/denied permission and manifest/activity panels for a synthetic fixture app.",
+            "Independently implement the observed detail views with an explicit permission state model.",
+            "Verify displayed permission classification and stability across view switching, without granting or revoking permissions."
+          ],
+          "validator_expected": [
+            "Granted/denied classification",
+            "Fixture manifest metadata",
+            "No mutation of app installation or permission state"
+          ],
+          "evidence": "Pinned README permission/manifest features; no official evaluator is inspected."
+        }
+      ],
+      "skill_expectation": [
+        "Inspect OS-derived state through read-only GUI views",
+        "Separate permission declaration from grant state",
+        "Use deterministic local fixtures and avoid accidental system changes"
+      ],
+      "bench_correspondence": [
+        {
+          "task_id": "android/hamza417-inure",
+          "capability": "Package list/detail and permission inspection",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "android/nitishgadangi-privacy-indicator-app",
+          "capability": "Permission/system-state reasoning only; live privacy indicators remain unknown",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "android/rbn-apps-quick-tile-settings",
+          "capability": "System-derived state distinction only; quick-tile operations remain unknown",
+          "rationale_inference": true
+        }
+      ],
+      "source_isolation": {
+        "aliases": [],
+        "known_upstream": [
+          "https://github.com/Grarak/KernelAdiutor",
+          "https://github.com/Aefyr/SAI",
+          "https://github.com/nkalra0123/Split-APK-Installer",
+          "https://github.com/topjohnwu/libsu",
+          "https://github.com/sunilpaulmathew/sCommon",
+          "https://github.com/apk-editor/aXML"
+        ],
+        "manual_evidence": "Pinned Credits.md discloses borrowed Kernel Adiutor and split-APK installer code; dependencies and guessed canonical upstream repository identities require full provenance review. Only explicitly resolvable public repo URLs are compared mechanically.",
+        "family_risk": "Shared or borrowed library code with benchmark applications may exist; read-only scope does not prove strict source isolation.",
+        "full_code_audit_pending": true,
+        "identity_audit_file": "source_identity_audit.json"
+      },
+      "references": [
+        "https://github.com/SmartPack/PackageManager/releases/tag/v7.0",
+        "https://github.com/SmartPack/PackageManager/tree/f13008b9204ce916fc9773b8ae52376db585457b"
+      ],
+      "skill_expectation_is_hypothesis": true,
+      "download_size": "Use root acquisition manifest; rejected v7.9 documentation stays separate from the accepted v7.0 source pin.",
+      "source_acquisition": {
+        "application_id": "android--SmartPack--PackageManager",
+        "platform": "android",
+        "repo": "https://github.com/SmartPack/PackageManager",
+        "commit": "f13008b9204ce916fc9773b8ae52376db585457b",
+        "source_url": "https://codeload.github.com/SmartPack/PackageManager/tar.gz/f13008b9204ce916fc9773b8ae52376db585457b",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\archives\\android--SmartPack--PackageManager--f13008b9204ce916fc9773b8ae52376db585457b.tar.gz",
+        "archive_bytes": 5168107,
+        "archive_sha256": "700fb354099a4b0e443ae7dc78a81de05b8d2fc7b979dbe1d4fa97fcb1c40e1e",
+        "source_directory": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\sources\\android--SmartPack--PackageManager--f13008b9204c",
+        "regular_files": 260,
+        "expanded_bytes": 6399543,
+        "skipped_links": 0,
+        "inventory": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\inventories\\android--SmartPack--PackageManager--f13008b9204c.json",
+        "inventory_sha256": "4fbd605c71a83baed0ece6edf515e50beb16bc543b4671f2cb9ccfa254bf68c8",
+        "runtime_accepted": false
+      },
+      "selection_status": "main_source_candidate_runtime_pending",
+      "runtime_accepted": false,
+      "trajectory_count": 0,
+      "verified_skill_count": 0
+    },
+    {
+      "platform": "ubuntu",
+      "name": "Veusz",
+      "repo": "https://github.com/veusz/veusz",
+      "tag": "veusz-4.2.1",
+      "commit": "b637be1018a473fa829d097ce48b8164078dd365",
+      "license": "GPL-2.0-or-later",
+      "build_evidence": [
+        {
+          "path": "README.md",
+          "bytes": 3320,
+          "sha256": "829ae1d53c215d9da6d672a4c431864127ca237737888b1104312917c95302f2",
+          "url": "https://github.com/veusz/veusz/blob/b637be1018a473fa829d097ce48b8164078dd365/README.md"
+        },
+        {
+          "path": "COPYING",
+          "bytes": 17984,
+          "sha256": "edaef632cbb643e4e7a221717a6c441a4c1a7c918e6e4d56debc3d8739b233f6",
+          "url": "https://github.com/veusz/veusz/blob/b637be1018a473fa829d097ce48b8164078dd365/COPYING"
+        },
+        {
+          "path": "INSTALL.md",
+          "bytes": 9021,
+          "sha256": "6df7b6baad1ae75b0d7cdd482eb84fed72e0a11b51aee499dd339da674855d09",
+          "url": "https://github.com/veusz/veusz/blob/b637be1018a473fa829d097ce48b8164078dd365/INSTALL.md"
+        },
+        {
+          "path": "requirements.txt",
+          "bytes": 71,
+          "sha256": "e2d97bc74c20ebe601c31a52be4fa6be69ee02114c48093d98d802dd3cc56da2",
+          "url": "https://github.com/veusz/veusz/blob/b637be1018a473fa829d097ce48b8164078dd365/requirements.txt"
+        },
+        {
+          "path": "setup.py",
+          "bytes": 5707,
+          "sha256": "f7e735bde1b325e0e08f6f17ebeb9462ee34a7c36e2cf3f851bd69df261801e3",
+          "url": "https://github.com/veusz/veusz/blob/b637be1018a473fa829d097ce48b8164078dd365/setup.py"
+        }
+      ],
+      "build_requirements": "Python>=3.8, Qt>=6.3, SIP>=6.5, PyQt>=6.3 and NumPy per fixed INSTALL; C++ helper extensions and setuptools build. FITS/HDF5 are optional. Scope localCSV,2Dplot,SVG/PNG export.",
+      "source_caveats": "Ubuntu24.04 Python/Qt baseline must be compared with exact pinned requirements; Qt6.10.2 in official binaries is not a requirement automatically satisfied by stock apt. Plotcanvas requires screenshots/coordinates; optional networking/data capture/plugins excluded.",
+      "workflows": [
+        {
+          "name": "数据到图形映射",
+          "observe": "观察合成CSV列导入、X/Y分配、轴标题/范围、线与点样式",
+          "implement": "独立实现数据schema与plot坐标转换，分开widget树、数据与viewport",
+          "check": "小数据图点数量/坐标/标签与参考一致；改变轴范围只改变视图",
+          "negative_example": "凭初始图手绘曲线、混用列或缩放改数据",
+          "status": "proposed public behavior; reference runtime observation and independent verifier not yet admitted"
+        },
+        {
+          "name": "文档与导出一致性",
+          "observe": "编辑图层/标签后保存重开，导出SVG/PNG并改变输出尺寸",
+          "implement": "实现文档持久化和数据驱动导出",
+          "check": "重开保留dataset/轴/样式；解码输出尺寸与图形范围正确",
+          "negative_example": "只保存截图或工具条不是真实图内容，导出忽略最终修改",
+          "status": "proposed public behavior; reference runtime observation and independent verifier not yet admitted"
+        }
+      ],
+      "bench_correspondence": [
+        {
+          "task_id": "ubuntu/kde-labplot",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        },
+        {
+          "task_id": "ubuntu/silx-kit-silx",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        },
+        {
+          "task_id": "windows/husonlab-splitstree6",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        },
+        {
+          "task_id": "windows/vagabond-k-dxftoelevationmodel",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        }
+      ],
+      "source_isolation": {
+        "all200native_exact_matches": [],
+        "aliases": [],
+        "all50web_explicit_source_matches": [],
+        "web_anonymized_origins_unresolved": true,
+        "full_fork_or_code_similarity_checked": false,
+        "generic_framework_overlap": "Shared GTK/KDE/Qt/React libraries are disclosed; independent source product does not prove complete absence of common code."
+      },
+      "runtime_accepted": false,
+      "reference_application_run": false,
+      "model_or_task_execution": false,
+      "proposed_workflow_count": 2,
+      "source_acquisition": {
+        "application_id": "ubuntu--veusz--veusz",
+        "platform": "ubuntu",
+        "repo": "https://github.com/veusz/veusz",
+        "commit": "b637be1018a473fa829d097ce48b8164078dd365",
+        "source_url": "https://codeload.github.com/veusz/veusz/tar.gz/b637be1018a473fa829d097ce48b8164078dd365",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\archives\\ubuntu--veusz--veusz--b637be1018a473fa829d097ce48b8164078dd365.tar.gz",
+        "archive_bytes": 3003383,
+        "archive_sha256": "581f19212780c2a0c6567ed1f837ac0042e1ad61ffb1420f7136e2fa1807b2cc",
+        "source_directory": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\sources\\ubuntu--veusz--veusz--b637be1018a4",
+        "regular_files": 685,
+        "expanded_bytes": 15480874,
+        "skipped_links": 0,
+        "inventory": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\inventories\\ubuntu--veusz--veusz--b637be1018a4.json",
+        "inventory_sha256": "0949843af306b326aca6978d5ad4e571caea44877812a7ae525732ca3583b262",
+        "runtime_accepted": false
+      },
+      "selection_status": "main_source_candidate_runtime_pending",
+      "trajectory_count": 0,
+      "verified_skill_count": 0
+    },
+    {
+      "platform": "windows",
+      "name": "Pomotroid",
+      "repo": "https://github.com/Splode/pomotroid",
+      "tag": "v1.7.1",
+      "commit": "4a02ac7bff9083dc5b2cc42fa7c4683c1fc15805",
+      "license": "MIT",
+      "build_evidence": [
+        {
+          "path": "README.md",
+          "bytes": 6460,
+          "sha256": "faa651e36f833b00d57578345589a2bddd99930ed7a929a2e56f2daabd7e23fc",
+          "url": "https://github.com/Splode/pomotroid/blob/4a02ac7bff9083dc5b2cc42fa7c4683c1fc15805/README.md"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1075,
+          "sha256": "26c9bfaefad8fafa79e3f2c403bf75438f099f1847da304f43fda117b5ca6658",
+          "url": "https://github.com/Splode/pomotroid/blob/4a02ac7bff9083dc5b2cc42fa7c4683c1fc15805/LICENSE"
+        },
+        {
+          "path": "package.json",
+          "bytes": 1501,
+          "sha256": "faa64d5d010ababee542a377592d6aded2a0c2c6e3181931932e0a603038a688",
+          "url": "https://github.com/Splode/pomotroid/blob/4a02ac7bff9083dc5b2cc42fa7c4683c1fc15805/package.json"
+        },
+        {
+          "path": "src-tauri/Cargo.toml",
+          "bytes": 1439,
+          "sha256": "90199c768ad0bcde0bec8715fc336d0cf1279df1137aaa7b7f503d3e11d2e362",
+          "url": "https://github.com/Splode/pomotroid/blob/4a02ac7bff9083dc5b2cc42fa7c4683c1fc15805/src-tauri/Cargo.toml"
+        },
+        {
+          "path": "src-tauri/tauri.conf.json",
+          "bytes": 2577,
+          "sha256": "faac91ef880f4b73d804f812223aae42e8259a63135be6b4244c884f7ee34d6b",
+          "url": "https://github.com/Splode/pomotroid/blob/4a02ac7bff9083dc5b2cc42fa7c4683c1fc15805/src-tauri/tauri.conf.json"
+        },
+        {
+          "path": "CONTRIBUTING.md",
+          "bytes": 8168,
+          "sha256": "eda639815ed7389ba54abde39d9f1e7981dd52a43e144b651ef8154d30822aec",
+          "url": "https://github.com/Splode/pomotroid/blob/4a02ac7bff9083dc5b2cc42fa7c4683c1fc15805/CONTRIBUTING.md"
+        }
+      ],
+      "build_requirements": "Tauri2/Rust2021/Svelte5; Node22+ per fixed CONTRIBUTING.md, npm and Rust/Cargo caches; native Windows MSVC/WebView2 or Ubuntu WebKitGTK4.1. Cargo includes bundledrusqlite/rodio/localwebsocket optionalserver.",
+      "source_caveats": "Windows2022 needs fixed MSVC and WebView2 runtime, neither build nor GUI admission performed; tray/notification must remain local to reference VM. Updater/network disabled; optional WebSocketserver not actor observation channel.",
+      "workflows": [
+        {
+          "name": "暂停与继续的单一时钟",
+          "observe": "观察start、短等待、pause、等待、resume、reset时显示与进度弧",
+          "implement": "独立实现单一单调时间来源、running/paused/reset状态机",
+          "check": "暂停期间剩余值保持、继续接续同round；容许固定显示粒度误差，不用每render重开interval",
+          "negative_example": "暂停后后台仍倒计时或多interval让计时加倍",
+          "status": "proposed public behavior; reference runtime observation and independent verifier not yet admitted"
+        },
+        {
+          "name": "轮次边界与统计持久化",
+          "observe": "用公开设置的最短合法时长观察work→break、完成统计、重启记录",
+          "implement": "独立实现边界事件 exactlyonce、设置/会话状态与统计持久化",
+          "check": "一次完成只增加一次计数；重启统计保留，reset不伪造完成",
+          "negative_example": "达到零反复统计、暂停/放弃被记完成",
+          "status": "proposed public behavior; reference runtime observation and independent verifier not yet admitted"
+        }
+      ],
+      "bench_correspondence": [
+        {
+          "task_id": "ubuntu/jmoerman-go-for-it",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        },
+        {
+          "task_id": "ubuntu/zidoro-pomatez",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        },
+        {
+          "task_id": "ubuntu/seadve-breathing",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        },
+        {
+          "task_id": "windows/envigit-pomodorotimer",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        },
+        {
+          "task_id": "windows/odest-iclock",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        },
+        {
+          "task_id": "windows/planshit-tai",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        }
+      ],
+      "source_isolation": {
+        "all200native_exact_matches": [],
+        "aliases": [],
+        "all50web_explicit_source_matches": [],
+        "web_anonymized_origins_unresolved": true,
+        "full_fork_or_code_similarity_checked": false,
+        "generic_framework_overlap": "Shared GTK/KDE/Qt/React libraries are disclosed; independent source product does not prove complete absence of common code."
+      },
+      "runtime_accepted": false,
+      "reference_application_run": false,
+      "model_or_task_execution": false,
+      "proposed_workflow_count": 2,
+      "source_acquisition": {
+        "application_id": "windows--Splode--pomotroid",
+        "platform": "windows",
+        "repo": "https://github.com/Splode/pomotroid",
+        "commit": "4a02ac7bff9083dc5b2cc42fa7c4683c1fc15805",
+        "source_url": "https://codeload.github.com/Splode/pomotroid/tar.gz/4a02ac7bff9083dc5b2cc42fa7c4683c1fc15805",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\archives\\windows--Splode--pomotroid--4a02ac7bff9083dc5b2cc42fa7c4683c1fc15805.tar.gz",
+        "archive_bytes": 1881043,
+        "archive_sha256": "f1ea99a569ae17a428e1a9811fbc3e8d7732d4c04d3f9fd62d046a316de17150",
+        "source_directory": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\sources\\windows--Splode--pomotroid--4a02ac7bff90",
+        "regular_files": 344,
+        "expanded_bytes": 3017538,
+        "skipped_links": 0,
+        "inventory": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\inventories\\windows--Splode--pomotroid--4a02ac7bff90.json",
+        "inventory_sha256": "81fc8feb3910abbf2eaa4786c36955cc9eab9dbe8ed2d3019e2d45fa3be67d8a",
+        "runtime_accepted": false
+      },
+      "selection_status": "main_source_candidate_runtime_pending",
+      "trajectory_count": 0,
+      "verified_skill_count": 0
+    },
+    {
+      "platform": "ubuntu",
+      "name": "Cozy",
+      "repo": "https://github.com/geigi/cozy",
+      "tag": "1.3.0",
+      "commit": "4c978ec53f0d86de116e4db471821af5138f8edc",
+      "license": "GPL-3.0-or-later; bundled python-inject has its own includedlicense",
+      "build_evidence": [
+        {
+          "path": "README.md",
+          "bytes": 7914,
+          "sha256": "cde76df54d67431ef5a4cda6a214fd57fcbb2e5d259aa8bb0c5c12cb3db66e86",
+          "url": "https://github.com/geigi/cozy/blob/4c978ec53f0d86de116e4db471821af5138f8edc/README.md"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 35149,
+          "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+          "url": "https://github.com/geigi/cozy/blob/4c978ec53f0d86de116e4db471821af5138f8edc/LICENSE"
+        },
+        {
+          "path": "meson.build",
+          "bytes": 2867,
+          "sha256": "53bf70be72902ac442207cf3f05a6bb4d2904dc0ea3047ad6aba15221b78ab86",
+          "url": "https://github.com/geigi/cozy/blob/4c978ec53f0d86de116e4db471821af5138f8edc/meson.build"
+        },
+        {
+          "path": "requirements.txt",
+          "bytes": 43,
+          "sha256": "32f74c21e2961eae62837ab517346b371a33f986fa24b0df72b69e0690933ec8",
+          "url": "https://github.com/geigi/cozy/blob/4c978ec53f0d86de116e4db471821af5138f8edc/requirements.txt"
+        },
+        {
+          "path": "pyproject.toml",
+          "bytes": 265,
+          "sha256": "c778829e8365601714314925d075bd9c7e4ecd22964d7aa0f4ec419eea2d72f3",
+          "url": "https://github.com/geigi/cozy/blob/4c978ec53f0d86de116e4db471821af5138f8edc/pyproject.toml"
+        }
+      ],
+      "build_requirements": "Python3/Meson>=0.40,GTK4>=4.10,Adwaita>=1.4,PyGObject/gi-cairo,Peewee>=3.9.6,Mutagen,GStreamer1.0 codecs. README has Ubuntu-specific DEVELOPMENT instructions.",
+      "source_caveats": "Declared GTK/Adwaita minima fit Ubuntu24.04 baseline; build/runtime not verified. Use synthetic local WAV chapters(no copyright/DRM/networkdrive); fixed GStreamer/audio sink, font/metadata library. macOS port discontinued, not selected.",
+      "workflows": [
+        {
+          "name": "播放与寻址状态",
+          "observe": "导入两个合成WAV章节，观察play/pause/seek/切章、时长和进度",
+          "implement": "独立建模media身份、秒时间、playback状态和异步加载/seek",
+          "check": "seek后声段/显示位置一致；暂停位置不推进，换章不会延用上一章时长",
+          "negative_example": "仅移动进度条而媒体没跳转、异步回执覆盖新章节",
+          "status": "proposed public behavior; reference runtime observation and independent verifier not yet admitted"
+        },
+        {
+          "name": "位置与库持久化",
+          "observe": "播放/seek后关闭重开、搜索过滤书目、更改播放速度并观察",
+          "implement": "实现每媒体独立bookmark、库状态和播放速率",
+          "check": "重开回到同章节与位置(允许固定误差)；过滤不删除库记录；速率不改文件时长",
+          "negative_example": "全库共用一个位置或搜索结果被误当已删除媒体",
+          "status": "proposed public behavior; reference runtime observation and independent verifier not yet admitted"
+        }
+      ],
+      "bench_correspondence": [
+        {
+          "task_id": "ubuntu/clementine-player-clementine",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        },
+        {
+          "task_id": "ubuntu/digimezzo-dopamine",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        },
+        {
+          "task_id": "ubuntu/rncbc-qtractor",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        },
+        {
+          "task_id": "ubuntu/thp-wavbreaker",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        },
+        {
+          "task_id": "windows/jbe2277-musicmanager",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        },
+        {
+          "task_id": "windows/thisismy-github-pyplayer",
+          "basis": "public application category or behavior capability inference, not same-source or proven transfer"
+        }
+      ],
+      "source_isolation": {
+        "all200native_exact_matches": [],
+        "aliases": [],
+        "all50web_explicit_source_matches": [],
+        "web_anonymized_origins_unresolved": true,
+        "full_fork_or_code_similarity_checked": false,
+        "generic_framework_overlap": "Shared GTK/KDE/Qt/React libraries are disclosed; independent source product does not prove complete absence of common code."
+      },
+      "runtime_accepted": false,
+      "reference_application_run": false,
+      "model_or_task_execution": false,
+      "proposed_workflow_count": 2,
+      "source_acquisition": {
+        "application_id": "ubuntu--geigi--cozy",
+        "platform": "ubuntu",
+        "repo": "https://github.com/geigi/cozy",
+        "commit": "4c978ec53f0d86de116e4db471821af5138f8edc",
+        "source_url": "https://codeload.github.com/geigi/cozy/tar.gz/4c978ec53f0d86de116e4db471821af5138f8edc",
+        "status": "source_acquired_not_executed",
+        "archive": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\archives\\ubuntu--geigi--cozy--4c978ec53f0d86de116e4db471821af5138f8edc.tar.gz",
+        "archive_bytes": 332318,
+        "archive_sha256": "6642a9d3b191d2b3a3345c66888bcd9665f09c119ae29508e83bb5d3fad64602",
+        "source_directory": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\sources\\ubuntu--geigi--cozy--4c978ec53f0d",
+        "regular_files": 259,
+        "expanded_bytes": 1743798,
+        "skipped_links": 0,
+        "inventory": "D:\\skillloop\\research\\reports\\280_gui_pool_sufficiency\\inventories\\ubuntu--geigi--cozy--4c978ec53f0d.json",
+        "inventory_sha256": "6b0474818645e77a49749ac9d6350f89dccd36672c57b390e14c3e719bb85206",
+        "runtime_accepted": false
+      },
+      "selection_status": "main_source_candidate_runtime_pending",
+      "trajectory_count": 0,
+      "verified_skill_count": 0
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+apply plugin: 'com.android.application'
+
+def keystoreFile = rootProject.file("app/sp.jks")
+
+android {
+
+    if (keystoreFile.exists()) {
+        signingConfigs {
+            release {
+                storeFile file("sp.jks")
+                storePassword "smartpack"
+                keyAlias "sp_key1"
+                keyPassword "smartpack"
+            }
+        }
+    }
+
+    namespace 'com.smartpack.packagemanager'
+    compileSdkVersion 33
+    buildToolsVersion '30.0.3'
+
+    defaultConfig {
+        applicationId "com.smartpack.packagemanager"
+        minSdkVersion 23
+        targetSdkVersion 33
+        versionCode 70
+        versionName "v7.0"
+        vectorDrawables.useSupportLibrary = true
+        testFunctionalTest = false
+        testHandleProfiling = false
+    }
+
+    buildTypes {
+        release {
+            if (keystoreFile.exists()) {
+                signingConfig signingConfigs.release
+            }
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "release"
+    productFlavors {
+        play {
+            dimension "release"
+        }
+        fdroid {
+            dimension "release"
+        }
+    }
+    lint {
+        abortOnError false
+    }
+}
+
+dependencies {
+    playImplementation 'com.android.billingclient:billing:6.0.0'
+    implementation 'com.github.apk-editor:aXML:8458ba5aee'
+
+    def sCommon_Version = 'aa1019da38'
+    implementation "com.github.sunilpaulmathew.sCommon:adapters:${sCommon_Version}"
+    implementation "com.github.sunilpaulmathew.sCommon:crashreporter:${sCommon_Version}"
+    implementation "com.github.sunilpaulmathew.sCommon:credits:${sCommon_Version}"
+    implementation "com.github.sunilpaulmathew.sCommon:installerutils:${sCommon_Version}"
+    implementation "com.github.sunilpaulmathew.sCommon:permissionutils:${sCommon_Version}"
+    implementation "com.github.sunilpaulmathew.sCommon:themeutils:${sCommon_Version}"
+    implementation "com.github.sunilpaulmathew.sCommon:translatorutils:${sCommon_Version}"
+
+    implementation "com.github.topjohnwu.libsu:core:4.0.3"
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation "dev.rikka.shizuku:api:12.1.0"
+    implementation "dev.rikka.shizuku:provider:12.1.0"
+    implementation 'net.lingala.zip4j:zip4j:2.11.3'
+}

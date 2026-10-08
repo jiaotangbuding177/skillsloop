@@ -1,0 +1,565 @@
+{
+  "date": "2026-10-04",
+  "scope": "Public source acquisition and source-side documentation audit only; no model, task, scoring or learning execution",
+  "bench_catalog": "../bench_source_catalog.json",
+  "selected_candidates": [
+    {
+      "id": "macos_hexfiend",
+      "platform": "macos",
+      "name": "Hex Fiend",
+      "repo": "https://github.com/HexFiend/HexFiend",
+      "tag": "v2.18.1",
+      "commit": "e2f91f1b7aff9a473c3b5aaf7c2e0cf3cb9e027e",
+      "license": "BSD-2-Clause",
+      "license_evidence": "HexFiend__HexFiend/License.txt",
+      "build_evidence": {
+        "official_readme": "Native macOS hex editor; local binary editing, searching and comparison.",
+        "fixed_source": "Makefile invokes xcodebuild for documentation; .gitmodules is empty. Guessed project paths returned HTTP 404, so full project/build dependency admission remains pending.",
+        "runtime_expected": "macOS AppKit application using local synthetic files; no account needed for proposed core workflows.",
+        "executed": false,
+        "limitations": [
+          "Build, deployment target and signing have not been executed or fully admitted.",
+          "Custom byte-grid accessibility may require screenshots and coordinates; macOS AX capability is unverified.",
+          "Source archive alone does not include a verified runnable application."
+        ]
+      },
+      "workflows": [
+        {
+          "sequence": [
+            "Observe byte grid, character panel and inspector using a small synthetic binary.",
+            "Observe select, replace and save-as state transitions.",
+            "Implement the observed editor behavior independently, then reopen and compare saved bytes."
+          ],
+          "validator_expected": [
+            "Exact expected byte sequence and file length.",
+            "Selection/view state agrees with input.",
+            "Save/reopen preserves edited content."
+          ],
+          "evidence": "Pinned README documents binary editing and inspector; exact task controls require reference UI observation."
+        },
+        {
+          "sequence": [
+            "Observe search and compare panels on two small controlled binaries.",
+            "Record no-match, next-match and changed-byte states.",
+            "Recreate these states, then selfcheck offsets and diff outputs."
+          ],
+          "validator_expected": [
+            "Expected matching offsets.",
+            "Correct changed byte regions.",
+            "No-match state does not mutate data."
+          ],
+          "evidence": "Pinned README documents search and binary comparison; proposed task contract, not an existing official validator."
+        }
+      ],
+      "skill_expectation": [
+        "Observe coupled grid/inspector/selection states before recreating a desktop UI.",
+        "Treat binary data as bytes and verify saved artifacts.",
+        "Separate viewport state from persistent document changes."
+      ],
+      "bench_correspondence": [
+        {
+          "task_id": "macos/abentele-erbele",
+          "capability": "Desktop text/selection/menu/document state.",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "macos/pawelsalawa-letos",
+          "capability": "Structured local editing and state inspection.",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "ubuntu/kde-okteta",
+          "capability": "Binary editor capabilities on another native platform; strongest functional correspondence.",
+          "rationale_inference": true
+        }
+      ],
+      "source_isolation": {
+        "aliases": [
+          "https://github.com/ridiculousfish/HexFiend"
+        ],
+        "known_upstream": [],
+        "manual_evidence": "Canonical project moved organization; the old owner is treated as an alias.",
+        "family_risk": "Text/hex editor domain overlap is expected. No exact candidate/alias source identity matched the native catalog, but code similarity is not proven absent.",
+        "full_code_audit_pending": true,
+        "exact_repo_matches": [],
+        "identity_audit_file": "source_identity_audit.json"
+      },
+      "references": [
+        "https://github.com/HexFiend/HexFiend",
+        "https://github.com/HexFiend/HexFiend/releases/tag/v2.18.1",
+        "https://github.com/HexFiend/HexFiend/tree/e2f91f1b7aff9a473c3b5aaf7c2e0cf3cb9e027e"
+      ],
+      "skill_expectation_is_hypothesis": true,
+      "download_size": "Root acquired source archive; use root acquisition manifest for exact bytes. No source download or build by this subagent."
+    },
+    {
+      "id": "macos_gifski",
+      "platform": "macos",
+      "name": "Gifski",
+      "repo": "https://github.com/sindresorhus/Gifski",
+      "tag": "v2.23.0",
+      "commit": "6fd12595617d1854c59f4ddca8e068fefa66c397",
+      "license": "MIT for GUI source; AGPL-3.0-or-later for gifski encoder dependency",
+      "license_evidence": "sindresorhus__Gifski/license",
+      "build_evidence": {
+        "official_readme": "Convert local videos into GIFs; older compatible v2.23.0 selected rather than current macOS 26 release.",
+        "fixed_source": "Pinned README says macOS 13+; project deployment target is 13.3. Build uses Xcode, Rust and SwiftLint with Swift package dependencies.",
+        "runtime_expected": "macOS 14.7.5 reference host can satisfy the declared deployment target; local video/GIF core needs no application account.",
+        "executed": false,
+        "limitations": [
+          "Build/toolchain, signing, Rust library resolution and reference UI not executed.",
+          "Dependency revision/license audit must include the AGPL encoder; do not label the whole bundle MIT.",
+          "Latest v3 cropping/macOS 26 features are outside selected v2.23.0.",
+          "Video decode support and output inspection need admission using a synthetic input."
+        ]
+      },
+      "workflows": [
+        {
+          "sequence": [
+            "Observe local short-video import, settings, preview and save dialog.",
+            "Change dimensions, FPS and quality one at a time.",
+            "Recreate the observed pipeline and selfcheck decoded GIF dimensions, frame count and saved file."
+          ],
+          "validator_expected": [
+            "Output is a decodable GIF.",
+            "Expected dimensions and bounded frame count.",
+            "Settings visibly update preview and output."
+          ],
+          "evidence": "Pinned README documents conversion controls; concrete values and preview behavior require UI admission."
+        },
+        {
+          "sequence": [
+            "Observe loop, bounce and playback speed behavior on a short synthetic video.",
+            "Record reset/new-input transitions.",
+            "Implement the observed state handling, then verify animation order and loop metadata."
+          ],
+          "validator_expected": [
+            "Expected loop behavior.",
+            "Expected forward/reverse frame ordering for admitted bounce control.",
+            "Replacing source does not export stale frames."
+          ],
+          "evidence": "Pinned v2 README features; no v3-only crop requirement."
+        }
+      ],
+      "skill_expectation": [
+        "Map asynchronous media settings to preview and generated artifacts.",
+        "Verify output format and metadata in addition to screenshots.",
+        "Manage import/export dialogs and stale media state."
+      ],
+      "bench_correspondence": [
+        {
+          "task_id": "macos/mifi-lossless-cut",
+          "capability": "Local media import, parameter selection, preview and export.",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "macos/stefansl-image-shrinker",
+          "capability": "Dimension settings and transformed local image artifacts.",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "macos/sappharad-mp3gainosx",
+          "capability": "Media parameter changes with persistent output.",
+          "rationale_inference": true
+        }
+      ],
+      "source_isolation": {
+        "aliases": [],
+        "known_upstream": [
+          "https://github.com/ImageOptim/gifski"
+        ],
+        "manual_evidence": "Native Swift GUI is a distinct wrapper around the ImageOptim encoder; both identities are audited against native benchmark sources.",
+        "family_risk": "Shared codec library/source dependency must be pinned and audited; distinct GUI repo alone does not eliminate transitive source overlap.",
+        "full_code_audit_pending": true,
+        "exact_repo_matches": [],
+        "identity_audit_file": "source_identity_audit.json"
+      },
+      "references": [
+        "https://github.com/sindresorhus/Gifski/releases/tag/v2.23.0",
+        "https://raw.githubusercontent.com/sindresorhus/Gifski/6fd12595617d1854c59f4ddca8e068fefa66c397/readme.md",
+        "https://github.com/ImageOptim/gifski/blob/main/README.md",
+        "https://github.com/sindresorhus/Gifski/tree/6fd12595617d1854c59f4ddca8e068fefa66c397"
+      ],
+      "skill_expectation_is_hypothesis": true,
+      "download_size": "Root acquired source archive; use root acquisition manifest for exact bytes. No source download or build by this subagent."
+    },
+    {
+      "id": "macos_macpass",
+      "platform": "macos",
+      "name": "MacPass",
+      "repo": "https://github.com/MacPass/MacPass",
+      "tag": "0.8.2",
+      "commit": "3256bc93ea94eb20b618c155e6a1b08e6fabe663",
+      "license": "GPL-3.0-or-later",
+      "license_evidence": "MacPass__MacPass/LICENSE.txt",
+      "build_evidence": {
+        "official_readme": "Native macOS KeePass database client; recursive Git checkout, Carthage and Xcode build.",
+        "fixed_source": "Deployment target 10.13. DDHotKey Git submodule plus Carthage dependencies including KeePassKit, KissXML, TransformerKit, HNHUi and Sparkle.",
+        "runtime_expected": "Local synthetic password database and dummy values, with no application account or cloud integration.",
+        "executed": false,
+        "limitations": [
+          "Build with recursive dependencies and code signing not yet admitted.",
+          "Only GitHub source/release is selected; the project reports abandonment of old macpassapp.org and fixes the update domain in 0.8.2.",
+          "AutoType, browser integrations, plugins, external cloud/password stores and real secrets are excluded.",
+          "Protocol/source-family risk with benchmark KeeWeb is explicitly unresolved at code/dependency level."
+        ]
+      },
+      "workflows": [
+        {
+          "sequence": [
+            "Observe group and entry forms in an isolated synthetic KeePass database.",
+            "Create groups and dummy entries, edit fields, then observe search and selection states.",
+            "Independently implement the observed CRUD/search UI and selfcheck local persistence after reopening."
+          ],
+          "validator_expected": [
+            "Expected group/entry structure and dummy fields.",
+            "Search returns correct controlled entries.",
+            "Edited values survive save/reopen."
+          ],
+          "evidence": "Pinned README documents local KeePass management; exact forms and validation need UI observation."
+        },
+        {
+          "sequence": [
+            "Observe moving an entry between groups and locking/reopening the local database.",
+            "Record focus, selection and locked/unlocked state transitions.",
+            "Recreate only these admitted behaviors and check that move and lock preserve data."
+          ],
+          "validator_expected": [
+            "Correct destination group.",
+            "Locked UI hides editable entries.",
+            "Reopen restores controlled database structure."
+          ],
+          "evidence": "Proposed reference task; lock/move controls and validation must be admitted, without plugins."
+        }
+      ],
+      "skill_expectation": [
+        "Recreate nested list/detail editors and persistence contracts.",
+        "Separate lock/session state from stored records.",
+        "Use synthetic fixtures and verify structure instead of memorizing literal passwords."
+      ],
+      "bench_correspondence": [
+        {
+          "task_id": "macos/saturneric-gpgfrontend",
+          "capability": "Local structured security records, forms and saved state.",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "macos/p0deje-maccy",
+          "capability": "Selection/search and transient desktop state.",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "ubuntu/keeweb-keeweb",
+          "capability": "Same KeePass file-format domain; deliberate capability overlap and family-risk disclosure.",
+          "rationale_inference": true
+        }
+      ],
+      "source_isolation": {
+        "aliases": [],
+        "known_upstream": [],
+        "manual_evidence": "Official README presents MacPass as a native client and KeeWeb as an alternative; no claim of a KeeWeb product fork is present. KeePassKit is a separate dependency.",
+        "family_risk": "MacPass and benchmark KeeWeb share KeePass/KDBX format and may share algorithms or libraries. This supports capability transfer but does not establish strict family isolation. A family/source dependency review is required before accepting strong isolation claims.",
+        "full_code_audit_pending": true,
+        "exact_repo_matches": [],
+        "identity_audit_file": "source_identity_audit.json"
+      },
+      "references": [
+        "https://github.com/MacPass/MacPass",
+        "https://github.com/MacPass/MacPass/releases/tag/0.8.2",
+        "https://raw.githubusercontent.com/MacPass/MacPass/3256bc93ea94eb20b618c155e6a1b08e6fabe663/README.md",
+        "https://github.com/MacPass/MacPass/tree/3256bc93ea94eb20b618c155e6a1b08e6fabe663"
+      ],
+      "skill_expectation_is_hypothesis": true,
+      "download_size": "Root acquired source archive; use root acquisition manifest for exact bytes. No source download or build by this subagent."
+    },
+    {
+      "id": "android_fossify_gallery",
+      "platform": "android",
+      "name": "Fossify Gallery",
+      "repo": "https://github.com/FossifyOrg/Gallery",
+      "tag": "1.13.1",
+      "commit": "b28299dc33821eee8d108a9880ce87876cf31443",
+      "license": "GPL-3.0 (repository license; header grant audit pending)",
+      "license_evidence": "FossifyOrg__Gallery/LICENSE",
+      "build_evidence": {
+        "official_readme": "Offline local photo/gallery core with albums, editing, resize, rotate, flip and recycle bin.",
+        "fixed_source": "compileSdk 36, targetSdk 36, minSdk 26; foss/gplay flavors. Main manifest removes ACCESS_NETWORK_STATE; merged APK manifest not audited.",
+        "runtime_expected": "Android API 35 benchmark host meets declared minimum; SDK 36 is required to build selected version. foss debug flavor avoids store publishing.",
+        "executed": false,
+        "limitations": [
+          "No APK build, installation, merged manifest or UiAutomator/UI hierarchy validation.",
+          "SDK 36 build prerequisites and API 35 scoped-storage/media permissions must be admitted.",
+          "Canvas editing may need screenshot coordinates.",
+          "Only synthetic local media; no PIN/protected albums, external sharing or online components."
+        ]
+      },
+      "workflows": [
+        {
+          "sequence": [
+            "Observe seeded local album/list/detail states and file picker permissions.",
+            "Observe a controlled rotate or resize operation and save result.",
+            "Recreate these states and check resulting image orientation/dimensions plus local file persistence."
+          ],
+          "validator_expected": [
+            "Expected image dimensions/orientation.",
+            "Saved artifact readable in local album.",
+            "Album selection and new-media refresh are consistent."
+          ],
+          "evidence": "Pinned README lists local gallery/editing; exact controls and permissions need reference UI admission."
+        },
+        {
+          "sequence": [
+            "Observe creating/renaming an album and moving selected synthetic images.",
+            "Observe delete-to-recycle and restore states if supported by selected UI.",
+            "Implement admitted list-selection/dialog/storage transitions and compare expected filenames and membership."
+          ],
+          "validator_expected": [
+            "Correct album membership.",
+            "Selected items move once.",
+            "Admitted recycle/restore operation preserves controlled bytes."
+          ],
+          "evidence": "Proposed task from pinned gallery/recycle-bin capabilities; confirm selected release UI before task freeze."
+        }
+      ],
+      "skill_expectation": [
+        "Observe Android scoped-storage and multi-selection flows.",
+        "Recreate media list/detail/editor transitions with persistent files.",
+        "Validate generated artifacts and list refresh, not only image similarity."
+      ],
+      "bench_correspondence": [
+        {
+          "task_id": "android/patzly-doodle-android",
+          "capability": "Touch/canvas drawing or editing state.",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "android/swati4star-images-to-pdf",
+          "capability": "Local image selection and generated file outputs.",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "android/teamamaze-amazefilemanager",
+          "capability": "Albums/files, selection, move and permission dialogs.",
+          "rationale_inference": true
+        }
+      ],
+      "source_isolation": {
+        "aliases": [],
+        "known_upstream": [
+          "https://github.com/SimpleMobileTools/Simple-Gallery"
+        ],
+        "manual_evidence": "Fossify Gallery is a continuation/fork of Simple Gallery; the family must be treated as one unit across candidate versions or sister apps.",
+        "family_risk": "No candidate/upstream exact repo identity in native catalog. Common Android libraries and Fossify Commons remain a transitive similarity risk; no second Fossify app is selected.",
+        "full_code_audit_pending": true,
+        "exact_repo_matches": [],
+        "identity_audit_file": "source_identity_audit.json"
+      },
+      "references": [
+        "https://github.com/FossifyOrg/Gallery",
+        "https://github.com/FossifyOrg/Gallery/releases/tag/1.13.1",
+        "https://raw.githubusercontent.com/FossifyOrg/Gallery/b28299dc33821eee8d108a9880ce87876cf31443/app/build.gradle.kts",
+        "https://github.com/FossifyOrg/Gallery/tree/b28299dc33821eee8d108a9880ce87876cf31443"
+      ],
+      "skill_expectation_is_hypothesis": true,
+      "download_size": "Root acquired source archive; use root acquisition manifest for exact bytes. No source download or build by this subagent."
+    },
+    {
+      "id": "android_activity_diary",
+      "platform": "android",
+      "name": "Activity Diary",
+      "repo": "https://github.com/ramack/ActivityDiary",
+      "tag": "v1.4.2",
+      "commit": "22593ca02b897132c5649f1219aa93448dc18b06",
+      "license": "GPL-3.0-or-later",
+      "license_evidence": "ramack__ActivityDiary/LICENSE",
+      "build_evidence": {
+        "official_readme": "Local activity tracking, notes, pictures and history; privacy policy says data stays local unless the user requests transmission.",
+        "fixed_source": "compileSdk 30, targetSdk 30, minSdk 21; applicationId de.rampro.activitydiary. Older Gradle/dependencies include map, charts and optional mail crash reporting.",
+        "runtime_expected": "Local activity/notes/history workflows without account, location lookup, maps or crash-report transmission.",
+        "executed": false,
+        "limitations": [
+          "Old Android build toolchain/dependency repository and API 35 runtime compatibility not admitted.",
+          "Publishing Gradle configuration refers to a service-account file; publishing tasks are excluded, and debug configuration must be checked without any credential.",
+          "No installation/UiAutomator testing has occurred.",
+          "Timing-sensitive numeric duration scoring is avoided; deterministic activity/notes/history state is proposed."
+        ]
+      },
+      "workflows": [
+        {
+          "sequence": [
+            "Observe creating activities, choosing color/icon and current-activity selection.",
+            "Observe start/change/stop states and adding a short synthetic note.",
+            "Recreate the admitted state machine, then verify selected activity, note content and history sequence."
+          ],
+          "validator_expected": [
+            "Correct mutually exclusive current activity.",
+            "Expected note attached to correct event.",
+            "History order agrees with observed transitions."
+          ],
+          "evidence": "Pinned README and local privacy policy; exact forms/buttons need UI observation."
+        },
+        {
+          "sequence": [
+            "Observe activity search/filter and editing a controlled history note.",
+            "Record empty-result and restored-list states.",
+            "Independently implement these transitions and selfcheck persistence after reopening."
+          ],
+          "validator_expected": [
+            "Expected matched activity names.",
+            "Edited note persists.",
+            "Empty search does not delete stored records."
+          ],
+          "evidence": "Proposed task; search/edit availability must be admitted in selected release."
+        }
+      ],
+      "skill_expectation": [
+        "Infer a timer/activity state machine from observable transitions.",
+        "Implement local CRUD/filtering and history persistence.",
+        "Avoid treating wall-clock timing noise as task success evidence."
+      ],
+      "bench_correspondence": [
+        {
+          "task_id": "android/razeeman-android-simpletimetracker",
+          "capability": "Activity/timer/history state machine.",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "android/v1tzor-timeplanner",
+          "capability": "Local planning records and multiple screens.",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "android/goodtime-productivity-goodtime",
+          "capability": "Start/stop and active-session state.",
+          "rationale_inference": true
+        }
+      ],
+      "source_isolation": {
+        "aliases": [],
+        "known_upstream": [],
+        "manual_evidence": "Official project has its own Activity Diary implementation; exact repository identities were compared across all public benchmark source rows.",
+        "family_risk": "Functional domain overlaps timer/planning benchmark apps. Exact identity non-overlap is not a source-copy or full product-lineage guarantee.",
+        "full_code_audit_pending": true,
+        "exact_repo_matches": [],
+        "identity_audit_file": "source_identity_audit.json"
+      },
+      "references": [
+        "https://github.com/ramack/ActivityDiary",
+        "https://raw.githubusercontent.com/ramack/ActivityDiary/22593ca02b897132c5649f1219aa93448dc18b06/Privacy-Policy.md",
+        "https://raw.githubusercontent.com/ramack/ActivityDiary/22593ca02b897132c5649f1219aa93448dc18b06/app/build.gradle",
+        "https://github.com/ramack/ActivityDiary/tree/22593ca02b897132c5649f1219aa93448dc18b06"
+      ],
+      "skill_expectation_is_hypothesis": true,
+      "download_size": "Root acquired source archive; use root acquisition manifest for exact bytes. No source download or build by this subagent."
+    },
+    {
+      "id": "android_family_gem",
+      "platform": "android",
+      "name": "Family Gem",
+      "repo": "https://github.com/michelesalvador/FamilyGem",
+      "tag": "v1.2",
+      "commit": "3aeb97f00cfe6b8f8efbb5c0164529f0a0e16c62",
+      "license": "GPL-3.0-or-later",
+      "license_evidence": "michelesalvador__FamilyGem__v1.2/LICENSE.txt",
+      "build_evidence": {
+        "official_readme": "Create/edit local family trees, people, events, photos and GEDCOM files; online sharing and place lookup are optional separate facilities.",
+        "fixed_source": "v1.2 compileSdk/targetSdk 35, minSdk 21, app.familygem; v1.3 was inspected and rejected because compile/target SDK 37.2 is less compatible.",
+        "runtime_expected": "Offline fictional three-person family tree and GEDCOM import/export on Android API 35, without online sharing, place suggestions or premium tree merge.",
+        "executed": false,
+        "limitations": [
+          "Build/installation/UiAutomator and file-picker compatibility remain unverified.",
+          "Vendored gedcomgraph/geonames JARs need source/license provenance audit before final redistribution.",
+          "Network permission exists for optional services; proposed runtime uses blocked network and local core.",
+          "Diagram canvas may lack detailed accessibility nodes; use bounded small graph and observable editor forms."
+        ]
+      },
+      "workflows": [
+        {
+          "sequence": [
+            "Observe creating three fictional people and parent-child links in local forms.",
+            "Observe switching between person detail and relationship diagram.",
+            "Recreate the observed small graph UI/persistence and verify exported GEDCOM records and relationships."
+          ],
+          "validator_expected": [
+            "Exactly expected people and links.",
+            "Person data survives reopen.",
+            "Exported GEDCOM references resolve to controlled records."
+          ],
+          "evidence": "Pinned v1.2 README local tree and GEDCOM features; selected-release UI needs observation."
+        },
+        {
+          "sequence": [
+            "Observe import of a tiny synthetic GEDCOM and editing a note/date event.",
+            "Observe export and local save dialog.",
+            "Implement the admitted import/edit/export transitions and selfcheck structured records after round trip."
+          ],
+          "validator_expected": [
+            "Expected event/note edits in exported records.",
+            "No unintended duplicate people.",
+            "Reimport/reopen preserves edited relationships."
+          ],
+          "evidence": "Proposed local-only task; no geolocation/autocomplete or online account feature."
+        }
+      ],
+      "skill_expectation": [
+        "Recreate nested forms and graph/detail state transitions.",
+        "Preserve linked records and identifiers through local import/export.",
+        "Use structured artifact validation in addition to visual diagram matching."
+      ],
+      "bench_correspondence": [
+        {
+          "task_id": "android/v1tzor-timeplanner",
+          "capability": "Multi-screen linked local records and editing.",
+          "rationale_inference": true
+        },
+        {
+          "task_id": "android/mhss1-mybrain",
+          "capability": "Structured local CRUD, detail forms and persistence; capability-level analogy, not genealogy-domain equivalence.",
+          "rationale_inference": true
+        }
+      ],
+      "source_isolation": {
+        "aliases": [],
+        "known_upstream": [],
+        "manual_evidence": "Canonical repository and public local genealogy workflow; no exact candidate source identity in native benchmark catalog.",
+        "family_risk": "There is no directly corresponding genealogy benchmark domain. Similarity is at interaction/state/persistence level and shared dependencies still need audit.",
+        "full_code_audit_pending": true,
+        "exact_repo_matches": [],
+        "identity_audit_file": "source_identity_audit.json"
+      },
+      "references": [
+        "https://github.com/michelesalvador/FamilyGem",
+        "https://raw.githubusercontent.com/michelesalvador/FamilyGem/3aeb97f00cfe6b8f8efbb5c0164529f0a0e16c62/README.md",
+        "https://raw.githubusercontent.com/michelesalvador/FamilyGem/3aeb97f00cfe6b8f8efbb5c0164529f0a0e16c62/app/build.gradle",
+        "https://github.com/michelesalvador/FamilyGem/tree/3aeb97f00cfe6b8f8efbb5c0164529f0a0e16c62"
+      ],
+      "skill_expectation_is_hypothesis": true,
+      "download_size": "Root acquired source archive; use root acquisition manifest for exact bytes. No source download or build by this subagent."
+    }
+  ],
+  "rejected": [
+    {
+      "repo": "https://github.com/CotEditor/CotEditor",
+      "reason": "Current macOS 26/toolchain mismatch; README places image assets under CC-BY-NC-ND-4.0 despite Apache source. Not admitted as wholly open asset pool.",
+      "reference": "https://github.com/CotEditor/CotEditor"
+    },
+    {
+      "repo": "https://github.com/michelesalvador/FamilyGem",
+      "tag": "v1.3",
+      "commit": "fc460b58fa4006df39501344c2c9ef0f34ec7aaf",
+      "reason": "compileSdk/targetSdk 37.2; selected older v1.2 declares SDK 35. Initial evidence/manifest retained."
+    },
+    {
+      "repo": "https://github.com/mtotschnig/MyExpenses",
+      "reason": "Reserve only: monetized/cloud/store integrations and broad dependency risk; prefer simpler offline Android candidates.",
+      "reference": "https://github.com/mtotschnig/MyExpenses"
+    }
+  ],
+  "limits": [
+    "All six are source-acquisition candidates, not runnable/admitted fixtures.",
+    "GitHub anonymous API requests returned 403; no API-derived fork/archive flag is asserted. Fixed SHA evidence came from git ls-remote and pinned raw docs.",
+    "Public native catalog covers 200 source repositories/commits; web 50 rows have no public source identity. Exact non-match alone cannot prove family isolation.",
+    "Reference GUI observations, independent task validators, merged dependency/license audit and source-similarity audit remain required before training.",
+    "RecreationWorld-style proposal: observe reference GUI states, independently implement original code, selfcheck generated app/artifacts. Proposed workflows describe reference interactions and expected checks, not authorization to execute."
+  ]
+}

@@ -1,0 +1,2 @@
+Installed skill catalog: None. This is a separately versioned delivery-guidance demonstration, not the unchanged baseline.
+After a brief initial view, write and build a minimal working React application before extended reference exploration. Then inspect and implement the remaining pages incrementally, keeping a buildable application throughout. Before ending, build and verify the actual application and its required output/index.html; exploration notes or placeholder templates are not a delivery.

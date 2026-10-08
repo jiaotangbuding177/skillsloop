@@ -1,0 +1,80 @@
+{
+  "id": "web_actual_budget",
+  "platform": "web",
+  "name": "Actual Budget browser client",
+  "repo": "https://github.com/actualbudget/actual",
+  "release": "v26.9.0",
+  "commit": "59fe126f637d858c061e1eeedbef5436c8f2225a",
+  "commit_evidence": "https://github.com/actualbudget/actual/releases/tag/v26.9.0 links this full commit",
+  "license": "MIT",
+  "license_evidence": "evidence/actualbudget__actual__LICENSE.txt",
+  "license_sha256": "71e4b3053e4622e1f5fc5d8aa5336350de32ead39247924c596d659b89b47b6f",
+  "selection": "minimal_source_supplement_not_runtime_admitted",
+  "build_evidence": {
+    "fixed_root_package": "Yarn workspace; start=start:browser; build:browser=./bin/package-browser; build=lage build",
+    "fixed_web_package": "packages/desktop-client aliases @actual-app/web, React/Vite; build:browser=vite build --mode=browser",
+    "local_core": "loot-core dependency includes @jlongster/sql.js; official install docs explain browser-local data and server-optional budgeting",
+    "fixed_validation_source": "packages/desktop-client/src/components/util/accountValidation.ts trims names, rejects blank and duplicate account names",
+    "official_install_documentation": "https://actualbudget.org/docs/install/",
+    "runtime_expected": "loopback-hosted browser client with synthetic budget only; do not use hosted demo, bank sync, real account data or cloud credentials",
+    "executed": false,
+    "caveats": [
+      "Local browser build, isolated dependency installation, sql.js/WASM and worker headers are pending actual admission.",
+      "Official documentation is current; exact pinned release UI must be observed before final workflow/validator freeze.",
+      "Native server or plugin service if required must remain loopback and isolated; this is not an external API key prerequisite.",
+      "Build evidence does not establish successful startup; no credentials read and no model called."
+    ]
+  },
+  "workflows": [
+    {
+      "name": "dependent form and visible validation",
+      "observe": ["create local synthetic budget", "open Add Account multi-step form", "probe blank and duplicate names", "set account type/on-budget state/balance", "save and reopen"],
+      "recreate": "independently implement observed fields, dependency/reset behavior, validation feedback, navigation and persistence",
+      "verify_expected": ["blank/duplicate names produce feedback and do not create extra account", "accepted local input appears in sidebar with expected balance", "field dependency and save/reopen behavior match public reference"],
+      "evidence": ["https://actualbudget.org/docs/accounts/", "fixed accountValidation.ts"],
+      "exact_behavior_admitted": false
+    },
+    {
+      "name": "conditional list and saved state",
+      "observe": ["import synthetic dated/category transaction fixture", "apply date and category conditions", "save a named filter", "clear conditions", "reapply saved filter"],
+      "recreate": "independently implement query-control-list-total dependencies and saved-filter selection",
+      "verify_expected": ["expected fixture rows and totals change with combined conditions", "clear restores all applicable rows", "saved conditions can be reselected without bank/cloud calls"],
+      "evidence": ["https://actualbudget.org/docs/transactions/filters/"],
+      "exact_behavior_admitted": false
+    },
+    {
+      "name": "data view, temporal boundaries and responsive state",
+      "observe": ["change transaction date/amount", "switch account and budget/report view", "change date range", "inspect narrow viewport and return"],
+      "recreate": "independently preserve selected context and numeric/date semantics across views",
+      "verify_expected": ["only intended rows/context change", "date boundaries and computed amount agree with controlled fixture", "desktop/narrow layout exposes the same underlying state"],
+      "evidence": ["fixed package UI/core structure", "official release and account documentation"],
+      "exact_behavior_admitted": false
+    }
+  ],
+  "skill_expectation": [
+    "Observe dependent input states and negative validation before coding a multi-step form.",
+    "Represent filter conditions independently of visible table rows, and verify clear/reapply behavior against a controlled fixture.",
+    "Check route/context/date/numeric state and responsive UI together after the final edit."
+  ],
+  "bench_correspondence": {
+    "form_static_evidence": "sonelio.example public account-register reference contains text/password/email/country inputs and 3 required controls",
+    "search_static_evidence": "aperlio.example public index contains search form; sentorra index contains search form, and public filename inventory contains combined topic/content query routes",
+    "data_interface_evidence": "climatewatch.org public title and homepage structure include data/filter controls; detailed live chart behavior was not executed",
+    "task_form": "reference observation -> independent application recreation -> functional/visual verification, not mere clicking of reference",
+    "same_distribution_proven": false,
+    "private_tests_accessed": false,
+    "mapping_is_not_250_task_coverage_fraction": true
+  },
+  "source_caveats": [
+    "No canonical actualbudget/actual match in public 200 native repo catalog; no explicit Actual Budget identity in 50 Web homepage audit.",
+    "Web contains 44 synthetic references plus 6 public websites per paper; 44 synthetic identities are not presumed hidden original commercial sites.",
+    "Shared components, template ancestry and near-duplicates remain unresolved; generic React/Vite alone is not a source-family match.",
+    "Actual is finance-domain GUI, while many Web tests are content/catalog/marketing pages. Capability correspondence is a study hypothesis, not gain evidence.",
+    "Reference-source archive is researcher-side infrastructure; actor sees only protocol-allowed public observation and own code, never benchmark private assertions."
+  ],
+  "max_corrective_rounds_including_first": 3,
+  "runtime_accepted": false,
+  "trajectory_observed": false,
+  "skill_extracted": false,
+  "stop_further_web_source_expansion_after_this_supplement": true
+}

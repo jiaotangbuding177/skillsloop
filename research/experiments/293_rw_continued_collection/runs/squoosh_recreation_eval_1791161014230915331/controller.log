@@ -1,0 +1,143 @@
+[mockweb] === RecreationBench Web Evaluation ===
+[mockweb] domain=squoosh.training scaffold=claude-code browser_mcp=playwright allow_image_read=true enhanced_prompt=false replicate_all_pages=false
+[mockweb] Phase 1: Materialising frozen unified instance...
+[mockweb]   unified instance ← released/web/squoosh.training
+[mockweb]   materialised: {"domain": "squoosh.training", "task_json": true, "site_meta": true, "site": 80, "specs": 1, "eval_config": true, "needs_gt": false, "notes": [], "gt_dom": 2, "gt_layout": 3, "gt_regions": 2, "gt_screenshots": 3}
+[mockweb]   repacked unified dataset → /var/lib/mockweb-scorer/squoosh.training.tar.gz
+[mockweb]   reclaimed 40 MiB of unified staging
+[mockweb]   disk: overlay        1007G   95G  862G  10% /
+[mockweb]   Extracted agent-visible tree to /workspace/dataset/squoosh.training (evaluation/ withheld)
+[mockweb] Phase 1.4: validating the prepared RecreationBench runtime...
+[mockweb]   web code: /workspace/RecreationBench/scripts/web (25 py files)
+[mockweb]   installing template dependencies from rb lock 6a59ae7d8857...
+
+added 95 packages in 3s
+[mockweb]   template dependencies ready: lock=6a59ae7d8857 source=rb-bootstrap
+MCP package ready: @playwright/mcp@0.0.79 (/usr/local/bin/playwright-mcp)
+[mockweb] Phase 2: Configuring claude-code...
+[mockweb]   claude-code → http://127.0.0.1:8793 (prepared endpoint)
+[mockweb]   compaction: window=Claude default, pct=Claude default (80%), max_output=128000
+2.1.177 (Claude Code)
+[mockweb] Phase 3: Running rollout + evaluation...
+[mockweb]   VLM judge DISABLED (default) — visual dim scored via SSIM/LPIPS
+[mockweb]   Reference isolation ON — agent=non-root uid 1002; /workspace/dataset + tarball + evaluation/ root-0700 (HTTP-only reference)
+2026-10-05 00:43:47,855 INFO Server started at http://localhost:46211 serving /workspace/dataset/squoosh.training/site
+2026-10-05 00:43:47,859 INFO Wrote shared workspace settings (MCP=playwright, BASE_URL=http://127.0.0.1:8793, MODEL=claude-opus-4-8, allow_image_read=True)
+2026-10-05 00:43:47,866 INFO Agent Claude state write probe passed: /home/agent/.claude/session-env
+2026-10-05 00:43:47,866 INFO Wrote MCP config for playwright to /home/agent/.claude/mcp.json (allow_image_read=True)
+2026-10-05 00:43:47,866 INFO Playwright MCP will use bundled Chromium at /ms-playwright/chromium-1223/chrome-linux64/chrome
+2026-10-05 00:43:49,239 INFO Strict playwright reference MCP preflight passed: url=http://localhost:46211 snapshot_chars=2655 screenshot_bytes=48125
+2026-10-05 00:43:49,264 INFO relay up: /tmp/mockweb-relays/ANTHROPIC_BASE_URL-8793.sock -> 127.0.0.1:8793
+2026-10-05 00:43:49,264 INFO relay up: /tmp/mockweb-relays/reference-site-46211.sock -> 127.0.0.1:46211
+2026-10-05 00:43:49,264 INFO network isolation ON (claude-code scaffold, netns route (CAP_SYS_ADMIN)): namespace has no egress; relayed ANTHROPIC_BASE_URL:8793, reference-site:46211
+2026-10-05 01:06:43,361 INFO collected 2 session transcript(s) -> /workspace/recreation/sessions
+2026-10-05 01:06:43,727 INFO build runs with no network at all (isolated netns route (CAP_SYS_ADMIN), no relays)
+2026-10-05 01:06:45,610 INFO Server stopped on port 46211
+2026-10-05 01:06:45,635 INFO Skipping evaluation for squoosh.training (--skip-eval)
+[mockweb] Phase 3b: Extracting evaluation/ for scorer...
+2026-10-05 01:06:46,119 INFO Server started at http://localhost:42193 serving /workspace/dataset/squoosh.training/site
+2026-10-05 01:06:46,151 INFO build runs with no network at all (isolated netns route (CAP_SYS_ADMIN), no relays)
+2026-10-05 01:06:48,240 INFO Server stopped on port 42193
+2026-10-05 01:06:48,267 INFO VLM judge runtime override applied: enabled=False model=None backend=None
+2026-10-05 01:06:48,484 INFO Server started at http://localhost:38089 serving /workspace/recreation/output
+2026-10-05 01:07:25,682 INFO Server stopped on port 38089
+/usr/local/lib/python3.12/dist-packages/torchvision/models/_utils.py:207: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/usr/local/lib/python3.12/dist-packages/torchvision/models/_utils.py:222: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+  0%|          | 0.00/233M [00:00<?, ?B/s]  0%|          | 128k/233M [00:00<08:10, 498kB/s]  0%|          | 256k/233M [00:00<06:47, 599kB/s]  0%|          | 512k/233M [00:00<03:38, 1.12MB/s]  0%|          | 1.12M/233M [00:00<01:34, 2.57MB/s]  1%|          | 2.62M/233M [00:00<00:38, 6.20MB/s]  3%|▎         | 6.00M/233M [00:00<00:16, 14.5MB/s]  5%|▌         | 12.0M/233M [00:00<00:08, 27.1MB/s]  8%|▊         | 18.0M/233M [00:01<00:06, 37.1MB/s] 10%|█         | 23.5M/233M [00:01<00:05, 42.9MB/s] 12%|█▏        | 28.8M/233M [00:01<00:04, 46.4MB/s] 15%|█▍        | 34.5M/233M [00:01<00:04, 50.2MB/s] 17%|█▋        | 40.0M/233M [00:01<00:03, 51.9MB/s] 20%|█▉        | 45.8M/233M [00:01<00:03, 54.1MB/s] 22%|██▏       | 51.4M/233M [00:01<00:03, 55.1MB/s] 25%|██▍       | 57.2M/233M [00:01<00:03, 56.6MB/s] 27%|██▋       | 63.0M/233M [00:01<00:03, 56.7MB/s] 29%|██▉       | 68.5M/233M [00:02<00:03, 56.7MB/s] 32%|███▏      | 74.1M/233M [00:02<00:02, 57.1MB/s] 34%|███▍      | 80.0M/233M [00:02<00:02, 58.4MB/s] 37%|███▋      | 85.6M/233M [00:02<00:02, 58.1MB/s] 39%|███▉      | 91.2M/233M [00:02<00:02, 56.7MB/s] 42%|████▏     | 96.8M/233M [00:02<00:02, 55.9MB/s] 44%|████▍     | 103M/233M [00:02<00:02, 57.6MB/s]  46%|████▋     | 108M/233M [00:02<00:02, 58.1MB/s] 49%|████▉     | 114M/233M [00:02<00:02, 54.6MB/s] 51%|█████▏    | 120M/233M [00:02<00:02, 54.1MB/s] 54%|█████▍    | 126M/233M [00:03<00:02, 56.3MB/s] 56%|█████▌    | 131M/233M [00:03<00:01, 54.0MB/s] 58%|█████▊    | 136M/233M [00:03<00:02, 50.2MB/s] 61%|██████    | 141M/233M [00:03<00:01, 50.0MB/s] 63%|██████▎   | 146M/233M [00:03<00:01, 49.5MB/s] 65%|██████▌   | 152M/233M [00:03<00:01, 52.6MB/s] 68%|██████▊   | 158M/233M [00:03<00:01, 44.8MB/s] 70%|██████▉   | 162M/233M [00:03<00:01, 43.4MB/s] 72%|███████▏  | 168M/233M [00:04<00:01, 46.7MB/s] 74%|███████▍  | 173M/233M [00:04<00:01, 49.5MB/s] 76%|███████▋  | 178M/233M [00:04<00:01, 50.9MB/s] 79%|███████▉  | 184M/233M [00:04<00:00, 52.8MB/s] 81%|████████▏ | 190M/233M [00:04<00:00, 54.5MB/s] 84%|████████▎ | 195M/233M [00:04<00:00, 54.4MB/s] 86%|████████▌ | 200M/233M [00:04<00:00, 55.3MB/s] 88%|████████▊ | 206M/233M [00:04<00:00, 55.4MB/s] 91%|█████████ | 212M/233M [00:04<00:00, 57.6MB/s] 93%|█████████▎| 218M/233M [00:04<00:00, 57.5MB/s] 96%|█████████▌| 223M/233M [00:05<00:00, 54.2MB/s] 98%|█████████▊| 229M/233M [00:05<00:00, 55.2MB/s]100%|██████████| 233M/233M [00:05<00:00, 46.6MB/s]
+2026-10-05 01:07:40,436 INFO LPIPS(alex) loaded for visual scoring
+2026-10-05 01:07:41,811 INFO Server started at http://localhost:45163 serving /workspace/recreation/output
+2026-10-05 01:07:56,320 INFO Dimension functional [scripted]: 1/6 passed (16.7%)
+2026-10-05 01:07:56,320 INFO Dimension functional: 1/6 passed (16.7%)
+2026-10-05 01:07:56,321 INFO Server stopped on port 45163
+2026-10-05 01:07:57,033 INFO Evaluation complete for squoosh.training: final_score=0.5246
+[mockweb] Phase 4: Writing metrics.json...
+[mockweb] ERROR: failed to parse run.json: Expecting value: line 1 column 1 (char 0)
+{
+  "eval_target": "recreation",
+  "task_score": 0.0,
+  "passed": false,
+  "metrics": {
+    "status": "unknown",
+    "eval_target": "recreation",
+    "final_score": 0.0,
+    "domain": null,
+    "task_id": null,
+    "difficulty": null,
+    "model": null,
+    "scaffold": "claude-code",
+    "scores": {},
+    "anti_cheat": null,
+    "submitted": null,
+    "no_submission_reason": null,
+    "rollout": {},
+    "api_error": null,
+    "build_result": {},
+    "eval_error": null
+  }
+}
+[recreation] manifest -> /workspace/recreation/recreation_manifest.json
+[mockweb] Phase 5: Removing bulky build artifacts from workspace...
+[mockweb]   recreation artifact staged: /results/recreation
+[trajectory] surfaced 3 file(s) from /results/recreation -> /results
+[mockweb] Diag: SHARED_DIR=/workspace/shared
+total 16
+drwxr-xr-x 3 root root 4096 Oct  5 00:43 .
+drwxr-xr-x 1 user user 4096 Oct  5 01:06 ..
+drwxr-xr-x 3 root root 4096 Oct  5 00:43 mockweb-template-deps
+[mockweb] No proxy pair-log dir at /workspace/shared/logs/claudecode
+[mockweb] Done. Output dir contents:
+total 1880
+drwxrwxrwx 1 ubuntu ubuntu    4096 Oct  5 01:08 .
+drwxr-xr-x 1 root   root      4096 Oct  5 00:43 ..
+-rwxrwxrwx 1 ubuntu ubuntu    9086 Oct  5 01:08 controller.log
+-rwxrwxrwx 1 ubuntu ubuntu     478 Oct  5 01:07 metrics.json
+-rwxrwxrwx 1 ubuntu ubuntu    7280 Oct  5 01:06 model_proxy.log
+drwxrwxrwx 1 ubuntu ubuntu    4096 Oct  5 01:07 recreation
+-rwxrwxrwx 1 ubuntu ubuntu    1856 Oct  5 01:07 run.json
+-rwxrwxrwx 1 ubuntu ubuntu     652 Oct  5 01:06 run_agent_only.json
+drwxrwxrwx 1 ubuntu ubuntu    4096 Oct  5 01:08 sessions
+-rwxrwxrwx 1 ubuntu ubuntu 1891035 Oct  5 01:06 trajectory.jsonl
+{
+  "task_id": "squoosh.training",
+  "model": "deepseek-v4-flash-vision-exp",
+  "sandbox_id": null,
+  "sandbox_ip": null,
+  "pipeline_exit_code": 0,
+  "stage": "recreation_eval",
+  "task_score": 0.0,
+  "program_score": 0.0,
+  "vlm_score": null,
+  "scoring_eval": null,
+  "passed": true,
+  "stage_recreation": "succeeded",
+  "stage_eval": "succeeded",
+  "prog_vlm_avg": 0.0,
+  "score_passed": false,
+  "platform": "web",
+  "native_exit_code": 0,
+  "stage_outcomes": {
+    "recreation": {
+      "status": "pass",
+      "outcome_class": "completed",
+      "reason_code": "completed",
+      "native_exit_code": null,
+      "result_complete": true,
+      "retryable": false
+    },
+    "eval": {
+      "status": "pass",
+      "outcome_class": "completed",
+      "reason_code": "completed",
+      "native_exit_code": null,
+      "result_complete": true,
+      "retryable": false
+    }
+  },
+  "outcome_class": "completed",
+  "reason_code": "completed",
+  "result_complete": true,
+  "retryable": false,
+  "process_exit_code": 0
+}

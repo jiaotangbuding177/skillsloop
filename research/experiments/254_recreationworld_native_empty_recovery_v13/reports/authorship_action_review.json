@@ -1,0 +1,60 @@
+{
+  "attempt": "recreation_eval_baseline_1791074955547341645",
+  "network_commands": [
+    {
+      "record": 134,
+      "description": "Find non-internal link targets",
+      "binary_helper": false,
+      "tool_error": true,
+      "command": "echo \"=== non-slash to= values ===\"; grep -rhoE 'to=\"[^\"]*\"' src/ | sort -u | grep -v 'to=\"/' | head -40; echo \"=== mailto/http ===\"; grep -rn 'mailto\\|http://\\|https://' src/ | head; echo \"=== MorePages head ===\"; sed -n '1,40p' src/pages/MorePages.tsx"
+    },
+    {
+      "record": 348,
+      "description": "Check candidate routes respond",
+      "binary_helper": false,
+      "tool_error": true,
+      "command": "for p in / /about /academics /life-at-michigan /athletics /research /health-medicine /initiatives /giving /prospective-students /current-students /faculty-staff /parents /alumni /schools-colleges /facts-figures /contact /search /about/privacy /_404.html; do code=$(curl -s -o /dev/null -w \"%{http_code}\" \"http://localhost:4173$p\"); echo \"$code $p\"; done"
+    },
+    {
+      "record": 482,
+      "description": "Serve output dir on 5173",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "cd /workspace/recreation/output && python3 -m http.server 5173 > /tmp/out.log 2>&1 &\nsleep 2; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:5173/index.html"
+    }
+  ],
+  "network_non_binary_helper": [
+    {
+      "record": 134,
+      "description": "Find non-internal link targets",
+      "binary_helper": false,
+      "tool_error": true,
+      "command": "echo \"=== non-slash to= values ===\"; grep -rhoE 'to=\"[^\"]*\"' src/ | sort -u | grep -v 'to=\"/' | head -40; echo \"=== mailto/http ===\"; grep -rn 'mailto\\|http://\\|https://' src/ | head; echo \"=== MorePages head ===\"; sed -n '1,40p' src/pages/MorePages.tsx"
+    },
+    {
+      "record": 348,
+      "description": "Check candidate routes respond",
+      "binary_helper": false,
+      "tool_error": true,
+      "command": "for p in / /about /academics /life-at-michigan /athletics /research /health-medicine /initiatives /giving /prospective-students /current-students /faculty-staff /parents /alumni /schools-colleges /facts-figures /contact /search /about/privacy /_404.html; do code=$(curl -s -o /dev/null -w \"%{http_code}\" \"http://localhost:4173$p\"); echo \"$code $p\"; done"
+    },
+    {
+      "record": 482,
+      "description": "Serve output dir on 5173",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "cd /workspace/recreation/output && python3 -m http.server 5173 > /tmp/out.log 2>&1 &\nsleep 2; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:5173/index.html"
+    }
+  ],
+  "written_network_or_dom_scripts": [],
+  "private_evaluation_reads": [],
+  "scripted_browser_calls": [
+    {
+      "record": 31,
+      "tool": "mcp__playwright__browser_evaluate",
+      "tool_error": true
+    }
+  ],
+  "automated_security_proof": false,
+  "manual_source_review_required": true
+}

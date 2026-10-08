@@ -1,0 +1,207 @@
+[
+  {
+    "record": 31,
+    "description": "Check status codes of candidate pages",
+    "command": "for p in / /about/ /academics/ /life-at-michigan/ /athletics/ /research/ /health-medicine/ /initiatives/ /giving/ /facts-figures/ /contact/ /about/privacy/ /schools-colleges/; do code=$(curl -s -o /dev/null -w \"%{http_code}\" \"http://localhost:35963$p\"); echo \"$code $p\"; done"
+  },
+  {
+    "record": 37,
+    "description": "Probe audience pages",
+    "command": "for p in /prospective-students/ /current-students/ /faculty-staff/ /parents/ /alumni/; do code=$(curl -s -o /dev/null -w \"%{http_code}\" \"http://localhost:35963$p\"); echo \"$code $p\"; done"
+  },
+  {
+    "record": 77,
+    "description": "Extract headings from 4 section pages",
+    "command": "for p in research health-medicine initiatives giving; do echo \"===== $p =====\"; curl -s \"http://localhost:35963/$p/\" | python3 -c \"import sys,re; h=sys.stdin.read(); \nimport html\n# strip tags crudely\nt=re.sub(r'<script.*?</script>','',h,flags=re.S)\nt=re.sub(r'<style.*?</style>','',t,flags=re.S)\nfor m in re.findall(r'<h[1-5][^>]*>(.*?)</h[1-5]>',t,flags=re.S):\n    s=re.sub(r'<[^>]+>','',m); s=html.unescape(s).strip()\n    if s: print('H:',s)\n\"; done"
+  },
+  {
+    "record": 95,
+    "description": "Extract headings from remaining pages",
+    "command": "for p in prospective-students current-students faculty-staff parents alumni contact about/privacy schools-colleges; do echo \"===== $p =====\"; curl -s \"http://localhost:35963/$p/\" | python3 -c \"import sys,re,html;\nt=sys.stdin.read()\nt=re.sub(r'<script.*?</script>','',t,flags=re.S); t=re.sub(r'<style.*?</style>','',t,flags=re.S)\nfor m in re.findall(r'<h[1-5][^>]*>(.*?)</h[1-5]>',t,flags=re.S):\n    s=re.sub(r'<[^>]+>','',m); s=html.unescape(s).strip()\n    if s: print('H:',s)\nprint('--- title:', re.search(r'<title>(.*?)</title>',t).group(1) if re.search(r'<title>(.*?)</title>',t) else '')\n\"; done"
+  },
+  {
+    "record": 98,
+    "description": "Find image assets on homepage",
+    "command": "curl -s http://localhost:35963/ -o /tmp/home.html && grep -oE '(src|href)=\"[^\"]*\\.(jpg|jpeg|png|svg|webp|gif|woff2?|ico)\"' /tmp/home.html | sort -u | head -60; echo \"---count---\"; grep -oE 'https?://[^\" ]*\\.(jpg|png|jpeg|svg|webp)' /tmp/home.html | sed 's|http://localhost:35963||' | sort -u | wc -l"
+  },
+  {
+    "record": 100,
+    "description": "Collect all _images references",
+    "command": "cd /tmp && for p in \"\" about academics life-at-michigan athletics research health-medicine initiatives giving facts-figures contact about/privacy schools-colleges prospective-students current-students faculty-staff parents alumni; do curl -s \"http://localhost:35963/$p/\" ; done | grep -oE '/_images/[a-zA-Z0-9_.-]+' | sort -u > /tmp/images.txt; wc -l /tmp/images.txt; cat /tmp/images.txt"
+  },
+  {
+    "record": 102,
+    "description": "Map images to alt text per page",
+    "command": "cd /tmp && python3 -c \"\nimport re,html,subprocess\npages=['','about','academics','life-at-michigan','athletics','research','health-medicine','initiatives','giving','facts-figures','contact','about/privacy','schools-colleges','prospective-students','current-students','faculty-staff','parents','alumni']\nfor p in pages:\n    h=subprocess.run(['curl','-s','http://localhost:35963/'+p+'/'],capture_output=True,text=True).stdout\n    h=re.sub(r'<script.*?</script>','',h,flags=re.S)\n    imgs=re.findall(r'<img[^>]*>',h)\n    print('=====',p or 'home','=====')\n    for im in imgs:\n        src=re.search(r'src=\\\"([^\\\"]*)\\\"',im)\n        alt=re.search(r'alt=\\\"([^\\\"]*)\\\"',im)\n        print(' ',src.group(1) if src else '?', '|', html.unescape(alt.group(1))[:70] if alt else '')\n\""
+  },
+  {
+    "record": 107,
+    "description": "Collect all asset paths",
+    "command": "cd /tmp && python3 -c \"\nimport re,subprocess\npages=['','about','academics','life-at-michigan','athletics','research','health-medicine','initiatives','giving','facts-figures','contact','about/privacy','schools-colleges','prospective-students','current-students','faculty-staff','parents','alumni']\ns=set()\nfor p in pages:\n    h=subprocess.run(['curl','-s','http://localhost:35963/'+p+'/'],capture_output=True,text=True).stdout\n    h=re.sub(r'<script.*?</script>','',h,flags=re.S)\n    for im in re.findall(r'<img[^>]*src=\\\"([^\\\"]*)\\\"',h):\n        if im.startswith('/_images/') or im.startswith('/media/') or im.startswith('/assets_gen/') or im.startswith('/includes/'):\n            s.add(im)\n    # also splash/background images in style attributes\n    for im in re.findall(r'url\\(([^)]*)\\)',h):\n        im=im.strip('\\'\\\"')\n        if im.startswith('/_images/') or im.startswith('/media/') or im.startswith('/assets_gen/') or im.startswith('/includes/'):\n            s.add(im)\nfor i in sorted(s): print(i)\n\" | tee /tmp/allassets.txt | wc -l"
+  },
+  {
+    "record": 112,
+    "description": "Download all media and font assets",
+    "command": "mkdir -p public/media && cd public && while read -r p; do mkdir -p \".$(dirname \"$p\")\"; curl -s \"http://localhost:35963$p\" -o \".$p\"; done < /tmp/allassets.txt\n# fonts\nmkdir -p cf-fonts/s/roboto-condensed/5.0.14/latin cf-fonts/s/roboto-slab/5.0.18/latin cf-fonts/s/roboto/5.0.11/latin\nfor w in 300 400 700; do curl -s \"http://localhost:35963/cf-fonts/s/roboto-condensed/5.0.14/latin/${w}/normal.woff2\" -o \"cf-fonts/s/roboto-condensed/5.0.14/latin/${w}/normal.woff2\" 2>/dev/null; done\nmkdir -p cf-fonts/s/roboto-condensed/5.0.14/latin/400/italic\ncurl -s \"http://localhost:35963/cf-fonts/s/roboto-condensed/5.0.14/latin/400/italic.woff2\" -o \"cf-fonts/s/roboto-condensed/5.0.14/latin/400/italic.woff2\"\nfor w in 300 400 700; do curl -s \"http://localhost:35963/cf-fonts/s/roboto-slab/5.0.18/latin/${w}/normal.woff2\" -o \"cf-fonts/s/roboto-slab/5.0.18/latin/${w}/normal.woff2\"; done\nfor w in 300 400 500 700; do curl -s \"http://localhost:35963/cf-fonts/s/roboto/5.0.11/latin/${w}/normal.woff2\" -o \"cf-fonts/s/roboto/5.0.11/latin/${w}/normal.woff2\"; done\nfind . -name '*.woff2' | head -20; echo \"--- total files ---\"; find . -type f | wc -l; du -sh ."
+  },
+  {
+    "record": 116,
+    "description": "Verify font downloads",
+    "command": "find /workspace/recreation/public/cf-fonts -type f 2>/dev/null | head; echo \"===\"; ls -la /workspace/recreation/public/; echo \"=== check url ===\"; curl -s -o /dev/null -w \"%{http_code} %{size_download}\\n\" \"http://localhost:35963/cf-fonts/s/roboto-condensed/5.0.14/latin/700/normal.woff2\"; curl -s -o /dev/null -w \"%{http_code} %{size_download}\\n\" \"http://localhost:35963/cf-fonts/s/roboto-slab/5.0.18/latin/300/normal.woff2\""
+  },
+  {
+    "record": 118,
+    "description": "Download fonts with proper dirs",
+    "command": "cd /workspace/recreation/public\nfor w in 300 400 700; do mkdir -p \"cf-fonts/s/roboto-condensed/5.0.14/latin/$w\"; curl -s \"http://localhost:35963/cf-fonts/s/roboto-condensed/5.0.14/latin/$w/normal.woff2\" -o \"cf-fonts/s/roboto-condensed/5.0.14/latin/$w/normal.woff2\"; done\nmkdir -p cf-fonts/s/roboto-condensed/5.0.14/latin/400/italic\ncurl -s \"http://localhost:35963/cf-fonts/s/roboto-condensed/5.0.14/latin/400/italic.woff2\" -o \"cf-fonts/s/roboto-condensed/5.0.14/latin/400/italic.woff2\"\nfor w in 300 400 700; do mkdir -p \"cf-fonts/s/roboto-slab/5.0.18/latin/$w\"; curl -s \"http://localhost:35963/cf-fonts/s/roboto-slab/5.0.18/latin/$w/normal.woff2\" -o \"cf-fonts/s/roboto-slab/5.0.18/latin/$w/normal.woff2\"; done\nfor w in 300 400 500 700; do mkdir -p \"cf-fonts/s/roboto/5.0.11/latin/$w\"; curl -s \"http://localhost:35963/cf-fonts/s/roboto/5.0.11/latin/$w/normal.woff2\" -o \"cf-fonts/s/roboto/5.0.11/latin/$w/normal.woff2\"; done\nfind cf-fonts -type f | xargs ls -la | awk '{print $5, $9}'"
+  },
+  {
+    "record": 139,
+    "description": "Get CSS files",
+    "command": "grep -oE 'href=\"[^\"]*\\.css[^\"]*\"' /tmp/home.html | sort -u; echo \"=== fetch skin css ===\"; curl -s \"http://localhost:35963/skins/um2013/styles/skin.css?1740073863\" -o /tmp/skin.css; wc -l /tmp/skin.css"
+  },
+  {
+    "record": 141,
+    "description": "Inspect CSS content",
+    "command": "cat /tmp/skin.css; echo \"=== styles/index.css ===\"; curl -s \"http://localhost:35963/styles/index.css?1762967283\" -o /tmp/styles.css; wc -l /tmp/styles.css; head -50 /tmp/styles.css"
+  },
+  {
+    "record": 184,
+    "description": "Download logo",
+    "command": "cd /workspace/recreation/public && mkdir -p skins/um2013/media/images && curl -s \"http://localhost:35963/skins/um2013/media/images/umich-logo.png\" -o skins/um2013/media/images/umich-logo.png && ls -la skins/um2013/media/images/ && curl -s -o /dev/null -w \"%{http_code}\\n\" \"http://localhost:35963/skins/um2013/media/images/umich-logo.png\""
+  },
+  {
+    "record": 188,
+    "description": "Extract contact page text",
+    "command": "curl -s http://localhost:35963/contact/ | python3 -c \"\nimport sys,re,html\nh=sys.stdin.read()\ni=h.find('id=\\\"content\\\"')\nif i<0: i=h.find('<main')\nj=h.find('id=\\\"footer\\\"')\nseg=h[i:j]\nseg=re.sub(r'<script.*?</script>','',seg,flags=re.S)\ntxt=re.sub(r'<[^>]+>','\\n',seg)\ntxt=html.unescape(txt)\nlines=[l.strip() for l in txt.split('\\n') if l.strip()]\nprint('\\n'.join(lines))\n\""
+  },
+  {
+    "record": 193,
+    "description": "Extract intro paragraphs",
+    "command": "for p in about academics life-at-michigan athletics research health-medicine initiatives giving schools-colleges prospective-students current-students faculty-staff parents alumni; do echo \"===== $p =====\"; curl -s \"http://localhost:35963/$p/\" | python3 -c \"\nimport sys,re,html\nh=sys.stdin.read()\ni=h.find('id=\\\"content\\\"')\nj=h.find('id=\\\"footer\\\"')\nseg=h[i:j] if i>0 and j>i else h\nseg=re.sub(r'<script.*?</script>','',seg,flags=re.S)\nm=re.search(r'<div class=\\\"intro\\\".*?</div>|<p class=\\\"intro\\\".*?</p>|<div class=\\\"teaser\\\".*?</div>',seg,flags=re.S)\n# just get first substantive paragraph\nfor pm in re.findall(r'<p[^>]*>(.*?)</p>',seg,flags=re.S)[:3]:\n    t=html.unescape(re.sub(r'<[^>]+>','',pm)).strip()\n    if len(t)>80: print('P:',t)\n\"; done"
+  },
+  {
+    "record": 195,
+    "description": "Extract nav groups structurally",
+    "command": "cd /tmp && cat > /tmp/extract.py <<'EOF'\nimport re, html, json, subprocess, sys\n\ndef clean(s):\n    s = re.sub(r'<i class=\"fa[^\"]*\"[^>]*></i>', '', s)\n    s = re.sub(r'<i [^>]*></i>', '', s)\n    s = re.sub(r'<[^>]+>', '', s)\n    return html.unescape(s).strip()\n\ndef extract(page):\n    h = subprocess.run(['curl','-s','http://localhost:35963/'+page+'/'],capture_output=True,text=True).stdout\n    i=h.find('id=\"content\"'); j=h.find('id=\"footer\"')\n    seg=h[i:j] if i>0 and j>i else h\n    seg=re.sub(r'<script.*?</script>','',seg,flags=re.S)\n    blocks=[]\n    # find every <li> that contains a heading h4 (group wrapper)\n    for m in re.finditer(r'<li[^>]*>(.*?)</li>', seg, flags=re.S):\n        inner=m.group(1)\n        if '<h4' in inner:\n            hm=re.search(r'<h4[^>]*>(.*?)</h4>', inner, flags=re.S)\n            title=clean(hm.group(1))\n            items=[]\n            # links\n            for am in re.finditer(r'<a\\b(.*?)>(.*?)</a>', inner, flags=re.S):\n                attrs=am.group(1); body=am.group(2)\n                href=re.search(r'href=\"([^\"]*)\"',attrs)\n                em=re.search(r'<em[^>]*>(.*?)</em>', body, flags=re.S)\n                txt=clean(re.sub(r'<em[^>]*>.*?</em>','',body,flags=re.S))\n                items.append({'label':txt,'to':href.group(1) if href else '#','note':clean(em.group(1)) if em else ''})\n            for sm in re.finditer(r'<summary[^>]*>(.*?)</summary>', inner, flags=re.S):\n                items.append({'label':clean(sm.group(1)),'to':'','note':'','expand':True})\n            blocks.append({'title':title,'items':items})\n    return blocks\n\nfor page in ['about','academics','life-at-michigan','athletics','research','health-medicine','initiatives','giving','schools-colleges','prospective-students','current-students','faculty-staff','parents','alumni']:\n    print('=====',page,'=====')\n    print(json.dumps(extract(page), indent=1))\nEOF\npython3 /tmp/extract.py > /tmp/groups.txt 2>&1; wc -l /tmp/groups.txt"
+  },
+  {
+    "record": 199,
+    "description": "Extract nav groups v2",
+    "command": "cd /tmp && cat > /tmp/extract2.py <<'EOF'\nimport re, html, json, subprocess\n\ndef clean(s):\n    s = re.sub(r'<i [^>]*></i>', '', s)\n    s = re.sub(r'<[^>]+>', '', s)\n    return html.unescape(s).strip()\n\ndef extract(page):\n    h = subprocess.run(['curl','-s','http://localhost:35963/'+page+'/'],capture_output=True,text=True).stdout\n    i=h.find('id=\"content\"'); j=h.find('id=\"footer\"')\n    seg=h[i:j] if i>0 and j>i else h\n    seg=re.sub(r'<script.*?</script>','',seg,flags=re.S)\n    chunks = seg.split('nav-block')\n    blocks=[]\n    for ch in chunks[1:]:\n        # cut at end of this block: first </ul> sequence then next\n        hm=re.search(r'<h4[^>]*>(.*?)</h4>', ch, flags=re.S)\n        if not hm: continue\n        title=clean(hm.group(1))\n        body=ch[hm.end():]\n        # take up to the closing of the list container (last </ul> before next nav-block already split)\n        um=re.search(r'</ul>', body)\n        if um: body=body[:um.start()]\n        items=[]\n        for am in re.finditer(r'<a\\b([^>]*)>(.*?)</a>', body, flags=re.S):\n            attrs=am.group(1); b=am.group(2)\n            href=re.search(r'href=\"([^\"]*)\"',attrs)\n            em=re.search(r'<em[^>]*>(.*?)</em>', b, flags=re.S)\n            txt=clean(re.sub(r'<em[^>]*>.*?</em>','',b,flags=re.S))\n            items.append({'label':txt,'to':href.group(1) if href else '#','note':clean(em.group(1)) if em else ''})\n        for sm in re.finditer(r'<summary[^>]*>(.*?)</summary>', body, flags=re.S):\n            items.append({'label':clean(sm.group(1)),'to':'','note':'','expand':True})\n        blocks.append({'title':title,'items':items})\n    return blocks\n\nout={}\nfor page in ['about','academics','life-at-michigan','athletics','research','health-medicine','initiatives','giving','schools-colleges','prospective-students','current-students','faculty-staff','parents','alumni']:\n    out[page]=extract(page)\nprint(json.dumps(out, indent=1))\nEOF\npython3 /tmp/extract2.py > /tmp/groups2.json 2>&1; python3 -c \"\nimport json\nd=json.load(open('/tmp/groups2.json'))\nfor k,v in d.items():\n    print('=====',k)\n    for b in v:\n        print(' ',b['title'])\n        for it in b['items']:\n            print('    -',it['label'],'|',it['to'],'|',it['note'], '| expand' if it.get('expand') else '')\n\""
+  },
+  {
+    "record": 204,
+    "description": "Extract sidebar/feature images",
+    "command": "cd /tmp && cat > /tmp/extract3.py <<'EOF'\nimport re, html, json, subprocess\ndef clean(s):\n    s=re.sub(r'<i [^>]*></i>','',s); s=re.sub(r'<[^>]+>','',s); return html.unescape(s).strip()\nout={}\nfor page in ['about','academics','life-at-michigan','athletics','research','health-medicine','initiatives','giving','schools-colleges','prospective-students','current-students','faculty-staff','parents','alumni']:\n    h=subprocess.run(['curl','-s','http://localhost:35963/'+page+'/'],capture_output=True,text=True).stdout\n    i=h.find('id=\"content\"'); j=h.find('id=\"footer\"')\n    seg=h[i:j] if i>0 and j>i else h\n    d={}\n    # sidebar image\n    m=re.search(r'<div class=\"sidebar\".*?</div>',seg,flags=re.S)\n    # find image with sidebar-images\n    sm=re.search(r'<img[^>]*src=\"(/media/images/sidebar-images/[^\"]*)\"[^>]*alt=\"([^\"]*)\"',seg)\n    if sm: d['sideImg']=sm.group(1); d['sideAlt']=html.unescape(sm.group(2))\n    # captions: look for figcaption or class caption\n    caps=[clean(x) for x in re.findall(r'<figcaption[^>]*>(.*?)</figcaption>',seg,flags=re.S)]\n    if not caps:\n        caps=[clean(x) for x in re.findall(r'class=\"[^\"]*caption[^\"]*\"[^>]*>(.*?)</p>',seg,flags=re.S)]\n    d['captions']=caps\n    # feature image (big, last _images img)\n    fm=re.findall(r'<img[^>]*src=\"(/_images/[^\"]*)\"[^>]*alt=\"([^\"]*)\"',seg)\n    if fm: d['feature']=[fm[-1][0], html.unescape(fm[-1][1])]\n    out[page]=d\nprint(json.dumps(out,indent=1,ensure_ascii=False))\nEOF\npython3 /tmp/extract3.py"
+  },
+  {
+    "record": 207,
+    "description": "Save nav groups JSON",
+    "command": "cd /tmp && python3 -c \"\nimport re, html, json, subprocess\ndef clean(s):\n    s=re.sub(r'<i [^>]*></i>','',s); s=re.sub(r'<[^>]+>','',s); return html.unescape(s).strip()\ndef extract(page):\n    h=subprocess.run(['curl','-s','http://localhost:35963/'+page+'/'],capture_output=True,text=True).stdout\n    i=h.find('id=\\\"content\\\"'); j=h.find('id=\\\"footer\\\"')\n    seg=h[i:j] if i>0 and j>i else h\n    seg=re.sub(r'<script.*?</script>','',seg,flags=re.S)\n    chunks=seg.split('nav-block'); blocks=[]\n    for ch in chunks[1:]:\n        hm=re.search(r'<h4[^>]*>(.*?)</h4>',ch,flags=re.S)\n        if not hm: continue\n        title=clean(hm.group(1)); body=ch[hm.end():]\n        um=re.search(r'</ul>',body)\n        if um: body=body[:um.start()]\n        items=[]\n        for am in re.finditer(r'<a\\b([^>]*)>(.*?)</a>',body,flags=re.S):\n            attrs=am.group(1); b=am.group(2)\n            href=re.search(r'href=\\\"([^\\\"]*)\\\"',attrs)\n            em=re.search(r'<em[^>]*>(.*?)</em>',b,flags=re.S)\n            txt=clean(re.sub(r'<em[^>]*>.*?</em>','',b,flags=re.S))\n            items.append({'label':txt,'to':href.group(1) if href else '#','note':clean(em.group(1)) if em else ''})\n        blocks.append({'title':title,'items':items})\n    return blocks\nout={}\nfor page in ['about','academics','life-at-michigan','athletics','research','health-medicine','initiatives','giving','schools-colleges','prospective-students','current-students','faculty-staff','parents','alumni']:\n    out[page]=extract(page)\njson.dump(out,open('/tmp/navgroups.json','w'),ensure_ascii=False,indent=1)\nprint('ok', sum(len(v) for v in out.values()))\n\""
+  },
+  {
+    "record": 212,
+    "description": "Check 404 and schools page",
+    "command": "curl -s -o /dev/null -w \"404 page: %{http_code}\\n\" \"http://localhost:35963/_404.html\"; curl -s \"http://localhost:35963/schools-colleges/\" | python3 -c \"\nimport sys,re,html\nh=sys.stdin.read(); i=h.find('id=\\\"content\\\"'); j=h.find('id=\\\"footer\\\"'); seg=h[i:j]\nseg=re.sub(r'<script.*?</script>','',seg,flags=re.S)\nt=re.sub(r'<[^>]+>','\\n',seg); t=html.unescape(t)\nprint('\\n'.join([l.strip() for l in t.split(chr(10)) if l.strip()])[:1500])\n\""
+  },
+  {
+    "record": 219,
+    "description": "Find feature image containers",
+    "command": "for p in about academics life-at-michigan athletics research health-medicine initiatives giving prospective-students current-students faculty-staff parents alumni; do echo \"== $p\"; curl -s \"http://localhost:35963/$p/\" | python3 -c \"\nimport sys,re,html\nh=sys.stdin.read(); i=h.find('id=\\\"content\\\"'); j=h.find('id=\\\"footer\\\"'); seg=h[i:j]\n# find blocks with class containing 'feature' or 'image-gallery' big image\nfor m in re.finditer(r'<(div|section)[^>]*class=\\\"([^\\\"]*)\\\"[^>]*>\\s*<img[^>]*src=\\\"([^\\\"]*)\\\"',seg,flags=re.S):\n    print(' ',m.group(2),'->',m.group(3))\nprint('  last imgs:', re.findall(r'src=\\\"(/(?:_images|media)[^\\\"]*)\\\"',seg)[-2:])\n\"; done"
+  },
+  {
+    "record": 225,
+    "description": "Inspect feature block markup",
+    "command": "curl -s http://localhost:35963/about/ | python3 -c \"\nimport sys,re\nh=sys.stdin.read()\ni=h.find('class=\\\"feature\\\"')\nprint(h[i-700:i+400])\n\""
+  },
+  {
+    "record": 243,
+    "description": "Extract per-page header labels",
+    "command": "for p in \"\" about academics life-at-michigan athletics research health-medicine initiatives giving facts-figures contact about/privacy schools-colleges prospective-students current-students faculty-staff parents alumni; do curl -s \"http://localhost:35963/$p/\" | python3 -c \"\nimport sys,re,html\nh=sys.stdin.read()\nrep=re.search(r'class=\\\"sexual-misconduct\\\">\\s*<a[^>]*>(.*?)<i',h,flags=re.S)\nskip=re.search(r'class=\\\"skip\\\"[^>]*>(.*?)</a>',h,flags=re.S)\nnav=re.search(r'<nav[^>]*aria-label=\\\"([^\\\"]*)\\\"[^>]*id=\\\"main-nav\\\"',h) or re.search(r'role=\\\"navigation\\\">\\s*<div class=\\\"wrapper\\\">\\s*<div id=\\\"main-nav\\\"',h)\nql=re.search(r'<summary>(.*?)</summary>',h)\nlab=re.search(r'aria-label=\\\"Main Menu\\\"',h)\n# nav label from the h3 region for mobile; find aria-labelledby zone\nz=re.search(r'aria-labelledby=\\\"([^\\\"]*)\\\" id=\\\"zone-main-nav\\\"',h)\nprint('$p' or '/','||', (html.unescape(re.sub(r'<[^>]+>','',rep.group(1))).strip() if rep else '?'), '||', (html.unescape(skip.group(1)).strip() if skip else '?'), '||', (ql.group(1) if ql else '?'), '||', re.search(r'<h3 id=\\\"main-menu-header\\\">(.*?)</h3>',h).group(1) if re.search(r'<h3 id=\\\"main-menu-header\\\">(.*?)</h3>',h) else '?')\n\"; done"
+  },
+  {
+    "record": 245,
+    "description": "Find homepage section classes",
+    "command": "curl -s http://localhost:35963/ | python3 -c \"\nimport sys,re\nh=sys.stdin.read()\nfor m in re.finditer(r'<(section|div)[^>]*class=\\\"([^\\\"]*(panel|highlight|splash|gallery|news|events|videos|infographic|seize)[^\\\"]*)\\\"[^>]*>',h):\n    print(m.group(2))\n\" | sort -u | head -40"
+  },
+  {
+    "record": 249,
+    "description": "Inspect hero markup",
+    "command": "curl -s http://localhost:35963/ | python3 -c \"\nimport sys,re\nh=sys.stdin.read()\ni=h.find('class=\\\"panel blue clear\\\"')\nprint(h[i-1500:i+200])\n\""
+  },
+  {
+    "record": 255,
+    "description": "Search styles.css for homepage",
+    "command": "python3 -c \"\nimport re\nc=open('/tmp/styles.css').read()\nfor pat in ['#events','#news','#videos','#happening-','.infographics','#home-','#featured','#seize','.panel.blue','#zone-highlight']:\n    print('====',pat, len(re.findall(re.escape(pat),c)))\n    for m in re.finditer(r'[^{}]{0,30}'+re.escape(pat)+r'[^{}]{0,80}\\{[^}]{0,250}\\}', c):\n        print('  ',m.group(0)[:300])\n\" 2>&1 | head -80"
+  },
+  {
+    "record": 257,
+    "description": "Re-fetch styles/index.css",
+    "command": "curl -s \"http://localhost:35963/styles/index.css?1762967283\" -o /tmp/styles.css; wc -c /tmp/styles.css; grep -oE '\\.[a-z-]+' /tmp/styles.css | sort -u | head -50; echo \"=== keys ===\"; python3 -c \"\nimport re\nc=open('/tmp/styles.css').read()\nprint(c[:800])\n\""
+  },
+  {
+    "record": 261,
+    "description": "Download infographic cards",
+    "command": "cd /workspace/recreation/public && mkdir -p media/images/infographics && for f in schools-colleges degree-programs research-gateway-2025 grad-ranking UMich200-gateway; do curl -s \"http://localhost:35963/media/images/infographics/$f.png\" -o \"media/images/infographics/$f.png\"; done; ls -la media/images/infographics/"
+  },
+  {
+    "record": 263,
+    "description": "Download panel CSS",
+    "command": "rm -f media/images/infographics/*.png; curl -s \"http://localhost:35963/includes/panels/news/styles/index.css?1737988442\" -o /tmp/news.css; curl -s \"http://localhost:35963/includes/panels/videos/styles/index.css?1726493282\" -o /tmp/videos.css; curl -s \"http://localhost:35963/includes/panels/events/styles/index.css?1689260462\" -o /tmp/events.css; curl -s \"http://localhost:35963/includes/panels/gallery/styles/index.css?1689213842\" -o /tmp/gallery.css; wc -c /tmp/news.css /tmp/videos.css /tmp/events.css /tmp/gallery.css"
+  },
+  {
+    "record": 271,
+    "description": "Find hero background images order",
+    "command": "curl -s http://localhost:35963/ | python3 -c \"\nimport sys,re\nh=sys.stdin.read()\ni=h.find('id=\\\"large-features\\\"')\nseg=h[i:i+6000]\nfor m in re.finditer(r'background-image:\\s*url\\(([^)]*)\\)',seg):\n    print(m.group(1))\nprint('--- first li ---')\nprint(seg[:1800])\n\""
+  },
+  {
+    "record": 273,
+    "description": "Extract all hero slides",
+    "command": "curl -s http://localhost:35963/ | python3 -c \"\nimport sys,re,html\nh=sys.stdin.read()\ni=h.find('id=\\\"large-features\\\"'); j=h.find('id=\\\"infographics\\\"')\nseg=h[i:j]\nfor li in re.finditer(r'<li(?![^>]*cloned)[^>]*>(.*?)</li>',seg,flags=re.S):\n    body=li.group(1)\n    h2=re.search(r'<h2>(.*?)</h2>',body,flags=re.S)\n    p=re.search(r'<p>(.*?)</p>',body,flags=re.S)\n    a=re.search(r'<a href=\\\"([^\\\"]*)\\\"[^>]*><span>(.*?)</span>',body,flags=re.S)\n    bg=re.search(r'url\\(([^)]*)\\)',body)\n    cls=re.search(r'feature-copy (\\w+)',body)\n    print('TITLE:',html.unescape(h2.group(1).strip()) if h2 else '')\n    print('  BODY:',html.unescape(re.sub(r'<[^>]+>','',p.group(1))).strip()[:200] if p else '')\n    print('  CTA:',html.unescape(a.group(2)).strip() if a else '', '->', a.group(1) if a else '')\n    print('  BG:',bg.group(1) if bg else '', '| align:',cls.group(1) if cls else '')\n\""
+  },
+  {
+    "record": 288,
+    "description": "Extract facts-figures text",
+    "command": "curl -s http://localhost:35963/facts-figures/ | python3 -c \"\nimport sys,re,html\nh=sys.stdin.read(); i=h.find('id=\\\"content\\\"'); j=h.find('id=\\\"footer\\\"'); seg=h[i:j]\nseg=re.sub(r'<script.*?</script>','',seg,flags=re.S)\nt=re.sub(r'<(br|/tr|/p|/li|/h[1-6]|/div)[^>]*>','\\n',seg)\nt=re.sub(r'<[^>]+>',' ',t); t=html.unescape(t)\nlines=[re.sub(r'[ \\t]+',' ',l).strip() for l in t.split(chr(10))]\nprint('\\n'.join([l for l in lines if l]))\n\" | head -140"
+  },
+  {
+    "record": 302,
+    "description": "Inspect schools-colleges markup",
+    "command": "curl -s http://localhost:35963/schools-colleges/ | python3 -c \"\nimport sys,re\nh=sys.stdin.read(); i=h.find('id=\\\"content\\\"'); j=h.find('id=\\\"footer\\\"'); seg=h[i:j]\nseg=re.sub(r'<script.*?</script>','',seg,flags=re.S)\nprint(seg[:2500])\n\""
+  },
+  {
+    "record": 304,
+    "description": "Check schools secondary",
+    "command": "curl -s http://localhost:35963/schools-colleges/ | python3 -c \"\nimport sys,re\nh=sys.stdin.read(); i=h.find('id=\\\"content\\\"'); j=h.find('id=\\\"footer\\\"'); seg=h[i:j]\nk=seg.find('secondary')\nprint(seg[k-300:k+900] if k>0 else 'no secondary')\n\""
+  },
+  {
+    "record": 306,
+    "description": "Extract privacy text",
+    "command": "curl -s http://localhost:35963/about/privacy/ | python3 -c \"\nimport sys,re,html\nh=sys.stdin.read(); i=h.find('id=\\\"content\\\"'); j=h.find('id=\\\"footer\\\"'); seg=h[i:j]\nseg=re.sub(r'<script.*?</script>','',seg,flags=re.S)\nt=re.sub(r'<(br|/p|/li|/h[1-6]|/div|/table|/tr)[^>]*>','\\n',seg)\nt=re.sub(r'<[^>]+>',' ',t); t=html.unescape(t)\nlines=[re.sub(r'[ \\t]+',' ',l).strip() for l in t.split(chr(10))]\nprint('\\n'.join([l for l in lines if l])[:3500])\n\""
+  },
+  {
+    "record": 308,
+    "description": "Extract privacy blocks",
+    "command": "curl -s http://localhost:35963/about/privacy/ | python3 -c \"\nimport sys,re,html,json\nh=sys.stdin.read(); i=h.find('id=\\\"content\\\"'); j=h.find('id=\\\"footer\\\"'); seg=h[i:j]\nseg=re.sub(r'<script.*?</script>','',seg,flags=re.S)\nout=[]\n# walk through headings and paragraphs in order\nfor m in re.finditer(r'<(h[2-5]|p|li)([^>]*)>(.*?)</\\1>', seg, flags=re.S):\n    tag=m.group(1); body=m.group(3)\n    if '<p' in body or '<li' in body or '<ul' in body: continue\n    txt=html.unescape(re.sub(r'<[^>]+>','',body)).strip()\n    txt=re.sub(r'\\s+',' ',txt)\n    if txt and len(txt)>3: out.append((tag,txt))\njson.dump(out,open('/tmp/privacy.json','w'),ensure_ascii=False)\nprint(len(out),'blocks')\nfor t,x in out[:8]: print(t, x[:100])\n\""
+  },
+  {
+    "record": 315,
+    "description": "Download facts figures banner",
+    "command": "cd /workspace/recreation/public && mkdir -p media/images/facts-figures && curl -s -o media/images/facts-figures/gbg-banner-rev.png -w \"%{http_code} %{size_download}\\n\" \"http://localhost:35963/media/images/facts-figures/gbg-banner-rev.png\"; curl -s http://localhost:35963/facts-figures/ | grep -oE 'src=\"[^\"]*facts-figures[^\"]*\"' | sort -u"
+  },
+  {
+    "record": 395,
+    "description": "Inspect infographics markup",
+    "command": "curl -s http://localhost:35963/ | python3 -c \"\nimport sys,re\nh=sys.stdin.read()\ni=h.find('id=\\\"infographics\\\"'); j=h.find('id=\\\"news\\\"')\nseg=h[i:j]\nprint(re.sub(r'\\s+',' ',seg)[:3000])\n\""
+  },
+  {
+    "record": 397,
+    "description": "Re-download infographic PNGs",
+    "command": "mkdir -p src/assets/img && cd src/assets/img && for f in schools-colleges degree-programs research-gateway-2025 grad-ranking UMich200-gateway; do echo -n \"$f: \"; curl -s -o \"info-$f.png\" -w \"%{http_code} %{size_download}\\n\" \"http://localhost:35963/media/images/infographics/$f.png\"; done; ls -la info-*.png"
+  },
+  {
+    "record": 401,
+    "description": "Diagnose infographic asset",
+    "command": "cd /tmp && head -c 300 src/assets/img/info-schools-colleges.png 2>/dev/null; echo; curl -sI \"http://localhost:35963/media/images/infographics/schools-colleges.png\" | head -5; echo \"---try styles path---\"; curl -s -o /tmp/i1.png -w \"%{http_code} %{size_download}\\n\" \"http://localhost:35963/styles/media/images/infographics/schools-colleges.png\""
+  }
+]

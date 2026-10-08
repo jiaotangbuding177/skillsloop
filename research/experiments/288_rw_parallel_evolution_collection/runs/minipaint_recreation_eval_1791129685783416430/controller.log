@@ -1,0 +1,143 @@
+[mockweb] === RecreationBench Web Evaluation ===
+[mockweb] domain=minipaint.training scaffold=claude-code browser_mcp=playwright allow_image_read=true enhanced_prompt=false replicate_all_pages=false
+[mockweb] Phase 1: Materialising frozen unified instance...
+[mockweb]   unified instance ← released/web/minipaint.training
+[mockweb]   materialised: {"domain": "minipaint.training", "task_json": true, "site_meta": true, "site": 52, "specs": 1, "eval_config": true, "needs_gt": false, "notes": [], "gt_dom": 2, "gt_layout": 3, "gt_regions": 2, "gt_screenshots": 3}
+[mockweb]   repacked unified dataset → /var/lib/mockweb-scorer/minipaint.training.tar.gz
+[mockweb]   reclaimed 10 MiB of unified staging
+[mockweb]   disk: overlay        1007G   83G  874G   9% /
+[mockweb]   Extracted agent-visible tree to /workspace/dataset/minipaint.training (evaluation/ withheld)
+[mockweb] Phase 1.4: validating the prepared RecreationBench runtime...
+[mockweb]   web code: /workspace/RecreationBench/scripts/web (25 py files)
+[mockweb]   installing template dependencies from rb lock 6a59ae7d8857...
+
+added 95 packages in 4s
+[mockweb]   template dependencies ready: lock=6a59ae7d8857 source=rb-bootstrap
+MCP package ready: @playwright/mcp@0.0.79 (/usr/local/bin/playwright-mcp)
+[mockweb] Phase 2: Configuring claude-code...
+[mockweb]   claude-code → http://127.0.0.1:8788 (prepared endpoint)
+[mockweb]   compaction: window=Claude default, pct=Claude default (80%), max_output=128000
+2.1.177 (Claude Code)
+[mockweb] Phase 3: Running rollout + evaluation...
+[mockweb]   VLM judge DISABLED (default) — visual dim scored via SSIM/LPIPS
+[mockweb]   Reference isolation ON — agent=non-root uid 1002; /workspace/dataset + tarball + evaluation/ root-0700 (HTTP-only reference)
+2026-10-04 16:01:40,837 INFO Server started at http://localhost:45769 serving /workspace/dataset/minipaint.training/site
+2026-10-04 16:01:40,843 INFO Wrote shared workspace settings (MCP=playwright, BASE_URL=http://127.0.0.1:8788, MODEL=claude-opus-4-8, allow_image_read=True)
+2026-10-04 16:01:40,854 INFO Agent Claude state write probe passed: /home/agent/.claude/session-env
+2026-10-04 16:01:40,854 INFO Wrote MCP config for playwright to /home/agent/.claude/mcp.json (allow_image_read=True)
+2026-10-04 16:01:40,854 INFO Playwright MCP will use bundled Chromium at /ms-playwright/chromium-1223/chrome-linux64/chrome
+2026-10-04 16:01:42,711 INFO Strict playwright reference MCP preflight passed: url=http://localhost:45769 snapshot_chars=5938 screenshot_bytes=54422
+2026-10-04 16:01:42,753 INFO relay up: /tmp/mockweb-relays/ANTHROPIC_BASE_URL-8788.sock -> 127.0.0.1:8788
+2026-10-04 16:01:42,754 INFO relay up: /tmp/mockweb-relays/reference-site-45769.sock -> 127.0.0.1:45769
+2026-10-04 16:01:42,754 INFO network isolation ON (claude-code scaffold, netns route (CAP_SYS_ADMIN)): namespace has no egress; relayed ANTHROPIC_BASE_URL:8788, reference-site:45769
+2026-10-04 16:20:43,547 INFO collected 2 session transcript(s) -> /workspace/recreation/sessions
+2026-10-04 16:20:43,660 INFO build runs with no network at all (isolated netns route (CAP_SYS_ADMIN), no relays)
+2026-10-04 16:20:46,196 INFO Server stopped on port 45769
+2026-10-04 16:20:46,214 INFO Skipping evaluation for minipaint.training (--skip-eval)
+[mockweb] Phase 3b: Extracting evaluation/ for scorer...
+2026-10-04 16:20:46,493 INFO Server started at http://localhost:45463 serving /workspace/dataset/minipaint.training/site
+2026-10-04 16:20:46,524 INFO build runs with no network at all (isolated netns route (CAP_SYS_ADMIN), no relays)
+2026-10-04 16:20:48,618 INFO Server stopped on port 45463
+2026-10-04 16:20:48,641 INFO VLM judge runtime override applied: enabled=False model=None backend=None
+2026-10-04 16:20:48,745 INFO Server started at http://localhost:45879 serving /workspace/recreation/output
+2026-10-04 16:21:22,972 INFO Server stopped on port 45879
+/usr/local/lib/python3.12/dist-packages/torchvision/models/_utils.py:207: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/usr/local/lib/python3.12/dist-packages/torchvision/models/_utils.py:222: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+  0%|          | 0.00/233M [00:00<?, ?B/s]  0%|          | 128k/233M [00:00<04:14, 958kB/s]  0%|          | 256k/233M [00:00<04:22, 930kB/s]  0%|          | 512k/233M [00:00<02:50, 1.43MB/s]  0%|          | 1.00M/233M [00:00<01:34, 2.56MB/s]  1%|          | 2.00M/233M [00:00<00:48, 5.01MB/s]  2%|▏         | 3.62M/233M [00:00<00:30, 7.95MB/s]  2%|▏         | 4.50M/233M [00:00<00:33, 7.16MB/s]  3%|▎         | 7.25M/233M [00:01<00:20, 11.7MB/s]  4%|▎         | 8.38M/233M [00:01<00:20, 11.6MB/s]  5%|▍         | 11.4M/233M [00:01<00:15, 15.2MB/s]  6%|▌         | 12.9M/233M [00:01<00:18, 12.4MB/s]  7%|▋         | 15.4M/233M [00:01<00:18, 12.5MB/s]  8%|▊         | 18.9M/233M [00:01<00:13, 16.6MB/s]  9%|▉         | 20.9M/233M [00:01<00:14, 14.9MB/s] 10%|▉         | 22.5M/233M [00:02<00:15, 14.1MB/s] 10%|█         | 24.4M/233M [00:02<00:14, 14.9MB/s] 11%|█▏        | 26.2M/233M [00:02<00:15, 13.6MB/s] 12%|█▏        | 29.0M/233M [00:02<00:13, 16.2MB/s] 14%|█▎        | 31.6M/233M [00:02<00:12, 16.3MB/s] 14%|█▍        | 33.2M/233M [00:02<00:13, 15.7MB/s] 15%|█▍        | 34.9M/233M [00:02<00:13, 15.6MB/s] 16%|█▌        | 37.1M/233M [00:03<00:13, 15.6MB/s] 17%|█▋        | 38.8M/233M [00:03<00:13, 15.7MB/s] 17%|█▋        | 40.4M/233M [00:03<00:13, 15.0MB/s] 18%|█▊        | 41.9M/233M [00:03<00:14, 14.1MB/s] 19%|█▊        | 43.4M/233M [00:03<00:18, 10.8MB/s] 20%|█▉        | 46.0M/233M [00:03<00:14, 13.3MB/s] 21%|██        | 47.9M/233M [00:03<00:14, 13.5MB/s] 21%|██▏       | 49.9M/233M [00:04<00:12, 15.0MB/s] 22%|██▏       | 51.5M/233M [00:04<00:15, 12.1MB/s] 23%|██▎       | 53.8M/233M [00:04<00:13, 13.6MB/s] 24%|██▎       | 55.2M/233M [00:04<00:16, 11.0MB/s] 25%|██▍       | 57.5M/233M [00:04<00:14, 13.1MB/s] 26%|██▌       | 59.6M/233M [00:04<00:13, 13.5MB/s] 26%|██▌       | 61.1M/233M [00:05<00:14, 12.3MB/s] 27%|██▋       | 62.5M/233M [00:05<00:14, 12.2MB/s] 27%|██▋       | 64.0M/233M [00:05<00:14, 12.1MB/s] 28%|██▊       | 65.9M/233M [00:05<00:13, 13.2MB/s] 29%|██▉       | 67.8M/233M [00:05<00:13, 12.6MB/s] 31%|███       | 71.4M/233M [00:05<00:09, 17.2MB/s] 31%|███▏      | 73.1M/233M [00:05<00:11, 14.8MB/s] 32%|███▏      | 75.4M/233M [00:06<00:10, 15.6MB/s] 33%|███▎      | 77.0M/233M [00:06<00:11, 14.1MB/s] 34%|███▍      | 79.4M/233M [00:06<00:10, 15.4MB/s] 35%|███▍      | 81.0M/233M [00:06<00:12, 13.2MB/s] 36%|███▌      | 83.6M/233M [00:06<00:10, 15.1MB/s] 37%|███▋      | 85.2M/233M [00:06<00:11, 13.6MB/s] 38%|███▊      | 87.5M/233M [00:07<00:11, 12.8MB/s] 38%|███▊      | 88.9M/233M [00:07<00:11, 13.0MB/s] 39%|███▊      | 90.2M/233M [00:07<00:11, 13.1MB/s] 39%|███▉      | 91.8M/233M [00:07<00:13, 10.9MB/s] 40%|████      | 93.6M/233M [00:07<00:12, 11.9MB/s] 41%|████      | 96.0M/233M [00:07<00:10, 13.8MB/s] 42%|████▏     | 98.0M/233M [00:07<00:09, 15.1MB/s] 43%|████▎     | 99.6M/233M [00:08<00:10, 13.7MB/s] 43%|████▎     | 101M/233M [00:08<00:15, 8.96MB/s]  44%|████▍     | 102M/233M [00:08<00:14, 9.29MB/s] 45%|████▍     | 104M/233M [00:08<00:12, 10.7MB/s] 45%|████▌     | 106M/233M [00:08<00:10, 12.4MB/s] 46%|████▌     | 107M/233M [00:08<00:13, 9.46MB/s] 46%|████▋     | 108M/233M [00:09<00:13, 9.86MB/s] 47%|████▋     | 110M/233M [00:09<00:14, 9.25MB/s] 48%|████▊     | 111M/233M [00:09<00:13, 9.77MB/s] 48%|████▊     | 112M/233M [00:09<00:12, 10.0MB/s] 49%|████▉     | 114M/233M [00:09<00:13, 9.33MB/s] 50%|████▉     | 116M/233M [00:09<00:11, 10.8MB/s] 50%|█████     | 117M/233M [00:09<00:10, 11.1MB/s] 51%|█████     | 118M/233M [00:10<00:11, 10.4MB/s] 51%|█████▏    | 120M/233M [00:10<00:11, 10.4MB/s] 52%|█████▏    | 121M/233M [00:10<00:10, 10.7MB/s] 52%|█████▏    | 122M/233M [00:10<00:11, 10.2MB/s] 53%|█████▎    | 124M/233M [00:10<00:10, 10.8MB/s] 53%|█████▎    | 125M/233M [00:10<00:10, 10.8MB/s] 54%|█████▍    | 127M/233M [00:10<00:08, 13.8MB/s] 55%|█████▌    | 128M/233M [00:11<00:11, 9.41MB/s] 56%|█████▌    | 130M/233M [00:11<00:11, 9.30MB/s] 57%|█████▋    | 132M/233M [00:11<00:08, 12.9MB/s] 57%|█████▋    | 134M/233M [00:11<00:08, 12.5MB/s] 58%|█████▊    | 135M/233M [00:11<00:07, 12.9MB/s] 59%|█████▊    | 137M/233M [00:11<00:09, 11.1MB/s] 59%|█████▉    | 138M/233M [00:11<00:10, 9.33MB/s] 60%|██████    | 141M/233M [00:12<00:08, 10.8MB/s] 61%|██████    | 143M/233M [00:12<00:07, 12.8MB/s] 62%|██████▏   | 144M/233M [00:12<00:07, 11.9MB/s] 63%|██████▎   | 146M/233M [00:12<00:06, 13.8MB/s] 63%|██████▎   | 148M/233M [00:12<00:07, 12.3MB/s] 64%|██████▍   | 149M/233M [00:12<00:06, 12.7MB/s] 65%|██████▍   | 151M/233M [00:12<00:06, 12.6MB/s] 65%|██████▌   | 152M/233M [00:13<00:06, 12.9MB/s] 66%|██████▌   | 154M/233M [00:13<00:06, 13.2MB/s] 67%|██████▋   | 157M/233M [00:13<00:04, 16.2MB/s] 68%|██████▊   | 158M/233M [00:13<00:05, 14.2MB/s] 69%|██████▉   | 161M/233M [00:13<00:04, 15.7MB/s] 70%|██████▉   | 163M/233M [00:13<00:06, 12.2MB/s] 71%|███████   | 166M/233M [00:14<00:04, 15.3MB/s] 72%|███████▏  | 167M/233M [00:14<00:04, 14.1MB/s] 73%|███████▎  | 170M/233M [00:14<00:04, 16.1MB/s] 74%|███████▎  | 171M/233M [00:14<00:04, 16.2MB/s] 74%|███████▍  | 173M/233M [00:14<00:03, 16.0MB/s] 75%|███████▍  | 175M/233M [00:14<00:04, 14.2MB/s] 76%|███████▌  | 177M/233M [00:14<00:03, 15.8MB/s] 77%|███████▋  | 179M/233M [00:14<00:03, 14.4MB/s] 78%|███████▊  | 182M/233M [00:15<00:03, 16.6MB/s] 79%|███████▉  | 184M/233M [00:15<00:03, 13.4MB/s] 80%|████████  | 187M/233M [00:15<00:03, 15.9MB/s] 81%|████████  | 188M/233M [00:15<00:03, 14.9MB/s] 82%|████████▏ | 190M/233M [00:15<00:02, 15.4MB/s] 83%|████████▎ | 193M/233M [00:15<00:02, 15.2MB/s] 83%|████████▎ | 194M/233M [00:16<00:02, 13.7MB/s] 85%|████████▍ | 197M/233M [00:16<00:02, 16.7MB/s] 85%|████████▌ | 199M/233M [00:16<00:02, 14.7MB/s] 86%|████████▌ | 201M/233M [00:16<00:02, 14.6MB/s] 87%|████████▋ | 203M/233M [00:16<00:02, 13.4MB/s] 88%|████████▊ | 206M/233M [00:16<00:01, 16.5MB/s] 89%|████████▉ | 207M/233M [00:16<00:01, 16.4MB/s] 90%|████████▉ | 209M/233M [00:17<00:02, 11.9MB/s] 91%|█████████ | 211M/233M [00:17<00:01, 13.5MB/s] 91%|█████████▏| 213M/233M [00:17<00:01, 14.9MB/s] 92%|█████████▏| 215M/233M [00:17<00:01, 13.9MB/s] 93%|█████████▎| 217M/233M [00:17<00:01, 14.7MB/s] 94%|█████████▎| 218M/233M [00:17<00:01, 14.6MB/s] 94%|█████████▍| 220M/233M [00:17<00:00, 14.8MB/s] 95%|█████████▌| 222M/233M [00:18<00:01, 9.76MB/s] 96%|█████████▌| 224M/233M [00:18<00:01, 6.94MB/s] 97%|█████████▋| 227M/233M [00:18<00:00, 10.3MB/s] 98%|█████████▊| 228M/233M [00:18<00:00, 9.99MB/s] 99%|█████████▊| 230M/233M [00:19<00:00, 10.5MB/s]100%|█████████▉| 232M/233M [00:19<00:00, 12.7MB/s]100%|██████████| 233M/233M [00:20<00:00, 12.1MB/s]
+2026-10-04 16:21:50,393 INFO LPIPS(alex) loaded for visual scoring
+2026-10-04 16:21:52,746 INFO Server started at http://localhost:41177 serving /workspace/recreation/output
+2026-10-04 16:22:04,408 INFO Dimension functional [scripted]: 4/6 passed (66.7%)
+2026-10-04 16:22:04,408 INFO Dimension functional: 4/6 passed (66.7%)
+2026-10-04 16:22:04,410 INFO Server stopped on port 41177
+2026-10-04 16:22:04,908 INFO Evaluation complete for minipaint.training: final_score=0.4228
+[mockweb] Phase 4: Writing metrics.json...
+[mockweb] ERROR: failed to parse run.json: Expecting value: line 1 column 1 (char 0)
+{
+  "eval_target": "recreation",
+  "task_score": 0.0,
+  "passed": false,
+  "metrics": {
+    "status": "unknown",
+    "eval_target": "recreation",
+    "final_score": 0.0,
+    "domain": null,
+    "task_id": null,
+    "difficulty": null,
+    "model": null,
+    "scaffold": "claude-code",
+    "scores": {},
+    "anti_cheat": null,
+    "submitted": null,
+    "no_submission_reason": null,
+    "rollout": {},
+    "api_error": null,
+    "build_result": {},
+    "eval_error": null
+  }
+}
+[recreation] manifest -> /workspace/recreation/recreation_manifest.json
+[mockweb] Phase 5: Removing bulky build artifacts from workspace...
+[mockweb]   recreation artifact staged: /results/recreation
+[trajectory] surfaced 3 file(s) from /results/recreation -> /results
+[mockweb] Diag: SHARED_DIR=/workspace/shared
+total 16
+drwxr-xr-x 3 root root 4096 Oct  4 16:01 .
+drwxr-xr-x 1 user user 4096 Oct  4 16:20 ..
+drwxr-xr-x 3 root root 4096 Oct  4 16:01 mockweb-template-deps
+[mockweb] No proxy pair-log dir at /workspace/shared/logs/claudecode
+[mockweb] Done. Output dir contents:
+total 3628
+drwxrwxrwx 1 ubuntu ubuntu    4096 Oct  4 16:22 .
+drwxr-xr-x 1 root   root      4096 Oct  4 16:01 ..
+-rwxrwxrwx 1 ubuntu ubuntu   14207 Oct  4 16:22 controller.log
+-rwxrwxrwx 1 ubuntu ubuntu     478 Oct  4 16:22 metrics.json
+-rwxrwxrwx 1 ubuntu ubuntu     312 Oct  4 16:01 model_proxy.log
+drwxrwxrwx 1 ubuntu ubuntu    4096 Oct  4 16:22 recreation
+-rwxrwxrwx 1 ubuntu ubuntu    1855 Oct  4 16:22 run.json
+-rwxrwxrwx 1 ubuntu ubuntu     656 Oct  4 16:20 run_agent_only.json
+drwxrwxrwx 1 ubuntu ubuntu    4096 Oct  4 16:22 sessions
+-rwxrwxrwx 1 ubuntu ubuntu 3688685 Oct  4 16:20 trajectory.jsonl
+{
+  "task_id": "minipaint.training",
+  "model": "deepseek-v4-flash-vision-exp",
+  "sandbox_id": null,
+  "sandbox_ip": null,
+  "pipeline_exit_code": 0,
+  "stage": "recreation_eval",
+  "task_score": 0.0,
+  "program_score": 0.0,
+  "vlm_score": null,
+  "scoring_eval": null,
+  "passed": true,
+  "stage_recreation": "succeeded",
+  "stage_eval": "succeeded",
+  "prog_vlm_avg": 0.0,
+  "score_passed": false,
+  "platform": "web",
+  "native_exit_code": 0,
+  "stage_outcomes": {
+    "recreation": {
+      "status": "pass",
+      "outcome_class": "completed",
+      "reason_code": "completed",
+      "native_exit_code": null,
+      "result_complete": true,
+      "retryable": false
+    },
+    "eval": {
+      "status": "pass",
+      "outcome_class": "completed",
+      "reason_code": "completed",
+      "native_exit_code": null,
+      "result_complete": true,
+      "retryable": false
+    }
+  },
+  "outcome_class": "completed",
+  "reason_code": "completed",
+  "result_complete": true,
+  "retryable": false,
+  "process_exit_code": 0
+}

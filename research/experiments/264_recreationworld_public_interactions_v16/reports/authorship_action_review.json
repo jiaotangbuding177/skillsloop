@@ -1,0 +1,70 @@
+{
+  "attempt": "recreation_eval_baseline_1791089863418290376",
+  "network_commands": [
+    {
+      "record": 2,
+      "description": "Check reference server response",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "curl -s -I http://localhost:38381/ | head -20"
+    },
+    {
+      "record": 561,
+      "description": "Check all routes respond",
+      "binary_helper": false,
+      "tool_error": true,
+      "command": "for p in /about /academics /life-at-michigan /athletics /research /health-medicine /initiatives /giving /prospective-students /current-students /faculty-staff /parents /alumni /schools-colleges /facts-figures /contact /search /about/privacy /about/privacy-statement; do\n  code=$(curl -s -o /dev/null -w \"%{http_code}\" \"http://localhost:4173$p/\")\n  echo \"$p -> $code\"\ndone"
+    },
+    {
+      "record": 717,
+      "description": "Check SPA server status",
+      "binary_helper": false,
+      "tool_error": true,
+      "command": "sleep 1; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:5173/about/privacy-statement/ 2>/dev/null || echo \"curl blocked\"; cat /tmp/spa.log 2>/dev/null"
+    }
+  ],
+  "network_non_binary_helper": [
+    {
+      "record": 2,
+      "description": "Check reference server response",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "curl -s -I http://localhost:38381/ | head -20"
+    },
+    {
+      "record": 561,
+      "description": "Check all routes respond",
+      "binary_helper": false,
+      "tool_error": true,
+      "command": "for p in /about /academics /life-at-michigan /athletics /research /health-medicine /initiatives /giving /prospective-students /current-students /faculty-staff /parents /alumni /schools-colleges /facts-figures /contact /search /about/privacy /about/privacy-statement; do\n  code=$(curl -s -o /dev/null -w \"%{http_code}\" \"http://localhost:4173$p/\")\n  echo \"$p -> $code\"\ndone"
+    },
+    {
+      "record": 717,
+      "description": "Check SPA server status",
+      "binary_helper": false,
+      "tool_error": true,
+      "command": "sleep 1; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:5173/about/privacy-statement/ 2>/dev/null || echo \"curl blocked\"; cat /tmp/spa.log 2>/dev/null"
+    }
+  ],
+  "written_network_or_dom_scripts": [],
+  "private_evaluation_reads": [],
+  "scripted_browser_calls": [
+    {
+      "record": 35,
+      "tool": "mcp__playwright__browser_evaluate",
+      "tool_error": true
+    },
+    {
+      "record": 150,
+      "tool": "mcp__playwright__browser_evaluate",
+      "tool_error": true
+    },
+    {
+      "record": 443,
+      "tool": "mcp__playwright__browser_evaluate",
+      "tool_error": true
+    }
+  ],
+  "automated_security_proof": false,
+  "manual_source_review_required": true
+}

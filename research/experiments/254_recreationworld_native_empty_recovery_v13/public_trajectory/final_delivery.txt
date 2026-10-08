@@ -1,0 +1,27 @@
+Delivery complete. Summary of work:
+
+## What I found
+The restored candidate was already a close reproduction of the Corravale University site, but had the functional-fidelity defects flagged in the brief:
+
+1. **Placeholder links** — `/_404.html` (the reference's real offline-page URL, used for every external/backend/authenticated destination) resolved to `href="#"` and had navigation `preventDefault`-ed. The 404 links were inert.
+2. **Per-page header labels broken** — `reportLabel`/`searchLabel`/`activeIndex` compared the router's normalized path (no trailing slash) against trailing-slash keys, so every page silently fell back to the homepage defaults and the active Main Menu tab never highlighted.
+3. **Quick Links menu wrong shape** — rendered as a wide full-width grid instead of the reference's narrow right-anchored dark dropdown, and listed guessed items.
+4. **Mobile header** lacked the reference's "FOR:" audience grid and full-width QUICK LINKS button.
+5. **Search page/field** and **footer campus row** differed from the observed layout.
+
+## What I changed (original code, observation-driven)
+- **`src/lib/router.tsx`** — real client-side routing: root-relative targets now navigate instead of `#`; anchors preserve in-page hashes; protocol links (`tel:`, `mailto:`) and bare `#` fall through to the browser; `pushState` guarded for opaque file origins; `.html` file paths mapped back to routes.
+- **`src/pages/OfflinePage.tsx`** (new) — replicated the reference's "Page Not Available / 404" notice, wired as a routable path (`/_404.html`, doc title `Page Not Available - Offline Mode`), rendered standalone like the original.
+- **`src/components/Header.tsx`** — trailing-slash-normalized label lookups (fixing report/search text + active-tab highlight), the observed 9-item Quick Links dropdown anchored under its button, and a responsive header with the mobile audience grid + Quick Links button.
+- **`src/data/site.ts`** — added observed `quickLinks`.
+- **`src/pages/MorePages.tsx`** — Search page/field matched to the reference.
+- **`src/components/Footer.tsx`** — campus row no longer wraps.
+- **`src/vite-env.d.ts`** (new) — clean `tsc --noEmit` (exit 0).
+
+## Verification
+- `npm install && npm run build` succeed; dist inlined to a single self-contained `output/index.html` (all 58 images as data-URIs, fonts embedded) — no external requests.
+- Console: **0 errors, 0 warnings** on the delivered build.
+- Internal navigation verified by click-through (main menu → Giving/Academics/Initiatives, footer Contact, 404 links → offline page); all 20 routes render; compared against the reference at 1920×1080 and 375×812 (header, footer, Quick Links, mobile Main Menu, offline page).
+- Binary media reused from the loopback origin only; no reference class names or DOM serialization in source.
+
+Deliverables: source in `/workspace/recreation/src`, built single-file `/workspace/recreation/output/index.html`.

@@ -1,0 +1,242 @@
+{
+  "attempt": "recreation_eval_baseline_1791083166423505276",
+  "network_commands": [
+    {
+      "record": 323,
+      "description": "Check preview status",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "sleep 2; curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4173/ ; echo; cat /tmp/preview.log"
+    },
+    {
+      "record": 325,
+      "description": "Restart preview server",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "nohup npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 &\nsleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    },
+    {
+      "record": 406,
+      "description": "Copy output and restart preview",
+      "binary_helper": false,
+      "tool_error": true,
+      "command": "cp dist/index.html output/index.html; pkill -f \"vite preview\"; sleep 1; nohup npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 & sleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    },
+    {
+      "record": 408,
+      "description": "Verify preview and output",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "sleep 1; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/ 2>&1 || true; ls -la output/"
+    },
+    {
+      "record": 410,
+      "description": "Start preview detached",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "(setsid npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 < /dev/null &) ; sleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    },
+    {
+      "record": 610,
+      "description": "Restart preview",
+      "binary_helper": false,
+      "tool_error": true,
+      "command": "pkill -f \"vite preview\"; sleep 1; (setsid npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 < /dev/null &); sleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    },
+    {
+      "record": 612,
+      "description": "Start preview detached",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "(setsid npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 < /dev/null &); sleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    },
+    {
+      "record": 766,
+      "description": "Restart preview",
+      "binary_helper": false,
+      "tool_error": true,
+      "command": "pkill -f \"vite preview\" 2>/dev/null; sleep 1; (setsid npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 < /dev/null &); sleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    },
+    {
+      "record": 768,
+      "description": "Start preview",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "(setsid npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 < /dev/null &); sleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    },
+    {
+      "record": 807,
+      "description": "Restart preview",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "(setsid npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 < /dev/null &); sleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    },
+    {
+      "record": 828,
+      "description": "Rebuild, copy, restart preview",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "npm run build 2>&1 | tail -3 && cp dist/index.html output/index.html && (setsid npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 < /dev/null &); sleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    },
+    {
+      "record": 854,
+      "description": "Rebuild, copy, preview",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "npm run build 2>&1 | tail -3 && cp dist/index.html output/index.html && (setsid npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 < /dev/null &); sleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    },
+    {
+      "record": 915,
+      "description": "Rebuild, copy, preview",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "npm run build 2>&1 | tail -3 && cp dist/index.html output/index.html && (setsid npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 < /dev/null &); sleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    },
+    {
+      "record": 938,
+      "description": "Serve output dir",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "cd /workspace/recreation/output && (setsid python3 -m http.server 5173 > /tmp/http5.log 2>&1 < /dev/null &); sleep 2; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:5173/index.html"
+    },
+    {
+      "record": 962,
+      "description": "Restart preview with latest build",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "(setsid npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 < /dev/null &); sleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    },
+    {
+      "record": 992,
+      "description": "Rebuild, copy, preview",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "npm run build 2>&1 | tail -3 && cp dist/index.html output/index.html && (setsid npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 < /dev/null &); sleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    }
+  ],
+  "network_non_binary_helper": [
+    {
+      "record": 323,
+      "description": "Check preview status",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "sleep 2; curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4173/ ; echo; cat /tmp/preview.log"
+    },
+    {
+      "record": 325,
+      "description": "Restart preview server",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "nohup npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 &\nsleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    },
+    {
+      "record": 406,
+      "description": "Copy output and restart preview",
+      "binary_helper": false,
+      "tool_error": true,
+      "command": "cp dist/index.html output/index.html; pkill -f \"vite preview\"; sleep 1; nohup npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 & sleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    },
+    {
+      "record": 408,
+      "description": "Verify preview and output",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "sleep 1; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/ 2>&1 || true; ls -la output/"
+    },
+    {
+      "record": 410,
+      "description": "Start preview detached",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "(setsid npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 < /dev/null &) ; sleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    },
+    {
+      "record": 610,
+      "description": "Restart preview",
+      "binary_helper": false,
+      "tool_error": true,
+      "command": "pkill -f \"vite preview\"; sleep 1; (setsid npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 < /dev/null &); sleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    },
+    {
+      "record": 612,
+      "description": "Start preview detached",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "(setsid npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 < /dev/null &); sleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    },
+    {
+      "record": 766,
+      "description": "Restart preview",
+      "binary_helper": false,
+      "tool_error": true,
+      "command": "pkill -f \"vite preview\" 2>/dev/null; sleep 1; (setsid npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 < /dev/null &); sleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    },
+    {
+      "record": 768,
+      "description": "Start preview",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "(setsid npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 < /dev/null &); sleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    },
+    {
+      "record": 807,
+      "description": "Restart preview",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "(setsid npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 < /dev/null &); sleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    },
+    {
+      "record": 828,
+      "description": "Rebuild, copy, restart preview",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "npm run build 2>&1 | tail -3 && cp dist/index.html output/index.html && (setsid npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 < /dev/null &); sleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    },
+    {
+      "record": 854,
+      "description": "Rebuild, copy, preview",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "npm run build 2>&1 | tail -3 && cp dist/index.html output/index.html && (setsid npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 < /dev/null &); sleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    },
+    {
+      "record": 915,
+      "description": "Rebuild, copy, preview",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "npm run build 2>&1 | tail -3 && cp dist/index.html output/index.html && (setsid npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 < /dev/null &); sleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    },
+    {
+      "record": 938,
+      "description": "Serve output dir",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "cd /workspace/recreation/output && (setsid python3 -m http.server 5173 > /tmp/http5.log 2>&1 < /dev/null &); sleep 2; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:5173/index.html"
+    },
+    {
+      "record": 962,
+      "description": "Restart preview with latest build",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "(setsid npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 < /dev/null &); sleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    },
+    {
+      "record": 992,
+      "description": "Rebuild, copy, preview",
+      "binary_helper": false,
+      "tool_error": false,
+      "command": "npm run build 2>&1 | tail -3 && cp dist/index.html output/index.html && (setsid npx vite preview --port 4173 --strictPort > /tmp/preview.log 2>&1 < /dev/null &); sleep 4; curl -s -o /dev/null -w \"%{http_code}\\n\" http://localhost:4173/"
+    }
+  ],
+  "written_network_or_dom_scripts": [],
+  "private_evaluation_reads": [],
+  "scripted_browser_calls": [
+    {
+      "record": 33,
+      "tool": "mcp__playwright__browser_evaluate",
+      "tool_error": true
+    }
+  ],
+  "automated_security_proof": false,
+  "manual_source_review_required": true
+}

@@ -1,0 +1,56 @@
+You are recreating a web front-end application from observation.
+The reference is a local offline copy. Nothing is published or distributed.
+
+The reference is available in the loopback URL http://localhost:33615. Use the computer-use tools to inspect screenshots, accessibility snapshots, and interactive behavior.
+
+## Full-site scope
+Starting from http://localhost:33615, explore the entire site and rebuild as many pages as you can.
+
+- Discover pages by following internal links from the homepage until no new pages are found; stay on the loopback origin and ignore external links.
+- Rebuild every page that renders correctly, skipping only genuine HTTP errors, empty/error shells, and redirect loops.
+- Reuse shared components across pages while preserving each page's real content and route.
+
+Study the reference thoroughly before and as you write code. Inspect its visual layout, colors, structure, and behavior, and keep returning to it rather than relying on a single early look.
+Capture desktop (1920x1080) and mobile (375x812) views.
+Write a new, original implementation with the highest possible fidelity, matching visible content, semantic structure, layout, spacing, colors, typography, media, responsive behavior, navigation, and interactive states.
+Author original React/TypeScript components and class names. Reproduce visible text content, but do not copy the reference implementation.
+You may copy binary media from http://localhost:33615 and its loopback origin only. Do not access external sites or CDNs. If an exact font is unavailable locally, use a bundled or system fallback.
+
+Deliver:
+1. Source code in /workspace/recreation
+2. A single self-contained /workspace/recreation/output/index.html responsive at 1920x1080 and 375x812
+
+Build requirements:
+- Use the supplied Vite + React 19 + Tailwind CSS 4 + TypeScript scaffold.
+- Build with npm install && npm run build using the scaffold's declared dependencies.
+- Copy dist/index.html to /workspace/recreation/output/index.html; all media and navigation must work and the browser console must have no errors.
+
+Do not inspect eval_config.json, the evaluation harness, scorer, ground truth, test files, scorer installation, or evaluation/ directory.
+
+Original-authorship rules (a violating submission is CAPPED AT 0.10):
+- Reuse binary media and individual design-token values only. Never carry reference class names into source or data files.
+- Do not copy raw HTML with innerHTML, dangerouslySetInnerHTML, or DOMParser, and do not replay a serialized node tree through a generic renderer.
+- Do not bulk-walk or serialize the page with querySelectorAll, outerHTML, innerHTML, getComputedStyle, or getBoundingClientRect to harvest DOM, classes, or geometry for replay. Targeted inspection of a visible property or design-token value is allowed.
+- Do not embed the original with an iframe or use screenshots as page backgrounds.
+
+Web-specific implementation:
+- Build shared Header, Footer, and Nav components consistently across pages.
+- Implement each discovered page to match its on-screen reference.
+- Use path-based client-side routing matching the original URL paths, not hash routing. Use the existing cn() utility; @/ maps to src/.
+
+Important principles:
+- Develop iteratively: start with a minimal working skeleton, build it, launch it, and verify against the reference, then keep adding and refining in small increments.
+- Be thorough: reproduce the full persistent product surface, not just the initial screen.
+- Treat "it launches" as the start, not the finish. Keep iterating to improve fidelity.
+- Do not give up after a failed build or launch; diagnose the error, fix it, and retry.
+- Verify quantitatively after each rebuild. Compare behavior and visual output against the reference rather than guessing.
+
+This is an automated pipeline with no user interaction. You MUST include at least one tool call in every response; a text-only response terminates the session. Do not ask questions or wait for confirmation. Do NOT use Agent, Workflow, EnterPlanMode, ExitPlanMode, or AskUserQuestion.
+
+This is a source-only corrective demonstration, not an independent baseline. The previous model-authored application is restored, without prior sessions, evaluation data, tests or scores. Original task, reference access and originality rules still apply. Use screenshots, public accessibility snapshots, ordinary clicks/navigation and binary asset helper only. Reference DOM/HTML/CSS scraping, browser_evaluate/run_code and serialized-node replay are forbidden. Never read evaluation or gold files.
+
+Inspect your existing source first. Its Link component still replaces non-root-relative destinations with # and suppresses their clicks. Do not keep that policy by habit: observe each public reference link with ordinary tools, then implement its actual observable destination and behavior in your own component. Never infer an unavailable destination is a no-op. Audit search submission/query changes, direct entry/reload of each internal route, exact visible link names, heading levels, accessible field names, menus and offline destinations. Check the actual self-contained output, not just the dev server.
+
+Perform one targeted functional pass before cosmetic work. Record a compact checklist using ONLY observed public interactions, and test the same interactions in your candidate. For each failed public interaction, repair your own source and verify the repair immediately. Direct-navigate both reference and candidate to the same path, compare public accessibility snapshots, and correct missing or paraphrased text and semantic roles. Preserve the final complete artifact and rebuild after the last edit. A nonempty final delivery statement is required; a context summary is not delivery. No benchmark score, private assertions or expected-answer feedback is provided.
+
+Binary asset helper: python3 /opt/rw218/asset_fetch.py URL /workspace/recreation/public/FILE. Own preview ports 4173 or 5173 are allowed. Do not use screenshots as page backgrounds or hand off a default scaffold.
