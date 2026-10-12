@@ -1,0 +1,401 @@
+{
+  "skill_id": "SK-923573E2",
+  "domain_profile": {
+    "profile_id": "DP-6BFC9291",
+    "domain_name": "human_resources",
+    "business_objects": [
+      "employee_training",
+      "employee_exit_management",
+      "employee_recruitment"
+    ],
+    "task_intents": [
+      "manage training programs",
+      "handle employee departures",
+      "conduct recruitment processes",
+      "enforce compliance with policies",
+      "evaluate employee performance"
+    ],
+    "knowledge_types": [
+      "policy documentation",
+      "process workflows",
+      "regulatory compliance",
+      "employee performance metrics",
+      "training program design"
+    ],
+    "sensitive_classes": [
+      "employee personal data",
+      "training cost details",
+      "disciplinary actions",
+      "termination reasons",
+      "confidential company policies"
+    ],
+    "output_formats": [
+      "PDF",
+      "structured forms",
+      "reports",
+      "employee records",
+      "training schedules"
+    ],
+    "evidence_examples": [
+      "{'source': '员工手册制度\\\\10、员工培训管理规定.pdf', 'block_id': 'B-0001', 'text': '人力资源部负责培训需求调查、培训计划制定和培训的组织实施；'}",
+      "{'source': '员工手册制度\\\\11、员工离职管理规定.pdf', 'block_id': 'B-0002', 'text': '员工离职的类别有：终止试用、辞退、开除、辞职（劳动合同解除）、裁减、合同期满、退休等。'}",
+      "{'source': '员工手册制度\\\\1、招聘与录用管理规定.pdf', 'block_id': 'B-0002', 'text': '公司聘用员工以契合公司业务发展需要为原则，以职位所需专业知识技能、学历背景、工作经验及个人品德为招聘基准。'}"
+    ],
+    "metadata": {
+      "generated_by": "llm"
+    }
+  },
+  "business_action": {
+    "action_id": "BA-D932680A06",
+    "action_type": "resource_transformation",
+    "task_label": "manage_training_programs",
+    "domain": "human_resources",
+    "intent": "create structured training schedules for employees",
+    "input_schema": [
+      "user_request",
+      "program_name",
+      "objectives",
+      "target_audience",
+      "delivery_method",
+      "business_context",
+      "authorization_context"
+    ],
+    "output_schema": [
+      "schedule",
+      "evaluation_criteria",
+      "evidence",
+      "next_action"
+    ],
+    "trigger_examples": [
+      "Run design_training_schedule for task manage_training_programs.",
+      "Transform employee_training into training_schedules."
+    ],
+    "transformation": {
+      "source_resources": [
+        "employee_training"
+      ],
+      "target_outputs": [
+        "training_schedules"
+      ],
+      "supporting_atom_ids": [
+        "KA-0003",
+        "KA-0004",
+        "KA-0009",
+        "KA-0010"
+      ],
+      "required_inputs": [
+        "program_name",
+        "objectives",
+        "target_audience",
+        "delivery_method"
+      ],
+      "output_fields": [
+        "schedule",
+        "evaluation_criteria"
+      ],
+      "confidence": 0.95
+    },
+    "constraints": [
+      "schedule must align with company strategy"
+    ],
+    "escalation_triggers": [
+      "missing_schedule_details",
+      "conflicting_objectives"
+    ],
+    "dominant_atom_types": [
+      "training_program",
+      "recruitment_process"
+    ],
+    "evidence_sources": [
+      "员工手册制度\\10、员工培训管理规定.pdf",
+      "新员工入职培训2023.pdf",
+      "面试流程说明.docx"
+    ],
+    "atom_count": 40,
+    "generated_by": "llm"
+  },
+  "business_rule_contract": {
+    "contract_version": "1.0",
+    "task_label": "manage_training_programs",
+    "action_id": "BA-D932680A06",
+    "required_input_fields": [
+      "program_name",
+      "objectives",
+      "target_audience",
+      "delivery_method"
+    ],
+    "must_do": [
+      "schedule must align with company strategy",
+      "Return evidence atom ids for key conclusions.",
+      "Expose missing inputs and unsupported scope."
+    ],
+    "must_not": [
+      "Do not invent business facts absent from evidence.",
+      "Do not treat low-confidence synthesis as a deterministic rule.",
+      "Do not expose restricted details when external output is not allowed."
+    ],
+    "transformation_constraints": {
+      "source_resources": [
+        "employee_training"
+      ],
+      "target_outputs": [
+        "training_schedules"
+      ],
+      "supporting_atom_ids": [
+        "KA-0003",
+        "KA-0004",
+        "KA-0009",
+        "KA-0010"
+      ],
+      "required_traceability": "source_resource -> evidence_atom -> output_field"
+    },
+    "evidence_requirements": {
+      "minimum_evidence_atoms": 2,
+      "claim_support_threshold_for_ready": 0.8,
+      "quote_traceability_threshold_for_review": 0.7,
+      "allow_reasoned_synthesis": true,
+      "unsupported_claim_policy": "ask_for_human_review"
+    },
+    "security_constraints": {
+      "max_data_level": "confidential",
+      "sensitive_classes": [
+        "internal_confidential"
+      ],
+      "external_output_requires_review": true
+    },
+    "escalation_triggers": [
+      "conflicting_objectives",
+      "evidence_missing",
+      "external_output_requested",
+      "misaligned_or_missing_quote",
+      "missing_schedule_details",
+      "sensitive_data_requested",
+      "unsupported_scope"
+    ],
+    "review_status_counts": {
+      "approved": 39,
+      "needs_evidence_review": 1
+    }
+  },
+  "readiness": {
+    "ready": true,
+    "blocking_reasons": [],
+    "checks": {
+      "coverage_score_ok": true,
+      "required_atom_types_present": true,
+      "claim_support_ok": true,
+      "numeric_consistency_ok": true,
+      "evidence_review_rate_ok": true,
+      "numeric_review_rate_ok": true,
+      "has_compact_io_schema": true,
+      "has_business_rule_contract": true
+    },
+    "coverage_score": 1.0,
+    "missing_required_atom_types": [],
+    "evidence_alignment_rate": 0.975,
+    "quote_traceability_rate": 0.975,
+    "claim_support_rate": 0.975,
+    "numeric_consistency_rate": 1.0,
+    "evidence_review_rate": 0.025,
+    "numeric_review_rate": 0.0,
+    "security_review_rate": 0.0,
+    "security_review_blocks_ready": false
+  },
+  "input_schema": [
+    "user_request",
+    "program_name",
+    "objectives",
+    "target_audience",
+    "delivery_method",
+    "business_context",
+    "authorization_context"
+  ],
+  "output_schema": [
+    "schedule",
+    "evaluation_criteria",
+    "evidence",
+    "next_action"
+  ],
+  "module_ids": [
+    "CM-99308FF7"
+  ],
+  "modules": [
+    {
+      "module_id": "CM-99308FF7",
+      "name": "human_resources.manage_training_programs.module",
+      "module_type": "task_conditioned_atom_subgraph",
+      "task_label": "manage_training_programs",
+      "description": "Dynamic cognitive module induced from 40 grounded atoms for task manage_training_programs.",
+      "atom_ids": [
+        "KA-0003",
+        "KA-0004",
+        "KA-0005",
+        "KA-0006",
+        "KA-0007",
+        "KA-0008",
+        "KA-0009",
+        "KA-0010",
+        "KA-0011",
+        "KA-0012",
+        "KA-0013",
+        "KA-0014",
+        "KA-0015",
+        "KA-0016",
+        "KA-0017",
+        "KA-0018",
+        "KA-0019",
+        "KA-0020",
+        "KA-0021",
+        "KA-0022",
+        "KA-0023",
+        "KA-0024",
+        "KA-0025",
+        "KA-0026",
+        "KA-0027",
+        "KA-0028",
+        "KA-0029",
+        "KA-0030",
+        "KA-0031",
+        "KA-0032",
+        "KA-0039",
+        "KA-0040",
+        "KA-0043",
+        "KA-0044",
+        "KA-0045",
+        "KA-0046",
+        "KA-0049",
+        "KA-0050",
+        "KA-0292",
+        "KA-0314"
+      ],
+      "relation_ids": [
+        "REL-F8B26822F4",
+        "REL-F3923AFC49",
+        "REL-3385052865",
+        "REL-7D79018EB7",
+        "REL-D3D9DF64D7",
+        "REL-F88D661159",
+        "REL-6139D63732",
+        "REL-74EAF20D2A",
+        "REL-12A5E1C934",
+        "REL-13299F2638",
+        "REL-92A5EAE522",
+        "REL-75FFC3A597",
+        "REL-7597F6F33F",
+        "REL-E7DA3C1B9C",
+        "REL-7F71F00392",
+        "REL-B32BC0898F",
+        "REL-821F146E28",
+        "REL-D8F13400B4",
+        "REL-F8041BE631",
+        "REL-98E7418A0E",
+        "REL-E2A70B70B1",
+        "REL-8CA077F2BB",
+        "REL-EA88C6C1E8",
+        "REL-A25948F95E",
+        "REL-45E2CAB3B0",
+        "REL-57C11D1B46",
+        "REL-87D792E66E",
+        "REL-62D54EBF71",
+        "REL-4CA49A8A03",
+        "REL-F743752520",
+        "REL-C79C06FA0A",
+        "REL-AAF9DD68A6",
+        "REL-C1B8598831",
+        "REL-33882FDAA1",
+        "REL-F1CD245C91",
+        "REL-0489A25080",
+        "REL-7F8725D81C",
+        "REL-8C0835C9D5",
+        "REL-D24FCA01AD",
+        "REL-A9A32052AF"
+      ],
+      "input_schema": [
+        "user_request",
+        "business_context",
+        "evidence_index"
+      ],
+      "output_schema": [
+        "PDF",
+        "structured forms",
+        "reports"
+      ],
+      "coverage_score": 1.0,
+      "evidence_alignment_rate": 0.975,
+      "numeric_consistency_rate": 1.0,
+      "security_level": "confidential",
+      "review_status": "needs_evidence_review",
+      "metadata": {
+        "task_label": "manage_training_programs",
+        "required_atom_types": [
+          "training_program",
+          "recruitment_process"
+        ],
+        "required_atom_type_strategy": "task_observed_top_types",
+        "covered_atom_types": [
+          "recruitment_process",
+          "training_program"
+        ],
+        "atom_count": 40,
+        "relation_count": 40,
+        "claim_support_rate": 0.975,
+        "sensitive_classes": [
+          "internal_confidential"
+        ]
+      }
+    }
+  ],
+  "required_atom_ids": [
+    "KA-0003",
+    "KA-0004",
+    "KA-0005",
+    "KA-0006",
+    "KA-0007",
+    "KA-0008",
+    "KA-0009",
+    "KA-0010",
+    "KA-0011",
+    "KA-0012",
+    "KA-0013",
+    "KA-0014",
+    "KA-0015",
+    "KA-0016",
+    "KA-0017",
+    "KA-0018",
+    "KA-0019",
+    "KA-0020",
+    "KA-0021",
+    "KA-0022",
+    "KA-0023",
+    "KA-0024",
+    "KA-0025",
+    "KA-0026",
+    "KA-0027",
+    "KA-0028",
+    "KA-0029",
+    "KA-0030",
+    "KA-0031",
+    "KA-0032",
+    "KA-0039",
+    "KA-0040",
+    "KA-0043",
+    "KA-0044",
+    "KA-0045",
+    "KA-0046",
+    "KA-0049",
+    "KA-0050",
+    "KA-0292",
+    "KA-0314"
+  ],
+  "module_count": 1,
+  "atom_count": 40,
+  "relation_count": 312,
+  "review_status_counts": {
+    "approved": 39,
+    "needs_evidence_review": 1
+  },
+  "security_counts": {
+    "internal": 18,
+    "confidential": 22
+  }
+}

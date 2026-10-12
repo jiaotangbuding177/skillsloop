@@ -1,0 +1,61 @@
+skill_id: SK-923573E2
+name: "human-resources-training"
+description: "Compiled agent skill for manage_training_programs in domain human_resources."
+coverage_score: 1.0
+risk_level: medium
+compile_status: ready
+version: 1.0
+evidence_policy: grounded_atoms_only
+module_ids:
+  - CM-99308FF7
+export_targets:
+  - generic_skill_package
+business_action:
+  action_id: "BA-D932680A06"
+  action_type: "resource_transformation"
+  intent: "create structured training schedules for employees"
+  trigger_examples:
+    - "Run design_training_schedule for task manage_training_programs."
+    - "Transform employee_training into training_schedules."
+inputs:
+  - user_request
+  - program_name
+  - objectives
+  - target_audience
+  - delivery_method
+  - business_context
+  - authorization_context
+outputs:
+  - schedule
+  - evaluation_criteria
+  - evidence
+  - next_action
+business_rules:
+  required_input_fields:
+    - program_name
+    - objectives
+    - target_audience
+    - delivery_method
+  must_do:
+    - "schedule must align with company strategy"
+    - "Return evidence atom ids for key conclusions."
+    - "Expose missing inputs and unsupported scope."
+  must_not:
+    - "Do not invent business facts absent from evidence."
+    - "Do not treat low-confidence synthesis as a deterministic rule."
+    - "Do not expose restricted details when external output is not allowed."
+  escalation_triggers:
+    - conflicting_objectives
+    - evidence_missing
+    - external_output_requested
+    - misaligned_or_missing_quote
+    - missing_schedule_details
+    - sensitive_data_requested
+    - unsupported_scope
+readiness:
+  ready: true
+  blocking_reasons:
+security:
+  data_level: confidential
+  human_approval_required: true
+  external_output_allowed: false

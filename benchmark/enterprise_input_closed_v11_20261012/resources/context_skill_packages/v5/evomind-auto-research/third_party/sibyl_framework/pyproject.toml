@@ -1,0 +1,33 @@
+[project]
+name = "sibyl-system"
+version = "0.6.1"
+description = "Sibyl Research System - 西比拉自动化研究系统 (Claude Code Native)"
+requires-python = ">=3.11"
+dependencies = [
+    "pyyaml>=6.0",
+    "rich>=13.0",
+    "flask>=3.0",
+    "gunicorn>=22.0",
+    "flask-sock>=0.7",
+    "watchfiles>=0.21",
+]
+
+[project.optional-dependencies]
+lark = [
+    "lark-oapi>=1.0.0",
+    "mistune>=3.0",
+]
+
+[project.scripts]
+sibyl = "sibyl.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["sibyl"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+norecursedirs = ["workspaces", "pytest-of-*", ".git", ".venv"]

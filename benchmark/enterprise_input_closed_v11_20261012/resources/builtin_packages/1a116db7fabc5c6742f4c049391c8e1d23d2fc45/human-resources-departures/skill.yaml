@@ -1,0 +1,61 @@
+skill_id: SK-630ED842
+name: "human-resources-departures"
+description: "Compiled agent skill for handle_employee_departures in domain human_resources."
+coverage_score: 1.0
+risk_level: high
+compile_status: ready
+version: 1.0
+evidence_policy: grounded_atoms_only
+module_ids:
+  - CM-7BD1ABD8
+export_targets:
+  - generic_skill_package
+business_action:
+  action_id: "BA-9B45B365E9"
+  action_type: "process_transformation"
+  intent: "standardize employee exit procedures"
+  trigger_examples:
+    - "Run process_employee_exit for task handle_employee_departures."
+    - "Transform employee_exit_management into employee_records."
+inputs:
+  - user_request
+  - exit_type
+  - reason
+  - effective_date
+  - documentation
+  - business_context
+  - authorization_context
+outputs:
+  - exit_interview_notes
+  - severance_details
+  - evidence
+  - next_action
+business_rules:
+  required_input_fields:
+    - exit_type
+    - reason
+    - effective_date
+    - documentation
+  must_do:
+    - "documentation must comply with regulatory standards"
+    - "Return evidence atom ids for key conclusions."
+    - "Expose missing inputs and unsupported scope."
+  must_not:
+    - "Do not invent business facts absent from evidence."
+    - "Do not treat low-confidence synthesis as a deterministic rule."
+    - "Do not expose restricted details when external output is not allowed."
+  escalation_triggers:
+    - disputed_exit_reasons
+    - evidence_missing
+    - external_output_requested
+    - misaligned_or_missing_quote
+    - missing_documentation
+    - sensitive_data_requested
+    - unsupported_scope
+readiness:
+  ready: true
+  blocking_reasons:
+security:
+  data_level: restricted
+  human_approval_required: true
+  external_output_allowed: false

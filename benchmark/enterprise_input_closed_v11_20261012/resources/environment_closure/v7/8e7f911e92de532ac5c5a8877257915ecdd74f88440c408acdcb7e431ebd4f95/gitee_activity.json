@@ -1,0 +1,277 @@
+{
+  "schema": "source-scoped-gitee-experiment-v7",
+  "session_id": "conv_143452559f75",
+  "synthetic": true,
+  "original_private_business_facts_verified": false,
+  "self_member_id": "experiment-self",
+  "projects": [
+    {
+      "id": "project-zclaw",
+      "name": "ZClaw",
+      "aliases": [
+        "zlaw",
+        "Zlaw",
+        "zclaw"
+      ],
+      "description": "Agent 会话前端和 API 工程实验项目"
+    },
+    {
+      "id": "project-km",
+      "name": "EvoMind-KM",
+      "aliases": [
+        "EvoMind-KM项目"
+      ],
+      "description": "知识资料与图谱实验项目"
+    },
+    {
+      "id": "project-portal",
+      "name": "门户网站",
+      "aliases": [
+        "portal"
+      ],
+      "description": "无 Agent 会话文件的独立网站工程"
+    }
+  ],
+  "repositories": [
+    {
+      "id": "repo-zclaw",
+      "name": "ZClaw",
+      "project_id": "project-zclaw",
+      "aliases": [
+        "km-agent"
+      ],
+      "checkout": "services/gitee_repo",
+      "local_remote": "services/gitee_repo_remote.git",
+      "synthetic": true
+    },
+    {
+      "id": "repo-km",
+      "name": "EvoMind-KM",
+      "project_id": "project-km",
+      "aliases": [],
+      "checkout": "services/repos/evomind-km",
+      "local_remote": "services/repos/evomind-km_remote.git",
+      "synthetic": true
+    },
+    {
+      "id": "repo-web",
+      "name": "门户网站",
+      "project_id": "project-portal",
+      "aliases": [],
+      "checkout": "services/repos/portal",
+      "local_remote": "services/repos/portal_remote.git",
+      "synthetic": true
+    }
+  ],
+  "files": [
+    {
+      "path": "web/src/SuperLobsterPage.tsx",
+      "project_id": "project-zclaw",
+      "repository_id": "repo-zclaw",
+      "content": "// Synthetic current input reconstructed from the user's change summary.\nconst loadingSessionIdRef = { current: null as string | null };\nexport function loadConversation(id: string) {\n  if (loadingSessionIdRef.current === id) return;\n  loadingSessionIdRef.current = id;\n  return fetch(`/conversations/${id}`);\n}\n// Conversation/cron updates are subscribed through SSE, not visibilitychange.\n",
+      "sha256": "d7d33e1f1e3ead7efc29a01452e4c2d942e878bc496e5ee43142df142cc3cc15",
+      "synthetic": true
+    },
+    {
+      "path": "web/src/WorkbenchRailPanel.tsx",
+      "project_id": "project-zclaw",
+      "repository_id": "repo-zclaw",
+      "content": "// Current experiment input: consume SSE cron status updates.\nexport const refreshSource = \"SSE\";\n",
+      "sha256": "b771794c506303aa6a2fb37a0e81408727fb650e5331d0e571be5cda5fef5068",
+      "synthetic": true
+    },
+    {
+      "path": "web/src/tool-output-sanitizer.ts",
+      "project_id": "project-zclaw",
+      "repository_id": "repo-zclaw",
+      "content": "export function cleanToolOutput(value: string) { return value.replace(/SKILL\\.md/g, \"internal document\"); }\n",
+      "sha256": "9e7f76715a820ddeb301067da6c335d36156b1660203df28329eae1695abe9aa",
+      "synthetic": true
+    },
+    {
+      "path": "api/src/tool-output-sanitizer.ts",
+      "project_id": "project-zclaw",
+      "repository_id": "repo-zclaw",
+      "content": "export function cleanRESTAndSSE(value: string) { return value.replace(/openclaw/gi, \"assistant\"); }\n",
+      "sha256": "908295530f795cee32ca643cc8d46e4e1c25f2ccf45bd890ffbac70e70080e62",
+      "synthetic": true
+    },
+    {
+      "path": "api/src/zclaw.service.ts",
+      "project_id": "project-zclaw",
+      "repository_id": "repo-zclaw",
+      "content": "// User-described REST, stream and database writes all apply output sanitization.\nexport const sanitizePersistedOutput = true;\n",
+      "sha256": "8ced91ed0ad76389de49f8b5a80bf710f483d3c8246e222965257e4d30814029",
+      "synthetic": true
+    },
+    {
+      "path": "api/eslint.config.mjs",
+      "project_id": "project-zclaw",
+      "repository_id": "repo-zclaw",
+      "content": "export default [{ ignores: [\"dist/**\"] }];\n",
+      "sha256": "c3b651f3549f1b5e7dadaad9fd032209ab5d3b7f165cb37a986c465405dee2c0",
+      "synthetic": true
+    },
+    {
+      "path": "web/eslint.config.mjs",
+      "project_id": "project-zclaw",
+      "repository_id": "repo-zclaw",
+      "content": "export default [{ ignores: [\"dist/**\"] }];\n",
+      "sha256": "c3b651f3549f1b5e7dadaad9fd032209ab5d3b7f165cb37a986c465405dee2c0",
+      "synthetic": true
+    },
+    {
+      "path": "api/src/cron-task-helpers.ts",
+      "project_id": "project-zclaw",
+      "repository_id": "repo-zclaw",
+      "content": "export const missingChannelAnnounce = { bestEffort: true };\n",
+      "sha256": "3bd541bb09a2fb39aa54b8a1d899b0e59c41197e06d946a29acce85a75036e0e",
+      "synthetic": true
+    },
+    {
+      "path": "web/src/MessageBubble.tsx",
+      "project_id": "project-zclaw",
+      "repository_id": "repo-zclaw",
+      "content": "// User-described rendering boundary.\nexport const hideInternalDetails = true;\n",
+      "sha256": "a954ba434c1c8db84275bb85cee155effa053ac1fe6ff2aa58581c8d19c04448",
+      "synthetic": true
+    },
+    {
+      "path": "web/src/ZclawMarkdown.tsx",
+      "project_id": "project-zclaw",
+      "repository_id": "repo-zclaw",
+      "content": "// Markdown displays sanitized business content.\nexport const sanitized = true;\n",
+      "sha256": "f5215894c3d6cb3a4b35314b769b3b60d4fa6f3c14b1e91a8b8a700c7429491b",
+      "synthetic": true
+    },
+    {
+      "path": "README.md",
+      "project_id": "project-km",
+      "repository_id": "repo-km",
+      "content": "# EvoMind-KM experimental project\nKnowledge upload, search and graph context.\n",
+      "sha256": "20bb56e038147a93d5f780f3137c7b39f862d02292a7b5f1e9cdd195f24ac807",
+      "synthetic": true
+    },
+    {
+      "path": "api/knowledge/index.ts",
+      "project_id": "project-km",
+      "repository_id": "repo-km",
+      "content": "export const knowledgeInput = \"document\";\n",
+      "sha256": "26e33fe303d41546f83d3694f42ce2718ee54b8c90b107406e26936992a76cb3",
+      "synthetic": true
+    },
+    {
+      "path": "README.md",
+      "project_id": "project-portal",
+      "repository_id": "repo-web",
+      "content": "# Generic web portal experiment\n",
+      "sha256": "59d703122215910f248e0ad0f4d3be77db016726806d915e62e2d04287f2ac7a",
+      "synthetic": true
+    },
+    {
+      "path": "src/Portal.tsx",
+      "project_id": "project-portal",
+      "repository_id": "repo-web",
+      "content": "export const page = \"portal\";\n",
+      "sha256": "779630e90d6ec1102c0c562ed42a5e1d44b4936249cfa92083adbf6a852871f2",
+      "synthetic": true
+    }
+  ],
+  "commits": [
+    {
+      "sha": "8a771768502cd584b060fcacd20b3d69f1d09fd4",
+      "project_id": "project-zclaw",
+      "repository_id": "repo-zclaw",
+      "author": "experiment-self",
+      "message": "Raw code/feature experiment input; no requested work item created",
+      "changed_files": [
+        "web/src/SuperLobsterPage.tsx",
+        "web/src/WorkbenchRailPanel.tsx",
+        "web/src/tool-output-sanitizer.ts",
+        "api/src/tool-output-sanitizer.ts",
+        "api/src/zclaw.service.ts",
+        "api/eslint.config.mjs",
+        "web/eslint.config.mjs",
+        "api/src/cron-task-helpers.ts",
+        "web/src/MessageBubble.tsx",
+        "web/src/ZclawMarkdown.tsx"
+      ],
+      "created_at": "2026-06-16T10:00:00+08:00",
+      "updated_at": "2026-06-16T10:00:00+08:00",
+      "actual_git_commit": true,
+      "synthetic": true
+    },
+    {
+      "sha": "9766c523165ee1bdb35744caf8c5018c44b4e4ee",
+      "project_id": "project-km",
+      "repository_id": "repo-km",
+      "author": "experiment-self",
+      "message": "Raw code/feature experiment input; no requested work item created",
+      "changed_files": [
+        "README.md",
+        "api/knowledge/index.ts"
+      ],
+      "created_at": "2026-06-16T10:00:00+08:00",
+      "updated_at": "2026-06-16T10:00:00+08:00",
+      "actual_git_commit": true,
+      "synthetic": true
+    },
+    {
+      "sha": "3d83db6d3bf28318aa2702798e95fdf3f9f24edf",
+      "project_id": "project-portal",
+      "repository_id": "repo-web",
+      "author": "experiment-self",
+      "message": "Raw code/feature experiment input; no requested work item created",
+      "changed_files": [
+        "README.md",
+        "src/Portal.tsx"
+      ],
+      "created_at": "2026-06-16T10:00:00+08:00",
+      "updated_at": "2026-06-16T10:00:00+08:00",
+      "actual_git_commit": true,
+      "synthetic": true
+    }
+  ],
+  "members": [
+    {
+      "id": "experiment-self",
+      "login": "experiment-self",
+      "name": "当前实验用户",
+      "aliases": [
+        "张文",
+        "我自己",
+        "当前实验用户"
+      ]
+    },
+    {
+      "id": "experiment-design",
+      "login": "experiment-design",
+      "name": "设计跟进人实验别名",
+      "aliases": [
+        "徐志高"
+      ],
+      "role_confirmed_by_user": false
+    }
+  ],
+  "issues": [
+    {
+      "number": 1,
+      "id": "EXPERIMENT-SEED-1",
+      "title": "实验项目资料初始化记录",
+      "body": "这是一条可读取的无关起始背景工单，不是用户要求创建的目标工单。",
+      "project_id": "project-km",
+      "repository_id": "repo-km",
+      "assignee": "experiment-self",
+      "priority": "low",
+      "type": "task",
+      "state": "closed",
+      "created_at": "2026-06-15T08:00:00+08:00",
+      "updated_at": "2026-06-15T09:00:00+08:00",
+      "synthetic": true,
+      "origin": "explicit unrelated experimental initial background"
+    }
+  ],
+  "pulls": [],
+  "mutation_log": [],
+  "requested_target_work_items_precreated": false
+}

@@ -1,0 +1,61 @@
+skill_id: SK-1C568613
+name: "human-resources-performance"
+description: "Compiled agent skill for evaluate_employee_performance in domain human_resources."
+coverage_score: 1.0
+risk_level: medium
+compile_status: ready
+version: 1.0
+evidence_policy: grounded_atoms_only
+module_ids:
+  - CM-1E8685E4
+export_targets:
+  - generic_skill_package
+business_action:
+  action_id: "BA-E69B148438"
+  action_type: "record_transformation"
+  intent: "evaluate employee performance based on defined criteria"
+  trigger_examples:
+    - "Run conduct_performance_review for task evaluate_employee_performance."
+    - "Transform employee_training, performance_evaluation into employee_records."
+inputs:
+  - user_request
+  - evaluation_period
+  - criteria
+  - feedback
+  - rating_scale
+  - business_context
+  - authorization_context
+outputs:
+  - action_plan
+  - training_recommendations
+  - evidence
+  - next_action
+business_rules:
+  required_input_fields:
+    - evaluation_period
+    - criteria
+    - feedback
+    - rating_scale
+  must_do:
+    - "feedback must be constructive and actionable"
+    - "Return evidence atom ids for key conclusions."
+    - "Expose missing inputs and unsupported scope."
+  must_not:
+    - "Do not invent business facts absent from evidence."
+    - "Do not treat low-confidence synthesis as a deterministic rule."
+    - "Do not expose restricted details when external output is not allowed."
+  escalation_triggers:
+    - disputed_evaluations
+    - evidence_missing
+    - external_output_requested
+    - misaligned_or_missing_quote
+    - missing_feedback
+    - sensitive_data_requested
+    - unsupported_scope
+readiness:
+  ready: true
+  blocking_reasons:
+security:
+  data_level: confidential
+  human_approval_required: true
+  external_output_allowed: false

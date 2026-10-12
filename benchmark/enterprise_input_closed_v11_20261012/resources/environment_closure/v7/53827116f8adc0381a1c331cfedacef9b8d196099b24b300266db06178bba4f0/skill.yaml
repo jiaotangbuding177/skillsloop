@@ -1,0 +1,60 @@
+skill_id: SK-0903A33A
+name: "human-resources-recruitment"
+description: "Compiled agent skill for conduct_recruitment_processes in domain human_resources."
+coverage_score: 1.0
+risk_level: medium
+compile_status: ready
+version: 1.0
+evidence_policy: grounded_atoms_only
+module_ids:
+  - CM-F3D7979F
+export_targets:
+  - generic_skill_package
+business_action:
+  action_id: "BA-121EC09ADD"
+  action_type: "process_transformation"
+  intent: "implement recruitment workflows for new hires"
+  trigger_examples:
+    - "Run execute_recruitment_plan for task conduct_recruitment_processes."
+    - "Transform employee_recruitment into structured_forms."
+inputs:
+  - user_request
+  - job_title
+  - required_skills
+  - application_process
+  - interview_schedule
+  - business_context
+  - authorization_context
+outputs:
+  - candidate_verification
+  - final_approval
+  - evidence
+  - next_action
+business_rules:
+  required_input_fields:
+    - job_title
+    - required_skills
+    - application_process
+    - interview_schedule
+  must_do:
+    - "interview schedule must accommodate all stakeholders"
+    - "Return evidence atom ids for key conclusions."
+    - "Expose missing inputs and unsupported scope."
+  must_not:
+    - "Do not invent business facts absent from evidence."
+    - "Do not treat low-confidence synthesis as a deterministic rule."
+    - "Do not expose restricted details when external output is not allowed."
+  escalation_triggers:
+    - candidate_disputes
+    - evidence_missing
+    - external_output_requested
+    - policy_non_compliance
+    - sensitive_data_requested
+    - unsupported_scope
+readiness:
+  ready: true
+  blocking_reasons:
+security:
+  data_level: confidential
+  human_approval_required: true
+  external_output_allowed: false

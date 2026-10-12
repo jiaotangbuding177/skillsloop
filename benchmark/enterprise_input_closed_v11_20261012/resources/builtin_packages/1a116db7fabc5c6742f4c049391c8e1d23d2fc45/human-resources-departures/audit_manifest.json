@@ -1,0 +1,457 @@
+{
+  "skill_id": "SK-630ED842",
+  "domain_profile": {
+    "profile_id": "DP-6BFC9291",
+    "domain_name": "human_resources",
+    "business_objects": [
+      "employee_training",
+      "employee_exit_management",
+      "employee_recruitment"
+    ],
+    "task_intents": [
+      "manage training programs",
+      "handle employee departures",
+      "conduct recruitment processes",
+      "enforce compliance with policies",
+      "evaluate employee performance"
+    ],
+    "knowledge_types": [
+      "policy documentation",
+      "process workflows",
+      "regulatory compliance",
+      "employee performance metrics",
+      "training program design"
+    ],
+    "sensitive_classes": [
+      "employee personal data",
+      "training cost details",
+      "disciplinary actions",
+      "termination reasons",
+      "confidential company policies"
+    ],
+    "output_formats": [
+      "PDF",
+      "structured forms",
+      "reports",
+      "employee records",
+      "training schedules"
+    ],
+    "evidence_examples": [
+      "{'source': '员工手册制度\\\\10、员工培训管理规定.pdf', 'block_id': 'B-0001', 'text': '人力资源部负责培训需求调查、培训计划制定和培训的组织实施；'}",
+      "{'source': '员工手册制度\\\\11、员工离职管理规定.pdf', 'block_id': 'B-0002', 'text': '员工离职的类别有：终止试用、辞退、开除、辞职（劳动合同解除）、裁减、合同期满、退休等。'}",
+      "{'source': '员工手册制度\\\\1、招聘与录用管理规定.pdf', 'block_id': 'B-0002', 'text': '公司聘用员工以契合公司业务发展需要为原则，以职位所需专业知识技能、学历背景、工作经验及个人品德为招聘基准。'}"
+    ],
+    "metadata": {
+      "generated_by": "llm"
+    }
+  },
+  "business_action": {
+    "action_id": "BA-9B45B365E9",
+    "action_type": "process_transformation",
+    "task_label": "handle_employee_departures",
+    "domain": "human_resources",
+    "intent": "standardize employee exit procedures",
+    "input_schema": [
+      "user_request",
+      "exit_type",
+      "reason",
+      "effective_date",
+      "documentation",
+      "business_context",
+      "authorization_context"
+    ],
+    "output_schema": [
+      "exit_interview_notes",
+      "severance_details",
+      "evidence",
+      "next_action"
+    ],
+    "trigger_examples": [
+      "Run process_employee_exit for task handle_employee_departures.",
+      "Transform employee_exit_management into employee_records."
+    ],
+    "transformation": {
+      "source_resources": [
+        "employee_exit_management"
+      ],
+      "target_outputs": [
+        "employee_records"
+      ],
+      "supporting_atom_ids": [
+        "KA-0060",
+        "KA-0061",
+        "KA-0063",
+        "KA-0064"
+      ],
+      "required_inputs": [
+        "exit_type",
+        "reason",
+        "effective_date",
+        "documentation"
+      ],
+      "output_fields": [
+        "exit_interview_notes",
+        "severance_details"
+      ],
+      "confidence": 0.92
+    },
+    "constraints": [
+      "documentation must comply with regulatory standards"
+    ],
+    "escalation_triggers": [
+      "missing_documentation",
+      "disputed_exit_reasons"
+    ],
+    "dominant_atom_types": [
+      "employee_exit"
+    ],
+    "evidence_sources": [
+      "员工手册制度\\11、员工离职管理规定.pdf",
+      "员工手册制度\\1、招聘与录用管理规定.pdf",
+      "员工手册制度\\4、假期管理规定.pdf",
+      "员工手册制度\\行政管理制度（修订）.pdf"
+    ],
+    "atom_count": 59,
+    "generated_by": "llm"
+  },
+  "business_rule_contract": {
+    "contract_version": "1.0",
+    "task_label": "handle_employee_departures",
+    "action_id": "BA-9B45B365E9",
+    "required_input_fields": [
+      "exit_type",
+      "reason",
+      "effective_date",
+      "documentation"
+    ],
+    "must_do": [
+      "documentation must comply with regulatory standards",
+      "Return evidence atom ids for key conclusions.",
+      "Expose missing inputs and unsupported scope."
+    ],
+    "must_not": [
+      "Do not invent business facts absent from evidence.",
+      "Do not treat low-confidence synthesis as a deterministic rule.",
+      "Do not expose restricted details when external output is not allowed."
+    ],
+    "transformation_constraints": {
+      "source_resources": [
+        "employee_exit_management"
+      ],
+      "target_outputs": [
+        "employee_records"
+      ],
+      "supporting_atom_ids": [
+        "KA-0060",
+        "KA-0061",
+        "KA-0063",
+        "KA-0064"
+      ],
+      "required_traceability": "source_resource -> evidence_atom -> output_field"
+    },
+    "evidence_requirements": {
+      "minimum_evidence_atoms": 2,
+      "claim_support_threshold_for_ready": 0.8,
+      "quote_traceability_threshold_for_review": 0.7,
+      "allow_reasoned_synthesis": true,
+      "unsupported_claim_policy": "ask_for_human_review"
+    },
+    "security_constraints": {
+      "max_data_level": "restricted",
+      "sensitive_classes": [
+        "internal_confidential"
+      ],
+      "external_output_requires_review": true
+    },
+    "escalation_triggers": [
+      "disputed_exit_reasons",
+      "evidence_missing",
+      "external_output_requested",
+      "misaligned_or_missing_quote",
+      "missing_documentation",
+      "sensitive_data_requested",
+      "unsupported_scope"
+    ],
+    "review_status_counts": {
+      "approved": 51,
+      "needs_evidence_review": 8
+    }
+  },
+  "readiness": {
+    "ready": true,
+    "blocking_reasons": [],
+    "checks": {
+      "coverage_score_ok": true,
+      "required_atom_types_present": true,
+      "claim_support_ok": true,
+      "numeric_consistency_ok": true,
+      "evidence_review_rate_ok": true,
+      "numeric_review_rate_ok": true,
+      "has_compact_io_schema": true,
+      "has_business_rule_contract": true
+    },
+    "coverage_score": 1.0,
+    "missing_required_atom_types": [],
+    "evidence_alignment_rate": 0.881,
+    "quote_traceability_rate": 0.881,
+    "claim_support_rate": 0.881,
+    "numeric_consistency_rate": 1.0,
+    "evidence_review_rate": 0.136,
+    "numeric_review_rate": 0.0,
+    "security_review_rate": 0.0,
+    "security_review_blocks_ready": false
+  },
+  "input_schema": [
+    "user_request",
+    "exit_type",
+    "reason",
+    "effective_date",
+    "documentation",
+    "business_context",
+    "authorization_context"
+  ],
+  "output_schema": [
+    "exit_interview_notes",
+    "severance_details",
+    "evidence",
+    "next_action"
+  ],
+  "module_ids": [
+    "CM-7BD1ABD8"
+  ],
+  "modules": [
+    {
+      "module_id": "CM-7BD1ABD8",
+      "name": "human_resources.handle_employee_departures.module",
+      "module_type": "task_conditioned_atom_subgraph",
+      "task_label": "handle_employee_departures",
+      "description": "Dynamic cognitive module induced from 59 grounded atoms for task handle_employee_departures.",
+      "atom_ids": [
+        "KA-0060",
+        "KA-0061",
+        "KA-0062",
+        "KA-0063",
+        "KA-0064",
+        "KA-0065",
+        "KA-0066",
+        "KA-0067",
+        "KA-0068",
+        "KA-0069",
+        "KA-0070",
+        "KA-0071",
+        "KA-0072",
+        "KA-0073",
+        "KA-0074",
+        "KA-0075",
+        "KA-0076",
+        "KA-0077",
+        "KA-0078",
+        "KA-0079",
+        "KA-0080",
+        "KA-0081",
+        "KA-0087",
+        "KA-0088",
+        "KA-0089",
+        "KA-0091",
+        "KA-0092",
+        "KA-0093",
+        "KA-0094",
+        "KA-0097",
+        "KA-0098",
+        "KA-0099",
+        "KA-0100",
+        "KA-0101",
+        "KA-0102",
+        "KA-0103",
+        "KA-0104",
+        "KA-0105",
+        "KA-0106",
+        "KA-0107",
+        "KA-0108",
+        "KA-0109",
+        "KA-0110",
+        "KA-0111",
+        "KA-0112",
+        "KA-0113",
+        "KA-0114",
+        "KA-0115",
+        "KA-0116",
+        "KA-0117",
+        "KA-0149",
+        "KA-0156",
+        "KA-0157",
+        "KA-0185",
+        "KA-0186",
+        "KA-0187",
+        "KA-0267",
+        "KA-0268",
+        "KA-0276"
+      ],
+      "relation_ids": [
+        "REL-D9CEF60AED",
+        "REL-E30FAAB81D",
+        "REL-9456B6ECA0",
+        "REL-D877CD441B",
+        "REL-A74F52EDF5",
+        "REL-763E94314F",
+        "REL-6A570D0D94",
+        "REL-137D67A8D5",
+        "REL-662A79719C",
+        "REL-B51BA3DD26",
+        "REL-A26A895C8C",
+        "REL-40FE0C5287",
+        "REL-CCBD0AD521",
+        "REL-3DC66E63C4",
+        "REL-71BE03BB0C",
+        "REL-ABCD2DCBB2",
+        "REL-411559BB05",
+        "REL-3788FBEEED",
+        "REL-FABE8999CE",
+        "REL-73FC491B64",
+        "REL-0F86BC3575",
+        "REL-5D951B2F64",
+        "REL-603924AF73",
+        "REL-6B7FBF8A37",
+        "REL-FDC92D0CE7",
+        "REL-A6366F6E4C",
+        "REL-F46F199B79",
+        "REL-8CCD4A37EA",
+        "REL-4286ECFE81",
+        "REL-946952B341",
+        "REL-40707E744B",
+        "REL-6D152C162D",
+        "REL-D9BA3E998F",
+        "REL-9EC2943C17",
+        "REL-41F853A411",
+        "REL-82ADAA5AAE",
+        "REL-3A5B3EB559",
+        "REL-D019945F1B",
+        "REL-67CFCFA49A",
+        "REL-05AF485647",
+        "REL-7CE0505965",
+        "REL-DD33123B7A",
+        "REL-7CEB58633A",
+        "REL-D17C697B93",
+        "REL-6E487AD518",
+        "REL-05BC2500D8",
+        "REL-7B0C7F4A63",
+        "REL-47BDBE68B4",
+        "REL-B936C3CA60",
+        "REL-D26F3BD5EE",
+        "REL-1EB2FF5931",
+        "REL-4739C76A66",
+        "REL-4EB9F9F437",
+        "REL-77270DF0BC",
+        "REL-00AA63892D",
+        "REL-A8CEF205F1",
+        "REL-E248CE57FD",
+        "REL-8CF8DA6D9A",
+        "REL-7F20F28FD7"
+      ],
+      "input_schema": [
+        "user_request",
+        "business_context",
+        "evidence_index"
+      ],
+      "output_schema": [
+        "PDF",
+        "structured forms",
+        "reports"
+      ],
+      "coverage_score": 1.0,
+      "evidence_alignment_rate": 0.881,
+      "numeric_consistency_rate": 1.0,
+      "security_level": "restricted",
+      "review_status": "needs_evidence_review",
+      "metadata": {
+        "task_label": "handle_employee_departures",
+        "required_atom_types": [
+          "employee_exit"
+        ],
+        "required_atom_type_strategy": "task_observed_top_types",
+        "covered_atom_types": [
+          "employee_exit"
+        ],
+        "atom_count": 59,
+        "relation_count": 59,
+        "claim_support_rate": 0.881,
+        "sensitive_classes": [
+          "internal_confidential"
+        ]
+      }
+    }
+  ],
+  "required_atom_ids": [
+    "KA-0060",
+    "KA-0061",
+    "KA-0062",
+    "KA-0063",
+    "KA-0064",
+    "KA-0065",
+    "KA-0066",
+    "KA-0067",
+    "KA-0068",
+    "KA-0069",
+    "KA-0070",
+    "KA-0071",
+    "KA-0072",
+    "KA-0073",
+    "KA-0074",
+    "KA-0075",
+    "KA-0076",
+    "KA-0077",
+    "KA-0078",
+    "KA-0079",
+    "KA-0080",
+    "KA-0081",
+    "KA-0087",
+    "KA-0088",
+    "KA-0089",
+    "KA-0091",
+    "KA-0092",
+    "KA-0093",
+    "KA-0094",
+    "KA-0097",
+    "KA-0098",
+    "KA-0099",
+    "KA-0100",
+    "KA-0101",
+    "KA-0102",
+    "KA-0103",
+    "KA-0104",
+    "KA-0105",
+    "KA-0106",
+    "KA-0107",
+    "KA-0108",
+    "KA-0109",
+    "KA-0110",
+    "KA-0111",
+    "KA-0112",
+    "KA-0113",
+    "KA-0114",
+    "KA-0115",
+    "KA-0116",
+    "KA-0117",
+    "KA-0149",
+    "KA-0156",
+    "KA-0157",
+    "KA-0185",
+    "KA-0186",
+    "KA-0187",
+    "KA-0267",
+    "KA-0268",
+    "KA-0276"
+  ],
+  "module_count": 1,
+  "atom_count": 59,
+  "relation_count": 312,
+  "review_status_counts": {
+    "approved": 51,
+    "needs_evidence_review": 8
+  },
+  "security_counts": {
+    "confidential": 50,
+    "internal": 8,
+    "restricted": 1
+  }
+}

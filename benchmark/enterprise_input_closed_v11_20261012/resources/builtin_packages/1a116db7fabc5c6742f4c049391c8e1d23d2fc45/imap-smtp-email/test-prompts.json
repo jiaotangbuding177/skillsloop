@@ -1,0 +1,5 @@
+[
+  {"id": 1, "category": "happy-path", "prompt": "用 163 邮箱发一份周报到 manager@163.com，主题周报，正文请查收附件，附件 ~/Downloads/report.pdf", "expected": "读取 ~/.config/imap-smtp-email/.env → 执行 smtp.js send --to manager@163.com --subject 周报 --body 请查收附件 --attach ~/Downloads/report.pdf"},
+  {"id": 2, "category": "ambiguous", "prompt": "发邮件给张三", "expected": "agent 识别到缺少邮箱地址、主题、正文三要素，追问用户补全"},
+  {"id": 3, "category": "first-config", "prompt": "帮我配置 126 邮箱，账号 test@126.com，授权码 ABC123", "expected": "agent 检查 .env 不存在 → 写入 ~/.config/imap-smtp-email/.env (PROVIDER=126/USERNAME=test@126.com/PASSWORD=ABC123) → 确认完成"}
+]

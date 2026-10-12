@@ -1,0 +1,34 @@
+[
+  {
+    "name": "paper_with_source_data_and_word_report",
+    "prompt": "Use evomind-paper-scan to review a paper with a supplementary source-data folder and generate a Word internal report.",
+    "expected_behaviors": [
+      "reads the whole paper before judging data",
+      "completes the 29-dimension review",
+      "runs or inspects numeric scan outputs",
+      "uses the concise data audit component label paperconan v0.5.0",
+      "generates EvoMind-branded Markdown and DOCX reports"
+    ]
+  },
+  {
+    "name": "paper_without_source_data",
+    "prompt": "Use evomind-paper-scan to review a PDF where no source data is provided.",
+    "expected_behaviors": [
+      "states source data is missing",
+      "does not infer fabrication from missing data alone",
+      "scans PDF-extracted tables when possible",
+      "marks reproducibility as limited",
+      "includes AI human-review warning"
+    ]
+  },
+  {
+    "name": "scanner_false_positive",
+    "prompt": "Use evomind-paper-scan on a paper where paperconan flags questionnaire Likert coding tables.",
+    "expected_behaviors": [
+      "maps scanner findings to the appendix questionnaire",
+      "downgrades expected ordinal coding patterns as plausible benign explanations",
+      "does not call the data fabricated",
+      "uses professional internal-report wording"
+    ]
+  }
+]

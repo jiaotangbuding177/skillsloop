@@ -1,0 +1,395 @@
+{
+  "skill_id": "SK-0903A33A",
+  "domain_profile": {
+    "profile_id": "DP-6BFC9291",
+    "domain_name": "human_resources",
+    "business_objects": [
+      "employee_training",
+      "employee_exit_management",
+      "employee_recruitment"
+    ],
+    "task_intents": [
+      "manage training programs",
+      "handle employee departures",
+      "conduct recruitment processes",
+      "enforce compliance with policies",
+      "evaluate employee performance"
+    ],
+    "knowledge_types": [
+      "policy documentation",
+      "process workflows",
+      "regulatory compliance",
+      "employee performance metrics",
+      "training program design"
+    ],
+    "sensitive_classes": [
+      "employee personal data",
+      "training cost details",
+      "disciplinary actions",
+      "termination reasons",
+      "confidential company policies"
+    ],
+    "output_formats": [
+      "PDF",
+      "structured forms",
+      "reports",
+      "employee records",
+      "training schedules"
+    ],
+    "evidence_examples": [
+      "{'source': '员工手册制度\\\\10、员工培训管理规定.pdf', 'block_id': 'B-0001', 'text': '人力资源部负责培训需求调查、培训计划制定和培训的组织实施；'}",
+      "{'source': '员工手册制度\\\\11、员工离职管理规定.pdf', 'block_id': 'B-0002', 'text': '员工离职的类别有：终止试用、辞退、开除、辞职（劳动合同解除）、裁减、合同期满、退休等。'}",
+      "{'source': '员工手册制度\\\\1、招聘与录用管理规定.pdf', 'block_id': 'B-0002', 'text': '公司聘用员工以契合公司业务发展需要为原则，以职位所需专业知识技能、学历背景、工作经验及个人品德为招聘基准。'}"
+    ],
+    "metadata": {
+      "generated_by": "llm"
+    }
+  },
+  "business_action": {
+    "action_id": "BA-121EC09ADD",
+    "action_type": "process_transformation",
+    "task_label": "conduct_recruitment_processes",
+    "domain": "human_resources",
+    "intent": "implement recruitment workflows for new hires",
+    "input_schema": [
+      "user_request",
+      "job_title",
+      "required_skills",
+      "application_process",
+      "interview_schedule",
+      "business_context",
+      "authorization_context"
+    ],
+    "output_schema": [
+      "candidate_verification",
+      "final_approval",
+      "evidence",
+      "next_action"
+    ],
+    "trigger_examples": [
+      "Run execute_recruitment_plan for task conduct_recruitment_processes.",
+      "Transform employee_recruitment into structured_forms."
+    ],
+    "transformation": {
+      "source_resources": [
+        "employee_recruitment"
+      ],
+      "target_outputs": [
+        "structured_forms"
+      ],
+      "supporting_atom_ids": [
+        "KA-0123",
+        "KA-0124",
+        "KA-0125",
+        "KA-0130"
+      ],
+      "required_inputs": [
+        "job_title",
+        "required_skills",
+        "application_process",
+        "interview_schedule"
+      ],
+      "output_fields": [
+        "candidate_verification",
+        "final_approval"
+      ],
+      "confidence": 0.93
+    },
+    "constraints": [
+      "interview schedule must accommodate all stakeholders"
+    ],
+    "escalation_triggers": [
+      "candidate_disputes",
+      "policy_non_compliance"
+    ],
+    "dominant_atom_types": [
+      "recruitment_process",
+      "policy_document"
+    ],
+    "evidence_sources": [
+      "员工手册制度\\1、招聘与录用管理规定.pdf",
+      "岗位JD.docx",
+      "面试流程说明.docx"
+    ],
+    "atom_count": 39,
+    "generated_by": "llm"
+  },
+  "business_rule_contract": {
+    "contract_version": "1.0",
+    "task_label": "conduct_recruitment_processes",
+    "action_id": "BA-121EC09ADD",
+    "required_input_fields": [
+      "job_title",
+      "required_skills",
+      "application_process",
+      "interview_schedule"
+    ],
+    "must_do": [
+      "interview schedule must accommodate all stakeholders",
+      "Return evidence atom ids for key conclusions.",
+      "Expose missing inputs and unsupported scope."
+    ],
+    "must_not": [
+      "Do not invent business facts absent from evidence.",
+      "Do not treat low-confidence synthesis as a deterministic rule.",
+      "Do not expose restricted details when external output is not allowed."
+    ],
+    "transformation_constraints": {
+      "source_resources": [
+        "employee_recruitment"
+      ],
+      "target_outputs": [
+        "structured_forms"
+      ],
+      "supporting_atom_ids": [
+        "KA-0123",
+        "KA-0124",
+        "KA-0125",
+        "KA-0130"
+      ],
+      "required_traceability": "source_resource -> evidence_atom -> output_field"
+    },
+    "evidence_requirements": {
+      "minimum_evidence_atoms": 2,
+      "claim_support_threshold_for_ready": 0.8,
+      "quote_traceability_threshold_for_review": 0.7,
+      "allow_reasoned_synthesis": true,
+      "unsupported_claim_policy": "ask_for_human_review"
+    },
+    "security_constraints": {
+      "max_data_level": "confidential",
+      "sensitive_classes": [
+        "internal_confidential"
+      ],
+      "external_output_requires_review": true
+    },
+    "escalation_triggers": [
+      "candidate_disputes",
+      "evidence_missing",
+      "external_output_requested",
+      "policy_non_compliance",
+      "sensitive_data_requested",
+      "unsupported_scope"
+    ],
+    "review_status_counts": {
+      "approved": 39
+    }
+  },
+  "readiness": {
+    "ready": true,
+    "blocking_reasons": [],
+    "checks": {
+      "coverage_score_ok": true,
+      "required_atom_types_present": true,
+      "claim_support_ok": true,
+      "numeric_consistency_ok": true,
+      "evidence_review_rate_ok": true,
+      "numeric_review_rate_ok": true,
+      "has_compact_io_schema": true,
+      "has_business_rule_contract": true
+    },
+    "coverage_score": 1.0,
+    "missing_required_atom_types": [],
+    "evidence_alignment_rate": 1.0,
+    "quote_traceability_rate": 1.0,
+    "claim_support_rate": 1.0,
+    "numeric_consistency_rate": 1.0,
+    "evidence_review_rate": 0.0,
+    "numeric_review_rate": 0.0,
+    "security_review_rate": 0.0,
+    "security_review_blocks_ready": false
+  },
+  "input_schema": [
+    "user_request",
+    "job_title",
+    "required_skills",
+    "application_process",
+    "interview_schedule",
+    "business_context",
+    "authorization_context"
+  ],
+  "output_schema": [
+    "candidate_verification",
+    "final_approval",
+    "evidence",
+    "next_action"
+  ],
+  "module_ids": [
+    "CM-F3D7979F"
+  ],
+  "modules": [
+    {
+      "module_id": "CM-F3D7979F",
+      "name": "human_resources.conduct_recruitment_processes.module",
+      "module_type": "task_conditioned_atom_subgraph",
+      "task_label": "conduct_recruitment_processes",
+      "description": "Dynamic cognitive module induced from 39 grounded atoms for task conduct_recruitment_processes.",
+      "atom_ids": [
+        "KA-0121",
+        "KA-0122",
+        "KA-0123",
+        "KA-0124",
+        "KA-0125",
+        "KA-0130",
+        "KA-0131",
+        "KA-0132",
+        "KA-0134",
+        "KA-0135",
+        "KA-0136",
+        "KA-0137",
+        "KA-0138",
+        "KA-0140",
+        "KA-0289",
+        "KA-0290",
+        "KA-0291",
+        "KA-0293",
+        "KA-0294",
+        "KA-0295",
+        "KA-0296",
+        "KA-0297",
+        "KA-0298",
+        "KA-0299",
+        "KA-0300",
+        "KA-0301",
+        "KA-0302",
+        "KA-0303",
+        "KA-0304",
+        "KA-0305",
+        "KA-0306",
+        "KA-0307",
+        "KA-0308",
+        "KA-0309",
+        "KA-0310",
+        "KA-0311",
+        "KA-0312",
+        "KA-0313",
+        "KA-0314"
+      ],
+      "relation_ids": [
+        "REL-6A094E5789",
+        "REL-8B01DD5E1F",
+        "REL-CA27618DA6",
+        "REL-8058B26E52",
+        "REL-7609D21E86",
+        "REL-B26EAF7CEE",
+        "REL-B22FC050E3",
+        "REL-CAEA62B8CF",
+        "REL-9C120C8459",
+        "REL-29E5DFBBDE",
+        "REL-C782C012CE",
+        "REL-D1ACC38262",
+        "REL-DDA495FE4A",
+        "REL-646B9AD453",
+        "REL-B04FA14133",
+        "REL-CCA6C0CED8",
+        "REL-9FF6772CBA",
+        "REL-9796AE9B95",
+        "REL-43F4C66491",
+        "REL-FEBFB8E1AD",
+        "REL-BD256252F3",
+        "REL-92B7B3890A",
+        "REL-3C96CE2382",
+        "REL-0BD11AD831",
+        "REL-C85C592C31",
+        "REL-C1FCF60B90",
+        "REL-2EEC20521D",
+        "REL-05B62A9115",
+        "REL-9368819DF6",
+        "REL-DCDAF0F847",
+        "REL-6BC55B4C57",
+        "REL-7912C576C7",
+        "REL-5CE22A0A24",
+        "REL-E8B76BCD9A",
+        "REL-73FF2209A9",
+        "REL-D3B318312B",
+        "REL-01320BCA7D",
+        "REL-A95896DA42",
+        "REL-AF9FBB04E2"
+      ],
+      "input_schema": [
+        "user_request",
+        "business_context",
+        "evidence_index"
+      ],
+      "output_schema": [
+        "PDF",
+        "structured forms",
+        "reports"
+      ],
+      "coverage_score": 1.0,
+      "evidence_alignment_rate": 1.0,
+      "numeric_consistency_rate": 1.0,
+      "security_level": "confidential",
+      "review_status": "approved",
+      "metadata": {
+        "task_label": "conduct_recruitment_processes",
+        "required_atom_types": [
+          "recruitment_process",
+          "policy_document"
+        ],
+        "required_atom_type_strategy": "task_observed_top_types",
+        "covered_atom_types": [
+          "policy_document",
+          "recruitment_process"
+        ],
+        "atom_count": 39,
+        "relation_count": 39,
+        "claim_support_rate": 1.0,
+        "sensitive_classes": [
+          "internal_confidential"
+        ]
+      }
+    }
+  ],
+  "required_atom_ids": [
+    "KA-0121",
+    "KA-0122",
+    "KA-0123",
+    "KA-0124",
+    "KA-0125",
+    "KA-0130",
+    "KA-0131",
+    "KA-0132",
+    "KA-0134",
+    "KA-0135",
+    "KA-0136",
+    "KA-0137",
+    "KA-0138",
+    "KA-0140",
+    "KA-0289",
+    "KA-0290",
+    "KA-0291",
+    "KA-0293",
+    "KA-0294",
+    "KA-0295",
+    "KA-0296",
+    "KA-0297",
+    "KA-0298",
+    "KA-0299",
+    "KA-0300",
+    "KA-0301",
+    "KA-0302",
+    "KA-0303",
+    "KA-0304",
+    "KA-0305",
+    "KA-0306",
+    "KA-0307",
+    "KA-0308",
+    "KA-0309",
+    "KA-0310",
+    "KA-0311",
+    "KA-0312",
+    "KA-0313",
+    "KA-0314"
+  ],
+  "module_count": 1,
+  "atom_count": 39,
+  "relation_count": 312,
+  "review_status_counts": {
+    "approved": 39
+  },
+  "security_counts": {
+    "confidential": 13,
+    "internal": 26
+  }
+}

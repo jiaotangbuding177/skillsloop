@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>公司业务全景与 AI 嵌入式工作流架构图 — EvoMind V4.0</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f8f9fc;--surface:#ffffff;--border:#dfe3ec;--border-light:#ebeef5;
+  --tx:#1a1f36;--tx2:#4e5a78;--tx3:#8490ab;
+  --blue:#2563eb;--blue-light:#eff6ff;--blue-border:#bfdbfe;
+  --violet:#7c3aed;--violet-light:#f5f3ff;
+  --orange:#ea580c;--orange-light:#fff7ed;--orange-border:#fed7aa;
+  --green:#059669;--green-light:#ecfdf5;
+  --rose:#e11d48;--rose-light:#fff1f2;--rose-border:#fecdd3;
+  --cyan:#0891b2;
+  --grad:linear-gradient(135deg,#2563eb,#7c3aed);
+  --shadow:0 1px 3px rgba(0,0,0,.06);
+  --shadow-md:0 4px 12px rgba(0,0,0,.07);
+  --radius:12px;--radius-lg:16px;
+}
+html{scroll-behavior:smooth;font-size:15px}
+body{font-family:'Noto Sans SC','Inter',-apple-system,sans-serif;background:var(--bg);color:var(--tx);line-height:1.7;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-thumb{background:#c1c8d6;border-radius:3px}
+
+/* ===== 全屏放大浮层 ===== */
+.zoom-overlay{position:fixed;inset:0;z-index:9999;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);display:none;flex-direction:column}
+.zoom-overlay.active{display:flex}
+.zoom-toolbar{position:fixed;top:0;left:0;right:0;z-index:10000;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-light);padding:.6rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-shrink:0}
+.zoom-toolbar-title{font-size:.88rem;font-weight:700;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+.zoom-toolbar-btns{display:flex;gap:.4rem;flex-shrink:0}
+.zoom-btn{padding:.4rem .9rem;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--tx2);font-size:.78rem;font-weight:600;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:.3rem}
+.zoom-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
+.zoom-btn.danger{color:var(--rose);border-color:var(--rose-border)}
+.zoom-btn.danger:hover{background:var(--rose-light)}
+.zoom-info{font-size:.72rem;color:var(--tx3);white-space:nowrap}
+.zoom-viewport{flex:1;overflow:hidden;cursor:grab;position:relative;margin-top:48px}
+.zoom-viewport.dragging{cursor:grabbing}
+.zoom-content{transform-origin:0 0;transition:transform .08s ease-out;will-change:transform}
+.zoom-hint{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:rgba(26,31,54,.88);color:#fff;padding:.5rem 1.2rem;border-radius:100px;font-size:.78rem;font-weight:500;pointer-events:none;opacity:0;transition:opacity .3s;z-index:10001}
+.zoom-hint.show{opacity:1}
+
+/* ===== 导航 ===== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border-light);padding:0 2rem;height:52px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-weight:800;font-size:.9rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;gap:.2rem;flex-wrap:wrap}
+.nav-links a{color:var(--tx3);text-decoration:none;font-size:.7rem;font-weight:500;padding:.3rem .55rem;border-radius:6px;transition:all .2s;white-space:nowrap}
+.nav-links a:hover{color:var(--blue);background:var(--blue-light)}
+
+/* ===== Hero ===== */
+.hero{position:relative;padding:6rem 2rem 3rem;text-align:center;background:linear-gradient(180deg,#fff,var(--bg))}
+.hero-content{max-width:800px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:.4rem;background:var(--blue-light);border:1px solid var(--blue-border);border-radius:100px;padding:.3rem 1rem;font-size:.72rem;font-weight:600;color:var(--blue);margin-bottom:1.5rem}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--blue);border-radius:50%}
+.hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.2;margin-bottom:1rem}
+.hero h1 .gt{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1rem;color:var(--tx2);max-width:620px;margin:0 auto 1.5rem}
+.hero-meta{display:flex;gap:1.5rem;justify-content:center;font-size:.78rem;color:var(--tx3);flex-wrap:wrap}
+
+/* ===== 通用 ===== */
+.container{max-width:1400px;margin:0 auto;padding:0 2rem}
+.section{padding:3.5rem 0;border-bottom:1px solid var(--border-light)}
+.section:last-child{border-bottom:none}
+.section-num{font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:500;color:var(--violet);letter-spacing:.08em;margin-bottom:.4rem;text-transform:uppercase}
+.section-title{font-size:clamp(1.3rem,2.5vw,1.8rem);font-weight:800;margin-bottom:.5rem}
+.section-desc{font-size:.88rem;color:var(--tx2);max-width:700px;margin-bottom:2rem}
+
+/* ===== 可缩放容器 ===== */
+.mermaid-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;overflow:hidden;box-shadow:var(--shadow);position:relative;cursor:pointer;transition:box-shadow .2s}
+.mermaid-wrap:hover{box-shadow:var(--shadow-md)}
+.mermaid-wrap::after{content:'🔍 点击全屏放大查看';position:absolute;bottom:.8rem;right:1rem;font-size:.72rem;color:var(--blue);font-weight:600;background:var(--blue-light);padding:.25rem .7rem;border-radius:6px;opacity:0;transition:opacity .2s;pointer-events:none}
+.mermaid-wrap:hover::after{opacity:1}
+.mermaid{display:flex;justify-content:center}
+.mermaid svg{max-width:none!important;height:auto!important}
+
+.table-wrap{overflow:hidden;border-radius:var(--radius-lg);border:1px solid var(--border);background:var(--surface);box-shadow:var(--shadow);position:relative;cursor:pointer;transition:box-shadow .2s}
+.table-wrap:hover{box-shadow:var(--shadow-md)}
+.table-wrap::after{content:'🔍 点击全屏放大查看';position:absolute;bottom:.8rem;right:1rem;font-size:.72rem;color:var(--blue);font-weight:600;background:var(--blue-light);padding:.25rem .7rem;border-radius:6px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:2}
+.table-wrap:hover::after{opacity:1}
+table{width:100%;border-collapse:collapse;font-size:.82rem;table-layout:auto}
+thead{background:var(--blue-light)}
+th{padding:.7rem 1rem;text-align:left;font-weight:700;color:var(--blue);border-bottom:2px solid var(--blue-border);white-space:nowrap;font-size:.78rem}
+td{padding:.6rem 1rem;border-bottom:1px solid var(--border-light);color:var(--tx2);vertical-align:top;line-height:1.5}
+tr:last-child td{border-bottom:none}
+.tag{display:inline-block;padding:.12rem .5rem;border-radius:4px;font-size:.7rem;font-weight:600;white-space:nowrap}
+.tag-ai{background:var(--violet-light);color:var(--violet)}
+.tag-dept{background:var(--blue-light);color:var(--blue)}
+.tag-yes{background:var(--green-light);color:var(--green)}
+
+/* ===== 部门卡片 ===== */
+.dept-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+@media(max-width:1200px){.dept-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.dept-grid{grid-template-columns:1fr}}
+.dept-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:box-shadow .3s}
+.dept-card:hover{box-shadow:var(--shadow-md)}
+.dept-card-header{padding:1rem 1.2rem;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:.6rem}
+.dept-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.dept-card-title{font-size:.88rem;font-weight:700}
+.dept-card-body{padding:1rem;overflow:hidden;cursor:pointer;position:relative}
+.dept-card-body::after{content:'🔍 点击放大';position:absolute;bottom:.5rem;right:.8rem;font-size:.68rem;color:var(--blue);font-weight:600;background:var(--blue-light);padding:.2rem .5rem;border-radius:5px;opacity:0;transition:opacity .2s;pointer-events:none}
+.dept-card:hover .dept-card-body::after{opacity:1}
+.dept-card-body .mermaid{transform:scale(.78);transform-origin:top left}
+
+/* ===== 其他 ===== */
+.problem-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem}
+@media(max-width:768px){.problem-grid{grid-template-columns:1fr}}
+.problem-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:.8rem 1rem;display:flex;align-items:flex-start;gap:.6rem}
+.problem-num{font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:600;color:var(--rose);background:var(--rose-light);min-width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:6px;flex-shrink:0}
+.problem-text{font-size:.84rem;color:var(--tx2);line-height:1.5}
+.confirm-list{display:grid;gap:.6rem}
+.confirm-item{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--orange);border-radius:0 var(--radius) var(--radius) 0;padding:.8rem 1.2rem;font-size:.86rem;color:var(--tx2)}
+.arch-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+@media(max-width:1000px){.arch-grid{grid-template-columns:repeat(2,1fr)}}
+.arch-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.2rem}
+.arch-label{font-size:.72rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem}
+.arch-desc{font-size:.82rem;color:var(--tx2);line-height:1.5}
+.chain-wrap{overflow:hidden;padding:.5rem 0;cursor:pointer;position:relative}
+.chain-wrap::after{content:'🔍 点击放大';position:absolute;bottom:.5rem;right:1rem;font-size:.72rem;color:var(--blue);font-weight:600;background:var(--blue-light);padding:.25rem .7rem;border-radius:6px;opacity:0;transition:opacity .2s;pointer-events:none}
+.chain-wrap:hover::after{opacity:1}
+.chain-flow{display:flex;align-items:center;gap:0;min-width:fit-content}
+.chain-node{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.45rem .8rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--cyan);white-space:nowrap}
+.chain-arrow{color:var(--tx3);font-size:1rem;padding:0 .2rem;flex-shrink:0}
+.key-note{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.2rem 1.5rem;margin-top:1.5rem}
+.key-note h4{font-size:.82rem;font-weight:700;color:var(--orange);margin-bottom:.6rem}
+.key-note ul{list-style:none;padding:0}
+.key-note li{font-size:.82rem;color:var(--tx2);padding:.3rem 0;padding-left:1rem;position:relative}
+.key-note li::before{content:'';position:absolute;left:0;top:.65rem;width:5px;height:5px;background:var(--orange);border-radius:50%}
+.footer{padding:2.5rem 2rem;text-align:center;border-top:1px solid var(--border-light);color:var(--tx3);font-size:.78rem}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+@media print{.nav{display:none}.hero{padding:2rem 1rem;min-height:auto}.section{padding:1.5rem 0}body{font-size:12px}}
+
+/* Mermaid light theme */
+.mermaid .node rect,.mermaid .node circle,.mermaid .node polygon{fill:#eff6ff!important;stroke:#2563eb!important}
+.mermaid .edgePath .path{stroke:#6b7fa8!important}
+.mermaid .edgeLabel{background:rgba(255,255,255,.85)!important;color:#4e5a78!important;font-size:11px!important}
+.mermaid .nodeLabel{color:#1a1f36!important;font-size:12px!important}
+.mermaid .cluster rect{fill:#f8f9fc!important;stroke:#dfe3ec!important}
+.mermaid .cluster .nodeLabel{color:#4e5a78!important}
+.mermaid .flowchartLink{stroke:#6b7fa8!important}
+.mermaid .marker{fill:#6b7fa8!important}
+</style>
+</head>
+<body>
+
+<!-- 全屏放大浮层 -->
+<div class="zoom-overlay" id="zoomOverlay">
+  <div class="zoom-toolbar">
+    <div class="zoom-toolbar-title" id="zoomTitle">图表详情</div>
+    <div class="zoom-info" id="zoomInfo">100%</div>
+    <div class="zoom-toolbar-btns">
+      <button class="zoom-btn" onclick="zoomIn()">＋ 放大</button>
+      <button class="zoom-btn" onclick="zoomOut()">－ 缩小</button>
+      <button class="zoom-btn" onclick="zoomReset()">↺ 重置</button>
+      <button class="zoom-btn" onclick="zoomFit()">⊞ 适应</button>
+      <button class="zoom-btn danger" onclick="zoomClose()">✕ 关闭</button>
+    </div>
+  </div>
+  <div class="zoom-viewport" id="zoomViewport">
+    <div class="zoom-content" id="zoomContent"></div>
+  </div>
+  <div class="zoom-hint" id="zoomHint">滚轮缩放 · 拖拽平移 · 双击适应 · ESC 关闭</div>
+</div>
+
+<nav class="nav">
+  <div class="nav-brand">EvoMind × 业务全景架构</div>
+  <div class="nav-links">
+    <a href="#sec-overview">全局</a>
+    <a href="#sec-valuechain">主价值链</a>
+    <a href="#sec-swimlane">跨部门泳道</a>
+    <a href="#sec-ai-table">AI 产物总表</a>
+    <a href="#sec-governance">治理节点</a>
+    <a href="#sec-dept">部门 AI 工作流</a>
+    <a href="#sec-system">系统架构</a>
+    <a href="#sec-chain">主数据链</a>
+    <a href="#sec-flow">产物流转</a>
+    <a href="#sec-problems">问题与待确认</a>
+  </div>
+</nav>
+
+<header class="hero" id="sec-overview">
+  <div class="hero-content">
+    <div class="hero-badge">EvoMind Architecture V4.0</div>
+    <h1>公司业务全景与<br><span class="gt">AI 嵌入式工作流</span>架构图</h1>
+    <p>B2B 项目制解决方案全链路——从市场洞察到售后复盘，AI 在每个环节生成中间产物，辅助人类决策，沉淀组织知识。</p>
+    <div class="hero-meta">
+      <span>📅 2026-08-25</span>
+      <span>📄 V4.0</span>
+      <span>🏢 9 大部门</span>
+      <span>🤖 40+ AI 产物节点</span>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+<!-- 1. 主价值链 -->
+<section class="section" id="sec-valuechain">
+  <div>
+    <div class="section-num">01 / 主价值链</div>
+    <h2 class="section-title">公司业务全景图</h2>
+    <p class="section-desc">一条典型的 B2B 项目制解决方案业务链——12 个核心节点，标准/定制双路径分流，知识反哺闭环。</p>
+  </div>
+  <div class="mermaid-wrap" data-title="公司业务全景图 — 主价值链">
+    <div class="mermaid">
+flowchart LR
+    A1["1 战略与市场洞察\n重点行业 / 竞品情报 / 经营目标"]
+    A2["2 品牌传播与获客\n官网SEO / 新媒体 / 展会"]
+    A3["3 销售线索与客户需求\n客户建档 / 商机 / 会议纪要"]
+    A4["4 售前交流与勘察\n技术交流 / 现场勘察 / 风险识别"]
+    A5["5 招投标与商务协同\n方案书 / 技术标 / 报价"]
+    A6["6 中标与内部启动\n合同审批 / 业务制单"]
+    A7["7 项目立项与技术评审\nPM任命 / 里程碑 / 差异分析"]
+    A8{"8 产品路径分流\n标准 or 定制"}
+    A8S["标准产品\n型号确认 / 版本确认"]
+    A8C["定制研发\n需求拆解 / 开发 / 测试 / 发布"]
+    A9["9 工程设计与项目BOM\n施工方案 / 工程BOM"]
+    A10["10 ERP / 库存 / 采购 / 生产\n请购 / 装配 / 质检"]
+    A11["11 发货与现场交付\n安装 / 调试 / 试运行"]
+    A12["12 验收回款售后复盘\n验收 / 回款 / 成本核算 / 知识沉淀"]
+    A1 --> A2 --> A3 --> A4 --> A5 --> A6 --> A7 --> A8
+    A8 -->|标准| A8S --> A9
+    A8 -->|定制| A8C --> A9
+    A9 --> A10 --> A11 --> A12
+    A12 -.知识反哺.-> A1
+    A12 -.案例反哺.-> A3
+    A12 -.方案经验反哺.-> A4
+    A12 -.故障与版本反哺.-> A8C
+    classDef main fill:#eff6ff,stroke:#2563eb,stroke-width:1.5px,color:#1e3a5f
+    classDef decision fill:#fff7ed,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+    classDef branch fill:#f5f3ff,stroke:#7c3aed,stroke-width:1.5px,color:#4c1d95
+    class A1,A2,A3,A4,A5,A6,A7,A9,A10,A11,A12 main
+    class A8 decision
+    class A8S,A8C branch
+    </div>
+  </div>
+</section>
+
+<!-- 2. 跨部门泳道 -->
+<section class="section" id="sec-swimlane">
+  <div>
+    <div class="section-num">02 / 跨部门协同</div>
+    <h2 class="section-title">跨部门协同总泳道图</h2>
+    <p class="section-desc">9 大部门 × 客户交互 × AI 嵌入点——保留部门边界、主工作流、跨部门串联与管理层闭环。</p>
+  </div>
+  <div class="mermaid-wrap" data-title="跨部门协同总泳道图">
+    <div class="mermaid">
+flowchart TB
+    subgraph CLIENT["客户 / 业主"]
+        C1["需求表达 / 咨询"]
+        C2["技术交流 / 现场配合"]
+        C3["方案确认 / 招投标"]
+        C4["签约 / 技术协议确认"]
+        C5["项目启动会 / 实施配合"]
+        C6["验收 / 付款"]
+        C7["使用反馈 / 售后反馈"]
+    end
+    subgraph MKT["品宣部"]
+        M1["市场研究 / 竞品分析"]
+        M2["内容策划 / SEO / 新媒体 / 展会"]
+        M3["线索收集 / 归档 / 分发"]
+        MAI["AI: 行业简报 / 竞品报告 / 选题文案 / SEO建议 / 线索评分表"]
+    end
+    subgraph SALES["销售 / 商务"]
+        S1["线索接收 / 客户建档"]
+        S2["拜访 / 需求沟通 / 会议纪要"]
+        S3["商机评估 / 分级 / 推进"]
+        S4["报价 / 商务谈判"]
+        S5["合同 / 技术协议 / 业务制单"]
+        S6["回款协调 / 客户维护"]
+        SAI["AI: 客户摘要 / 会议纪要 / 商机评分 / 报价建议 / 合同初筛 / 回款提醒"]
+    end
+    subgraph PRE["售前技术支持"]
+        P1["技术交流 / 需求理解"]
+        P2["售前现场勘察"]
+        P3["风险识别 / 差异初判"]
+        P4["方案设计 / 技术标"]
+        P5["技术协议支持"]
+        PAI["AI: 需求抽取表 / 勘察记录 / 风险清单 / 方案匹配 / 方案初稿 / 技术标检查单"]
+    end
+    subgraph RND["研发部"]
+        R1["接收技术基线"]
+        R2["差异分析 / 技术评审"]
+        R3{"标准 or 定制"}
+        R4["型号 / 版本确认"]
+        R5["研发需求拆解"]
+        R6["开发 / 测试 / 发布"]
+        RAI["AI: 差异分析报告 / 版本匹配 / 需求拆解单 / 测试归因 / 知识条目"]
+    end
+    subgraph PM["项目交付部"]
+        J1["项目立项 / PM任命"]
+        J2["施工勘察"]
+        J3["施工方案 / 工程BOM"]
+        J4["安装 / 调试 / 试运行"]
+        J5["验收 / 复盘 / 售后"]
+        JAI["AI: 任务清单 / 施工资料 / BOM初稿 / 异常归类 / 验收资料包 / 复盘报告"]
+    end
+    subgraph SCM["生产 / 供应链"]
+        MFG1["ERP需求接收 / 库存检查"]
+        MFG2["备货 / 生产排程"]
+        MFG3["装配 / 质检 / 成品入库"]
+        MFG4["发货 / 物流跟踪"]
+        SCMAI["AI: 库存缺口 / 齐套检查 / 排产建议 / 发货核对 / 物流摘要"]
+    end
+    subgraph PROC["采购"]
+        Q1["请购接收 / 校验"]
+        Q2["询价 / 比价 / 供应商评估"]
+        Q3["采购订单 / 到料跟踪"]
+        Q4["验收入库 / 绩效评估"]
+        QAI["AI: 请购校验 / 询价比价 / 供应商风险 / 到料预警 / 绩效摘要"]
+    end
+    subgraph MGMT["总经办 / 管理层"]
+        G1["战略目标 / 经营计划"]
+        G2["经营数据汇总 / 重点项目监控"]
+        G3["经营会议 / 风险审查 / 决策下发"]
+        G4["回款 / 成本 / 毛利 / 经营复盘"]
+        GAI["AI: 经营简报 / 项目健康度 / 风险雷达 / 回款预警 / 毛利分析 / 管理问答"]
+    end
+    subgraph HR["人力行政"]
+        H1["招聘 / 入职"]
+        H2["培训 / 考勤 / 制度支持"]
+        HAI["AI: 简历筛选 / 候选人摘要 / 面试纪要 / 培训课件 / 考勤提醒 / 制度问答"]
+    end
+    G1 -.战略输入.-> M1
+    M1 --> M2 --> M3 --> S1
+    S1 --> S2 --> S3
+    S3 --> P1 --> P2 --> P3 --> P4 --> P5
+    P5 --> S4 --> S5 --> J1
+    J1 --> R1 --> R2 --> R3
+    R3 -->|标准| R4 --> J2
+    R3 -->|定制| R5 --> R6 --> J2
+    J2 --> J3 --> MFG1
+    MFG1 --> Q1 --> Q2 --> Q3 --> Q4 --> MFG2
+    MFG2 --> MFG3 --> MFG4 --> J4 --> J5 --> S6
+    S6 --> G4
+    C1 --> S2
+    C2 --> P2
+    P4 --> C3
+    S5 --> C4
+    J1 --> C5
+    J4 --> C5
+    J5 --> C6
+    C7 --> J5
+    S3 -.商机数据.-> G2
+    J1 -.项目数据.-> G2
+    J5 -.验收售后问题.-> G2
+    G2 --> G3 --> G4
+    G4 -.复盘结论.-> M1
+    G4 -.复盘结论.-> S3
+    G4 -.复盘结论.-> P3
+    G4 -.复盘结论.-> R2
+    G4 -.复盘结论.-> J3
+    H1 -.人才补充.-> SALES
+    H2 -.制度与培训.-> PRE
+    H2 -.制度与培训.-> RND
+    H2 -.制度与培训.-> PM
+    classDef ai fill:#f5f3ff,stroke:#7c3aed,stroke-width:1.2px,color:#4c1d95
+    class MAI,SAI,PAI,RAI,JAI,SCMAI,QAI,GAI,HAI ai
+    </div>
+  </div>
+</section>
+
+<!-- 3. AI 产物总表 -->
+<section class="section" id="sec-ai-table">
+  <div>
+    <div class="section-num">03 / AI 产物总表</div>
+    <h2 class="section-title">各部门 AI 嵌入点与产物</h2>
+    <p class="section-desc">40+ AI 产物节点覆盖全链路，所有 AI 产物均需人工确认后方可回写正式系统。</p>
+  </div>
+  <div class="table-wrap" data-title="AI 产物总表（40+ 条目）">
+    <table>
+      <thead><tr><th>部门</th><th>业务节点</th><th>AI 能力</th><th>AI 产物（中间结果）</th><th>回写/去向</th><th>人工确认</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag tag-dept">品宣部</span></td><td>行业研究</td><td>行业情报抓取</td><td>行业简报</td><td>市场资料库</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">品宣部</span></td><td>竞品分析</td><td>竞品对比</td><td>竞品报告</td><td>市场资料库 / 管理层</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">品宣部</span></td><td>内容策划</td><td>文案生成</td><td>选题清单、标题、文案初稿</td><td>内容工作台 / 发布前审核</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">品宣部</span></td><td>获客线索</td><td>线索清洗与评分</td><td>线索评分表、标签结果</td><td>CRM</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">销售/商务</span></td><td>客户建档</td><td>客户摘要</td><td>客户画像、关键联系人摘要</td><td>CRM</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">销售/商务</span></td><td>会议沟通</td><td>纪要生成</td><td>会议纪要、待办项、需求摘要</td><td>CRM / 会议纪要库</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">销售/商务</span></td><td>商机推进</td><td>商机评分</td><td>商机等级、赢单概率、风险提示</td><td>CRM</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">销售/商务</span></td><td>报价</td><td>报价辅助</td><td>历史报价参考、成本参考</td><td>报价单草稿</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">销售/商务</span></td><td>合同协同</td><td>合同初筛</td><td>条款风险提示、缺失清单</td><td>OA / 合同审批流</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">销售/商务</span></td><td>回款</td><td>催收提醒</td><td>回款提醒清单、跟进建议</td><td>财务 / CRM / 管理层</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">售前</span></td><td>技术交流</td><td>需求抽取</td><td>需求项清单</td><td>售前资料库</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">售前</span></td><td>现场勘察</td><td>资料结构化</td><td>勘察记录结构化表、缺项清单</td><td>项目资料库</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">售前</span></td><td>风险识别</td><td>风险分析</td><td>风险清单、差异项清单</td><td>方案评审材料</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">售前</span></td><td>方案设计</td><td>历史方案匹配</td><td>相似案例清单</td><td>方案资料库</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">售前</span></td><td>方案输出</td><td>方案生成</td><td>方案初稿、配置建议</td><td>技术方案草稿</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">售前</span></td><td>技术标</td><td>一致性检查</td><td>技术标检查单</td><td>招投标资料</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">研发</span></td><td>差异分析</td><td>差异分析</td><td>差异分析报告</td><td>IPD / 研发项目</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">研发</span></td><td>标准/定制判断</td><td>判断辅助</td><td>判断建议、复杂度评估</td><td>技术评审会材料</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">研发</span></td><td>需求拆解</td><td>任务拆解</td><td>软硬件需求拆解单</td><td>IPD / 研发项目</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">研发</span></td><td>测试</td><td>问题归因</td><td>测试问题归因单</td><td>测试记录 / 版本库</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">研发</span></td><td>发布</td><td>知识沉淀</td><td>版本知识条目</td><td>研发知识库</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">项目交付</span></td><td>立项</td><td>计划生成</td><td>项目任务清单、里程碑清单</td><td>项目管理系统</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">项目交付</span></td><td>施工勘察</td><td>资料整理</td><td>施工勘察结构化记录</td><td>项目资料库</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">项目交付</span></td><td>施工方案</td><td>方案草拟</td><td>施工方案初稿</td><td>项目管理系统</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">项目交付</span></td><td>工程BOM</td><td>BOM辅助</td><td>BOM初稿、漏项检查单</td><td>ERP导入前</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">项目交付</span></td><td>调试</td><td>异常归类</td><td>调试异常分类单、处理建议</td><td>项目问题库</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">项目交付</span></td><td>验收</td><td>资料汇总</td><td>验收资料包、整改项清单</td><td>验收资料库</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">项目交付</span></td><td>复盘</td><td>复盘生成</td><td>项目复盘报告</td><td>经营复盘库 / 知识库</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">供应链</span></td><td>库存检查</td><td>缺口识别</td><td>库存缺口清单</td><td>ERP / 供应链</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">供应链</span></td><td>齐套判断</td><td>齐套检查</td><td>齐套性检查结果</td><td>ERP / 项目</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">供应链</span></td><td>生产排程</td><td>排产建议</td><td>排产建议单</td><td>生产计划</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">供应链</span></td><td>发货</td><td>发货校验</td><td>发货核对单、物流摘要</td><td>发货记录</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">采购</span></td><td>请购</td><td>请购校验</td><td>请购校验单</td><td>ERP / 采购流</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">采购</span></td><td>询价比价</td><td>成本比对</td><td>询价比价表</td><td>采购决策材料</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">采购</span></td><td>供应商管理</td><td>风险评估</td><td>供应商风险提示</td><td>供应商库</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">采购</span></td><td>到料</td><td>交期预警</td><td>到料预警单</td><td>采购 / 项目 / 供应链</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">总经办</span></td><td>经营分析</td><td>自动汇总</td><td>经营简报</td><td>经营会议</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">总经办</span></td><td>项目监控</td><td>健康度分析</td><td>项目健康度报告</td><td>管理层</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">总经办</span></td><td>风险管理</td><td>风险雷达</td><td>风险预警清单</td><td>管理层</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">总经办</span></td><td>财务经营</td><td>毛利分析</td><td>成本/毛利分析报告</td><td>管理层 / 财务</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">人力行政</span></td><td>招聘</td><td>简历筛选</td><td>简历筛选结果、候选人摘要</td><td>招聘工作台</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">人力行政</span></td><td>面试</td><td>面试记录</td><td>面试纪要</td><td>人员档案</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">人力行政</span></td><td>培训</td><td>课件生成</td><td>培训课件、培训大纲</td><td>培训资料库</td><td><span class="tag tag-yes">是</span></td></tr>
+        <tr><td><span class="tag tag-dept">人力行政</span></td><td>考勤制度</td><td>异常识别</td><td>考勤异常提醒、制度问答结果</td><td>HR系统</td><td><span class="tag tag-yes">是</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 4. 关键治理节点 -->
+<section class="section" id="sec-governance">
+  <div>
+    <div class="section-num">04 / 治理节点</div>
+    <h2 class="section-title">售前、研发、项目三方边界</h2>
+    <p class="section-desc">关键治理口径：售前负责需求理解与差异初判，研发负责最终技术评估，项目部负责施工实现。</p>
+  </div>
+  <div class="mermaid-wrap" data-title="售前-研发-项目三方治理边界">
+    <div class="mermaid">
+flowchart LR
+    A["售前输入\n客户需求 / 现场勘察 / 方案初稿"]
+    B["售前差异初判\n初步判断是否超出标准能力"]
+    C["研发最终技术评估\n基于技术协议 + 勘察资料 + 历史版本"]
+    D{"标准产品\nor 定制研发"}
+    E["研发确认标准型号 / 版本"]
+    F["研发拆分软硬件需求\n开发 / 测试 / 发布"]
+    G["形成唯一技术基线\nTech_Baseline_ID"]
+    H["项目部工程实现评估\n施工条件 / 安装 / 网络"]
+    I["项目工程BOM\nProject_BOM_ID"]
+    J["ERP / 请购 / 采购 / 生产"]
+    A --> B --> C --> D
+    D -->|标准| E --> G
+    D -->|定制| F --> G
+    G --> H --> I --> J
+    AI1["AI: 差异项清单"]
+    AI2["AI: 标准/定制判断建议"]
+    AI3["AI: BOM初稿 / 施工资料结构化结果"]
+    B -.-> AI1
+    C -.-> AI2
+    H -.-> AI3
+    classDef key fill:#fff7ed,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+    classDef ai fill:#f5f3ff,stroke:#7c3aed,color:#4c1d95
+    class C,D,G key
+    class AI1,AI2,AI3 ai
+    </div>
+  </div>
+  <div class="key-note">
+    <h4>治理口径</h4>
+    <ul>
+      <li>售前负责：需求理解、业务/技术勘察、方案、技术标、差异初判</li>
+      <li>研发负责：最终技术评估、标准/定制判断、核心产品型号/版本</li>
+      <li>项目部负责：施工实现、工程物料、工程 BOM、安装调试交付</li>
+      <li>ERP / 采购 / 生产必须基于唯一技术基线</li>
+      <li>AI 产物只做辅助，不直接替代正式评审结论</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 5. 部门级 AI 工作流 -->
+<section class="section" id="sec-dept">
+  <div>
+    <div class="section-num">05 / 部门 AI 工作流</div>
+    <h2 class="section-title">9 大部门级 AI 工作流</h2>
+    <p class="section-desc">每个部门独立的 AI 嵌入点与产物生成链路——点击任意卡片可全屏放大查看。</p>
+  </div>
+  <div class="dept-grid">
+    <div class="dept-card">
+      <div class="dept-card-header"><div class="dept-icon" style="background:rgba(225,29,72,.1)">📢</div><div class="dept-card-title">品宣部</div></div>
+      <div class="dept-card-body" data-title="品宣部 AI 工作流"><div class="mermaid">flowchart LR
+    A["行业研究"] --> B["竞品分析"] --> C["内容策划"] --> D["内容生产"] --> E["多渠道发布"] --> F["线索收集"] --> G["线索归档"]
+    X1["AI: 行业简报"] -.-> A
+    X2["AI: 竞品报告"] -.-> B
+    X3["AI: 选题/文案初稿"] -.-> C
+    X4["AI: SEO优化建议"] -.-> E
+    X5["AI: 线索评分表"] -.-> F
+    X6["AI: 传播效果分析"] -.-> G
+    classDef ai fill:#f5f3ff,stroke:#7c3aed,color:#4c1d95
+    class X1,X2,X3,X4,X5,X6 ai</div></div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-card-header"><div class="dept-icon" style="background:rgba(37,99,235,.1)">💼</div><div class="dept-card-title">销售 / 商务</div></div>
+      <div class="dept-card-body" data-title="销售/商务 AI 工作流"><div class="mermaid">flowchart LR
+    A["线索接收"] --> B["客户建档"] --> C["需求沟通"] --> D["商机评估"] --> E["方案推进"] --> F["报价"] --> G["商务谈判"] --> H["合同/业务制单"] --> I["回款协调"]
+    X1["AI: 客户画像摘要"] -.-> B
+    X2["AI: 会议纪要/待办"] -.-> C
+    X3["AI: 商机评分/赢单概率"] -.-> D
+    X4["AI: 下一步跟进建议"] -.-> E
+    X5["AI: 报价建议"] -.-> F
+    X6["AI: 合同风险提示"] -.-> H
+    X7["AI: 回款提醒清单"] -.-> I
+    classDef ai fill:#f5f3ff,stroke:#7c3aed,color:#4c1d95
+    class X1,X2,X3,X4,X5,X6,X7 ai</div></div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-card-header"><div class="dept-icon" style="background:rgba(234,88,12,.1)">🔧</div><div class="dept-card-title">售前技术支持</div></div>
+      <div class="dept-card-body" data-title="售前技术支持 AI 工作流"><div class="mermaid">flowchart LR
+    A["需求接收"] --> B["技术交流"] --> C["现场勘察"] --> D["风险识别"] --> E["差异初判"] --> F["方案设计"] --> G["技术标/协议支持"] --> H["移交研发/项目"]
+    X1["AI: 需求抽取表"] -.-> B
+    X2["AI: 勘察结构化结果"] -.-> C
+    X3["AI: 风险清单"] -.-> D
+    X4["AI: 历史方案匹配"] -.-> F
+    X5["AI: 方案初稿"] -.-> F
+    X6["AI: 技术标检查单"] -.-> G
+    classDef ai fill:#f5f3ff,stroke:#7c3aed,color:#4c1d95
+    class X1,X2,X3,X4,X5,X6 ai</div></div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-card-header"><div class="dept-icon" style="background:rgba(124,58,237,.1)">💻</div><div class="dept-card-title">研发部</div></div>
+      <div class="dept-card-body" data-title="研发部 AI 工作流"><div class="mermaid">flowchart LR
+    A["接收技术基线"] --> B["差异分析"] --> C["技术评审"] --> D{"标准 or 定制"}
+    D -->|标准| E["型号/版本确认"]
+    D -->|定制| F["需求拆解"] --> G["开发"] --> H["测试"] --> I["发布"]
+    E --> J["版本交付"]
+    I --> J
+    X1["AI: 差异分析报告"] -.-> B
+    X2["AI: 版本匹配建议"] -.-> B
+    X3["AI: 需求拆解单"] -.-> F
+    X4["AI: 测试问题归因"] -.-> H
+    X5["AI: 版本知识条目"] -.-> I
+    classDef ai fill:#f5f3ff,stroke:#7c3aed,color:#4c1d95
+    classDef key fill:#fff7ed,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+    class D,C key
+    class X1,X2,X3,X4,X5 ai</div></div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-card-header"><div class="dept-icon" style="background:rgba(5,150,105,.1)">🏗️</div><div class="dept-card-title">项目交付部</div></div>
+      <div class="dept-card-body" data-title="项目交付部 AI 工作流"><div class="mermaid">flowchart LR
+    A["项目立项"] --> B["施工勘察"] --> C["施工方案"] --> D["工程BOM"] --> E["物料齐套"] --> F["安装"] --> G["调试"] --> H["试运行"] --> I["验收"] --> J["售后/复盘"]
+    X1["AI: 任务清单"] -.-> A
+    X2["AI: 施工勘察记录"] -.-> B
+    X3["AI: 方案初稿"] -.-> C
+    X4["AI: BOM初稿/漏项"] -.-> D
+    X5["AI: 进度与风险提醒"] -.-> E
+    X6["AI: 异常归类/处理建议"] -.-> G
+    X7["AI: 验收资料包"] -.-> I
+    X8["AI: 复盘报告"] -.-> J
+    classDef ai fill:#f5f3ff,stroke:#7c3aed,color:#4c1d95
+    class X1,X2,X3,X4,X5,X6,X7,X8 ai</div></div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-card-header"><div class="dept-icon" style="background:rgba(8,145,178,.1)">📦</div><div class="dept-card-title">生产 / 供应链</div></div>
+      <div class="dept-card-body" data-title="生产/供应链 AI 工作流"><div class="mermaid">flowchart LR
+    A["需求接收"] --> B["ERP录入"] --> C["库存检查"] --> D{"库存充足?"}
+    D -->|是| E["备货/排产"]
+    D -->|否| F["形成请购"] --> E
+    E --> G["装配/质检"] --> H["成品入库"] --> I["发货"]
+    X1["AI: 库存缺口清单"] -.-> C
+    X2["AI: 齐套性检查结果"] -.-> D
+    X3["AI: 排产建议"] -.-> E
+    X4["AI: 发货核对/物流摘要"] -.-> I
+    classDef ai fill:#f5f3ff,stroke:#7c3aed,color:#4c1d95
+    class X1,X2,X3,X4 ai</div></div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-card-header"><div class="dept-icon" style="background:rgba(251,146,60,.1)">🛒</div><div class="dept-card-title">采购部</div></div>
+      <div class="dept-card-body" data-title="采购部 AI 工作流"><div class="mermaid">flowchart LR
+    A["请购接收"] --> B["需求校验"] --> C["询价"] --> D["比价"] --> E["供应商评估"] --> F["采购审批"] --> G["采购订单"] --> H["到料跟踪"] --> I["验收入库"] --> J["绩效评估"]
+    X1["AI: 请购校验单"] -.-> B
+    X2["AI: 询价比价表"] -.-> D
+    X3["AI: 供应商风险提示"] -.-> E
+    X4["AI: 到料预警单"] -.-> H
+    X5["AI: 绩效摘要"] -.-> J
+    classDef ai fill:#f5f3ff,stroke:#7c3aed,color:#4c1d95
+    class X1,X2,X3,X4,X5 ai</div></div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-card-header"><div class="dept-icon" style="background:rgba(234,88,12,.1)">🏛️</div><div class="dept-card-title">总经办 / 管理层</div></div>
+      <div class="dept-card-body" data-title="总经办 AI 工作流"><div class="mermaid">flowchart LR
+    A["战略目标"] --> B["经营数据汇总"] --> C["重点项目监控"] --> D["风险审查"] --> E["经营会议"] --> F["决策下发"] --> G["经营复盘"]
+    X1["AI: 经营简报"] -.-> B
+    X2["AI: 项目健康度报告"] -.-> C
+    X3["AI: 风险雷达"] -.-> D
+    X4["AI: 回款预警"] -.-> D
+    X5["AI: 成本/毛利分析"] -.-> G
+    X6["AI: 管理问答结果"] -.-> E
+    classDef ai fill:#f5f3ff,stroke:#7c3aed,color:#4c1d95
+    class X1,X2,X3,X4,X5,X6 ai</div></div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-card-header"><div class="dept-icon" style="background:rgba(124,58,237,.1)">👥</div><div class="dept-card-title">人力行政</div></div>
+      <div class="dept-card-body" data-title="人力行政 AI 工作流"><div class="mermaid">flowchart LR
+    A["用人需求"] --> B["招聘发布"] --> C["简历筛选"] --> D["面试"] --> E["入职"] --> F["培训"] --> G["考勤/制度支持"]
+    X1["AI: 简历筛选结果"] -.-> C
+    X2["AI: 候选人摘要"] -.-> C
+    X3["AI: 面试纪要"] -.-> D
+    X4["AI: 培训课件/大纲"] -.-> F
+    X5["AI: 考勤异常提醒"] -.-> G
+    X6["AI: 制度问答结果"] -.-> G
+    classDef ai fill:#f5f3ff,stroke:#7c3aed,color:#4c1d95
+    class X1,X2,X3,X4,X5,X6 ai</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. 系统分层架构 -->
+<section class="section" id="sec-system">
+  <div>
+    <div class="section-num">06 / 系统架构</div>
+    <h2 class="section-title">系统分层与数据流架构（TO-BE）</h2>
+    <p class="section-desc">三层架构：L1 业务记录系统 → L2 沟通协作层 → L3 EvoMind AI 协作层。</p>
+  </div>
+  <div class="mermaid-wrap" data-title="系统分层与数据流架构">
+    <div class="mermaid">
+flowchart TB
+    subgraph L1["L1 业务记录系统"]
+        CRM["CRM"] OA["OA/审批"] IPD["IPD/研发"] PMS["项目管理"] ERP["ERP"] FIN["财务"] HRS["HR"]
+    end
+    subgraph L2["L2 沟通协作层"]
+        IM["企微/钉钉/飞书"] EMAIL["邮件"] MEET["会议纪要"] DOC["共享文档"]
+    end
+    subgraph L3["L3 EvoMind AI 协作层"]
+        CONN["连接器/API/MCP"] BRAIN["企业数字大脑"] AGENT["Agent Skills"]
+        OUT1["自动报告"] OUT2["差异分析"] OUT3["风险提醒"] OUT4["管理问答"] OUT5["AI产物生成"]
+    end
+    CRM <--> OA <--> IPD <--> PMS <--> ERP <--> FIN
+    HRS -.-> PMS
+    IM --> DOC
+    EMAIL --> DOC
+    MEET --> DOC
+    CRM <--> CONN
+    OA <--> CONN
+    IPD <--> CONN
+    PMS <--> CONN
+    ERP <--> CONN
+    FIN <--> CONN
+    HRS <--> CONN
+    DOC <--> CONN
+    CONN --> BRAIN --> AGENT
+    AGENT --> OUT1
+    AGENT --> OUT2
+    AGENT --> OUT3
+    AGENT --> OUT4
+    AGENT --> OUT5
+    </div>
+  </div>
+  <div class="arch-grid" style="margin-top:1.5rem">
+    <div class="arch-item"><div class="arch-label">CRM</div><div class="arch-desc">客户、联系人、线索、商机与销售过程</div></div>
+    <div class="arch-item"><div class="arch-label">OA</div><div class="arch-desc">审批、合同、技术协议、业务制单、授权与流转</div></div>
+    <div class="arch-item"><div class="arch-label">IPD / 研发</div><div class="arch-desc">研发需求、评审、版本、计划、测试与发布</div></div>
+    <div class="arch-item"><div class="arch-label">项目管理</div><div class="arch-desc">立项、里程碑、工程BOM、安装调试、验收与售后</div></div>
+    <div class="arch-item"><div class="arch-label">ERP</div><div class="arch-desc">库存、请购、采购、生产、发货</div></div>
+    <div class="arch-item"><div class="arch-label">财务</div><div class="arch-desc">应收、回款、成本、毛利、财务报表</div></div>
+    <div class="arch-item"><div class="arch-label">HR</div><div class="arch-desc">招聘、入职、培训、考勤、组织支持</div></div>
+    <div class="arch-item"><div class="arch-label">EvoMind</div><div class="arch-desc">跨系统连接、上下文理解、AI中间产物生成、差异分析、风险提醒、自动报告、管理问答和知识沉淀</div></div>
+  </div>
+</section>
+
+<!-- 7. 主数据链 -->
+<section class="section" id="sec-chain">
+  <div>
+    <div class="section-num">07 / 主数据链</div>
+    <h2 class="section-title">跨系统主数据标识链</h2>
+    <p class="section-desc">Project_ID 是跨部门主关联键，Tech_Baseline_ID 是治理核心键，Project_BOM_ID 是项目与 ERP 衔接的关键键。</p>
+  </div>
+  <div class="chain-wrap" data-title="主数据标识链"><div class="chain-flow">
+    <div class="chain-node">Customer_ID</div><span class="chain-arrow">→</span>
+    <div class="chain-node">Contact_ID</div><span class="chain-arrow">→</span>
+    <div class="chain-node">Opportunity_ID</div><span class="chain-arrow">→</span>
+    <div class="chain-node">Bid_ID</div><span class="chain-arrow">→</span>
+    <div class="chain-node">Contract_ID</div><span class="chain-arrow">→</span>
+    <div class="chain-node">Tech_Baseline_ID</div><span class="chain-arrow">→</span>
+    <div class="chain-node">Project_ID</div><span class="chain-arrow">→</span>
+    <div class="chain-node">Model_Version_ID</div><span class="chain-arrow">→</span>
+    <div class="chain-node">Project_BOM_ID</div><span class="chain-arrow">→</span>
+    <div class="chain-node">PR_ID/PO_ID</div><span class="chain-arrow">→</span>
+    <div class="chain-node">Shipment_ID</div><span class="chain-arrow">→</span>
+    <div class="chain-node">Acceptance_ID</div><span class="chain-arrow">→</span>
+    <div class="chain-node">Receivable_ID</div><span class="chain-arrow">→</span>
+    <div class="chain-node">Service_Ticket_ID</div>
+  </div></div>
+</section>
+
+<!-- 8. AI 产物流转 -->
+<section class="section" id="sec-flow">
+  <div>
+    <div class="section-num">08 / 产物流转</div>
+    <h2 class="section-title">AI 中间产物流转图</h2>
+    <p class="section-desc">AI 产物到底怎么流？在哪生成？给谁用？最终回写哪里？</p>
+  </div>
+  <div class="mermaid-wrap" data-title="AI 中间产物流转图">
+    <div class="mermaid">
+flowchart LR
+    A["业务节点"] --> B["EvoMind 读取授权上下文"] --> C["AI Skill 执行"] --> D["生成 AI 中间产物"] --> E{"涉及正式决策/审批?"}
+    E -->|是| F["业务人员人工确认"] --> G["回写正式系统"]
+    E -->|否| G
+    G --> H["沉淀知识库/经验库"] --> I["后续节点复用"]
+    </div>
+  </div>
+</section>
+
+<!-- 9. 当前问题 -->
+<section class="section" id="sec-problems">
+  <div>
+    <div class="section-num">09 / 问题与待确认</div>
+    <h2 class="section-title">当前问题（AS-IS）与管理层待确认项</h2>
+  </div>
+  <div class="problem-grid">
+    <div class="problem-item"><div class="problem-num">01</div><div class="problem-text">流程口径不统一</div></div>
+    <div class="problem-item"><div class="problem-num">02</div><div class="problem-text">销售与 CRM 管理基础薄弱</div></div>
+    <div class="problem-item"><div class="problem-num">03</div><div class="problem-text">任务推进依赖群聊和人工催办</div></div>
+    <div class="problem-item"><div class="problem-num">04</div><div class="problem-text">售前、研发、项目之间存在重复评估</div></div>
+    <div class="problem-item"><div class="problem-num">05</div><div class="problem-text">ERP 前仍存在人工整理和手工录入</div></div>
+    <div class="problem-item"><div class="problem-num">06</div><div class="problem-text">交付压力下可能发生流程跳步</div></div>
+    <div class="problem-item"><div class="problem-num">07</div><div class="problem-text">项目成本仍依赖人工按项目汇总</div></div>
+    <div class="problem-item"><div class="problem-num">08</div><div class="problem-text">知识散落在个人电脑、群聊、文件夹中</div></div>
+    <div class="problem-item"><div class="problem-num">09</div><div class="problem-text">经营数据需要临时向部门索取，管理层看不到统一视图</div></div>
+    <div class="problem-item"><div class="problem-num">10</div><div class="problem-text">各系统和 EvoMind 的边界尚未完全制度化</div></div>
+  </div>
+  <div style="margin-top:2rem">
+    <h3 style="font-size:1rem;font-weight:700;color:var(--orange);margin-bottom:1rem">⚠️ 待管理层确认项</h3>
+    <div class="confirm-list">
+      <div class="confirm-item">1. 技术协议的正式版本节点到底如何划分</div>
+      <div class="confirm-item">2. 产品型号最终审批权归谁</div>
+      <div class="confirm-item">3. ERP 请购责任边界如何划分</div>
+      <div class="confirm-item">4. 项目变更流程如何定义</div>
+      <div class="confirm-item">5. 加急交付的审批机制如何设计</div>
+      <div class="confirm-item">6. 回款 / 开票 / 催收 / 逾期的责任边界如何明确</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <p>EvoMind × 业务全景与 AI 嵌入式工作流架构图 V4.0 · 2026-08-25</p>
+  <p style="margin-top:.4rem">EvoMind 不替代 CRM / OA / IPD / ERP / 财务 / HR 等正式业务系统，只负责读取授权数据、理解上下文、生成 AI 中间产物、辅助判断、预警和知识沉淀。</p>
+</footer>
+
+<script>
+mermaid.initialize({
+  startOnLoad: true,
+  theme: 'base',
+  themeVariables: {
+    primaryColor: '#eff6ff',
+    primaryBorderColor: '#2563eb',
+    primaryTextColor: '#1e3a5f',
+    lineColor: '#6b7fa8',
+    secondaryColor: '#f5f3ff',
+    tertiaryColor: '#f8f9fc',
+    fontFamily: '"Noto Sans SC","Inter",sans-serif',
+    fontSize: '12px',
+    background: 'transparent',
+    mainBkg: '#eff6ff',
+    nodeBorder: '#2563eb',
+    clusterBkg: '#f8f9fc',
+    clusterBorder: '#dfe3ec',
+    titleColor: '#1a1f36',
+    edgeLabelBackground: 'rgba(255,255,255,0.85)',
+  },
+  flowchart: { curve: 'basis', padding: 15, htmlLabels: true, useMaxWidth: false }
+});
+
+/* ===== 全屏缩放平移系统 ===== */
+(function(){
+  const overlay = document.getElementById('zoomOverlay');
+  const viewport = document.getElementById('zoomViewport');
+  const content = document.getElementById('zoomContent');
+  const titleEl = document.getElementById('zoomTitle');
+  const infoEl = document.getElementById('zoomInfo');
+  const hintEl = document.getElementById('zoomHint');
+
+  let scale = 1, panX = 0, panY = 0;
+  let dragging = false, startX = 0, startY = 0;
+  let hintTimer = null;
+
+  function updateTransform(){
+    content.style.transform = `translate(${panX}px,${panY}px) scale(${scale})`;
+    infoEl.textContent = Math.round(scale * 100) + '%';
+  }
+
+  function zoomTo(s, cx, cy){
+    const oldScale = scale;
+    scale = Math.max(0.1, Math.min(10, s));
+    if(cx !== undefined && cy !== undefined){
+      panX = cx - (cx - panX) * (scale / oldScale);
+      panY = cy - (cy - panY) * (scale / oldScale);
+    }
+    updateTransform();
+  }
+
+  window.zoomIn = function(){ zoomTo(scale * 1.3); };
+  window.zoomOut = function(){ zoomTo(scale / 1.3); };
+  window.zoomReset = function(){ scale = 1; panX = 0; panY = 0; updateTransform(); };
+  window.zoomFit = function(){
+    const vw = viewport.clientWidth, vh = viewport.clientHeight - 0;
+    const cw = content.scrollWidth, ch = content.scrollHeight;
+    if(!cw || !ch) return;
+    scale = Math.min(vw / cw, vh / ch, 2) * 0.92;
+    panX = (vw - cw * scale) / 2;
+    panY = (vh - ch * scale) / 2;
+    updateTransform();
+  };
+  window.zoomClose = function(){
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  // Mouse wheel zoom
+  viewport.addEventListener('wheel', function(e){
+    e.preventDefault();
+    const rect = viewport.getBoundingClientRect();
+    const cx = e.clientX - rect.left;
+    const cy = e.clientY - rect.top;
+    const delta = e.deltaY > 0 ? 0.9 : 1.1;
+    zoomTo(scale * delta, cx, cy);
+  }, {passive: false});
+
+  // Drag to pan
+  viewport.addEventListener('mousedown', function(e){
+    if(e.button !== 0) return;
+    dragging = true;
+    startX = e.clientX - panX;
+    startY = e.clientY - panY;
+    viewport.classList.add('dragging');
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove', function(e){
+    if(!dragging) return;
+    panX = e.clientX - startX;
+    panY = e.clientY - startY;
+    updateTransform();
+  });
+  document.addEventListener('mouseup', function(){
+    dragging = false;
+    viewport.classList.remove('dragging');
+  });
+
+  // Double-click to fit
+  viewport.addEventListener('dblclick', function(e){
+    e.preventDefault();
+    window.zoomFit();
+  });
+
+  // ESC to close
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && overlay.classList.contains('active')){
+      window.zoomClose();
+    }
+    if(e.key === '+' || e.key === '=') window.zoomIn();
+    if(e.key === '-') window.zoomOut();
+    if(e.key === '0') window.zoomReset();
+  });
+
+  // Touch support
+  let lastTouchDist = 0;
+  viewport.addEventListener('touchstart', function(e){
+    if(e.touches.length === 1){
+      dragging = true;
+      startX = e.touches[0].clientX - panX;
+      startY = e.touches[0].clientY - panY;
+    } else if(e.touches.length === 2){
+      lastTouchDist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+    }
+  }, {passive: true});
+  viewport.addEventListener('touchmove', function(e){
+    if(e.touches.length === 1 && dragging){
+      panX = e.touches[0].clientX - startX;
+      panY = e.touches[0].clientY - startY;
+      updateTransform();
+    } else if(e.touches.length === 2){
+      const dist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      if(lastTouchDist > 0){
+        const rect = viewport.getBoundingClientRect();
+        const cx = (e.touches[0].clientX + e.touches[1].clientX) / 2 - rect.left;
+        const cy = (e.touches[0].clientY + e.touches[1].clientY) / 2 - rect.top;
+        zoomTo(scale * (dist / lastTouchDist), cx, cy);
+      }
+      lastTouchDist = dist;
+    }
+    e.preventDefault();
+  }, {passive: false});
+  viewport.addEventListener('touchend', function(){
+    dragging = false;
+    lastTouchDist = 0;
+  });
+
+  // Show hint briefly
+  function showHint(){
+    hintEl.classList.add('show');
+    clearTimeout(hintTimer);
+    hintTimer = setTimeout(function(){ hintEl.classList.remove('show'); }, 3000);
+  }
+
+  // Bind click-to-zoom on all .mermaid-wrap, .table-wrap, .chain-wrap, .dept-card-body
+  function bindZoomTriggers(){
+    document.querySelectorAll('.mermaid-wrap[data-title], .table-wrap[data-title], .chain-wrap[data-title], .dept-card-body[data-title]').forEach(function(el){
+      el.addEventListener('click', function(e){
+        // Don't trigger on inner links
+        if(e.target.tagName === 'A') return;
+        const title = el.getAttribute('data-title') || '详情';
+        openZoom(el, title);
+      });
+    });
+  }
+
+  function openZoom(sourceEl, title){
+    titleEl.textContent = title;
+    // Clone the content
+    content.innerHTML = '';
+    const clone = sourceEl.querySelector('.mermaid, table, .chain-flow');
+    if(!clone) return;
+    const wrapper = clone.cloneNode(true);
+    wrapper.style.margin = '40px';
+    wrapper.style.display = 'inline-block';
+    wrapper.style.maxWidth = 'none';
+    wrapper.style.transform = 'none';
+    content.appendChild(wrapper);
+
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    // Wait for mermaid to render, then fit
+    setTimeout(function(){
+      window.zoomFit();
+      showHint();
+    }, 300);
+  }
+
+  // Init after DOM ready
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', bindZoomTriggers);
+  } else {
+    bindZoomTriggers();
+  }
+})();
+</script>
+</body>
+</html>
