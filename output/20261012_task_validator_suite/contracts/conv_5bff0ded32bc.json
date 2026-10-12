@@ -1,0 +1,257 @@
+{
+  "sid": "conv_5bff0ded32bc",
+  "category": "COMM",
+  "title": "每周一10点周例会保留B及09点55企微会议号提醒登记",
+  "user_turn_count": 7,
+  "scoring_time": "one_pass_at_session_end",
+  "final_target": "保留B的周例会最终记录；周一09:55企微会议号提醒登记",
+  "final_deliverables": [
+    {
+      "name": "保留B的周例会最终记录",
+      "kind": "service",
+      "format": "tencent_meeting",
+      "turn_indices": [
+        0,
+        1,
+        2,
+        5,
+        6
+      ],
+      "final_version_only": true,
+      "checks": [
+        {
+          "kind": "final_service_state",
+          "parameters": {
+            "service": "tencent_meeting",
+            "expected": {
+              "subject": "周例会",
+              "start_time": "Monday 10:00",
+              "end_time": "Monday 11:00",
+              "recurrence": "weekly Monday",
+              "invitees": [],
+              "keep_label": "B",
+              "meeting_id_readback": true
+            }
+          },
+          "mandatory": true,
+          "point_id": "conv_5bff0ded32bc:delivery1:check1",
+          "display_object": "保留B的周例会最终记录",
+          "requirement_basis": [
+            {
+              "turn_1based": 1,
+              "quote": "帮我开一个下周一的例会"
+            },
+            {
+              "turn_1based": 6,
+              "quote": "连接不上"
+            },
+            {
+              "turn_1based": 7,
+              "quote": "成功了吗？"
+            }
+          ],
+          "evidence_method": "本次会议实际创建/更新结果和最终get读回、初态B选择映射、meeting_id、开始/结束、每周重复及参与者字段；仅会话回复会议号不算状态。",
+          "passing_condition": "本次保留B的会议真实存在并读回：主题周例会、每周一10:00–11:00、无邀请人，最终meeting_id与本次B选择对象对应。用冻结实验时钟及对象映射解释下周一。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只核本次会话终态的已请求交付对象及原有明确基础条件。保留历史用户轮次作需求来源，不逐轮打分，不使用旧AI作为gold。 仅接受关联本attempt的真实工具终态记录/读回，不把完成声明或历史收据当状态。定时不触发，SMTP接受不等于到达。"
+        }
+      ],
+      "delivery_id": "conv_5bff0ded32bc:final:0",
+      "id": "delivery_01",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    },
+    {
+      "name": "周一09:55企微会议号提醒登记",
+      "kind": "service",
+      "format": "cron_registration",
+      "turn_indices": [
+        1,
+        3,
+        4
+      ],
+      "final_version_only": true,
+      "checks": [
+        {
+          "kind": "final_service_state",
+          "parameters": {
+            "service": "cron_registration",
+            "expected": {
+              "schedule": "Monday 09:55",
+              "channel": "current_experiment_wecom",
+              "payload": "meeting number of final retained meeting",
+              "created": true,
+              "actual_trigger_not_evaluated": true
+            }
+          },
+          "mandatory": true,
+          "point_id": "conv_5bff0ded32bc:delivery2:check1",
+          "display_object": "周一09:55企微会议号提醒登记",
+          "requirement_basis": [
+            {
+              "turn_1based": 2,
+              "quote": "会议时间：10:00–11:00 会议主题：周例会 是否周期性：每周一固定重复 要不要邀请人：不要 但是每周一早上9:55需要提醒我"
+            },
+            {
+              "turn_1based": 4,
+              "quote": "能链接到我的微信吗？每周把会议号发给我"
+            },
+            {
+              "turn_1based": 5,
+              "quote": "企业微信"
+            }
+          ],
+          "evidence_method": "本次调度器job最终读回、schedule、渠道及payload与最终get的meeting_id/meeting_code关联；历史提醒或文字承诺不算登记。",
+          "passing_condition": "本次提醒job真实登记，每周一09:55，渠道为当前实验企业微信，payload引用最终保留B会议的真实会议号；不要求立即或未来真实触发。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只核本次会话终态的已请求交付对象及原有明确基础条件。保留历史用户轮次作需求来源，不逐轮打分，不使用旧AI作为gold。 仅接受关联本attempt的真实工具终态记录/读回，不把完成声明或历史收据当状态。定时不触发，SMTP接受不等于到达。"
+        }
+      ],
+      "delivery_id": "conv_5bff0ded32bc:final:1",
+      "id": "delivery_02",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    }
+  ],
+  "checks": [
+    {
+      "delivery_id": "delivery_01",
+      "kind": "final_service_state",
+      "parameters": {
+        "service": "tencent_meeting",
+        "expected": {
+          "subject": "周例会",
+          "start_time": "Monday 10:00",
+          "end_time": "Monday 11:00",
+          "recurrence": "weekly Monday",
+          "invitees": [],
+          "keep_label": "B",
+          "meeting_id_readback": true
+        }
+      },
+      "mandatory": true,
+      "point_id": "conv_5bff0ded32bc:delivery1:check1",
+      "display_object": "保留B的周例会最终记录",
+      "requirement_basis": [
+        {
+          "turn_1based": 1,
+          "quote": "帮我开一个下周一的例会"
+        },
+        {
+          "turn_1based": 6,
+          "quote": "连接不上"
+        },
+        {
+          "turn_1based": 7,
+          "quote": "成功了吗？"
+        }
+      ],
+      "evidence_method": "本次会议实际创建/更新结果和最终get读回、初态B选择映射、meeting_id、开始/结束、每周重复及参与者字段；仅会话回复会议号不算状态。",
+      "passing_condition": "本次保留B的会议真实存在并读回：主题周例会、每周一10:00–11:00、无邀请人，最终meeting_id与本次B选择对象对应。用冻结实验时钟及对象映射解释下周一。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只核本次会话终态的已请求交付对象及原有明确基础条件。保留历史用户轮次作需求来源，不逐轮打分，不使用旧AI作为gold。 仅接受关联本attempt的真实工具终态记录/读回，不把完成声明或历史收据当状态。定时不触发，SMTP接受不等于到达。"
+    },
+    {
+      "delivery_id": "delivery_02",
+      "kind": "final_service_state",
+      "parameters": {
+        "service": "cron_registration",
+        "expected": {
+          "schedule": "Monday 09:55",
+          "channel": "current_experiment_wecom",
+          "payload": "meeting number of final retained meeting",
+          "created": true,
+          "actual_trigger_not_evaluated": true
+        }
+      },
+      "mandatory": true,
+      "point_id": "conv_5bff0ded32bc:delivery2:check1",
+      "display_object": "周一09:55企微会议号提醒登记",
+      "requirement_basis": [
+        {
+          "turn_1based": 2,
+          "quote": "会议时间：10:00–11:00 会议主题：周例会 是否周期性：每周一固定重复 要不要邀请人：不要 但是每周一早上9:55需要提醒我"
+        },
+        {
+          "turn_1based": 4,
+          "quote": "能链接到我的微信吗？每周把会议号发给我"
+        },
+        {
+          "turn_1based": 5,
+          "quote": "企业微信"
+        }
+      ],
+      "evidence_method": "本次调度器job最终读回、schedule、渠道及payload与最终get的meeting_id/meeting_code关联；历史提醒或文字承诺不算登记。",
+      "passing_condition": "本次提醒job真实登记，每周一09:55，渠道为当前实验企业微信，payload引用最终保留B会议的真实会议号；不要求立即或未来真实触发。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只核本次会话终态的已请求交付对象及原有明确基础条件。保留历史用户轮次作需求来源，不逐轮打分，不使用旧AI作为gold。 仅接受关联本attempt的真实工具终态记录/读回，不把完成声明或历史收据当状态。定时不触发，SMTP接受不等于到达。"
+    }
+  ],
+  "ignored_details": [
+    "每周实际发送不验证，只验证会议终态与提醒登记；当前文本“成功了吗”承接已有目标。"
+  ],
+  "input_bindings_needed": [],
+  "service_patch_needed": false,
+  "exclusion_candidate": false,
+  "no_old_ai_as_gold": true,
+  "implemented": false,
+  "executed": false,
+  "session_id": "conv_5bff0ded32bc",
+  "schema": "audited-per-task-delivery-contract-v1",
+  "score_at": "conversation_end_only",
+  "full_user_input_review": true,
+  "checked_user_turn_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "actor_can_see_historical_ai": false,
+  "quality_scored": false,
+  "intermediate_steps_scored": false,
+  "manual_judgement_scored": false,
+  "review_status": "audited_for_basic_delivery_only",
+  "validators_execution_status": "offline_controls_only_not_business_run",
+  "summary": "创建下周一起每周一10点至11点的周例会，不邀请其他人，并在09点55提醒本人。用户选择保留B，随后将每周发送会议号渠道明确为企业微信，再追问连接和成功状态；最终需真实会议读回及关联保留会议号的企微提醒登记。",
+  "category_name": "行政协同、邮件与日程",
+  "design_audit_status": "approved_limited_delivery",
+  "execution_preflight": {
+    "status": "current_attempt_evidence_required"
+  },
+  "user_source_texts": [
+    "帮我开一个下周一的例会\n\n【本轮实际提供的输入文件】\n- tencent-meeting.json：/workspace/service-context/tencent-meeting.json（既有或原读回输入）",
+    "会议时间：10:00–11:00\n\n会议主题：周例会\n\n是否周期性：每周一固定重复\n\n要不要邀请人：不要\n但是每周一早上9:55需要提醒我",
+    "保留B\n\n【本轮实际提供的输入文件】\n- meeting-choice-state.json：/workspace/inputs/meeting-choice-state.json（既有或原读回输入）",
+    "能链接到我的微信吗？每周把会议号发给我",
+    "企业微信",
+    "连接不上",
+    "成功了吗？"
+  ],
+  "input_source_specs": [
+    {
+      "mount": "service-context/tencent-meeting.json",
+      "format": "json",
+      "synthetic": false,
+      "provenance": null,
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_original_inputs_v10_20261011\\resources\\clean_alignment\\v6\\7c6d6d0fbfafe0665fb5fc87ba3d00c3e8c2acee43dff77b39df16a1a58bc6ab\\腾讯会议实验对象.json",
+      "sha256": "7c6d6d0fbfafe0665fb5fc87ba3d00c3e8c2acee43dff77b39df16a1a58bc6ab"
+    },
+    {
+      "mount": "inputs/meeting-choice-state.json",
+      "format": "json",
+      "synthetic": false,
+      "provenance": null,
+      "when": 2,
+      "path": "D:\\skillloop\\benchmark\\enterprise_original_inputs_v10_20261011\\resources\\clean_alignment\\v6\\e23f73fbf4198043ef975ef3567116b739ddaafee40590a691bf76058b60e399\\会议候选AB前态.json",
+      "sha256": "e23f73fbf4198043ef975ef3567116b739ddaafee40590a691bf76058b60e399"
+    }
+  ]
+}

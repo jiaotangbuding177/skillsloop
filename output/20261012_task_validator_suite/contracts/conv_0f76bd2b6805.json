@@ -1,0 +1,107 @@
+{
+  "sid": "conv_0f76bd2b6805",
+  "session_id": "conv_0f76bd2b6805",
+  "title": "收集当日新闻并交付新闻正文",
+  "category": "NEWS",
+  "status": "proposed_active",
+  "final_target": "新闻正文",
+  "final_deliverables": [
+    {
+      "name": "新闻正文",
+      "kind": "text",
+      "format": null,
+      "turn_indices": [
+        0
+      ],
+      "checks": [
+        {
+          "kind": "delivered_body_nonempty",
+          "parameters": {
+            "strip_whitespace": true,
+            "no_minimum_words_invented": true,
+            "semantic_completion_not_inferred": true
+          },
+          "mandatory": true,
+          "point_id": "conv_0f76bd2b6805:delivery1:check1",
+          "display_object": "新闻正文",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              1
+            ],
+            "quote": "用户输入索引0（第1轮）：收集今天的新闻。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "会话终态读取本次向用户交付的「新闻正文」文字集合，去掉空白后仍非空；允许相应文件原生抽取正文。不把计划、声明与实质完成做语义区分，不核事实或专业正确性。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+        }
+      ],
+      "id": "delivery_01",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    }
+  ],
+  "checks": [
+    {
+      "delivery_id": "delivery_01",
+      "kind": "delivered_body_nonempty",
+      "parameters": {
+        "strip_whitespace": true,
+        "no_minimum_words_invented": true,
+        "semantic_completion_not_inferred": true
+      },
+      "mandatory": true,
+      "point_id": "conv_0f76bd2b6805:delivery1:check1",
+      "display_object": "新闻正文",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          1
+        ],
+        "quote": "用户输入索引0（第1轮）：收集今天的新闻。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "会话终态读取本次向用户交付的「新闻正文」文字集合，去掉空白后仍非空；允许相应文件原生抽取正文。不把计划、声明与实质完成做语义区分，不核事实或专业正确性。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+    }
+  ],
+  "ignored_details": [
+    "历史AI答案与原生产物不是本次gold；不评分中间轮次success、技能调用、主观质量或法律/科学/金融正确性。",
+    "原用户未指定条数；“今天”以该运行冻结时间为输入，不评新闻真实性。"
+  ],
+  "input_bindings_needed": [],
+  "original_user_turn_indices_inspected": [
+    0
+  ],
+  "requirement_source": "D:\\skillloop\\benchmark\\enterprise_environment_admitted_v7_20261009\\有效轨迹.jsonl",
+  "original_trace_sha256": "c15d7c74d8dc0a1c9171ef2c0d5975698985b44f3e8a28f996aa880fd2a57b8e",
+  "prior_analysis_path": "D:\\skillloop\\output\\20261010_evaluation_delivery_verifiability\\edu_know_news_life.json",
+  "reviewed": false,
+  "rubric_activated": false,
+  "assessment_executed": false,
+  "schema": "audited-per-task-delivery-contract-v1",
+  "score_at": "conversation_end_only",
+  "full_user_input_review": true,
+  "checked_user_turn_indices": [
+    0
+  ],
+  "actor_can_see_historical_ai": false,
+  "quality_scored": false,
+  "intermediate_steps_scored": false,
+  "manual_judgement_scored": false,
+  "review_status": "audited_for_basic_delivery_only",
+  "validators_execution_status": "offline_controls_only_not_business_run",
+  "summary": "用户仅要求收集今天的新闻，没有限定领域、条数、栏目或输出文件格式。任务概要保留当日新闻收集这一目标，日期由本次运行冻结时间确定。现有终态检查只确认新运行交付正文非空，无法据此证明新闻真实、当日相关、覆盖完整或已实质完成检索。",
+  "category_name": "新闻与一般信息检索",
+  "design_audit_status": "approved_basic",
+  "execution_preflight": {
+    "status": "requires_current_attempt_evidence",
+    "note": "本轮未重验环境或执行任务；脚本须读当前attempt实际交付/服务状态。"
+  },
+  "user_source_texts": [
+    "收集今天的新闻"
+  ],
+  "input_source_specs": []
+}

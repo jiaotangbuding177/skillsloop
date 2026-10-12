@@ -1,0 +1,276 @@
+{
+  "sid": "conv_24bc635473a8",
+  "session_id": "conv_24bc635473a8",
+  "title": "IMA全部笔记导入工作区并保存暂停进度",
+  "category": "KNOW",
+  "status": "proposed_active",
+  "final_target": "当前已导入笔记和进度；最后暂停/进度答复正文",
+  "final_deliverables": [
+    {
+      "name": "当前已导入笔记和进度",
+      "kind": "service",
+      "format": "state_snapshot",
+      "turn_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "checks": [
+        {
+          "kind": "final_state_readback",
+          "parameters": {},
+          "mandatory": true,
+          "point_id": "conv_24bc635473a8:delivery1:check1",
+          "display_object": "当前已导入笔记和进度",
+          "requirement_basis": [
+            {
+              "turn": 1,
+              "quote": "导入所有ima笔记"
+            },
+            {
+              "turn": 2,
+              "quote": "方案A，包含所有笔记本"
+            }
+          ],
+          "evidence_method": "本次服务/知识存储的最终查询返回、可解析状态快照或实际保存文件；关联当前会话和对象“当前已导入笔记和进度”。",
+          "passing_condition": "需读本次终态已保存结果并关联attempt，不允许输入附件或旧状态被声称为新整理/导入结果；不强制用户未指定的改动数量或固定知识条数。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。",
+          "score_at": "conversation_end_only",
+          "audit_action": "replace",
+          "audit_rationale": "需读本次终态已保存结果并关联attempt，不允许输入附件或旧状态被声称为新整理/导入结果；不强制用户未指定的改动数量或固定知识条数。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。"
+        },
+        {
+          "kind": "knowledge_import_checkpoint_readback",
+          "parameters": {
+            "include_notebooks": true,
+            "include_uncategorized": true,
+            "final_instruction": "明日继续",
+            "completion_of_deferred_work_required": false
+          },
+          "mandatory": true,
+          "point_id": "conv_24bc635473a8:delivery1:check2",
+          "display_object": "当前已导入笔记和进度",
+          "requirement_basis": [
+            {
+              "turn": 1,
+              "quote": "导入所有ima笔记",
+              "turn_1based": 1
+            },
+            {
+              "turn": 2,
+              "quote": "方案A，包含所有笔记本",
+              "turn_1based": 2
+            }
+          ],
+          "evidence_method": "当前实际导入文件、笔记本/未分类标识、导入进度记录与剩余项清单；不触发次日运行。",
+          "passing_condition": "当前workspace已有实际写入且可读的IMA笔记文件，并存在可解析导入/待继续进度。范围纳入全部笔记本和未分类笔记；最后指令为“明日继续”，本次不要求暂停后的工作全部完成。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "原条件属于该最终对象的可读性、数量、形式或保存状态；未与用户取消/后续替代冲突。"
+        }
+      ],
+      "id": "delivery_01",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    },
+    {
+      "name": "最后暂停/进度答复正文",
+      "kind": "text",
+      "format": null,
+      "turn_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "checks": [
+        {
+          "kind": "delivered_body_nonempty",
+          "parameters": {
+            "strip_whitespace": true,
+            "no_minimum_words_invented": true,
+            "semantic_completion_not_inferred": true
+          },
+          "mandatory": true,
+          "point_id": "conv_24bc635473a8:delivery2:check1",
+          "display_object": "最后暂停/进度答复正文",
+          "requirement_basis": [
+            {
+              "turn": 1,
+              "quote": "导入所有ima笔记"
+            },
+            {
+              "turn": 2,
+              "quote": "方案A，包含所有笔记本"
+            }
+          ],
+          "evidence_method": "本次运行的“最后暂停/进度答复正文”交付消息/最终文件正文及去空白长度；排除原AI记录。",
+          "passing_condition": "原非空点只按相关文本集合，需改为对应最终交付对象绑定，避免拿计划、无关聊天或工具状态充作新交付；不加语义质量Judge。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。",
+          "score_at": "conversation_end_only",
+          "audit_action": "replace",
+          "audit_rationale": "原非空点只按相关文本集合，需改为对应最终交付对象绑定，避免拿计划、无关聊天或工具状态充作新交付；不加语义质量Judge。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。"
+        }
+      ],
+      "id": "delivery_02",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    }
+  ],
+  "checks": [
+    {
+      "delivery_id": "delivery_01",
+      "kind": "final_state_readback",
+      "parameters": {},
+      "mandatory": true,
+      "point_id": "conv_24bc635473a8:delivery1:check1",
+      "display_object": "当前已导入笔记和进度",
+      "requirement_basis": [
+        {
+          "turn": 1,
+          "quote": "导入所有ima笔记"
+        },
+        {
+          "turn": 2,
+          "quote": "方案A，包含所有笔记本"
+        }
+      ],
+      "evidence_method": "本次服务/知识存储的最终查询返回、可解析状态快照或实际保存文件；关联当前会话和对象“当前已导入笔记和进度”。",
+      "passing_condition": "需读本次终态已保存结果并关联attempt，不允许输入附件或旧状态被声称为新整理/导入结果；不强制用户未指定的改动数量或固定知识条数。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。",
+      "score_at": "conversation_end_only",
+      "audit_action": "replace",
+      "audit_rationale": "需读本次终态已保存结果并关联attempt，不允许输入附件或旧状态被声称为新整理/导入结果；不强制用户未指定的改动数量或固定知识条数。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。"
+    },
+    {
+      "delivery_id": "delivery_01",
+      "kind": "knowledge_import_checkpoint_readback",
+      "parameters": {
+        "include_notebooks": true,
+        "include_uncategorized": true,
+        "final_instruction": "明日继续",
+        "completion_of_deferred_work_required": false
+      },
+      "mandatory": true,
+      "point_id": "conv_24bc635473a8:delivery1:check2",
+      "display_object": "当前已导入笔记和进度",
+      "requirement_basis": [
+        {
+          "turn": 1,
+          "quote": "导入所有ima笔记",
+          "turn_1based": 1
+        },
+        {
+          "turn": 2,
+          "quote": "方案A，包含所有笔记本",
+          "turn_1based": 2
+        }
+      ],
+      "evidence_method": "当前实际导入文件、笔记本/未分类标识、导入进度记录与剩余项清单；不触发次日运行。",
+      "passing_condition": "当前workspace已有实际写入且可读的IMA笔记文件，并存在可解析导入/待继续进度。范围纳入全部笔记本和未分类笔记；最后指令为“明日继续”，本次不要求暂停后的工作全部完成。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "原条件属于该最终对象的可读性、数量、形式或保存状态；未与用户取消/后续替代冲突。"
+    },
+    {
+      "delivery_id": "delivery_02",
+      "kind": "delivered_body_nonempty",
+      "parameters": {
+        "strip_whitespace": true,
+        "no_minimum_words_invented": true,
+        "semantic_completion_not_inferred": true
+      },
+      "mandatory": true,
+      "point_id": "conv_24bc635473a8:delivery2:check1",
+      "display_object": "最后暂停/进度答复正文",
+      "requirement_basis": [
+        {
+          "turn": 1,
+          "quote": "导入所有ima笔记"
+        },
+        {
+          "turn": 2,
+          "quote": "方案A，包含所有笔记本"
+        }
+      ],
+      "evidence_method": "本次运行的“最后暂停/进度答复正文”交付消息/最终文件正文及去空白长度；排除原AI记录。",
+      "passing_condition": "原非空点只按相关文本集合，需改为对应最终交付对象绑定，避免拿计划、无关聊天或工具状态充作新交付；不加语义质量Judge。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。",
+      "score_at": "conversation_end_only",
+      "audit_action": "replace",
+      "audit_rationale": "原非空点只按相关文本集合，需改为对应最终交付对象绑定，避免拿计划、无关聊天或工具状态充作新交付；不加语义质量Judge。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。"
+    }
+  ],
+  "ignored_details": [
+    "历史AI答案与原生产物不是本次gold；不评分中间轮次success、技能调用、主观质量或法律/科学/金融正确性。",
+    "用户结束时暂停，不把明天尚未触发的全量完成作本次终态失败，不自动新建定时任务。"
+  ],
+  "input_bindings_needed": [],
+  "original_user_turn_indices_inspected": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "requirement_source": "D:\\skillloop\\benchmark\\enterprise_environment_admitted_v7_20261009\\有效轨迹.jsonl",
+  "original_trace_sha256": "a8ca14c37c6892d6b62d5bc5393b6c5c886fb6718017552c6bdcf10ad9c618e9",
+  "prior_analysis_path": "D:\\skillloop\\output\\20261010_evaluation_delivery_verifiability\\edu_know_news_life.json",
+  "reviewed": false,
+  "rubric_activated": false,
+  "assessment_executed": false,
+  "schema": "audited-per-task-delivery-contract-v1",
+  "score_at": "conversation_end_only",
+  "full_user_input_review": true,
+  "checked_user_turn_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "actor_can_see_historical_ai": false,
+  "quality_scored": false,
+  "intermediate_steps_scored": false,
+  "manual_judgement_scored": false,
+  "review_status": "audited_for_basic_delivery_only",
+  "validators_execution_status": "offline_controls_only_not_business_run",
+  "summary": "将IMA笔记导入工作区，按用户选择覆盖所有笔记本和未分类笔记，继续处理尚未完成部分。末轮“明日继续”明确本次暂停，终态需已有可读导入文件及可解析的进度或待续记录，并给出暂停说明；不把未触发的次日全量完成作为本次必须达成条件。",
+  "category_name": "知识库、记忆与资料整理",
+  "design_audit_status": "approved_basic_delivery_design",
+  "execution_preflight": {
+    "status": "current_attempt_evidence_required"
+  },
+  "user_source_texts": [
+    "导入所有ima笔记\n\n【本轮实际提供的输入文件】\n- source_ima.json：/workspace/services/source_ima.json（实验重建输入）",
+    "方案A，包含所有笔记本",
+    "导入所有ima笔记至workspace中",
+    "API Key: [凭据已隐去] Client ID: ***HEX*** 以上是IMA凭证",
+    "未分类的也导入",
+    "继续导入未完成的部分",
+    "Continue where you left off. The previous model attempt failed or timed out.",
+    "明日继续"
+  ],
+  "input_source_specs": [
+    {
+      "mount": "services/source_ima.json",
+      "format": "json",
+      "synthetic": true,
+      "provenance": "authorized_source_scoped_experiment_preparation",
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_original_inputs_v10_20261011\\resources\\clean_alignment\\v6\\a2279fb7611035297021812b8ab497fcd101fc0b2e00c860ad211381df791f9d\\source_ima.json",
+      "sha256": "a2279fb7611035297021812b8ab497fcd101fc0b2e00c860ad211381df791f9d"
+    }
+  ]
+}

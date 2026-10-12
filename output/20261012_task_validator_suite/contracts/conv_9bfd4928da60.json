@@ -1,0 +1,113 @@
+{
+  "sid": "conv_9bfd4928da60",
+  "session_id": "conv_9bfd4928da60",
+  "title": "说明2026年5月25日A股行情并回应日期纠正",
+  "category": "NEWS",
+  "status": "proposed_active",
+  "final_target": "行情概述正文",
+  "final_deliverables": [
+    {
+      "name": "行情概述正文",
+      "kind": "text",
+      "format": null,
+      "turn_indices": [
+        0,
+        1
+      ],
+      "checks": [
+        {
+          "kind": "delivered_body_nonempty",
+          "parameters": {
+            "strip_whitespace": true,
+            "no_minimum_words_invented": true,
+            "semantic_completion_not_inferred": true
+          },
+          "mandatory": true,
+          "point_id": "conv_9bfd4928da60:delivery1:check1",
+          "display_object": "行情概述正文",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              1,
+              2
+            ],
+            "quote": "用户输入索引0（第1轮）：今日大A；用户输入索引1（第2轮）：你确定？今天是2026年5月25日了。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "会话终态读取本次向用户交付的「行情概述正文」文字集合，去掉空白后仍非空；允许相应文件原生抽取正文。不把计划、声明与实质完成做语义区分，不核事实或专业正确性。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+        }
+      ],
+      "id": "delivery_01",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    }
+  ],
+  "checks": [
+    {
+      "delivery_id": "delivery_01",
+      "kind": "delivered_body_nonempty",
+      "parameters": {
+        "strip_whitespace": true,
+        "no_minimum_words_invented": true,
+        "semantic_completion_not_inferred": true
+      },
+      "mandatory": true,
+      "point_id": "conv_9bfd4928da60:delivery1:check1",
+      "display_object": "行情概述正文",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          1,
+          2
+        ],
+        "quote": "用户输入索引0（第1轮）：今日大A；用户输入索引1（第2轮）：你确定？今天是2026年5月25日了。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "会话终态读取本次向用户交付的「行情概述正文」文字集合，去掉空白后仍非空；允许相应文件原生抽取正文。不把计划、声明与实质完成做语义区分，不核事实或专业正确性。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+    }
+  ],
+  "ignored_details": [
+    "历史AI答案与原生产物不是本次gold；不评分中间轮次success、技能调用、主观质量或法律/科学/金融正确性。",
+    "不评金融数据/投资判断正确性，不擅自换成其他日期。"
+  ],
+  "input_bindings_needed": [],
+  "original_user_turn_indices_inspected": [
+    0,
+    1
+  ],
+  "requirement_source": "D:\\skillloop\\benchmark\\enterprise_environment_admitted_v7_20261009\\有效轨迹.jsonl",
+  "original_trace_sha256": "9a310375fcc6abb9b4645de59f9df62bb8cfffa72551c2a08fd4bc5f4ffb17df",
+  "prior_analysis_path": "D:\\skillloop\\output\\20261010_evaluation_delivery_verifiability\\edu_know_news_life.json",
+  "reviewed": false,
+  "rubric_activated": false,
+  "assessment_executed": false,
+  "schema": "audited-per-task-delivery-contract-v1",
+  "score_at": "conversation_end_only",
+  "full_user_input_review": true,
+  "checked_user_turn_indices": [
+    0,
+    1
+  ],
+  "actor_can_see_historical_ai": false,
+  "quality_scored": false,
+  "intermediate_steps_scored": false,
+  "manual_judgement_scored": false,
+  "review_status": "audited_for_basic_delivery_only",
+  "validators_execution_status": "offline_controls_only_not_business_run",
+  "summary": "用户先询问今日A股行情，后续明确纠正日期为2026年5月25日并质疑此前回答。日期纠正属于仍有效的任务背景，不能擅自使用其他日期。当前终态只检查行情概述文字非空，不判断行情数据、日期一致性或投资观点正确，也不因中间被质疑直接判整会话失败。",
+  "category_name": "新闻与一般信息检索",
+  "design_audit_status": "approved_basic",
+  "execution_preflight": {
+    "status": "requires_current_attempt_evidence",
+    "note": "本轮未重验环境或执行任务；脚本须读当前attempt实际交付/服务状态。"
+  },
+  "user_source_texts": [
+    "今日大A",
+    "你确定？今天是2026年5月25日了"
+  ],
+  "input_source_specs": []
+}

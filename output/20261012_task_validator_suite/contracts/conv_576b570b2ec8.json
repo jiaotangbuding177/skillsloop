@@ -1,0 +1,363 @@
+{
+  "sid": "conv_576b570b2ec8",
+  "final_deliverables": [
+    {
+      "name": "每日9点导入IMA并整理知识库的已登记定时任务",
+      "kind": "service",
+      "turn_indices": [
+        0
+      ],
+      "service": "cron",
+      "schedule_hints": [
+        "9"
+      ],
+      "id": "delivery_01",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false,
+      "checks": [
+        {
+          "kind": "final_service_state",
+          "parameters": {
+            "service": "cron_registration",
+            "expected": {
+              "created": true,
+              "schedule": "daily 09:00"
+            },
+            "payload_terms": [
+              "ima",
+              "知识库"
+            ]
+          },
+          "mandatory": true,
+          "point_id": "conv_576b570b2ec8:delivery1:check1",
+          "display_object": "每日9点导入IMA并整理知识库的已登记定时任务",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              1
+            ],
+            "quote": "每天9点帮我导入ima笔记，然后整理知识库"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "小时提示9不等于每天09:00，明示每日频率与任务内容应读取完整登记字段；时区沿冻结环境，不新增猜测时区。",
+          "score_at": "conversation_end_only",
+          "audit_action": "replace",
+          "audit_metadata_not_execution_parameters": {
+            "actual_trigger_not_evaluated": true
+          },
+          "audit_rationale": "小时提示9不等于每天09:00，明示每日频率与任务内容应读取完整登记字段；时区沿冻结环境，不新增猜测时区。"
+        }
+      ]
+    },
+    {
+      "name": "达尔文技能包",
+      "kind": "skill",
+      "turn_indices": [
+        1,
+        2
+      ],
+      "target_hints": [
+        "darwin"
+      ],
+      "id": "delivery_02",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false,
+      "checks": [
+        {
+          "kind": "skill_final_state",
+          "parameters": {
+            "target_hints": [
+              "darwin"
+            ],
+            "score_at": "conversation_end_only",
+            "historical_ai_is_gold": false
+          },
+          "mandatory": true,
+          "point_id": "conv_576b570b2ec8:delivery2:check1",
+          "display_object": "达尔文技能包",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              2,
+              3
+            ],
+            "quote": "用户输入索引1（第2轮）：安装技能，alchaincyf/darwin-skill: 达尔文.skill —— 一个让你的Skill无限进化的系统：评估→改进→测试→保留或回滚 | Autoresearch-inspired autonomous skill optimization for Claude；用户输入索引2（第3轮）：安装技能，alchaincyf/darwin-skill: 达尔文.skill —— 一个让你的Skill无限进化的系统：评估→改进→测试→保留或回滚 | Autoresearch-inspired autonomous skill optimization for Claude。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "「达尔文技能包」在本次实验技能目录有真实、可读、非空的SKILL.md或明确入口。目标定位提示为darwin。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+        }
+      ]
+    },
+    {
+      "name": "guizang PPT技能包",
+      "kind": "skill",
+      "turn_indices": [
+        3
+      ],
+      "target_hints": [
+        "guizang"
+      ],
+      "id": "delivery_03",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false,
+      "checks": [
+        {
+          "kind": "skill_final_state",
+          "parameters": {
+            "target_hints": [
+              "guizang"
+            ],
+            "score_at": "conversation_end_only",
+            "historical_ai_is_gold": false
+          },
+          "mandatory": true,
+          "point_id": "conv_576b570b2ec8:delivery3:check1",
+          "display_object": "guizang PPT技能包",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              4
+            ],
+            "quote": "用户输入索引3（第4轮）：安装https://github.com/op7418/guizang-ppt-skill技能。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "「guizang PPT技能包」在本次实验技能目录有真实、可读、非空的SKILL.md或明确入口。目标定位提示为guizang。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+        }
+      ]
+    },
+    {
+      "name": "最终更新的openclaw-karpathy-wiki技能",
+      "kind": "skill",
+      "turn_indices": [
+        4
+      ],
+      "target_hints": [
+        "karpathy",
+        "wiki"
+      ],
+      "must_be_changed": true,
+      "id": "delivery_04",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false,
+      "checks": [
+        {
+          "kind": "skill_final_state",
+          "parameters": {
+            "target_hints": [
+              "karpathy",
+              "wiki"
+            ],
+            "must_be_changed": true,
+            "score_at": "conversation_end_only",
+            "historical_ai_is_gold": false
+          },
+          "mandatory": true,
+          "point_id": "conv_576b570b2ec8:delivery4:check1",
+          "display_object": "最终更新的openclaw-karpathy-wiki技能",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              5
+            ],
+            "quote": "用户输入索引4（第5轮）：优化技能openclaw-karpathy-wiki。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "「最终更新的openclaw-karpathy-wiki技能」在本次实验技能目录有真实、可读、非空的SKILL.md或明确入口。目标定位提示为karpathy、wiki。相对本attempt初态有真实文件变更。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+        }
+      ]
+    }
+  ],
+  "ignored_details": [
+    "定时只检查最终登记和指定时间，不验触发；不评分优化收益或使用了哪个优化工具。"
+  ],
+  "category": "ASSIST",
+  "title": "登记每日IMA整理任务并安装、更新三个指定技能",
+  "reviewed_user_turn_count": 5,
+  "checked_user_turn_indices": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "final_target": "每日9点导入IMA并整理知识库的已登记定时任务；达尔文技能包；guizang PPT技能包；最终更新的openclaw-karpathy-wiki技能",
+  "checks": [
+    {
+      "delivery_id": "delivery_01",
+      "kind": "final_service_state",
+      "parameters": {
+        "service": "cron_registration",
+        "expected": {
+          "created": true,
+          "schedule": "daily 09:00"
+        },
+        "payload_terms": [
+          "ima",
+          "知识库"
+        ]
+      },
+      "mandatory": true,
+      "point_id": "conv_576b570b2ec8:delivery1:check1",
+      "display_object": "每日9点导入IMA并整理知识库的已登记定时任务",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          1
+        ],
+        "quote": "每天9点帮我导入ima笔记，然后整理知识库"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "小时提示9不等于每天09:00，明示每日频率与任务内容应读取完整登记字段；时区沿冻结环境，不新增猜测时区。",
+      "score_at": "conversation_end_only",
+      "audit_action": "replace",
+      "audit_metadata_not_execution_parameters": {
+        "actual_trigger_not_evaluated": true
+      },
+      "audit_rationale": "小时提示9不等于每天09:00，明示每日频率与任务内容应读取完整登记字段；时区沿冻结环境，不新增猜测时区。"
+    },
+    {
+      "delivery_id": "delivery_02",
+      "kind": "skill_final_state",
+      "parameters": {
+        "target_hints": [
+          "darwin"
+        ],
+        "score_at": "conversation_end_only",
+        "historical_ai_is_gold": false
+      },
+      "mandatory": true,
+      "point_id": "conv_576b570b2ec8:delivery2:check1",
+      "display_object": "达尔文技能包",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          2,
+          3
+        ],
+        "quote": "用户输入索引1（第2轮）：安装技能，alchaincyf/darwin-skill: 达尔文.skill —— 一个让你的Skill无限进化的系统：评估→改进→测试→保留或回滚 | Autoresearch-inspired autonomous skill optimization for Claude；用户输入索引2（第3轮）：安装技能，alchaincyf/darwin-skill: 达尔文.skill —— 一个让你的Skill无限进化的系统：评估→改进→测试→保留或回滚 | Autoresearch-inspired autonomous skill optimization for Claude。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "「达尔文技能包」在本次实验技能目录有真实、可读、非空的SKILL.md或明确入口。目标定位提示为darwin。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+    },
+    {
+      "delivery_id": "delivery_03",
+      "kind": "skill_final_state",
+      "parameters": {
+        "target_hints": [
+          "guizang"
+        ],
+        "score_at": "conversation_end_only",
+        "historical_ai_is_gold": false
+      },
+      "mandatory": true,
+      "point_id": "conv_576b570b2ec8:delivery3:check1",
+      "display_object": "guizang PPT技能包",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          4
+        ],
+        "quote": "用户输入索引3（第4轮）：安装https://github.com/op7418/guizang-ppt-skill技能。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "「guizang PPT技能包」在本次实验技能目录有真实、可读、非空的SKILL.md或明确入口。目标定位提示为guizang。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+    },
+    {
+      "delivery_id": "delivery_04",
+      "kind": "skill_final_state",
+      "parameters": {
+        "target_hints": [
+          "karpathy",
+          "wiki"
+        ],
+        "must_be_changed": true,
+        "score_at": "conversation_end_only",
+        "historical_ai_is_gold": false
+      },
+      "mandatory": true,
+      "point_id": "conv_576b570b2ec8:delivery4:check1",
+      "display_object": "最终更新的openclaw-karpathy-wiki技能",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          5
+        ],
+        "quote": "用户输入索引4（第5轮）：优化技能openclaw-karpathy-wiki。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "「最终更新的openclaw-karpathy-wiki技能」在本次实验技能目录有真实、可读、非空的SKILL.md或明确入口。目标定位提示为karpathy、wiki。相对本attempt初态有真实文件变更。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+    }
+  ],
+  "session_id": "conv_576b570b2ec8",
+  "schema": "audited-per-task-delivery-contract-v1",
+  "score_at": "conversation_end_only",
+  "full_user_input_review": true,
+  "actor_can_see_historical_ai": false,
+  "quality_scored": false,
+  "intermediate_steps_scored": false,
+  "manual_judgement_scored": false,
+  "review_status": "audited_for_basic_delivery_only",
+  "validators_execution_status": "offline_controls_only_not_business_run",
+  "summary": "用户先要求每天9点导入IMA笔记并整理知识库，随后两次要求安装darwin-skill，再要求安装guizang-ppt-skill并优化openclaw-karpathy-wiki。同一达尔文安装只计一个最终目标。终态保留定时登记、两个安装技能和一个已更新技能，不检验后续触发或优化收益。",
+  "category_name": "助手配置与技能管理",
+  "design_audit_status": "approved_basic_with_revisions",
+  "execution_preflight": {
+    "status": "requires_current_attempt_evidence",
+    "note": "本轮未重验环境或执行任务；脚本须读当前attempt实际交付/服务状态。"
+  },
+  "user_source_texts": [
+    "每天9点帮我导入ima笔记，然后整理知识库\n\n【本轮实际提供的输入文件】\n- 系统需求原始材料.md：/workspace/个人知识库/合成环境材料/系统需求原始材料.md（实验重建输入）\n- 接口字段样例.json：/workspace/个人知识库/合成环境材料/接口字段样例.json（实验重建输入）\n- 现有项目说明.md：/workspace/个人知识库/合成环境材料/现有项目说明.md（实验重建输入）\n- source_ima.json：/workspace/services/source_ima.json（实验重建输入）",
+    "安装技能，alchaincyf/darwin-skill: 达尔文.skill —— 一个让你的Skill无限进化的系统：评估→改进→测试→保留或回滚 | Autoresearch-inspired autonomous skill optimization for Claude Code. Evaluate, improve, test, keep or revert.",
+    "安装技能，alchaincyf/darwin-skill: 达尔文.skill —— 一个让你的Skill无限进化的系统：评估→改进→测试→保留或回滚 | Autoresearch-inspired autonomous skill optimization for Claude Code. Evaluate, improve, test, keep or revert.",
+    "安装https://github.com/op7418/guizang-ppt-skill技能",
+    "优化技能openclaw-karpathy-wiki"
+  ],
+  "input_source_specs": [
+    {
+      "mount": "个人知识库/合成环境材料/系统需求原始材料.md",
+      "format": "md",
+      "synthetic": true,
+      "provenance": null,
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_original_inputs_v10_20261011\\resources\\clean_alignment\\v6\\37abc21d7df52ac9d642f0605adabf4b1d3bf7660c678a3a17de269ff7957429\\系统需求原始材料.md",
+      "sha256": "37abc21d7df52ac9d642f0605adabf4b1d3bf7660c678a3a17de269ff7957429"
+    },
+    {
+      "mount": "个人知识库/合成环境材料/接口字段样例.json",
+      "format": "json",
+      "synthetic": true,
+      "provenance": null,
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_original_inputs_v10_20261011\\resources\\clean_alignment\\v6\\527d0fe1b41da381ee3d7c50641d84f15ceef555bba5cc7160cbf0957b0897ff\\接口字段样例.json",
+      "sha256": "527d0fe1b41da381ee3d7c50641d84f15ceef555bba5cc7160cbf0957b0897ff"
+    },
+    {
+      "mount": "个人知识库/合成环境材料/现有项目说明.md",
+      "format": "md",
+      "synthetic": true,
+      "provenance": null,
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_original_inputs_v10_20261011\\resources\\clean_alignment\\v6\\60d0a30ae52ba60af6f5b7388812f9d7845bca888f30637c9fa50cde72f96cfd\\现有项目说明.md",
+      "sha256": "60d0a30ae52ba60af6f5b7388812f9d7845bca888f30637c9fa50cde72f96cfd"
+    },
+    {
+      "mount": "services/source_ima.json",
+      "format": "json",
+      "synthetic": true,
+      "provenance": "authorized_source_scoped_experiment_preparation",
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_original_inputs_v10_20261011\\resources\\clean_alignment\\v6\\d0d04e75296487c919c60ddd48bf4d430d8a8ef6a6fe61b4f00c66eb6842dc06\\source_ima.json",
+      "sha256": "d0d04e75296487c919c60ddd48bf4d430d8a8ef6a6fe61b4f00c66eb6842dc06"
+    }
+  ]
+}

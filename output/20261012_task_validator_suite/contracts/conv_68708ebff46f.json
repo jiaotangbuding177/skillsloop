@@ -1,0 +1,129 @@
+{
+  "sid": "conv_68708ebff46f",
+  "category": "COMM",
+  "title": "2026年6月24日22点46提醒下班单次任务登记",
+  "user_turn_count": 3,
+  "scoring_time": "one_pass_at_session_end",
+  "final_target": "提醒下班任务登记",
+  "final_deliverables": [
+    {
+      "name": "提醒下班任务登记",
+      "kind": "service",
+      "format": "cron_registration",
+      "turn_indices": [
+        0,
+        1
+      ],
+      "final_version_only": true,
+      "checks": [
+        {
+          "kind": "final_service_state",
+          "parameters": {
+            "service": "cron_registration",
+            "expected": {
+              "name": "提醒下班",
+              "payload": "提醒下班",
+              "one_time": "2026-06-24 22:46",
+              "timezone": "Asia/Shanghai",
+              "created": true,
+              "actual_trigger_not_evaluated": true
+            }
+          },
+          "mandatory": true,
+          "point_id": "conv_68708ebff46f:delivery1:check1",
+          "display_object": "提醒下班任务登记",
+          "requirement_basis": [
+            {
+              "turn_1based": 1,
+              "quote": "请帮我创建一个定时任务： - 任务名称：提醒下班 - 任务内容：提醒下班 - 计划：单次执行，执行时间为 2026-06-24 22:46"
+            },
+            {
+              "turn_1based": 2,
+              "quote": "提醒下班"
+            }
+          ],
+          "evidence_method": "本次调度器最终job登记读回、name/payload、单次时间及时区与attempt映射；使用冻结历史实验时间，不擅自改日期。",
+          "passing_condition": "本次真实登记存在，name与payload均为提醒下班，执行时间2026-06-24 22:46，Asia/Shanghai；只核登记，不要求未来实际触发。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只核本次会话终态的已请求交付对象及原有明确基础条件。保留历史用户轮次作需求来源，不逐轮打分，不使用旧AI作为gold。 仅接受关联本attempt的真实工具终态记录/读回，不把完成声明或历史收据当状态。定时不触发，SMTP接受不等于到达。"
+        }
+      ],
+      "delivery_id": "conv_68708ebff46f:final:0",
+      "id": "delivery_01",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    }
+  ],
+  "checks": [
+    {
+      "delivery_id": "delivery_01",
+      "kind": "final_service_state",
+      "parameters": {
+        "service": "cron_registration",
+        "expected": {
+          "name": "提醒下班",
+          "payload": "提醒下班",
+          "one_time": "2026-06-24 22:46",
+          "timezone": "Asia/Shanghai",
+          "created": true,
+          "actual_trigger_not_evaluated": true
+        }
+      },
+      "mandatory": true,
+      "point_id": "conv_68708ebff46f:delivery1:check1",
+      "display_object": "提醒下班任务登记",
+      "requirement_basis": [
+        {
+          "turn_1based": 1,
+          "quote": "请帮我创建一个定时任务： - 任务名称：提醒下班 - 任务内容：提醒下班 - 计划：单次执行，执行时间为 2026-06-24 22:46"
+        },
+        {
+          "turn_1based": 2,
+          "quote": "提醒下班"
+        }
+      ],
+      "evidence_method": "本次调度器最终job登记读回、name/payload、单次时间及时区与attempt映射；使用冻结历史实验时间，不擅自改日期。",
+      "passing_condition": "本次真实登记存在，name与payload均为提醒下班，执行时间2026-06-24 22:46，Asia/Shanghai；只核登记，不要求未来实际触发。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只核本次会话终态的已请求交付对象及原有明确基础条件。保留历史用户轮次作需求来源，不逐轮打分，不使用旧AI作为gold。 仅接受关联本attempt的真实工具终态记录/读回，不把完成声明或历史收据当状态。定时不触发，SMTP接受不等于到达。"
+    }
+  ],
+  "ignored_details": [
+    "内容质量、美观、事实结论正确性、操作技能和过程不评分。"
+  ],
+  "input_bindings_needed": [],
+  "service_patch_needed": false,
+  "exclusion_candidate": false,
+  "no_old_ai_as_gold": true,
+  "implemented": false,
+  "executed": false,
+  "session_id": "conv_68708ebff46f",
+  "schema": "audited-per-task-delivery-contract-v1",
+  "score_at": "conversation_end_only",
+  "full_user_input_review": true,
+  "checked_user_turn_indices": [
+    0,
+    1,
+    2
+  ],
+  "actor_can_see_historical_ai": false,
+  "quality_scored": false,
+  "intermediate_steps_scored": false,
+  "manual_judgement_scored": false,
+  "review_status": "audited_for_basic_delivery_only",
+  "validators_execution_status": "offline_controls_only_not_business_run",
+  "summary": "用户明确创建名为“提醒下班”、内容同名、在2026年6月24日22点46执行一次的定时任务，后续再次提及提醒并打招呼。终态验本次运行的真实单次登记及上海时区参数；无需触发任务或以聊天问候另设交付，不将重复输入计作第二条任务。",
+  "category_name": "行政协同、邮件与日程",
+  "design_audit_status": "approved_limited_delivery",
+  "execution_preflight": {
+    "status": "current_attempt_evidence_required"
+  },
+  "user_source_texts": [
+    "请帮我创建一个定时任务：\n- 任务名称：提醒下班\n- 任务内容：提醒下班\n- 计划：单次执行，执行时间为 2026-06-24 22:46",
+    "提醒下班",
+    "你好"
+  ],
+  "input_source_specs": []
+}

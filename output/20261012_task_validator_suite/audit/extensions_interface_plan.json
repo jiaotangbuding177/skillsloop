@@ -1,0 +1,194 @@
+{
+  "schema": "terminal-basic-check-extension-interface-plan-v1",
+  "state": "design_only_waiting_for_root_226_audit_gate",
+  "output_module": "output/20261012_task_validator_suite/_extensions.py",
+  "entrypoint": "register_extensions(base_module)",
+  "handler_signature": "handler(ctx, did, parameters, kind) -> observed: dict",
+  "compatibility": {
+    "exceptions": "Raise base_module.DeliveryFailure for observed absence/mismatch; base_module.UnknownEvidence for missing bindings/parser/mapping or malformed contract.",
+    "registration": "Use base_module.register and base_module.PARAMETERS per handler; reject unsupported parameters. Do not import a second scorer module with different exception classes.",
+    "optional_scope": "Native no-table check on PDF/other formats must be marked report-only by the new runtime; legacy score_request ignores handler scorable fields, so this requires explicit runtime support.",
+    "immutable_inputs": "No changes to frozen benchmark or scorer; wrappers and compile-time normalization only live in the independent suite."
+  },
+  "source_observations": [
+    {
+      "source": "research/pipelines/task_group_pipeline/final_state_scorer.py:659",
+      "finding": "docx_check already loops all paths from ctx.opened and checks w:ins/w:del in each DOCX.",
+      "correction": "Do not pass scope/require_each_file_checked/exclude_former_attempt_records. Keep kind docx_track_change_elements_exist and parameters {elements:[w:ins,w:del],any_of:true}; three-file requirement remains its separate current final file check."
+    },
+    {
+      "source": "research/pipelines/task_group_pipeline/final_state_scorer.py:581",
+      "finding": "service_check created:true accepts a current record with id/meeting_id; old timeout symbol checks same native job transition and final>initial.",
+      "correction": "Use original expected payload and timeout symbols; registered_exists/payload_ref/timeout object are design metadata, not supported remote record fields."
+    },
+    {
+      "source": "research/pipelines/task_group_pipeline/final_state_evidence.py:432",
+      "finding": "capture_timeout_before_dispatch saves original_job_id and actual alias job_id in initial native snapshot; timeout_change_readback does not carry original_job_id to final evidence.",
+      "correction": "New runtime may copy original_job_id from that actual initial snapshot into the matching authoritative final timeout transition; never derive it from the final actor output."
+    }
+  ],
+  "new_handlers": [
+    {
+      "kind": "final_distinct_artifact_objects",
+      "handler_name": "distinct_final_file_objects",
+      "parameters": {
+        "delivery_ids": [
+          "delivery_03",
+          "delivery_04"
+        ],
+        "required_distinct_object_count": 2
+      },
+      "accepted_parameter_names": [
+        "delivery_ids",
+        "required_distinct_object_count"
+      ],
+      "compile_from": "Convert reviewed zero-based delivery_indices to final_deliverables[i].id; remove comparison/hash-policy metadata.",
+      "algorithm": [
+        "Validate a nonempty, unique string ID list and positive integer required count.",
+        "For each delivery ID use ctx.opened(id,{}) to resolve the current final binding and native readable files.",
+        "Resolve canonical physical paths; aliases/symlinks of the same path are the same object. Where available use samefile to detect hard-link identity.",
+        "Require pairwise-disjoint physical file objects across requested delivery IDs and enough unique objects.",
+        "Do not compare content SHA to decide identity: two independent files with identical bytes can pass."
+      ],
+      "observed": [
+        "delivery_id_to_resolved_paths",
+        "physical_object_count"
+      ],
+      "positive": "Two separately copied files, same SHA but different paths/physical objects -> pass.",
+      "negative": "Same file bound twice, symlink alias or samefile hard-link -> fail.",
+      "unknown": "Outside-attempt path, unresolved distinct binding, unreadable parser or invalid target IDs -> unknown."
+    },
+    {
+      "kind": "final_artifact_parent_directory",
+      "handler_name": "final_file_in_resolved_directory",
+      "parameters": {
+        "directory_label": "学生资料"
+      },
+      "accepted_parameter_names": [
+        "directory_label"
+      ],
+      "compile_from": "Resolve the existing delivery_index to did; remove directory_key/index/path-policy metadata.",
+      "runtime_evidence": {
+        "location": "ctx.evidence.resolved_parameters[did].directory_binding",
+        "required_fields": {
+          "label": "学生资料",
+          "path": "/workspace/<frozen mapped target>",
+          "source_session_id": "<this source>",
+          "authoritative": true,
+          "origin": "frozen_environment_directory_mapping"
+        }
+      },
+      "algorithm": [
+        "Require the independent mapping label, source identity, authoritative flag and frozen origin; missing/malformed mapping is unknown.",
+        "Use ctx.path(mapping.path), requiring the actual mapped directory inside this attempt's workspace.",
+        "Open this delivery's current final files with ctx.opened(did,{}) and require every resolved file to be a descendant of that mapped root.",
+        "Do not accept any directory merely because its basename is 学生资料; no root is inferred from the actor's output."
+      ],
+      "observed": [
+        "mapping_label",
+        "canonical_directory",
+        "canonical_final_file_paths"
+      ],
+      "positive": "Verified directory mapping and final PDF within it -> pass.",
+      "negative": "Real final PDF elsewhere in the workspace, or the mapped directory physically missing -> fail.",
+      "unknown": "No independent environment mapping, actor-provided mapping, wrong source or outside-attempt mapping -> unknown."
+    },
+    {
+      "kind": "final_native_document_no_tables",
+      "handler_name": "native_docx_body_without_tables",
+      "parameters": {
+        "non_docx_policy": "report_only"
+      },
+      "accepted_parameter_names": [
+        "non_docx_policy"
+      ],
+      "compile_from": "Drop metadata delivery_index/native_formats/forbidden_element/scope/do_not_force_output_format; the kind fixes native DOCX main-body table inspection.",
+      "algorithm": [
+        "Validate non_docx_policy equals report_only.",
+        "Read current final files and actual native format, not a suffix alone.",
+        "For DOCX inspect word/document.xml main w:body and recursively count w:tbl; any table is a failure.",
+        "Unresolved altChunk/external body payload prevents a reliable native no-table assertion and is unknown.",
+        "For PDF/other formats return a report-only observation; do not force DOCX, approximate PDF table geometry or invent thresholds."
+      ],
+      "observed": [
+        "actual_format",
+        "native_body_table_count",
+        "applicable_to_AND"
+      ],
+      "runtime_requirement": "If actual final format is not DOCX, this check has scorable:false and does not enter AND. The existing mandatory file-open check still controls missing/corrupt file delivery.",
+      "positive": "DOCX body with paragraphs and no w:tbl -> pass.",
+      "negative": "DOCX body with a table -> fail.",
+      "unknown_or_report_only": "PDF -> report-only; malformed/unresolved DOCX body -> unknown."
+    }
+  ],
+  "existing_service_wrapper": {
+    "wrapper_name": "final_service_with_source_job_identity",
+    "replaces_handler_names": [
+      "final_service_state",
+      "scheduler_record_fields"
+    ],
+    "route_rule": "Delegate unchanged unless top-level source_job_id is supplied. source_job_id only allowed for service cron_registration.",
+    "added_parameter_names": [
+      "source_job_id"
+    ],
+    "minimal_parameters": {
+      "service": "cron_registration",
+      "source_job_id": "fd4a7d47-dcb1-42a2-981e-95b2a91aea92",
+      "expected": {
+        "name": "follow-builders 每日情报+选题",
+        "start": "2026-06-25 00:00",
+        "schedule": "daily 08:00",
+        "timezone": "Asia/Shanghai",
+        "payload": "user_turn_4_full_task_text",
+        "outputs_configured": [
+          "/workspace/分析摘要-{YYYY-MM-DD}.md",
+          "/workspace/选题推荐-{YYYY-MM-DD}.md",
+          "/workspace/首推公众号文章-{YYYY-MM-DD}.md"
+        ],
+        "timeout": "raised_value_recorded_but_no_exact_target_user_value",
+        "created": true,
+        "actual_trigger_not_evaluated": true
+      }
+    },
+    "algorithm": [
+      "Find a unique complete authoritative same-delivery timeout transition whose original_job_id equals source_job_id; missing/ambiguous original-to-native mapping is unknown.",
+      "Require its actual job_id, initial/final native evidence and source scope to be valid.",
+      "Delegate existing service_check with expected.id set to that actual job_id and all old expected fields intact.",
+      "Prevent resolved_parameters from overriding the independently mapped expected.id; use a lightweight context view/deep copy without mutating ctx.",
+      "Let the original service_check verify all fields on the same record and the actual same-job timeout increase. Correct fields from another job cannot be spliced in."
+    ],
+    "compile_normalization": {
+      "payload_ref": "canonical_user_turn_5_task_payload -> payload:user_turn_4_full_task_text (0-based dispatch 4)",
+      "registered_exists": "true -> created:true (existing handler already interprets record existence)",
+      "existing_job_identity_ref": "source UUID -> top-level source_job_id, with independently collected original_job_id evidence",
+      "timeout_object": "final_gt_initial_same_job -> old raised_value_recorded_but_no_exact_target_user_value symbol",
+      "evidence_source": "audit metadata only, not passed as a parameter"
+    },
+    "tests": [
+      "Correct mapped source job and final>initial with all fields -> pass.",
+      "Correct initial source job with unchanged/decreased timeout -> fail.",
+      "Source job remains wrong while another job has all expected fields -> fail.",
+      "Missing original_job_id/native transition -> unknown.",
+      "Payload_ref/new metadata passed directly rather than normalized -> unsupported/unknown."
+    ]
+  },
+  "old_docx_compile_normalization": {
+    "kind": "docx_track_change_elements_exist",
+    "parameters": {
+      "elements": [
+        "w:ins",
+        "w:del"
+      ],
+      "any_of": true
+    },
+    "discarded_audit_metadata": [
+      "scope",
+      "require_each_file_checked",
+      "exclude_former_attempt_records"
+    ],
+    "hard_condition_verified": "Actual XML revision element existence in every currently bound final DOCX; original revision preservation not claimed."
+  },
+  "test_plan_only": true,
+  "implementation_started": false,
+  "external_services_accessed": false
+}

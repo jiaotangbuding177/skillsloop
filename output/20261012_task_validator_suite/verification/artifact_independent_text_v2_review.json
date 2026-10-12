@@ -1,0 +1,79 @@
+{
+  "schema": "independent-text-v2-review-v1",
+  "scope": "Pure local fixtures; implementation unchanged; no actual service/model/business execution.",
+  "implementation_sha256": {
+    "_text_extensions.py": "6c937114a4885e61924892fe7189c6b91bb21afc315876d8bc365c81bf2a43dd",
+    "_runtime.py": "8e963ec59566ad80c65e01581e91e4a5b8cee2bd4e5bf24c87aac99aed97ce3f",
+    "text_extensions_normalization.json": "b4e8fa43d0edd6c3d9a38e7c70ba2dc617d032c7e872f15892b96439f96d67b8"
+  },
+  "probes": [
+    {
+      "case": "explicit_pages_with_numbered_details",
+      "expected_status": "PASS",
+      "actual_status": "FAIL",
+      "reason": "numbered_item_count_mismatch",
+      "observed": null
+    },
+    {
+      "case": "named_html_relative_image_path",
+      "expected_status": "PASS",
+      "actual_status": "FAIL",
+      "reason": "file_missing",
+      "observed": null
+    },
+    {
+      "case": "zero_extent_image_is_not_visible_payload",
+      "expected_status": "FAIL_OR_UNSCORED",
+      "actual_status": "PASS",
+      "reason": null,
+      "observed": {
+        "image_pages": 1,
+        "hidden_ocr_text_allowed": true
+      }
+    },
+    {
+      "case": "quote_fields_mixed_groups_not_ignored",
+      "expected_status": "UNSCORED",
+      "actual_status": "PASS",
+      "reason": null,
+      "observed": {
+        "fields_checked": 1
+      }
+    },
+    {
+      "case": "fde_person_days_not_calendar_days",
+      "expected_status": "FAIL_OR_UNSCORED",
+      "actual_status": "PASS",
+      "reason": null,
+      "observed": {
+        "bound_rows_checked": 1
+      }
+    },
+    {
+      "case": "historical_gold_true_is_invalid_policy",
+      "expected_status": "UNSCORED",
+      "actual_status": "PASS",
+      "reason": null,
+      "observed": {
+        "item_count": 1,
+        "ordinals": [
+          1
+        ]
+      }
+    },
+    {
+      "case": "q_Q_text_mode_restored",
+      "expected_status": "FAIL",
+      "actual_status": "FAIL",
+      "reason": "visible_native_text_outside_raster_image",
+      "observed": null
+    },
+    {
+      "case": "nested_form_text_mode_does_not_leak",
+      "expected_status": "FAIL",
+      "actual_status": "FAIL",
+      "reason": "visible_native_text_outside_raster_image",
+      "observed": null
+    }
+  ]
+}

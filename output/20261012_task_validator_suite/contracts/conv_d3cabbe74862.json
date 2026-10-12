@@ -1,0 +1,156 @@
+{
+  "sid": "conv_d3cabbe74862",
+  "category": "DATA",
+  "title": "基于三张财务报表分析企业经营状况",
+  "user_turn_count": 1,
+  "scoring_time": "one_pass_at_session_end",
+  "final_target": "经营财报分析内容",
+  "final_deliverables": [
+    {
+      "name": "经营财报分析内容",
+      "kind": "text",
+      "format": "text",
+      "turn_indices": [
+        0
+      ],
+      "final_version_only": true,
+      "checks": [
+        {
+          "kind": "delivered_text_nonempty",
+          "parameters": {
+            "trim_whitespace": true
+          },
+          "mandatory": true,
+          "point_id": "conv_d3cabbe74862:delivery1:check1",
+          "display_object": "经营财报分析内容",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              1
+            ],
+            "quote": "用户输入索引0（第1轮）：【个人助手设定】 你的名字叫「小明」，请在对话中以此自称。 请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。 请在本轮及后续对话中始终遵循以上设定。 请使用技能「3-statements」协助当前任务。场景：三张表财务模型。 小明，帮我分析一下这个财务报表，经营情况如。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "会话终态读取本次向用户交付的「经营财报分析内容」文字集合，去掉空白后仍非空；允许相应文件原生抽取正文。不把计划、声明与实质完成做语义区分，不核事实或专业正确性。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+        }
+      ],
+      "delivery_id": "conv_d3cabbe74862:final:0",
+      "id": "delivery_01",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    }
+  ],
+  "checks": [
+    {
+      "delivery_id": "delivery_01",
+      "kind": "delivered_text_nonempty",
+      "parameters": {
+        "trim_whitespace": true
+      },
+      "mandatory": true,
+      "point_id": "conv_d3cabbe74862:delivery1:check1",
+      "display_object": "经营财报分析内容",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          1
+        ],
+        "quote": "用户输入索引0（第1轮）：【个人助手设定】 你的名字叫「小明」，请在对话中以此自称。 请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。 请在本轮及后续对话中始终遵循以上设定。 请使用技能「3-statements」协助当前任务。场景：三张表财务模型。 小明，帮我分析一下这个财务报表，经营情况如。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "会话终态读取本次向用户交付的「经营财报分析内容」文字集合，去掉空白后仍非空；允许相应文件原生抽取正文。不把计划、声明与实质完成做语义区分，不核事实或专业正确性。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+    }
+  ],
+  "ignored_details": [
+    "内容质量、美观、事实结论正确性、操作技能和过程不评分。"
+  ],
+  "input_bindings_needed": [],
+  "service_patch_needed": false,
+  "exclusion_candidate": false,
+  "no_old_ai_as_gold": true,
+  "implemented": false,
+  "executed": false,
+  "session_id": "conv_d3cabbe74862",
+  "schema": "audited-per-task-delivery-contract-v1",
+  "score_at": "conversation_end_only",
+  "full_user_input_review": true,
+  "checked_user_turn_indices": [
+    0
+  ],
+  "actor_can_see_historical_ai": false,
+  "quality_scored": false,
+  "intermediate_steps_scored": false,
+  "manual_judgement_scored": false,
+  "review_status": "audited_for_basic_delivery_only",
+  "validators_execution_status": "offline_controls_only_not_business_run",
+  "summary": "用户以财务助手身份要求分析财务报表和经营情况，指定三表模型技能，输入提供已披露数据的PDF和JSON摘录。终态目标为经营财报分析文字，未规定必须创建新的Excel模型。非空正文检查只能确认文字交付，不认证数据计算、财务勾稽或经营结论正确性。",
+  "category_name": "财务核算、预算与数据表格",
+  "design_audit_status": "approved_basic",
+  "execution_preflight": {
+    "status": "requires_current_attempt_evidence",
+    "note": "本轮未重验环境或执行任务；脚本须读当前attempt实际交付/服务状态。"
+  },
+  "user_source_texts": [
+    "【个人助手设定】\n你的名字叫「小明」，请在对话中以此自称。\n请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。\n请在本轮及后续对话中始终遵循以上设定。\n请使用技能「3-statements」协助当前任务。场景：三张表财务模型。\n小明，帮我分析一下这个财务报表，经营情况如何\n\n【本轮实际提供的输入文件】\n- PUBLIC_REFERENCE_LICENSE：/workspace/environment_skills/3-statements/PUBLIC_REFERENCE_LICENSE（既有或原读回输入）\n- formulas.md：/workspace/environment_skills/3-statements/references/formulas.md（既有或原读回输入）\n- sec-filings.md：/workspace/environment_skills/3-statements/references/sec-filings.md（既有或原读回输入）\n- SKILL.md：/workspace/environment_skills/3-statements/SKILL.md（既有或原读回输入）\n- 财务报表_已披露原数据摘录.pdf：/workspace/inputs/restored/conv_d3cabbe74862/财务报表_已披露原数据摘录.pdf（实验重建输入）\n- 财务报表_已披露原数据摘录.json：/workspace/inputs/restored/conv_d3cabbe74862/财务报表_已披露原数据摘录.json（实验重建输入）"
+  ],
+  "input_source_specs": [
+    {
+      "mount": "environment_skills/3-statements/PUBLIC_REFERENCE_LICENSE",
+      "format": "",
+      "synthetic": false,
+      "provenance": null,
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_original_inputs_v10_20261011\\resources\\environment_closure\\v7\\cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30\\PUBLIC_REFERENCE_LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "mount": "environment_skills/3-statements/references/formulas.md",
+      "format": "md",
+      "synthetic": false,
+      "provenance": null,
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_original_inputs_v10_20261011\\resources\\environment_closure\\v7\\5761041366248bba14782f72082b9396c7e47291491999ea85be1c9c2875df5e\\formulas.md",
+      "sha256": "5761041366248bba14782f72082b9396c7e47291491999ea85be1c9c2875df5e"
+    },
+    {
+      "mount": "environment_skills/3-statements/references/sec-filings.md",
+      "format": "md",
+      "synthetic": false,
+      "provenance": null,
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_original_inputs_v10_20261011\\resources\\environment_closure\\v7\\9765c2f789b8d87baeca89b7f3a5ddc68d6068c06b39b4445224197d6e444e93\\sec-filings.md",
+      "sha256": "9765c2f789b8d87baeca89b7f3a5ddc68d6068c06b39b4445224197d6e444e93"
+    },
+    {
+      "mount": "environment_skills/3-statements/SKILL.md",
+      "format": "md",
+      "synthetic": false,
+      "provenance": null,
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_original_inputs_v10_20261011\\resources\\environment_closure\\v7\\e6efbe5faf2cefabf45d7a93b089cf9b7bbbe192f693a78cdfd1353a5b10ff3e\\SKILL.md",
+      "sha256": "e6efbe5faf2cefabf45d7a93b089cf9b7bbbe192f693a78cdfd1353a5b10ff3e"
+    },
+    {
+      "mount": "inputs/restored/conv_d3cabbe74862/财务报表_已披露原数据摘录.pdf",
+      "format": "pdf",
+      "synthetic": true,
+      "provenance": null,
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_original_inputs_v10_20261011\\resources\\environment_closure\\v7\\29e17291b4038ac5f5633d317e1755ef700ec48fa4e6460f418dfc047cc34e0b\\财务报表_已披露原数据摘录.pdf",
+      "sha256": "29e17291b4038ac5f5633d317e1755ef700ec48fa4e6460f418dfc047cc34e0b"
+    },
+    {
+      "mount": "inputs/restored/conv_d3cabbe74862/财务报表_已披露原数据摘录.json",
+      "format": "json",
+      "synthetic": true,
+      "provenance": null,
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_original_inputs_v10_20261011\\resources\\environment_closure\\v7\\0a2b230aff193affd2bc7498a5d554cdefbfef48e4edfc18ed410c6dd2cdd0b3\\财务报表_已披露原数据摘录.json",
+      "sha256": "0a2b230aff193affd2bc7498a5d554cdefbfef48e4edfc18ed410c6dd2cdd0b3"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "sid": "conv_6c48bf880731",
+  "session_id": "conv_6c48bf880731",
+  "title": "办公空调故障期间合同赔偿条款查询",
+  "category": "LEGAL",
+  "status": "proposed_active",
+  "final_target": "合同约定查询正文",
+  "final_deliverables": [
+    {
+      "name": "合同约定查询正文",
+      "kind": "text",
+      "format": null,
+      "turn_indices": [
+        0
+      ],
+      "checks": [
+        {
+          "kind": "delivered_body_nonempty",
+          "parameters": {
+            "strip_whitespace": true,
+            "no_minimum_words_invented": true,
+            "semantic_completion_not_inferred": true
+          },
+          "mandatory": true,
+          "point_id": "conv_6c48bf880731:delivery1:check1",
+          "display_object": "合同约定查询正文",
+          "requirement_basis": [
+            {
+              "turn_1based": 1,
+              "quote": "现在空调坏了，从早上到现在，这份合同里面有什么条款我可以用来要求赔偿么？"
+            }
+          ],
+          "evidence_method": "本次attempt的实际用户可见交付文本及交付对象映射；若以文件承载，保存该文件原生抽取正文、路径和SHA。会话结束统一核验，不逐轮打成功标签。",
+          "passing_condition": "在会话结束时读取本次新运行已交付的“合同约定查询正文”正文集合；去空白后非空。可用本次真实交付文件原生抽取正文；不使用历史AI记录，不设额外最少字数。此检查不能区分完成计划、完成声明与实质答复。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只核本次会话终态的已请求交付对象及原有明确基础条件。保留历史用户轮次作需求来源，不逐轮打分，不使用旧AI作为gold。 非空仅证明交付文字形式，不推断实质问题已回答；source_turn_indices是需求来源，不强制必须在那一轮产出或处罚前轮失败。"
+        }
+      ],
+      "id": "delivery_01",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    }
+  ],
+  "checks": [
+    {
+      "delivery_id": "delivery_01",
+      "kind": "delivered_body_nonempty",
+      "parameters": {
+        "strip_whitespace": true,
+        "no_minimum_words_invented": true,
+        "semantic_completion_not_inferred": true
+      },
+      "mandatory": true,
+      "point_id": "conv_6c48bf880731:delivery1:check1",
+      "display_object": "合同约定查询正文",
+      "requirement_basis": [
+        {
+          "turn_1based": 1,
+          "quote": "现在空调坏了，从早上到现在，这份合同里面有什么条款我可以用来要求赔偿么？"
+        }
+      ],
+      "evidence_method": "本次attempt的实际用户可见交付文本及交付对象映射；若以文件承载，保存该文件原生抽取正文、路径和SHA。会话结束统一核验，不逐轮打成功标签。",
+      "passing_condition": "在会话结束时读取本次新运行已交付的“合同约定查询正文”正文集合；去空白后非空。可用本次真实交付文件原生抽取正文；不使用历史AI记录，不设额外最少字数。此检查不能区分完成计划、完成声明与实质答复。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只核本次会话终态的已请求交付对象及原有明确基础条件。保留历史用户轮次作需求来源，不逐轮打分，不使用旧AI作为gold。 非空仅证明交付文字形式，不推断实质问题已回答；source_turn_indices是需求来源，不强制必须在那一轮产出或处罚前轮失败。"
+    }
+  ],
+  "ignored_details": [
+    "历史AI答案与原生产物不是本次gold；不评分中间轮次success、技能调用、主观质量或法律/科学/金融正确性。",
+    "未找到相关条款的答复也是合法查询交付，不强制正向赔偿结论。"
+  ],
+  "input_bindings_needed": [],
+  "original_user_turn_indices_inspected": [
+    0
+  ],
+  "requirement_source": "D:\\skillloop\\benchmark\\enterprise_environment_admitted_v7_20261009\\有效轨迹.jsonl",
+  "original_trace_sha256": "c3947fb8ac9b7501c8dea7cb781e291667c27de81c296d0eea60b4d84d6317cf",
+  "prior_analysis_path": "D:\\skillloop\\output\\20261010_evaluation_delivery_verifiability\\legal_tech_assist.json",
+  "reviewed": false,
+  "rubric_activated": false,
+  "assessment_executed": false,
+  "schema": "audited-per-task-delivery-contract-v1",
+  "score_at": "conversation_end_only",
+  "full_user_input_review": true,
+  "checked_user_turn_indices": [
+    0
+  ],
+  "actor_can_see_historical_ai": false,
+  "quality_scored": false,
+  "intermediate_steps_scored": false,
+  "manual_judgement_scored": false,
+  "review_status": "audited_for_basic_delivery_only",
+  "validators_execution_status": "offline_controls_only_not_business_run",
+  "summary": "用户称空调从早上起一直故障，请从所指办公租赁及物业合同中查找能要求赔偿的条款。以本任务提供的合同材料为范围，终态提供查询文字；若没有找到适用条款也允许说明，不要求正向赔偿结论、固定金额或实际索赔操作。",
+  "category_name": "合同审阅与法务合规",
+  "design_audit_status": "approved_limited_delivery_with_observations",
+  "execution_preflight": {
+    "status": "current_attempt_evidence_required"
+  },
+  "user_source_texts": [
+    "请使用中文回复，除非用户明确使用其他语言。\n\n现在空调坏了，从早上到现在，这份合同里面有什么条款我可以用来要求赔偿么？\n\n【本轮实际提供的输入文件】\n- 办公租赁及物业合同.docx：/workspace/合成待核输入/办公租赁及物业合同.docx（实验重建输入）"
+  ],
+  "input_source_specs": [
+    {
+      "mount": "合成待核输入/办公租赁及物业合同.docx",
+      "format": "docx",
+      "synthetic": true,
+      "provenance": "source_specific_generic_domain_experimental_synthetic_input",
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_original_inputs_v10_20261011\\resources\\objects\\7178476f8d03fb8568bd9cf58fc9dd9bd87e6f0d95e13c9c5263a84fc137e3ef\\办公租赁及物业合同.docx",
+      "sha256": "7178476f8d03fb8568bd9cf58fc9dd9bd87e6f0d95e13c9c5263a84fc137e3ef"
+    }
+  ]
+}

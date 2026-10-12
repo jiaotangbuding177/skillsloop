@@ -1,0 +1,250 @@
+{
+  "sid": "conv_737c4b010b18",
+  "category": "OFFICE",
+  "title": "制作科委概念验证平台汇报逐页提示词及图片",
+  "user_turn_count": 4,
+  "scoring_time": "one_pass_at_session_end",
+  "final_target": "面向科委汇报的每页文字/生图提示词；对应本次每页提示词的汇报图片",
+  "final_deliverables": [
+    {
+      "name": "面向科委汇报的每页文字/生图提示词",
+      "kind": "text",
+      "format": "text",
+      "turn_indices": [
+        1,
+        2
+      ],
+      "final_version_only": true,
+      "checks": [
+        {
+          "kind": "delivered_text_nonempty",
+          "parameters": {
+            "trim_whitespace": true
+          },
+          "mandatory": true,
+          "point_id": "conv_737c4b010b18:delivery1:check1",
+          "display_object": "面向科委汇报的每页文字/生图提示词",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              2,
+              3
+            ],
+            "quote": "用户输入索引1（第2轮）：需要提示的是，不需要专家评审，整体逻辑包括批量导入，然后可以智能分析或直接进行项目管理，在项目管理过程中也可以进行智能分析。然后项目不仅仅包括批量导入，也可以手动录入。；用户输入索引2（第3轮）：我明天需要去给科委汇报，需要准备一份ppt，汇报内容上聚焦在我们能提供什么，不要行业概况啥的，浅色背景，帮我文字输出一下每一页内容，用于生图提示词。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "会话终态读取本次向用户交付的「面向科委汇报的每页文字/生图提示词」文字集合，去掉空白后仍非空；允许相应文件原生抽取正文。不把计划、声明与实质完成做语义区分，不核事实或专业正确性。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+        }
+      ],
+      "delivery_id": "conv_737c4b010b18:final:0",
+      "id": "delivery_01",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    },
+    {
+      "name": "对应本次每页提示词的汇报图片",
+      "kind": "file",
+      "format": "image",
+      "turn_indices": [
+        3
+      ],
+      "final_version_only": true,
+      "checks": [
+        {
+          "kind": "delivered_file_open",
+          "parameters": {
+            "format": "image"
+          },
+          "mandatory": true,
+          "point_id": "conv_737c4b010b18:delivery2:check1",
+          "display_object": "对应本次每页提示词的汇报图片",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              4
+            ],
+            "quote": "用户输入索引3（第4轮）：按照你的提示词，生成每一页的图，逐页生成，high quality。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "本次「对应本次每页提示词的汇报图片」实际交付链接或路径可解析到当前可用的已声明的最终文件，image数据非空，并能用图片解码器打开，包含像素尺寸及有效图像帧。同一对象只计最终有效版本。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+        },
+        {
+          "kind": "manifest_corresponding_artifacts",
+          "parameters": {
+            "count_from": "current_attempt_prompt_page_manifest",
+            "manifest_source": "actually_delivered_prompt_text_for_turn_3",
+            "freeze_manifest_before_image_phase": true,
+            "require_one_readable_final_image_per_page": true,
+            "reject_terminal_self_declared_subsets": true
+          },
+          "mandatory": true,
+          "point_id": "conv_737c4b010b18:delivery2:check2",
+          "display_object": "对应本次每页提示词的汇报图片",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              3,
+              4
+            ],
+            "quote": "按照你的提示词，生成每一页的图"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "用户明确条目或生图前冻结的本次逐页提示词条目全部对应非重复、可读的最终图像。",
+          "score_at": "conversation_end_only",
+          "audit_action": "replace",
+          "audit_metadata_not_execution_parameters": {
+            "count_from": "current_attempt_prompt_page_manifest",
+            "manifest_source": "actually_delivered_prompt_text_for_turn_3",
+            "freeze_manifest_before_image_phase": true,
+            "require_one_readable_final_image_per_page": true,
+            "reject_terminal_self_declared_subsets": true
+          },
+          "audit_rationale": "清单必须来自第3轮实际提示词，不能用临末自报子集或旧AI页数降要求。"
+        }
+      ],
+      "delivery_id": "conv_737c4b010b18:final:1",
+      "id": "delivery_02",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    }
+  ],
+  "checks": [
+    {
+      "delivery_id": "delivery_01",
+      "kind": "delivered_text_nonempty",
+      "parameters": {
+        "trim_whitespace": true
+      },
+      "mandatory": true,
+      "point_id": "conv_737c4b010b18:delivery1:check1",
+      "display_object": "面向科委汇报的每页文字/生图提示词",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          2,
+          3
+        ],
+        "quote": "用户输入索引1（第2轮）：需要提示的是，不需要专家评审，整体逻辑包括批量导入，然后可以智能分析或直接进行项目管理，在项目管理过程中也可以进行智能分析。然后项目不仅仅包括批量导入，也可以手动录入。；用户输入索引2（第3轮）：我明天需要去给科委汇报，需要准备一份ppt，汇报内容上聚焦在我们能提供什么，不要行业概况啥的，浅色背景，帮我文字输出一下每一页内容，用于生图提示词。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "会话终态读取本次向用户交付的「面向科委汇报的每页文字/生图提示词」文字集合，去掉空白后仍非空；允许相应文件原生抽取正文。不把计划、声明与实质完成做语义区分，不核事实或专业正确性。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+    },
+    {
+      "delivery_id": "delivery_02",
+      "kind": "delivered_file_open",
+      "parameters": {
+        "format": "image"
+      },
+      "mandatory": true,
+      "point_id": "conv_737c4b010b18:delivery2:check1",
+      "display_object": "对应本次每页提示词的汇报图片",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          4
+        ],
+        "quote": "用户输入索引3（第4轮）：按照你的提示词，生成每一页的图，逐页生成，high quality。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "本次「对应本次每页提示词的汇报图片」实际交付链接或路径可解析到当前可用的已声明的最终文件，image数据非空，并能用图片解码器打开，包含像素尺寸及有效图像帧。同一对象只计最终有效版本。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+    },
+    {
+      "delivery_id": "delivery_02",
+      "kind": "manifest_corresponding_artifacts",
+      "parameters": {
+        "count_from": "current_attempt_prompt_page_manifest",
+        "manifest_source": "actually_delivered_prompt_text_for_turn_3",
+        "freeze_manifest_before_image_phase": true,
+        "require_one_readable_final_image_per_page": true,
+        "reject_terminal_self_declared_subsets": true
+      },
+      "mandatory": true,
+      "point_id": "conv_737c4b010b18:delivery2:check2",
+      "display_object": "对应本次每页提示词的汇报图片",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          3,
+          4
+        ],
+        "quote": "按照你的提示词，生成每一页的图"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "用户明确条目或生图前冻结的本次逐页提示词条目全部对应非重复、可读的最终图像。",
+      "score_at": "conversation_end_only",
+      "audit_action": "replace",
+      "audit_metadata_not_execution_parameters": {
+        "count_from": "current_attempt_prompt_page_manifest",
+        "manifest_source": "actually_delivered_prompt_text_for_turn_3",
+        "freeze_manifest_before_image_phase": true,
+        "require_one_readable_final_image_per_page": true,
+        "reject_terminal_self_declared_subsets": true
+      },
+      "audit_rationale": "清单必须来自第3轮实际提示词，不能用临末自报子集或旧AI页数降要求。"
+    }
+  ],
+  "ignored_details": [
+    "内容质量、美观、事实结论正确性、操作技能和过程不评分。"
+  ],
+  "input_bindings_needed": [],
+  "service_patch_needed": false,
+  "exclusion_candidate": false,
+  "no_old_ai_as_gold": true,
+  "implemented": false,
+  "executed": false,
+  "session_id": "conv_737c4b010b18",
+  "schema": "audited-per-task-delivery-contract-v1",
+  "score_at": "conversation_end_only",
+  "full_user_input_review": true,
+  "checked_user_turn_indices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "actor_can_see_historical_ai": false,
+  "quality_scored": false,
+  "intermediate_steps_scored": false,
+  "manual_judgement_scored": false,
+  "review_status": "audited_for_basic_delivery_only",
+  "validators_execution_status": "offline_controls_only_not_business_run",
+  "summary": "用户先提供专项管理平台方案并澄清取消专家评审，保留批量导入、手动录入、项目管理及各阶段智能分析。为次日科委汇报要求聚焦可提供的能力、浅色背景，先输出每页生图提示词，再按提示词逐页生成图片。终态需文字和本次实际页清单对应图片，不固定历史AI页数。",
+  "category_name": "文档、演示与视觉内容",
+  "design_audit_status": "approved_basic_with_revisions",
+  "execution_preflight": {
+    "status": "requires_current_attempt_evidence",
+    "note": "本轮未重验环境或执行任务；脚本须读当前attempt实际交付/服务状态。"
+  },
+  "user_source_texts": [
+    "请使用中文回复，除非用户明确使用其他语言。\n\n先学习一下这份文件\n\n【本轮实际提供的输入文件】\n- 2026-08-09_科委概念验证专项管理平台_方案_V1.0.docx：/workspace/对话附件/2026-08-09_科委概念验证专项管理平台_方案_V1.0.docx（实验重建输入）",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n需要提示的是，不需要专家评审，整体逻辑包括批量导入，然后可以智能分析或直接进行项目管理，在项目管理过程中也可以进行智能分析。然后项目不仅仅包括批量导入，也可以手动录入。",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n我明天需要去给科委汇报，需要准备一份ppt，汇报内容上聚焦在我们能提供什么，不要行业概况啥的，浅色背景，帮我文字输出一下每一页内容，用于生图提示词",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n按照你的提示词，生成每一页的图，逐页生成，high quality"
+  ],
+  "input_source_specs": [
+    {
+      "mount": "对话附件/2026-08-09_科委概念验证专项管理平台_方案_V1.0.docx",
+      "format": "docx",
+      "synthetic": true,
+      "provenance": null,
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_original_inputs_v10_20261011\\resources\\objects\\a662acdc8011adb4e58ca412ea76c9a28f570bed9a87a40709eff6e72cdddc74\\2026-08-09_科委概念验证专项管理平台_方案_V1.0.docx",
+      "sha256": "a662acdc8011adb4e58ca412ea76c9a28f570bed9a87a40709eff6e72cdddc74"
+    },
+    {
+      "mount": "对话附件/2026-08-09_科委概念验证专项管理平台_方案_V1.0.docx",
+      "format": "docx",
+      "synthetic": true,
+      "provenance": null,
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_original_inputs_v10_20261011\\resources\\clean_alignment\\v6\\a662acdc8011adb4e58ca412ea76c9a28f570bed9a87a40709eff6e72cdddc74\\2026-08-09_科委概念验证专项管理平台_方案_V1.0.docx",
+      "sha256": "a662acdc8011adb4e58ca412ea76c9a28f570bed9a87a40709eff6e72cdddc74"
+    }
+  ]
+}

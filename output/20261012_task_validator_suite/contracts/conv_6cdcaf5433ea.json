@@ -1,0 +1,107 @@
+{
+  "sid": "conv_6cdcaf5433ea",
+  "session_id": "conv_6cdcaf5433ea",
+  "title": "抓取指定小红书帖子并交付信息正文",
+  "category": "NEWS",
+  "status": "proposed_active",
+  "final_target": "小红书信息正文",
+  "final_deliverables": [
+    {
+      "name": "小红书信息正文",
+      "kind": "text",
+      "format": null,
+      "turn_indices": [
+        0
+      ],
+      "checks": [
+        {
+          "kind": "delivered_body_nonempty",
+          "parameters": {
+            "strip_whitespace": true,
+            "no_minimum_words_invented": true,
+            "semantic_completion_not_inferred": true
+          },
+          "mandatory": true,
+          "point_id": "conv_6cdcaf5433ea:delivery1:check1",
+          "display_object": "小红书信息正文",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              1
+            ],
+            "quote": "用户输入索引0（第1轮）：【个人助手设定】 你的名字叫「小明」，请在对话中以此自称。 请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。 请在本轮及后续对话中始终遵循以上设定。 用agent browser这个技能，抓取https://www.xiaohongshu.com/explore/69。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "会话终态读取本次向用户交付的「小红书信息正文」文字集合，去掉空白后仍非空；允许相应文件原生抽取正文。不把计划、声明与实质完成做语义区分，不核事实或专业正确性。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+        }
+      ],
+      "id": "delivery_01",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    }
+  ],
+  "checks": [
+    {
+      "delivery_id": "delivery_01",
+      "kind": "delivered_body_nonempty",
+      "parameters": {
+        "strip_whitespace": true,
+        "no_minimum_words_invented": true,
+        "semantic_completion_not_inferred": true
+      },
+      "mandatory": true,
+      "point_id": "conv_6cdcaf5433ea:delivery1:check1",
+      "display_object": "小红书信息正文",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          1
+        ],
+        "quote": "用户输入索引0（第1轮）：【个人助手设定】 你的名字叫「小明」，请在对话中以此自称。 请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。 请在本轮及后续对话中始终遵循以上设定。 用agent browser这个技能，抓取https://www.xiaohongshu.com/explore/69。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "会话终态读取本次向用户交付的「小红书信息正文」文字集合，去掉空白后仍非空；允许相应文件原生抽取正文。不把计划、声明与实质完成做语义区分，不核事实或专业正确性。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+    }
+  ],
+  "ignored_details": [
+    "历史AI答案与原生产物不是本次gold；不评分中间轮次success、技能调用、主观质量或法律/科学/金融正确性。",
+    "不评外站信息真实性，原脱敏链接用既有环境映射，不擅自加条数门槛。"
+  ],
+  "input_bindings_needed": [],
+  "original_user_turn_indices_inspected": [
+    0
+  ],
+  "requirement_source": "D:\\skillloop\\benchmark\\enterprise_environment_admitted_v7_20261009\\有效轨迹.jsonl",
+  "original_trace_sha256": "ceeb0dd8166e26bbbe0ed72427d420921314eee2b6e96f1539120a341f373a73",
+  "prior_analysis_path": "D:\\skillloop\\output\\20261010_evaluation_delivery_verifiability\\edu_know_news_life.json",
+  "reviewed": false,
+  "rubric_activated": false,
+  "assessment_executed": false,
+  "schema": "audited-per-task-delivery-contract-v1",
+  "score_at": "conversation_end_only",
+  "full_user_input_review": true,
+  "checked_user_turn_indices": [
+    0
+  ],
+  "actor_can_see_historical_ai": false,
+  "quality_scored": false,
+  "intermediate_steps_scored": false,
+  "manual_judgement_scored": false,
+  "review_status": "audited_for_basic_delivery_only",
+  "validators_execution_status": "offline_controls_only_not_business_run",
+  "summary": "用户要求通过浏览器技能抓取指定小红书链接的信息，链接包含原数据脱敏片段，依已有环境映射执行。没有规定记录条数或文件格式。当前终态检查仅核本次正文非空，不证明帖子读取成功、信息完整和真实，也不将是否调用指定技能列入任务成功判断。",
+  "category_name": "新闻与一般信息检索",
+  "design_audit_status": "approved_basic",
+  "execution_preflight": {
+    "status": "requires_current_attempt_evidence",
+    "note": "本轮未重验环境或执行任务；脚本须读当前attempt实际交付/服务状态。"
+  },
+  "user_source_texts": [
+    "【个人助手设定】\n你的名字叫「小明」，请在对话中以此自称。\n请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。\n请在本轮及后续对话中始终遵循以上设定。\n用agent browser这个技能，抓取https://www.xiaohongshu.com/explore/69da075d***CARD***里面的信息"
+  ],
+  "input_source_specs": []
+}

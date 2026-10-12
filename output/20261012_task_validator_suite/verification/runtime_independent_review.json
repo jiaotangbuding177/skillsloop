@@ -1,0 +1,188 @@
+{
+  "schema": "independent-runtime-code-review-v1",
+  "reviewer": "/root/review_legal_hr_checkpoints",
+  "date": "2026-10-12",
+  "scope": [
+    "output/20261012_task_validator_suite/_runtime.py",
+    "output/20261012_task_validator_suite/tests/test_runtime.py"
+  ],
+  "mode": "read_only_root_sources_local_temporary_fixtures",
+  "status": "changes_requested_against_reviewed_snapshot",
+  "snapshot_note": "Findings refer to the source read and fixture reproductions before any later root repair; reviewer did not edit root files.",
+  "findings": [
+    {
+      "id": "RUNTIME-1",
+      "severity": "high",
+      "location": "_runtime.py::validate_resolved_parameters",
+      "issue": "daily/weekly/monthly fixed-time values are classified as relative and arbitrary resolved overrides are accepted.",
+      "proof": "Frozen expected schedule=daily 08:00; override and authoritative record schedule=daily 09:00; score_task_request returned score=1,status=pass.",
+      "implication": "Explicit user time can be replaced by the observed result, producing a false positive.",
+      "recommendation": "Preserve fixed time/day components. Permit representational normalization only from a canonical source/time resolver with independent origin; reject conflicting daily 09:00 as unknown or use the fixed 08:00 predicate."
+    },
+    {
+      "id": "RUNTIME-2",
+      "severity": "high",
+      "location": "_runtime.py::FinalContext.files",
+      "issue": "Old initial artifacts are excluded only when final path matches the original inventory key.",
+      "proof": "initial_sha256={'old.txt':sha}; renamed.txt is a byte-for-byte copy of old.txt; final binding renamed.txt with allow_existing_file_reference=false returned score=1 and no provenance_rejections.",
+      "implication": "Renaming/copying an unchanged old artifact satisfies a new output obligation.",
+      "recommendation": "Compare current candidate SHA against initial inventory values as well as declared input values, with the explicit existing-reference exception retained."
+    },
+    {
+      "id": "RUNTIME-3",
+      "severity": "medium",
+      "location": "_runtime.py::FinalContext.files",
+      "issue": "Inventory dictionaries are type-checked but their digest values are not validated.",
+      "proof": "declared_input_sha256={'old.txt':'invalid_digest'} with a copied file returned score=1.",
+      "implication": "Malformed measurement data silently acts as an empty valid inventory rather than UNSCORED.",
+      "recommendation": "Validate digest encoding and the known inventory value schema; malformed inventories are UnknownEvidence before provenance comparison."
+    },
+    {
+      "id": "RUNTIME-4",
+      "severity": "medium",
+      "location": "_runtime.py::enrich_same_job_identity",
+      "issue": "A prefilled original_job_id skips real initial-snapshot verification.",
+      "proof": "Transition claimed original_job_id with no actual initial snapshot file; enrich_same_job_identity preserved the claim.",
+      "implication": "Missing real before-dispatch identity evidence need not remain unknown.",
+      "recommendation": "Verify any retained original_job_id against the actual hashed native initial snapshot, or only retain a separately verified provenance binding; do not accept an unproven prefilled ID."
+    },
+    {
+      "id": "RUNTIME-5",
+      "severity": "medium",
+      "location": "_runtime.py::score_task_request / frozen_row_fields / unscored",
+      "issue": "Engine loading occurs before the measurement try block; failure rendering also calls load_engine.",
+      "proof": "Controlled import failure during pinned engine load escaped score_task_request as ImportError.",
+      "implication": "Missing/corrupt implementation dependency can crash the CLI instead of returning UNSCORED.",
+      "recommendation": "Wrap engine load as a measurement failure and make frozen-row failure rendering merge parameters locally without reloading the unavailable engine."
+    }
+  ],
+  "passed_scope_observations": [
+    "Observed missing/blank ordinary mandatory deliveries produce 0; absence of required independent evidence produces UNSCORED.",
+    "Mandatory failures use AND; explicitly nonmandatory observations do not enter the score.",
+    "Source identity and complete-conversation flags are required; file paths remain inside the current workspace.",
+    "Selected-skill reference resolution is mandatory and tied to the actual previous new answer SHA; unresolved selections remain hard unknown.",
+    "No historical AI content was read in this review; source code, controlled metadata and current local fixture bytes only."
+  ],
+  "own_extension_cross_layer_correction": {
+    "issue": "PDF no-table observation returned scorable:false but lacked runtime's applicable:false flag, so the row was presented as pass.",
+    "action": "Corrected only _extensions.py to return applicable as well; added a PDF runtime integration regression in our own test file.",
+    "result": "41 own controls pass; PDF row is not_applicable with passed:null and scorable:false; mandatory PDF file delivery still governs the task."
+  },
+  "accepted_fields": {
+    "final_distinct_artifact_objects": {
+      "fields": [
+        "delivery_ids",
+        "required_distinct_object_count"
+      ],
+      "values": "IDs are unique nonempty strings; count is a positive int, not bool. Resolve reviewed delivery_indices to actual delivery IDs.",
+      "discarded_metadata": [
+        "delivery_indices",
+        "compare",
+        "hash_equality_does_not_prove_same_object",
+        "no_fixed_pixel_or_page_count"
+      ]
+    },
+    "final_artifact_parent_directory": {
+      "fields": [
+        "directory_label"
+      ],
+      "values": "directory_label is a nonempty string. Independent directory_binding label/path/source/authoritative/frozen-origin evidence is required.",
+      "discarded_metadata": [
+        "delivery_index",
+        "expected_directory_label",
+        "resolve_directory_from",
+        "require_canonical_descendant",
+        "require_readable_final_artifact",
+        "unresolved_mapping"
+      ]
+    },
+    "final_native_document_no_tables": {
+      "fields": [
+        "non_docx_policy"
+      ],
+      "values": "Only report_only. Actual non-DOCX outputs have scorable:false,applicable:false; DOCX native tables are checked.",
+      "discarded_metadata": [
+        "delivery_index",
+        "native_formats",
+        "forbidden_element",
+        "scope",
+        "on_non_native_or_pdf",
+        "do_not_force_output_format"
+      ]
+    },
+    "final_service_state": {
+      "top_fields": [
+        "service",
+        "min_records",
+        "assignee",
+        "expected",
+        "schedule_hints",
+        "records",
+        "trigger_required",
+        "source_job_id"
+      ],
+      "source_job_id_scope": "Only final_service_state with service cron_registration; otherwise UnknownEvidence. Without source_job_id delegate unchanged to the base handler.",
+      "expected_fields_with_source_job_id": [
+        "name",
+        "start",
+        "schedule",
+        "timezone",
+        "payload",
+        "outputs_configured",
+        "timeout",
+        "created",
+        "id",
+        "not_required",
+        "same_task_repetition",
+        "actual_trigger_not_evaluated"
+      ],
+      "conversion": {
+        "payload_ref": "canonical_user_turn_5_task_payload -> payload:user_turn_4_full_task_text",
+        "registered_exists": "true -> created:true (base means actual record ID exists)",
+        "existing_job_identity_ref": "source UUID -> top-level source_job_id",
+        "timeout_object": "final_gt_initial_same_job -> raised_value_recorded_but_no_exact_target_user_value",
+        "docx_scope": "Remove metadata; base handler already iterates each bound DOCX"
+      }
+    },
+    "scheduler_record_fields": {
+      "top_fields": [
+        "service",
+        "min_records",
+        "assignee",
+        "expected",
+        "schedule_hints",
+        "records",
+        "trigger_required"
+      ],
+      "note": "source_job_id is not a valid route for this kind; original behavior is delegated unchanged."
+    },
+    "docx_track_change_elements_exist": {
+      "minimal_fields": [
+        "elements",
+        "any_of"
+      ],
+      "parameters": {
+        "elements": [
+          "w:ins",
+          "w:del"
+        ],
+        "any_of": true
+      },
+      "note": "Do not forward scope/require_each_file_checked/exclude_former_attempt_records; actual source loops all opened DOCX files. No original-revision preservation assertion."
+    },
+    "policy_metadata": {
+      "fields": [
+        "score_at",
+        "historical_ai_is_gold"
+      ],
+      "values_for_new_handlers": {
+        "score_at": "conversation_end_only",
+        "historical_ai_is_gold": false
+      },
+      "note": "These are declared scorer policy metadata, not extra content requirements."
+    }
+  },
+  "root_sources_modified": false,
+  "services_accessed": false,
+  "actor_or_model_calls": 0
+}

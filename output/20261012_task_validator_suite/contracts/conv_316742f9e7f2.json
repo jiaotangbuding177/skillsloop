@@ -1,0 +1,132 @@
+{
+  "sid": "conv_316742f9e7f2",
+  "category": "COMM",
+  "title": "126邮箱向本人发送测试邮件（会话3167）",
+  "user_turn_count": 1,
+  "scoring_time": "one_pass_at_session_end",
+  "final_target": "给本人发送的测试邮件",
+  "final_deliverables": [
+    {
+      "name": "给本人发送的测试邮件",
+      "kind": "service",
+      "format": "smtp",
+      "turn_indices": [
+        0
+      ],
+      "final_version_only": true,
+      "checks": [
+        {
+          "kind": "final_service_state",
+          "parameters": {
+            "service": "smtp",
+            "expected": {
+              "recipient": "current_authorized_personal_account",
+              "subject": "测试",
+              "body": "测试",
+              "final_status": "SMTP_accepted",
+              "not_required": [
+                "收件人已读",
+                "收件人实际到达"
+              ],
+              "same_task_repetition": "one_final_delivery_no_duplicate_score"
+            }
+          },
+          "mandatory": true,
+          "point_id": "conv_316742f9e7f2:delivery1:check1",
+          "display_object": "给本人发送的测试邮件",
+          "requirement_basis": [
+            {
+              "turn_1based": 1,
+              "quote": "请使用技能「imap-smtp-email」协助当前任务。 我要发送【126邮件】，请引导我获取授权码，然后发送邮件给我自己：主题【测试】，内容【测试】"
+            }
+          ],
+          "evidence_method": "本次SMTP实际发送请求参数、账户/收件地址映射、服务器接受响应及关联attempt的message记录；历史收据、伪造日志或文字成功声明无效。",
+          "passing_condition": "本attempt发送给当前授权本人账户的邮件，收件地址由该账户解析；主题“测试”、正文“测试”，真实终态为SMTP_accepted。同一任务重复提问只核一份最终交付，不要求收件箱到达或已读。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只核本次会话终态的已请求交付对象及原有明确基础条件。保留历史用户轮次作需求来源，不逐轮打分，不使用旧AI作为gold。 仅接受关联本attempt的真实工具终态记录/读回，不把完成声明或历史收据当状态。定时不触发，SMTP接受不等于到达。"
+        }
+      ],
+      "delivery_id": "conv_316742f9e7f2:final:0",
+      "id": "delivery_01",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    }
+  ],
+  "checks": [
+    {
+      "delivery_id": "delivery_01",
+      "kind": "final_service_state",
+      "parameters": {
+        "service": "smtp",
+        "expected": {
+          "recipient": "current_authorized_personal_account",
+          "subject": "测试",
+          "body": "测试",
+          "final_status": "SMTP_accepted",
+          "not_required": [
+            "收件人已读",
+            "收件人实际到达"
+          ],
+          "same_task_repetition": "one_final_delivery_no_duplicate_score"
+        }
+      },
+      "mandatory": true,
+      "point_id": "conv_316742f9e7f2:delivery1:check1",
+      "display_object": "给本人发送的测试邮件",
+      "requirement_basis": [
+        {
+          "turn_1based": 1,
+          "quote": "请使用技能「imap-smtp-email」协助当前任务。 我要发送【126邮件】，请引导我获取授权码，然后发送邮件给我自己：主题【测试】，内容【测试】"
+        }
+      ],
+      "evidence_method": "本次SMTP实际发送请求参数、账户/收件地址映射、服务器接受响应及关联attempt的message记录；历史收据、伪造日志或文字成功声明无效。",
+      "passing_condition": "本attempt发送给当前授权本人账户的邮件，收件地址由该账户解析；主题“测试”、正文“测试”，真实终态为SMTP_accepted。同一任务重复提问只核一份最终交付，不要求收件箱到达或已读。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只核本次会话终态的已请求交付对象及原有明确基础条件。保留历史用户轮次作需求来源，不逐轮打分，不使用旧AI作为gold。 仅接受关联本attempt的真实工具终态记录/读回，不把完成声明或历史收据当状态。定时不触发，SMTP接受不等于到达。"
+    }
+  ],
+  "ignored_details": [
+    "内容质量、美观、事实结论正确性、操作技能和过程不评分。"
+  ],
+  "input_bindings_needed": [],
+  "service_patch_needed": false,
+  "exclusion_candidate": false,
+  "no_old_ai_as_gold": true,
+  "implemented": false,
+  "executed": false,
+  "session_id": "conv_316742f9e7f2",
+  "schema": "audited-per-task-delivery-contract-v1",
+  "score_at": "conversation_end_only",
+  "full_user_input_review": true,
+  "checked_user_turn_indices": [
+    0
+  ],
+  "actor_can_see_historical_ai": false,
+  "quality_scored": false,
+  "intermediate_steps_scored": false,
+  "manual_judgement_scored": false,
+  "review_status": "audited_for_basic_delivery_only",
+  "validators_execution_status": "offline_controls_only_not_business_run",
+  "summary": "用户要求使用126邮箱，引导获取授权码后向本人发送测试邮件。主题及正文均明确为“测试”，收件人由当前授权个人账户解析；最终只核本次运行对应的真实SMTP接受状态和邮件参数，不将历史邮件收据、技能动作或完成声明作为实际发送证据。",
+  "category_name": "行政协同、邮件与日程",
+  "design_audit_status": "approved_limited_delivery",
+  "execution_preflight": {
+    "status": "current_attempt_evidence_required"
+  },
+  "user_source_texts": [
+    "请使用技能「imap-smtp-email」协助当前任务。\n我要发送【126邮件】，请引导我获取授权码，然后发送邮件给我自己：主题【测试】，内容【测试】\n\n【本轮实际提供的输入文件】\n- source_mail.json：/workspace/services/source_mail.json（实验重建输入）"
+  ],
+  "input_source_specs": [
+    {
+      "mount": "services/source_mail.json",
+      "format": "json",
+      "synthetic": true,
+      "provenance": "authorized_source_scoped_experiment_preparation",
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_original_inputs_v10_20261011\\resources\\clean_alignment\\v6\\e1f5e67b096d1d1e33545bc9b7d55dae2b44024bae63a944d52a2328df0f4eb9\\source_mail.json",
+      "sha256": "e1f5e67b096d1d1e33545bc9b7d55dae2b44024bae63a944d52a2328df0f4eb9"
+    }
+  ]
+}

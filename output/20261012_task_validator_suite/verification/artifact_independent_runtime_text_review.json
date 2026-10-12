@@ -1,0 +1,189 @@
+{
+  "schema": "independent-code-review-probes-v1",
+  "scope": "Local constructed fixtures only; no business task, model or actual service runs. Implementation untouched.",
+  "implementation_sha256": {
+    "_runtime.py": "c4c6da846fef9d28989d69044526b65cf40f888cd1c6e1e568d6f88cbb54ad66",
+    "_text_extensions.py": "15f0014c05894d51f6c5e78bcf05fd42e9b8e2ed009e3fb4f5e006cdbe2f4aec",
+    "_artifact_extensions.py": "a1b666d2f0561f2c7f4e6e9d2d827a6aab4b3377869de5b9643b70faa2fa46c1",
+    "_extensions.py": "61dd071e1cc42b8d26e9faf8567a930992e8e1ac0b823f4ba767d6d56aa154f4"
+  },
+  "probes": [
+    {
+      "case": "renamed_old_skill_package",
+      "expected_status": "FAIL",
+      "actual_status": "FAIL",
+      "actual_check_status": "fail",
+      "reason": "skill_package_has_no_new_or_changed_bytes",
+      "observed": null
+    },
+    {
+      "case": "actual_new_helper_file_in_package",
+      "expected_status": "PASS",
+      "actual_status": "PASS",
+      "actual_check_status": "pass",
+      "reason": null,
+      "observed": {
+        "readable_entries": [
+          "skill\\SKILL.md"
+        ],
+        "new_or_changed_package_files": [
+          "skill/helper.py"
+        ]
+      }
+    },
+    {
+      "case": "skill_explicitly_incomplete_initial_inventory",
+      "expected_status": "UNSCORED",
+      "actual_status": "PASS",
+      "actual_check_status": "pass",
+      "reason": null,
+      "observed": {
+        "readable_entries": [
+          "skill\\SKILL.md"
+        ],
+        "new_or_changed_package_files": [
+          "skill/SKILL.md",
+          "skill/helper.py"
+        ]
+      }
+    },
+    {
+      "case": "skill_invalid_initial_digest",
+      "expected_status": "UNSCORED",
+      "actual_status": "PASS",
+      "actual_check_status": "pass",
+      "reason": null,
+      "observed": {
+        "readable_entries": [
+          "skill\\SKILL.md"
+        ],
+        "new_or_changed_package_files": [
+          "skill/SKILL.md",
+          "skill/helper.py"
+        ]
+      }
+    },
+    {
+      "case": "pdf_text_render_mode_restored_by_Q",
+      "expected_status": "FAIL",
+      "actual_status": "PASS",
+      "actual_check_status": "pass",
+      "reason": null,
+      "observed": {
+        "image_only_pages_verified": true,
+        "hidden_ocr_text_allowed": true
+      }
+    },
+    {
+      "case": "text_registered_count_param",
+      "expected_status": "PASS",
+      "actual_status": "UNSCORED",
+      "actual_check_status": "unknown",
+      "reason": "validator_parameters_not_implemented:count_mode,min_characters",
+      "observed": null
+    },
+    {
+      "case": "missing_quotation_handler",
+      "expected_status": "PASS",
+      "actual_status": "UNSCORED",
+      "actual_check_status": "unknown",
+      "reason": "validator_not_implemented:quotation_named_numeric_fields",
+      "observed": null
+    },
+    {
+      "case": "input_format_alias_substring",
+      "expected_status": "FAIL",
+      "actual_status": "FAIL",
+      "actual_check_status": "fail",
+      "reason": "skill_declared_input_format_missing:word",
+      "observed": null
+    }
+  ],
+  "service_controls": [
+    {
+      "case": "current_created_issue_for_required_assignee",
+      "expected_status": "PASS",
+      "actual_status": "PASS",
+      "reason": null,
+      "observed": {
+        "matching_records": 1,
+        "actual_trigger_evaluated": false
+      }
+    },
+    {
+      "case": "old_issue_is_not_current_creation",
+      "expected_status": "FAIL",
+      "actual_status": "FAIL",
+      "reason": "final_service_record_count_below_requirement",
+      "observed": null
+    },
+    {
+      "case": "foreign_task_creation_is_not_current_creation",
+      "expected_status": "FAIL",
+      "actual_status": "FAIL",
+      "reason": "final_service_record_count_below_requirement",
+      "observed": null
+    },
+    {
+      "case": "different_records_cannot_splice_create_and_assignee",
+      "expected_status": "FAIL",
+      "actual_status": "FAIL",
+      "reason": "final_service_record_count_below_requirement",
+      "observed": null
+    },
+    {
+      "case": "fixed_expected_override_rejected",
+      "expected_status": "UNSCORED",
+      "actual_status": "UNSCORED",
+      "reason": "resolved_parameter_conflicts_with_frozen_requirement:recipient",
+      "observed": null
+    }
+  ],
+  "findings": [
+    {
+      "id": "ART-R1",
+      "priority": "high",
+      "location": "_runtime.py::_register_terminal_guards/whole_skill_state",
+      "scope": "must_be_changed/new_generated_skill_required package checks",
+      "problem": "Explicitly incomplete initial file inventory is accepted as a valid baseline for newly changed skill bytes. Directory skill checks bypass FinalContext.files inventory guard.",
+      "reproduction": "Set measurement.initial_snapshot_complete=false with a valid nonempty skill package and initial_sha256={}. Current check returns PASS.",
+      "expected": "UnknownEvidence / UNSCORED until a usable initial baseline exists. No new mandatory complete=true legacy field is proposed."
+    },
+    {
+      "id": "ART-R2",
+      "priority": "high",
+      "location": "_runtime.py::_register_terminal_guards/whole_skill_state",
+      "scope": "package SHA comparison",
+      "problem": "Invalid initial digest values are put into old_hashes without validation, so every valid current digest differs and a skill package can falsely qualify as new.",
+      "reproduction": "Set initial_sha256={\"unknown_file\":\"invalid_digest\"}; current skill package returns PASS.",
+      "expected": "UnknownEvidence / UNSCORED for invalid baseline inventory. Preserve package-level helper/script changes as valid basic changes."
+    },
+    {
+      "id": "ART-R3",
+      "priority": "high",
+      "location": "_text_extensions.py::pdf_only_images",
+      "scope": "pure image PDF check only",
+      "problem": "PDF q/Q restores text rendering mode, but the check retains the last Tr value. Visible text after Q can be treated as invisible OCR.",
+      "reproduction": "Content stream: q ... /I Do Q q 3 Tr Q BT /F 12 Tf 10 10 Td (Visible caption) Tj ET. Current check returns PASS although the caption paints with restored mode 0.",
+      "expected": "DeliveryFailure for reliably parsed visible text; track the text-rendering state stack or UnknownEvidence if state cannot be established. No OCR or subjective watermark quality check is proposed."
+    },
+    {
+      "id": "ART-R4",
+      "priority": "high",
+      "location": "_text_extensions.py and tests/test_text_extensions.py",
+      "scope": "implementation/test/compiler interface consistency",
+      "problem": "Inspected module registers minimum/count_rule and returns nonempty_items; tests use min_characters/count_mode and expect item_count. The module also lacks quotation_named_numeric_fields and additional kinds referenced by tests.",
+      "reproduction": "The complete valid runtime fixture with min_characters/count_mode is UNSCORED unsupported parameters; quotation kind is UNSCORED not implemented. Direct test suite additionally stops 21 cases at source identity because its fixture omits task_id.",
+      "expected": "Synchronize the intended implementation, compiled parameters and controls before relying on green test claims. Record exact tested implementation hashes.",
+      "evidence": "verification/independent_text_tests.txt: 21 failed / 1 passed on inspected bytes."
+    }
+  ],
+  "reasonable_boundaries": [
+    "Renamed byte-identical initial skill packages correctly fail, while a genuine new helper file in the same package correctly passes the physical package-change condition.",
+    "Current creation is checked from same-source current-attempt create provenance. Old or foreign records cannot qualify, and separate records cannot splice creator/assignee requirements.",
+    "Changing a frozen recipient through resolved_parameters correctly produces UNSCORED rather than adopting output as gold.",
+    "These controls prove limited basic mechanical evidence only. They do not certify actual benchmark delivery, business correctness, skill semantic content, visual quality, or scheduler execution.",
+    "Legacy baseline schema can support a complete inventory without a newly invented mandatory complete=true flag; an explicit incomplete=false condition in these fixtures refers to initial_snapshot_complete=false and must be honored."
+  ],
+  "review_status": "needs_revision_before_frozen_release"
+}

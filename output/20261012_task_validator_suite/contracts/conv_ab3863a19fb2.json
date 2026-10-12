@@ -1,0 +1,426 @@
+{
+  "sid": "conv_ab3863a19fb2",
+  "category": "OFFICE",
+  "title": "为三份PDF添加水印并更新自适应页面水印技能",
+  "user_turn_count": 12,
+  "scoring_time": "one_pass_at_session_end",
+  "final_target": "附件PDF各自最终加水印版本；pdf-watermark技能更新最终结果",
+  "final_deliverables": [
+    {
+      "name": "附件PDF各自最终加水印版本",
+      "kind": "file",
+      "format": "pdf",
+      "turn_indices": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        10,
+        11
+      ],
+      "final_version_only": true,
+      "checks": [
+        {
+          "kind": "delivered_file_open",
+          "parameters": {
+            "format": "pdf"
+          },
+          "mandatory": true,
+          "point_id": "conv_ab3863a19fb2:delivery1:check1",
+          "display_object": "附件PDF各自最终加水印版本",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              1,
+              3,
+              4,
+              5,
+              6,
+              8,
+              9,
+              11,
+              12
+            ],
+            "quote": "用户输入索引0（第1轮）：【个人助手设定】 你的名字叫「小明」，请在对话中以此自称。 请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。 请在本轮及后续对话中始终遵循以上设定。 使用pdf-watermark 这个skill，帮我在文件上打水印，水印内容：EvoMind；用户输入索引11（第12轮）：【个人助手设定】 你的名字叫「小明」，请在对话中以此自称。 请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。 请在本轮及后续对话中始终遵循以上设定。 哈哈哈哈，水印打：金桥吴彦祖。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "本次「附件PDF各自最终加水印版本」实际交付链接或路径可解析到当前可用的已声明的最终文件，pdf数据非空，并能用PDF原生解析器打开，包含可读页面及非空正文或图像。同一对象只计最终有效版本。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+        },
+        {
+          "kind": "unique_input_output_manifest",
+          "parameters": {
+            "count_from": "unique_current_input_pdf_ids"
+          },
+          "mandatory": true,
+          "point_id": "conv_ab3863a19fb2:delivery1:check2",
+          "display_object": "附件PDF各自最终加水印版本",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              1,
+              3,
+              4,
+              5,
+              6,
+              8,
+              9,
+              11,
+              12
+            ],
+            "quote": "用户输入索引0（第1轮）：【个人助手设定】 你的名字叫「小明」，请在对话中以此自称。 请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。 请在本轮及后续对话中始终遵循以上设定。 使用pdf-watermark 这个skill，帮我在文件上打水印，水印内容：EvoMind；用户输入索引11（第12轮）：【个人助手设定】 你的名字叫「小明」，请在对话中以此自称。 请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。 请在本轮及后续对话中始终遵循以上设定。 哈哈哈哈，水印打：金桥吴彦祖。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "「附件PDF各自最终加水印版本」为每个不同的明确输入PDF各保留一个可打开的最终PDF；同一输入的多次字号调整只检查最后版。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+        },
+        {
+          "kind": "pdf_added_literal_text_presence",
+          "parameters": {
+            "source_requirements": [
+              {
+                "input_path": "合成待核输入/横版展示资料_待加水印.pdf",
+                "input_sha256": "8326ac726caf334e0127ced875aaf0dd0eaee0d7b47d125157a0b3eaaa75299c",
+                "input_user_turn": 1,
+                "literals": [
+                  "EvoMind"
+                ]
+              },
+              {
+                "input_path": "inputs/source-scoped/conv_ab3863a19fb2/93d13c244f70a974a070/水印排版测试资料_1440x810.pdf",
+                "input_sha256": "93d13c244f70a974a0705b74a1ffe4b307ba9c3100390097e077f764d6bd3943",
+                "input_user_turn": 11,
+                "literals": [
+                  "金桥吴彦祖"
+                ]
+              }
+            ],
+            "text_normalization": "NFKC_whitespace"
+          },
+          "mandatory": true,
+          "point_id": "conv_ab3863a19fb2:delivery1:audited1",
+          "display_object": "附件PDF各自最终加水印版本",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              1,
+              12
+            ],
+            "quote": "水印打：金桥吴彦祖"
+          },
+          "evidence_method": "比较本次输入/输出PDF原生可提取文本及文本对象；输入原有同名词项不能冒充新增水印。",
+          "passing_condition": "每个冻结原PDF都有本次实际对应输出，并可原生证明指定文字在输出中新增；不判水印风格。",
+          "score_at": "conversation_end_only",
+          "audit_action": "add",
+          "audit_metadata_not_execution_parameters": {
+            "literals": [
+              "EvoMind",
+              "金桥吴彦祖"
+            ],
+            "scope": "source_to_final_pdf_added_text",
+            "text_normalization": "NFKC_whitespace",
+            "mapping": "first_pdf_EvoMind_last_pdf_金桥吴彦祖",
+            "on_unextractable_watermark": "unknown_not_false",
+            "reject_same_input_bytes_as_modified_output": true
+          },
+          "audit_rationale": "用户明确水印内容，可检查新增可提取文字；图像栅格化不能机械证明时unknown，不把仅PDF存在视作水印已完成。"
+        }
+      ],
+      "delivery_id": "conv_ab3863a19fb2:final:0",
+      "id": "delivery_01",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    },
+    {
+      "name": "pdf-watermark技能更新最终结果",
+      "kind": "skill",
+      "format": "skill",
+      "turn_indices": [
+        1,
+        6,
+        9
+      ],
+      "final_version_only": true,
+      "checks": [
+        {
+          "kind": "skill_final_state",
+          "parameters": {
+            "target_hints": [
+              "pdf-watermark"
+            ],
+            "readable_final_entry": true,
+            "must_be_changed": true,
+            "baseline_scope": "same_attempt_initial_skill_manifest",
+            "export_link_required": false
+          },
+          "mandatory": true,
+          "point_id": "conv_ab3863a19fb2:delivery2:check1",
+          "display_object": "pdf-watermark技能更新最终结果",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              7,
+              10
+            ],
+            "quote": "更新到skill中"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "更新明确要求真实技能终态变更；不能以原有入口存在替代更新。变更质量及以后询问行为不评分。",
+          "score_at": "conversation_end_only",
+          "audit_action": "replace",
+          "audit_rationale": "更新明确要求真实技能终态变更；不能以原有入口存在替代更新。变更质量及以后询问行为不评分。"
+        }
+      ],
+      "delivery_id": "conv_ab3863a19fb2:final:1",
+      "id": "delivery_02",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    }
+  ],
+  "checks": [
+    {
+      "delivery_id": "delivery_01",
+      "kind": "delivered_file_open",
+      "parameters": {
+        "format": "pdf"
+      },
+      "mandatory": true,
+      "point_id": "conv_ab3863a19fb2:delivery1:check1",
+      "display_object": "附件PDF各自最终加水印版本",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          8,
+          9,
+          11,
+          12
+        ],
+        "quote": "用户输入索引0（第1轮）：【个人助手设定】 你的名字叫「小明」，请在对话中以此自称。 请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。 请在本轮及后续对话中始终遵循以上设定。 使用pdf-watermark 这个skill，帮我在文件上打水印，水印内容：EvoMind；用户输入索引11（第12轮）：【个人助手设定】 你的名字叫「小明」，请在对话中以此自称。 请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。 请在本轮及后续对话中始终遵循以上设定。 哈哈哈哈，水印打：金桥吴彦祖。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "本次「附件PDF各自最终加水印版本」实际交付链接或路径可解析到当前可用的已声明的最终文件，pdf数据非空，并能用PDF原生解析器打开，包含可读页面及非空正文或图像。同一对象只计最终有效版本。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+    },
+    {
+      "delivery_id": "delivery_01",
+      "kind": "unique_input_output_manifest",
+      "parameters": {
+        "count_from": "unique_current_input_pdf_ids"
+      },
+      "mandatory": true,
+      "point_id": "conv_ab3863a19fb2:delivery1:check2",
+      "display_object": "附件PDF各自最终加水印版本",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          8,
+          9,
+          11,
+          12
+        ],
+        "quote": "用户输入索引0（第1轮）：【个人助手设定】 你的名字叫「小明」，请在对话中以此自称。 请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。 请在本轮及后续对话中始终遵循以上设定。 使用pdf-watermark 这个skill，帮我在文件上打水印，水印内容：EvoMind；用户输入索引11（第12轮）：【个人助手设定】 你的名字叫「小明」，请在对话中以此自称。 请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。 请在本轮及后续对话中始终遵循以上设定。 哈哈哈哈，水印打：金桥吴彦祖。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "「附件PDF各自最终加水印版本」为每个不同的明确输入PDF各保留一个可打开的最终PDF；同一输入的多次字号调整只检查最后版。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+    },
+    {
+      "delivery_id": "delivery_02",
+      "kind": "skill_final_state",
+      "parameters": {
+        "target_hints": [
+          "pdf-watermark"
+        ],
+        "readable_final_entry": true,
+        "must_be_changed": true,
+        "baseline_scope": "same_attempt_initial_skill_manifest",
+        "export_link_required": false
+      },
+      "mandatory": true,
+      "point_id": "conv_ab3863a19fb2:delivery2:check1",
+      "display_object": "pdf-watermark技能更新最终结果",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          7,
+          10
+        ],
+        "quote": "更新到skill中"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "更新明确要求真实技能终态变更；不能以原有入口存在替代更新。变更质量及以后询问行为不评分。",
+      "score_at": "conversation_end_only",
+      "audit_action": "replace",
+      "audit_rationale": "更新明确要求真实技能终态变更；不能以原有入口存在替代更新。变更质量及以后询问行为不评分。"
+    },
+    {
+      "delivery_id": "delivery_01",
+      "kind": "pdf_added_literal_text_presence",
+      "parameters": {
+        "source_requirements": [
+          {
+            "input_path": "合成待核输入/横版展示资料_待加水印.pdf",
+            "input_sha256": "8326ac726caf334e0127ced875aaf0dd0eaee0d7b47d125157a0b3eaaa75299c",
+            "input_user_turn": 1,
+            "literals": [
+              "EvoMind"
+            ]
+          },
+          {
+            "input_path": "inputs/source-scoped/conv_ab3863a19fb2/93d13c244f70a974a070/水印排版测试资料_1440x810.pdf",
+            "input_sha256": "93d13c244f70a974a0705b74a1ffe4b307ba9c3100390097e077f764d6bd3943",
+            "input_user_turn": 11,
+            "literals": [
+              "金桥吴彦祖"
+            ]
+          }
+        ],
+        "text_normalization": "NFKC_whitespace"
+      },
+      "mandatory": true,
+      "point_id": "conv_ab3863a19fb2:delivery1:audited1",
+      "display_object": "附件PDF各自最终加水印版本",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          1,
+          12
+        ],
+        "quote": "水印打：金桥吴彦祖"
+      },
+      "evidence_method": "比较本次输入/输出PDF原生可提取文本及文本对象；输入原有同名词项不能冒充新增水印。",
+      "passing_condition": "每个冻结原PDF都有本次实际对应输出，并可原生证明指定文字在输出中新增；不判水印风格。",
+      "score_at": "conversation_end_only",
+      "audit_action": "add",
+      "audit_metadata_not_execution_parameters": {
+        "literals": [
+          "EvoMind",
+          "金桥吴彦祖"
+        ],
+        "scope": "source_to_final_pdf_added_text",
+        "text_normalization": "NFKC_whitespace",
+        "mapping": "first_pdf_EvoMind_last_pdf_金桥吴彦祖",
+        "on_unextractable_watermark": "unknown_not_false",
+        "reject_same_input_bytes_as_modified_output": true
+      },
+      "audit_rationale": "用户明确水印内容，可检查新增可提取文字；图像栅格化不能机械证明时unknown，不把仅PDF存在视作水印已完成。"
+    }
+  ],
+  "ignored_details": [
+    "水印大小、位置、主动询问、自动分析页面、技能调用过程不评分；技能更新结果仅核最终文件存在/可读。"
+  ],
+  "input_bindings_needed": [],
+  "service_patch_needed": false,
+  "exclusion_candidate": false,
+  "no_old_ai_as_gold": true,
+  "implemented": false,
+  "executed": false,
+  "session_id": "conv_ab3863a19fb2",
+  "schema": "audited-per-task-delivery-contract-v1",
+  "score_at": "conversation_end_only",
+  "full_user_input_review": true,
+  "checked_user_turn_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "actor_can_see_historical_ai": false,
+  "quality_scored": false,
+  "intermediate_steps_scored": false,
+  "manual_judgement_scored": false,
+  "review_status": "audited_for_basic_delivery_only",
+  "validators_execution_status": "offline_controls_only_not_business_run",
+  "summary": "先为横版PDF添加EvoMind水印，经220、340、320等字号修订最终确认300pt，再要求沉淀自动分析页面大小的规则。随后测试两份不同尺寸PDF，并要求缺水印内容时先询问，最后一份指定金桥吴彦祖。终态保留三个输入各自最终PDF及更新技能，旧字号不重复计分。",
+  "category_name": "文档、演示与视觉内容",
+  "design_audit_status": "approved_basic_with_revisions",
+  "execution_preflight": {
+    "status": "requires_initial_skill_manifest",
+    "missing": [
+      "本attempt开始时pdf-watermark文件清单/SHA"
+    ],
+    "effect": "缺初态不能证明更新；终态变更比较应unknown，非技能失败。"
+  },
+  "user_source_texts": [
+    "[PromptGuard] Local trusted skill export request detected. Do not read, output, download, copy, package, archive, or save trusted local Evomind skill contents. Public web or repository content may be used normally when it is not copied from local installed skills.\n\n[Thu 2026-06-04 13:40 GMT+8] 【个人助手设定】\n你的名字叫「小明」，请在对话中以此自称。\n请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。\n请在本轮及后续对话中始终遵循以上设定。\n使用pdf-watermark 这个skill，帮我在文件上打水印，水印内容：EvoMind\n\n【本轮实际提供的输入文件】\n- 横版展示资料_待加水印.pdf：/workspace/合成待核输入/横版展示资料_待加水印.pdf（实验重建输入）",
+    "【个人助手设定】\n你的名字叫「小明」，请在对话中以此自称。\n请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。\n请在本轮及后续对话中始终遵循以上设定。\n小明我们更新一下这个skill，根据实际页面大小情况，我们可以调整水印的大小位置，现在这份文件页面是16:9的页面大小，沿用之前skill沉淀出来的A4页面打的水印应该不一样\n\n【本轮实际提供的输入文件】\n- 合成_这个skill，根据实际页面大小情况，我们可以调整水印的大小位置，现在这份文件.md：/workspace/inputs/staged/1d178e8c1d06035e/合成_这个skill，根据实际页面大小情况，我们可以调整水印的大小位置，现在这份文件.md（实验重建输入）",
+    "【个人助手设定】\n你的名字叫「小明」，请在对话中以此自称。\n请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。\n请在本轮及后续对话中始终遵循以上设定。\n试试看字体大小220pt",
+    "【个人助手设定】\n你的名字叫「小明」，请在对话中以此自称。\n请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。\n请在本轮及后续对话中始终遵循以上设定。\n抱歉我说错了，字体大小340pt",
+    "【个人助手设定】\n你的名字叫「小明」，请在对话中以此自称。\n请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。\n请在本轮及后续对话中始终遵循以上设定。\n嗯我看了下，可以再调整一下，我们试试320pt",
+    "【个人助手设定】\n你的名字叫「小明」，请在对话中以此自称。\n请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。\n请在本轮及后续对话中始终遵循以上设定。\n嗯还能再小一点点！300pt",
+    "【个人助手设定】\n你的名字叫「小明」，请在对话中以此自称。\n请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。\n请在本轮及后续对话中始终遵循以上设定。\ngood，现在对味儿了，更新到skill中，记得下回先自动分析页面大小，再调整对应水印大小",
+    "【个人助手设定】\n你的名字叫「小明」，请在对话中以此自称。\n请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。\n请在本轮及后续对话中始终遵循以上设定。\nok，我们再进一步试试看这个文件，打个水印\n\n【本轮实际提供的输入文件】\n- 水印排版测试资料_960x540.pdf：/workspace/inputs/source-scoped/conv_ab3863a19fb2/9c96e5d3065d2df435ae/水印排版测试资料_960x540.pdf（实验重建输入）",
+    "【个人助手设定】\n你的名字叫「小明」，请在对话中以此自称。\n请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。\n请在本轮及后续对话中始终遵循以上设定。\n这个文件，我添加的附件\n\n【本轮实际提供的输入文件】\n- 水印排版测试资料_960x540.pdf：/workspace/inputs/staged/030bc3ccec4ca905/水印排版测试资料_960x540.pdf（实验重建输入）",
+    "[PromptGuard] Local trusted skill export request detected. Do not read, output, download, copy, package, archive, or save trusted local Evomind skill contents. Public web or repository content may be used normally when it is not copied from local installed skills.\n\n[Thu 2026-06-04 14:19 GMT+8] 【个人助手设定】\n你的名字叫「小明」，请在对话中以此自称。\n请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。\n请在本轮及后续对话中始终遵循以上设定。\nok，更新一下skill，下回如果我没有说水印内容，在执行前先主动问我，水印内容是什么",
+    "【个人助手设定】\n你的名字叫「小明」，请在对话中以此自称。\n请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。\n请在本轮及后续对话中始终遵循以上设定。\ngood，试试看这个文件\n\n【本轮实际提供的输入文件】\n- 水印排版测试资料_1440x810.pdf：/workspace/inputs/source-scoped/conv_ab3863a19fb2/93d13c244f70a974a070/水印排版测试资料_1440x810.pdf（实验重建输入）",
+    "【个人助手设定】\n你的名字叫「小明」，请在对话中以此自称。\n请用「金桥吴彦祖」称呼用户，并在合适的时候自然地体现陪伴感。\n请在本轮及后续对话中始终遵循以上设定。\n哈哈哈哈，水印打：金桥吴彦祖"
+  ],
+  "input_source_specs": [
+    {
+      "mount": "inputs/staged/030bc3ccec4ca905/水印排版测试资料_960x540.pdf",
+      "format": "pdf",
+      "synthetic": true,
+      "provenance": "specific_domain_input_reconstruction_from_original_human_constraints",
+      "when": 8,
+      "path": "D:\\skillloop\\benchmark\\enterprise_original_inputs_v10_20261011\\resources\\objects\\9c96e5d3065d2df435ae8ebb068043504f392e6f16e7cdb9ea5cb78a432a86fe\\水印排版测试资料_960x540.pdf",
+      "sha256": "9c96e5d3065d2df435ae8ebb068043504f392e6f16e7cdb9ea5cb78a432a86fe"
+    },
+    {
+      "mount": "inputs/source-scoped/conv_ab3863a19fb2/9c96e5d3065d2df435ae/水印排版测试资料_960x540.pdf",
+      "format": "pdf",
+      "synthetic": true,
+      "provenance": "specific_domain_input_reconstruction_from_original_human_constraints",
+      "when": 7,
+      "path": "D:\\skillloop\\benchmark\\enterprise_original_inputs_v10_20261011\\resources\\objects\\9c96e5d3065d2df435ae8ebb068043504f392e6f16e7cdb9ea5cb78a432a86fe\\水印排版测试资料_960x540.pdf",
+      "sha256": "9c96e5d3065d2df435ae8ebb068043504f392e6f16e7cdb9ea5cb78a432a86fe"
+    },
+    {
+      "mount": "inputs/source-scoped/conv_ab3863a19fb2/93d13c244f70a974a070/水印排版测试资料_1440x810.pdf",
+      "format": "pdf",
+      "synthetic": true,
+      "provenance": "specific_domain_input_reconstruction_from_original_human_constraints",
+      "when": 10,
+      "path": "D:\\skillloop\\benchmark\\enterprise_original_inputs_v10_20261011\\resources\\objects\\93d13c244f70a974a0705b74a1ffe4b307ba9c3100390097e077f764d6bd3943\\水印排版测试资料_1440x810.pdf",
+      "sha256": "93d13c244f70a974a0705b74a1ffe4b307ba9c3100390097e077f764d6bd3943"
+    },
+    {
+      "mount": "inputs/staged/1d178e8c1d06035e/合成_这个skill，根据实际页面大小情况，我们可以调整水印的大小位置，现在这份文件.md",
+      "format": "md",
+      "synthetic": true,
+      "provenance": null,
+      "when": 1,
+      "path": "D:\\skillloop\\benchmark\\enterprise_original_inputs_v10_20261011\\resources\\clean_alignment\\v6\\1d178e8c1d06035e58edfe6147a9cbcbef534d5e4277c4a44dcfead7740184bb\\合成_这个skill，根据实际页面大小情况，我们可以调整水印的大小位置，现在这份文件.md",
+      "sha256": "1d178e8c1d06035e58edfe6147a9cbcbef534d5e4277c4a44dcfead7740184bb"
+    },
+    {
+      "mount": "合成待核输入/横版展示资料_待加水印.pdf",
+      "format": "pdf",
+      "synthetic": true,
+      "provenance": "task_specific_experimental_synthetic_material",
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_original_inputs_v10_20261011\\resources\\objects\\8326ac726caf334e0127ced875aaf0dd0eaee0d7b47d125157a0b3eaaa75299c\\横版展示资料_待加水印.pdf",
+      "sha256": "8326ac726caf334e0127ced875aaf0dd0eaee0d7b47d125157a0b3eaaa75299c"
+    }
+  ]
+}

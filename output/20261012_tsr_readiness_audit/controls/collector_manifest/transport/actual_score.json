@@ -1,0 +1,108 @@
+{
+  "schema": "enterprise-per-task-basic-delivery-v1",
+  "source_session_id": "conv_737c4b010b18",
+  "task_id": "heldout_conv_737c4b010b18",
+  "task_title": "制作科委概念验证平台汇报逐页提示词及图片",
+  "category_name": "文档、演示与视觉内容",
+  "score_at": "conversation_end_only",
+  "valid": false,
+  "score": null,
+  "task_success_status": "UNSCORED",
+  "check_pass_fraction": null,
+  "checks": [
+    {
+      "index": 0,
+      "point_id": "conv_737c4b010b18:delivery1:check1",
+      "delivery_id": "delivery_01",
+      "kind": "delivered_text_nonempty",
+      "mandatory": true,
+      "scorable": true,
+      "检查对象": "面向科委汇报的每页文字/生图提示词",
+      "通过条件": "会话终态读取本次向用户交付的「面向科委汇报的每页文字/生图提示词」文字集合，去掉空白后仍非空；允许相应文件原生抽取正文。不把计划、声明与实质完成做语义区分，不核事实或专业正确性。",
+      "取证方法": "current_attempt_terminal_deliverable_only",
+      "用户要求依据": {
+        "user_turns_1_based": [
+          2,
+          3
+        ],
+        "quote": "用户输入索引1（第2轮）：需要提示的是，不需要专家评审，整体逻辑包括批量导入，然后可以智能分析或直接进行项目管理，在项目管理过程中也可以进行智能分析。然后项目不仅仅包括批量导入，也可以手动录入。；用户输入索引2（第3轮）：我明天需要去给科委汇报，需要准备一份ppt，汇报内容上聚焦在我们能提供什么，不要行业概况啥的，浅色背景，帮我文字输出一下每一页内容，用于生图提示词。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "校验参数": {
+        "trim_whitespace": true
+      },
+      "status": "pass",
+      "passed": true,
+      "observed": {
+        "characters": 6
+      }
+    },
+    {
+      "index": 1,
+      "point_id": "conv_737c4b010b18:delivery2:check1",
+      "delivery_id": "delivery_02",
+      "kind": "delivered_file_open",
+      "mandatory": true,
+      "scorable": true,
+      "检查对象": "对应本次每页提示词的汇报图片",
+      "通过条件": "本次「对应本次每页提示词的汇报图片」实际交付链接或路径可解析到当前可用的已声明的最终文件，image数据非空，并能用图片解码器打开，包含像素尺寸及有效图像帧。同一对象只计最终有效版本。",
+      "取证方法": "current_attempt_terminal_deliverable_only",
+      "用户要求依据": {
+        "user_turns_1_based": [
+          4
+        ],
+        "quote": "用户输入索引3（第4轮）：按照你的提示词，生成每一页的图，逐页生成，high quality。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "校验参数": {
+        "format": "image"
+      },
+      "status": "pass",
+      "passed": true,
+      "observed": {
+        "files_opened": 1
+      }
+    },
+    {
+      "index": 2,
+      "point_id": "conv_737c4b010b18:delivery2:check2",
+      "delivery_id": "delivery_02",
+      "kind": "manifest_corresponding_artifacts",
+      "mandatory": true,
+      "scorable": true,
+      "检查对象": "对应本次每页提示词的汇报图片",
+      "通过条件": "用户明确条目或生图前冻结的本次逐页提示词条目全部对应非重复、可读的最终图像。",
+      "取证方法": "current_attempt_terminal_deliverable_only",
+      "用户要求依据": {
+        "user_turns_1_based": [
+          3,
+          4
+        ],
+        "quote": "按照你的提示词，生成每一页的图"
+      },
+      "校验参数": {
+        "count_from": "current_attempt_prompt_page_manifest",
+        "manifest_source": "actually_delivered_prompt_text_for_turn_3",
+        "freeze_manifest_before_image_phase": true,
+        "require_one_readable_final_image_per_page": true,
+        "reject_terminal_self_declared_subsets": true
+      },
+      "status": "unknown",
+      "passed": null,
+      "reason": "current_attempt_manifest_missing:pages"
+    }
+  ],
+  "delivery_status": {
+    "delivery_01": "pass",
+    "delivery_02": "unknown"
+  },
+  "counts": {
+    "pass": 2,
+    "unknown": 1
+  },
+  "scorable_count": 3,
+  "observed_only_count": 0,
+  "provenance_rejections": [],
+  "quality_scored": false,
+  "intermediate_steps_scored": false,
+  "historical_ai_read": false,
+  "business_actor_run_by_this_script": false
+}
