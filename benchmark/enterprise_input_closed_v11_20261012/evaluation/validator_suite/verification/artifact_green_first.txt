@@ -1,0 +1,721 @@
+C:\Users\22142\AppData\Local\Programs\Python\Python311\Lib\site-packages\pytest_asyncio\plugin.py:217: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+FFFFF.FFFFFF.FFFFFFFFFFF..                                               [100%]
+================================== FAILURES ===================================
+________________________ test_code_real_forms[source] _________________________
+
+engine = <module 'artifact_base_fixture' from 'D:\\skillloop\\research\\pipelines\\task_group_pipeline\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-0/test_code_real_forms_source_0')
+form = 'source'
+
+    @pytest.mark.parametrize('form',['source','zip','fence'])
+    def test_code_real_forms(engine,tmp_path,form):
+>       if form=='source':(tmp_path/'code.ts').write_text('const n = 1;');c=ctx(engine,tmp_path,['code.ts'])
+
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:30: in ctx
+    return b.Context({'source_session_id':'fixture','workspace':str(tmp_path),'result':{},'evidence':evidence},
+research\pipelines\task_group_pipeline\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'files': ['code.ts']}},...ture', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-0\\test_code_real_forms_source_0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               artifact_base_fixture.UnknownEvidence: task_and_source_identity_mismatch
+
+research\pipelines\task_group_pipeline\final_state_scorer.py:52: UnknownEvidence
+__________________________ test_code_real_forms[zip] __________________________
+
+engine = <module 'artifact_base_fixture' from 'D:\\skillloop\\research\\pipelines\\task_group_pipeline\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-0/test_code_real_forms_zip_0')
+form = 'zip'
+
+    @pytest.mark.parametrize('form',['source','zip','fence'])
+    def test_code_real_forms(engine,tmp_path,form):
+        if form=='source':(tmp_path/'code.ts').write_text('const n = 1;');c=ctx(engine,tmp_path,['code.ts'])
+        elif form=='zip':
+            with zipfile.ZipFile(tmp_path/'code.zip','w') as z:z.writestr('src/app.js','const n=1;')
+>           c=ctx(engine,tmp_path,['code.zip'])
+
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:30: in ctx
+    return b.Context({'source_session_id':'fixture','workspace':str(tmp_path),'result':{},'evidence':evidence},
+research\pipelines\task_group_pipeline\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'files': ['code.zip']}}...fixture', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-0\\test_code_real_forms_zip_0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               artifact_base_fixture.UnknownEvidence: task_and_source_identity_mismatch
+
+research\pipelines\task_group_pipeline\final_state_scorer.py:52: UnknownEvidence
+_________________________ test_code_real_forms[fence] _________________________
+
+engine = <module 'artifact_base_fixture' from 'D:\\skillloop\\research\\pipelines\\task_group_pipeline\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-0/test_code_real_forms_fence_0')
+form = 'fence'
+
+    @pytest.mark.parametrize('form',['source','zip','fence'])
+    def test_code_real_forms(engine,tmp_path,form):
+        if form=='source':(tmp_path/'code.ts').write_text('const n = 1;');c=ctx(engine,tmp_path,['code.ts'])
+        elif form=='zip':
+            with zipfile.ZipFile(tmp_path/'code.zip','w') as z:z.writestr('src/app.js','const n=1;')
+            c=ctx(engine,tmp_path,['code.zip'])
+>       else:c=ctx(engine,tmp_path,text='```python\nx=1\n```')
+
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:30: in ctx
+    return b.Context({'source_session_id':'fixture','workspace':str(tmp_path),'result':{},'evidence':evidence},
+research\pipelines\task_group_pipeline\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'text': '```python\nx=1...xture', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-0\\test_code_real_forms_fence_0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               artifact_base_fixture.UnknownEvidence: task_and_source_identity_mismatch
+
+research\pipelines\task_group_pipeline\final_state_scorer.py:52: UnknownEvidence
+_____________________ test_code_plan_and_md_archive_fail ______________________
+
+engine = <module 'artifact_base_fixture' from 'D:\\skillloop\\research\\pipelines\\task_group_pipeline\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-0/test_code_plan_and_md_archive_0')
+
+    def test_code_plan_and_md_archive_fail(engine,tmp_path):
+>       c=ctx(engine,tmp_path,text='I will implement this tomorrow.')
+
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:66: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:30: in ctx
+    return b.Context({'source_session_id':'fixture','workspace':str(tmp_path),'result':{},'evidence':evidence},
+research\pipelines\task_group_pipeline\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'text': 'I will impleme...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-0\\test_code_plan_and_md_archive_0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               artifact_base_fixture.UnknownEvidence: task_and_source_identity_mismatch
+
+research\pipelines\task_group_pipeline\final_state_scorer.py:52: UnknownEvidence
+____________________ test_literal_nfkc_numeric_boundaries _____________________
+
+engine = <module 'artifact_base_fixture' from 'D:\\skillloop\\research\\pipelines\\task_group_pipeline\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-0/test_literal_nfkc_numeric_boun0')
+
+    def test_literal_nfkc_numeric_boundaries(engine,tmp_path):
+        p={'literals':['10��F'],'numeric_fields':['5000','500'],'unicode_normalization':'NFKC','number_match':'token_after_grouping_separator_normalization'}
+>       assert run(engine,ctx(engine,tmp_path,text='\uff11\uff10\xb5\uff26 5,000\u4e2a 500\u4e2a'),'literal_fields_presence',p)['numeric_fields_matched']==2
+
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:73: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:30: in ctx
+    return b.Context({'source_session_id':'fixture','workspace':str(tmp_path),'result':{},'evidence':evidence},
+research\pipelines\task_group_pipeline\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'text': '\uff11\uff10\xb5\uff26 5,000\u4e2a 50...re', 'workspace': 'C:\\\\Users\\\\22142\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-22142\\\\pytest-0\\\\test_literal_nfkc_numeric_boun0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               artifact_base_fixture.UnknownEvidence: task_and_source_identity_mismatch
+
+research\pipelines\task_group_pipeline\final_state_scorer.py:52: UnknownEvidence
+______________ test_literal_skill_refs_and_report_only_triggers _______________
+
+engine = <module 'artifact_base_fixture' from 'D:\\skillloop\\research\\pipelines\\task_group_pipeline\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-0/test_literal_skill_refs_and_re0')
+
+    def test_literal_skill_refs_and_report_only_triggers(engine,tmp_path):
+        (tmp_path/'skill').mkdir();(tmp_path/'skill'/'SKILL.md').write_text('�̿��� ����',encoding='utf-8')
+>       c=ctx(engine,tmp_path);c.evidence['deliveries']['d']={'directory':'skill'}
+
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:82: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:30: in ctx
+    return b.Context({'source_session_id':'fixture','workspace':str(tmp_path),'result':{},'evidence':evidence},
+research\pipelines\task_group_pipeline\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {}}, 'initial_sha256': {...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-0\\test_literal_skill_refs_and_re0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               artifact_base_fixture.UnknownEvidence: task_and_source_identity_mismatch
+
+research\pipelines\task_group_pipeline\final_state_scorer.py:52: UnknownEvidence
+____ test_table_actual_nonempty_rows[| A | B |\n|---|---|\n| 1 | 2 |-True] ____
+
+engine = <module 'artifact_base_fixture' from 'D:\\skillloop\\research\\pipelines\\task_group_pipeline\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-0/test_table_actual_nonempty_row0')
+text = '| A | B |\n|---|---|\n| 1 | 2 |', ok = True
+
+    @pytest.mark.parametrize('text,ok',[('| A | B |\n|---|---|\n| 1 | 2 |',True),('| A | B |\n|---|---|',False),('<table><tr><td>x</td></tr></table>',True),('<table></table>',False)])
+    def test_table_actual_nonempty_rows(engine,tmp_path,text,ok):
+>       c=ctx(engine,tmp_path,text=text);p={'accepted_forms':['markdown_table','html_table'],'minimum_table_count':1,'require_nonempty_table_body':True}
+
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:30: in ctx
+    return b.Context({'source_session_id':'fixture','workspace':str(tmp_path),'result':{},'evidence':evidence},
+research\pipelines\task_group_pipeline\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'text': '| A | B |\n|--...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-0\\test_table_actual_nonempty_row0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               artifact_base_fixture.UnknownEvidence: task_and_source_identity_mismatch
+
+research\pipelines\task_group_pipeline\final_state_scorer.py:52: UnknownEvidence
+_________ test_table_actual_nonempty_rows[| A | B |\n|---|---|-False] _________
+
+engine = <module 'artifact_base_fixture' from 'D:\\skillloop\\research\\pipelines\\task_group_pipeline\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-0/test_table_actual_nonempty_row1')
+text = '| A | B |\n|---|---|', ok = False
+
+    @pytest.mark.parametrize('text,ok',[('| A | B |\n|---|---|\n| 1 | 2 |',True),('| A | B |\n|---|---|',False),('<table><tr><td>x</td></tr></table>',True),('<table></table>',False)])
+    def test_table_actual_nonempty_rows(engine,tmp_path,text,ok):
+>       c=ctx(engine,tmp_path,text=text);p={'accepted_forms':['markdown_table','html_table'],'minimum_table_count':1,'require_nonempty_table_body':True}
+
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:30: in ctx
+    return b.Context({'source_session_id':'fixture','workspace':str(tmp_path),'result':{},'evidence':evidence},
+research\pipelines\task_group_pipeline\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'text': '| A | B |\n|--...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-0\\test_table_actual_nonempty_row1'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               artifact_base_fixture.UnknownEvidence: task_and_source_identity_mismatch
+
+research\pipelines\task_group_pipeline\final_state_scorer.py:52: UnknownEvidence
+__ test_table_actual_nonempty_rows[<table><tr><td>x</td></tr></table>-True] ___
+
+engine = <module 'artifact_base_fixture' from 'D:\\skillloop\\research\\pipelines\\task_group_pipeline\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-0/test_table_actual_nonempty_row2')
+text = '<table><tr><td>x</td></tr></table>', ok = True
+
+    @pytest.mark.parametrize('text,ok',[('| A | B |\n|---|---|\n| 1 | 2 |',True),('| A | B |\n|---|---|',False),('<table><tr><td>x</td></tr></table>',True),('<table></table>',False)])
+    def test_table_actual_nonempty_rows(engine,tmp_path,text,ok):
+>       c=ctx(engine,tmp_path,text=text);p={'accepted_forms':['markdown_table','html_table'],'minimum_table_count':1,'require_nonempty_table_body':True}
+
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:30: in ctx
+    return b.Context({'source_session_id':'fixture','workspace':str(tmp_path),'result':{},'evidence':evidence},
+research\pipelines\task_group_pipeline\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'text': '<table><tr><td...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-0\\test_table_actual_nonempty_row2'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               artifact_base_fixture.UnknownEvidence: task_and_source_identity_mismatch
+
+research\pipelines\task_group_pipeline\final_state_scorer.py:52: UnknownEvidence
+___________ test_table_actual_nonempty_rows[<table></table>-False] ____________
+
+engine = <module 'artifact_base_fixture' from 'D:\\skillloop\\research\\pipelines\\task_group_pipeline\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-0/test_table_actual_nonempty_row3')
+text = '<table></table>', ok = False
+
+    @pytest.mark.parametrize('text,ok',[('| A | B |\n|---|---|\n| 1 | 2 |',True),('| A | B |\n|---|---|',False),('<table><tr><td>x</td></tr></table>',True),('<table></table>',False)])
+    def test_table_actual_nonempty_rows(engine,tmp_path,text,ok):
+>       c=ctx(engine,tmp_path,text=text);p={'accepted_forms':['markdown_table','html_table'],'minimum_table_count':1,'require_nonempty_table_body':True}
+
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:30: in ctx
+    return b.Context({'source_session_id':'fixture','workspace':str(tmp_path),'result':{},'evidence':evidence},
+research\pipelines\task_group_pipeline\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'text': '<table></table...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-0\\test_table_actual_nonempty_row3'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               artifact_base_fixture.UnknownEvidence: task_and_source_identity_mismatch
+
+research\pipelines\task_group_pipeline\final_state_scorer.py:52: UnknownEvidence
+______________ test_memory_changed_unchanged_and_missing_initial ______________
+
+engine = <module 'artifact_base_fixture' from 'D:\\skillloop\\research\\pipelines\\task_group_pipeline\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-0/test_memory_changed_unchanged_0')
+
+    def test_memory_changed_unchanged_and_missing_initial(engine,tmp_path):
+        f=tmp_path/'memory.md';f.write_text('saved preference')
+        p={'readable_nonempty_record':True,'new_or_changed_since_attempt_start':True,'request_user_turns':[5],'storage_scope':'current_attempt_memory_state'}
+>       c=ctx(engine,tmp_path,['memory.md'],extra={'memory_request_bindings':{'d':[5]}})
+
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:96: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:30: in ctx
+    return b.Context({'source_session_id':'fixture','workspace':str(tmp_path),'result':{},'evidence':evidence},
+research\pipelines\task_group_pipeline\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'files': ['memory.md']}...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-0\\test_memory_changed_unchanged_0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               artifact_base_fixture.UnknownEvidence: task_and_source_identity_mismatch
+
+research\pipelines\task_group_pipeline\final_state_scorer.py:52: UnknownEvidence
+_____________________ test_watermark_native_added_literal _____________________
+
+engine = <module 'artifact_base_fixture' from 'D:\\skillloop\\research\\pipelines\\task_group_pipeline\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-0/test_watermark_native_added_li0')
+
+    def test_watermark_native_added_literal(engine,tmp_path):
+>       c,p=watermark_ctx(engine,tmp_path,'hello','hello EvoMind')
+
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:116: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:110: in watermark_ctx
+    c=ctx(b,tmp_path,['output.pdf'],extra={'declared_input_sha256':{'input.pdf':source_hash}})
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:30: in ctx
+    return b.Context({'source_session_id':'fixture','workspace':str(tmp_path),'result':{},'evidence':evidence},
+research\pipelines\task_group_pipeline\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {'input.pdf': '6bdf6c1109fff250a362afeaf4b755658...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-0\\test_watermark_native_added_li0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               artifact_base_fixture.UnknownEvidence: task_and_source_identity_mismatch
+
+research\pipelines\task_group_pipeline\final_state_scorer.py:52: UnknownEvidence
+_______________ test_watermark_existing_word_and_raster_unknown _______________
+
+engine = <module 'artifact_base_fixture' from 'D:\\skillloop\\research\\pipelines\\task_group_pipeline\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-0/test_watermark_existing_word_a0')
+
+    def test_watermark_existing_word_and_raster_unknown(engine,tmp_path):
+>       c,p=watermark_ctx(engine,tmp_path,'EvoMind','EvoMind')
+
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:120: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:110: in watermark_ctx
+    c=ctx(b,tmp_path,['output.pdf'],extra={'declared_input_sha256':{'input.pdf':source_hash}})
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:30: in ctx
+    return b.Context({'source_session_id':'fixture','workspace':str(tmp_path),'result':{},'evidence':evidence},
+research\pipelines\task_group_pipeline\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {'input.pdf': '6dfe1eef31a8fc9ddf312c27c19a0ae82...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-0\\test_watermark_existing_word_a0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               artifact_base_fixture.UnknownEvidence: task_and_source_identity_mismatch
+
+research\pipelines\task_group_pipeline\final_state_scorer.py:52: UnknownEvidence
+___________________ test_watermark_missing_or_wrong_mapping ___________________
+
+engine = <module 'artifact_base_fixture' from 'D:\\skillloop\\research\\pipelines\\task_group_pipeline\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-0/test_watermark_missing_or_wron0')
+
+    def test_watermark_missing_or_wrong_mapping(engine,tmp_path):
+>       c,p=watermark_ctx(engine,tmp_path,'hello','EvoMind')
+
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:126: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:110: in watermark_ctx
+    c=ctx(b,tmp_path,['output.pdf'],extra={'declared_input_sha256':{'input.pdf':source_hash}})
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:30: in ctx
+    return b.Context({'source_session_id':'fixture','workspace':str(tmp_path),'result':{},'evidence':evidence},
+research\pipelines\task_group_pipeline\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {'input.pdf': '6bdf6c1109fff250a362afeaf4b755658...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-0\\test_watermark_missing_or_wron0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               artifact_base_fixture.UnknownEvidence: task_and_source_identity_mismatch
+
+research\pipelines\task_group_pipeline\final_state_scorer.py:52: UnknownEvidence
+_________________________ test_photo_size_and_anchors _________________________
+
+engine = <module 'artifact_base_fixture' from 'D:\\skillloop\\research\\pipelines\\task_group_pipeline\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-0/test_photo_size_and_anchors0')
+
+    def test_photo_size_and_anchors(engine,tmp_path):
+>       assert run(engine,photo_ctx(engine,tmp_path),'spreadsheet_image_dimensions_and_anchors',PHOTO)['photo_count']==2
+
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:142: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:136: in photo_ctx
+    c=ctx(b,tmp_path,['output.xlsx'],extra={'declared_input_sha256':{'input.xlsx':h}})
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:30: in ctx
+    return b.Context({'source_session_id':'fixture','workspace':str(tmp_path),'result':{},'evidence':evidence},
+research\pipelines\task_group_pipeline\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {'input.xlsx': '5d9d0a09c7fcc8c8e11e3f720e072f55...xture', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-0\\test_photo_size_and_anchors0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               artifact_base_fixture.UnknownEvidence: task_and_source_identity_mismatch
+
+research\pipelines\task_group_pipeline\final_state_scorer.py:52: UnknownEvidence
+__________ test_photo_explicit_mismatch_fails[sizes0-oneCellAnchor] ___________
+
+engine = <module 'artifact_base_fixture' from 'D:\\skillloop\\research\\pipelines\\task_group_pipeline\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-0/test_photo_explicit_mismatch_f0')
+sizes = ((100, 200), (101, 200)), anchor = 'oneCellAnchor'
+
+    @pytest.mark.parametrize('sizes,anchor',[(((100,200),(101,200)),'oneCellAnchor'),(((100,200),),'oneCellAnchor'),(((100,200),(100,200)),'absoluteAnchor')])
+    def test_photo_explicit_mismatch_fails(engine,tmp_path,sizes,anchor):
+>       with pytest.raises(engine.DeliveryFailure):run(engine,photo_ctx(engine,tmp_path,sizes,anchor),'spreadsheet_image_dimensions_and_anchors',PHOTO)
+
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:146: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:136: in photo_ctx
+    c=ctx(b,tmp_path,['output.xlsx'],extra={'declared_input_sha256':{'input.xlsx':h}})
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:30: in ctx
+    return b.Context({'source_session_id':'fixture','workspace':str(tmp_path),'result':{},'evidence':evidence},
+research\pipelines\task_group_pipeline\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {'input.xlsx': '5d9d0a09c7fcc8c8e11e3f720e072f55...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-0\\test_photo_explicit_mismatch_f0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               artifact_base_fixture.UnknownEvidence: task_and_source_identity_mismatch
+
+research\pipelines\task_group_pipeline\final_state_scorer.py:52: UnknownEvidence
+__________ test_photo_explicit_mismatch_fails[sizes1-oneCellAnchor] ___________
+
+engine = <module 'artifact_base_fixture' from 'D:\\skillloop\\research\\pipelines\\task_group_pipeline\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-0/test_photo_explicit_mismatch_f1')
+sizes = ((100, 200),), anchor = 'oneCellAnchor'
+
+    @pytest.mark.parametrize('sizes,anchor',[(((100,200),(101,200)),'oneCellAnchor'),(((100,200),),'oneCellAnchor'),(((100,200),(100,200)),'absoluteAnchor')])
+    def test_photo_explicit_mismatch_fails(engine,tmp_path,sizes,anchor):
+>       with pytest.raises(engine.DeliveryFailure):run(engine,photo_ctx(engine,tmp_path,sizes,anchor),'spreadsheet_image_dimensions_and_anchors',PHOTO)
+
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:146: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:136: in photo_ctx
+    c=ctx(b,tmp_path,['output.xlsx'],extra={'declared_input_sha256':{'input.xlsx':h}})
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:30: in ctx
+    return b.Context({'source_session_id':'fixture','workspace':str(tmp_path),'result':{},'evidence':evidence},
+research\pipelines\task_group_pipeline\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {'input.xlsx': '5d9d0a09c7fcc8c8e11e3f720e072f55...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-0\\test_photo_explicit_mismatch_f1'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               artifact_base_fixture.UnknownEvidence: task_and_source_identity_mismatch
+
+research\pipelines\task_group_pipeline\final_state_scorer.py:52: UnknownEvidence
+__________ test_photo_explicit_mismatch_fails[sizes2-absoluteAnchor] __________
+
+engine = <module 'artifact_base_fixture' from 'D:\\skillloop\\research\\pipelines\\task_group_pipeline\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-0/test_photo_explicit_mismatch_f2')
+sizes = ((100, 200), (100, 200)), anchor = 'absoluteAnchor'
+
+    @pytest.mark.parametrize('sizes,anchor',[(((100,200),(101,200)),'oneCellAnchor'),(((100,200),),'oneCellAnchor'),(((100,200),(100,200)),'absoluteAnchor')])
+    def test_photo_explicit_mismatch_fails(engine,tmp_path,sizes,anchor):
+>       with pytest.raises(engine.DeliveryFailure):run(engine,photo_ctx(engine,tmp_path,sizes,anchor),'spreadsheet_image_dimensions_and_anchors',PHOTO)
+
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:146: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:136: in photo_ctx
+    c=ctx(b,tmp_path,['output.xlsx'],extra={'declared_input_sha256':{'input.xlsx':h}})
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:30: in ctx
+    return b.Context({'source_session_id':'fixture','workspace':str(tmp_path),'result':{},'evidence':evidence},
+research\pipelines\task_group_pipeline\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {'input.xlsx': '5d9d0a09c7fcc8c8e11e3f720e072f55...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-0\\test_photo_explicit_mismatch_f2'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               artifact_base_fixture.UnknownEvidence: task_and_source_identity_mismatch
+
+research\pipelines\task_group_pipeline\final_state_scorer.py:52: UnknownEvidence
+____________ test_photo_missing_source_count_or_dimensions_unknown ____________
+
+engine = <module 'artifact_base_fixture' from 'D:\\skillloop\\research\\pipelines\\task_group_pipeline\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-0/test_photo_missing_source_coun0')
+
+    def test_photo_missing_source_count_or_dimensions_unknown(engine,tmp_path):
+>       c=photo_ctx(engine,tmp_path);c.evidence['deliveries']['d']['manifests']['source_photos'].pop('source_photo_count')
+
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:149: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:136: in photo_ctx
+    c=ctx(b,tmp_path,['output.xlsx'],extra={'declared_input_sha256':{'input.xlsx':h}})
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:30: in ctx
+    return b.Context({'source_session_id':'fixture','workspace':str(tmp_path),'result':{},'evidence':evidence},
+research\pipelines\task_group_pipeline\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {'input.xlsx': '5d9d0a09c7fcc8c8e11e3f720e072f55...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-0\\test_photo_missing_source_coun0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               artifact_base_fixture.UnknownEvidence: task_and_source_identity_mismatch
+
+research\pipelines\task_group_pipeline\final_state_scorer.py:52: UnknownEvidence
+_____________________ test_prompt_manifest_frozen_source ______________________
+
+engine = <module 'artifact_base_fixture' from 'D:\\skillloop\\research\\pipelines\\task_group_pipeline\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-0/test_prompt_manifest_frozen_so0')
+
+    def test_prompt_manifest_frozen_source(engine,tmp_path):
+>       c=manifest_ctx(engine,tmp_path)
+
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:165: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:156: in manifest_ctx
+    c=ctx(b,tmp_path,['p1.png','p2.png'])
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:30: in ctx
+    return b.Context({'source_session_id':'fixture','workspace':str(tmp_path),'result':{},'evidence':evidence},
+research\pipelines\task_group_pipeline\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'files': ['p1.png', 'p2...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-0\\test_prompt_manifest_frozen_so0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               artifact_base_fixture.UnknownEvidence: task_and_source_identity_mismatch
+
+research\pipelines\task_group_pipeline\final_state_scorer.py:52: UnknownEvidence
+_________________ test_manifest_terminal_subset_or_sha_wrong __________________
+
+engine = <module 'artifact_base_fixture' from 'D:\\skillloop\\research\\pipelines\\task_group_pipeline\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-0/test_manifest_terminal_subset_0')
+
+    def test_manifest_terminal_subset_or_sha_wrong(engine,tmp_path):
+>       with pytest.raises(engine.DeliveryFailure):run(engine,manifest_ctx(engine,tmp_path,('p1',)),'manifest_corresponding_artifacts',{'freeze_manifest_before_image_phase':True})
+
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:169: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:156: in manifest_ctx
+    c=ctx(b,tmp_path,['p1.png','p2.png'])
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:30: in ctx
+    return b.Context({'source_session_id':'fixture','workspace':str(tmp_path),'result':{},'evidence':evidence},
+research\pipelines\task_group_pipeline\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'files': ['p1.png', 'p2...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-0\\test_manifest_terminal_subset_0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               artifact_base_fixture.UnknownEvidence: task_and_source_identity_mismatch
+
+research\pipelines\task_group_pipeline\final_state_scorer.py:52: UnknownEvidence
+____________ test_manifest_no_snapshot_unknown_and_user_frozen_ids ____________
+
+engine = <module 'artifact_base_fixture' from 'D:\\skillloop\\research\\pipelines\\task_group_pipeline\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-0/test_manifest_no_snapshot_unkn0')
+
+    def test_manifest_no_snapshot_unknown_and_user_frozen_ids(engine,tmp_path):
+>       c=manifest_ctx(engine,tmp_path);c.evidence.pop('manifest_snapshots')
+
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:174: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:156: in manifest_ctx
+    c=ctx(b,tmp_path,['p1.png','p2.png'])
+output\20261012_task_validator_suite\tests\test_artifact_extensions.py:30: in ctx
+    return b.Context({'source_session_id':'fixture','workspace':str(tmp_path),'result':{},'evidence':evidence},
+research\pipelines\task_group_pipeline\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'files': ['p1.png', 'p2...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-0\\test_manifest_no_snapshot_unkn0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               artifact_base_fixture.UnknownEvidence: task_and_source_identity_mismatch
+
+research\pipelines\task_group_pipeline\final_state_scorer.py:52: UnknownEvidence
+=========================== short test summary info ===========================
+FAILED output/20261012_task_validator_suite/tests/test_artifact_extensions.py::test_code_real_forms[source]
+FAILED output/20261012_task_validator_suite/tests/test_artifact_extensions.py::test_code_real_forms[zip]
+FAILED output/20261012_task_validator_suite/tests/test_artifact_extensions.py::test_code_real_forms[fence]
+FAILED output/20261012_task_validator_suite/tests/test_artifact_extensions.py::test_code_plan_and_md_archive_fail
+FAILED output/20261012_task_validator_suite/tests/test_artifact_extensions.py::test_literal_nfkc_numeric_boundaries
+FAILED output/20261012_task_validator_suite/tests/test_artifact_extensions.py::test_literal_skill_refs_and_report_only_triggers
+FAILED output/20261012_task_validator_suite/tests/test_artifact_extensions.py::test_table_actual_nonempty_rows[| A | B |\n|---|---|\n| 1 | 2 |-True]
+FAILED output/20261012_task_validator_suite/tests/test_artifact_extensions.py::test_table_actual_nonempty_rows[| A | B |\n|---|---|-False]
+FAILED output/20261012_task_validator_suite/tests/test_artifact_extensions.py::test_table_actual_nonempty_rows[<table><tr><td>x</td></tr></table>-True]
+FAILED output/20261012_task_validator_suite/tests/test_artifact_extensions.py::test_table_actual_nonempty_rows[<table></table>-False]
+FAILED output/20261012_task_validator_suite/tests/test_artifact_extensions.py::test_memory_changed_unchanged_and_missing_initial
+FAILED output/20261012_task_validator_suite/tests/test_artifact_extensions.py::test_watermark_native_added_literal
+FAILED output/20261012_task_validator_suite/tests/test_artifact_extensions.py::test_watermark_existing_word_and_raster_unknown
+FAILED output/20261012_task_validator_suite/tests/test_artifact_extensions.py::test_watermark_missing_or_wrong_mapping
+FAILED output/20261012_task_validator_suite/tests/test_artifact_extensions.py::test_photo_size_and_anchors
+FAILED output/20261012_task_validator_suite/tests/test_artifact_extensions.py::test_photo_explicit_mismatch_fails[sizes0-oneCellAnchor]
+FAILED output/20261012_task_validator_suite/tests/test_artifact_extensions.py::test_photo_explicit_mismatch_fails[sizes1-oneCellAnchor]
+FAILED output/20261012_task_validator_suite/tests/test_artifact_extensions.py::test_photo_explicit_mismatch_fails[sizes2-absoluteAnchor]
+FAILED output/20261012_task_validator_suite/tests/test_artifact_extensions.py::test_photo_missing_source_count_or_dimensions_unknown
+FAILED output/20261012_task_validator_suite/tests/test_artifact_extensions.py::test_prompt_manifest_frozen_source
+FAILED output/20261012_task_validator_suite/tests/test_artifact_extensions.py::test_manifest_terminal_subset_or_sha_wrong
+FAILED output/20261012_task_validator_suite/tests/test_artifact_extensions.py::test_manifest_no_snapshot_unknown_and_user_frozen_ids
+22 failed, 4 passed in 1.35s

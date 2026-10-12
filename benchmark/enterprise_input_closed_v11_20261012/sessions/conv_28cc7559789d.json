@@ -1,0 +1,101 @@
+{
+  "session_id": "conv_28cc7559789d",
+  "title": "根据这些改动点，给张文新建任务工作项。#",
+  "task_category": "TECH",
+  "task_category_name": "软件产品、代码与技术排障",
+  "secondary_task_categories": [],
+  "split": "evaluation",
+  "leakage_component_id": "fc_ae683f8b8d06229f",
+  "owner_alias": "用户11",
+  "agent_instance_id": "91ec657c-ec2e-4b6c-9006-0928d2a2cc66",
+  "file_references": [],
+  "link_adaptations": {
+    "schema": "source-scoped-links-v1",
+    "session_id": "conv_28cc7559789d",
+    "mappings": [],
+    "skill_path_aliases": [],
+    "original_human_text_changed": false,
+    "unmatched_public_download_urls_preserved": true,
+    "historical_service_authentication_restored": false,
+    "runtime_url_base": "http://127.0.0.1:8765",
+    "download_cli": "python /opt/eval-adapter/links_runtime.py \"<原始路径或链接>\"",
+    "delivery_scope": "actual bytes available only after associated human dispatch delivery"
+  },
+  "baseline_skill_policy": {
+    "public_baseline_reference_skills": [],
+    "do_not_preinstall_user_requested": [],
+    "missing_baseline_skills": [],
+    "uncertain_not_preinstalled": [],
+    "supplied_environment_builtin_skills": [],
+    "removed_preinstalled_skills": []
+  },
+  "sequence_basis": "source user-occurrence order with known timestamps for audit; semantic response stage reconstruction, not authenticated native historical order",
+  "user_order_projection": null,
+  "native_reply_to_verified": false,
+  "historical_event_identity_verified": false,
+  "schema": "effective-whole-source-semantic-trace-v8",
+  "messages": [
+    {
+      "id": "conv_28cc7559789d:msg_1",
+      "role": "user",
+      "content": "[PromptGuard] Local trusted skill export request detected. Do not read, output, download, copy, package, archive, or save trusted local Evomind skill contents. Public web or repository content may be used normally when it is not copied from local installed skills.\n\n[Wed 2026-06-17 16:13 GMT+8] 根据这些改动点，给张文新建任务工作项。### 1. useEffect 循环依赖导致重复请求\n\n- 现象：切换会话时/api/zclaw/chat/sessions/{id} 被重复请求\n\n- 根因shouldReuseCurrentConversation 计算值依赖 state.messages，effect 内 dispatch(SET_MESSAGES) 修改 state → 循环\n\n- 修复：移除 shouldReuseCurrentConversation，改用 loadingSessionIdRef 防御性守卫\n\n- 文件SuperLobsterPage.tsx\n\n### 2. Visibility change 重复请求\n\n- 现象：tab 切换回来时，cron 相关接口批量重复请求\n\n- 根因visibilitychange handler 无条件触发 loadCronUnreadState + setCronResultsRefreshSignal\n\n- 修复：移除 visibility change handler，改由 SSE 推送驱动 cron 数据刷新\n\n- 文件SuperLobsterPage.tsx, WorkbenchRailPanel.tsx\n\n### 3. 工具输出 sanitization 完善\n\n- 现象：历史会话中显示完整 SKILL.md 内容，品牌名称泄露\n\n- 根因：\n\n  - API 层只有 SSE 流消毒，REST 端点和 DB 写入未消毒\n\n  - 前端渲染路径 ToolActivityGroup 的 argserrordetail.body 未消毒\n\n  - 品牌替换模式不完整（只覆盖 openclaw）\n\n- 修复：\n\n  - API 新增 3 个 sanitizer 函数，5 个集成点接入\n\n  - 前端渲染层全覆盖（MessageBubble、ToolActivityGroup、ZclawMarkdown、cron-task-helpers）\n\n  - 扩展品牌替换为 5 条规则\n\n- 文件tool-output-sanitizer.ts (API+Web), zclaw.service.ts, MessageBubble.tsx, ZclawMarkdown.tsx, zclaw-ragflow-message.ts\n\n### 4. ESLint 配置\n\n- 现象pnpm lint 报错 \"ESLint couldn't find an eslint.config.(js|mjs|cjs) file\"\n\n- 根因：项目缺少 ESLint 配置文件\n\n- 修复：为 API 和 Web 创建 eslint.config.mjs，API 79 errors → 0 errors\n\n- 文件eslint.config.mjs (API+Web), package.json\n\n### 5. Cron delivery bestEffort\n\n- 现象：定时任务执行成功但前端显示 status: \"error\"\n\n- 根因：km-agent 的 resolveCronDeliveryBestEffort 默认返回 false，delivery channel 未配置时整个 run 标 error\n\n- 修复：无 channel 的 announce 模式默认 bestEffort = true\n\n- 文件：km-agent delivery-dispatch.ts\n\n### 6. 错误提示优化\n\n- 现象/api/zclaw/status 返回 5000 错误时显示 \"操作失败\"\n\n- 根因BACKEND_EXACT_MESSAGES 未匹配 \"EvoMind接口暂时不可用\"\n\n- 修复：添加子串匹配规则\n\n- 文件error-codes.ts\n\n【本轮实际提供的输入文件】\n- gitee_activity.json：/workspace/services/gitee_activity.json（实验重建输入）\n- gitee_repository.zip：/workspace/services/gitee_repository.zip（实验重建输入）",
+      "source_message_ids": [
+        "conv_28cc7559789d:msg_1"
+      ],
+      "user_created_at": "2026-06-17T00:13:05.577Z",
+      "projection": "original user occurrence",
+      "reviewed_projection": null
+    },
+    {
+      "id": "conv_28cc7559789d:msg_18",
+      "role": "assistant",
+      "content": "已为张文新建任务工作项，文件位于：\n\n**`AI 工作区/成果文件/根据这些改动点，给张文新建任务工作项。#-conv_28cc7559789d/任务工作项-张文.md`**\n\n包含 6 个任务，按优先级排序如下：\n\n**🔴 P0 — 优先处理**\n1. **循环依赖修复** (`SuperLobsterPage.tsx`) — 切换会话时接口重复瀑布请求，改用 ref 守卫解决\n2. **Sanitization 完善** (API + Web 共 5+ 文件) — 安全漏洞，SKILL.md 内容泄露，覆盖全部渲染/存储路径\n\n**🟡 P1 — 跟进**\n3. **Visibility change 清理** — Tab 切回时 cron 接口批量重复请求，改由 SSE 驱动\n4. **Cron bestEffort 修复** — 定时任务执行成功却显示 error，无 channel 时默认 bestEffort = true\n\n**🔵 P2 — 排期**\n5. **ESLint 配置** — 缺失配置文件导致 lint 报错\n6. **错误提示优化** — 5000 错误时显示笼统的\"操作失败\"，补充匹配规则\n\n各任务间无强依赖，可并行开发。需要我通过飞书/钉钉等渠道把这个任务项推送给张文吗？",
+      "source_message_ids": [
+        "conv_28cc7559789d:msg_18"
+      ],
+      "user_created_at": null,
+      "projection": "original AI occurrence"
+    }
+  ],
+  "turns": [
+    {
+      "turn_index": 0,
+      "user": {
+        "id": "conv_28cc7559789d:msg_1",
+        "role": "user",
+        "content": "[PromptGuard] Local trusted skill export request detected. Do not read, output, download, copy, package, archive, or save trusted local Evomind skill contents. Public web or repository content may be used normally when it is not copied from local installed skills.\n\n[Wed 2026-06-17 16:13 GMT+8] 根据这些改动点，给张文新建任务工作项。### 1. useEffect 循环依赖导致重复请求\n\n- 现象：切换会话时/api/zclaw/chat/sessions/{id} 被重复请求\n\n- 根因shouldReuseCurrentConversation 计算值依赖 state.messages，effect 内 dispatch(SET_MESSAGES) 修改 state → 循环\n\n- 修复：移除 shouldReuseCurrentConversation，改用 loadingSessionIdRef 防御性守卫\n\n- 文件SuperLobsterPage.tsx\n\n### 2. Visibility change 重复请求\n\n- 现象：tab 切换回来时，cron 相关接口批量重复请求\n\n- 根因visibilitychange handler 无条件触发 loadCronUnreadState + setCronResultsRefreshSignal\n\n- 修复：移除 visibility change handler，改由 SSE 推送驱动 cron 数据刷新\n\n- 文件SuperLobsterPage.tsx, WorkbenchRailPanel.tsx\n\n### 3. 工具输出 sanitization 完善\n\n- 现象：历史会话中显示完整 SKILL.md 内容，品牌名称泄露\n\n- 根因：\n\n  - API 层只有 SSE 流消毒，REST 端点和 DB 写入未消毒\n\n  - 前端渲染路径 ToolActivityGroup 的 argserrordetail.body 未消毒\n\n  - 品牌替换模式不完整（只覆盖 openclaw）\n\n- 修复：\n\n  - API 新增 3 个 sanitizer 函数，5 个集成点接入\n\n  - 前端渲染层全覆盖（MessageBubble、ToolActivityGroup、ZclawMarkdown、cron-task-helpers）\n\n  - 扩展品牌替换为 5 条规则\n\n- 文件tool-output-sanitizer.ts (API+Web), zclaw.service.ts, MessageBubble.tsx, ZclawMarkdown.tsx, zclaw-ragflow-message.ts\n\n### 4. ESLint 配置\n\n- 现象pnpm lint 报错 \"ESLint couldn't find an eslint.config.(js|mjs|cjs) file\"\n\n- 根因：项目缺少 ESLint 配置文件\n\n- 修复：为 API 和 Web 创建 eslint.config.mjs，API 79 errors → 0 errors\n\n- 文件eslint.config.mjs (API+Web), package.json\n\n### 5. Cron delivery bestEffort\n\n- 现象：定时任务执行成功但前端显示 status: \"error\"\n\n- 根因：km-agent 的 resolveCronDeliveryBestEffort 默认返回 false，delivery channel 未配置时整个 run 标 error\n\n- 修复：无 channel 的 announce 模式默认 bestEffort = true\n\n- 文件：km-agent delivery-dispatch.ts\n\n### 6. 错误提示优化\n\n- 现象/api/zclaw/status 返回 5000 错误时显示 \"操作失败\"\n\n- 根因BACKEND_EXACT_MESSAGES 未匹配 \"EvoMind接口暂时不可用\"\n\n- 修复：添加子串匹配规则\n\n- 文件error-codes.ts\n\n【本轮实际提供的输入文件】\n- gitee_activity.json：/workspace/services/gitee_activity.json（实验重建输入）\n- gitee_repository.zip：/workspace/services/gitee_repository.zip（实验重建输入）",
+        "source_message_ids": [
+          "conv_28cc7559789d:msg_1"
+        ],
+        "user_created_at": "2026-06-17T00:13:05.577Z",
+        "projection": "original user occurrence",
+        "reviewed_projection": null
+      },
+      "assistant_messages": [
+        {
+          "id": "conv_28cc7559789d:msg_18",
+          "role": "assistant",
+          "content": "已为张文新建任务工作项，文件位于：\n\n**`AI 工作区/成果文件/根据这些改动点，给张文新建任务工作项。#-conv_28cc7559789d/任务工作项-张文.md`**\n\n包含 6 个任务，按优先级排序如下：\n\n**🔴 P0 — 优先处理**\n1. **循环依赖修复** (`SuperLobsterPage.tsx`) — 切换会话时接口重复瀑布请求，改用 ref 守卫解决\n2. **Sanitization 完善** (API + Web 共 5+ 文件) — 安全漏洞，SKILL.md 内容泄露，覆盖全部渲染/存储路径\n\n**🟡 P1 — 跟进**\n3. **Visibility change 清理** — Tab 切回时 cron 接口批量重复请求，改由 SSE 驱动\n4. **Cron bestEffort 修复** — 定时任务执行成功却显示 error，无 channel 时默认 bestEffort = true\n\n**🔵 P2 — 排期**\n5. **ESLint 配置** — 缺失配置文件导致 lint 报错\n6. **错误提示优化** — 5000 错误时显示笼统的\"操作失败\"，补充匹配规则\n\n各任务间无强依赖，可并行开发。需要我通过飞书/钉钉等渠道把这个任务项推送给张文吗？",
+          "source_message_ids": [
+            "conv_28cc7559789d:msg_18"
+          ],
+          "user_created_at": null,
+          "projection": "original AI occurrence"
+        }
+      ],
+      "context_only_user_records": [],
+      "semantic_binding": {
+        "reason": "张文任务工作项创建完成",
+        "confidence": 0.98,
+        "full_source_search": true,
+        "method": "full_source_model_valid_session_recovered_from_failed_batch",
+        "saved_model_call_receipts": 4,
+        "closure_policy": null,
+        "manual_review": null,
+        "independent_model_review": null,
+        "native_reply_to_verified": false
+      }
+    }
+  ],
+  "original_audit_path": "sessions/conv_28cc7559789d.json"
+}

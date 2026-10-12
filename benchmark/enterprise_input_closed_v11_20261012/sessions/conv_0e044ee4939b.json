@@ -1,0 +1,160 @@
+{
+  "session_id": "conv_0e044ee4939b",
+  "title": "我C盘有个隐藏文件夹AppData，占用",
+  "task_category": "TECH",
+  "task_category_name": "软件产品、代码与技术排障",
+  "secondary_task_categories": [],
+  "split": "evolution",
+  "leakage_component_id": "fc_804f773b52080895",
+  "owner_alias": "用户23",
+  "agent_instance_id": "90b6bd93-4c31-4cc5-92f8-14fce33f863f",
+  "file_references": [],
+  "link_adaptations": {
+    "schema": "source-scoped-links-v1",
+    "session_id": "conv_0e044ee4939b",
+    "mappings": [],
+    "skill_path_aliases": [],
+    "original_human_text_changed": false,
+    "unmatched_public_download_urls_preserved": true,
+    "historical_service_authentication_restored": false,
+    "runtime_url_base": "http://127.0.0.1:8765",
+    "download_cli": "python /opt/eval-adapter/links_runtime.py \"<原始路径或链接>\"",
+    "delivery_scope": "actual bytes available only after associated human dispatch delivery"
+  },
+  "baseline_skill_policy": {
+    "public_baseline_reference_skills": [],
+    "do_not_preinstall_user_requested": [],
+    "missing_baseline_skills": [],
+    "uncertain_not_preinstalled": [],
+    "supplied_environment_builtin_skills": [],
+    "removed_preinstalled_skills": []
+  },
+  "sequence_basis": "source user-occurrence order with known timestamps for audit; semantic response stage reconstruction, not authenticated native historical order",
+  "user_order_projection": null,
+  "native_reply_to_verified": false,
+  "historical_event_identity_verified": false,
+  "schema": "effective-whole-source-semantic-trace-v8",
+  "messages": [
+    {
+      "id": "fe2d282b-32ef-4262-aaa3-d6178b06c42e",
+      "role": "user",
+      "content": "我C盘有个隐藏文件夹AppData，占用了我C盘90%的空间，里面有Local、LocalLow、Roaming、Roaming Tencent，有我能清理的么",
+      "source_message_ids": [
+        "fe2d282b-32ef-4262-aaa3-d6178b06c42e"
+      ],
+      "user_created_at": null,
+      "projection": "original user occurrence",
+      "reviewed_projection": null
+    },
+    {
+      "id": "ff6c3569-8442-4022-9ca4-cdbe93391b63",
+      "role": "assistant",
+      "content": "可以清的**大块头**不少，AppData 占C盘 90% 的话，多半是缓存和日志在呲水。按\"最值得清 → 慎重清\"排个序：\n\n---\n\n## ✅ 放心清（丢了也不影响使用）\n\n| 位置 | 说明 | 能清多少 |\n|------|------|---------|\n| `Local\\Temp` | 临时文件，很多几千个小文件卡成一团 | **常能清 5–50GB** |\n| `Local\\Microsoft\\Windows\\INetCache` | IE/Edge 缓存 | 几百 MB |\n| `Local\\Microsoft\\Windows\\WER` | Windows 错误报告（崩溃转储） | 1–10GB |\n| `Local\\CrashDumps` | 程序崩溃 dmp 文件 | 看运气，有时很大 |\n| `Local\\Microsoft\\OneDrive\\cache` | OneDrive 缓存 | 可清 |\n| `Local\\Packages` 下某些应用的 `AC\\INetCache` | 微软商店应用的缓存 | 几百 MB |\n\n## ⚠️ 清也可以，但会丢配置\n\n| 位置 | 会丢什么 |\n|------|---------|\n| **浏览器缓存** (`Chrome`, `Edge`, `Opera` 等) | 登录状态+浏览记录，要重新登 |\n| `Local\\Microsoft\\Windows\\DeliveryOptimization\\Cache` | Windows 更新 P2P 缓存，可安全清 |\n| `Roaming\\Microsoft\\Teams\\Cache` | Teams 缓存，常占 5–20GB |\n| `Local\\Discord` 的 Cache | Discord 缓存 |\n\n## 🐘 腾讯系——可能是大头\n\n你的 `Roaming Tencent` 里面：\n- **微信** (`WeChat` / `WeChat Files`) — **典型 10–60GB**，全是聊天文件缓存\n- **QQ** (`QQ` / `QQ Files`) — 同理\n\n**微信清理路径:** 微信设置 → 通用设置 → 存储空间管理 → 清缓存\n**不建议直接删文件夹**，微信可能会重建且丢聊天记录资源。\n\n## 🔧 高效清理操作（建议当面远程帮你）\n\n1. **磁盘清理工具（内置安全方案）**\n   - 按 Win+R → 输入 `cleanmgr` → 选 C 盘 → 点\"清理系统文件\" → 勾上所有 → 确定\n   - 这里面 **Windows 更新清理** 一项就能释放 10–30GB\n\n2. **用 WizTree / SpaceSniffer 扫一遍**\n   - 可视化成块状图，一眼看出谁在吃空间\n   - 你先把大块头告诉我，我帮你看能不能删\n\n3. **手动快速清 temp**\n   ```\n   Win+R → 输入 %temp% → Ctrl+A → Shift+Del\n   ```\n   跑不掉的跳过，能删的尽删\n\n---\n\n要不你把 **`Roaming Tencent` 下面**和 **`Local\\Temp` 大小**先看看？告诉我具体哪些文件夹大，我帮你逐个判断能不能删。",
+      "source_message_ids": [
+        "ff6c3569-8442-4022-9ca4-cdbe93391b63"
+      ],
+      "user_created_at": null,
+      "projection": "original AI occurrence"
+    },
+    {
+      "id": "7ee59ef1-9c28-4eab-9b9f-b9f5d857964a",
+      "role": "user",
+      "content": "你说的这些要么占用空间很小要么就找不到，我现在看到Local文件里面DingTalk和Doubao，能删除么",
+      "source_message_ids": [
+        "7ee59ef1-9c28-4eab-9b9f-b9f5d857964a"
+      ],
+      "user_created_at": null,
+      "projection": "original user occurrence",
+      "reviewed_projection": null
+    },
+    {
+      "id": "f8341fa9-39e8-4f81-ae5b-0722ab6f245d",
+      "role": "assistant",
+      "content": "这两个确实是常见的大户，直接说结论：\n\n---\n\n## ✅ DingTalk（钉钉）— **可以清，大胆清**\n\n`Local\\DingTalk` 里面存的 90% 是：\n- 聊天图片/文件缩略图缓存\n- 表情包缓存\n- 更新包残留\n- 日志文件\n\n**操作：**\n```\n打开钉钉 → 设置 → 文件管理 → 清空缓存\n```\n或者**直接进 `Local\\DingTalk` 删里面的 `Cache`、`Code Cache`、`GPUCache`、`logs` 这些文件夹**，不会丢聊天记录。\n\n如果你看到 `Local\\DingTalk\\V2\\...` 很大，那是钉钉存的实际聊天文件——删了会丢已下载的文件，但聊天文字记录在服务器上。\n\n---\n\n## ✅ Doubao（豆包）— **可以清**\n\n豆包的本地缓存主要是：\n- AI 对话历史缓存\n- 模型预加载数据\n- 日志\n\n**要权衡的是：** 清了之后，之前的聊天记录本地就没了（云端不一定保留全部历史）。\n\n**操作：** 直接在豆包应用里找清理缓存的选项，或者进 `Local\\Doubao` 删 `Cache`、`logs` 子文件夹。\n\n---\n\n## 动手前先看一眼大小\n\n因为这俩的**实际大小差别很大**——有的用户 DingTalk 只有几百 MB，有的能到 20GB+。你先：\n\n```\n打开 C:\\Users\\你的用户名\\AppData\\Local\n→ 右键 DingTalk → 属性 → 看大小\n→ 右键 Doubao → 属性 → 看大小\n```\n\n告诉我各自多大，我教你怎么精准清。也顺便看看 `Local` 里还有没有别的大家伙。",
+      "source_message_ids": [
+        "f8341fa9-39e8-4f81-ae5b-0722ab6f245d"
+      ],
+      "user_created_at": null,
+      "projection": "original AI occurrence"
+    }
+  ],
+  "turns": [
+    {
+      "turn_index": 0,
+      "user": {
+        "id": "fe2d282b-32ef-4262-aaa3-d6178b06c42e",
+        "role": "user",
+        "content": "我C盘有个隐藏文件夹AppData，占用了我C盘90%的空间，里面有Local、LocalLow、Roaming、Roaming Tencent，有我能清理的么",
+        "source_message_ids": [
+          "fe2d282b-32ef-4262-aaa3-d6178b06c42e"
+        ],
+        "user_created_at": null,
+        "projection": "original user occurrence",
+        "reviewed_projection": null
+      },
+      "assistant_messages": [
+        {
+          "id": "ff6c3569-8442-4022-9ca4-cdbe93391b63",
+          "role": "assistant",
+          "content": "可以清的**大块头**不少，AppData 占C盘 90% 的话，多半是缓存和日志在呲水。按\"最值得清 → 慎重清\"排个序：\n\n---\n\n## ✅ 放心清（丢了也不影响使用）\n\n| 位置 | 说明 | 能清多少 |\n|------|------|---------|\n| `Local\\Temp` | 临时文件，很多几千个小文件卡成一团 | **常能清 5–50GB** |\n| `Local\\Microsoft\\Windows\\INetCache` | IE/Edge 缓存 | 几百 MB |\n| `Local\\Microsoft\\Windows\\WER` | Windows 错误报告（崩溃转储） | 1–10GB |\n| `Local\\CrashDumps` | 程序崩溃 dmp 文件 | 看运气，有时很大 |\n| `Local\\Microsoft\\OneDrive\\cache` | OneDrive 缓存 | 可清 |\n| `Local\\Packages` 下某些应用的 `AC\\INetCache` | 微软商店应用的缓存 | 几百 MB |\n\n## ⚠️ 清也可以，但会丢配置\n\n| 位置 | 会丢什么 |\n|------|---------|\n| **浏览器缓存** (`Chrome`, `Edge`, `Opera` 等) | 登录状态+浏览记录，要重新登 |\n| `Local\\Microsoft\\Windows\\DeliveryOptimization\\Cache` | Windows 更新 P2P 缓存，可安全清 |\n| `Roaming\\Microsoft\\Teams\\Cache` | Teams 缓存，常占 5–20GB |\n| `Local\\Discord` 的 Cache | Discord 缓存 |\n\n## 🐘 腾讯系——可能是大头\n\n你的 `Roaming Tencent` 里面：\n- **微信** (`WeChat` / `WeChat Files`) — **典型 10–60GB**，全是聊天文件缓存\n- **QQ** (`QQ` / `QQ Files`) — 同理\n\n**微信清理路径:** 微信设置 → 通用设置 → 存储空间管理 → 清缓存\n**不建议直接删文件夹**，微信可能会重建且丢聊天记录资源。\n\n## 🔧 高效清理操作（建议当面远程帮你）\n\n1. **磁盘清理工具（内置安全方案）**\n   - 按 Win+R → 输入 `cleanmgr` → 选 C 盘 → 点\"清理系统文件\" → 勾上所有 → 确定\n   - 这里面 **Windows 更新清理** 一项就能释放 10–30GB\n\n2. **用 WizTree / SpaceSniffer 扫一遍**\n   - 可视化成块状图，一眼看出谁在吃空间\n   - 你先把大块头告诉我，我帮你看能不能删\n\n3. **手动快速清 temp**\n   ```\n   Win+R → 输入 %temp% → Ctrl+A → Shift+Del\n   ```\n   跑不掉的跳过，能删的尽删\n\n---\n\n要不你把 **`Roaming Tencent` 下面**和 **`Local\\Temp` 大小**先看看？告诉我具体哪些文件夹大，我帮你逐个判断能不能删。",
+          "source_message_ids": [
+            "ff6c3569-8442-4022-9ca4-cdbe93391b63"
+          ],
+          "user_created_at": null,
+          "projection": "original AI occurrence"
+        }
+      ],
+      "context_only_user_records": [],
+      "semantic_binding": {
+        "reason": "用户询问AppData中各文件夹（Local, Roaming等）的可清理性，AI回复a0001针对这些通用文件夹提供了分类清理建议（Temp, Tencent等），完全对应。",
+        "confidence": 1.0,
+        "full_source_search": true,
+        "method": "full_source_semantic_model_reconstruction",
+        "saved_model_call_receipts": 1,
+        "closure_policy": null,
+        "manual_review": null,
+        "independent_model_review": null,
+        "native_reply_to_verified": false
+      }
+    },
+    {
+      "turn_index": 1,
+      "user": {
+        "id": "7ee59ef1-9c28-4eab-9b9f-b9f5d857964a",
+        "role": "user",
+        "content": "你说的这些要么占用空间很小要么就找不到，我现在看到Local文件里面DingTalk和Doubao，能删除么",
+        "source_message_ids": [
+          "7ee59ef1-9c28-4eab-9b9f-b9f5d857964a"
+        ],
+        "user_created_at": null,
+        "projection": "original user occurrence",
+        "reviewed_projection": null
+      },
+      "assistant_messages": [
+        {
+          "id": "f8341fa9-39e8-4f81-ae5b-0722ab6f245d",
+          "role": "assistant",
+          "content": "这两个确实是常见的大户，直接说结论：\n\n---\n\n## ✅ DingTalk（钉钉）— **可以清，大胆清**\n\n`Local\\DingTalk` 里面存的 90% 是：\n- 聊天图片/文件缩略图缓存\n- 表情包缓存\n- 更新包残留\n- 日志文件\n\n**操作：**\n```\n打开钉钉 → 设置 → 文件管理 → 清空缓存\n```\n或者**直接进 `Local\\DingTalk` 删里面的 `Cache`、`Code Cache`、`GPUCache`、`logs` 这些文件夹**，不会丢聊天记录。\n\n如果你看到 `Local\\DingTalk\\V2\\...` 很大，那是钉钉存的实际聊天文件——删了会丢已下载的文件，但聊天文字记录在服务器上。\n\n---\n\n## ✅ Doubao（豆包）— **可以清**\n\n豆包的本地缓存主要是：\n- AI 对话历史缓存\n- 模型预加载数据\n- 日志\n\n**要权衡的是：** 清了之后，之前的聊天记录本地就没了（云端不一定保留全部历史）。\n\n**操作：** 直接在豆包应用里找清理缓存的选项，或者进 `Local\\Doubao` 删 `Cache`、`logs` 子文件夹。\n\n---\n\n## 动手前先看一眼大小\n\n因为这俩的**实际大小差别很大**——有的用户 DingTalk 只有几百 MB，有的能到 20GB+。你先：\n\n```\n打开 C:\\Users\\你的用户名\\AppData\\Local\n→ 右键 DingTalk → 属性 → 看大小\n→ 右键 Doubao → 属性 → 看大小\n```\n\n告诉我各自多大，我教你怎么精准清。也顺便看看 `Local` 里还有没有别的大家伙。",
+          "source_message_ids": [
+            "f8341fa9-39e8-4f81-ae5b-0722ab6f245d"
+          ],
+          "user_created_at": null,
+          "projection": "original AI occurrence"
+        }
+      ],
+      "context_only_user_records": [],
+      "semantic_binding": {
+        "reason": "用户反馈之前建议的文件太小或找不到，并具体指出了Local下的DingTalk和Doubao文件夹询问能否删除。AI回复a0002专门针对DingTalk和Doubao这两个特定应用给出了详细的清理建议和风险提示，语义完全吻合。",
+        "confidence": 1.0,
+        "full_source_search": true,
+        "method": "full_source_semantic_model_reconstruction",
+        "saved_model_call_receipts": 1,
+        "closure_policy": null,
+        "manual_review": null,
+        "independent_model_review": null,
+        "native_reply_to_verified": false
+      }
+    }
+  ],
+  "original_audit_path": "sessions/conv_0e044ee4939b.json"
+}

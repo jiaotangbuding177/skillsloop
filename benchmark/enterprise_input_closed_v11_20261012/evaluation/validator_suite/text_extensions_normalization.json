@@ -1,0 +1,265 @@
+{
+  "schema": "text-extensions-normalization-v1",
+  "module": "_text_extensions.py",
+  "registration": "register_extensions(base)",
+  "normalization_rules": [
+    {
+      "kind": "download_result_manifest_coverage",
+      "accepted_parameter_names": [
+        "query_group_hints"
+      ],
+      "scope": "Download scope must be frozen in evidence.manifest_snapshots[delivery_id].download_results before_download; actual listed outputs must open and match SHA.",
+      "compile_from": "Move all other audit policy keys to metadata; do not register unused parameters.",
+      "mandatory_override": null
+    },
+    {
+      "kind": "pdf_text_or_ocr_literal_fields_present",
+      "accepted_parameter_names": [
+        "fields"
+      ],
+      "scope": "Native PDF text only; offline OCR without independently pinned actual artifact evidence is unknown. Assistant/author role interpretation stays quality.",
+      "compile_from": "Move all other audit policy keys to metadata; do not register unused parameters.",
+      "mandatory_override": null
+    },
+    {
+      "kind": "basic_visual_requirement_attestation",
+      "accepted_parameter_names": [
+        "requirement",
+        "text",
+        "trusted_receipt_sha256"
+      ],
+      "scope": "mandatory=false by default; absent independently frozen receipt SHA is unknown. Never actor self-certification.",
+      "compile_from": "Move all other audit policy keys to metadata; do not register unused parameters.",
+      "mandatory_override": false
+    },
+    {
+      "kind": "named_image_delivery_entries",
+      "accepted_parameter_names": [
+        "names"
+      ],
+      "scope": "Visible Markdown/HTML image caption entries resolve to actual decodable files or embedded containers; person identity not inferred.",
+      "compile_from": "Move all other audit policy keys to metadata; do not register unused parameters.",
+      "mandatory_override": null
+    },
+    {
+      "kind": "skill_declared_input_formats_present",
+      "accepted_parameter_names": [
+        "formats",
+        "aliases"
+      ],
+      "scope": "Read actual SKILL.md/input declaration only; no source execution.",
+      "compile_from": "Move all other audit policy keys to metadata; do not register unused parameters.",
+      "mandatory_override": null
+    },
+    {
+      "kind": "text_named_sections_equal_to_user_baseline",
+      "accepted_parameter_names": [
+        "frozen_baseline_text",
+        "section_heading_keys"
+      ],
+      "scope": "Task conv_80ce11dd162c must be observation unless permitted training-positioning edits are independently bounded; do not freeze all chapters contrary to allowed edit.",
+      "compile_from": "Move all other audit policy keys to metadata; do not register unused parameters.",
+      "mandatory_override": null
+    },
+    {
+      "kind": "text_numbered_item_count",
+      "accepted_parameter_names": [
+        "count"
+      ],
+      "scope": "Count identifiable nonempty distinct numbered items; no prescribed titles.",
+      "compile_from": "Move all other audit policy keys to metadata; do not register unused parameters.",
+      "mandatory_override": null
+    },
+    {
+      "kind": "file_numeric_and_reference_markers_present",
+      "accepted_parameter_names": [
+        "require_numeric_token"
+      ],
+      "scope": "Only numeric/citation marker presence; unidentifiable citation syntax unknown.",
+      "compile_from": "Move all other audit policy keys to metadata; do not register unused parameters.",
+      "mandatory_override": null
+    },
+    {
+      "kind": "questionnaire_basic_form_structure",
+      "accepted_parameter_names": [
+        "section_count",
+        "accepted_question_types",
+        "time_notice_max_minutes"
+      ],
+      "scope": "Only identifiable sections, type labels, skip notice and explicit advertised minutes; no actual completion time or questionnaire quality.",
+      "compile_from": "Move all other audit policy keys to metadata; do not register unused parameters.",
+      "mandatory_override": null
+    },
+    {
+      "kind": "text_character_count_minimum",
+      "accepted_parameter_names": [
+        "min_characters",
+        "count_mode"
+      ],
+      "scope": "1000 user minimum only; approx2500 is separate observation.",
+      "compile_from": "Move all other audit policy keys to metadata; do not register unused parameters.",
+      "mandatory_override": null
+    },
+    {
+      "kind": "grouped_list_entry_counts",
+      "accepted_parameter_names": [
+        "groups",
+        "require_reference_field"
+      ],
+      "scope": "Table or heading scoped route/country entry count; no ranking/institution truth. If require_reference_field=true, each actual group row needs a nonempty identified reference column or entry marker; no truth checking.",
+      "compile_from": "Move all other audit policy keys to metadata; do not register unused parameters.",
+      "mandatory_override": null
+    },
+    {
+      "kind": "quotation_named_numeric_fields",
+      "accepted_parameter_names": [
+        "fields",
+        "groups",
+        "field",
+        "value",
+        "unit"
+      ],
+      "scope": "Only labeled exact values with units; scope group rows. Approx total observation.",
+      "compile_from": "Move all other audit policy keys to metadata; do not register unused parameters.",
+      "mandatory_override": null
+    },
+    {
+      "kind": "quotation_numeric_bounds",
+      "accepted_parameter_names": [
+        "bounds"
+      ],
+      "scope": "Parse scoped fields on each identified table row. FDE calendar days never person-days substitute.",
+      "compile_from": "Move all other audit policy keys to metadata; do not register unused parameters.",
+      "mandatory_override": null
+    },
+    {
+      "kind": "quotation_clause_fields_present",
+      "accepted_parameter_names": [
+        "clauses"
+      ],
+      "scope": "mandatory=false observation: lexical clues cannot establish semantic clause coverage.",
+      "compile_from": "Move all other audit policy keys to metadata; do not register unused parameters.",
+      "mandatory_override": false
+    },
+    {
+      "kind": "pdf_page_images_match_current_sources",
+      "accepted_parameter_names": [
+        "ordered_source_names"
+      ],
+      "scope": "Current actual image pixels vs actual painted PDF images in source order. Missing source/lossy unprovable comparison unknown.",
+      "compile_from": "Move all other audit policy keys to metadata; do not register unused parameters.",
+      "mandatory_override": null
+    },
+    {
+      "kind": "named_record_count",
+      "accepted_parameter_names": [
+        "count",
+        "record_type"
+      ],
+      "scope": "Only identifiable numbered/table record count and duplicate labels; no historical company list.",
+      "compile_from": "Move all other audit policy keys to metadata; do not register unused parameters.",
+      "mandatory_override": null
+    },
+    {
+      "kind": "inquiry_reference_pairing_fields_present",
+      "accepted_parameter_names": [],
+      "scope": "mandatory=false observation: relationship factual pairing cannot be established from arbitrary non-template text.",
+      "compile_from": "Move all other audit policy keys to metadata; do not register unused parameters.",
+      "mandatory_override": false
+    },
+    {
+      "kind": "pdf_external_text_absent",
+      "accepted_parameter_names": [],
+      "scope": "Actual image Do required each page; native painted text rejected; rendering modes q/Q and nested form states restored.",
+      "compile_from": "Move all other audit policy keys to metadata; do not register unused parameters.",
+      "mandatory_override": null
+    },
+    {
+      "kind": "pdf_image_count_matches_current_outline",
+      "accepted_parameter_names": [
+        "outline_delivery_id"
+      ],
+      "scope": "Numbered current bound outline only; no old8 count.",
+      "compile_from": "Move all other audit policy keys to metadata; do not register unused parameters.",
+      "mandatory_override": null
+    },
+    {
+      "kind": "file_delivery_distinct_from",
+      "accepted_parameter_names": [
+        "other_delivery_ids"
+      ],
+      "scope": "Canonical objects distinct; same bytes in separate files allowed.",
+      "compile_from": "Move all other audit policy keys to metadata; do not register unused parameters.",
+      "mandatory_override": null
+    },
+    {
+      "kind": "final_image_sources_not_reusing_prior_current_attempt_images",
+      "accepted_parameter_names": [
+        "before_user_turn_index"
+      ],
+      "scope": "Protected same-attempt pre-turn image snapshot and decoded normalized pixels; absence unknown.",
+      "compile_from": "Move all other audit policy keys to metadata; do not register unused parameters.",
+      "mandatory_override": null
+    },
+    {
+      "kind": "exact_status_only_text_diagnostic",
+      "accepted_parameter_names": [
+        "phrases"
+      ],
+      "scope": "mandatory=false observation of full-string matches only.",
+      "compile_from": "Move all other audit policy keys to metadata; do not register unused parameters.",
+      "mandatory_override": null
+    }
+  ],
+  "special_normalization": [
+    {
+      "kind": "text_named_sections_equal_to_user_baseline",
+      "source_session_id": "conv_80ce11dd162c",
+      "mandatory_override": false,
+      "reason": "允许培训定位变更跨章，原整章不变点超出确定边界。先记录冻结用户章对比结果；没有独立限定允许编辑的片段时不进入AND。"
+    },
+    {
+      "kind": "pdf_image_count_matches_current_outline",
+      "rename": "outline_delivery_index -> compiler-resolved outline_delivery_id"
+    },
+    {
+      "kind": "file_delivery_distinct_from",
+      "rename": "other_delivery_indices -> compiler-resolved other_delivery_ids"
+    },
+    {
+      "kind": "final_image_sources_not_reusing_prior_current_attempt_images",
+      "parameters": {
+        "before_user_turn_index": 14
+      }
+    },
+    {
+      "kind": "quotation_numeric_bounds",
+      "bounds_scope_normalization": {
+        "单个skill开发项目": "skill",
+        "FDE驻场": "FDE"
+      }
+    },
+    {
+      "kind": "quotation_named_numeric_fields",
+      "unit_normalization": "单位等价 variants are parsed; keep fields[].equivalents inside fields. Drop unit_aliases audit policy; 万/w numeric multipliers consumed natively."
+    }
+  ],
+  "file_open_wrapper": {
+    "accepted_extra_parameter_names": [
+      "allow_embedded_image_payloads",
+      "allowed_image_containers",
+      "require_actual_decodable_image_payload",
+      "no_local_file_only_restriction",
+      "header_scope",
+      "headers_empty_scope",
+      "ignore_orphan_header_parts",
+      "header_renderable_payload_absent",
+      "active_sections_only",
+      "include_image_and_field_payloads"
+    ],
+    "scope": "Embedded picture containers require actual painted/resolved decodable payload. Active header inheritance respects titlePg/evenAndOddHeaders; orphan headers ignored."
+  },
+  "scope": "Only basic final delivery mechanics. Missing/ambiguous evidence => UNSCORED. No model or service call.",
+  "trusted_receipt_pin": "trusted_receipt_sha256 can only be supplied by an independent frozen collector, never copied from actor output.",
+  "implementation_started": true
+}

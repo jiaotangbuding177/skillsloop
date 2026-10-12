@@ -1,0 +1,189 @@
+{
+  "sid": "conv_308db455267f",
+  "session_id": "conv_308db455267f",
+  "title": "收集当日新闻、回答身份并生成超级玛丽网页游戏",
+  "category": "NEWS",
+  "status": "proposed_active",
+  "final_target": "新闻与身份答复正文；Super Mario Web入口",
+  "final_deliverables": [
+    {
+      "name": "新闻与身份答复正文",
+      "kind": "text",
+      "format": null,
+      "turn_indices": [
+        0,
+        1,
+        2
+      ],
+      "checks": [
+        {
+          "kind": "delivered_body_nonempty",
+          "parameters": {
+            "strip_whitespace": true,
+            "no_minimum_words_invented": true,
+            "semantic_completion_not_inferred": true
+          },
+          "mandatory": true,
+          "point_id": "conv_308db455267f:delivery1:check1",
+          "display_object": "新闻与身份答复正文",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              1,
+              2,
+              3
+            ],
+            "quote": "用户输入索引0（第1轮）：收集今天的新闻；用户输入索引2（第3轮）：生成一个超级玛丽游戏。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "会话终态读取本次向用户交付的「新闻与身份答复正文」文字集合，去掉空白后仍非空；允许相应文件原生抽取正文。不把计划、声明与实质完成做语义区分，不核事实或专业正确性。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+        }
+      ],
+      "id": "delivery_01",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    },
+    {
+      "name": "Super Mario Web入口",
+      "kind": "file",
+      "format": "html",
+      "turn_indices": [
+        0,
+        1,
+        2
+      ],
+      "checks": [
+        {
+          "kind": "final_file_native_open",
+          "parameters": {
+            "allowed_formats": [
+              "html"
+            ],
+            "required_distinct_file_count": 1,
+            "require_nonempty_payload": true,
+            "resolve_from_current_attempt_delivery_declaration": true
+          },
+          "mandatory": true,
+          "point_id": "conv_308db455267f:delivery2:check1",
+          "display_object": "Super Mario Web入口",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              1,
+              2,
+              3
+            ],
+            "quote": "用户输入索引0（第1轮）：收集今天的新闻；用户输入索引2（第3轮）：生成一个超级玛丽游戏。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "本次「Super Mario Web入口」实际交付链接或路径可解析到当前可用的1个不同最终文件，html数据非空，并能用HTML读取器打开，包含非空HTML正文及引用。同一对象只计最终有效版本。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+        }
+      ],
+      "id": "delivery_02",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    }
+  ],
+  "checks": [
+    {
+      "delivery_id": "delivery_01",
+      "kind": "delivered_body_nonempty",
+      "parameters": {
+        "strip_whitespace": true,
+        "no_minimum_words_invented": true,
+        "semantic_completion_not_inferred": true
+      },
+      "mandatory": true,
+      "point_id": "conv_308db455267f:delivery1:check1",
+      "display_object": "新闻与身份答复正文",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          1,
+          2,
+          3
+        ],
+        "quote": "用户输入索引0（第1轮）：收集今天的新闻；用户输入索引2（第3轮）：生成一个超级玛丽游戏。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "会话终态读取本次向用户交付的「新闻与身份答复正文」文字集合，去掉空白后仍非空；允许相应文件原生抽取正文。不把计划、声明与实质完成做语义区分，不核事实或专业正确性。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+    },
+    {
+      "delivery_id": "delivery_02",
+      "kind": "final_file_native_open",
+      "parameters": {
+        "allowed_formats": [
+          "html"
+        ],
+        "required_distinct_file_count": 1,
+        "require_nonempty_payload": true,
+        "resolve_from_current_attempt_delivery_declaration": true
+      },
+      "mandatory": true,
+      "point_id": "conv_308db455267f:delivery2:check1",
+      "display_object": "Super Mario Web入口",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          1,
+          2,
+          3
+        ],
+        "quote": "用户输入索引0（第1轮）：收集今天的新闻；用户输入索引2（第3轮）：生成一个超级玛丽游戏。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "本次「Super Mario Web入口」实际交付链接或路径可解析到当前可用的1个不同最终文件，html数据非空，并能用HTML读取器打开，包含非空HTML正文及引用。同一对象只计最终有效版本。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+    }
+  ],
+  "ignored_details": [
+    "历史AI答案与原生产物不是本次gold；不评分中间轮次success、技能调用、主观质量或法律/科学/金融正确性。",
+    "不加未指定关卡数/图像设计/功能细节评分。"
+  ],
+  "input_bindings_needed": [],
+  "original_user_turn_indices_inspected": [
+    0,
+    1,
+    2
+  ],
+  "requirement_source": "D:\\skillloop\\benchmark\\enterprise_environment_admitted_v7_20261009\\有效轨迹.jsonl",
+  "original_trace_sha256": "ee3af23e0bbb039e96708e988d9b50fd0a3203eb88dce8997745dfb83bd33fe2",
+  "prior_analysis_path": "D:\\skillloop\\output\\20261010_evaluation_delivery_verifiability\\edu_know_news_life.json",
+  "reviewed": false,
+  "rubric_activated": false,
+  "assessment_executed": false,
+  "schema": "audited-per-task-delivery-contract-v1",
+  "score_at": "conversation_end_only",
+  "full_user_input_review": true,
+  "checked_user_turn_indices": [
+    0,
+    1,
+    2
+  ],
+  "actor_can_see_historical_ai": false,
+  "quality_scored": false,
+  "intermediate_steps_scored": false,
+  "manual_judgement_scored": false,
+  "review_status": "audited_for_basic_delivery_only",
+  "validators_execution_status": "offline_controls_only_not_business_run",
+  "summary": "完整会话先要求收集今天的新闻，再询问助手身份，随后增加生成超级玛丽游戏的独立任务。终态应保留新闻及身份文字答复和可打开的HTML游戏入口；后来游戏任务没有明确取消早先新闻需求。现有文字与文件检查只验基础交付，不证明新闻事实或游戏可玩性。",
+  "category_name": "新闻与一般信息检索",
+  "design_audit_status": "approved_basic",
+  "execution_preflight": {
+    "status": "requires_current_attempt_evidence",
+    "note": "本轮未重验环境或执行任务；脚本须读当前attempt实际交付/服务状态。"
+  },
+  "user_source_texts": [
+    "收集今天的新闻",
+    "你是谁",
+    "生成一个超级玛丽游戏"
+  ],
+  "input_source_specs": []
+}

@@ -1,0 +1,265 @@
+{
+  "sid": "conv_3ada2d9f53bf",
+  "session_id": "conv_3ada2d9f53bf",
+  "title": "语文教案Word与午休、黄金两条单次定时登记",
+  "category": "EDU",
+  "status": "proposed_active",
+  "final_target": "语文教案；午休与黄金定时登记",
+  "final_deliverables": [
+    {
+      "name": "语文教案",
+      "kind": "file",
+      "format": [
+        "doc",
+        "docx"
+      ],
+      "turn_indices": [
+        0
+      ],
+      "checks": [
+        {
+          "kind": "final_file_native_open",
+          "parameters": {
+            "allowed_formats": [
+              "doc",
+              "docx"
+            ],
+            "required_distinct_file_count": 1,
+            "require_nonempty_payload": true,
+            "resolve_from_current_attempt_delivery_declaration": true
+          },
+          "mandatory": true,
+          "point_id": "conv_3ada2d9f53bf:delivery1:check1",
+          "display_object": "语文教案",
+          "requirement_basis": [
+            {
+              "turn": 1,
+              "quote": "生成一份语文教案，以doc的格式输出",
+              "turn_1based": 1
+            }
+          ],
+          "evidence_method": "本次“语文教案”的最终交付声明／清单对应的真实路径、大小与SHA；固定转换环境读取DOC，再解析文档载荷，或DOCX原生文档解析：读取正文或图像载荷与有效结构。排除未被请求重新引用的输入件、旧运行和同对象旧版本。",
+          "passing_condition": "本次实际交付当前最终文件存在、非空，交付路径可解析，格式doc / docx能按实际内容原生打开并有正文/图像/幻灯片等载荷；扩展名或完成声明不足为证。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "原条件属于该最终对象的可读性、数量、形式或保存状态；未与用户取消/后续替代冲突。"
+        }
+      ],
+      "id": "delivery_01",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    },
+    {
+      "name": "午休与黄金定时登记",
+      "kind": "service",
+      "format": "state_snapshot",
+      "turn_indices": [
+        1,
+        2
+      ],
+      "checks": [
+        {
+          "kind": "final_state_readback",
+          "parameters": {},
+          "mandatory": true,
+          "point_id": "conv_3ada2d9f53bf:delivery2:check1",
+          "display_object": "午休与黄金定时登记",
+          "requirement_basis": [
+            {
+              "turn": 2,
+              "quote": "请帮我创建一个定时任务：\n- 任务名称：午休\n- 任务内容：午休提示\n- 计划：单次执行，执行时间为 2026-06-01 13:39"
+            },
+            {
+              "turn": 3,
+              "quote": "请帮我创建一个定时任务：\n- 任务名称：黄金\n- 任务内容：实时推送今日黄金价格\n- 计划：单次执行，执行时间为 2026-06-01 14:18"
+            }
+          ],
+          "evidence_method": "本次服务/知识存储的最终查询返回、可解析状态快照或实际保存文件；关联当前会话和对象“午休与黄金定时登记”。",
+          "passing_condition": "需读本次终态已保存结果并关联attempt，不允许输入附件或旧状态被声称为新整理/导入结果；不强制用户未指定的改动数量或固定知识条数。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。",
+          "score_at": "conversation_end_only",
+          "audit_action": "replace",
+          "audit_rationale": "需读本次终态已保存结果并关联attempt，不允许输入附件或旧状态被声称为新整理/导入结果；不强制用户未指定的改动数量或固定知识条数。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。"
+        },
+        {
+          "kind": "scheduler_record_fields",
+          "parameters": {
+            "records": [
+              {
+                "name": "午休",
+                "content": "午休提示",
+                "once_at": "2026-06-01 13:39",
+                "timezone": "Asia/Shanghai"
+              },
+              {
+                "name": "黄金",
+                "content": "实时推送今日黄金价格",
+                "once_at": "2026-06-01 14:18",
+                "timezone": "Asia/Shanghai"
+              }
+            ],
+            "trigger_required": false
+          },
+          "mandatory": true,
+          "point_id": "conv_3ada2d9f53bf:delivery2:check2",
+          "display_object": "午休与黄金定时登记",
+          "requirement_basis": [
+            {
+              "turn": 2,
+              "quote": "请帮我创建一个定时任务：\n- 任务名称：午休\n- 任务内容：午休提示\n- 计划：单次执行，执行时间为 2026-06-01 13:39",
+              "turn_1based": 2
+            },
+            {
+              "turn": 3,
+              "quote": "请帮我创建一个定时任务：\n- 任务名称：黄金\n- 任务内容：实时推送今日黄金价格\n- 计划：单次执行，执行时间为 2026-06-01 14:18",
+              "turn_1based": 3
+            }
+          ],
+          "evidence_method": "本次调度服务终态实际查询返回的两条记录及名称、内容、单次时间和时区字段。",
+          "passing_condition": "存在午休/午休提示/2026-06-01 13:39与黄金/实时推送今日黄金价格/2026-06-01 14:18两条单次登记，时区Asia/Shanghai。只核登记字段，不要求触发或真实价格推送。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "原条件属于该最终对象的可读性、数量、形式或保存状态；未与用户取消/后续替代冲突。"
+        }
+      ],
+      "id": "delivery_02",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    }
+  ],
+  "checks": [
+    {
+      "delivery_id": "delivery_01",
+      "kind": "final_file_native_open",
+      "parameters": {
+        "allowed_formats": [
+          "doc",
+          "docx"
+        ],
+        "required_distinct_file_count": 1,
+        "require_nonempty_payload": true,
+        "resolve_from_current_attempt_delivery_declaration": true
+      },
+      "mandatory": true,
+      "point_id": "conv_3ada2d9f53bf:delivery1:check1",
+      "display_object": "语文教案",
+      "requirement_basis": [
+        {
+          "turn": 1,
+          "quote": "生成一份语文教案，以doc的格式输出",
+          "turn_1based": 1
+        }
+      ],
+      "evidence_method": "本次“语文教案”的最终交付声明／清单对应的真实路径、大小与SHA；固定转换环境读取DOC，再解析文档载荷，或DOCX原生文档解析：读取正文或图像载荷与有效结构。排除未被请求重新引用的输入件、旧运行和同对象旧版本。",
+      "passing_condition": "本次实际交付当前最终文件存在、非空，交付路径可解析，格式doc / docx能按实际内容原生打开并有正文/图像/幻灯片等载荷；扩展名或完成声明不足为证。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "原条件属于该最终对象的可读性、数量、形式或保存状态；未与用户取消/后续替代冲突。"
+    },
+    {
+      "delivery_id": "delivery_02",
+      "kind": "final_state_readback",
+      "parameters": {},
+      "mandatory": true,
+      "point_id": "conv_3ada2d9f53bf:delivery2:check1",
+      "display_object": "午休与黄金定时登记",
+      "requirement_basis": [
+        {
+          "turn": 2,
+          "quote": "请帮我创建一个定时任务：\n- 任务名称：午休\n- 任务内容：午休提示\n- 计划：单次执行，执行时间为 2026-06-01 13:39"
+        },
+        {
+          "turn": 3,
+          "quote": "请帮我创建一个定时任务：\n- 任务名称：黄金\n- 任务内容：实时推送今日黄金价格\n- 计划：单次执行，执行时间为 2026-06-01 14:18"
+        }
+      ],
+      "evidence_method": "本次服务/知识存储的最终查询返回、可解析状态快照或实际保存文件；关联当前会话和对象“午休与黄金定时登记”。",
+      "passing_condition": "需读本次终态已保存结果并关联attempt，不允许输入附件或旧状态被声称为新整理/导入结果；不强制用户未指定的改动数量或固定知识条数。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。",
+      "score_at": "conversation_end_only",
+      "audit_action": "replace",
+      "audit_rationale": "需读本次终态已保存结果并关联attempt，不允许输入附件或旧状态被声称为新整理/导入结果；不强制用户未指定的改动数量或固定知识条数。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。"
+    },
+    {
+      "delivery_id": "delivery_02",
+      "kind": "scheduler_record_fields",
+      "parameters": {
+        "records": [
+          {
+            "name": "午休",
+            "content": "午休提示",
+            "once_at": "2026-06-01 13:39",
+            "timezone": "Asia/Shanghai"
+          },
+          {
+            "name": "黄金",
+            "content": "实时推送今日黄金价格",
+            "once_at": "2026-06-01 14:18",
+            "timezone": "Asia/Shanghai"
+          }
+        ],
+        "trigger_required": false
+      },
+      "mandatory": true,
+      "point_id": "conv_3ada2d9f53bf:delivery2:check2",
+      "display_object": "午休与黄金定时登记",
+      "requirement_basis": [
+        {
+          "turn": 2,
+          "quote": "请帮我创建一个定时任务：\n- 任务名称：午休\n- 任务内容：午休提示\n- 计划：单次执行，执行时间为 2026-06-01 13:39",
+          "turn_1based": 2
+        },
+        {
+          "turn": 3,
+          "quote": "请帮我创建一个定时任务：\n- 任务名称：黄金\n- 任务内容：实时推送今日黄金价格\n- 计划：单次执行，执行时间为 2026-06-01 14:18",
+          "turn_1based": 3
+        }
+      ],
+      "evidence_method": "本次调度服务终态实际查询返回的两条记录及名称、内容、单次时间和时区字段。",
+      "passing_condition": "存在午休/午休提示/2026-06-01 13:39与黄金/实时推送今日黄金价格/2026-06-01 14:18两条单次登记，时区Asia/Shanghai。只核登记字段，不要求触发或真实价格推送。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "原条件属于该最终对象的可读性、数量、形式或保存状态；未与用户取消/后续替代冲突。"
+    }
+  ],
+  "ignored_details": [
+    "历史AI答案与原生产物不是本次gold；不评分中间轮次success、技能调用、主观质量或法律/科学/金融正确性。",
+    "只核登记终态，不真实触发、等待历史日期或评分推送内容。"
+  ],
+  "input_bindings_needed": [],
+  "original_user_turn_indices_inspected": [
+    0,
+    1,
+    2
+  ],
+  "requirement_source": "D:\\skillloop\\benchmark\\enterprise_environment_admitted_v7_20261009\\有效轨迹.jsonl",
+  "original_trace_sha256": "987ad46f21129ce7f32e18cccb550edfd7b67a30ed4693e843ed6ac874a64f87",
+  "prior_analysis_path": "D:\\skillloop\\output\\20261010_evaluation_delivery_verifiability\\edu_know_news_life.json",
+  "reviewed": false,
+  "rubric_activated": false,
+  "assessment_executed": false,
+  "schema": "audited-per-task-delivery-contract-v1",
+  "score_at": "conversation_end_only",
+  "full_user_input_review": true,
+  "checked_user_turn_indices": [
+    0,
+    1,
+    2
+  ],
+  "actor_can_see_historical_ai": false,
+  "quality_scored": false,
+  "intermediate_steps_scored": false,
+  "manual_judgement_scored": false,
+  "review_status": "audited_for_basic_delivery_only",
+  "validators_execution_status": "offline_controls_only_not_business_run",
+  "summary": "先生成一份语文教案并以doc格式交付，随后登记午休提示和黄金价格推送两个定时任务，分别指定2026年6月1日13:39和14:18单次执行。终态核可读Word及两条名称、内容、时间对应的真实调度记录，只验证登记，不等待历史日期或触发真实推送。",
+  "category_name": "教学、教育与科研",
+  "design_audit_status": "approved_basic_delivery_design",
+  "execution_preflight": {
+    "status": "current_attempt_evidence_required"
+  },
+  "user_source_texts": [
+    "【个人助手设定】\n你的名字叫「小南」，请在对话中以此自称。\n请用「大帅逼」称呼用户，并在合适的时候自然地体现陪伴感。\n请在本轮及后续对话中始终遵循以上设定。\n生成一份语文教案，以doc的格式输出",
+    "【个人助手设定】\n你的名字叫「小南」，请在对话中以此自称。\n请用「大帅逼」称呼用户，并在合适的时候自然地体现陪伴感。\n请在本轮及后续对话中始终遵循以上设定。\n请帮我创建一个定时任务：\n- 任务名称：午休\n- 任务内容：午休提示\n- 计划：单次执行，执行时间为 2026-06-01 13:39",
+    "【个人助手设定】\n你的名字叫「小南」，请在对话中以此自称。\n请用「大帅逼」称呼用户，并在合适的时候自然地体现陪伴感。\n请在本轮及后续对话中始终遵循以上设定。\n请帮我创建一个定时任务：\n- 任务名称：黄金\n- 任务内容：实时推送今日黄金价格\n- 计划：单次执行，执行时间为 2026-06-01 14:18"
+  ],
+  "input_source_specs": []
+}

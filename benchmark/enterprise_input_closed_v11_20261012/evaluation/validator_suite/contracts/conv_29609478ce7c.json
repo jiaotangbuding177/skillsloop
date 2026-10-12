@@ -1,0 +1,383 @@
+{
+  "sid": "conv_29609478ce7c",
+  "category": "BIZ",
+  "final_target": "标黄尽调问题和新增技术说明答复；所请求文献的下载文件；后续两管线文章题目查询",
+  "final_deliverables": [
+    {
+      "name": "标黄尽调问题和新增技术说明答复",
+      "kind": "text",
+      "turn_indices": [
+        0,
+        1,
+        2
+      ],
+      "checks": [
+        {
+          "kind": "text_body_nonempty",
+          "parameters": {
+            "source_turn_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "mandatory": true,
+          "point_id": "conv_29609478ce7c:delivery1:check1",
+          "display_object": "标黄尽调问题和新增技术说明答复",
+          "requirement_basis": [
+            {
+              "turn": 1,
+              "quote": "这是北京国投的投资尽调材料，请把那个word里的标黄的问题帮我回复一下。"
+            },
+            {
+              "turn": 2,
+              "quote": "加入华东理工叶帮策团队的研究成果，他们好像有智能益生菌治疗肠炎的项目。同时请确认美诺华JH389和Aurealis Therapeutics（瑞士）：AUP-16的这两条管线真是的强表达的吗，请查阅他们官网的资料或者他们发表的文章，总结他们的核心技术原理。"
+            }
+          ],
+          "evidence_method": "本次运行对应“标黄尽调问题和新增技术说明答复”的交付文字集合及去空白长度；只证明有文字，不认证逐轮语义完成。",
+          "passing_condition": "原非空点只按相关文本集合，需改为对应最终交付对象绑定，避免拿计划、无关聊天或工具状态充作新交付；不加语义质量Judge。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。",
+          "score_at": "conversation_end_only",
+          "audit_action": "replace",
+          "audit_rationale": "原非空点只按相关文本集合，需改为对应最终交付对象绑定，避免拿计划、无关聊天或工具状态充作新交付；不加语义质量Judge。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。"
+        }
+      ],
+      "id": "delivery_01",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    },
+    {
+      "name": "所请求文献的下载文件",
+      "kind": "file",
+      "format": null,
+      "turn_indices": [
+        3
+      ],
+      "checks": [
+        {
+          "kind": "file_delivery_open",
+          "parameters": {
+            "actual_file": true,
+            "nonempty": true,
+            "openable": true,
+            "delivery_path_resolves": true
+          },
+          "mandatory": true,
+          "point_id": "conv_29609478ce7c:delivery2:check1",
+          "display_object": "所请求文献的下载文件",
+          "requirement_basis": [
+            {
+              "turn": 4,
+              "quote": "请搜索美诺华JH389和Aurealis Therapeutics（瑞士）：AUP-16的这两条管线相关发表的文章并帮我下载下来。",
+              "turn_1based": 4
+            }
+          ],
+          "evidence_method": "本次“所请求文献的下载文件”的最终交付声明／清单对应的真实路径、大小与SHA；对应格式的原生结构与非空载荷解析。排除未被请求重新引用的输入件、旧运行和同对象旧版本。",
+          "passing_condition": "本次实际交付当前最终文件存在、非空，交付路径可解析，文件类型未锁定，按实际格式原生打开并有正文/图像/幻灯片等载荷；扩展名或完成声明不足为证。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "原条件属于该最终对象的可读性、数量、形式或保存状态；未与用户取消/后续替代冲突。"
+        },
+        {
+          "kind": "download_result_manifest_coverage",
+          "parameters": {
+            "query_group_hints": [
+              "JH389",
+              "AUP-16"
+            ]
+          },
+          "mandatory": true,
+          "point_id": "conv_29609478ce7c:delivery2:audited1",
+          "display_object": "所请求文献的下载文件",
+          "requirement_basis": [
+            {
+              "turn": 4,
+              "turns": [
+                4
+              ],
+              "quote": "请搜索美诺华JH389和Aurealis Therapeutics（瑞士）：AUP-16的这两条管线相关发表的文章并帮我下载下来。"
+            }
+          ],
+          "evidence_method": "实际终态文件／状态的原生解析与独立读回",
+          "passing_condition": "下载前冻结的本次可下载条目全部对应实际可打开文件，输出路径和SHA吻合；不要求穷尽全球文献。",
+          "score_at": "conversation_end_only",
+          "audit_action": "add",
+          "audit_metadata_not_execution_parameters": {
+            "manifest_source": "current_attempt_retrieved_result_set",
+            "freeze_downloadable_result_ids_before_download": true,
+            "all_selected_downloadable_results_mapped_to_real_openable_files": true,
+            "no_minimum_papers_per_group_invented": true,
+            "no_historical_titles_as_gold": true,
+            "missing_manifest_status": "UNSCORED",
+            "verified_scope": "Download scope must be frozen in evidence.manifest_snapshots[delivery_id].download_results before_download; actual listed outputs must open and match SHA."
+          },
+          "audit_rationale": "‘相关发表文章’是集合请求，一份文件不等于范围完备；仅对本次可访问检索结果中已选定可下载集合核文件覆盖，不冒称穷尽全球论文或验证相关性。"
+        }
+      ],
+      "id": "delivery_02",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    },
+    {
+      "name": "后续两管线文章题目查询",
+      "kind": "text",
+      "turn_indices": [
+        4,
+        5,
+        6
+      ],
+      "checks": [
+        {
+          "kind": "text_body_nonempty",
+          "parameters": {
+            "source_turn_indices": [
+              4,
+              5,
+              6
+            ]
+          },
+          "mandatory": true,
+          "point_id": "conv_29609478ce7c:delivery3:check1",
+          "display_object": "后续两管线文章题目查询",
+          "requirement_basis": [
+            {
+              "turn": 5,
+              "quote": "请给我出我两个文章的具体题目"
+            },
+            {
+              "turn": 6,
+              "quote": "请把jh309和aup-16的相关的文献题目给我"
+            }
+          ],
+          "evidence_method": "本次运行对应“后续两管线文章题目查询”的交付文字集合及去空白长度；只证明有文字，不认证逐轮语义完成。",
+          "passing_condition": "原非空点只按相关文本集合，需改为对应最终交付对象绑定，避免拿计划、无关聊天或工具状态充作新交付；不加语义质量Judge。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。",
+          "score_at": "conversation_end_only",
+          "audit_action": "replace",
+          "audit_rationale": "原非空点只按相关文本集合，需改为对应最终交付对象绑定，避免拿计划、无关聊天或工具状态充作新交付；不加语义质量Judge。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。"
+        }
+      ],
+      "id": "delivery_03",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    }
+  ],
+  "checks": [
+    {
+      "delivery_id": "delivery_01",
+      "kind": "text_body_nonempty",
+      "parameters": {
+        "source_turn_indices": [
+          0,
+          1,
+          2
+        ]
+      },
+      "mandatory": true,
+      "point_id": "conv_29609478ce7c:delivery1:check1",
+      "display_object": "标黄尽调问题和新增技术说明答复",
+      "requirement_basis": [
+        {
+          "turn": 1,
+          "quote": "这是北京国投的投资尽调材料，请把那个word里的标黄的问题帮我回复一下。"
+        },
+        {
+          "turn": 2,
+          "quote": "加入华东理工叶帮策团队的研究成果，他们好像有智能益生菌治疗肠炎的项目。同时请确认美诺华JH389和Aurealis Therapeutics（瑞士）：AUP-16的这两条管线真是的强表达的吗，请查阅他们官网的资料或者他们发表的文章，总结他们的核心技术原理。"
+        }
+      ],
+      "evidence_method": "本次运行对应“标黄尽调问题和新增技术说明答复”的交付文字集合及去空白长度；只证明有文字，不认证逐轮语义完成。",
+      "passing_condition": "原非空点只按相关文本集合，需改为对应最终交付对象绑定，避免拿计划、无关聊天或工具状态充作新交付；不加语义质量Judge。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。",
+      "score_at": "conversation_end_only",
+      "audit_action": "replace",
+      "audit_rationale": "原非空点只按相关文本集合，需改为对应最终交付对象绑定，避免拿计划、无关聊天或工具状态充作新交付；不加语义质量Judge。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。"
+    },
+    {
+      "delivery_id": "delivery_02",
+      "kind": "file_delivery_open",
+      "parameters": {
+        "actual_file": true,
+        "nonempty": true,
+        "openable": true,
+        "delivery_path_resolves": true
+      },
+      "mandatory": true,
+      "point_id": "conv_29609478ce7c:delivery2:check1",
+      "display_object": "所请求文献的下载文件",
+      "requirement_basis": [
+        {
+          "turn": 4,
+          "quote": "请搜索美诺华JH389和Aurealis Therapeutics（瑞士）：AUP-16的这两条管线相关发表的文章并帮我下载下来。",
+          "turn_1based": 4
+        }
+      ],
+      "evidence_method": "本次“所请求文献的下载文件”的最终交付声明／清单对应的真实路径、大小与SHA；对应格式的原生结构与非空载荷解析。排除未被请求重新引用的输入件、旧运行和同对象旧版本。",
+      "passing_condition": "本次实际交付当前最终文件存在、非空，交付路径可解析，文件类型未锁定，按实际格式原生打开并有正文/图像/幻灯片等载荷；扩展名或完成声明不足为证。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "原条件属于该最终对象的可读性、数量、形式或保存状态；未与用户取消/后续替代冲突。"
+    },
+    {
+      "delivery_id": "delivery_03",
+      "kind": "text_body_nonempty",
+      "parameters": {
+        "source_turn_indices": [
+          4,
+          5,
+          6
+        ]
+      },
+      "mandatory": true,
+      "point_id": "conv_29609478ce7c:delivery3:check1",
+      "display_object": "后续两管线文章题目查询",
+      "requirement_basis": [
+        {
+          "turn": 5,
+          "quote": "请给我出我两个文章的具体题目"
+        },
+        {
+          "turn": 6,
+          "quote": "请把jh309和aup-16的相关的文献题目给我"
+        }
+      ],
+      "evidence_method": "本次运行对应“后续两管线文章题目查询”的交付文字集合及去空白长度；只证明有文字，不认证逐轮语义完成。",
+      "passing_condition": "原非空点只按相关文本集合，需改为对应最终交付对象绑定，避免拿计划、无关聊天或工具状态充作新交付；不加语义质量Judge。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。",
+      "score_at": "conversation_end_only",
+      "audit_action": "replace",
+      "audit_rationale": "原非空点只按相关文本集合，需改为对应最终交付对象绑定，避免拿计划、无关聊天或工具状态充作新交付；不加语义质量Judge。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。"
+    },
+    {
+      "delivery_id": "delivery_02",
+      "kind": "download_result_manifest_coverage",
+      "parameters": {
+        "query_group_hints": [
+          "JH389",
+          "AUP-16"
+        ]
+      },
+      "mandatory": true,
+      "point_id": "conv_29609478ce7c:delivery2:audited1",
+      "display_object": "所请求文献的下载文件",
+      "requirement_basis": [
+        {
+          "turn": 4,
+          "turns": [
+            4
+          ],
+          "quote": "请搜索美诺华JH389和Aurealis Therapeutics（瑞士）：AUP-16的这两条管线相关发表的文章并帮我下载下来。"
+        }
+      ],
+      "evidence_method": "实际终态文件／状态的原生解析与独立读回",
+      "passing_condition": "下载前冻结的本次可下载条目全部对应实际可打开文件，输出路径和SHA吻合；不要求穷尽全球文献。",
+      "score_at": "conversation_end_only",
+      "audit_action": "add",
+      "audit_metadata_not_execution_parameters": {
+        "manifest_source": "current_attempt_retrieved_result_set",
+        "freeze_downloadable_result_ids_before_download": true,
+        "all_selected_downloadable_results_mapped_to_real_openable_files": true,
+        "no_minimum_papers_per_group_invented": true,
+        "no_historical_titles_as_gold": true,
+        "missing_manifest_status": "UNSCORED",
+        "verified_scope": "Download scope must be frozen in evidence.manifest_snapshots[delivery_id].download_results before_download; actual listed outputs must open and match SHA."
+      },
+      "audit_rationale": "‘相关发表文章’是集合请求，一份文件不等于范围完备；仅对本次可访问检索结果中已选定可下载集合核文件覆盖，不冒称穷尽全球论文或验证相关性。"
+    }
+  ],
+  "ignored_details": [
+    "中间工具步骤、skill读取、重试次数和每轮成功率",
+    "文字观点、推荐或投资结论与历史AI是否一致",
+    "内容深度、全面性、美观和专业质量",
+    "未由用户明确规定的字数、页数、章节、评分、排序与时间窗"
+  ],
+  "input_bindings_needed": [],
+  "score_at": "conversation_end_only",
+  "covered_user_turn_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "superseded_or_consolidated": "同一目标的Continue、确认、修订和纠正归入最终版；不因多次索取同一文件重复计分。独立旧目标的交付在末态仍保留，未随最后一轮丢弃。",
+  "session_id": "conv_29609478ce7c",
+  "title": "合生纪康投资尽调黄标回复、专利校正与两管线文献下载",
+  "schema": "audited-per-task-delivery-contract-v1",
+  "full_user_input_review": true,
+  "checked_user_turn_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "actor_can_see_historical_ai": false,
+  "quality_scored": false,
+  "intermediate_steps_scored": false,
+  "manual_judgement_scored": false,
+  "review_status": "audited_for_basic_delivery_only",
+  "validators_execution_status": "offline_controls_only_not_business_run",
+  "summary": "根据北京国投尽调Word中标黄问题及项目材料形成答复，补入研究团队与智能益生菌技术信息，并以新上传的专利汇总替代旧数量说法。后续检索并下载JH389与AUP-16相关文献、给出论文题目；末轮出现jh309写法，保留对象歧义而不擅自改定。",
+  "category_name": "企业、市场与经营调研",
+  "design_audit_status": "approved_basic_delivery_design",
+  "execution_preflight": {
+    "status": "current_attempt_evidence_required"
+  },
+  "user_source_texts": [
+    "这是北京国投的投资尽调材料，请把那个word里的标黄的问题帮我回复一下。\n\n【本轮实际提供的输入文件】\n- 北京京国管科服问题及回复.docx：/workspace/对话附件/北京京国管科服问题及回复.docx（实验重建输入）\n- 合生纪康立项汇报初稿V1(1).pptx：/workspace/对话附件/合生纪康立项汇报初稿V1(1).pptx（实验重建输入）",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n加入华东理工叶帮策团队的研究成果，他们好像有智能益生菌治疗肠炎的项目。同时请确认美诺华JH389和Aurealis Therapeutics（瑞士）：AUP-16的这两条管线真是的强表达的吗，请查阅他们官网的资料或者他们发表的文章，总结他们的核心技术原理。",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n这是所有的专利信息，之前那个说法是笼统的说法，以这个专利数量情况为准。\n[附加文件: 专利申请信息汇总_叶海峰老师_20251219.xlsx (/workspace/对话附件/专利申请信息汇总_叶海峰老师_20251219.xlsx)]\n\n【本轮实际提供的输入文件】\n- 专利申请信息汇总_叶海峰老师_20251219.xlsx：/workspace/inputs/staged/e47e90d30ba7410b/专利申请信息汇总_叶海峰老师_20251219.xlsx（实验重建输入）",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n请搜索美诺华JH389和Aurealis Therapeutics（瑞士）：AUP-16的这两条管线相关发表的文章并帮我下载下来。",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n请给我出我两个文章的具体题目",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n请把jh309和aup-16的相关的文献题目给我",
+    "Continue where you left off. The previous model attempt failed or timed out."
+  ],
+  "input_source_specs": [
+    {
+      "mount": "对话附件/北京京国管科服问题及回复.docx",
+      "format": "docx",
+      "synthetic": true,
+      "provenance": "source_scoped_experimental_initial_domain_material",
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\ed9c4c28c76dec51af380422df8182ccb13a64acec46568010361fe970b6438f\\北京京国管科服问题及回复.docx",
+      "sha256": "ed9c4c28c76dec51af380422df8182ccb13a64acec46568010361fe970b6438f"
+    },
+    {
+      "mount": "inputs/staged/e47e90d30ba7410b/专利申请信息汇总_叶海峰老师_20251219.xlsx",
+      "format": "xlsx",
+      "synthetic": true,
+      "provenance": "explicit_task_specific_synthetic_input_v3",
+      "when": 2,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\73c1542df8a770222ad8a6eb37352444e38a9f74ef07d7ad098c7e1de23efbb2\\专利申请信息汇总_叶海峰老师_20251219.xlsx",
+      "sha256": "73c1542df8a770222ad8a6eb37352444e38a9f74ef07d7ad098c7e1de23efbb2"
+    },
+    {
+      "mount": "对话附件/合生纪康立项汇报初稿V1(1).pptx",
+      "format": "pptx",
+      "synthetic": true,
+      "provenance": "task_specific_native_product_BP_PPT_experimental_input",
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\0e9495ecdfa3b555cede9b233f9894e8fbef7291ee919b2db170599dcb8c8b29\\合生纪康立项汇报初稿V1(1).pptx",
+      "sha256": "0e9495ecdfa3b555cede9b233f9894e8fbef7291ee919b2db170599dcb8c8b29"
+    },
+    {
+      "mount": "inputs/staged/e47e90d30ba7410b/专利申请信息汇总_叶海峰老师_20251219.xlsx",
+      "format": "xlsx",
+      "synthetic": true,
+      "provenance": "explicit_task_specific_synthetic_input_v3",
+      "when": 2,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\73c1542df8a770222ad8a6eb37352444e38a9f74ef07d7ad098c7e1de23efbb2\\专利申请信息汇总_叶海峰老师_20251219.xlsx",
+      "sha256": "73c1542df8a770222ad8a6eb37352444e38a9f74ef07d7ad098c7e1de23efbb2"
+    },
+    {
+      "mount": "inputs/staged/e47e90d30ba7410b/专利申请信息汇总_叶海峰老师_20251219.xlsx",
+      "format": "xlsx",
+      "synthetic": true,
+      "provenance": "explicit_task_specific_synthetic_input_v3",
+      "when": 2,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\73c1542df8a770222ad8a6eb37352444e38a9f74ef07d7ad098c7e1de23efbb2\\专利申请信息汇总_叶海峰老师_20251219.xlsx",
+      "sha256": "73c1542df8a770222ad8a6eb37352444e38a9f74ef07d7ad098c7e1de23efbb2"
+    }
+  ]
+}

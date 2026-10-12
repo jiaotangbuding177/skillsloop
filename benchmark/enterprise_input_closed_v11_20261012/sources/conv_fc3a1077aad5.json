@@ -1,0 +1,267 @@
+{
+  "schema": "whole-source-session-preprocessing-v1",
+  "session_id": "conv_fc3a1077aad5",
+  "owner_alias": "用户23",
+  "agent_instance_id": "90b6bd93-4c31-4cc5-92f8-14fce33f863f",
+  "task_category": "BIZ",
+  "task_category_name": "企业、市场与经营调研",
+  "secondary_task_categories": [
+    "OFFICE"
+  ],
+  "split": "evolution",
+  "planned_split": "evolution",
+  "leakage_component_id": "fc_49529de66fa69796",
+  "source_order_basis": "RAW_JSONL_LINE_ORDER_UNVERIFIED",
+  "source_session_metadata": {
+    "id": "conv_fc3a1077aad5",
+    "userId": "用户23",
+    "agentInstanceId": "90b6bd93-4c31-4cc5-92f8-14fce33f863f",
+    "title": "我想要在附件BP里面，加一页融资规划，计",
+    "status": "active",
+    "lastMessageAt": {},
+    "createdAt": {},
+    "updatedAt": {},
+    "isDeleted": false,
+    "lastUsedProvider": null,
+    "lastUsedModel": null,
+    "lastUsedAt": null,
+    "locale": "zh",
+    "purpose": "consumer",
+    "originEnterpriseId": null,
+    "skillLearningEnabled": true,
+    "skillLearningExcludedAt": null,
+    "skillLearningExcludedBy": null
+  },
+  "dated_session_metadata": {
+    "id": "conv_fc3a1077aad5",
+    "user_id": "用户23",
+    "title": "我想要在附件BP里面，加一页融资规划，计",
+    "status": "active",
+    "created_at": "2026-09-19T22:22:01.295Z",
+    "last_message_at": "2026-09-19T22:53:03.432Z",
+    "user_msgs": "3"
+  },
+  "messages": [
+    {
+      "id": "e7631690-bc82-4afe-93fe-fb818c5ac9d2",
+      "role": "user",
+      "status": "done",
+      "source_line": 44475,
+      "source_file": "messages",
+      "copy_kind": "client_or_nontrusted",
+      "user_created_at": null,
+      "dated_source_position": null,
+      "numeric_scheme": null,
+      "numeric_id": null,
+      "original_position": 1,
+      "content": "我想要在附件BP里面，加一页融资规划，计划融资3000万，帮我设计一下，并输出16：9，high quality的图片。注意背景要和之前的保持一致。"
+    },
+    {
+      "id": "a0093fed-5438-445c-9b64-3b0322065674",
+      "role": "assistant",
+      "status": "done",
+      "source_line": 44476,
+      "source_file": "messages",
+      "copy_kind": "client_or_nontrusted",
+      "user_created_at": null,
+      "dated_source_position": null,
+      "numeric_scheme": null,
+      "numeric_id": null,
+      "original_position": 2,
+      "content": "收到老板！先看看这份 BP 的视觉风格，再设计融资页 🎯找到了关键线索 —— 这份 BP 每页都用同一张背景图（xref 8）。我把它提取出来 👀视觉风格摸清了：白底 + 蓝青柔光晕染，标题深藏蓝 `#1E386B`，强调色亮蓝 `#004BF8`。我看下卡片样式细节，然后开始排版。背景就绪，现在开始排版（用 BP 里那张原生背景图，保证 100% 一致）✍️排版完成 ✅ 中文 OCR 复核通过。现在再跑一版 AI 生成版做参考（16:9 / high）。本地记忆里提到可以用 `gemini-3.1-pro-preview` 做视觉复核 —— 让我用它来替我看一眼排版效果。背景强度有差距 —— 原来内容页在公共底图上还叠了一层独立的蓝色光晕层。我找一张\"干净但光晕足\"的页做底。思路清楚了：我给底图补上一层与原 BP 内容页同强度的蓝色柔光（按 11 张内容页实测的边缘光晕强度来定标）。背景协调性通过 ✅ 现在整理交付文件。老板，融资规划页做好了 🎯\n\n**核心做法（关键在\"背景一致\"）**\n\n我把 BP 拆开看了：23 页、全是 960×540pt（正好 16:9）。发现每页都叠同一张原生背景图，但**内容页还会各自再叠一张整页装饰图**——这就是为什么直接拿\"纯背景页\"当底会显得偏白。所以我做了两件事：\n\n1. 用 BP 第 22 页（全份唯一一页纯背景页）的**原生背景**当底，放大到 3840×2160；\n2. 量了 11 张内容页边缘的实测亮度，**数值拟合补了一层蓝色柔光**，自检对齐（底中 R−B −20.1 / 目标 −19.6，中下 −27.0 / 目标 −29.5）。\n\n配色也全部取自原 BP：标题 `#1E386B`、卡片蓝 `#4874CB`、描边 `#2E54A1`、强调亮蓝 `#004BF8`。\n\n**页面内容**\n\n| 区块 | 内容 |\n|---|---|\n| 顶部 KPI | 3,000 万元 / 出让 10% / 投后估值 3.0 亿元 / 覆盖 18 个月 |\n| 资金用途 | 研发 40%（1,200万）· 市场 25%（750万）· 团队 20%（600万）· 交付算力 10%（300万）· 运营 5%（150万） |\n| 关键里程碑 | 付费客户 100+、Skill 100+/连接器 50+、3 个行业复制、团队 60 人 |\n| 融资节奏 | Pre-A 3,000万 → A 轮 8,000万（2027）→ B 轮 2–3亿（2029） |\n\n**交付文件**（`AI 工作区/成果文件/我想要在附件BP里面，加一页融资规划，计-conv_fc3a1077aad5/`）\n- `2026-09-20_融资规划页_16x9_3840x2160.png` ← 主文件\n- `2026-09-20_融资规划页_16x9.pdf` ← 单页 960×540pt，**跟原 BP 页面同尺寸，可直接插入**\n- `2026-09-20_融资规划页_AI生成参考版.png` ← 另外跑了一版 gpt-image-2\n- `版本/` 里放了 V1 和图内说明\n\n**质检**：tesseract 中文 OCR 逐字复核 + 视觉模型对照原 BP 页比对，都过了（无乱码、无溢出、背景协调）。\n\n⚠️ **一点实话**：那版 AI 生成的（gpt-image-2）虽然画面好看，但**中文数字会出错**——把\"3.0 亿元\"画成\"3.012%\"、\"1,200万\"画成\"1,2005\"、\"750万\"画成\"750A\"。BP 里数字错一个就麻烦了，所以**主推精排版那版**，AI 版只当视觉参考。\n\n另外，出让比例 10%、估值 3.0 亿、各项资金占比和里程碑数字都是我按行业惯例填的**测算口径**——你确认一下真实数字，我马上出 V2。"
+    },
+    {
+      "id": "509a4e16-e88e-4c57-ae65-3d88b3d17f61",
+      "role": "user",
+      "status": "done",
+      "source_line": 44481,
+      "source_file": "messages",
+      "copy_kind": "client_or_nontrusted",
+      "user_created_at": null,
+      "dated_source_position": null,
+      "numeric_scheme": null,
+      "numeric_id": null,
+      "original_position": 3,
+      "content": "去掉上方出让比例、投后估值和使用周期，去掉下方融资节奏，资金用途里面交付与算力资源比例提升为30%。右边关键里程碑不要，更换一下，总结bp内容，放核心价值亮点"
+    },
+    {
+      "id": "cc5a7263-aee0-4880-9085-c2ede926e6dd",
+      "role": "assistant",
+      "status": "done",
+      "source_line": 44482,
+      "source_file": "messages",
+      "copy_kind": "client_or_nontrusted",
+      "user_created_at": null,
+      "dated_source_position": null,
+      "numeric_scheme": null,
+      "numeric_id": null,
+      "original_position": 4,
+      "content": "收到！四改：顶部只留融资额、去掉底部融资节奏、交付算力提到 30%、右侧换成核心价值亮点。开始改 🛠️V2 改好了，老板 ✅\n\n**四处改动**\n\n1. **顶部** —— 删掉出让股权比例、投后估值、资金覆盖周期，只留「本轮融资额」做成通栏大卡：**3,000 万元人民币**\n2. **底部** —— 融资节奏整条去掉\n3. **资金用途** —— 交付与算力资源 **10% → 30%**，其余重排后合计正好 100%：\n\n| 用途 | 占比 | 金额 |\n|---|---|---|\n| 产品与技术研发 | 30% | 900 万 |\n| **交付与算力资源** | **30%** | **900 万** |\n| 市场拓展与渠道 | 20% | 600 万 |\n| 团队与人才建设 | 15% | 450 万 |\n| 运营与资金储备 | 5% | 150 万 |\n\n4. **右侧** —— 换成**核心价值亮点**（从 BP 全文提炼 6 条）：\n   - 可复用、可进化的组织大脑 —— 员工经验封装为技能，全员与 AI 复用\n   - 重复的活 AI 来干 —— 周报、纪要、数据汇总自动完成\n   - 数据不出企业 —— 全链路安全治理，关键操作留痕可审计\n   - Token 消耗降低 79% —— 西游记案例：118.6 万 → 25.1 万\n   - 开放连接器生态 —— MCP / API 接入企业现有系统\n   - 硬核团队与学术成果 —— 60+ 篇 AI 顶会论文，顶级赛事最高奖\n\n**交付**（同名目录下，V1 已保留在 `版本/`）\n- `2026-09-20_融资规划页_16x9_3840x2160.png`\n- `2026-09-20_融资规划页_16x9.pdf`（960×540pt，可直接插进 BP）\n\n背景仍是 BP 原生底图 + 柔光拟合，配色一致。OCR 逐字复核无乱码，视觉模型对照原 BP 页复核：无溢出/重叠，背景协调。\n\n📌 一个提醒：**资金用途那 5 个比例是我按\"3000 万里交付算力占大头的逻辑\"重排的**（研发 30 / 交付 30 / 市场 20 / 团队 15 / 运营 5）。你要是有真实的科目口径，把数字给我，我出 V3。"
+    },
+    {
+      "id": "95725403-644c-4f45-b2f9-2ec9731f06ff",
+      "role": "user",
+      "status": "done",
+      "source_line": 44485,
+      "source_file": "messages",
+      "copy_kind": "client_or_nontrusted",
+      "user_created_at": null,
+      "dated_source_position": null,
+      "numeric_scheme": null,
+      "numeric_id": null,
+      "original_position": 5,
+      "content": "去掉上方Pre-A轮本轮融资3000万元人民币的小字。核心价值亮点里面去掉所有浅色小字补充描述。重复的活AI来干修改为AI自动执行重复工作。Token消耗降低79%修改为Token消耗显著降低。"
+    },
+    {
+      "id": "22195e73-116f-4c38-a12e-c831159ddd9a",
+      "role": "assistant",
+      "status": "done",
+      "source_line": 44486,
+      "source_file": "messages",
+      "copy_kind": "client_or_nontrusted",
+      "user_created_at": null,
+      "dated_source_position": null,
+      "numeric_scheme": null,
+      "numeric_id": null,
+      "original_position": 6,
+      "content": "收到，继续改 🔧VLM 提示右侧偏空 —— 但你要的就是去掉小字，所以我不加回描述，改用**细分隔线 + 字号微调**来撑住版面。V3 完成 ✅\n\n**改动**\n\n1. 删掉标题下的小字副标题「Pre-A 轮 · 本轮融资 3,000 万元人民币」——现在标题「融资规划」下直接接 3,000 万通栏大卡\n2. 「核心价值亮点」**六条描述小字全部去掉**，只留标题\n3. 「重复的活 AI 来干」→ **「AI 自动执行重复工作」**\n4. 「Token 消耗降低 79%」→ **「Token ***\n\n**顺手补的一点**：右侧只剩标题后，行间会显得空。我没加回描述（那是你要去掉的），而是用了**细分隔线 + 字号 14.5 + 加大行距**来撑版面。视觉模型复核结论是\"繁简呼吸感刚好，版面平衡，可直接使用\"——而且留白正好方便你路演时口头展开讲亮点。\n\n**现在这页长这样**\n\n```\n              融资规划\n   ┌─────────────────────────────────────┐\n   │  本轮融资额 · 3,000 万元人民币        │\n   └─────────────────────────────────────┘\n   ┌─ 资金用途 ───────┐  ┌─ 核心价值亮点 ──┐\n   │ 产品与技术研发 30% │  │ • 可复用、可进化的组织大脑 │\n   │ 交付与算力资源 30% │  │ • AI 自动执行重复工作     │\n   │ 市场拓展与渠道 20% │  │ • 数据不出企业           │\n   │ 团队与人才建设 15% │  │ • Token ***     │\n   │ 运营与资金储备  5% │  │ • 开放连接器生态         │\n   └──────────────────┘  │ • 硬核团队与学术成果     │\n                         └──────────────────────┘\n```\n\n**交付**（同名目录，V1/V2/V3 都在 `版本/`）\n- `2026-09-20_融资规划页_16x9_3840x2160.png`\n- `2026-09-20_融资规划页_16x9.pdf`（960×540pt，可直接插进 BP）\n\nOCR 逐字复核无乱码，视觉模型对照原 BP 页复核：无溢出/重叠，背景配色协调。"
+    }
+  ],
+  "turn_references": [
+    {
+      "user_original_position": 1,
+      "user_original_id": "e7631690-bc82-4afe-93fe-fb818c5ac9d2",
+      "user_content": "我想要在附件BP里面，加一页融资规划，计划融资3000万，帮我设计一下，并输出16：9，high quality的图片。注意背景要和之前的保持一致。",
+      "user_group_id": "u_5073bda31a0762ab76",
+      "user_group_occurrence_count": 1,
+      "per_occurrence_binding": "unknown",
+      "binding_note": "既有内容标注仅供来源引用，未认证逐次回复归属或真实时序。",
+      "assistant_source_references": [
+        {
+          "assistant_original_position": 2,
+          "assistant_original_id": "a0093fed-5438-445c-9b64-3b0322065674",
+          "assistant_content": "收到老板！先看看这份 BP 的视觉风格，再设计融资页 🎯找到了关键线索 —— 这份 BP 每页都用同一张背景图（xref 8）。我把它提取出来 👀视觉风格摸清了：白底 + 蓝青柔光晕染，标题深藏蓝 `#1E386B`，强调色亮蓝 `#004BF8`。我看下卡片样式细节，然后开始排版。背景就绪，现在开始排版（用 BP 里那张原生背景图，保证 100% 一致）✍️排版完成 ✅ 中文 OCR 复核通过。现在再跑一版 AI 生成版做参考（16:9 / high）。本地记忆里提到可以用 `gemini-3.1-pro-preview` 做视觉复核 —— 让我用它来替我看一眼排版效果。背景强度有差距 —— 原来内容页在公共底图上还叠了一层独立的蓝色光晕层。我找一张\"干净但光晕足\"的页做底。思路清楚了：我给底图补上一层与原 BP 内容页同强度的蓝色柔光（按 11 张内容页实测的边缘光晕强度来定标）。背景协调性通过 ✅ 现在整理交付文件。老板，融资规划页做好了 🎯\n\n**核心做法（关键在\"背景一致\"）**\n\n我把 BP 拆开看了：23 页、全是 960×540pt（正好 16:9）。发现每页都叠同一张原生背景图，但**内容页还会各自再叠一张整页装饰图**——这就是为什么直接拿\"纯背景页\"当底会显得偏白。所以我做了两件事：\n\n1. 用 BP 第 22 页（全份唯一一页纯背景页）的**原生背景**当底，放大到 3840×2160；\n2. 量了 11 张内容页边缘的实测亮度，**数值拟合补了一层蓝色柔光**，自检对齐（底中 R−B −20.1 / 目标 −19.6，中下 −27.0 / 目标 −29.5）。\n\n配色也全部取自原 BP：标题 `#1E386B`、卡片蓝 `#4874CB`、描边 `#2E54A1`、强调亮蓝 `#004BF8`。\n\n**页面内容**\n\n| 区块 | 内容 |\n|---|---|\n| 顶部 KPI | 3,000 万元 / 出让 10% / 投后估值 3.0 亿元 / 覆盖 18 个月 |\n| 资金用途 | 研发 40%（1,200万）· 市场 25%（750万）· 团队 20%（600万）· 交付算力 10%（300万）· 运营 5%（150万） |\n| 关键里程碑 | 付费客户 100+、Skill 100+/连接器 50+、3 个行业复制、团队 60 人 |\n| 融资节奏 | Pre-A 3,000万 → A 轮 8,000万（2027）→ B 轮 2–3亿（2029） |\n\n**交付文件**（`AI 工作区/成果文件/我想要在附件BP里面，加一页融资规划，计-conv_fc3a1077aad5/`）\n- `2026-09-20_融资规划页_16x9_3840x2160.png` ← 主文件\n- `2026-09-20_融资规划页_16x9.pdf` ← 单页 960×540pt，**跟原 BP 页面同尺寸，可直接插入**\n- `2026-09-20_融资规划页_AI生成参考版.png` ← 另外跑了一版 gpt-image-2\n- `版本/` 里放了 V1 和图内说明\n\n**质检**：tesseract 中文 OCR 逐字复核 + 视觉模型对照原 BP 页比对，都过了（无乱码、无溢出、背景协调）。\n\n⚠️ **一点实话**：那版 AI 生成的（gpt-image-2）虽然画面好看，但**中文数字会出错**——把\"3.0 亿元\"画成\"3.012%\"、\"1,200万\"画成\"1,2005\"、\"750万\"画成\"750A\"。BP 里数字错一个就麻烦了，所以**主推精排版那版**，AI 版只当视觉参考。\n\n另外，出让比例 10%、估值 3.0 亿、各项资金占比和里程碑数字都是我按行业惯例填的**测算口径**——你确认一下真实数字，我马上出 V2。",
+          "relation_levels": [
+            "proposed"
+          ],
+          "relation_provenance": [
+            {
+              "user_group_id": "u_5073bda31a0762ab76",
+              "assistant_group_id": "a_aae8e57a5a24b6fe01",
+              "source": "matched_066",
+              "relation_level": "proposed",
+              "chronology_verified": false,
+              "same_task_verified": false
+            }
+          ],
+          "is_new_event": false,
+          "reply_to_this_occurrence_verified": false
+        }
+      ]
+    },
+    {
+      "user_original_position": 3,
+      "user_original_id": "509a4e16-e88e-4c57-ae65-3d88b3d17f61",
+      "user_content": "去掉上方出让比例、投后估值和使用周期，去掉下方融资节奏，资金用途里面交付与算力资源比例提升为30%。右边关键里程碑不要，更换一下，总结bp内容，放核心价值亮点",
+      "user_group_id": "u_1d082f2e7e955dd0bd",
+      "user_group_occurrence_count": 1,
+      "per_occurrence_binding": "unknown",
+      "binding_note": "既有内容标注仅供来源引用，未认证逐次回复归属或真实时序。",
+      "assistant_source_references": [
+        {
+          "assistant_original_position": 4,
+          "assistant_original_id": "cc5a7263-aee0-4880-9085-c2ede926e6dd",
+          "assistant_content": "收到！四改：顶部只留融资额、去掉底部融资节奏、交付算力提到 30%、右侧换成核心价值亮点。开始改 🛠️V2 改好了，老板 ✅\n\n**四处改动**\n\n1. **顶部** —— 删掉出让股权比例、投后估值、资金覆盖周期，只留「本轮融资额」做成通栏大卡：**3,000 万元人民币**\n2. **底部** —— 融资节奏整条去掉\n3. **资金用途** —— 交付与算力资源 **10% → 30%**，其余重排后合计正好 100%：\n\n| 用途 | 占比 | 金额 |\n|---|---|---|\n| 产品与技术研发 | 30% | 900 万 |\n| **交付与算力资源** | **30%** | **900 万** |\n| 市场拓展与渠道 | 20% | 600 万 |\n| 团队与人才建设 | 15% | 450 万 |\n| 运营与资金储备 | 5% | 150 万 |\n\n4. **右侧** —— 换成**核心价值亮点**（从 BP 全文提炼 6 条）：\n   - 可复用、可进化的组织大脑 —— 员工经验封装为技能，全员与 AI 复用\n   - 重复的活 AI 来干 —— 周报、纪要、数据汇总自动完成\n   - 数据不出企业 —— 全链路安全治理，关键操作留痕可审计\n   - Token 消耗降低 79% —— 西游记案例：118.6 万 → 25.1 万\n   - 开放连接器生态 —— MCP / API 接入企业现有系统\n   - 硬核团队与学术成果 —— 60+ 篇 AI 顶会论文，顶级赛事最高奖\n\n**交付**（同名目录下，V1 已保留在 `版本/`）\n- `2026-09-20_融资规划页_16x9_3840x2160.png`\n- `2026-09-20_融资规划页_16x9.pdf`（960×540pt，可直接插进 BP）\n\n背景仍是 BP 原生底图 + 柔光拟合，配色一致。OCR 逐字复核无乱码，视觉模型对照原 BP 页复核：无溢出/重叠，背景协调。\n\n📌 一个提醒：**资金用途那 5 个比例是我按\"3000 万里交付算力占大头的逻辑\"重排的**（研发 30 / 交付 30 / 市场 20 / 团队 15 / 运营 5）。你要是有真实的科目口径，把数字给我，我出 V3。",
+          "relation_levels": [
+            "proposed"
+          ],
+          "relation_provenance": [
+            {
+              "user_group_id": "u_1d082f2e7e955dd0bd",
+              "assistant_group_id": "a_0fead8979c373133fe",
+              "source": "matched_066",
+              "relation_level": "proposed",
+              "chronology_verified": false,
+              "same_task_verified": false
+            }
+          ],
+          "is_new_event": false,
+          "reply_to_this_occurrence_verified": false
+        }
+      ]
+    },
+    {
+      "user_original_position": 5,
+      "user_original_id": "95725403-644c-4f45-b2f9-2ec9731f06ff",
+      "user_content": "去掉上方Pre-A轮本轮融资3000万元人民币的小字。核心价值亮点里面去掉所有浅色小字补充描述。重复的活AI来干修改为AI自动执行重复工作。Token消耗降低79%修改为Token消耗显著降低。",
+      "user_group_id": "u_efa09a48482169c909",
+      "user_group_occurrence_count": 1,
+      "per_occurrence_binding": "unknown",
+      "binding_note": "既有内容标注仅供来源引用，未认证逐次回复归属或真实时序。",
+      "assistant_source_references": [
+        {
+          "assistant_original_position": 6,
+          "assistant_original_id": "22195e73-116f-4c38-a12e-c831159ddd9a",
+          "assistant_content": "收到，继续改 🔧VLM 提示右侧偏空 —— 但你要的就是去掉小字，所以我不加回描述，改用**细分隔线 + 字号微调**来撑住版面。V3 完成 ✅\n\n**改动**\n\n1. 删掉标题下的小字副标题「Pre-A 轮 · 本轮融资 3,000 万元人民币」——现在标题「融资规划」下直接接 3,000 万通栏大卡\n2. 「核心价值亮点」**六条描述小字全部去掉**，只留标题\n3. 「重复的活 AI 来干」→ **「AI 自动执行重复工作」**\n4. 「Token 消耗降低 79%」→ **「Token ***\n\n**顺手补的一点**：右侧只剩标题后，行间会显得空。我没加回描述（那是你要去掉的），而是用了**细分隔线 + 字号 14.5 + 加大行距**来撑版面。视觉模型复核结论是\"繁简呼吸感刚好，版面平衡，可直接使用\"——而且留白正好方便你路演时口头展开讲亮点。\n\n**现在这页长这样**\n\n```\n              融资规划\n   ┌─────────────────────────────────────┐\n   │  本轮融资额 · 3,000 万元人民币        │\n   └─────────────────────────────────────┘\n   ┌─ 资金用途 ───────┐  ┌─ 核心价值亮点 ──┐\n   │ 产品与技术研发 30% │  │ • 可复用、可进化的组织大脑 │\n   │ 交付与算力资源 30% │  │ • AI 自动执行重复工作     │\n   │ 市场拓展与渠道 20% │  │ • 数据不出企业           │\n   │ 团队与人才建设 15% │  │ • Token ***     │\n   │ 运营与资金储备  5% │  │ • 开放连接器生态         │\n   └──────────────────┘  │ • 硬核团队与学术成果     │\n                         └──────────────────────┘\n```\n\n**交付**（同名目录，V1/V2/V3 都在 `版本/`）\n- `2026-09-20_融资规划页_16x9_3840x2160.png`\n- `2026-09-20_融资规划页_16x9.pdf`（960×540pt，可直接插进 BP）\n\nOCR 逐字复核无乱码，视觉模型对照原 BP 页复核：无溢出/重叠，背景配色协调。",
+          "relation_levels": [
+            "proposed"
+          ],
+          "relation_provenance": [
+            {
+              "user_group_id": "u_efa09a48482169c909",
+              "assistant_group_id": "a_77c6b6a49ba2db1213",
+              "source": "matched_066",
+              "relation_level": "proposed",
+              "chronology_verified": false,
+              "same_task_verified": false
+            }
+          ],
+          "is_new_event": false,
+          "reply_to_this_occurrence_verified": false
+        }
+      ]
+    }
+  ],
+  "reference_scope": "Existing content-group source quotations; references are not additional historical events or certified turns.",
+  "file_references": [
+    {
+      "file_reference_id": "file_01678",
+      "session_id": "conv_fc3a1077aad5",
+      "role": "user",
+      "message_id": "e7631690-bc82-4afe-93fe-fb818c5ac9d2",
+      "group_id": "u_5073bda31a0762ab76",
+      "source_line": 44475,
+      "file_metadata": {
+        "name": "赶着用的BP.pdf",
+        "path": "对话附件/赶着用的BP.pdf",
+        "mimeType": "application/pdf",
+        "sizeBytes": 6974798
+      },
+      "bytes_available_in_export": false,
+      "attachment_bytes_restored": false
+    }
+  ],
+  "tool_record_ids": [
+    "tool_03549",
+    "tool_03550"
+  ],
+  "tool_assignment_scope": "Source session-level inventory; cumulative snapshots do not establish invocation time or task attribution.",
+  "order_diagnostics": {
+    "status": "NO_CONFLICT_OBSERVED_UNVERIFIED",
+    "reasons": {
+      "source_numeric_descent": [],
+      "source_user_time_descent": [],
+      "time_numeric_conflict": []
+    },
+    "same_time_numeric_descents": [],
+    "mixed_client_trusted_records": false,
+    "consecutive_user_pairs": 0,
+    "complete_chronology_verified": false
+  },
+  "outcome": "unknown",
+  "chronology_verified": false,
+  "complete_historical_trace_verified": false,
+  "benchmark_ready": false,
+  "artifact_bytes_restored": false,
+  "credential_masking": "Inherited unchanged from verified whole-session reader."
+}

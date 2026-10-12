@@ -1,0 +1,691 @@
+C:\Users\22142\AppData\Local\Programs\Python\Python311\Lib\site-packages\pytest_asyncio\plugin.py:217: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+FFFFFFFFFFFFFFFFFFF.FF                                                   [100%]
+================================== FAILURES ===================================
+_ test_numbered_count_accepts_normal_variants[\u7b2c1\u9875\uff1a\u5c01\u9762\n\u8bf4\u660e\n\u7b2c2\u9875\uff1a\u5e02\u573a\n\u5206\u6790\n\u7b2c3\u9875\uff1a\u603b\u7ed3\n\u884c\u52a8] _
+
+engine = <module 'text_fixture_base' from 'D:\\skillloop\\output\\20261012_task_validator_suite\\vendor\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-6/test_numbered_count_accepts_no0')
+body = '��1ҳ������\n˵��\n��2ҳ���г�\n����\n��3ҳ���ܽ�\n�ж�'
+
+    @pytest.mark.parametrize("body", [
+        "��1ҳ������\n˵��\n��2ҳ���г�\n����\n��3ҳ���ܽ�\n�ж�",
+        "# 1. Cover\nbody\n# 2. Market\nbody\n# 3. End\nbody",
+        "slide_00: Cover\nbody\nslide_01: Market\nbody\nslide_02: End\nbody"])
+    def test_numbered_count_accepts_normal_variants(engine, tmp_path, body):
+>       out = run(engine, context(engine, tmp_path, text=body), "text_numbered_item_count", {"count": 3})
+
+output\20261012_task_validator_suite\tests\test_text_extensions.py:123: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_text_extensions.py:49: in context
+    return base.Context(
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'text': '��1ҳ������\n˵��\n��2...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-6\\test_numbered_count_accepts_no0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               text_fixture_base.UnknownEvidence: task_and_source_identity_mismatch
+
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:52: UnknownEvidence
+_ test_numbered_count_accepts_normal_variants[# 1. Cover\nbody\n# 2. Market\nbody\n# 3. End\nbody] _
+
+engine = <module 'text_fixture_base' from 'D:\\skillloop\\output\\20261012_task_validator_suite\\vendor\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-6/test_numbered_count_accepts_no1')
+body = '# 1. Cover\nbody\n# 2. Market\nbody\n# 3. End\nbody'
+
+    @pytest.mark.parametrize("body", [
+        "��1ҳ������\n˵��\n��2ҳ���г�\n����\n��3ҳ���ܽ�\n�ж�",
+        "# 1. Cover\nbody\n# 2. Market\nbody\n# 3. End\nbody",
+        "slide_00: Cover\nbody\nslide_01: Market\nbody\nslide_02: End\nbody"])
+    def test_numbered_count_accepts_normal_variants(engine, tmp_path, body):
+>       out = run(engine, context(engine, tmp_path, text=body), "text_numbered_item_count", {"count": 3})
+
+output\20261012_task_validator_suite\tests\test_text_extensions.py:123: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_text_extensions.py:49: in context
+    return base.Context(
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'text': '# 1. Cover\nbo...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-6\\test_numbered_count_accepts_no1'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               text_fixture_base.UnknownEvidence: task_and_source_identity_mismatch
+
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:52: UnknownEvidence
+_ test_numbered_count_accepts_normal_variants[slide_00: Cover\nbody\nslide_01: Market\nbody\nslide_02: End\nbody] _
+
+engine = <module 'text_fixture_base' from 'D:\\skillloop\\output\\20261012_task_validator_suite\\vendor\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-6/test_numbered_count_accepts_no2')
+body = 'slide_00: Cover\nbody\nslide_01: Market\nbody\nslide_02: End\nbody'
+
+    @pytest.mark.parametrize("body", [
+        "��1ҳ������\n˵��\n��2ҳ���г�\n����\n��3ҳ���ܽ�\n�ж�",
+        "# 1. Cover\nbody\n# 2. Market\nbody\n# 3. End\nbody",
+        "slide_00: Cover\nbody\nslide_01: Market\nbody\nslide_02: End\nbody"])
+    def test_numbered_count_accepts_normal_variants(engine, tmp_path, body):
+>       out = run(engine, context(engine, tmp_path, text=body), "text_numbered_item_count", {"count": 3})
+
+output\20261012_task_validator_suite\tests\test_text_extensions.py:123: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_text_extensions.py:49: in context
+    return base.Context(
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'text': 'slide_00: Cove...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-6\\test_numbered_count_accepts_no2'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               text_fixture_base.UnknownEvidence: task_and_source_identity_mismatch
+
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:52: UnknownEvidence
+__________________ test_count_wrong_blank_and_unidentifiable __________________
+
+engine = <module 'text_fixture_base' from 'D:\\skillloop\\output\\20261012_task_validator_suite\\vendor\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-6/test_count_wrong_blank_and_uni0')
+
+    def test_count_wrong_blank_and_unidentifiable(engine, tmp_path):
+        with pytest.raises(engine.DeliveryFailure):
+>           run(engine, context(engine, tmp_path, text="��1ҳ��a\n��2ҳ��b"), "text_numbered_item_count", {"count": 3})
+
+output\20261012_task_validator_suite\tests\test_text_extensions.py:129: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_text_extensions.py:49: in context
+    return base.Context(
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'text': '��1ҳ��a\n��2ҳ��b'}...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-6\\test_count_wrong_blank_and_uni0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               text_fixture_base.UnknownEvidence: task_and_source_identity_mismatch
+
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:52: UnknownEvidence
+___________ test_minimum_word_count_does_not_create_2500_tolerance ____________
+
+engine = <module 'text_fixture_base' from 'D:\\skillloop\\output\\20261012_task_validator_suite\\vendor\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-6/test_minimum_word_count_does_n0')
+
+    def test_minimum_word_count_does_not_create_2500_tolerance(engine, tmp_path):
+        params = {"min_characters": 1000, "count_mode": "non_whitespace_unicode_codepoints"}
+>       assert run(engine, context(engine, tmp_path, text="�� " * 1000),
+                   "text_character_count_minimum", params)["characters"] == 1000
+
+output\20261012_task_validator_suite\tests\test_text_extensions.py:139: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_text_extensions.py:49: in context
+    return base.Context(
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'text': '�� �� �� �� �� �� �� ...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-6\\test_minimum_word_count_does_n0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               text_fixture_base.UnknownEvidence: task_and_source_identity_mismatch
+
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:52: UnknownEvidence
+_______________ test_status_short_phrases_are_observation_only ________________
+
+engine = <module 'text_fixture_base' from 'D:\\skillloop\\output\\20261012_task_validator_suite\\vendor\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-6/test_status_short_phrases_are_0')
+
+    def test_status_short_phrases_are_observation_only(engine, tmp_path):
+        p = {"phrases": ["�һ���", "�����"]}
+>       assert run(engine, context(engine, tmp_path, text="����ɡ�"),
+                   "exact_status_only_text_diagnostic", p)["scorable"] is False
+
+output\20261012_task_validator_suite\tests\test_text_extensions.py:150: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_text_extensions.py:49: in context
+    return base.Context(
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'text': '����ɡ�'}}, 'init...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-6\\test_status_short_phrases_are_0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               text_fixture_base.UnknownEvidence: task_and_source_identity_mismatch
+
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:52: UnknownEvidence
+______________ test_input_declarations_only_not_source_function _______________
+
+engine = <module 'text_fixture_base' from 'D:\\skillloop\\output\\20261012_task_validator_suite\\vendor\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-6/test_input_declarations_only_n0')
+
+    def test_input_declarations_only_not_source_function(engine, tmp_path):
+        d = tmp_path / "skill"; d.mkdir()
+        (d / "SKILL.md").write_text("�����ʽ��LaTeX / Markdown / Word / PDF\n��ִ�п��������жϡ�", "utf-8")
+>       c = context(engine, tmp_path); c.evidence["deliveries"]["d"] = {"directory": "skill"}
+
+output\20261012_task_validator_suite\tests\test_text_extensions.py:160: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_text_extensions.py:49: in context
+    return base.Context(
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {}}, 'initial_sha256': {...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-6\\test_input_declarations_only_n0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               text_fixture_base.UnknownEvidence: task_and_source_identity_mismatch
+
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:52: UnknownEvidence
+_____________ test_numeric_source_markers_are_only_form_presence ______________
+
+engine = <module 'text_fixture_base' from 'D:\\skillloop\\output\\20261012_task_validator_suite\\vendor\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-6/test_numeric_source_markers_ar0')
+
+    def test_numeric_source_markers_are_only_form_presence(engine, tmp_path):
+        p = {"require_numeric_token": True}
+        good = "�г���ģ2.5��Ԫ�����ϳ�����https://example.test/report"
+>       assert run(engine, context(engine, tmp_path, text=good),
+                   "file_numeric_and_reference_markers_present", p)["reference_count"] >= 1
+
+output\20261012_task_validator_suite\tests\test_text_extensions.py:174: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_text_extensions.py:49: in context
+    return base.Context(
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'text': '�г���ģ2.5��Ԫ�����ϳ���...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-6\\test_numeric_source_markers_ar0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               text_fixture_base.UnknownEvidence: task_and_source_identity_mismatch
+
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:52: UnknownEvidence
+________________ test_protected_sections_use_frozen_user_text _________________
+
+engine = <module 'text_fixture_base' from 'D:\\skillloop\\output\\20261012_task_validator_suite\\vendor\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-6/test_protected_sections_use_fr0')
+
+    def test_protected_sections_use_frozen_user_text(engine, tmp_path):
+        source = "һ��ԭ��\nA\n�����ɱ���\nB\n����ԭ��\nC"
+        p = {"frozen_baseline_text": source, "section_heading_keys": ["һ", "��"]}
+>       assert run(engine, context(engine, tmp_path, text="# ��һ�� ԭ��\n A \n# �ڶ��� ��д\nNEW\n# ������ ԭ��\nC"),
+                   "text_named_sections_equal_to_user_baseline", p)["sections_compared"] == 2
+
+output\20261012_task_validator_suite\tests\test_text_extensions.py:187: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_text_extensions.py:49: in context
+    return base.Context(
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'text': '# ��һ�� ԭ��\n A \...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-6\\test_protected_sections_use_fr0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               text_fixture_base.UnknownEvidence: task_and_source_identity_mismatch
+
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:52: UnknownEvidence
+_______________ test_quotation_values_have_unit_and_field_scope _______________
+
+engine = <module 'text_fixture_base' from 'D:\\skillloop\\output\\20261012_task_validator_suite\\vendor\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-6/test_quotation_values_have_uni0')
+
+    def test_quotation_values_have_unit_and_field_scope(engine, tmp_path):
+        p = {"fields": [{"name": "ƽ̨��", "value": 500000, "unit": "Ԫ"},
+                        {"name": "���", "value": 30000000, "unit": "token"}]}
+        good = "ƽ̨�ѣ�50��Ԫ\n��ȣ�3,000��token"
+>       assert run(engine, context(engine, tmp_path, text=good), "quotation_named_numeric_fields", p)["fields_checked"] == 2
+
+output\20261012_task_validator_suite\tests\test_text_extensions.py:201: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_text_extensions.py:49: in context
+    return base.Context(
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'text': 'ƽ̨�ѣ�50��Ԫ\n��ȣ�3...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-6\\test_quotation_values_have_uni0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               text_fixture_base.UnknownEvidence: task_and_source_identity_mismatch
+
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:52: UnknownEvidence
+___________ test_quote_bounds_all_identified_rows_not_summary_only ____________
+
+engine = <module 'text_fixture_base' from 'D:\\skillloop\\output\\20261012_task_validator_suite\\vendor\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-6/test_quote_bounds_all_identifi0')
+
+    def test_quote_bounds_all_identified_rows_not_summary_only(engine, tmp_path):
+        p = {"bounds": [{"scope": "skill", "field": "����", "max": 10},
+                        {"scope": "FDE", "field": "פ������", "min": 7}]}
+        good = "| ��Ŀ | ���� | פ������ |\n|---|---|---|\n| skill A | 8 | |\n| skill B | 10 | |\n| FDE | | 7 |"
+>       assert run(engine, context(engine, tmp_path, text=good), "quotation_numeric_bounds", p)["bound_rows_checked"] == 3
+
+output\20261012_task_validator_suite\tests\test_text_extensions.py:214: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_text_extensions.py:49: in context
+    return base.Context(
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'text': '| ��Ŀ | ���� | פ��...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-6\\test_quote_bounds_all_identifi0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               text_fixture_base.UnknownEvidence: task_and_source_identity_mismatch
+
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:52: UnknownEvidence
+____________ test_download_scope_not_terminal_self_selected_subset ____________
+
+engine = <module 'text_fixture_base' from 'D:\\skillloop\\output\\20261012_task_validator_suite\\vendor\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-6/test_download_scope_not_termin0')
+
+    def test_download_scope_not_terminal_self_selected_subset(engine, tmp_path):
+        for name in ("a.md", "b.md"):
+            (tmp_path / name).write_text("Downloaded content " + name, "utf-8")
+>       c = context(engine, tmp_path, files=["a.md", "b.md"])
+
+output\20261012_task_validator_suite\tests\test_text_extensions.py:225: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_text_extensions.py:49: in context
+    return base.Context(
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'files': ['a.md', 'b.md...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-6\\test_download_scope_not_termin0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               text_fixture_base.UnknownEvidence: task_and_source_identity_mismatch
+
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:52: UnknownEvidence
+_________________ test_pdf_order_compares_actual_drawn_pixels _________________
+
+engine = <module 'text_fixture_base' from 'D:\\skillloop\\output\\20261012_task_validator_suite\\vendor\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-6/test_pdf_order_compares_actual0')
+
+    def test_pdf_order_compares_actual_drawn_pixels(engine, tmp_path):
+        raster(tmp_path / "slide_00.png", "red"); raster(tmp_path / "slide_01.png", "blue")
+        image_pdf(tmp_path / "out.pdf")
+        p = {"ordered_source_names": ["slide_00.png", "slide_01.png"]}
+>       c = context(engine, tmp_path, files=["out.pdf"])
+
+output\20261012_task_validator_suite\tests\test_text_extensions.py:246: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_text_extensions.py:49: in context
+    return base.Context(
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'files': ['out.pdf']}},...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-6\\test_pdf_order_compares_actual0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               text_fixture_base.UnknownEvidence: task_and_source_identity_mismatch
+
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:52: UnknownEvidence
+______________ test_pdf_image_resource_not_drawn_is_not_payload _______________
+
+engine = <module 'text_fixture_base' from 'D:\\skillloop\\output\\20261012_task_validator_suite\\vendor\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-6/test_pdf_image_resource_not_dr0')
+
+    def test_pdf_image_resource_not_drawn_is_not_payload(engine, tmp_path):
+        image_pdf(tmp_path / "out.pdf", ("red",), unused_image=True)
+        with pytest.raises(engine.DeliveryFailure):
+>           run(engine, context(engine, tmp_path, files=["out.pdf"]), "pdf_external_text_absent", {})
+
+output\20261012_task_validator_suite\tests\test_text_extensions.py:259: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_text_extensions.py:49: in context
+    return base.Context(
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'files': ['out.pdf']}},...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-6\\test_pdf_image_resource_not_dr0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               text_fixture_base.UnknownEvidence: task_and_source_identity_mismatch
+
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:52: UnknownEvidence
+_______ test_pdf_pure_image_invisible_ocr_allowed_visible_text_rejected _______
+
+engine = <module 'text_fixture_base' from 'D:\\skillloop\\output\\20261012_task_validator_suite\\vendor\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-6/test_pdf_pure_image_invisible_0')
+
+    def test_pdf_pure_image_invisible_ocr_allowed_visible_text_rejected(engine, tmp_path):
+        image_pdf(tmp_path / "out.pdf", ("red",), visible_text="Caption")
+        with pytest.raises(engine.DeliveryFailure):
+>           run(engine, context(engine, tmp_path, files=["out.pdf"]), "pdf_external_text_absent", {})
+
+output\20261012_task_validator_suite\tests\test_text_extensions.py:265: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_text_extensions.py:49: in context
+    return base.Context(
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'files': ['out.pdf']}},...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-6\\test_pdf_pure_image_invisible_0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               text_fixture_base.UnknownEvidence: task_and_source_identity_mismatch
+
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:52: UnknownEvidence
+__________ test_photo_named_entries_real_bytes_not_actor_dictionary ___________
+
+engine = <module 'text_fixture_base' from 'D:\\skillloop\\output\\20261012_task_validator_suite\\vendor\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-6/test_photo_named_entries_real_0')
+
+    def test_photo_named_entries_real_bytes_not_actor_dictionary(engine, tmp_path):
+        raster(tmp_path / "people.png", "red")
+        p = {"names": ["��", "��"]}
+>       c = context(engine, tmp_path, text="![��ͻ���Ƭ](people.png)", files=["people.png"])
+
+output\20261012_task_validator_suite\tests\test_text_extensions.py:273: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_text_extensions.py:49: in context
+    return base.Context(
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'files': ['people.png']...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-6\\test_photo_named_entries_real_0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               text_fixture_base.UnknownEvidence: task_and_source_identity_mismatch
+
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:52: UnknownEvidence
+______________ test_embedded_photos_open_real_container_payload _______________
+
+engine = <module 'text_fixture_base' from 'D:\\skillloop\\output\\20261012_task_validator_suite\\vendor\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-6/test_embedded_photos_open_real0')
+
+    def test_embedded_photos_open_real_container_payload(engine, tmp_path):
+        image_pdf(tmp_path / "photos.pdf", ("red",))
+>       c = context(engine, tmp_path, files=["photos.pdf"])
+
+output\20261012_task_validator_suite\tests\test_text_extensions.py:286: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_text_extensions.py:49: in context
+    return base.Context(
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'files': ['photos.pdf']...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-6\\test_embedded_photos_open_real0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               text_fixture_base.UnknownEvidence: task_and_source_identity_mismatch
+
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:52: UnknownEvidence
+________________ test_active_headers_images_fields_and_orphans ________________
+
+engine = <module 'text_fixture_base' from 'D:\\skillloop\\output\\20261012_task_validator_suite\\vendor\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-6/test_active_headers_images_fie0')
+
+    def test_active_headers_images_fields_and_orphans(engine, tmp_path):
+        p = {"format": "docx", "headers_empty": True, "header_scope": "active_section_references",
+             "header_renderable_payload_absent": True, "ignore_orphan_header_parts": True}
+        docx(tmp_path / "out.docx", header_text="old unused", active=False)
+>       assert run(engine, context(engine, tmp_path, files=["out.docx"]), "file_delivery_open", p)["active_headers"] == 0
+
+output\20261012_task_validator_suite\tests\test_text_extensions.py:300: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_text_extensions.py:49: in context
+    return base.Context(
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'files': ['out.docx']}}...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-6\\test_active_headers_images_fie0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               text_fixture_base.UnknownEvidence: task_and_source_identity_mismatch
+
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:52: UnknownEvidence
+_________ test_watermark_only_independently_pinned_actual_inspection __________
+
+engine = <module 'text_fixture_base' from 'D:\\skillloop\\output\\20261012_task_validator_suite\\vendor\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-6/test_watermark_only_independen0')
+
+    def test_watermark_only_independently_pinned_actual_inspection(engine, tmp_path):
+        image_pdf(tmp_path / "out.pdf", ("red",), visible_text="Zhang")
+>       c = context(engine, tmp_path, files=["out.pdf"])
+
+output\20261012_task_validator_suite\tests\test_text_extensions.py:313: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_text_extensions.py:49: in context
+    return base.Context(
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'files': ['out.pdf']}},...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-6\\test_watermark_only_independen0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               text_fixture_base.UnknownEvidence: task_and_source_identity_mismatch
+
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:52: UnknownEvidence
+______________________ test_file_identity_not_same_bytes ______________________
+
+engine = <module 'text_fixture_base' from 'D:\\skillloop\\output\\20261012_task_validator_suite\\vendor\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-6/test_file_identity_not_same_by0')
+
+    def test_file_identity_not_same_bytes(engine, tmp_path):
+        image_pdf(tmp_path / "a.pdf", ("red",))
+        (tmp_path / "b.pdf").write_bytes((tmp_path / "a.pdf").read_bytes())
+>       c = context(engine, tmp_path, files=["a.pdf"])
+
+output\20261012_task_validator_suite\tests\test_text_extensions.py:342: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_text_extensions.py:49: in context
+    return base.Context(
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'files': ['a.pdf']}}, '...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-6\\test_file_identity_not_same_by0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               text_fixture_base.UnknownEvidence: task_and_source_identity_mismatch
+
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:52: UnknownEvidence
+____________________ test_pixel_reuse_current_attempt_only ____________________
+
+engine = <module 'text_fixture_base' from 'D:\\skillloop\\output\\20261012_task_validator_suite\\vendor\\final_state_scorer.py'>
+tmp_path = WindowsPath('C:/Users/22142/AppData/Local/Temp/pytest-of-22142/pytest-6/test_pixel_reuse_current_attem0')
+
+    def test_pixel_reuse_current_attempt_only(engine, tmp_path):
+        raster(tmp_path / "out.png", "blue"); raster(tmp_path / "prior.png", "red")
+>       c = context(engine, tmp_path, files=["out.png"])
+
+output\20261012_task_validator_suite\tests\test_text_extensions.py:353: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+output\20261012_task_validator_suite\tests\test_text_extensions.py:49: in context
+    return base.Context(
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:261: in __init__
+    if source_id(request) != expected_sid:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'evidence': {'conversation_complete': True, 'declared_input_sha256': {}, 'deliveries': {'d': {'files': ['out.png']}},...re', 'workspace': 'C:\\Users\\22142\\AppData\\Local\\Temp\\pytest-of-22142\\pytest-6\\test_pixel_reuse_current_attem0'}
+
+    def source_id(request):
+        """Use the pinned source identity; permit only the known legacy heldout ID form."""
+        rubric = request.get('rubric') or {}
+        explicit = request.get('source_session_id') or rubric.get('source_session_id') or rubric.get('contract_id')
+        if explicit:
+            if not isinstance(explicit, str): raise UnknownEvidence('invalid_source_session_id')
+            if request.get('task_id') not in (explicit, 'heldout_' + explicit):
+>               raise UnknownEvidence('task_and_source_identity_mismatch')
+E               text_fixture_base.UnknownEvidence: task_and_source_identity_mismatch
+
+output\20261012_task_validator_suite\vendor\final_state_scorer.py:52: UnknownEvidence
+=========================== short test summary info ===========================
+FAILED output/20261012_task_validator_suite/tests/test_text_extensions.py::test_numbered_count_accepts_normal_variants[\u7b2c1\u9875\uff1a\u5c01\u9762\n\u8bf4\u660e\n\u7b2c2\u9875\uff1a\u5e02\u573a\n\u5206\u6790\n\u7b2c3\u9875\uff1a\u603b\u7ed3\n\u884c\u52a8]
+FAILED output/20261012_task_validator_suite/tests/test_text_extensions.py::test_numbered_count_accepts_normal_variants[# 1. Cover\nbody\n# 2. Market\nbody\n# 3. End\nbody]
+FAILED output/20261012_task_validator_suite/tests/test_text_extensions.py::test_numbered_count_accepts_normal_variants[slide_00: Cover\nbody\nslide_01: Market\nbody\nslide_02: End\nbody]
+FAILED output/20261012_task_validator_suite/tests/test_text_extensions.py::test_count_wrong_blank_and_unidentifiable
+FAILED output/20261012_task_validator_suite/tests/test_text_extensions.py::test_minimum_word_count_does_not_create_2500_tolerance
+FAILED output/20261012_task_validator_suite/tests/test_text_extensions.py::test_status_short_phrases_are_observation_only
+FAILED output/20261012_task_validator_suite/tests/test_text_extensions.py::test_input_declarations_only_not_source_function
+FAILED output/20261012_task_validator_suite/tests/test_text_extensions.py::test_numeric_source_markers_are_only_form_presence
+FAILED output/20261012_task_validator_suite/tests/test_text_extensions.py::test_protected_sections_use_frozen_user_text
+FAILED output/20261012_task_validator_suite/tests/test_text_extensions.py::test_quotation_values_have_unit_and_field_scope
+FAILED output/20261012_task_validator_suite/tests/test_text_extensions.py::test_quote_bounds_all_identified_rows_not_summary_only
+FAILED output/20261012_task_validator_suite/tests/test_text_extensions.py::test_download_scope_not_terminal_self_selected_subset
+FAILED output/20261012_task_validator_suite/tests/test_text_extensions.py::test_pdf_order_compares_actual_drawn_pixels
+FAILED output/20261012_task_validator_suite/tests/test_text_extensions.py::test_pdf_image_resource_not_drawn_is_not_payload
+FAILED output/20261012_task_validator_suite/tests/test_text_extensions.py::test_pdf_pure_image_invisible_ocr_allowed_visible_text_rejected
+FAILED output/20261012_task_validator_suite/tests/test_text_extensions.py::test_photo_named_entries_real_bytes_not_actor_dictionary
+FAILED output/20261012_task_validator_suite/tests/test_text_extensions.py::test_embedded_photos_open_real_container_payload
+FAILED output/20261012_task_validator_suite/tests/test_text_extensions.py::test_active_headers_images_fields_and_orphans
+FAILED output/20261012_task_validator_suite/tests/test_text_extensions.py::test_watermark_only_independently_pinned_actual_inspection
+FAILED output/20261012_task_validator_suite/tests/test_text_extensions.py::test_file_identity_not_same_bytes
+FAILED output/20261012_task_validator_suite/tests/test_text_extensions.py::test_pixel_reuse_current_attempt_only
+21 failed, 1 passed in 1.16s

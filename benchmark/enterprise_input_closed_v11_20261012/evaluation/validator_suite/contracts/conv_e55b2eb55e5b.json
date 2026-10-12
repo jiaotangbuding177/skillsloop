@@ -1,0 +1,465 @@
+{
+  "sid": "conv_e55b2eb55e5b",
+  "session_id": "conv_e55b2eb55e5b",
+  "title": "土地实验室咨询、股东特殊权利Excel及尽调风险专利核查",
+  "category": "LEGAL",
+  "status": "proposed_active",
+  "final_target": "咨询/租约摘录/最终尽调/报告比对和专利检索正文；股东特殊权利Excel汇总",
+  "final_deliverables": [
+    {
+      "name": "咨询/租约摘录/最终尽调/报告比对和专利检索正文",
+      "kind": "text",
+      "format": null,
+      "turn_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "checks": [
+        {
+          "kind": "delivered_body_nonempty",
+          "parameters": {
+            "strip_whitespace": true,
+            "no_minimum_words_invented": true,
+            "semantic_completion_not_inferred": true
+          },
+          "mandatory": true,
+          "point_id": "conv_e55b2eb55e5b:delivery1:check1",
+          "display_object": "咨询/租约摘录/最终尽调/报告比对和专利检索正文",
+          "requirement_basis": [
+            {
+              "turn_1based": 1,
+              "quote": "公司拍得一块工业用地，签了出让合同并支付了全额的出让金后，办理的是一个土地预告登记的不动产登记证，请问这个证书是什么效力？如何转为正式的不动产权证？"
+            },
+            {
+              "turn_1based": 12,
+              "quote": "比对一下这两份财务和法律尽调报告中就相同的事实内容是否有披露口径不一致的问题（涉及报告期不一致的单独标注一下） [附加文件: 爱德克美财务尽职调查报告-2026.09.09-v6.docx (/workspace/对话附件/爱德克美财务尽职调查报告-2026.09.09-v6.docx)][附加文件: 关于西安戴维新材料有限公司……"
+            },
+            {
+              "turn_1based": 13,
+              "quote": "#2/#3（专利）这两项请帮忙根据公开信息检索确认一下哪份报告的口径是准确的"
+            }
+          ],
+          "evidence_method": "本次attempt的实际用户可见交付文本及交付对象映射；若以文件承载，保存该文件原生抽取正文、路径和SHA。会话结束统一核验，不逐轮打成功标签。",
+          "passing_condition": "在会话结束时读取本次新运行已交付的“咨询/租约摘录/最终尽调/报告比对和专利检索正文”正文集合；去空白后非空。可用本次真实交付文件原生抽取正文；不使用历史AI记录，不设额外最少字数。此检查不能区分完成计划、完成声明与实质答复。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只核本次会话终态的已请求交付对象及原有明确基础条件。保留历史用户轮次作需求来源，不逐轮打分，不使用旧AI作为gold。 非空仅证明交付文字形式，不推断实质问题已回答；source_turn_indices是需求来源，不强制必须在那一轮产出或处罚前轮失败。"
+        }
+      ],
+      "id": "delivery_01",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    },
+    {
+      "name": "股东特殊权利Excel汇总",
+      "kind": "file",
+      "format": [
+        "xls",
+        "xlsx"
+      ],
+      "turn_indices": [
+        3
+      ],
+      "checks": [
+        {
+          "kind": "final_file_native_open",
+          "parameters": {
+            "allowed_formats": [
+              "xls",
+              "xlsx"
+            ],
+            "required_distinct_file_count": 1,
+            "require_nonempty_payload": true,
+            "resolve_from_current_attempt_delivery_declaration": true
+          },
+          "mandatory": true,
+          "point_id": "conv_e55b2eb55e5b:delivery2:check1",
+          "display_object": "股东特殊权利Excel汇总",
+          "requirement_basis": [
+            {
+              "turn_1based": 4,
+              "quote": "请参照这个Excel表格的格式和摘录条款的逻辑，摘录一下这份西安戴维新材料有限公司股东协议中的股东特殊权利条款 [附加文件: 投资协议股东特殊权利条款汇总.xls (/workspace/对话附件/投资协议股东特殊权利条款汇总.xls)][附加文件: 璟原股东协议.pdf (/workspace/对话附件/璟原股东协议.pdf)]"
+            }
+          ],
+          "evidence_method": "本次“股东特殊权利Excel汇总”的最终交付声明／清单对应的真实路径、大小与SHA；固定转换环境读取XLS，再解析工作表载荷，或工作簿原生解析：真实工作表及非空单元格。排除未被请求重新引用的输入件、旧运行和同对象旧版本。",
+          "passing_condition": "从本次交付声明定位“股东特殊权利Excel汇总”最终文件；需1个不同文件，格式允许xls/xlsx，实际存在且字节非空，原生读取成功并有有效正文、单元格、页面或图像负载。同一产物只计最终版，扩展名和口头声明不算证据。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只核本次会话终态的已请求交付对象及原有明确基础条件。保留历史用户轮次作需求来源，不逐轮打分，不使用旧AI作为gold。 必须绑定本次请求的当前最终文件，读取真实路径和原生载荷；输入件、同对象旧版、其他任务文件不能用来满足交付。"
+        }
+      ],
+      "id": "delivery_02",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    }
+  ],
+  "checks": [
+    {
+      "delivery_id": "delivery_01",
+      "kind": "delivered_body_nonempty",
+      "parameters": {
+        "strip_whitespace": true,
+        "no_minimum_words_invented": true,
+        "semantic_completion_not_inferred": true
+      },
+      "mandatory": true,
+      "point_id": "conv_e55b2eb55e5b:delivery1:check1",
+      "display_object": "咨询/租约摘录/最终尽调/报告比对和专利检索正文",
+      "requirement_basis": [
+        {
+          "turn_1based": 1,
+          "quote": "公司拍得一块工业用地，签了出让合同并支付了全额的出让金后，办理的是一个土地预告登记的不动产登记证，请问这个证书是什么效力？如何转为正式的不动产权证？"
+        },
+        {
+          "turn_1based": 12,
+          "quote": "比对一下这两份财务和法律尽调报告中就相同的事实内容是否有披露口径不一致的问题（涉及报告期不一致的单独标注一下） [附加文件: 爱德克美财务尽职调查报告-2026.09.09-v6.docx (/workspace/对话附件/爱德克美财务尽职调查报告-2026.09.09-v6.docx)][附加文件: 关于西安戴维新材料有限公司……"
+        },
+        {
+          "turn_1based": 13,
+          "quote": "#2/#3（专利）这两项请帮忙根据公开信息检索确认一下哪份报告的口径是准确的"
+        }
+      ],
+      "evidence_method": "本次attempt的实际用户可见交付文本及交付对象映射；若以文件承载，保存该文件原生抽取正文、路径和SHA。会话结束统一核验，不逐轮打成功标签。",
+      "passing_condition": "在会话结束时读取本次新运行已交付的“咨询/租约摘录/最终尽调/报告比对和专利检索正文”正文集合；去空白后非空。可用本次真实交付文件原生抽取正文；不使用历史AI记录，不设额外最少字数。此检查不能区分完成计划、完成声明与实质答复。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只核本次会话终态的已请求交付对象及原有明确基础条件。保留历史用户轮次作需求来源，不逐轮打分，不使用旧AI作为gold。 非空仅证明交付文字形式，不推断实质问题已回答；source_turn_indices是需求来源，不强制必须在那一轮产出或处罚前轮失败。"
+    },
+    {
+      "delivery_id": "delivery_02",
+      "kind": "final_file_native_open",
+      "parameters": {
+        "allowed_formats": [
+          "xls",
+          "xlsx"
+        ],
+        "required_distinct_file_count": 1,
+        "require_nonempty_payload": true,
+        "resolve_from_current_attempt_delivery_declaration": true
+      },
+      "mandatory": true,
+      "point_id": "conv_e55b2eb55e5b:delivery2:check1",
+      "display_object": "股东特殊权利Excel汇总",
+      "requirement_basis": [
+        {
+          "turn_1based": 4,
+          "quote": "请参照这个Excel表格的格式和摘录条款的逻辑，摘录一下这份西安戴维新材料有限公司股东协议中的股东特殊权利条款 [附加文件: 投资协议股东特殊权利条款汇总.xls (/workspace/对话附件/投资协议股东特殊权利条款汇总.xls)][附加文件: 璟原股东协议.pdf (/workspace/对话附件/璟原股东协议.pdf)]"
+        }
+      ],
+      "evidence_method": "本次“股东特殊权利Excel汇总”的最终交付声明／清单对应的真实路径、大小与SHA；固定转换环境读取XLS，再解析工作表载荷，或工作簿原生解析：真实工作表及非空单元格。排除未被请求重新引用的输入件、旧运行和同对象旧版本。",
+      "passing_condition": "从本次交付声明定位“股东特殊权利Excel汇总”最终文件；需1个不同文件，格式允许xls/xlsx，实际存在且字节非空，原生读取成功并有有效正文、单元格、页面或图像负载。同一产物只计最终版，扩展名和口头声明不算证据。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只核本次会话终态的已请求交付对象及原有明确基础条件。保留历史用户轮次作需求来源，不逐轮打分，不使用旧AI作为gold。 必须绑定本次请求的当前最终文件，读取真实路径和原生载荷；输入件、同对象旧版、其他任务文件不能用来满足交付。"
+    }
+  ],
+  "ignored_details": [
+    "历史AI答案与原生产物不是本次gold；不评分中间轮次success、技能调用、主观质量或法律/科学/金融正确性。",
+    "最后专利查询允许未知/未找到分支，不强制选哪份报告正确；不评法律语义。"
+  ],
+  "input_bindings_needed": [],
+  "original_user_turn_indices_inspected": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "requirement_source": "D:\\skillloop\\benchmark\\enterprise_environment_admitted_v7_20261009\\有效轨迹.jsonl",
+  "original_trace_sha256": "af71f03b23962bf17d829c0feabb93fa460ef199c4350acb49e4293029d3356e",
+  "prior_analysis_path": "D:\\skillloop\\output\\20261010_evaluation_delivery_verifiability\\legal_tech_assist.json",
+  "reviewed": false,
+  "rubric_activated": false,
+  "assessment_executed": false,
+  "schema": "audited-per-task-delivery-contract-v1",
+  "score_at": "conversation_end_only",
+  "full_user_input_review": true,
+  "checked_user_turn_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "actor_can_see_historical_ai": false,
+  "quality_scored": false,
+  "intermediate_steps_scored": false,
+  "manual_judgement_scored": false,
+  "review_status": "audited_for_basic_delivery_only",
+  "validators_execution_status": "offline_controls_only_not_business_run",
+  "summary": "连续处理土地预告登记、实验室备案安评、租约提前解除与股东特殊权利摘录，再补尽调专利、许可及委外产能风险。后轮按原风格形成风险与建议段落，比对财务法律报告及报告期差异，并公开核查专利口径；终态为文字集合及特殊权利Excel。",
+  "category_name": "合同审阅与法务合规",
+  "design_audit_status": "approved_limited_delivery",
+  "execution_preflight": {
+    "status": "current_attempt_evidence_required"
+  },
+  "user_source_texts": [
+    "请使用中文回复，除非用户明确使用其他语言。\n\n公司拍得一块工业用地，签了出让合同并支付了全额的出让金后，办理的是一个土地预告登记的不动产登记证，请问这个证书是什么效力？如何转为正式的不动产权证？",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n公司之前备案的这个研发实验室项目，近期计划将一部分研发设备迁至新租的其他地方的实验室，原本的实验室保留一部分，需要再重新申请备案一个新项目么，还是对原本的项目做变更？\n[附加文件: 备案证2.pdf (/workspace/对话附件/备案证2.pdf)]\n\n【本轮实际提供的输入文件】\n- 备案证2.pdf：/workspace/inputs/staged/3dd45e64447d602b/备案证2.pdf（实验重建输入）",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n这种实验室项目，需要办理安评么",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n请参照这个Excel表格的格式和摘录条款的逻辑，摘录一下这份西安戴维新材料有限公司股东协议中的股东特殊权利条款\n[附加文件: 投资协议股东特殊权利条款汇总.xls (/workspace/对话附件/投资协议股东特殊权利条款汇总.xls)][附加文件: 璟原股东协议.pdf (/workspace/对话附件/璟原股东协议.pdf)]\n\n【本轮实际提供的输入文件】\n- 璟原股东协议.pdf：/workspace/inputs/staged/cc51388e3176789b/璟原股东协议.pdf（实验重建输入）\n- 投资协议股东特殊权利条款汇总.xls.xlsx：/workspace/inputs/staged/cdfefdf18d173a32/投资协议股东特殊权利条款汇总.xls.xlsx（实验重建输入）\n- 合成_这个Excel表格的格式和摘录条款的逻辑，摘录一下这份西安戴维新材料有限公司股东协议.xlsx：/workspace/inputs/staged/b2cc7140e5953d71/合成_这个Excel表格的格式和摘录条款的逻辑，摘录一下这份西安戴维新材料有限公司股东协议.xlsx（实验重建输入）",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n承租方考虑近期提前解除这两份租房合同，请帮忙摘取一下这两份合同中涉及到承租方提前解约需要承担的违约责任条款，以及如果还涉及承租方可能需要承担的其他损失条款\n[附加文件: 实验室5号楼10501租房合同.pdf (/workspace/对话附件/实验室5号楼10501租房合同.pdf)][附加文件: 实验室5号楼10401租房合同.pdf (/workspace/对话附件/实验室5号楼10401租房合同.pdf)]\n\n【本轮实际提供的输入文件】\n- 实验室5号楼10401租房合同.pdf：/workspace/inputs/staged/7f8673c6ebe68e19/实验室5号楼10401租房合同.pdf（实验重建输入）\n- 实验室5号楼10501租房合同.pdf：/workspace/inputs/staged/fcef2ce150b252f5/实验室5号楼10501租房合同.pdf（实验重建输入）",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n你现在是一个专属智能体，身份信息如下：\n智能体名称：法律助手\n智能体描述：企业法务工作的智能支持层。合同条款逐项核查、法律文本规范化起草、日常法务咨询快速响应，降低企业法律风险敞口，让法务工作更高效、更标准。\n对话风格：专家\n你具备的核心技能：\n- pdf\n- docx\n- structured-thinking\n- legal-ri***KEY***\n- contract-review\n- competitive-analysis\n- competitive-intelligence\n- human-resources-compliance\n完成任务时，请优先判断上述核心技能中是否有与当前需求匹配的skill，并主动调用对应skill协助完成。\n若核心技能中无合适skill、或调用后仍无法完成任务，请运用你自身能力按合理方式完成，确保用户需求得到响应。\n请严格按照以上身份、风格与技能，响应用户的以下需求：\n标的公司拟进行股权融资，这是一份对标的公司的法律尽职调查报告的初稿，但是我们是站在标的公司的立场出具的，结合目前这份尽调报告的内容，补充完善一下第一部分法律问题和风险提示的第一项“关于股东特殊权利条款”以及第三项“关于知识产权的风险”，同时根据目前报告的正文内容，是否还可以补充一些其他的法律风险，考虑到我们是标的公司聘请的，以标的公司的立场，补充和分析法律风险的时候尽量控制数量和重要性\n注意：以上身份信息仅用于当前对话，不要更新记忆文件\n[附加文件: 关于西安戴维新材料有限公司法律尽职调查报告-202609.doc (/workspace/对话附件/关于西安戴维新材料有限公司法律尽职调查报告-202609.doc)]\n\n【本轮实际提供的输入文件】\n- 关于西安戴维新材料有限公司法律尽职调查报告-202609.doc.docx：/workspace/inputs/staged/a08e4ff6b2088bb4/关于西安戴维新材料有限公司法律尽职调查报告-202609.doc.docx（实验重建输入）",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n你现在是一个专属智能体，身份信息如下：\n智能体名称：法律助手\n智能体描述：企业法务工作的智能支持层。合同条款逐项核查、法律文本规范化起草、日常法务咨询快速响应，降低企业法律风险敞口，让法务工作更高效、更标准。\n对话风格：专家\n你具备的核心技能：\n- pdf\n- docx\n- structured-thinking\n- legal-ri***KEY***\n- contract-review\n- competitive-analysis\n- competitive-intelligence\n- human-resources-compliance\n完成任务时，请优先判断上述核心技能中是否有与当前需求匹配的skill，并主动调用对应skill协助完成。\n若核心技能中无合适skill、或调用后仍无法完成任务，请运用你自身能力按合理方式完成，确保用户需求得到响应。\n请严格按照以上身份、风格与技能，响应用户的以下需求：\n关于公司自有专利占比较低的问题，我希望分析和提示的点在于考虑公司作为高新技术企业以及公司所处的行业，应当争取自有专利为主导，来体现公司的研发能力；公司的专利申请节奏要么在2024年前要么是2026年集中申请了一批专利，建议公司制定一个长期、稳定的研发规划，能够长期、稳定的保持专利或非专利技术的产出\n注意：以上身份信息仅用于当前对话，不要更新记忆文件",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n你现在是一个专属智能体，身份信息如下：\n智能体名称：法律助手\n智能体描述：企业法务工作的智能支持层。合同条款逐项核查、法律文本规范化起草、日常法务咨询快速响应，降低企业法律风险敞口，让法务工作更高效、更标准。\n对话风格：专家\n你具备的核心技能：\n- pdf\n- docx\n- structured-thinking\n- legal-ri***KEY***\n- contract-review\n- competitive-analysis\n- competitive-intelligence\n- human-resources-compliance\n完成任务时，请优先判断上述核心技能中是否有与当前需求匹配的skill，并主动调用对应skill协助完成。\n若核心技能中无合适skill、或调用后仍无法完成任务，请运用你自身能力按合理方式完成，确保用户需求得到响应。\n请严格按照以上身份、风格与技能，响应用户的以下需求：\n如本尽职调查报告正文5.2部分所述，戴维新材因经营地址变更需同步办理《危险化学品经营许可证》变更手续（据说明预计约20个工作日内完成），建议尽快办结，以保持经营资质的连续性。\n\n\n这个按照事实+风险分析+建议的结构拓展一下\n注意：以上身份信息仅用于当前对话，不要更新记忆文件",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n你现在是一个专属智能体，身份信息如下：\n智能体名称：法律助手\n智能体描述：企业法务工作的智能支持层。合同条款逐项核查、法律文本规范化起草、日常法务咨询快速响应，降低企业法律风险敞口，让法务工作更高效、更标准。\n对话风格：专家\n你具备的核心技能：\n- pdf\n- docx\n- structured-thinking\n- legal-ri***KEY***\n- contract-review\n- competitive-analysis\n- competitive-intelligence\n- human-resources-compliance\n完成任务时，请优先判断上述核心技能中是否有与当前需求匹配的skill，并主动调用对应skill协助完成。\n若核心技能中无合适skill、或调用后仍无法完成任务，请运用你自身能力按合理方式完成，确保用户需求得到响应。\n请严格按照以上身份、风格与技能，响应用户的以下需求：\n如果是应当重新申请，但是公司只是做了变更，有什么法律后果\n注意：以上身份信息仅用于当前对话，不要更新记忆文件",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n根据公司说明，截至本尽职调查报告出具之日，公司目前自有的“西安爱德克美新材料聚酰亚胺、光刻胶、OCA胶研发实验室项目”仅负责工艺研发、工艺优化，并承接1kg-200kg小批量洁净订单，公司自有产能需“年产500吨光刻胶单体、新型显示单体和感光树脂项目”建成并投产使用后方能形成。\n\n \n\n公司目前生产模式主要为委外加工，其中核心受托生产主体为山东汶上代工厂，承接公司目前过半产能，此外还有湖北、西安、辽宁等地的代工厂、外协厂协助公司生产。",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n请按照原本报告的语言风格，总结成一段风险提示的介绍+一段律师建议",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n比对一下这两份财务和法律尽调报告中就相同的事实内容是否有披露口径不一致的问题（涉及报告期不一致的单独标注一下）\n[附加文件: 爱德克美财务尽职调查报告-2026.09.09-v6.docx (/workspace/对话附件/爱德克美财务尽职调查报告-2026.09.09-v6.docx)][附加文件: 关于西安戴维新材料有限公司法律尽职调查报告（初稿）-20260914.doc (/workspace/对话附件/关于西安戴维新材料有限公司法律尽职调查报告（初稿）-20260914.doc)]\n\n【本轮实际提供的输入文件】\n- 爱德克美财务尽职调查报告-2026.09.09-v6.docx：/workspace/inputs/staged/8b6291ca38096da9/爱德克美财务尽职调查报告-2026.09.09-v6.docx（实验重建输入）\n- 关于西安戴维新材料有限公司法律尽职调查报告（初稿）-20260914.doc.docx：/workspace/inputs/staged/994760665160a571/关于西安戴维新材料有限公司法律尽职调查报告（初稿）-20260914.doc.docx（实验重建输入）",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n#2/#3（专利）这两项请帮忙根据公开信息检索确认一下哪份报告的口径是准确的"
+  ],
+  "input_source_specs": [
+    {
+      "mount": "inputs/staged/cc51388e3176789b/璟原股东协议.pdf",
+      "format": "pdf",
+      "synthetic": true,
+      "provenance": "explicit_task_specific_synthetic_input_v3",
+      "when": 3,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\f07b3e4893704b74c01eb61145f5cc97c782a30d46c2dacc13dc5e74b4f21ec6\\璟原股东协议.pdf",
+      "sha256": "f07b3e4893704b74c01eb61145f5cc97c782a30d46c2dacc13dc5e74b4f21ec6"
+    },
+    {
+      "mount": "inputs/staged/a08e4ff6b2088bb4/关于西安戴维新材料有限公司法律尽职调查报告-202609.doc.docx",
+      "format": "docx",
+      "synthetic": true,
+      "provenance": "source_scoped_domain_synthetic_initial_input_from_original_user_constraints",
+      "when": 5,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\a72cf3c3a81373d04955c6d5916e7e352b2182f190efbba6fdc2b6ba6a0c275c\\关于西安戴维新材料有限公司法律尽职调查报告-202609.doc.docx",
+      "sha256": "a72cf3c3a81373d04955c6d5916e7e352b2182f190efbba6fdc2b6ba6a0c275c"
+    },
+    {
+      "mount": "inputs/staged/cdfefdf18d173a32/投资协议股东特殊权利条款汇总.xls.xlsx",
+      "format": "xlsx",
+      "synthetic": true,
+      "provenance": "explicit_task_specific_synthetic_input_v3",
+      "when": 3,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\518895293c9aa6a1b33c79dfefc3d43778c9b21243f155bbfe85a3b44f83d741\\投资协议股东特殊权利条款汇总.xls.xlsx",
+      "sha256": "518895293c9aa6a1b33c79dfefc3d43778c9b21243f155bbfe85a3b44f83d741"
+    },
+    {
+      "mount": "inputs/staged/b2cc7140e5953d71/合成_这个Excel表格的格式和摘录条款的逻辑，摘录一下这份西安戴维新材料有限公司股东协议.xlsx",
+      "format": "xlsx",
+      "synthetic": true,
+      "provenance": null,
+      "when": 3,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\clean_alignment\\v6\\b2cc7140e5953d71f03678040fdf05e6b91e45beb0568de461e0eec77409d578\\合成_这个Excel表格的格式和摘录条款的逻辑，摘录一下这份西安戴维新材料有限公司股东协议.xlsx",
+      "sha256": "b2cc7140e5953d71f03678040fdf05e6b91e45beb0568de461e0eec77409d578"
+    },
+    {
+      "mount": "inputs/staged/8b6291ca38096da9/爱德克美财务尽职调查报告-2026.09.09-v6.docx",
+      "format": "docx",
+      "synthetic": true,
+      "provenance": "source_scoped_domain_synthetic_initial_input_from_original_user_constraints",
+      "when": 11,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\18addd5e980fbd447e28822c8f4909de57464e120e327026d21f2f3aa820532f\\爱德克美财务尽职调查报告-2026.09.09-v6.docx",
+      "sha256": "18addd5e980fbd447e28822c8f4909de57464e120e327026d21f2f3aa820532f"
+    },
+    {
+      "mount": "inputs/staged/994760665160a571/关于西安戴维新材料有限公司法律尽职调查报告（初稿）-20260914.doc.docx",
+      "format": "docx",
+      "synthetic": true,
+      "provenance": "source_scoped_domain_synthetic_initial_input_from_original_user_constraints",
+      "when": 11,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\dcb251df33f57e629acaf61d883b5d25a5c97ea9527bbfb408c37f81554cf855\\关于西安戴维新材料有限公司法律尽职调查报告（初稿）-20260914.doc.docx",
+      "sha256": "dcb251df33f57e629acaf61d883b5d25a5c97ea9527bbfb408c37f81554cf855"
+    },
+    {
+      "mount": "inputs/staged/a08e4ff6b2088bb4/关于西安戴维新材料有限公司法律尽职调查报告-202609.doc.docx",
+      "format": "docx",
+      "synthetic": true,
+      "provenance": "source_scoped_domain_synthetic_initial_input_from_original_user_constraints",
+      "when": 5,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\a72cf3c3a81373d04955c6d5916e7e352b2182f190efbba6fdc2b6ba6a0c275c\\关于西安戴维新材料有限公司法律尽职调查报告-202609.doc.docx",
+      "sha256": "a72cf3c3a81373d04955c6d5916e7e352b2182f190efbba6fdc2b6ba6a0c275c"
+    },
+    {
+      "mount": "inputs/staged/3dd45e64447d602b/备案证2.pdf",
+      "format": "pdf",
+      "synthetic": true,
+      "provenance": "source_scoped_domain_synthetic_initial_input_from_original_user_constraints",
+      "when": 1,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\66c6cd2e68355a749ab1a931988b1a1ceb9659c4a81d0988c45e26cd2897437d\\备案证2.pdf",
+      "sha256": "66c6cd2e68355a749ab1a931988b1a1ceb9659c4a81d0988c45e26cd2897437d"
+    },
+    {
+      "mount": "inputs/staged/7f8673c6ebe68e19/实验室5号楼10401租房合同.pdf",
+      "format": "pdf",
+      "synthetic": true,
+      "provenance": "specific_laboratory_room_lease_synthetic_input_replacing_wrong_service_template",
+      "when": 4,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\0db65939a6c2e7247a29850d14a90f317290d3724bbbd28b223a7a42fe53fe7d\\实验室5号楼10401租房合同.pdf",
+      "sha256": "0db65939a6c2e7247a29850d14a90f317290d3724bbbd28b223a7a42fe53fe7d"
+    },
+    {
+      "mount": "inputs/staged/7f8673c6ebe68e19/实验室5号楼10401租房合同.pdf",
+      "format": "pdf",
+      "synthetic": true,
+      "provenance": "specific_laboratory_room_lease_synthetic_input_replacing_wrong_service_template",
+      "when": 4,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\0db65939a6c2e7247a29850d14a90f317290d3724bbbd28b223a7a42fe53fe7d\\实验室5号楼10401租房合同.pdf",
+      "sha256": "0db65939a6c2e7247a29850d14a90f317290d3724bbbd28b223a7a42fe53fe7d"
+    },
+    {
+      "mount": "inputs/staged/cc51388e3176789b/璟原股东协议.pdf",
+      "format": "pdf",
+      "synthetic": true,
+      "provenance": "explicit_task_specific_synthetic_input_v3",
+      "when": 3,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\f07b3e4893704b74c01eb61145f5cc97c782a30d46c2dacc13dc5e74b4f21ec6\\璟原股东协议.pdf",
+      "sha256": "f07b3e4893704b74c01eb61145f5cc97c782a30d46c2dacc13dc5e74b4f21ec6"
+    },
+    {
+      "mount": "inputs/staged/fcef2ce150b252f5/实验室5号楼10501租房合同.pdf",
+      "format": "pdf",
+      "synthetic": true,
+      "provenance": "specific_laboratory_room_lease_synthetic_input_replacing_wrong_service_template",
+      "when": 4,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\59c9bc4e096e7c09e57a1ea553c6c01b98c80774fd6de800270f649bdca2a98d\\实验室5号楼10501租房合同.pdf",
+      "sha256": "59c9bc4e096e7c09e57a1ea553c6c01b98c80774fd6de800270f649bdca2a98d"
+    },
+    {
+      "mount": "inputs/staged/fcef2ce150b252f5/实验室5号楼10501租房合同.pdf",
+      "format": "pdf",
+      "synthetic": true,
+      "provenance": "specific_laboratory_room_lease_synthetic_input_replacing_wrong_service_template",
+      "when": 4,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\59c9bc4e096e7c09e57a1ea553c6c01b98c80774fd6de800270f649bdca2a98d\\实验室5号楼10501租房合同.pdf",
+      "sha256": "59c9bc4e096e7c09e57a1ea553c6c01b98c80774fd6de800270f649bdca2a98d"
+    },
+    {
+      "mount": "inputs/staged/8b6291ca38096da9/爱德克美财务尽职调查报告-2026.09.09-v6.docx",
+      "format": "docx",
+      "synthetic": true,
+      "provenance": "source_scoped_domain_synthetic_initial_input_from_original_user_constraints",
+      "when": 11,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\18addd5e980fbd447e28822c8f4909de57464e120e327026d21f2f3aa820532f\\爱德克美财务尽职调查报告-2026.09.09-v6.docx",
+      "sha256": "18addd5e980fbd447e28822c8f4909de57464e120e327026d21f2f3aa820532f"
+    },
+    {
+      "mount": "inputs/staged/3dd45e64447d602b/备案证2.pdf",
+      "format": "pdf",
+      "synthetic": true,
+      "provenance": "source_scoped_domain_synthetic_initial_input_from_original_user_constraints",
+      "when": 1,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\66c6cd2e68355a749ab1a931988b1a1ceb9659c4a81d0988c45e26cd2897437d\\备案证2.pdf",
+      "sha256": "66c6cd2e68355a749ab1a931988b1a1ceb9659c4a81d0988c45e26cd2897437d"
+    },
+    {
+      "mount": "inputs/staged/3dd45e64447d602b/备案证2.pdf",
+      "format": "pdf",
+      "synthetic": true,
+      "provenance": "source_scoped_domain_synthetic_initial_input_from_original_user_constraints",
+      "when": 1,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\66c6cd2e68355a749ab1a931988b1a1ceb9659c4a81d0988c45e26cd2897437d\\备案证2.pdf",
+      "sha256": "66c6cd2e68355a749ab1a931988b1a1ceb9659c4a81d0988c45e26cd2897437d"
+    },
+    {
+      "mount": "inputs/staged/fcef2ce150b252f5/实验室5号楼10501租房合同.pdf",
+      "format": "pdf",
+      "synthetic": true,
+      "provenance": "specific_laboratory_room_lease_synthetic_input_replacing_wrong_service_template",
+      "when": 4,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\59c9bc4e096e7c09e57a1ea553c6c01b98c80774fd6de800270f649bdca2a98d\\实验室5号楼10501租房合同.pdf",
+      "sha256": "59c9bc4e096e7c09e57a1ea553c6c01b98c80774fd6de800270f649bdca2a98d"
+    },
+    {
+      "mount": "inputs/staged/a08e4ff6b2088bb4/关于西安戴维新材料有限公司法律尽职调查报告-202609.doc.docx",
+      "format": "docx",
+      "synthetic": true,
+      "provenance": "source_scoped_domain_synthetic_initial_input_from_original_user_constraints",
+      "when": 5,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\a72cf3c3a81373d04955c6d5916e7e352b2182f190efbba6fdc2b6ba6a0c275c\\关于西安戴维新材料有限公司法律尽职调查报告-202609.doc.docx",
+      "sha256": "a72cf3c3a81373d04955c6d5916e7e352b2182f190efbba6fdc2b6ba6a0c275c"
+    },
+    {
+      "mount": "inputs/staged/cc51388e3176789b/璟原股东协议.pdf",
+      "format": "pdf",
+      "synthetic": true,
+      "provenance": "explicit_task_specific_synthetic_input_v3",
+      "when": 3,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\f07b3e4893704b74c01eb61145f5cc97c782a30d46c2dacc13dc5e74b4f21ec6\\璟原股东协议.pdf",
+      "sha256": "f07b3e4893704b74c01eb61145f5cc97c782a30d46c2dacc13dc5e74b4f21ec6"
+    },
+    {
+      "mount": "inputs/staged/cdfefdf18d173a32/投资协议股东特殊权利条款汇总.xls.xlsx",
+      "format": "xlsx",
+      "synthetic": true,
+      "provenance": "explicit_task_specific_synthetic_input_v3",
+      "when": 3,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\518895293c9aa6a1b33c79dfefc3d43778c9b21243f155bbfe85a3b44f83d741\\投资协议股东特殊权利条款汇总.xls.xlsx",
+      "sha256": "518895293c9aa6a1b33c79dfefc3d43778c9b21243f155bbfe85a3b44f83d741"
+    },
+    {
+      "mount": "inputs/staged/cdfefdf18d173a32/投资协议股东特殊权利条款汇总.xls.xlsx",
+      "format": "xlsx",
+      "synthetic": true,
+      "provenance": "explicit_task_specific_synthetic_input_v3",
+      "when": 3,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\518895293c9aa6a1b33c79dfefc3d43778c9b21243f155bbfe85a3b44f83d741\\投资协议股东特殊权利条款汇总.xls.xlsx",
+      "sha256": "518895293c9aa6a1b33c79dfefc3d43778c9b21243f155bbfe85a3b44f83d741"
+    },
+    {
+      "mount": "inputs/staged/994760665160a571/关于西安戴维新材料有限公司法律尽职调查报告（初稿）-20260914.doc.docx",
+      "format": "docx",
+      "synthetic": true,
+      "provenance": "source_scoped_domain_synthetic_initial_input_from_original_user_constraints",
+      "when": 11,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\dcb251df33f57e629acaf61d883b5d25a5c97ea9527bbfb408c37f81554cf855\\关于西安戴维新材料有限公司法律尽职调查报告（初稿）-20260914.doc.docx",
+      "sha256": "dcb251df33f57e629acaf61d883b5d25a5c97ea9527bbfb408c37f81554cf855"
+    },
+    {
+      "mount": "inputs/staged/8b6291ca38096da9/爱德克美财务尽职调查报告-2026.09.09-v6.docx",
+      "format": "docx",
+      "synthetic": true,
+      "provenance": "source_scoped_domain_synthetic_initial_input_from_original_user_constraints",
+      "when": 11,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\18addd5e980fbd447e28822c8f4909de57464e120e327026d21f2f3aa820532f\\爱德克美财务尽职调查报告-2026.09.09-v6.docx",
+      "sha256": "18addd5e980fbd447e28822c8f4909de57464e120e327026d21f2f3aa820532f"
+    },
+    {
+      "mount": "inputs/staged/994760665160a571/关于西安戴维新材料有限公司法律尽职调查报告（初稿）-20260914.doc.docx",
+      "format": "docx",
+      "synthetic": true,
+      "provenance": "source_scoped_domain_synthetic_initial_input_from_original_user_constraints",
+      "when": 11,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\dcb251df33f57e629acaf61d883b5d25a5c97ea9527bbfb408c37f81554cf855\\关于西安戴维新材料有限公司法律尽职调查报告（初稿）-20260914.doc.docx",
+      "sha256": "dcb251df33f57e629acaf61d883b5d25a5c97ea9527bbfb408c37f81554cf855"
+    },
+    {
+      "mount": "inputs/staged/7f8673c6ebe68e19/实验室5号楼10401租房合同.pdf",
+      "format": "pdf",
+      "synthetic": true,
+      "provenance": "specific_laboratory_room_lease_synthetic_input_replacing_wrong_service_template",
+      "when": 4,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\0db65939a6c2e7247a29850d14a90f317290d3724bbbd28b223a7a42fe53fe7d\\实验室5号楼10401租房合同.pdf",
+      "sha256": "0db65939a6c2e7247a29850d14a90f317290d3724bbbd28b223a7a42fe53fe7d"
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+<!doctype html><html lang="zh"><meta charset="utf-8"><title>安装技能，Gitee agent ski</title><style>body{font-family:Microsoft YaHei,sans-serif;max-width:1180px;margin:35px auto;padding:0 18px;background:#f4f7fb;color:#18283a}section,header,article{background:white;border:1px solid #dbe4ed;border-radius:9px;margin:15px 0;padding:18px}pre{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.7;font-family:inherit}a{color:#155fc4}.user{border-left:5px solid #2161b4}.ai{border-left:5px solid #359778}.note{color:#755224}td,th{padding:9px;border-bottom:1px solid #ddd;text-align:left}table{width:100%;border-collapse:collapse}input{padding:12px;width:90%}</style><header><a href="../../打开这里.html">会话目录</a><h1>安装技能，Gitee agent ski</h1><p>演化 · 1 组问答</p><p>阅读页展示历史回复供审计；评测助手只收到逐次用户输入、当轮文件和本次新生成的对话。历史 AI、评分规则、其它会话不发给助手。</p></header><section><h2>第 1 次问答</h2><article class="user"><strong>本次完整用户输入</strong><pre>请使用中文回复，除非用户明确使用其他语言。
+
+安装技能，Gitee agent skills: Gitee agent skills via gitee mcp server</pre></article><article class="ai"><strong>历史 AI · 第 1 段（审计，不发给评测助手）</strong><pre>现在我来检查当前环境中已有的技能，并尝试安装 Gitee Agent Skills。</pre></article><article class="ai"><strong>历史 AI · 第 2 段（审计，不发给评测助手）</strong><pre>好的，我来帮你梳理「Gitee Agent Skills」的安装流程。我已经查阅了 Gitee 官方文档、OpenClaw 官方指南和相关社区文章。
+
+---
+
+## Gitee Agent Skills 安装指南
+
+Gitee Agent Skills 底层基于 **Gitee MCP Server**（由 OSChina 官方维护），通过 OpenClaw 的 MCP 集成能力对接 Gitee 平台。
+
+### 总览：两种安装方式
+
+| 方式 | 难度 | 说明 |
+|------|------|------|
+| **远程连接（推荐）** ⭐ | 简单 | 直接连 Gitee 官方托管的 MCP 服务，无需本地安装服务端 |
+| **本地安装 mcp-gitee** | 中等 | 通过 npx / go install 在本地运行 MCP Server |
+
+---
+
+### 前置条件
+
+1. **Gitee 个人访问令牌（access token）**
+   - 访问：https://gitee.com/profile/personal_access_tokens
+   - 生成一个 token，保存好
+
+2. **OpenClaw 已安装并运行**
+
+---
+
+### 方式一：远程 MCP Server（最简单）
+
+在 OpenClaw 的配置文件 `~/.openclaw/openclaw.json` 中添加：
+
+```json5
+{
+  &quot;mcpServers&quot;: {
+    &quot;gitee&quot;: {
+      &quot;url&quot;: &quot;https://api.gitee.com/mcp&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer [隐藏] Access Token&gt;&quot;
+      }
+    }
+  }
+}
+```
+
+配置完成后，重启 OpenClaw Gateway，你的 Agent 即可使用 Gitee 的所有能力。
+
+**可用的工具包括：**
+- 仓库管理：列出仓库、获取文件内容、创建仓库、Fork、搜索开源仓库
+- Pull Request：创建/合并/更新 PR、获取 Diff、审阅
+- Issue：创建/更新/列出 Issue、评论
+- 通知：列出用户通知
+- 用户信息
+
+---
+
+### 方式二：本地安装 mcp-gitee Server（功能更完整）
+
+#### 步骤 1：安装 Gitee MCP Server
+
+```bash
+# 方法 A：使用 npx（推荐，无需安装）
+npx -y @gitee/mcp-gitee
+
+# 方法 B：使用 Go 安装
+go install gitee.com/oschina/mcp-gitee@latest
+
+# 方法 C：从源码构建
+git clone https://gitee.com/oschina/mcp-gitee.git
+cd mcp-gitee
+make build
+# 将 ./bin/mcp-gitee 加入 PATH
+```
+
+#### 步骤 2：在 OpenClaw 中配置
+
+在 `~/.openclaw/openclaw.json` 中添加：
+
+```json5
+{
+  &quot;mcpServers&quot;: {
+    &quot;gitee&quot;: {
+      &quot;command&quot;: &quot;npx&quot;,
+      &quot;args&quot;: [&quot;-y&quot;, &quot;@gitee/mcp-gitee@latest&quot;],
+      &quot;env&quot;: {
+        &quot;GITEE_ACCESS_TOKEN&quot;: &quot;&lt;你的Gitee Access Token&gt;&quot;
+      }
+    }
+  }
+}
+```
+
+或者使用已安装的二进制文件：
+
+```json5
+{
+  &quot;mcpServers&quot;: {
+    &quot;gitee&quot;: {
+      &quot;command&quot;: &quot;mcp-gitee&quot;,
+      &quot;args&quot;: [&quot;--token&quot;, &quot;&lt;你的Gitee Access Token&gt;&quot;]
+    }
+  }
+}
+```
+
+#### 步骤 3：重启 Gateway
+
+```bash
+openclaw gateway restart
+```
+
+---
+
+### 方式三：使用 mcporter 管理（OpenClaw 官方推荐方式）
+
+OpenClaw 官方推荐用 **mcporter** 统一管理 MCP Server。
+
+1. 先在 OpenClaw Skills 界面中安装 mcporter skill
+2. 通过 mcporter 的配置界面添加 Gitee MCP Server
+3. 在 mcporter 的配置中填入 Gitee Access Token
+
+---
+
+### 验证安装
+
+在你的 OpenClaw Agent 中提问：
+
+&gt; &quot;列出我在 Gitee 上的仓库&quot;
+
+如果 Agent 能返回仓库列表，说明安装成功。
+
+---
+
+### 企业版说明
+
+如果你使用的是 **Gitee 企业版**，需要使用 `mcp-gitee-ent`（企业版 MCP Server）：
+
+```json5
+{
+  &quot;mcpServers&quot;: {
+    &quot;gitee-ent&quot;: {
+      &quot;command&quot;: &quot;npx&quot;,
+      &quot;args&quot;: [&quot;-y&quot;, &quot;@gitee/mcp-gitee-ent@latest&quot;],
+      &quot;env&quot;: {
+        &quot;GITEE_ENT_MCP_ACCESS_TOKEN&quot;: &quot;&lt;企业版Token&gt;&quot;,
+        &quot;GITEE_ENT_API_BASE&quot;: &quot;https://api.gitee.com/enterprises&quot;
+      }
+    }
+  }
+}
+```
+
+企业版额外支持：项目管理、Scrum 迭代、团队管理、工作项类型等。
+
+---
+
+需要我帮你进一步操作吗？比如创建具体的 SKILL.md 文件来包装 Gitee 工具集，或者检查当前环境的配置？</pre></article></section><section><a href="../../sources/conv_993b0303d2fe.json">修订前原始完整会话（保留）</a></section></html>

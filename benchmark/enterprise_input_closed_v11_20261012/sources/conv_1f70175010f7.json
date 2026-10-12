@@ -1,0 +1,191 @@
+{
+  "schema": "whole-source-session-preprocessing-v1",
+  "session_id": "conv_1f70175010f7",
+  "owner_alias": "用户23",
+  "agent_instance_id": "90b6bd93-4c31-4cc5-92f8-14fce33f863f",
+  "task_category": "ASSIST",
+  "task_category_name": "助手配置与技能管理",
+  "secondary_task_categories": [
+    "COMM"
+  ],
+  "split": "evolution",
+  "planned_split": "evolution",
+  "leakage_component_id": "fc_3d51d09df01f01c1",
+  "source_order_basis": "RAW_JSONL_LINE_ORDER_UNVERIFIED",
+  "source_session_metadata": {
+    "id": "conv_1f70175010f7",
+    "userId": "用户23",
+    "agentInstanceId": "90b6bd93-4c31-4cc5-92f8-14fce33f863f",
+    "title": "帮我看一下定时任务，最近一次7月3日，运",
+    "status": "active",
+    "lastMessageAt": {},
+    "createdAt": {},
+    "updatedAt": {},
+    "isDeleted": false,
+    "lastUsedProvider": null,
+    "lastUsedModel": null,
+    "lastUsedAt": null,
+    "locale": "zh",
+    "purpose": "consumer",
+    "originEnterpriseId": null,
+    "skillLearningEnabled": true,
+    "skillLearningExcludedAt": null,
+    "skillLearningExcludedBy": null
+  },
+  "dated_session_metadata": {
+    "id": "conv_1f70175010f7",
+    "user_id": "用户23",
+    "title": "帮我看一下定时任务，最近一次7月3日，运",
+    "status": "active",
+    "created_at": "2026-07-09T17:08:18.074Z",
+    "last_message_at": "2026-07-09T17:09:27.920Z",
+    "user_msgs": "2"
+  },
+  "messages": [
+    {
+      "id": "b51e5a19-3fed-45af-ba9a-18302622dde8",
+      "role": "user",
+      "status": "done",
+      "source_line": 13267,
+      "source_file": "messages",
+      "copy_kind": "client_or_nontrusted",
+      "user_created_at": null,
+      "dated_source_position": null,
+      "numeric_scheme": null,
+      "numeric_id": null,
+      "original_position": 1,
+      "content": "帮我看一下定时任务，最近一次7月3日，运行失败原因？"
+    },
+    {
+      "id": "30ea49ce-809c-48f1-83b8-3e77f93fbe6e",
+      "role": "assistant",
+      "status": "done",
+      "source_line": 13268,
+      "source_file": "messages",
+      "copy_kind": "client_or_nontrusted",
+      "user_created_at": null,
+      "dated_source_position": null,
+      "numeric_scheme": null,
+      "numeric_id": null,
+      "original_position": 2,
+      "content": "金桥吴彦祖，查到了！这个定时任务是 **AI Builders Digest 每周中文摘要**（每周五 12:00 CST）。\n\n## 📋 7月3日（周五）运行情况\n\n**状态：❌ 失败**\n- **失败原因：执行超时（timeout）**\n- **实际耗时：300 秒**（刚好撞上 5 分钟超时上限）\n- **错误信息：** `cron: job execution timed out`\n\n## 📈 历史对比\n\n| 日期 | 状态 | 耗时 |\n|------|------|------|\n| 6月19日（周五） | ✅ 成功 | 83 秒 |\n| 6月26日（周五） | ❌ 超时 | 300 秒 |\n| **7月3日（周五）** | **❌ 超时** | **300 秒** |\n\n已经**连续 2 次超时失败**了（`consecutiveErrors: 2`）。\n\n## 🔍 分析\n\n这个任务的 `timeoutSeconds` 设置了 **300 秒（5 分钟）**。之前成功运行时一般在 50-160 秒内完成，说明正常情况下够用。但从 6 月 26 日开始连续超时，可能的原因：\n\n1. **follow-builders 数据源响应变慢** — prepare-digest.js 获取中心 feed 耗时增加\n2. **任务内容量变大** — 最近几周 builders 动态越来越多，生成摘要所需 token 增加\n3. **模型响应速度波动**\n\n需要我帮你做什么？\n- **A)** 把 `timeoutSeconds` 从 300 调大（比如 600 秒），给更多执行时间\n- **B)** 看看到底是 fetch 数据卡住了还是生成摘要卡住了，排查根因"
+    },
+    {
+      "id": "d0612c4d-d508-4128-837b-1799abb358e3",
+      "role": "user",
+      "status": "done",
+      "source_line": 13274,
+      "source_file": "messages",
+      "copy_kind": "client_or_nontrusted",
+      "user_created_at": null,
+      "dated_source_position": null,
+      "numeric_scheme": null,
+      "numeric_id": null,
+      "original_position": 3,
+      "content": "把timeoutseconds修改为900秒"
+    },
+    {
+      "id": "ff89ec78-1e1d-40f4-8a63-6414b9a5b315",
+      "role": "assistant",
+      "status": "done",
+      "source_line": 13275,
+      "source_file": "messages",
+      "copy_kind": "client_or_nontrusted",
+      "user_created_at": null,
+      "dated_source_position": null,
+      "numeric_scheme": null,
+      "numeric_id": null,
+      "original_position": 4,
+      "content": "已修改完成 ✅\n\n- **`timeoutSeconds`**: 300 → **900**（15 分钟）\n- 今天中午 12:00 CST 就会用新配置跑，不会再被 5 分钟卡死了"
+    }
+  ],
+  "turn_references": [
+    {
+      "user_original_position": 1,
+      "user_original_id": "b51e5a19-3fed-45af-ba9a-18302622dde8",
+      "user_content": "帮我看一下定时任务，最近一次7月3日，运行失败原因？",
+      "user_group_id": "u_2c764b10f7aa755a4d",
+      "user_group_occurrence_count": 1,
+      "per_occurrence_binding": "unknown",
+      "binding_note": "既有内容标注仅供来源引用，未认证逐次回复归属或真实时序。",
+      "assistant_source_references": [
+        {
+          "assistant_original_position": 2,
+          "assistant_original_id": "30ea49ce-809c-48f1-83b8-3e77f93fbe6e",
+          "assistant_content": "金桥吴彦祖，查到了！这个定时任务是 **AI Builders Digest 每周中文摘要**（每周五 12:00 CST）。\n\n## 📋 7月3日（周五）运行情况\n\n**状态：❌ 失败**\n- **失败原因：执行超时（timeout）**\n- **实际耗时：300 秒**（刚好撞上 5 分钟超时上限）\n- **错误信息：** `cron: job execution timed out`\n\n## 📈 历史对比\n\n| 日期 | 状态 | 耗时 |\n|------|------|------|\n| 6月19日（周五） | ✅ 成功 | 83 秒 |\n| 6月26日（周五） | ❌ 超时 | 300 秒 |\n| **7月3日（周五）** | **❌ 超时** | **300 秒** |\n\n已经**连续 2 次超时失败**了（`consecutiveErrors: 2`）。\n\n## 🔍 分析\n\n这个任务的 `timeoutSeconds` 设置了 **300 秒（5 分钟）**。之前成功运行时一般在 50-160 秒内完成，说明正常情况下够用。但从 6 月 26 日开始连续超时，可能的原因：\n\n1. **follow-builders 数据源响应变慢** — prepare-digest.js 获取中心 feed 耗时增加\n2. **任务内容量变大** — 最近几周 builders 动态越来越多，生成摘要所需 token 增加\n3. **模型响应速度波动**\n\n需要我帮你做什么？\n- **A)** 把 `timeoutSeconds` 从 300 调大（比如 600 秒），给更多执行时间\n- **B)** 看看到底是 fetch 数据卡住了还是生成摘要卡住了，排查根因",
+          "relation_levels": [
+            "proposed"
+          ],
+          "relation_provenance": [
+            {
+              "user_group_id": "u_2c764b10f7aa755a4d",
+              "assistant_group_id": "a_fcf3df3b4d0bef1f4e",
+              "source": "matched_066",
+              "relation_level": "proposed",
+              "chronology_verified": false,
+              "same_task_verified": false
+            }
+          ],
+          "is_new_event": false,
+          "reply_to_this_occurrence_verified": false
+        }
+      ]
+    },
+    {
+      "user_original_position": 3,
+      "user_original_id": "d0612c4d-d508-4128-837b-1799abb358e3",
+      "user_content": "把timeoutseconds修改为900秒",
+      "user_group_id": "u_3fadefeb035814d458",
+      "user_group_occurrence_count": 1,
+      "per_occurrence_binding": "unknown",
+      "binding_note": "既有内容标注仅供来源引用，未认证逐次回复归属或真实时序。",
+      "assistant_source_references": [
+        {
+          "assistant_original_position": 4,
+          "assistant_original_id": "ff89ec78-1e1d-40f4-8a63-6414b9a5b315",
+          "assistant_content": "已修改完成 ✅\n\n- **`timeoutSeconds`**: 300 → **900**（15 分钟）\n- 今天中午 12:00 CST 就会用新配置跑，不会再被 5 分钟卡死了",
+          "relation_levels": [
+            "proposed"
+          ],
+          "relation_provenance": [
+            {
+              "user_group_id": "u_3fadefeb035814d458",
+              "assistant_group_id": "a_2425ed90bcd4fdecc7",
+              "source": "matched_066",
+              "relation_level": "proposed",
+              "chronology_verified": false,
+              "same_task_verified": false
+            }
+          ],
+          "is_new_event": false,
+          "reply_to_this_occurrence_verified": false
+        }
+      ]
+    }
+  ],
+  "reference_scope": "Existing content-group source quotations; references are not additional historical events or certified turns.",
+  "file_references": [],
+  "tool_record_ids": [
+    "tool_01575",
+    "tool_01576"
+  ],
+  "tool_assignment_scope": "Source session-level inventory; cumulative snapshots do not establish invocation time or task attribution.",
+  "order_diagnostics": {
+    "status": "NO_CONFLICT_OBSERVED_UNVERIFIED",
+    "reasons": {
+      "source_numeric_descent": [],
+      "source_user_time_descent": [],
+      "time_numeric_conflict": []
+    },
+    "same_time_numeric_descents": [],
+    "mixed_client_trusted_records": false,
+    "consecutive_user_pairs": 0,
+    "complete_chronology_verified": false
+  },
+  "outcome": "unknown",
+  "chronology_verified": false,
+  "complete_historical_trace_verified": false,
+  "benchmark_ready": false,
+  "artifact_bytes_restored": false,
+  "credential_masking": "Inherited unchanged from verified whole-session reader."
+}

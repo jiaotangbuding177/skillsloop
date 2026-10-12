@@ -1,0 +1,249 @@
+{
+  "schema": "whole-source-session-preprocessing-v1",
+  "session_id": "conv_1c97d2555405",
+  "owner_alias": "用户25",
+  "agent_instance_id": "a43caacc-572b-47ba-ae2a-d1a26f45bd52",
+  "task_category": "ASSIST",
+  "task_category_name": "助手配置与技能管理",
+  "secondary_task_categories": [
+    "KNOW"
+  ],
+  "split": "evolution",
+  "planned_split": "evolution",
+  "leakage_component_id": "fc_13f8e2a3f293002f",
+  "source_order_basis": "RAW_JSONL_LINE_ORDER_UNVERIFIED",
+  "source_session_metadata": {
+    "id": "conv_1c97d2555405",
+    "userId": "用户25",
+    "agentInstanceId": "a43caacc-572b-47ba-ae2a-d1a26f45bd52",
+    "title": "我要对接飞书知识库，我怎么弄",
+    "status": "active",
+    "lastMessageAt": {},
+    "createdAt": {},
+    "updatedAt": {},
+    "isDeleted": false,
+    "lastUsedProvider": null,
+    "lastUsedModel": null,
+    "lastUsedAt": null,
+    "locale": "zh",
+    "purpose": "consumer",
+    "originEnterpriseId": null,
+    "skillLearningEnabled": true,
+    "skillLearningExcludedAt": null,
+    "skillLearningExcludedBy": null
+  },
+  "dated_session_metadata": {
+    "id": "conv_1c97d2555405",
+    "user_id": "用户25",
+    "title": "我要对接飞书知识库，我怎么弄",
+    "status": "active",
+    "created_at": "2026-08-02T20:26:57.818Z",
+    "last_message_at": "2026-08-02T20:27:32.365Z",
+    "user_msgs": "0"
+  },
+  "messages": [
+    {
+      "id": "conv_1c97d2555405:a8f6cd98",
+      "role": "user",
+      "status": "done",
+      "source_line": 20465,
+      "source_file": "messages",
+      "copy_kind": "trusted",
+      "user_created_at": "2026-08-02T20:27:01.771Z",
+      "dated_source_position": 4310,
+      "numeric_scheme": null,
+      "numeric_id": null,
+      "original_position": 1,
+      "content": "[Mon 2026-08-03 12:26 GMT+8] 请使用中文回复，除非用户明确使用其他语言。\n\n我要对接飞书知识库，我怎么弄"
+    },
+    {
+      "id": "conv_1c97d2555405:msg_1",
+      "role": "user",
+      "status": "done",
+      "source_line": 20466,
+      "source_file": "messages",
+      "copy_kind": "trusted",
+      "user_created_at": "2026-08-02T20:27:01.771Z",
+      "dated_source_position": 4311,
+      "numeric_scheme": "msg_N",
+      "numeric_id": 1,
+      "original_position": 2,
+      "content": "请使用中文回复，除非用户明确使用其他语言。\n\n我要对接飞书知识库，我怎么弄"
+    },
+    {
+      "id": "conv_1c97d2555405:80834d37",
+      "role": "assistant",
+      "status": "done",
+      "source_line": 20467,
+      "source_file": "messages",
+      "copy_kind": "trusted",
+      "user_created_at": null,
+      "dated_source_position": null,
+      "numeric_scheme": null,
+      "numeric_id": null,
+      "original_position": 3,
+      "content": ""
+    },
+    {
+      "id": "conv_1c97d2555405:dbceedf5",
+      "role": "assistant",
+      "status": "done",
+      "source_line": 20468,
+      "source_file": "messages",
+      "copy_kind": "trusted",
+      "user_created_at": null,
+      "dated_source_position": null,
+      "numeric_scheme": null,
+      "numeric_id": null,
+      "original_position": 4,
+      "content": "对接飞书知识库，核心流程其实不复杂，但有一个**特别容易踩的坑**：知识库文档的 URL 里的 token 是「节点 token（node_token）」，不是文档真实的 document_id，直接拿去调文档接口会报错。得先通过节点接口换成 `obj_token` 再取内容。\n\n下面给你完整路径 👇\n\n## 一、准备工作（一次性）\n\n1. **创建企业自建应用**：打开 [飞书开放平台](https://open.feishu.cn) → 开发者后台 → 创建企业自建应用\n2. **拿到凭证**：应用凭证页的 `App ID` 和 `App Secret`\n3. **开通权限**（在「权限管理」里搜索添加）：\n   - `wiki:wiki`（读写知识库）或 `wiki:wiki.readonly`（只读）\n   - `docx:document` 或 `docx:document:readonly`（读写文档内容）\n4. **发布应用版本**，并确保可用范围包含知识库成员\n5. **授权应用访问你的知识库**（最容易漏的一步！）：\n   - 方式一（推荐）：飞书里建个群，把应用加为群机器人 → 知识库「设置 → 成员设置」→ 把这个群添加为管理员/成员\n   - 方式二：在知识库的某篇文档里，右上角「… → 更多 → 添加文档应用」直接添加应用为协作者\n\n## 二、调用链路（核心就 4 步）\n\n```\n获取 tenant_access_token\n   → 获取知识空间列表        GET /open-apis/wiki/v2/spaces\n   → 获取空间节点列表        GET /open-apis/wiki/v2/spaces/{space_id}/nodes\n   → 获取节点信息（拿 obj_token） GET /open-apis/wiki/v2/spaces/get_node?token=[隐藏]\n   → 根据 obj_type 取内容：\n       文档   → GET /open-apis/docx/v1/documents/{obj_token}/raw_content  （纯文本）\n                GET /open-apis/docx/v1/documents/{obj_token}/blocks       （结构化块）\n       表格   → 电子表格 API\n       多维表 → 查询记录 API\n```\n\n## 三、Python 代码示例（用官方 SDK，最省事）\n\n```bash\npip install lark-oapi\n```\n\n```python\nimport lark_oapi as lark\nfrom lark_oapi.api.wiki.v2 import *\nfrom lark_oapi.api.docx.v1 import *\n\nclient = lark.Client.builder() \\\n    .app_id(\"你的APP_ID\") \\\n    .app_secret(\"你的APP_SECRET\") \\\n    .log_level(lark.LogLevel.INFO) \\\n    .build()\n\n# 1. 列出知识空间\nspaces = client.wiki.v2.space.list(ListSpaceRequest.builder().build())\nfor s in spaces.data.items:\n    print(\"空间:\", s.name, s.space_id)\n\n# 2. 列出某个空间的节点（传 space_id）\nnodes = client.wiki.v2.space_node.list(\n    ListSpaceNodeRequest.builder().space_id(\"空间ID\").build())\nfor n in nodes.data.items:\n    print(\"节点:\", n.title, \"| node_token:\", n.node_token, \"| 类型:\", n.obj_type)\n\n# 3. 用 node_token 换真实文档 token\n*** = client.wiki.v2.space_node.get(\n    GetSpaceNodeRequest.builder().token(\"节点node_token\").build())\nobj_token = [隐藏]\nprint(\"真实文档ID:\", obj_token)\n\n# 4. 拉取文档纯文本\nresp = client.docx.v1.document.raw_content(\n    RawContentDocumentRequest.builder().document_id(obj_token).build())\nprint(resp.data.content)\n```\n\n## 四、常见报错对照\n\n| 报错 | 原因 | 解决 |\n|---|---|---|\n| `permission denied` / 131006 | 应用没被授权访问该知识库 | 按上面第 5 步把应用加进知识库成员或文档协作者 |\n| `document not found` / 文档 ID 无效 | 拿 node_token 当 document_id 用了 | 先调「获取节点信息」换 obj_token |\n| `access token *** | token 过期 | tenant_access_token 有效期 2 小时，过期重新获取 |\n\n---\n\n不过想先确认一下你的场景，好给你更精准的方案：\n\n1. **你想让谁来对接？** 是你自己写代码对接，还是想让我（你的助手）直接连上你的飞书知识库，帮你读写文档？\n2. **你要做什么？** 只是读内容（比如喂给 AI 做问答/总结）、还是要自动建文档/写文档、还是要双向同步？\n\n如果是想让我直接对接，你只需要在开放平台建好应用，把 `App ID`、`App Secret` 和知识库链接发我，我可以帮你写好脚本并跑通（应用授权那步需要你在飞书里点几下）。"
+    },
+    {
+      "id": "conv_1c97d2555405:msg_5",
+      "role": "assistant",
+      "status": "done",
+      "source_line": 20469,
+      "source_file": "messages",
+      "copy_kind": "trusted",
+      "user_created_at": null,
+      "dated_source_position": null,
+      "numeric_scheme": "msg_N",
+      "numeric_id": 5,
+      "original_position": 5,
+      "content": "对接飞书知识库，核心流程其实不复杂，但有一个**特别容易踩的坑**：知识库文档的 URL 里的 token 是「节点 token（node_token）」，不是文档真实的 document_id，直接拿去调文档接口会报错。得先通过节点接口换成 `obj_token` 再取内容。\n\n下面给你完整路径 👇\n\n## 一、准备工作（一次性）\n\n1. **创建企业自建应用**：打开 [飞书开放平台](https://open.feishu.cn) → 开发者后台 → 创建企业自建应用\n2. **拿到凭证**：应用凭证页的 `App ID` 和 `App Secret`\n3. **开通权限**（在「权限管理」里搜索添加）：\n   - `wiki:wiki`（读写知识库）或 `wiki:wiki.readonly`（只读）\n   - `docx:document` 或 `docx:document:readonly`（读写文档内容）\n4. **发布应用版本**，并确保可用范围包含知识库成员\n5. **授权应用访问你的知识库**（最容易漏的一步！）：\n   - 方式一（推荐）：飞书里建个群，把应用加为群机器人 → 知识库「设置 → 成员设置」→ 把这个群添加为管理员/成员\n   - 方式二：在知识库的某篇文档里，右上角「… → 更多 → 添加文档应用」直接添加应用为协作者\n\n## 二、调用链路（核心就 4 步）\n\n```\n获取 tenant_access_token\n   → 获取知识空间列表        GET /open-apis/wiki/v2/spaces\n   → 获取空间节点列表        GET /open-apis/wiki/v2/spaces/{space_id}/nodes\n   → 获取节点信息（拿 obj_token） GET /open-apis/wiki/v2/spaces/get_node?token=[隐藏]\n   → 根据 obj_type 取内容：\n       文档   → GET /open-apis/docx/v1/documents/{obj_token}/raw_content  （纯文本）\n                GET /open-apis/docx/v1/documents/{obj_token}/blocks       （结构化块）\n       表格   → 电子表格 API\n       多维表 → 查询记录 API\n```\n\n## 三、Python 代码示例（用官方 SDK，最省事）\n\n```bash\npip install lark-oapi\n```\n\n```python\nimport lark_oapi as lark\nfrom lark_oapi.api.wiki.v2 import *\nfrom lark_oapi.api.docx.v1 import *\n\nclient = lark.Client.builder() \\\n    .app_id(\"你的APP_ID\") \\\n    .app_secret(\"你的APP_SECRET\") \\\n    .log_level(lark.LogLevel.INFO) \\\n    .build()\n\n# 1. 列出知识空间\nspaces = client.wiki.v2.space.list(ListSpaceRequest.builder().build())\nfor s in spaces.data.items:\n    print(\"空间:\", s.name, s.space_id)\n\n# 2. 列出某个空间的节点（传 space_id）\nnodes = client.wiki.v2.space_node.list(\n    ListSpaceNodeRequest.builder().space_id(\"空间ID\").build())\nfor n in nodes.data.items:\n    print(\"节点:\", n.title, \"| node_token:\", n.node_token, \"| 类型:\", n.obj_type)\n\n# 3. 用 node_token 换真实文档 token\n*** = client.wiki.v2.space_node.get(\n    GetSpaceNodeRequest.builder().token(\"节点node_token\").build())\nobj_token = [隐藏]\nprint(\"真实文档ID:\", obj_token)\n\n# 4. 拉取文档纯文本\nresp = client.docx.v1.document.raw_content(\n    RawContentDocumentRequest.builder().document_id(obj_token).build())\nprint(resp.data.content)\n```\n\n## 四、常见报错对照\n\n| 报错 | 原因 | 解决 |\n|---|---|---|\n| `permission denied` / 131006 | 应用没被授权访问该知识库 | 按上面第 5 步把应用加进知识库成员或文档协作者 |\n| `document not found` / 文档 ID 无效 | 拿 node_token 当 document_id 用了 | 先调「获取节点信息」换 obj_token |\n| `access token *** | token 过期 | tenant_access_token 有效期 2 小时，过期重新获取 |\n\n---\n\n不过想先确认一下你的场景，好给你更精准的方案：\n\n1. **你想让谁来对接？** 是你自己写代码对接，还是想让我（你的助手）直接连上你的飞书知识库，帮你读写文档？\n2. **你要做什么？** 只是读内容（比如喂给 AI 做问答/总结）、还是要自动建文档/写文档、还是要双向同步？\n\n如果是想让我直接对接，你只需要在开放平台建好应用，把 `App ID`、`App Secret` 和知识库链接发我，我可以帮你写好脚本并跑通（应用授权那步需要你在飞书里点几下）。"
+    }
+  ],
+  "turn_references": [
+    {
+      "user_original_position": 1,
+      "user_original_id": "conv_1c97d2555405:a8f6cd98",
+      "user_content": "[Mon 2026-08-03 12:26 GMT+8] 请使用中文回复，除非用户明确使用其他语言。\n\n我要对接飞书知识库，我怎么弄",
+      "user_group_id": "u_9c12f6a71230a238fb",
+      "user_group_occurrence_count": 1,
+      "per_occurrence_binding": "unknown",
+      "binding_note": "既有内容标注仅供来源引用，未认证逐次回复归属或真实时序。",
+      "assistant_source_references": [
+        {
+          "assistant_original_position": 4,
+          "assistant_original_id": "conv_1c97d2555405:dbceedf5",
+          "assistant_content": "对接飞书知识库，核心流程其实不复杂，但有一个**特别容易踩的坑**：知识库文档的 URL 里的 token 是「节点 token（node_token）」，不是文档真实的 document_id，直接拿去调文档接口会报错。得先通过节点接口换成 `obj_token` 再取内容。\n\n下面给你完整路径 👇\n\n## 一、准备工作（一次性）\n\n1. **创建企业自建应用**：打开 [飞书开放平台](https://open.feishu.cn) → 开发者后台 → 创建企业自建应用\n2. **拿到凭证**：应用凭证页的 `App ID` 和 `App Secret`\n3. **开通权限**（在「权限管理」里搜索添加）：\n   - `wiki:wiki`（读写知识库）或 `wiki:wiki.readonly`（只读）\n   - `docx:document` 或 `docx:document:readonly`（读写文档内容）\n4. **发布应用版本**，并确保可用范围包含知识库成员\n5. **授权应用访问你的知识库**（最容易漏的一步！）：\n   - 方式一（推荐）：飞书里建个群，把应用加为群机器人 → 知识库「设置 → 成员设置」→ 把这个群添加为管理员/成员\n   - 方式二：在知识库的某篇文档里，右上角「… → 更多 → 添加文档应用」直接添加应用为协作者\n\n## 二、调用链路（核心就 4 步）\n\n```\n获取 tenant_access_token\n   → 获取知识空间列表        GET /open-apis/wiki/v2/spaces\n   → 获取空间节点列表        GET /open-apis/wiki/v2/spaces/{space_id}/nodes\n   → 获取节点信息（拿 obj_token） GET /open-apis/wiki/v2/spaces/get_node?token=[隐藏]\n   → 根据 obj_type 取内容：\n       文档   → GET /open-apis/docx/v1/documents/{obj_token}/raw_content  （纯文本）\n                GET /open-apis/docx/v1/documents/{obj_token}/blocks       （结构化块）\n       表格   → 电子表格 API\n       多维表 → 查询记录 API\n```\n\n## 三、Python 代码示例（用官方 SDK，最省事）\n\n```bash\npip install lark-oapi\n```\n\n```python\nimport lark_oapi as lark\nfrom lark_oapi.api.wiki.v2 import *\nfrom lark_oapi.api.docx.v1 import *\n\nclient = lark.Client.builder() \\\n    .app_id(\"你的APP_ID\") \\\n    .app_secret(\"你的APP_SECRET\") \\\n    .log_level(lark.LogLevel.INFO) \\\n    .build()\n\n# 1. 列出知识空间\nspaces = client.wiki.v2.space.list(ListSpaceRequest.builder().build())\nfor s in spaces.data.items:\n    print(\"空间:\", s.name, s.space_id)\n\n# 2. 列出某个空间的节点（传 space_id）\nnodes = client.wiki.v2.space_node.list(\n    ListSpaceNodeRequest.builder().space_id(\"空间ID\").build())\nfor n in nodes.data.items:\n    print(\"节点:\", n.title, \"| node_token:\", n.node_token, \"| 类型:\", n.obj_type)\n\n# 3. 用 node_token 换真实文档 token\n*** = client.wiki.v2.space_node.get(\n    GetSpaceNodeRequest.builder().token(\"节点node_token\").build())\nobj_token = [隐藏]\nprint(\"真实文档ID:\", obj_token)\n\n# 4. 拉取文档纯文本\nresp = client.docx.v1.document.raw_content(\n    RawContentDocumentRequest.builder().document_id(obj_token).build())\nprint(resp.data.content)\n```\n\n## 四、常见报错对照\n\n| 报错 | 原因 | 解决 |\n|---|---|---|\n| `permission denied` / 131006 | 应用没被授权访问该知识库 | 按上面第 5 步把应用加进知识库成员或文档协作者 |\n| `document not found` / 文档 ID 无效 | 拿 node_token 当 document_id 用了 | 先调「获取节点信息」换 obj_token |\n| `access token *** | token 过期 | tenant_access_token 有效期 2 小时，过期重新获取 |\n\n---\n\n不过想先确认一下你的场景，好给你更精准的方案：\n\n1. **你想让谁来对接？** 是你自己写代码对接，还是想让我（你的助手）直接连上你的飞书知识库，帮你读写文档？\n2. **你要做什么？** 只是读内容（比如喂给 AI 做问答/总结）、还是要自动建文档/写文档、还是要双向同步？\n\n如果是想让我直接对接，你只需要在开放平台建好应用，把 `App ID`、`App Secret` 和知识库链接发我，我可以帮你写好脚本并跑通（应用授权那步需要你在飞书里点几下）。",
+          "relation_levels": [
+            "accepted"
+          ],
+          "relation_provenance": [
+            {
+              "user_group_id": "u_9c12f6a71230a238fb",
+              "assistant_group_id": "a_bb1b05f4f43259b274",
+              "source": "accepted_071",
+              "relation_level": "accepted",
+              "chronology_verified": false,
+              "same_task_verified": false,
+              "basis": "ai_semantic_annotation_069",
+              "annotation_key": "user:u_9c12f6a71230a238fb"
+            }
+          ],
+          "is_new_event": false,
+          "reply_to_this_occurrence_verified": false
+        },
+        {
+          "assistant_original_position": 5,
+          "assistant_original_id": "conv_1c97d2555405:msg_5",
+          "assistant_content": "对接飞书知识库，核心流程其实不复杂，但有一个**特别容易踩的坑**：知识库文档的 URL 里的 token 是「节点 token（node_token）」，不是文档真实的 document_id，直接拿去调文档接口会报错。得先通过节点接口换成 `obj_token` 再取内容。\n\n下面给你完整路径 👇\n\n## 一、准备工作（一次性）\n\n1. **创建企业自建应用**：打开 [飞书开放平台](https://open.feishu.cn) → 开发者后台 → 创建企业自建应用\n2. **拿到凭证**：应用凭证页的 `App ID` 和 `App Secret`\n3. **开通权限**（在「权限管理」里搜索添加）：\n   - `wiki:wiki`（读写知识库）或 `wiki:wiki.readonly`（只读）\n   - `docx:document` 或 `docx:document:readonly`（读写文档内容）\n4. **发布应用版本**，并确保可用范围包含知识库成员\n5. **授权应用访问你的知识库**（最容易漏的一步！）：\n   - 方式一（推荐）：飞书里建个群，把应用加为群机器人 → 知识库「设置 → 成员设置」→ 把这个群添加为管理员/成员\n   - 方式二：在知识库的某篇文档里，右上角「… → 更多 → 添加文档应用」直接添加应用为协作者\n\n## 二、调用链路（核心就 4 步）\n\n```\n获取 tenant_access_token\n   → 获取知识空间列表        GET /open-apis/wiki/v2/spaces\n   → 获取空间节点列表        GET /open-apis/wiki/v2/spaces/{space_id}/nodes\n   → 获取节点信息（拿 obj_token） GET /open-apis/wiki/v2/spaces/get_node?token=[隐藏]\n   → 根据 obj_type 取内容：\n       文档   → GET /open-apis/docx/v1/documents/{obj_token}/raw_content  （纯文本）\n                GET /open-apis/docx/v1/documents/{obj_token}/blocks       （结构化块）\n       表格   → 电子表格 API\n       多维表 → 查询记录 API\n```\n\n## 三、Python 代码示例（用官方 SDK，最省事）\n\n```bash\npip install lark-oapi\n```\n\n```python\nimport lark_oapi as lark\nfrom lark_oapi.api.wiki.v2 import *\nfrom lark_oapi.api.docx.v1 import *\n\nclient = lark.Client.builder() \\\n    .app_id(\"你的APP_ID\") \\\n    .app_secret(\"你的APP_SECRET\") \\\n    .log_level(lark.LogLevel.INFO) \\\n    .build()\n\n# 1. 列出知识空间\nspaces = client.wiki.v2.space.list(ListSpaceRequest.builder().build())\nfor s in spaces.data.items:\n    print(\"空间:\", s.name, s.space_id)\n\n# 2. 列出某个空间的节点（传 space_id）\nnodes = client.wiki.v2.space_node.list(\n    ListSpaceNodeRequest.builder().space_id(\"空间ID\").build())\nfor n in nodes.data.items:\n    print(\"节点:\", n.title, \"| node_token:\", n.node_token, \"| 类型:\", n.obj_type)\n\n# 3. 用 node_token 换真实文档 token\n*** = client.wiki.v2.space_node.get(\n    GetSpaceNodeRequest.builder().token(\"节点node_token\").build())\nobj_token = [隐藏]\nprint(\"真实文档ID:\", obj_token)\n\n# 4. 拉取文档纯文本\nresp = client.docx.v1.document.raw_content(\n    RawContentDocumentRequest.builder().document_id(obj_token).build())\nprint(resp.data.content)\n```\n\n## 四、常见报错对照\n\n| 报错 | 原因 | 解决 |\n|---|---|---|\n| `permission denied` / 131006 | 应用没被授权访问该知识库 | 按上面第 5 步把应用加进知识库成员或文档协作者 |\n| `document not found` / 文档 ID 无效 | 拿 node_token 当 document_id 用了 | 先调「获取节点信息」换 obj_token |\n| `access token *** | token 过期 | tenant_access_token 有效期 2 小时，过期重新获取 |\n\n---\n\n不过想先确认一下你的场景，好给你更精准的方案：\n\n1. **你想让谁来对接？** 是你自己写代码对接，还是想让我（你的助手）直接连上你的飞书知识库，帮你读写文档？\n2. **你要做什么？** 只是读内容（比如喂给 AI 做问答/总结）、还是要自动建文档/写文档、还是要双向同步？\n\n如果是想让我直接对接，你只需要在开放平台建好应用，把 `App ID`、`App Secret` 和知识库链接发我，我可以帮你写好脚本并跑通（应用授权那步需要你在飞书里点几下）。",
+          "relation_levels": [
+            "accepted"
+          ],
+          "relation_provenance": [
+            {
+              "user_group_id": "u_9c12f6a71230a238fb",
+              "assistant_group_id": "a_bb1b05f4f43259b274",
+              "source": "accepted_071",
+              "relation_level": "accepted",
+              "chronology_verified": false,
+              "same_task_verified": false,
+              "basis": "ai_semantic_annotation_069",
+              "annotation_key": "user:u_9c12f6a71230a238fb"
+            }
+          ],
+          "is_new_event": false,
+          "reply_to_this_occurrence_verified": false
+        }
+      ]
+    },
+    {
+      "user_original_position": 2,
+      "user_original_id": "conv_1c97d2555405:msg_1",
+      "user_content": "请使用中文回复，除非用户明确使用其他语言。\n\n我要对接飞书知识库，我怎么弄",
+      "user_group_id": "u_7b5152b0f6610a3c20",
+      "user_group_occurrence_count": 1,
+      "per_occurrence_binding": "unknown",
+      "binding_note": "既有内容标注仅供来源引用，未认证逐次回复归属或真实时序。",
+      "assistant_source_references": [
+        {
+          "assistant_original_position": 4,
+          "assistant_original_id": "conv_1c97d2555405:dbceedf5",
+          "assistant_content": "对接飞书知识库，核心流程其实不复杂，但有一个**特别容易踩的坑**：知识库文档的 URL 里的 token 是「节点 token（node_token）」，不是文档真实的 document_id，直接拿去调文档接口会报错。得先通过节点接口换成 `obj_token` 再取内容。\n\n下面给你完整路径 👇\n\n## 一、准备工作（一次性）\n\n1. **创建企业自建应用**：打开 [飞书开放平台](https://open.feishu.cn) → 开发者后台 → 创建企业自建应用\n2. **拿到凭证**：应用凭证页的 `App ID` 和 `App Secret`\n3. **开通权限**（在「权限管理」里搜索添加）：\n   - `wiki:wiki`（读写知识库）或 `wiki:wiki.readonly`（只读）\n   - `docx:document` 或 `docx:document:readonly`（读写文档内容）\n4. **发布应用版本**，并确保可用范围包含知识库成员\n5. **授权应用访问你的知识库**（最容易漏的一步！）：\n   - 方式一（推荐）：飞书里建个群，把应用加为群机器人 → 知识库「设置 → 成员设置」→ 把这个群添加为管理员/成员\n   - 方式二：在知识库的某篇文档里，右上角「… → 更多 → 添加文档应用」直接添加应用为协作者\n\n## 二、调用链路（核心就 4 步）\n\n```\n获取 tenant_access_token\n   → 获取知识空间列表        GET /open-apis/wiki/v2/spaces\n   → 获取空间节点列表        GET /open-apis/wiki/v2/spaces/{space_id}/nodes\n   → 获取节点信息（拿 obj_token） GET /open-apis/wiki/v2/spaces/get_node?token=[隐藏]\n   → 根据 obj_type 取内容：\n       文档   → GET /open-apis/docx/v1/documents/{obj_token}/raw_content  （纯文本）\n                GET /open-apis/docx/v1/documents/{obj_token}/blocks       （结构化块）\n       表格   → 电子表格 API\n       多维表 → 查询记录 API\n```\n\n## 三、Python 代码示例（用官方 SDK，最省事）\n\n```bash\npip install lark-oapi\n```\n\n```python\nimport lark_oapi as lark\nfrom lark_oapi.api.wiki.v2 import *\nfrom lark_oapi.api.docx.v1 import *\n\nclient = lark.Client.builder() \\\n    .app_id(\"你的APP_ID\") \\\n    .app_secret(\"你的APP_SECRET\") \\\n    .log_level(lark.LogLevel.INFO) \\\n    .build()\n\n# 1. 列出知识空间\nspaces = client.wiki.v2.space.list(ListSpaceRequest.builder().build())\nfor s in spaces.data.items:\n    print(\"空间:\", s.name, s.space_id)\n\n# 2. 列出某个空间的节点（传 space_id）\nnodes = client.wiki.v2.space_node.list(\n    ListSpaceNodeRequest.builder().space_id(\"空间ID\").build())\nfor n in nodes.data.items:\n    print(\"节点:\", n.title, \"| node_token:\", n.node_token, \"| 类型:\", n.obj_type)\n\n# 3. 用 node_token 换真实文档 token\n*** = client.wiki.v2.space_node.get(\n    GetSpaceNodeRequest.builder().token(\"节点node_token\").build())\nobj_token = [隐藏]\nprint(\"真实文档ID:\", obj_token)\n\n# 4. 拉取文档纯文本\nresp = client.docx.v1.document.raw_content(\n    RawContentDocumentRequest.builder().document_id(obj_token).build())\nprint(resp.data.content)\n```\n\n## 四、常见报错对照\n\n| 报错 | 原因 | 解决 |\n|---|---|---|\n| `permission denied` / 131006 | 应用没被授权访问该知识库 | 按上面第 5 步把应用加进知识库成员或文档协作者 |\n| `document not found` / 文档 ID 无效 | 拿 node_token 当 document_id 用了 | 先调「获取节点信息」换 obj_token |\n| `access token *** | token 过期 | tenant_access_token 有效期 2 小时，过期重新获取 |\n\n---\n\n不过想先确认一下你的场景，好给你更精准的方案：\n\n1. **你想让谁来对接？** 是你自己写代码对接，还是想让我（你的助手）直接连上你的飞书知识库，帮你读写文档？\n2. **你要做什么？** 只是读内容（比如喂给 AI 做问答/总结）、还是要自动建文档/写文档、还是要双向同步？\n\n如果是想让我直接对接，你只需要在开放平台建好应用，把 `App ID`、`App Secret` 和知识库链接发我，我可以帮你写好脚本并跑通（应用授权那步需要你在飞书里点几下）。",
+          "relation_levels": [
+            "proposed"
+          ],
+          "relation_provenance": [
+            {
+              "user_group_id": "u_7b5152b0f6610a3c20",
+              "assistant_group_id": "a_bb1b05f4f43259b274",
+              "source": "matched_066",
+              "relation_level": "proposed",
+              "chronology_verified": false,
+              "same_task_verified": false
+            }
+          ],
+          "is_new_event": false,
+          "reply_to_this_occurrence_verified": false
+        },
+        {
+          "assistant_original_position": 5,
+          "assistant_original_id": "conv_1c97d2555405:msg_5",
+          "assistant_content": "对接飞书知识库，核心流程其实不复杂，但有一个**特别容易踩的坑**：知识库文档的 URL 里的 token 是「节点 token（node_token）」，不是文档真实的 document_id，直接拿去调文档接口会报错。得先通过节点接口换成 `obj_token` 再取内容。\n\n下面给你完整路径 👇\n\n## 一、准备工作（一次性）\n\n1. **创建企业自建应用**：打开 [飞书开放平台](https://open.feishu.cn) → 开发者后台 → 创建企业自建应用\n2. **拿到凭证**：应用凭证页的 `App ID` 和 `App Secret`\n3. **开通权限**（在「权限管理」里搜索添加）：\n   - `wiki:wiki`（读写知识库）或 `wiki:wiki.readonly`（只读）\n   - `docx:document` 或 `docx:document:readonly`（读写文档内容）\n4. **发布应用版本**，并确保可用范围包含知识库成员\n5. **授权应用访问你的知识库**（最容易漏的一步！）：\n   - 方式一（推荐）：飞书里建个群，把应用加为群机器人 → 知识库「设置 → 成员设置」→ 把这个群添加为管理员/成员\n   - 方式二：在知识库的某篇文档里，右上角「… → 更多 → 添加文档应用」直接添加应用为协作者\n\n## 二、调用链路（核心就 4 步）\n\n```\n获取 tenant_access_token\n   → 获取知识空间列表        GET /open-apis/wiki/v2/spaces\n   → 获取空间节点列表        GET /open-apis/wiki/v2/spaces/{space_id}/nodes\n   → 获取节点信息（拿 obj_token） GET /open-apis/wiki/v2/spaces/get_node?token=[隐藏]\n   → 根据 obj_type 取内容：\n       文档   → GET /open-apis/docx/v1/documents/{obj_token}/raw_content  （纯文本）\n                GET /open-apis/docx/v1/documents/{obj_token}/blocks       （结构化块）\n       表格   → 电子表格 API\n       多维表 → 查询记录 API\n```\n\n## 三、Python 代码示例（用官方 SDK，最省事）\n\n```bash\npip install lark-oapi\n```\n\n```python\nimport lark_oapi as lark\nfrom lark_oapi.api.wiki.v2 import *\nfrom lark_oapi.api.docx.v1 import *\n\nclient = lark.Client.builder() \\\n    .app_id(\"你的APP_ID\") \\\n    .app_secret(\"你的APP_SECRET\") \\\n    .log_level(lark.LogLevel.INFO) \\\n    .build()\n\n# 1. 列出知识空间\nspaces = client.wiki.v2.space.list(ListSpaceRequest.builder().build())\nfor s in spaces.data.items:\n    print(\"空间:\", s.name, s.space_id)\n\n# 2. 列出某个空间的节点（传 space_id）\nnodes = client.wiki.v2.space_node.list(\n    ListSpaceNodeRequest.builder().space_id(\"空间ID\").build())\nfor n in nodes.data.items:\n    print(\"节点:\", n.title, \"| node_token:\", n.node_token, \"| 类型:\", n.obj_type)\n\n# 3. 用 node_token 换真实文档 token\n*** = client.wiki.v2.space_node.get(\n    GetSpaceNodeRequest.builder().token(\"节点node_token\").build())\nobj_token = [隐藏]\nprint(\"真实文档ID:\", obj_token)\n\n# 4. 拉取文档纯文本\nresp = client.docx.v1.document.raw_content(\n    RawContentDocumentRequest.builder().document_id(obj_token).build())\nprint(resp.data.content)\n```\n\n## 四、常见报错对照\n\n| 报错 | 原因 | 解决 |\n|---|---|---|\n| `permission denied` / 131006 | 应用没被授权访问该知识库 | 按上面第 5 步把应用加进知识库成员或文档协作者 |\n| `document not found` / 文档 ID 无效 | 拿 node_token 当 document_id 用了 | 先调「获取节点信息」换 obj_token |\n| `access token *** | token 过期 | tenant_access_token 有效期 2 小时，过期重新获取 |\n\n---\n\n不过想先确认一下你的场景，好给你更精准的方案：\n\n1. **你想让谁来对接？** 是你自己写代码对接，还是想让我（你的助手）直接连上你的飞书知识库，帮你读写文档？\n2. **你要做什么？** 只是读内容（比如喂给 AI 做问答/总结）、还是要自动建文档/写文档、还是要双向同步？\n\n如果是想让我直接对接，你只需要在开放平台建好应用，把 `App ID`、`App Secret` 和知识库链接发我，我可以帮你写好脚本并跑通（应用授权那步需要你在飞书里点几下）。",
+          "relation_levels": [
+            "proposed"
+          ],
+          "relation_provenance": [
+            {
+              "user_group_id": "u_7b5152b0f6610a3c20",
+              "assistant_group_id": "a_bb1b05f4f43259b274",
+              "source": "matched_066",
+              "relation_level": "proposed",
+              "chronology_verified": false,
+              "same_task_verified": false
+            }
+          ],
+          "is_new_event": false,
+          "reply_to_this_occurrence_verified": false
+        }
+      ]
+    }
+  ],
+  "reference_scope": "Existing content-group source quotations; references are not additional historical events or certified turns.",
+  "file_references": [],
+  "tool_record_ids": [
+    "tool_01550",
+    "tool_01551"
+  ],
+  "tool_assignment_scope": "Source session-level inventory; cumulative snapshots do not establish invocation time or task attribution.",
+  "order_diagnostics": {
+    "status": "NO_CONFLICT_OBSERVED_UNVERIFIED",
+    "reasons": {
+      "source_numeric_descent": [],
+      "source_user_time_descent": [],
+      "time_numeric_conflict": []
+    },
+    "same_time_numeric_descents": [],
+    "mixed_client_trusted_records": false,
+    "consecutive_user_pairs": 1,
+    "complete_chronology_verified": false
+  },
+  "outcome": "unknown",
+  "chronology_verified": false,
+  "complete_historical_trace_verified": false,
+  "benchmark_ready": false,
+  "artifact_bytes_restored": false,
+  "credential_masking": "Inherited unchanged from verified whole-session reader."
+}

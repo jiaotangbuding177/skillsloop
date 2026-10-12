@@ -1,0 +1,514 @@
+{
+  "group": "legal_hr_services",
+  "overrides": {
+    "0": {
+      "new_checks": [
+        {
+          "kind": "final_distinct_artifact_objects",
+          "params": {
+            "delivery_indices": [
+              2,
+              3
+            ],
+            "required_distinct_object_count": 2,
+            "compare": "canonical_final_path_or_native_object_id",
+            "hash_equality_does_not_prove_same_object": true
+          },
+          "deliverable_index": null,
+          "mandatory": true,
+          "source_turns_1based": [
+            17
+          ],
+          "quote": "请分别生产方案和沟通函件的文档",
+          "reason": "用户明确分别交付两个文档，只验文件对象独立，不验方案与函件法律内容。",
+          "score_at": "conversation_end_only",
+          "implementation_state": "design_only_not_implemented"
+        }
+      ],
+      "proposal_decisions": [
+        "reject_quality_or_ambiguous_body_partition",
+        "approve_basic_hard"
+      ],
+      "residuals": [
+        "三份OCR完整与准确、法律答复和方案/函件内容可用性属于质量链；不硬加三节标题或三文件数量。"
+      ]
+    },
+    "4": {
+      "proposal_decisions": [
+        "reject_legal_content_quality"
+      ],
+      "residuals": [
+        "一次性付款期限、主体义务和联动条款属于合同内容，不用关键词或数值作TSR。T3取消直接修改文件，保留文字交付。"
+      ]
+    },
+    "5": {
+      "proposal_decisions": [
+        "reject_itinerary_content_quality"
+      ],
+      "residuals": [
+        "已预约时刻、地点覆盖与景点排除交给质量链；T6“第二天”指代无法机械确定，不能硬改日期或行程范围。"
+      ]
+    },
+    "10": {
+      "proposal_decisions": [
+        "reject_content_coverage_quality"
+      ],
+      "residuals": [
+        "KPI/行为评级/三个序列和面谈话术是方案覆盖质量，不硬造标题或评分值；前五轮技能/噪音不生成独立PDF义务。"
+      ]
+    },
+    "12": {
+      "replacements": [
+        {
+          "point_match": {
+            "deliverable_index": 0,
+            "check_index": 1
+          },
+          "kind": "docx_track_change_elements_exist",
+          "params": {
+            "elements": [
+              "w:ins",
+              "w:del"
+            ],
+            "any_of": true,
+            "scope": "each_of_three_bound_final_agreement_files",
+            "require_each_file_checked": true,
+            "exclude_former_attempt_records": true
+          },
+          "source_turns_1based": [
+            1
+          ],
+          "quote": "逐一进行审阅、修订，需要在输出的修订文件上保留修订痕迹",
+          "reason": "将检查明确绑定三份当前修订协议，逐份核修订记录；不能只在任意一份或其他DOCX找一个标记。原本若已逐份实现则此为范围澄清。"
+        }
+      ],
+      "residuals": [
+        "这里只要求输出修订痕迹存在；用户没明确要求保留原文件既有修订，不加旧修订全量保存比较器。",
+        "修订主体、条款正确性、不过度修改和原结构合理保留属于质量链。第2/8轮无需再出文件不取消初轮三份最终修订文件。",
+        "第14轮财政说明指代受控限定到当前会话材料，不导入另会话旧AI误产文件；无法机械证实该说明的真实对象。"
+      ]
+    },
+    "16": {
+      "new_checks": [
+        {
+          "kind": "final_artifact_parent_directory",
+          "params": {
+            "delivery_index": 0,
+            "expected_directory_label": "学生资料",
+            "resolve_directory_from": "current_attempt_environment_or_authorized_workspace_mapping",
+            "require_canonical_descendant": true,
+            "require_readable_final_artifact": true,
+            "unresolved_mapping": "UNSCORED"
+          },
+          "deliverable_index": 0,
+          "mandatory": true,
+          "source_turns_1based": [
+            3,
+            4
+          ],
+          "quote": "重新生成一份PDF 并放在学生资料文件夹里面",
+          "reason": "明确目录位置属于交付状态；有实验路径映射才核，缺映射标UNSCORED，不用任意新建同名目录顶替。",
+          "score_at": "conversation_end_only",
+          "implementation_state": "design_only_not_implemented"
+        }
+      ],
+      "observations": [
+        {
+          "kind": "final_document_literal_and_table_observation",
+          "params": {
+            "delivery_index": 0,
+            "literal": "贵州",
+            "literal_absent_observation": true,
+            "table_absence_native_if_docx": false,
+            "pdf_table_detection": "unreliable_report_only"
+          },
+          "deliverable_index": 0,
+          "mandatory": false,
+          "source_turns_1based": [
+            6
+          ],
+          "quote": "不要写成表格……去掉贵州的内容",
+          "reason": "PDF不能可靠原生证明无表格，地区内容删除涉及语义；只报告字面命中与版式观测，不能加入AND。",
+          "score_at": "conversation_end_only",
+          "implementation_state": "design_only_not_implemented",
+          "decision": "observation_only_not_in_AND"
+        }
+      ],
+      "proposal_decisions": [
+        "approve_basic_hard",
+        "split_observation_quality_only"
+      ],
+      "residuals": [
+        "后轮附加的具名优化文档为当前编辑对象，不将初轮另一简历事实拼入；正文的岗位价值、合并及贵州相关内容完整删除属于质量。"
+      ]
+    },
+    "18": {
+      "proposal_decisions": [
+        "reject_legal_content_quality"
+      ],
+      "residuals": [
+        "600万元、估值、交割日、利率、通知天数及担保价格属于协议内容；本轮不核金额或条款。只绑定后轮最终协议文件，不把早期借款版另计必要文件。"
+      ]
+    },
+    "22": {
+      "replacements": [
+        {
+          "point_match": {
+            "deliverable_index": 0,
+            "check_index": 0
+          },
+          "kind": "final_service_state",
+          "params": {
+            "service": "cron_registration",
+            "expected": {
+              "name": "follow-builders 每日情报+选题",
+              "start": "2026-06-25 00:00",
+              "schedule": "daily 08:00",
+              "timezone": "Asia/Shanghai",
+              "payload_ref": "canonical_user_turn_5_task_payload",
+              "outputs_configured": [
+                "/workspace/分析摘要-{YYYY-MM-DD}.md",
+                "/workspace/选题推荐-{YYYY-MM-DD}.md",
+                "/workspace/首推公众号文章-{YYYY-MM-DD}.md"
+              ],
+              "registered_exists": true,
+              "existing_job_identity_ref": "source_job_fd4a7d47-dcb1-42a2-981e-95b2a91aea92_via_current_attempt_mapping",
+              "timeout": {
+                "comparator": "final_gt_initial_same_job",
+                "initial_ref": "current_attempt_initial_job",
+                "exact_target_seconds": null
+              },
+              "actual_trigger_not_evaluated": true
+            },
+            "evidence_source": "real_final_scheduler_registration_readback"
+          },
+          "source_turns_1based": [
+            1,
+            2,
+            5
+          ],
+          "quote": "请帮我编辑定时任务……任务 ID：fd4a7d47-dcb1-42a2-981e-95b2a91aea92；还是超时，请继续加",
+          "reason": "明确编辑同一job，created不得解释为必须新建。补同job身份与初末timeout实际增量；最终payload用第5轮完整内容，未来文件只核配置。"
+        }
+      ],
+      "proposal_decisions": [
+        "approve_as_original_check_replacement"
+      ],
+      "residuals": [
+        "任务payload中的文章质量、真实来源和写作风格不在登记验收内。无精确timeout数值，不硬设阈值；不触发任务。"
+      ]
+    },
+    "24": {
+      "proposal_decisions": [
+        "observation_only_unfixed_text_schema"
+      ],
+      "observations": [
+        {
+          "kind": "final_recruitment_phase_fields_observation",
+          "params": {
+            "expected_phase_concepts": [
+              "初面",
+              "复试"
+            ],
+            "expected_durations_minutes": [
+              30,
+              60
+            ],
+            "second_duration_approximate": true,
+            "no_new_fixed_headers": true
+          },
+          "deliverable_index": 0,
+          "mandatory": false,
+          "source_turns_1based": [
+            2
+          ],
+          "quote": "只需要两轮面试，初面30分钟，复试需要做题目约60分钟",
+          "reason": "用户固定流程概念但没有机器表格式，观测可抽取时长与阶段；题目和完整流程覆盖仍质量，解析不足不硬判失败。",
+          "score_at": "conversation_end_only",
+          "implementation_state": "design_only_not_implemented",
+          "decision": "observation_only_not_in_AND"
+        }
+      ],
+      "residuals": [
+        "面试轮次时间是明确要求，但自然语言各种同义表达未冻结为可靠解析模式，只做字段观测；不强加两节标题。"
+      ]
+    },
+    "28": {
+      "residuals": [
+        "最终会议须用本次get读回及B对象映射，不沿用旧会议号；企微提醒核真实cron登记的渠道和会议号关联，不要求未来发送。",
+        "如果B映射或会议号记录缺失，标UNSCORED，不以“成功了吗”回复替代状态或要求额外邀请人。"
+      ]
+    },
+    "29": {
+      "proposal_decisions": [
+        "reject_legal_content_quality"
+      ],
+      "residuals": [
+        "保留两个可读正文对象即可；剥离丙方与担保条款的语义、完整性、法律逻辑另做质量评审，不用全局禁词“丙方”。"
+      ]
+    },
+    "30": {
+      "residuals": [
+        "最终查询对象是第2轮clean协议。可用本次交付对象/来源映射限定目标，但不能只凭非空自动证明全文确系最新协议分析；该残余交质量。"
+      ]
+    },
+    "31": {
+      "residuals": [
+        "固定历史时间参数按已冻结实验时间映射处理；不因真实今天已过该日期而改写执行日或要求触发。"
+      ]
+    },
+    "32": {
+      "residuals": [
+        "没有可索赔条款也可如实答复；赔偿权、适用条款及金额属于质量，不能强制有正向结论。"
+      ]
+    },
+    "36": {
+      "new_checks": [
+        {
+          "kind": "final_native_document_no_tables",
+          "params": {
+            "delivery_index": 0,
+            "native_formats": [
+              "docx"
+            ],
+            "forbidden_element": "w:tbl",
+            "scope": "main_document_body",
+            "on_non_native_or_pdf": "report_only_not_in_AND",
+            "do_not_force_output_format": true
+          },
+          "deliverable_index": 0,
+          "mandatory": true,
+          "source_turns_1based": [
+            2,
+            3,
+            4
+          ],
+          "quote": "市场营销经理的岗位职责……不要表格形式",
+          "reason": "用户明确非表格；若最终是DOCX可原生核正文w:tbl缺失，其他载体仅观察，不强制用户未规定的DOCX格式。",
+          "score_at": "conversation_end_only",
+          "implementation_state": "design_only_not_implemented"
+        }
+      ],
+      "proposal_decisions": [
+        "approve_conditional_native_basic_hard"
+      ],
+      "residuals": [
+        "招聘匹配与临床人才筛选正确性另属质量；营销文件目标未被后续招聘取消。无表格不等于职责简洁或合同适用。"
+      ]
+    },
+    "40": {
+      "proposal_decisions": [
+        "reject_legal_content_quality"
+      ],
+      "residuals": [
+        "保留明确Word基础格式；合世家、三个月及反洗钱用语更改属于法律方案正文，不新增金额/条款词项评分。"
+      ]
+    },
+    "41": {
+      "proposal_decisions": [
+        "observation_only_signature_region_not_frozen"
+      ],
+      "observations": [
+        {
+          "kind": "final_signature_page_correspondence_observation",
+          "params": {
+            "target_delivery_index": 0,
+            "reference_input": "补充协议签署页",
+            "require_no_fixed_page_count": true,
+            "reference_region": "not_frozen",
+            "visual_or_text_correspondence": "quality_or_manual_only"
+          },
+          "deliverable_index": 0,
+          "mandatory": false,
+          "source_turns_1based": [
+            1
+          ],
+          "quote": "把合伙人会议签署页补齐",
+          "reason": "未冻结签署页区域和可靠等价判定，不能硬核像素全等、固定页数或签字人词项；本次仅保留最终会议决议PDF交付。",
+          "score_at": "conversation_end_only",
+          "implementation_state": "design_only_not_implemented",
+          "decision": "observation_only_not_in_AND"
+        }
+      ],
+      "residuals": [
+        "PDF可打开不能机器证实签署页已补齐或法律效力；签署页内容一致留作质量/人工证据，不伪称完整完成。"
+      ]
+    },
+    "44": {
+      "new_checks": [
+        {
+          "kind": "final_distinct_artifact_objects",
+          "params": {
+            "delivery_indices": [
+              1,
+              2
+            ],
+            "required_distinct_object_count": 2,
+            "compare": "canonical_final_path_or_native_object_id",
+            "no_fixed_pixel_or_page_count": true
+          },
+          "deliverable_index": null,
+          "mandatory": true,
+          "source_turns_1based": [
+            9
+          ],
+          "quote": "把两个行程分别做成一个卡通手绘图片",
+          "reason": "两个行程各一张图是明确的独立图片交付，只核不同对象，安吉用末轮最终版。",
+          "score_at": "conversation_end_only",
+          "implementation_state": "design_only_not_implemented"
+        }
+      ],
+      "residuals": [
+        "Word图片关系存在不认证实景照片；狗种、姓名、民宿与遗址图样和行程覆盖质量另链。安吉后轮替代旧图，象山仍有独立最终图。"
+      ]
+    },
+    "46": {
+      "residuals": [
+        "第6轮单张长图替代第5轮两张分图；保留最终1图，不增加分辨率、长宽比和费用数值要求。手绘样式和地点覆盖属于质量。"
+      ]
+    },
+    "49": {
+      "proposal_decisions": [
+        "reject_legal_content_quality"
+      ],
+      "residuals": [
+        "最新采购对象与最终协议版本承接第6轮；总金额240万元、主体/产品和条款实质正确性留质量链，不给Word可开检查混入法律数值。",
+        "第5轮Word格式未取消，继续保留；不要求保留120/160万元旧稿作为必需文件。"
+      ]
+    },
+    "50": {
+      "residuals": [
+        "人格设定没有取消答辩和证据目标；非空仍不能区分人格确认与实质答辩，限定为文字交付形式，实质覆盖交质量。"
+      ]
+    },
+    "52": {
+      "residuals": [
+        "300字仅计2035说明正文，使用原Unicode非空白计数，不拓展到所有文字。图谱查询未查到人名允许说明，不強制列学生。"
+      ]
+    },
+    "53": {
+      "new_checks": [
+        {
+          "kind": "final_distinct_artifact_objects",
+          "params": {
+            "delivery_indices": [
+              0,
+              1
+            ],
+            "required_distinct_object_count": 2,
+            "compare": "canonical_final_path_or_native_object_id"
+          },
+          "deliverable_index": null,
+          "mandatory": true,
+          "source_turns_1based": [
+            6
+          ],
+          "quote": "请另行生成一份word文件",
+          "reason": "T6明确新增岗位另行Word，不能把主说明文件复用为新增文件；已有总监和两中心另行规则不再重复加点。",
+          "score_at": "conversation_end_only",
+          "implementation_state": "design_only_not_implemented"
+        }
+      ],
+      "proposal_decisions": [
+        "approve_basic_hard"
+      ],
+      "residuals": [
+        "岗位职责完整、中心/部门数量和各岗位配置属于内容质量；不硬要求每个岗位一个文件，也不扩为9份全局不同文件。"
+      ]
+    },
+    "56": {
+      "proposal_decisions": [
+        "reject_content_quality_and_unresolved_time_window"
+      ],
+      "observations": [
+        {
+          "kind": "final_comment_window_observation",
+          "params": {
+            "requested_months": 6,
+            "cutoff_ref": "source_conversation_frozen_query_time",
+            "actual_comment_timestamps_required_for_observation": true,
+            "missing_source_or_time": "UNSCORED",
+            "no_minimum_comment_count": true
+          },
+          "deliverable_index": 0,
+          "mandatory": false,
+          "source_turns_1based": [
+            3
+          ],
+          "quote": "餐厅、食物、地址和近6个月的评论做个总结",
+          "reason": "可以观测真实时间戳范围，未冻结链接抓取/评论数据及查询时点时不能hard；栏目、信息真实和覆盖属于质量。",
+          "score_at": "conversation_end_only",
+          "implementation_state": "design_only_not_implemented",
+          "decision": "observation_only_not_in_AND"
+        }
+      ],
+      "residuals": [
+        "小红书链接和评论可达性不由非空证明。保留纯文字交付限制，不要求浏览器安装或把当前日期作为历史时窗。"
+      ]
+    },
+    "57": {
+      "residuals": [
+        "保留6张16:9当前图片、覆盖6源的PDF和技能安装目录；用户未定PDF6页、像素或天气字段的机器格式。竖A4及三种输出能力不增加当前硬产物。",
+        "最终技能SKILL.md存在不证明更新内容正确或规则实现；将前后技能摘要变化只列观察，不依内容词匹配判成功。"
+      ]
+    },
+    "62": {
+      "proposal_decisions": [
+        "reject_candidate_content_quality"
+      ],
+      "residuals": [
+        "当前目标是吴钊志/张佳铭评估Word，可按交付声明限定对象；正文确无其他候选对比需要语义判断，不做所有其他姓名禁词。"
+      ]
+    },
+    "63": {
+      "residuals": [
+        "Excel汇总基础交付不认证特殊权利摘录、法律/财务口径与专利数量正确；公开查询没有确定结果可说明未知，不强制一份报告正确。"
+      ]
+    },
+    "67": {
+      "proposal_decisions": [
+        "observation_only_unfixed_ranking_representation"
+      ],
+      "observations": [
+        {
+          "kind": "final_user_fixed_rank_fields_observation",
+          "params": {
+            "expected_ranks": {
+              "谭琨": [
+                1
+              ],
+              "刘晔": [
+                6,
+                7
+              ],
+              "吕长虹": [
+                8
+              ],
+              "谭鑫": [
+                "last"
+              ]
+            },
+            "representation": "no_fixed_table_required",
+            "if_unambiguously_parsed": "compare_user_fixed_names_and_positions",
+            "unsupported_or_ambiguous_parser": "UNSCORED",
+            "infer_other_scores_or_ranks": false
+          },
+          "deliverable_index": 1,
+          "mandatory": false,
+          "source_turns_1based": [
+            2,
+            3
+          ],
+          "quote": "谭鑫的项目需要排最后，吕长虹的第8……谭琨应该排第一，然后刘晔排第六或第七",
+          "reason": "名字和名次明确，但没规定最终表格格式且末位需完整名单；当前仅观测不纳AND，不能倒推出分值。",
+          "score_at": "conversation_end_only",
+          "implementation_state": "design_only_not_implemented",
+          "decision": "observation_only_not_in_AND"
+        }
+      ],
+      "residuals": [
+        "谭鑫和谭琨不同人；第3轮替代刘晔前三，不能保留旧冲突排序作门槛。项目科学评分属于质量。"
+      ]
+    }
+  }
+}

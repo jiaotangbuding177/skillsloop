@@ -1,0 +1,312 @@
+{
+  "sid": "conv_4451b5c4da2e",
+  "category": "COMM",
+  "title": "follow-builders每日08点情报选题任务编辑及品牌关系说明",
+  "user_turn_count": 5,
+  "scoring_time": "one_pass_at_session_end",
+  "final_target": "follow-builders每日情报与选题定时任务最终登记；科大讯飞与EvoMind关联说明；张大胆公众号风格说明",
+  "final_deliverables": [
+    {
+      "name": "follow-builders每日情报与选题定时任务最终登记",
+      "kind": "service",
+      "format": "cron_registration",
+      "turn_indices": [
+        0,
+        1,
+        4
+      ],
+      "final_version_only": true,
+      "checks": [
+        {
+          "kind": "final_service_state",
+          "parameters": {
+            "service": "cron_registration",
+            "expected": {
+              "name": "follow-builders 每日情报+选题",
+              "start": "2026-06-25 00:00",
+              "schedule": "daily 08:00",
+              "timezone": "Asia/Shanghai",
+              "outputs_configured": [
+                "/workspace/分析摘要-{YYYY-MM-DD}.md",
+                "/workspace/选题推荐-{YYYY-MM-DD}.md",
+                "/workspace/首推公众号文章-{YYYY-MM-DD}.md"
+              ],
+              "actual_trigger_not_evaluated": true,
+              "payload": "user_turn_4_full_task_text",
+              "timeout": "raised_value_recorded_but_no_exact_target_user_value",
+              "created": true
+            },
+            "source_job_id": "fd4a7d47-dcb1-42a2-981e-95b2a91aea92"
+          },
+          "mandatory": true,
+          "point_id": "conv_4451b5c4da2e:delivery1:check1",
+          "display_object": "follow-builders每日情报与选题定时任务最终登记",
+          "requirement_basis": [
+            {
+              "turn_1based": 1,
+              "quote": "请帮我编辑定时任务……任务 ID：fd4a7d47-dcb1-42a2-981e-95b2a91aea92；还是超时，请继续加"
+            }
+          ],
+          "evidence_method": "同一job的本次初态/终态真实登记读回、身份映射、schedule/start/timezone、完整payload和三个配置路径、timeout前后值；不能以未来三个文件已生成或文字完成声明顶替。",
+          "passing_condition": "明确编辑同一job，created不得解释为必须新建。补同job身份与初末timeout实际增量；最终payload用第5轮完整内容，未来文件只核配置。",
+          "score_at": "conversation_end_only",
+          "audit_action": "replace",
+          "audit_metadata_not_execution_parameters": {
+            "service": "cron_registration",
+            "expected": {
+              "name": "follow-builders 每日情报+选题",
+              "start": "2026-06-25 00:00",
+              "schedule": "daily 08:00",
+              "timezone": "Asia/Shanghai",
+              "payload_ref": "canonical_user_turn_5_task_payload",
+              "outputs_configured": [
+                "/workspace/分析摘要-{YYYY-MM-DD}.md",
+                "/workspace/选题推荐-{YYYY-MM-DD}.md",
+                "/workspace/首推公众号文章-{YYYY-MM-DD}.md"
+              ],
+              "registered_exists": true,
+              "existing_job_identity_ref": "source_job_fd4a7d47-dcb1-42a2-981e-95b2a91aea92_via_current_attempt_mapping",
+              "timeout": {
+                "comparator": "final_gt_initial_same_job",
+                "initial_ref": "current_attempt_initial_job",
+                "exact_target_seconds": null
+              },
+              "actual_trigger_not_evaluated": true
+            },
+            "evidence_source": "real_final_scheduler_registration_readback"
+          },
+          "audit_rationale": "明确编辑同一job，created不得解释为必须新建。补同job身份与初末timeout实际增量；最终payload用第5轮完整内容，未来文件只核配置。"
+        }
+      ],
+      "delivery_id": "conv_4451b5c4da2e:final:0",
+      "id": "delivery_01",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    },
+    {
+      "name": "科大讯飞与EvoMind关联说明",
+      "kind": "text",
+      "format": "text",
+      "turn_indices": [
+        2
+      ],
+      "final_version_only": true,
+      "checks": [
+        {
+          "kind": "delivered_text_nonempty",
+          "parameters": {
+            "trim_whitespace": true
+          },
+          "mandatory": true,
+          "point_id": "conv_4451b5c4da2e:delivery2:check1",
+          "display_object": "科大讯飞与EvoMind关联说明",
+          "requirement_basis": [
+            {
+              "turn_1based": 3,
+              "quote": "科大讯飞和evomind的关联"
+            }
+          ],
+          "evidence_method": "本次attempt的实际用户可见交付文本及交付对象映射；若以文件承载，保存该文件原生抽取正文、路径和SHA。会话结束统一核验，不逐轮打成功标签。",
+          "passing_condition": "在会话结束时读取本次新运行已交付的“科大讯飞与EvoMind关联说明”正文集合；去空白后非空。可用本次真实交付文件原生抽取正文；不使用历史AI记录，不设额外最少字数。此检查不能区分完成计划、完成声明与实质答复。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只核本次会话终态的已请求交付对象及原有明确基础条件。保留历史用户轮次作需求来源，不逐轮打分，不使用旧AI作为gold。 非空仅证明交付文字形式，不推断实质问题已回答；source_turn_indices是需求来源，不强制必须在那一轮产出或处罚前轮失败。"
+        }
+      ],
+      "delivery_id": "conv_4451b5c4da2e:final:1",
+      "id": "delivery_02",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    },
+    {
+      "name": "张大胆公众号风格说明",
+      "kind": "text",
+      "format": "text",
+      "turn_indices": [
+        3
+      ],
+      "final_version_only": true,
+      "checks": [
+        {
+          "kind": "delivered_text_nonempty",
+          "parameters": {
+            "trim_whitespace": true
+          },
+          "mandatory": true,
+          "point_id": "conv_4451b5c4da2e:delivery3:check1",
+          "display_object": "张大胆公众号风格说明",
+          "requirement_basis": [
+            {
+              "turn_1based": 4,
+              "quote": "张大胆公众号风格是什么"
+            }
+          ],
+          "evidence_method": "本次attempt的实际用户可见交付文本及交付对象映射；若以文件承载，保存该文件原生抽取正文、路径和SHA。会话结束统一核验，不逐轮打成功标签。",
+          "passing_condition": "在会话结束时读取本次新运行已交付的“张大胆公众号风格说明”正文集合；去空白后非空。可用本次真实交付文件原生抽取正文；不使用历史AI记录，不设额外最少字数。此检查不能区分完成计划、完成声明与实质答复。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只核本次会话终态的已请求交付对象及原有明确基础条件。保留历史用户轮次作需求来源，不逐轮打分，不使用旧AI作为gold。 非空仅证明交付文字形式，不推断实质问题已回答；source_turn_indices是需求来源，不强制必须在那一轮产出或处罚前轮失败。"
+        }
+      ],
+      "delivery_id": "conv_4451b5c4da2e:final:2",
+      "id": "delivery_03",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    }
+  ],
+  "checks": [
+    {
+      "delivery_id": "delivery_01",
+      "kind": "final_service_state",
+      "parameters": {
+        "service": "cron_registration",
+        "expected": {
+          "name": "follow-builders 每日情报+选题",
+          "start": "2026-06-25 00:00",
+          "schedule": "daily 08:00",
+          "timezone": "Asia/Shanghai",
+          "outputs_configured": [
+            "/workspace/分析摘要-{YYYY-MM-DD}.md",
+            "/workspace/选题推荐-{YYYY-MM-DD}.md",
+            "/workspace/首推公众号文章-{YYYY-MM-DD}.md"
+          ],
+          "actual_trigger_not_evaluated": true,
+          "payload": "user_turn_4_full_task_text",
+          "timeout": "raised_value_recorded_but_no_exact_target_user_value",
+          "created": true
+        },
+        "source_job_id": "fd4a7d47-dcb1-42a2-981e-95b2a91aea92"
+      },
+      "mandatory": true,
+      "point_id": "conv_4451b5c4da2e:delivery1:check1",
+      "display_object": "follow-builders每日情报与选题定时任务最终登记",
+      "requirement_basis": [
+        {
+          "turn_1based": 1,
+          "quote": "请帮我编辑定时任务……任务 ID：fd4a7d47-dcb1-42a2-981e-95b2a91aea92；还是超时，请继续加"
+        }
+      ],
+      "evidence_method": "同一job的本次初态/终态真实登记读回、身份映射、schedule/start/timezone、完整payload和三个配置路径、timeout前后值；不能以未来三个文件已生成或文字完成声明顶替。",
+      "passing_condition": "明确编辑同一job，created不得解释为必须新建。补同job身份与初末timeout实际增量；最终payload用第5轮完整内容，未来文件只核配置。",
+      "score_at": "conversation_end_only",
+      "audit_action": "replace",
+      "audit_metadata_not_execution_parameters": {
+        "service": "cron_registration",
+        "expected": {
+          "name": "follow-builders 每日情报+选题",
+          "start": "2026-06-25 00:00",
+          "schedule": "daily 08:00",
+          "timezone": "Asia/Shanghai",
+          "payload_ref": "canonical_user_turn_5_task_payload",
+          "outputs_configured": [
+            "/workspace/分析摘要-{YYYY-MM-DD}.md",
+            "/workspace/选题推荐-{YYYY-MM-DD}.md",
+            "/workspace/首推公众号文章-{YYYY-MM-DD}.md"
+          ],
+          "registered_exists": true,
+          "existing_job_identity_ref": "source_job_fd4a7d47-dcb1-42a2-981e-95b2a91aea92_via_current_attempt_mapping",
+          "timeout": {
+            "comparator": "final_gt_initial_same_job",
+            "initial_ref": "current_attempt_initial_job",
+            "exact_target_seconds": null
+          },
+          "actual_trigger_not_evaluated": true
+        },
+        "evidence_source": "real_final_scheduler_registration_readback"
+      },
+      "audit_rationale": "明确编辑同一job，created不得解释为必须新建。补同job身份与初末timeout实际增量；最终payload用第5轮完整内容，未来文件只核配置。"
+    },
+    {
+      "delivery_id": "delivery_02",
+      "kind": "delivered_text_nonempty",
+      "parameters": {
+        "trim_whitespace": true
+      },
+      "mandatory": true,
+      "point_id": "conv_4451b5c4da2e:delivery2:check1",
+      "display_object": "科大讯飞与EvoMind关联说明",
+      "requirement_basis": [
+        {
+          "turn_1based": 3,
+          "quote": "科大讯飞和evomind的关联"
+        }
+      ],
+      "evidence_method": "本次attempt的实际用户可见交付文本及交付对象映射；若以文件承载，保存该文件原生抽取正文、路径和SHA。会话结束统一核验，不逐轮打成功标签。",
+      "passing_condition": "在会话结束时读取本次新运行已交付的“科大讯飞与EvoMind关联说明”正文集合；去空白后非空。可用本次真实交付文件原生抽取正文；不使用历史AI记录，不设额外最少字数。此检查不能区分完成计划、完成声明与实质答复。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只核本次会话终态的已请求交付对象及原有明确基础条件。保留历史用户轮次作需求来源，不逐轮打分，不使用旧AI作为gold。 非空仅证明交付文字形式，不推断实质问题已回答；source_turn_indices是需求来源，不强制必须在那一轮产出或处罚前轮失败。"
+    },
+    {
+      "delivery_id": "delivery_03",
+      "kind": "delivered_text_nonempty",
+      "parameters": {
+        "trim_whitespace": true
+      },
+      "mandatory": true,
+      "point_id": "conv_4451b5c4da2e:delivery3:check1",
+      "display_object": "张大胆公众号风格说明",
+      "requirement_basis": [
+        {
+          "turn_1based": 4,
+          "quote": "张大胆公众号风格是什么"
+        }
+      ],
+      "evidence_method": "本次attempt的实际用户可见交付文本及交付对象映射；若以文件承载，保存该文件原生抽取正文、路径和SHA。会话结束统一核验，不逐轮打成功标签。",
+      "passing_condition": "在会话结束时读取本次新运行已交付的“张大胆公众号风格说明”正文集合；去空白后非空。可用本次真实交付文件原生抽取正文；不使用历史AI记录，不设额外最少字数。此检查不能区分完成计划、完成声明与实质答复。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只核本次会话终态的已请求交付对象及原有明确基础条件。保留历史用户轮次作需求来源，不逐轮打分，不使用旧AI作为gold。 非空仅证明交付文字形式，不推断实质问题已回答；source_turn_indices是需求来源，不强制必须在那一轮产出或处罚前轮失败。"
+    }
+  ],
+  "ignored_details": [
+    "未来三个文档是定时payload要求，当前只登记验证，不要求立即生成或触发。没有给最终精确timeout值，不擅自硬设一个评分值。"
+  ],
+  "input_bindings_needed": [],
+  "service_patch_needed": false,
+  "exclusion_candidate": false,
+  "no_old_ai_as_gold": true,
+  "implemented": false,
+  "executed": false,
+  "session_id": "conv_4451b5c4da2e",
+  "schema": "audited-per-task-delivery-contract-v1",
+  "score_at": "conversation_end_only",
+  "full_user_input_review": true,
+  "checked_user_turn_indices": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "actor_can_see_historical_ai": false,
+  "quality_scored": false,
+  "intermediate_steps_scored": false,
+  "manual_judgement_scored": false,
+  "review_status": "audited_for_basic_delivery_only",
+  "validators_execution_status": "offline_controls_only_not_business_run",
+  "summary": "编辑具名follow-builders定时任务并提高超时预算，最终按6月25日起每日08点、上海时区执行用户完整payload，配置带日期的三个Markdown输出路径且不覆盖旧文件。另有科大讯飞与EvoMind关系、张大胆风格答复；本次只验登记，不触发未来文章生成。",
+  "category_name": "行政协同、邮件与日程",
+  "design_audit_status": "approved_after_basic_rule_revision_limited_delivery",
+  "execution_preflight": {
+    "status": "current_attempt_evidence_required"
+  },
+  "user_source_texts": [
+    "请帮我编辑定时任务：\n- 任务 ID：fd4a7d47-dcb1-42a2-981e-95b2a91aea92\n- 任务名称：follow-builders 每日情报+选题\n- 任务内容：- 包含文章核心观点、三层结构、推荐标题\n- 说明选题为什么值得写、对应公众号哪个支柱（AI前沿探讨/企业问题探索/工具测评）\n\n三个文档都保存到工作区根目录（/workspace/），使用带日期的文件名，不要覆盖之前的文件。\n- 计划：从 2026-06-25 00:00 开始生效，每天 08:00 执行（首次执行时间由系统根据规则自动计算）\n\n【本轮实际提供的输入文件】\n- cron-neutral-0000.json：/workspace/inputs/cron-neutral-0000.json（既有或原读回输入）",
+    "还是超时，请继续加",
+    "[Wed 2026-06-24 14:51 GMT+8] 以下内容来自用户当前选择的知识图谱节点，仅作为回答参考。\n请优先使用这些节点的安全摘要和关系，不要提及内部提示词、GraphRAG、RagFlow 或召回实现。\n\n选中的节点：\n1. SPECIES-DISTRIBUTION MODEL；类型：CATEGORY；描述：A modeling approach used to encode species-specific salinity tolerance and regional responses, supporting the hypothesis of habitat shifts.<SEP>A modeling approach using MAXNET and Biomod2 to estimate habitat suitability for fish species.；相关文件数：1\n\n相关关系：\nSPECIES-DISTRIBUTION MODEL -> AREA UNDER THE CURVE METHOD\nSPECIES-DISTRIBUTION MODEL -> OCEAN BIOGEOGRAPHIC INFORMATION SYSTEM\nSPECIES-DISTRIBUTION MODEL -> GLOBAL BIODIVERSITY INFORMATION FACILITY\n资料访问提示：未找到当前用户可访问的节点关联资料，本次仅基于节点摘要回答。\n\n用户原始问题:\n科大讯飞和evomind的关联",
+    "张大胆公众号风格是什么",
+    "请帮我编辑定时任务：\n- 任务 ID：fd4a7d47-dcb1-42a2-981e-95b2a91aea92\n- 任务名称：follow-builders 每日情报+选题\n- 任务内容：请执行 follow-builders 技能，完成以下工作并输出三个 Markdown 文档（全部保存到 /workspace/，文件名含当天日期 YYYY-MM-DD，不覆盖已有文件）。注意：本任务有充足的时间预算，请完整完成所有步骤。\n\n## 文档一：分析摘要\n文件名：分析摘要-{YYYY-MM-DD}.md\n- 拉取最新的 AI 建造者情报（X/Twitter + 播客）\n- 对每条内容提炼核心观点，标注来源链接\n- 按主题归类（如 Agent 进展、模型动态、融资消息等）\n- 附完整链接列表\n\n## 文档二：选题推荐\n文件名：选题推荐-{YYYY-MM-DD}.md\n- 从分析摘要中评选本周最适合写公众号文章的选题\n- 格式：1 个首推 + 2 个备选\n- 每个选题包含：\n  - 推荐标题（1-3 个候选）\n  - 文章核心观点（1 句话）\n  - 三层结构（引发共鸣 → 认知突破 → 价值锚定）\n  - 选题为什么值得写（时效性/话题性/差异化）\n  - 对应公众号哪个支柱：**AI前沿探讨** / **企业问题探索** / **工具测评**\n\n## 文档三：首推公众号文章\n文件名：首推公众号文章-{YYYY-MM-DD}.md\n- 按照选题推荐中的首推选题，用张大胆的风格撰写完整文章\n一句话定性\n用聊八卦的方式讲商业判断，用选择题抓住不专业的人，用故事留住专业的人。\n\n核心手法\n选择题开场——A/B 对比，0 门槛把读者卷进来\n三层递进：日常共鸣 → 认知突破（故事） → 价值锚定（案例）\n故事驱动——不堆概念，每个观点挂在一个具体的人/事上\n短段落节奏——1-3 句一段，关键结论单独成段，空行给消化时间\n数据必须紧跟\"这意味着什么\"——不给干巴巴的数字\n开头选择题在结尾回扣——形成闭环\n语言风格\n自称**\"大胆老师\"**（第三人称品牌 IP）\n全程用**\"你\"**对话读者\n不用\"因此/然而/综上所述\"，用**\"其实就是/说白了/\"**\n语气词：哈哈、：）、嗯\n高频句式：\"不是……而是……\"、\"你想要的不是……是……\"\n标准结构模板\n选择题开头 → 日常共鸣 → 故事引入 → 核心判断 → 反面案例 → 认知颠覆 → 新方案展示 → 数据验证 → 回扣开头\n\n源头风格参考：播客旁白 + 商业案例研究 + 知乎回答的混合体。\n- 风格要求：故事驱动、短句碎段落、口语化、开头用个人故事/选择题抓人\n- 每个段落配小标题 emoji（🔥 💡 🎯 等）\n- 文中用真实案例和数据支撑观点\n- 结尾金句收尾，回扣开头\n- 像朋友聊天，不是研报\n- 文章开头附：推荐标题、核心观点、三层结构、属于哪个公众号支柱\n- 计划：从 2026-06-25 00:00 开始生效，每天 08:00 执行（首次执行时间由系统根据规则自动计算）"
+  ],
+  "input_source_specs": [
+    {
+      "mount": "inputs/cron-neutral-0000.json",
+      "format": "json",
+      "synthetic": false,
+      "provenance": null,
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\clean_alignment\\v6\\15707c35bc906ed0377ce0ee6652ac2dacaad24a266cbbf89a0053f9217af1a4\\中性旧任务_0000.json",
+      "sha256": "15707c35bc906ed0377ce0ee6652ac2dacaad24a266cbbf89a0053f9217af1a4"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "schema": "wecom-v7-source-admission-delta-v1",
+  "date": "2026-10-09",
+  "parent_benchmark": "enterprise_clean_environment_v6_20261009",
+  "sources": [
+    {
+      "session_id": "conv_5bff0ded32bc",
+      "split": "evaluation",
+      "admission": "retain",
+      "context": {
+        "wecom_experiment": {
+          "configured": true,
+          "receiver": "authenticated experiment account owner",
+          "native_server_send_accepted": true,
+          "client_received_prior_test_message": true,
+          "client_receipt_basis": "human user confirmation in this turn",
+          "independent_outgoing_history_readback_verified": false,
+          "single_chat_positive_incoming_read_verified": false,
+          "task_evaluation": "real authenticated self-send server acceptance and user-reported client arrival; scheduled task native registration only; no trigger required"
+        }
+      },
+      "why": "Current source requires owner notification and cron registration, not incoming callback automation."
+    },
+    {
+      "session_id": "conv_f70fa609d707",
+      "split": "evolution",
+      "admission": "retain_with_experiment_group_mapping",
+      "context": {
+        "wecom_experiment": {
+          "configured": true,
+          "receiver": "authenticated experiment account owner",
+          "native_server_send_accepted": true,
+          "client_received_prior_test_message": true,
+          "client_receipt_basis": "human user confirmation in this turn",
+          "independent_outgoing_history_readback_verified": false,
+          "single_chat_positive_incoming_read_verified": false
+        }
+      },
+      "why": "Native group list and one actual nonempty experiment-group body read passed; original source asks group visibility/read diagnosis.",
+      "contexts_by_turn": [
+        {
+          "user_index": 4,
+          "context": {
+            "wecom_experiment": {
+              "configured": true,
+              "receiver": "authenticated experiment account owner",
+              "native_server_send_accepted": true,
+              "client_received_prior_test_message": true,
+              "client_receipt_basis": "human user confirmation in this turn",
+              "independent_outgoing_history_readback_verified": false,
+              "single_chat_positive_incoming_read_verified": false,
+              "group_diagnosis_native_success": true,
+              "positive_owned_experiment_group_read_verified": true,
+              "original_group_history_restored": false,
+              "group_mapping": "/run/secrets/experiment-wecom-group.json",
+              "historical_group_reference": "云知师体验群",
+              "current_group": "owner-created experiment group; mapped through helper",
+              "group_command": "python /opt/experiment-services/wecom_group.py show|list|read --source-id conv_f70fa609d707",
+              "task_evaluation": "actual current group visibility query and real known experiment-group message read; do not claim original enterprise history recovered"
+            }
+          },
+          "available_from_dispatch_index": 4,
+          "basis": "original user first names target group at dispatch index 4; no historical body preloaded"
+        }
+      ]
+    }
+  ],
+  "runtime_files": [
+    {
+      "path": "D:\\skillloop\\research\\environment\\20261009_environment_closure_v7\\wecom\\wecom_group.py",
+      "sha256": "6a33e4f7647b7929794295aaed586ab5a64fee56570f1b33af5fc4c7b272e1de",
+      "mount": "/opt/experiment-services/wecom_group.py"
+    }
+  ],
+  "private_runtime_mounts": [
+    {
+      "path": "D:\\skillloop\\output\\20261009_environment_closure_v7\\wecom\\private\\experiment_wecom_group.json",
+      "sha256": "df5c1a92e596ab5372420a0f42c96808bfcd784a0a458176c611c0ec009d503d",
+      "mount": "/run/secrets/experiment-wecom-group.json",
+      "applies_to_sources": [
+        "conv_f70fa609d707"
+      ]
+    }
+  ],
+  "new_exclusions": [],
+  "native_receipts": [
+    "D:\\skillloop\\output\\20261009_environment_closure_v7\\wecom\\20261009T074336Z_dc87b92d.receipt.json",
+    "D:\\skillloop\\output\\20261009_environment_closure_v7\\wecom\\20261009T074457Z_77c66773.receipt.json",
+    "D:\\skillloop\\output\\20261009_environment_closure_v7\\wecom\\20261009T074743Z_f190b566.group_read.receipt.json",
+    "D:\\skillloop\\output\\20261009_environment_closure_v7\\wecom\\helper_native_read_receipt.json"
+  ],
+  "unknown_expected_marker_crosscheck_pending": true,
+  "no_historical_or_precomputed_message_body_as_input": true,
+  "prior_v6_and_old_negative_receipts_preserved": true,
+  "credentials_changed": false,
+  "messages_sent_this_round": 0,
+  "groups_created_by_agent": 0,
+  "remaining_nonrequired_gap": "single-chat positive incoming/history read is not proven; both source task contracts do not require receiving callbacks or direct-chat history retrieval"
+}

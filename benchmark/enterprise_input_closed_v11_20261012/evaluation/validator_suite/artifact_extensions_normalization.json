@@ -1,0 +1,120 @@
+{
+  "schema": "artifact-extensions-normalization-v1",
+  "module": "_artifact_extensions.py",
+  "registration": "register_extensions(base)",
+  "scope": "Mechanical terminal evidence only; source code is never executed, PDF OCR is never started, semantic/visual quality is not inferred.",
+  "required_runtime_guards": [
+    "Context must verify source_session_id, conversation completion, schema and current workspace.",
+    "Context.files must reject unchanged inputs/initial products by the full initial/input hash value sets, including renamed byte-identical copies. Explicit retrieval/unchanged archive-member exceptions are owned by the runtime.",
+    "Manifest snapshots and memory request bindings must be collected by the runtime, not accepted as an assistant self-certification.",
+    "Observation kinds must be mandatory=false and never enter success AND. An unresolved required installation stays mandatory/unknown separately."
+  ],
+  "initial_snapshot": {
+    "schema": "final-state-evidence-v1",
+    "initial_sha256": "Object mapping workspace-relative POSIX paths to hashes, collected before this attempt.",
+    "declared_input_sha256": "Object mapping actual mounted input paths to hashes; includes later turn inputs.",
+    "measurement.initial_snapshot_complete": "Optional. Explicit false is rejected; no new complete=true flag is required from the legacy collector.",
+    "source_binding": "Source reads require their actual hash to match both the frozen expected hash and a matching path in declared_input_sha256 or initial_sha256."
+  },
+  "normalization_rules": [
+    {
+      "kind": "code_artifact_present",
+      "parameters": {
+        "accepted_forms": ["source_file", "archive_with_source", "delivered_fenced_source"],
+        "require_nonempty_code_payload": true,
+        "resolve_from_current_attempt_delivery_declaration": true,
+        "reject_plan_only": true,
+        "reject_reused_input_documents": true
+      },
+      "evidence": "Normal delivery files/text bindings. Explicit language code fences or supported source extensions; ZIP members are read, never extracted or run.",
+      "limit": "Nonempty source is not proof of functioning code, PRD coverage or absence of placeholders. Missing text encoding/measurement can be unknown."
+    },
+    {
+      "kind": "pdf_added_literal_text_presence",
+      "replace_audit_parameters": "Replace literals/scope/mapping/on_unextractable_watermark/reject_same_input_bytes_as_modified_output with source_requirements and text_normalization below. Do not merely delete conditions: resolve first/last PDF against actual attachments by input SHA+path+turn.",
+      "parameters": {
+        "source_requirements": [
+          {"input_path": "inputs/example.pdf", "input_sha256": "FROZEN_INPUT_SHA256", "input_user_turn": 1, "literals": ["EvoMind"]}
+        ],
+        "text_normalization": "NFKC_whitespace"
+      },
+      "evidence.deliveries.DELIVERY_ID.manifests.pdf_source_outputs": {
+        "items": [
+          {"input_path": "inputs/example.pdf", "input_sha256": "FROZEN_INPUT_SHA256", "input_user_turn": 1, "output_path": "outputs/marked.pdf"}
+        ]
+      },
+      "turn_index_base": 1,
+      "ab3863a19fb2_note": "resource_id is reused for 960x540 and 1440x810; never use it alone. First PDF has EvoMind, last 1440x810 PDF has 金桥吴彦祖. The second PDF has no newly specified watermark literal and must not receive an invented literal requirement.",
+      "failure": "Reliable native text counts do not increase for a required literal.",
+      "unknown": "Missing/ambiguous source-output mapping, unmatched source SHA, source not bound to this attempt, or output with no extractable native text. No raster OCR or visual watermark inference."
+    },
+    {
+      "kind": "spreadsheet_image_dimensions_and_anchors",
+      "parameters": {
+        "all_photo_objects_same_display_width_and_height": true,
+        "equality": "exact_normalized_OOXML_display_units",
+        "require_valid_cell_anchor": true,
+        "native_cell_image_relationships_accepted": true,
+        "photo_count_from": "source_photo_manifest",
+        "preserve_original_photo_count": true
+      },
+      "evidence.deliveries.DELIVERY_ID.manifests.source_photos": {
+        "source_path": "inputs/photos.xlsx", "source_sha256": "FROZEN_INPUT_SHA256", "source_photo_count": 2
+      },
+      "source_photo_count": "Derive from the real source package's active workbook→worksheet→drawing→image relationships, not a invented user count. The handler independently re-reads and checks this count.",
+      "comparison": "Final linked image object count must be at least the source count. oneCellAnchor's explicit outer xdr:ext in EMU must be identical; no invented pixel tolerance. Anchors must point to valid worksheet cells. Orphan drawing/media parts do not count. Internal picture a:xfrm/a:ext is never substituted for the displayed outer extent.",
+      "unknown": "Missing source count/SHA, missing explicit display extents, twoCellAnchor geometry requiring marker/worksheet metric measurement, or native in-cell image geometry not yet observable. Those unresolved geometries return unknown, not failed or passed. No external rendering/measurement claim is accepted by this handler yet.",
+      "limit": "No assertion about photo/person identity or subjective alignment."
+    },
+    {
+      "kind": "literal_fields_presence",
+      "parameters": {
+        "scope": "generated_skill_and_examples", "literals": ["100kΩ", "10μF"],
+        "numeric_fields": ["5000", "500"], "unicode_normalization": "NFKC",
+        "number_match": "token_after_grouping_separator_normalization"
+      },
+      "scope_values": ["current_attempt_delivery", "generated_skill_and_examples", "generated_skill_and_references", "final_feedback_report"],
+      "optional_observation_parameters": {"trigger_examples": ["我在读一本书"], "trigger_examples_mode": "report_only"},
+      "optional_section_scope": "second_chapter_if_machine_identifiable_else_full_report",
+      "numeric_behavior": "Normalize NFKC and valid comma thousands groups, match complete numeric tokens using Decimal equality. 500 does not match 5000 or ID500; 500.0 can match 500. Field association and semantic correctness are not inferred.",
+      "skills": "Directory binding required for generated_skill scopes; input file bytes are excluded from the textual evidence."
+    },
+    {
+      "kind": "delivered_table_present",
+      "parameters": {"accepted_forms": ["markdown_table", "html_table", "docx_table", "xlsx_table", "plain_text_matrix"], "minimum_table_count": 1, "require_nonempty_table_body": true},
+      "plain_text_matrix": "Tab-delimited matrix with a nonempty body row; arbitrary whitespace prose is not guessed as a table.",
+      "limit": "Only nonempty parseable structure. No proof that a detected table is a DCF sensitivity table or that its values are correct. Header-only Markdown/HTML and empty containers fail; rows explicitly inside HTML thead are headers even when they use td."
+    },
+    {
+      "kind": "persisted_memory_present",
+      "parameters": {"readable_nonempty_record": true, "new_or_changed_since_attempt_start": true, "request_user_turns": [5], "storage_scope": "current_attempt_memory_state", "separate_export_required": false, "exact_historical_ai_wording_required": false},
+      "evidence.memory_request_bindings": {"DELIVERY_ID": [5]},
+      "evidence.deliveries.DELIVERY_ID": {"files": ["memory/preferences.md"]},
+      "turn_index_base": 1,
+      "supported_legacy_parameters": ["readable_nonempty_record", "nonempty_persisted_record", "current_source_record", "separate_export_required"],
+      "unsupported_state_parameters": "Generic state_check keys such as root, absent, include_notebooks are not registered for this memory-only handler. Do not silently retain unused keys.",
+      "comparison": "Actual readable records are compared with the entire initial_sha256 value set from the same attempt. At least one must contain new bytes; old nonempty USER.md or an unchanged renamed copy does not qualify.",
+      "unknown": "Missing initial snapshot, explicitly incomplete measurement, unbound request turns, or unreadable encoding. No historical AI sentence is required."
+    },
+    {
+      "kind": "manifest_corresponding_artifacts",
+      "prompt_parameters": {"count_from": "current_attempt_prompt_page_manifest", "manifest_source": "delivered_prompt_text", "freeze_manifest_before_image_phase": true, "require_one_readable_final_image_per_page": true, "reject_terminal_self_declared_subsets": true},
+      "evidence.deliveries.IMAGE_DELIVERY_ID.manifests.pages": {"source_delivery_id": "PROMPT_DELIVERY_ID", "source_body_sha256": "ACTUAL_DELIVERED_PROMPT_TEXT_UTF8_SHA256", "items": [{"id": "page1", "path": "outputs/page1.png"}]},
+      "evidence.manifest_snapshots": {"IMAGE_DELIVERY_ID": {"pages": {"observation": "before_image_dispatch", "source_body_sha256": "ACTUAL_DELIVERED_PROMPT_TEXT_UTF8_SHA256", "required_item_ids": ["page1"]}}},
+      "user_storyboard_parameters": {"count_from": "user_explicit_storyboard_items", "manifest_source": "user_explicit_storyboard_items", "required_item_ids": ["clip1:shot1", "clip1:shot2"], "deduplicate_repeated_storyboard": true, "reject_agent_selected_subset": true},
+      "compiler_obligations": [
+        "Compile required_item_ids from actual original user text, deduplicate repeated storyboard requests, and keep the compiled origin in the frozen contract.",
+        "Move source_user_turns and ignore_unwritten_declared_extra_shot into audited compiler provenance after executing those compilation decisions; they are deliberately NOT registered as runtime predicates.",
+        "Replace current_attempt_adopted_storyboard_manifest with user_explicit_storyboard_items plus compiled IDs. Agent-selected subsets are not allowed.",
+        "For a196 Clip 1, the text declares three shots but actually writes two. Do not invent the unwritten third shot; record that discrepancy separately."
+      ],
+      "runtime_behavior": "Required IDs must be covered by distinct actual decoded images declared for this terminal delivery. Missing source hash/snapshot/ID mapping is unknown; known missing required items is failure. Images are not semantically compared."
+    }
+  ],
+  "observation_kinds": {
+    "selected_skill_identity_report_only": "Reports the resolved actual directory or unknown. Does not replace a required skill_final_state installation point and does not claim installation success. Returns scorable=false/applicable=false, and the compiler must mark mandatory=false.",
+    "download_scope_report_only": "Requires a preflight_frozen download_scope manifest with source_url, required_urls and url→path items; reports coverage/missing URLs only. Missing scope is unknown, not a complete-download pass. Returns scorable=false/applicable=false, and the compiler must mark mandatory=false."
+  },
+  "policy_parameters": {"score_at": "Only conversation_end_only is accepted.", "historical_ai_is_gold": "Only false is accepted; these parameters are validated when present."},
+  "test_evidence": {"red": "verification/artifact_red.txt", "boundary_red": "verification/artifact_boundary_red.txt", "green": "verification/artifact_green.txt", "passing_controls": 40, "fixtures_are_business_runs": false}
+}

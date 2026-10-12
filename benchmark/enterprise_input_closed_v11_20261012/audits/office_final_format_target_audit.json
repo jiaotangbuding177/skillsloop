@@ -1,0 +1,4266 @@
+{
+  "schema": "office_final_format_target_readonly_audit_v1",
+  "source_count": 60,
+  "user_turn_count": 302,
+  "categories": {
+    "OFFICE": 44,
+    "DATA": 7,
+    "COMM": 9
+  },
+  "review_basis": "此前完整302轮逐读分析加本轮格式/数量针对性原用户全文复读；语义更正由人工分析提出，元数据/pins由只读代码收集。",
+  "policy": "不使用原AI页数、文件名、输出格式增加目标；所有建议交由根集成独立新版本，冻结资源和规格不变。",
+  "source_pins": [
+    {
+      "path": "output/20261010_final_delivery_revision/final_office_data_comm.json",
+      "sha256": "aa6863fa9c5964e94436e5dcc9cbcd48669c168f2b1bd58ddbc3b014b47eec34",
+      "expected_sha256": "aa6863fa9c5964e94436e5dcc9cbcd48669c168f2b1bd58ddbc3b014b47eec34",
+      "matches_expected": true
+    },
+    {
+      "path": "benchmark/enterprise_environment_admitted_v7_20261009/有效轨迹.jsonl",
+      "sha256": "656a627ee2be5a5bfef0b9beed5b8b2bf866d249cfda671ceea9b710dfe0b3de",
+      "expected_sha256": "656a627ee2be5a5bfef0b9beed5b8b2bf866d249cfda671ceea9b710dfe0b3de",
+      "matches_expected": true
+    },
+    {
+      "path": "output/20261010_final_delivery_revision/office_resource_candidates.json",
+      "sha256": "ceeae554798a54fd769da9db1807a2116357071e80db10898364f1dd4d513c8a",
+      "expected_sha256": "ceeae554798a54fd769da9db1807a2116357071e80db10898364f1dd4d513c8a",
+      "matches_expected": true
+    },
+    {
+      "path": "benchmark/enterprise_environment_admitted_v7_20261009/contracts/evaluation.jsonl",
+      "sha256": "98960e407e9fc056bafd83f2dfba8c9ce03aacf7927e48892e68cd889648c755",
+      "expected_sha256": null,
+      "matches_expected": null
+    }
+  ],
+  "required_corrections": [
+    {
+      "sid": "conv_15221652e821",
+      "turn_indices": [
+        0
+      ],
+      "frozen_delivery_id": "conv_15221652e821:final:0",
+      "issue": "误将输入Word变为必须输出DOCX。",
+      "user_requirement": "Word里的内容以表格形式输出。",
+      "proposed_change": "文字表格或可打开的文件表格均可，只核非空及表格结构，不固定DOCX。",
+      "origin": "表格目标explicit，交付格式选择proposed",
+      "extra_action_not_added": "发给老板的是用途，不新增实际邮件发送动作。"
+    },
+    {
+      "sid": "conv_fcee61c6481d",
+      "turn_indices": [
+        7
+      ],
+      "frozen_delivery_id": "conv_fcee61c6481d:final:12",
+      "issue": "记忆保存被强制新text文件及下载链接。",
+      "user_requirement": "查看并记一下这些公司。",
+      "proposed_change": "终态可解析且非空memory/state记录或文本文件任一，不要求单独新文件或下载链接。",
+      "origin": "保存目标explicit，存储表示proposed"
+    },
+    {
+      "sid": "conv_ab3863a19fb2",
+      "turn_indices": [
+        1,
+        6,
+        9
+      ],
+      "frozen_delivery_id": "conv_ab3863a19fb2:final:1",
+      "issue": "更新已有skill被通用文件交付检查要求额外导出链接。",
+      "user_requirement": "更新这个skill/更新到skill中。",
+      "proposed_change": "只核最终技能目录/SKILL.md存在、非空且可解析；不强制ZIP、下载链接或原AI文件名。",
+      "origin": "技能更新目标explicit，终态入口表示proposed"
+    }
+  ],
+  "excluded_source_clarifications": [
+    {
+      "sid": "conv_079666ce3ba0",
+      "turn_indices": [
+        0,
+        3,
+        24
+      ],
+      "issue": "长期记忆不应强制下载文件，私密配置应只核本地终态。",
+      "action": "该源真实发布链仍缺，整源排除；原审查保留。"
+    },
+    {
+      "sid": "conv_d1f719a47afb",
+      "turn_indices": [
+        0,
+        1
+      ],
+      "issue": "当前仍有实际GET需求。",
+      "action": "继续按既有完整来源排除规则处理，冻结源不改。"
+    }
+  ],
+  "user_grounded_additions": [
+    {
+      "sid": "conv_f0d878d4053a",
+      "turn_indices": [
+        1
+      ],
+      "recommendation": "恰1页PPTX且至少1个嵌入图片；不判断视觉/图片内容质量。",
+      "root_status": "已表示会应用"
+    },
+    {
+      "sid": "conv_514f6d8693d2",
+      "turn_indices": [
+        6,
+        22
+      ],
+      "recommendation": "最终PPTX至少10页，第22轮第十页修改仍有效；不固定恰10页。",
+      "root_status": "已表示会应用"
+    },
+    {
+      "sid": "conv_965cf7b2c858",
+      "turn_indices": [
+        1,
+        3,
+        4,
+        6
+      ],
+      "recommendation": "最终逐页图至少4张（前三页＋第四页），拼图1张；仅图数及可打开，不评内容。",
+      "root_status": "独立建议，未激活"
+    },
+    {
+      "sid": "conv_3ae75a94697f",
+      "turn_indices": [
+        0
+      ],
+      "recommendation": "敏感性表结构可程序识别，允许文字或文件表格；不强制Excel或评估值。",
+      "root_status": "独立建议，未激活"
+    }
+  ],
+  "implementation_clarifications": [
+    "分析标签不是固定输出basename；除用户明确给定最终文件名，不强制旧AI名称。",
+    "视角/分页清单是proposed表示，必须引用本次可打开最终文件，不能把自述清单当存在证据。",
+    "所有skill内部终态检查可用最终技能目录入口，无额外导出链接。",
+    "明确一张图片/三张图片/一页PPT/16:9/4K来自原用户；4K到尺寸的映射为proposed表示。"
+  ],
+  "activity": {
+    "actor_runs": 0,
+    "api_calls": 0,
+    "model_calls": 0,
+    "scoring_runs": 0,
+    "frozen_benchmark_modified": false,
+    "frozen_candidates_modified": false,
+    "frozen_specs_modified": false
+  },
+  "per_source": [
+    {
+      "sid": "conv_0066cb5f2347",
+      "category": "OFFICE",
+      "title": "我想要换电脑桌面壁纸，想要用高达，牛，帮",
+      "user_turn_count": 10,
+      "user_turn_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "1ab5e1a90dd64007ca9a3907282a247620fb73e9135327d068799d03821ffdf8",
+          "user_content_chars": 87
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "c60f41a3641ddb52e06703f5c0fd59e693ce97d628ee74744101a36fbea05b5b",
+          "user_content_chars": 41
+        },
+        {
+          "turn_index": 2,
+          "user_content_sha256": "62f4a21542784d85369674195fee4172947e37c36d5a998e1c02b1a4586f1447",
+          "user_content_chars": 63
+        },
+        {
+          "turn_index": 3,
+          "user_content_sha256": "c1db401c32d404e17cfc8d2bb4e619837bc8cf4ffa1b910eee2e6c79a20836b4",
+          "user_content_chars": 50
+        },
+        {
+          "turn_index": 4,
+          "user_content_sha256": "313262fdebc3f730d8757a40e8f0494d4b722656441e846a277ee01c03967925",
+          "user_content_chars": 35
+        },
+        {
+          "turn_index": 5,
+          "user_content_sha256": "94b4d09aad94b468c5441a2d9f2415ce733efd9eb2eea06f8f4ad288a856ce18",
+          "user_content_chars": 45
+        },
+        {
+          "turn_index": 6,
+          "user_content_sha256": "686bf52f7c51055a6862a4c1aa3af4b0243867fc37f7d5a7c17e87843a34b47b",
+          "user_content_chars": 84
+        },
+        {
+          "turn_index": 7,
+          "user_content_sha256": "d560f3e7e813eb9880d41e81d8b9e3bf7b0073220f185d8c651d93d74ba6d584",
+          "user_content_chars": 68
+        },
+        {
+          "turn_index": 8,
+          "user_content_sha256": "02e2cc5a6d729c4a83ac6c4646808d394a592160c416a80161fdb970c0bcc299",
+          "user_content_chars": 94
+        },
+        {
+          "turn_index": 9,
+          "user_content_sha256": "c0a877ab3d4dbb9a46012f266620d5a4a9f77853f9830673fd2aec9755c6cd31",
+          "user_content_chars": 41
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "牛高达壁纸三张最终版",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "check_ids": [
+            "conv_0066cb5f2347:final:0:0",
+            "conv_0066cb5f2347:final:0:1"
+          ]
+        },
+        {
+          "name": "七机体SD电脑壁纸最终版",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            6,
+            7,
+            8,
+            9
+          ],
+          "check_ids": [
+            "conv_0066cb5f2347:final:1:0",
+            "conv_0066cb5f2347:final:1:1"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "原用户明确三张壁纸，另要一张，修订中间稿不重复计数。"
+    },
+    {
+      "sid": "conv_006c1e9f8bf0",
+      "category": "OFFICE",
+      "title": "load-test-image-2026-06-25T17:48:07.328+08:00-5",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "3162b621d2c55628a3974ca1b7d7eed0f4f29bfbd7382b0b6f9c4f3b44efc341",
+          "user_content_chars": 35
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "未来感企业智能工作台图片",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_006c1e9f8bf0:final:0:0",
+            "conv_006c1e9f8bf0:final:0:1",
+            "conv_006c1e9f8bf0:final:0:2"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "原用户明确一张图片及16:9。"
+    },
+    {
+      "sid": "conv_0166bc150833",
+      "category": "OFFICE",
+      "title": "生成一张图片，面向大学生的Rhino软件",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "18cb15d30c045e050cd18cdc9f039cd7967c7317a7db7e018d9f3fc709b1f534",
+          "user_content_chars": 47
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "面向大学生的Rhino宣传图",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_0166bc150833:final:0:0",
+            "conv_0166bc150833:final:0:1"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "原用户明确一张Rhino宣传图。"
+    },
+    {
+      "sid": "conv_0484aa7e032d",
+      "category": "OFFICE",
+      "title": "load-test-image-2026-06-25T17:48:06.718+08:00-2",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "3162b621d2c55628a3974ca1b7d7eed0f4f29bfbd7382b0b6f9c4f3b44efc341",
+          "user_content_chars": 35
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "未来感企业智能工作台图片",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_0484aa7e032d:final:0:0",
+            "conv_0484aa7e032d:final:0:1",
+            "conv_0484aa7e032d:final:0:2"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "原用户明确一张图片及16:9。"
+    },
+    {
+      "sid": "conv_079666ce3ba0",
+      "category": "OFFICE",
+      "title": "帮我看下下面公众号的内容，帮我学习风格，",
+      "user_turn_count": 61,
+      "user_turn_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "0845d0aefde48f8ba5f7e1580fa97e3d2901610ef7ab4cecf6d0cdab7d15b95d",
+          "user_content_chars": 2393
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "8d5923c158259a771f248c48fc4efca116be8d70fc3211bd3dd83f1490efb863",
+          "user_content_chars": 34
+        },
+        {
+          "turn_index": 2,
+          "user_content_sha256": "7a46b6ca47e4e155ceec7fd57b021017fdcb21b2fed856ece7fa4bd47a993b12",
+          "user_content_chars": 20
+        },
+        {
+          "turn_index": 3,
+          "user_content_sha256": "fd60fc977b9a9c61dd8c2ed3003426dc0be29134e032d89656dc7765718de073",
+          "user_content_chars": 43
+        },
+        {
+          "turn_index": 4,
+          "user_content_sha256": "d5a1cc9fb3ce8733858cdd9e7d1b59e571b35a859c8294eee93c1c46178fee3b",
+          "user_content_chars": 122
+        },
+        {
+          "turn_index": 5,
+          "user_content_sha256": "25b5dee2a8619024650688d342f4f54b9d726719dd38b70014baef203d82bfdc",
+          "user_content_chars": 19
+        },
+        {
+          "turn_index": 6,
+          "user_content_sha256": "3f55a20e9387ac793a5e83bbfe460dde304cbaaa62e87f253d7183fdf6467fee",
+          "user_content_chars": 165
+        },
+        {
+          "turn_index": 7,
+          "user_content_sha256": "c3172de082af24acbc3c761e1a849eaed0bb7044644d267ddcf7d625d4cada2d",
+          "user_content_chars": 70
+        },
+        {
+          "turn_index": 8,
+          "user_content_sha256": "68028c434ea7856e287ebd16013bd85f551a11eca3274c9c72f548040e5b4fcc",
+          "user_content_chars": 34
+        },
+        {
+          "turn_index": 9,
+          "user_content_sha256": "e742799be4013d7669346dccfeee05e64ef36ea34c16f9f3abc968e7c2d3a39a",
+          "user_content_chars": 16
+        },
+        {
+          "turn_index": 10,
+          "user_content_sha256": "3f55a20e9387ac793a5e83bbfe460dde304cbaaa62e87f253d7183fdf6467fee",
+          "user_content_chars": 165
+        },
+        {
+          "turn_index": 11,
+          "user_content_sha256": "f7252b76089b2b20738d32da4bc826470e2923883343a51fef238450b289ce5e",
+          "user_content_chars": 202
+        },
+        {
+          "turn_index": 12,
+          "user_content_sha256": "68028c434ea7856e287ebd16013bd85f551a11eca3274c9c72f548040e5b4fcc",
+          "user_content_chars": 34
+        },
+        {
+          "turn_index": 13,
+          "user_content_sha256": "aeeac6083c3bd5a61056b325fe4ec573b763a96f539703231ac895457bce0dbd",
+          "user_content_chars": 1639
+        },
+        {
+          "turn_index": 14,
+          "user_content_sha256": "c7bb3bd9322c71735ae2f62ce45f5f31e6c308397389dcb2e6fe6fc578843a99",
+          "user_content_chars": 49
+        },
+        {
+          "turn_index": 15,
+          "user_content_sha256": "c5082f4045a9cdcdfea2b7ec7fa2298b43d4c60412c81e853b0864207e5a5b93",
+          "user_content_chars": 28
+        },
+        {
+          "turn_index": 16,
+          "user_content_sha256": "398ab03e8397932f5eb27b3fdf4f47712ace22a6c8f4c251e38d303b427ca4ee",
+          "user_content_chars": 18
+        },
+        {
+          "turn_index": 17,
+          "user_content_sha256": "7131aaeb3ec30221e411dd876b3241bf665b6ee060dcd0e666db6d53cc710f55",
+          "user_content_chars": 12
+        },
+        {
+          "turn_index": 18,
+          "user_content_sha256": "f42797c0dbf538afdea032d428f5f238b5bf78334e32c1b87292f2d605b0273f",
+          "user_content_chars": 69
+        },
+        {
+          "turn_index": 19,
+          "user_content_sha256": "f6c9bd4215e7571d7eddaf88feefd7d7f07a315ba09a00150d838bc69bac379c",
+          "user_content_chars": 66
+        },
+        {
+          "turn_index": 20,
+          "user_content_sha256": "54fa8644260c9bb2222dd6f2e7ae5abb996ba68570fc4a0c9ded9302b6626f36",
+          "user_content_chars": 64
+        },
+        {
+          "turn_index": 21,
+          "user_content_sha256": "9ef31547f494f5da5462310746db39f8c0dc5c29f530d1c3970e9bce4508222d",
+          "user_content_chars": 231
+        },
+        {
+          "turn_index": 22,
+          "user_content_sha256": "c32f702abe81a10094b3fb4b1a1b9f0edfa0d44551c498c10ea9109a20169b72",
+          "user_content_chars": 90
+        },
+        {
+          "turn_index": 23,
+          "user_content_sha256": "9cba7d115f73b070ad29e3af574ec7dfd1a8b4cb8896754f08bf8c27c2a98d18",
+          "user_content_chars": 662
+        },
+        {
+          "turn_index": 24,
+          "user_content_sha256": "0c5fa5e9134921a9a29ef6a42c35d25d76ce75120af42c05fa5ad4886641b772",
+          "user_content_chars": 46
+        },
+        {
+          "turn_index": 25,
+          "user_content_sha256": "001f79e39a4e87b8616ebf67da2ed981fb6696ab00a26488ffd51a9f4a263077",
+          "user_content_chars": 60
+        },
+        {
+          "turn_index": 26,
+          "user_content_sha256": "61c320bd44251233de23e4248cea0b5ac5d2a4d0f52b6dfb080909f6016d7531",
+          "user_content_chars": 53
+        },
+        {
+          "turn_index": 27,
+          "user_content_sha256": "a8332d19b161a7656f7e6b1c08fcb567a79358c377d797da63b2b492a38acd99",
+          "user_content_chars": 12
+        },
+        {
+          "turn_index": 28,
+          "user_content_sha256": "a47493dabd38b79ec72917a89ed66e20d0413228d05b7106f8445bd30acc11b9",
+          "user_content_chars": 10
+        },
+        {
+          "turn_index": 29,
+          "user_content_sha256": "b2516129881bc74b0fe18a43b6302fb6676b62843623016ff3646e2dac865704",
+          "user_content_chars": 21
+        },
+        {
+          "turn_index": 30,
+          "user_content_sha256": "fdfe4f2193ae6882b28122dc1fe28443acb4213b07e4b8a54280223df9ee74fe",
+          "user_content_chars": 34
+        },
+        {
+          "turn_index": 31,
+          "user_content_sha256": "2df0470d3ee1b15b020be588f0107312f7b91aaf031afe1a304fbeede3856f74",
+          "user_content_chars": 21
+        },
+        {
+          "turn_index": 32,
+          "user_content_sha256": "5dcfe4bb72d5e30646ac833ba611f80a97b89e64aeb670087f9b0aca427f9dbb",
+          "user_content_chars": 63
+        },
+        {
+          "turn_index": 33,
+          "user_content_sha256": "27224f6097c55c61d669fc8bf61dc7145d707d6c4ede5e87c081e011e2cd5ea6",
+          "user_content_chars": 82
+        },
+        {
+          "turn_index": 34,
+          "user_content_sha256": "c4a7a9667b86cbd052f9cb8bda8a672ffb4a226a29e98c149e06b44edc131602",
+          "user_content_chars": 35
+        },
+        {
+          "turn_index": 35,
+          "user_content_sha256": "d7bf30473322c9f602bd9d8fafea98e94b9be8f24ee5046fe5ca0c10f6b23d64",
+          "user_content_chars": 16
+        },
+        {
+          "turn_index": 36,
+          "user_content_sha256": "bffd6ded64c72511ea6955841cd6b6c6d89c8b6ffa02dd51920708ba01627e89",
+          "user_content_chars": 43
+        },
+        {
+          "turn_index": 37,
+          "user_content_sha256": "108e2ead87ecda42690525c894c321dbf506137868e2bf89696ac19f2ac040d3",
+          "user_content_chars": 13
+        },
+        {
+          "turn_index": 38,
+          "user_content_sha256": "9c076d4cda7e789de94511fe7282470d05a044422ab1dacd773da04cdd47d5dc",
+          "user_content_chars": 35
+        },
+        {
+          "turn_index": 39,
+          "user_content_sha256": "32eea0f6745828565dde76ffea6e6acb021392d7e8e193df9294c3ffcddfb283",
+          "user_content_chars": 63
+        },
+        {
+          "turn_index": 40,
+          "user_content_sha256": "a777c5379360b0c4d627808db6305aadb375cae491d18f1936e90946e813339a",
+          "user_content_chars": 194
+        },
+        {
+          "turn_index": 41,
+          "user_content_sha256": "8d993657d8b5b558cc165832111cbff4fc1321e694448dadef8c23133d9c9aaf",
+          "user_content_chars": 55
+        },
+        {
+          "turn_index": 42,
+          "user_content_sha256": "463a16274ed3f8544b6b66a6ec9b58bf1ace6544c503be12a60fb9026927e137",
+          "user_content_chars": 42
+        },
+        {
+          "turn_index": 43,
+          "user_content_sha256": "48cf8591f516f5b03901157fc2a23f368bc2e9551776dca4c2f31ec4aaefc2af",
+          "user_content_chars": 45
+        },
+        {
+          "turn_index": 44,
+          "user_content_sha256": "335efa1eb39edafbcc490840fedae34482c62d988a22e442ca3a1f12201938c7",
+          "user_content_chars": 63
+        },
+        {
+          "turn_index": 45,
+          "user_content_sha256": "7905b705a3e9cf5d5392ba4a1ee25200161ad9675c6b86d0da2cca32cd78bf1b",
+          "user_content_chars": 49
+        },
+        {
+          "turn_index": 46,
+          "user_content_sha256": "0819720dd2e2ecf043e7b96630f130f5f5e2a5ba0f75476a6531fcf5cc5e2c7d",
+          "user_content_chars": 48
+        },
+        {
+          "turn_index": 47,
+          "user_content_sha256": "ee38bb79c044444b7dd9b3b0de007fda9f16c07dbb4e092d41103cf6739dcdd7",
+          "user_content_chars": 78
+        },
+        {
+          "turn_index": 48,
+          "user_content_sha256": "5d926329e42a3aba62467492ed9354301d171aec161555569b68ec059c8cd7a1",
+          "user_content_chars": 47
+        },
+        {
+          "turn_index": 49,
+          "user_content_sha256": "b160c8c66707348bef34307c5e8aa1baba11d3ed1e97d1b22147c73b6aa0f3e2",
+          "user_content_chars": 41
+        },
+        {
+          "turn_index": 50,
+          "user_content_sha256": "6f742f9e89f38d1b1bece2c58ed2dd9778f72c69276cc096594d1bdad827f9e8",
+          "user_content_chars": 45
+        },
+        {
+          "turn_index": 51,
+          "user_content_sha256": "3e26304f26e7daea95891fe56cdacfed8ce7dfa1d8e7dfaabe3f6b30c65d9619",
+          "user_content_chars": 231
+        },
+        {
+          "turn_index": 52,
+          "user_content_sha256": "80d12c9868d0430c92c364674e39ca7e33079232ff691ae64c3f6adf0258b503",
+          "user_content_chars": 1668
+        },
+        {
+          "turn_index": 53,
+          "user_content_sha256": "1b984b4ef6d6f755bc874641f778137f5e3a14f14716b6a640804b0f06459203",
+          "user_content_chars": 57
+        },
+        {
+          "turn_index": 54,
+          "user_content_sha256": "4c16a635bde523e147b6e8876ac8292834ba393e2caa2f7835b1b4649d2abd35",
+          "user_content_chars": 41
+        },
+        {
+          "turn_index": 55,
+          "user_content_sha256": "d25bf173744ebb21d055011ad18d59fb439dbe5db538c563b76dcee0ccabe87c",
+          "user_content_chars": 39
+        },
+        {
+          "turn_index": 56,
+          "user_content_sha256": "7386b9a4094a49cde0cabbcf2bde2fb4b662d8374b1b38acd2e06e9de67a8a49",
+          "user_content_chars": 50
+        },
+        {
+          "turn_index": 57,
+          "user_content_sha256": "80253480fd2e6feb93d50a9a9771aea27581d37623ed2e3c82b7a581e97965cc",
+          "user_content_chars": 50
+        },
+        {
+          "turn_index": 58,
+          "user_content_sha256": "7cdec016fffb15071e1fab35a37d420a81fceccef7a4dad4a571d0c43e7c5441",
+          "user_content_chars": 45
+        },
+        {
+          "turn_index": 59,
+          "user_content_sha256": "ca42b887ebc2bd5b7c3b3702c0e2bcaa762c17b50d5018180059670f9e309453",
+          "user_content_chars": 260
+        },
+        {
+          "turn_index": 60,
+          "user_content_sha256": "0f0c05c9e371b01f46a6157a83bd8a4c61c817a25ef1563a9fa7ea9ddf8244d8",
+          "user_content_chars": 42
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "张大胆公众号风格长期记忆",
+          "kind": "file",
+          "format": "text",
+          "turn_indices": [
+            0,
+            3,
+            24
+          ],
+          "check_ids": [
+            "conv_079666ce3ba0:final:0:0"
+          ]
+        },
+        {
+          "name": "公众号凭据的私密配置引用",
+          "kind": "file",
+          "format": "private_config",
+          "turn_indices": [
+            1,
+            41,
+            42,
+            43,
+            44
+          ],
+          "check_ids": [
+            "conv_079666ce3ba0:final:1:0",
+            "conv_079666ce3ba0:final:1:1"
+          ]
+        },
+        {
+          "name": "wechat-ai-publisher安装结果",
+          "kind": "skill",
+          "format": "skill",
+          "turn_indices": [
+            6,
+            10,
+            40
+          ],
+          "check_ids": [
+            "conv_079666ce3ba0:final:2:0"
+          ]
+        },
+        {
+          "name": "纳入公众号风格的投稿skill最终版",
+          "kind": "skill",
+          "format": "skill",
+          "turn_indices": [
+            24
+          ],
+          "check_ids": [
+            "conv_079666ce3ba0:final:3:0"
+          ]
+        },
+        {
+          "name": "明确请求的三篇公众号初始文章最终版",
+          "kind": "file",
+          "format": "md",
+          "turn_indices": [
+            4
+          ],
+          "check_ids": [
+            "conv_079666ce3ba0:final:4:0",
+            "conv_079666ce3ba0:final:4:1"
+          ]
+        },
+        {
+          "name": "follow-builders其他选题清单",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            7,
+            19
+          ],
+          "check_ids": [
+            "conv_079666ce3ba0:final:5:0"
+          ]
+        },
+        {
+          "name": "follow-builders其他选题对应文章与指定三主题文章",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            7,
+            20,
+            22
+          ],
+          "check_ids": [
+            "conv_079666ce3ba0:final:6:0"
+          ]
+        },
+        {
+          "name": "生物学大语言模型文章最终版及对比背景说明",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            23,
+            25,
+            26
+          ],
+          "check_ids": [
+            "conv_079666ce3ba0:final:7:0"
+          ]
+        },
+        {
+          "name": "普通人如何使用AI的Transformer合著者主题文章",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            33
+          ],
+          "check_ids": [
+            "conv_079666ce3ba0:final:8:0"
+          ]
+        },
+        {
+          "name": "新文章名称、标题候选和读者说明",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            28,
+            30,
+            32,
+            55
+          ],
+          "check_ids": [
+            "conv_079666ce3ba0:final:9:0"
+          ]
+        },
+        {
+          "name": "文章来源与微软CEO原文出处说明",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            27,
+            35,
+            54,
+            58
+          ],
+          "check_ids": [
+            "conv_079666ce3ba0:final:10:0"
+          ]
+        },
+        {
+          "name": "Swyx、Amjad、Levie身份说明",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            29,
+            56
+          ],
+          "check_ids": [
+            "conv_079666ce3ba0:final:11:0"
+          ]
+        },
+        {
+          "name": "公众号HTML排版最终版",
+          "kind": "file",
+          "format": "html",
+          "turn_indices": [
+            5,
+            9,
+            11,
+            13,
+            15,
+            16,
+            17,
+            18,
+            31,
+            46,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            57
+          ],
+          "check_ids": [
+            "conv_079666ce3ba0:final:12:0",
+            "conv_079666ce3ba0:final:12:1"
+          ]
+        },
+        {
+          "name": "Markdown转HTML的Python脚本最终版",
+          "kind": "file",
+          "format": "py",
+          "turn_indices": [
+            14,
+            47
+          ],
+          "check_ids": [
+            "conv_079666ce3ba0:final:13:0"
+          ]
+        },
+        {
+          "name": "公众号配图最终交付",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            37,
+            60
+          ],
+          "check_ids": [
+            "conv_079666ce3ba0:final:14:0"
+          ]
+        },
+        {
+          "name": "当前个人公众号草稿最终版",
+          "kind": "service",
+          "format": "wechat_draft",
+          "turn_indices": [
+            8,
+            12,
+            16,
+            21,
+            36,
+            39,
+            48,
+            59
+          ],
+          "check_ids": [
+            "conv_079666ce3ba0:final:15:0"
+          ]
+        },
+        {
+          "name": "循环文章发布结果",
+          "kind": "service",
+          "format": "wechat_publication",
+          "turn_indices": [
+            2,
+            45
+          ],
+          "check_ids": [
+            "conv_079666ce3ba0:final:16:0"
+          ]
+        }
+      ],
+      "verdict": "excluded_source_audit_only",
+      "basis": "整源发布缺口排除保留；长期记忆不需强制公开文件下载，私密配置只核本地终态。"
+    },
+    {
+      "sid": "conv_1369fc5a95fd",
+      "category": "OFFICE",
+      "title": "帮我解读该文件",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "363df869c2b75a630a78433c569c2dfcd30e1e6fcadb9359dff563439402e0bf",
+          "user_content_chars": 86
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "英特尔CNDA文件解读",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_1369fc5a95fd:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "用户只解读CNDA文件，最终文字，不加PDF或DOCX。"
+    },
+    {
+      "sid": "conv_15221652e821",
+      "category": "OFFICE",
+      "title": "帮我把Word里的内容以表格的形式输出，",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "9c3bf0cfea833cfe74e86c7c86f010451509d2f4048c4c3be26b7770aec06c13",
+          "user_content_chars": 58
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "面向老板的Word表格内容",
+          "kind": "file",
+          "format": "docx",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_15221652e821:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "correction_recommended",
+      "basis": "输入Word不是输出Word；用户只要求表格内容。"
+    },
+    {
+      "sid": "conv_1c49b4ff69dd",
+      "category": "OFFICE",
+      "title": "哈喽",
+      "user_turn_count": 3,
+      "user_turn_indices": [
+        0,
+        1,
+        2
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "3e908777782371beda37b0aaa8e5b19333ba8ef113bd8ac9ebaa01a85bb7b110",
+          "user_content_chars": 25
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "1bf088b3c53923cabb60b9c600b5c8a3004241b265a46053517918c3fd633948",
+          "user_content_chars": 109
+        },
+        {
+          "turn_index": 2,
+          "user_content_sha256": "3847e7830ea3df513961c6e4377373cf123e0a6b812b9c19d05f13b636a427b9",
+          "user_content_chars": 30
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "共享视频如何导出可编辑工程的说明",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            1,
+            2
+          ],
+          "check_ids": [
+            "conv_1c49b4ff69dd:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "用户要教学说明怎样导出视频工程，不是委托实际导出交付工程。"
+    },
+    {
+      "sid": "conv_1c5d5d968cf1",
+      "category": "COMM",
+      "title": "我要发送【126邮件】，请引导我获取授权",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "ca572bd85581ec62f42d8a177ec5abe7ef8528025371bcc0a3f1c49ab842a24c",
+          "user_content_chars": 76
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "给本人发送的测试邮件",
+          "kind": "service",
+          "format": "smtp",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_1c5d5d968cf1:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "测试邮件最终发送状态；个人模拟映射已确认，不加附件。"
+    },
+    {
+      "sid": "conv_230d8ea9a582",
+      "category": "OFFICE",
+      "title": "轶伦，平日行程匆忙，鲜有机会静下心来，梳",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "706648cad43b09aa1ab48e16e0a77934231ebf5626879228daa0570d1cc2b1a2",
+          "user_content_chars": 249
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "对朋友经济趋势消息的回复草稿",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_230d8ea9a582:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "给朋友的回复文字，无额外文件目标。"
+    },
+    {
+      "sid": "conv_299aa1b64659",
+      "category": "OFFICE",
+      "title": "参照我上传的222.png，帮我把我上传",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "d472b10e385d170ba27e4753684a46eabc52921f1615712242338d1697717f0c",
+          "user_content_chars": 81
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "调整111参考图后的最终图",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_299aa1b64659:final:0:0",
+            "conv_299aa1b64659:final:0:1"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "修改单一参考图，输出图片；不强制PNG扩展名或旧AI文件名。"
+    },
+    {
+      "sid": "conv_316742f9e7f2",
+      "category": "COMM",
+      "title": "我要发送【126邮件】，请引导我获取授权",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "ca572bd85581ec62f42d8a177ec5abe7ef8528025371bcc0a3f1c49ab842a24c",
+          "user_content_chars": 76
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "给本人发送的测试邮件",
+          "kind": "service",
+          "format": "smtp",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_316742f9e7f2:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "测试邮件最终发送状态；个人模拟映射已确认，不加附件。"
+    },
+    {
+      "sid": "conv_383a91943829",
+      "category": "OFFICE",
+      "title": "请将这份PPT简化成一页纸的PPT内容，",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "cc1914a8d1b81ab3962c05d56a1ec365f16e732d431605e75e80f10ba53c4092",
+          "user_content_chars": 40
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "一页PPT的精简内容稿",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_383a91943829:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "用户要一页PPT内容稿，允许文字，没有强制PPTX。"
+    },
+    {
+      "sid": "conv_3ae75a94697f",
+      "category": "DATA",
+      "title": "请为我的 SaaS 公司做 DCF 估值",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "b484082c6b51a2721e145656251f9f210c5d245ded75a2654bd5acefc2c32f91",
+          "user_content_chars": 267
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "DCF区间估值和敏感性表的文字/表格交付",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_3ae75a94697f:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "估值区间与敏感性表；无Excel要求，允许文字表格。"
+    },
+    {
+      "sid": "conv_3dd6019a60a3",
+      "category": "OFFICE",
+      "title": "针对这个报告，生成一个图片",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "bc631bb441bd165469f8cd61d94a241d6f13ad082554b7a9c6e098f1d891390b",
+          "user_content_chars": 13
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "审查报告配图",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_3dd6019a60a3:final:0:0",
+            "conv_3dd6019a60a3:final:0:1"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "用户明确一个图片，输入报告不变为输出报告。"
+    },
+    {
+      "sid": "conv_4024be190b45",
+      "category": "OFFICE",
+      "title": "请学习这份制度内容，并告知这份制度里可能",
+      "user_turn_count": 5,
+      "user_turn_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "22695f9feb6902c5067f26f679c0303cf946fe7c1cafa49d0c92f4e4f7dc9e7a",
+          "user_content_chars": 58
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "77991730258567282faffbb52adffea72cc1e04cfd16b300e030754affa00ebf",
+          "user_content_chars": 25
+        },
+        {
+          "turn_index": 2,
+          "user_content_sha256": "f84644f69cc7aa13cd2d9749d31f312470fbc5252e096f30330e7a3b91ef9d93",
+          "user_content_chars": 60
+        },
+        {
+          "turn_index": 3,
+          "user_content_sha256": "ae97ee19e2048c0a4a695def1f5ae9151955558f5bd56c93cd9b306983d77220",
+          "user_content_chars": 72
+        },
+        {
+          "turn_index": 4,
+          "user_content_sha256": "ce89b65d09953b143b6896895f92f9ea0d2b17933826a2d4deaa0316d863f904",
+          "user_content_chars": 88
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "制度风险点与完善意见",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            0,
+            1
+          ],
+          "check_ids": [
+            "conv_4024be190b45:final:0:0"
+          ]
+        },
+        {
+          "name": "评估表完善理由",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            2
+          ],
+          "check_ids": [
+            "conv_4024be190b45:final:1:0"
+          ]
+        },
+        {
+          "name": "按更新制度修订的评估打分表最终Word",
+          "kind": "file",
+          "format": "docx",
+          "turn_indices": [
+            3,
+            4
+          ],
+          "check_ids": [
+            "conv_4024be190b45:final:2:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "第3轮明确word版本，第4轮更新该文件，DOCX来自用户。"
+    },
+    {
+      "sid": "conv_43344c1d624a",
+      "category": "OFFICE",
+      "title": "load-test-image-2026-06-25T17:48:08.195+08:00-10",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "3162b621d2c55628a3974ca1b7d7eed0f4f29bfbd7382b0b6f9c4f3b44efc341",
+          "user_content_chars": 35
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "未来感企业智能工作台图片",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_43344c1d624a:final:0:0",
+            "conv_43344c1d624a:final:0:1",
+            "conv_43344c1d624a:final:0:2"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "原用户明确一张图片及16:9。"
+    },
+    {
+      "sid": "conv_4451b5c4da2e",
+      "category": "COMM",
+      "title": "请帮我编辑定时任务： - 任务 ID：f",
+      "user_turn_count": 5,
+      "user_turn_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "86bca4de43410c607c9339cf52992e6576e5ea6a6ba2eef3c2e4ddc7d0e1f3f5",
+          "user_content_chars": 267
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "6f4aa765b6a6059a0d7b396bd4b228c6eff0d6067198338a802ccbee63351d54",
+          "user_content_chars": 9
+        },
+        {
+          "turn_index": 2,
+          "user_content_sha256": "a3c75572affc5e972bfe6cd14a246545ec3812f650b818631a15f9927a907a87",
+          "user_content_chars": 677
+        },
+        {
+          "turn_index": 3,
+          "user_content_sha256": "eba2d3eab4d7c40452b8757a0ff1967c990e2666492b9f27090145d7e117de4f",
+          "user_content_chars": 11
+        },
+        {
+          "turn_index": 4,
+          "user_content_sha256": "d069eb5240fcf70b9f028927a0ab3ba1544de9ccb4bf625c817ac5a1a12695b9",
+          "user_content_chars": 1277
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "follow-builders每日情报与选题定时任务最终登记",
+          "kind": "service",
+          "format": "cron_registration",
+          "turn_indices": [
+            0,
+            1,
+            4
+          ],
+          "check_ids": [
+            "conv_4451b5c4da2e:final:0:0"
+          ]
+        },
+        {
+          "name": "科大讯飞与EvoMind关联说明",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            2
+          ],
+          "check_ids": [
+            "conv_4451b5c4da2e:final:1:0"
+          ]
+        },
+        {
+          "name": "张大胆公众号风格说明",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            3
+          ],
+          "check_ids": [
+            "conv_4451b5c4da2e:final:2:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "任务是编辑定时登记；三个MD是未来payload配置，不要求当场生成。"
+    },
+    {
+      "sid": "conv_470d66397a7d",
+      "category": "OFFICE",
+      "title": "帮我打水印",
+      "user_turn_count": 2,
+      "user_turn_indices": [
+        0,
+        1
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "973ce5a2292622b2144d3864b963725a43e4cfb261c7b5bbe8168a737c466a1e",
+          "user_content_chars": 86
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "be3aafe82190ef55b9b0a3dd5775bc041dace03caf40cbc46f0f9ce3e6cafb2c",
+          "user_content_chars": 105
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "最终加水印的PDF",
+          "kind": "file",
+          "format": "pdf",
+          "turn_indices": [
+            0,
+            1
+          ],
+          "check_ids": [
+            "conv_470d66397a7d:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "对实际绑定PDF加水印，保留被编辑输入格式合理。"
+    },
+    {
+      "sid": "conv_48bad126c8f3",
+      "category": "COMM",
+      "title": "我要发送【126邮件】，请引导我获取授权",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "ca572bd85581ec62f42d8a177ec5abe7ef8528025371bcc0a3f1c49ab842a24c",
+          "user_content_chars": 76
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "给本人发送的测试邮件",
+          "kind": "service",
+          "format": "smtp",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_48bad126c8f3:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "测试邮件最终发送状态；个人模拟映射已确认，不加附件。"
+    },
+    {
+      "sid": "conv_514f6d8693d2",
+      "category": "OFFICE",
+      "title": "结合项目总体计划，以及最近的项目进展，输",
+      "user_turn_count": 29,
+      "user_turn_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "9042823772825aa0bdfe24140c8db3fbea7b4bbe1a3e23c75e54fc907929d193",
+          "user_content_chars": 151
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "ec6abecb701370c6387c669746d450f16d4cccf86abcb52e0bde95f35e6054aa",
+          "user_content_chars": 59
+        },
+        {
+          "turn_index": 2,
+          "user_content_sha256": "532210f722a94a1821abeb5772ceca3185623b88faf12f6bf64c84746c08da79",
+          "user_content_chars": 54
+        },
+        {
+          "turn_index": 3,
+          "user_content_sha256": "e9fefe798d678066a0944888d671e775de345c11214e50e4aa8e80d1b3677fa1",
+          "user_content_chars": 119
+        },
+        {
+          "turn_index": 4,
+          "user_content_sha256": "3c76af4fc6e5540a3a15757ac6df98514ea4f70c3c7125480e75406c35e20f36",
+          "user_content_chars": 56
+        },
+        {
+          "turn_index": 5,
+          "user_content_sha256": "345a08ba4f52fe981192abdc4f6427d8841b3d11a7835d926277b34628db2f9b",
+          "user_content_chars": 82
+        },
+        {
+          "turn_index": 6,
+          "user_content_sha256": "ef76235e28ac48224ec050ede38bfa51291e52afd0e9588a409c9042d614b934",
+          "user_content_chars": 47
+        },
+        {
+          "turn_index": 7,
+          "user_content_sha256": "ce1296f08f962de0c30e0d70b0bc5b998df2697938c4f63706895e3c17de057e",
+          "user_content_chars": 93
+        },
+        {
+          "turn_index": 8,
+          "user_content_sha256": "345a08ba4f52fe981192abdc4f6427d8841b3d11a7835d926277b34628db2f9b",
+          "user_content_chars": 82
+        },
+        {
+          "turn_index": 9,
+          "user_content_sha256": "3ebc78ee05aad29062daa131712371a7b31b6efcaf047a8bbc0cd852521c062d",
+          "user_content_chars": 430
+        },
+        {
+          "turn_index": 10,
+          "user_content_sha256": "3e0bb0710f6a86e72901dcae5dfb2e7d16a440802691505bca10ddc6a139cf4d",
+          "user_content_chars": 103
+        },
+        {
+          "turn_index": 11,
+          "user_content_sha256": "b9f0f7899fa38874ecb964c1d00bbfd461b5a7624e91f231d3b150f350b13155",
+          "user_content_chars": 46
+        },
+        {
+          "turn_index": 12,
+          "user_content_sha256": "ce1296f08f962de0c30e0d70b0bc5b998df2697938c4f63706895e3c17de057e",
+          "user_content_chars": 93
+        },
+        {
+          "turn_index": 13,
+          "user_content_sha256": "e111bb11bd311962faa7ab82355e4d84d80450d265da47d2ee02ffdad4ea0bba",
+          "user_content_chars": 132
+        },
+        {
+          "turn_index": 14,
+          "user_content_sha256": "8996faafdd61c4d7ee7a6f878a9b2470eeb4b95a5ebcc0011df2259bdb702176",
+          "user_content_chars": 348
+        },
+        {
+          "turn_index": 15,
+          "user_content_sha256": "49f4e4ef67aca4e336d22238c182e3d8b61048bdc5a96aaff328406e073f1aa9",
+          "user_content_chars": 60
+        },
+        {
+          "turn_index": 16,
+          "user_content_sha256": "1848bb5c4b4edddb252cfedac14c5cb852713dbf0d69af216935478ff7657135",
+          "user_content_chars": 32
+        },
+        {
+          "turn_index": 17,
+          "user_content_sha256": "aee784500e795a67c47a3085b96f513c7e356deff604e11cf90d8505d5c44c9f",
+          "user_content_chars": 47
+        },
+        {
+          "turn_index": 18,
+          "user_content_sha256": "358239217410741adb9cba4ee0afd99e750558a1823ad27e1d84d39d4473874a",
+          "user_content_chars": 148
+        },
+        {
+          "turn_index": 19,
+          "user_content_sha256": "49f4e4ef67aca4e336d22238c182e3d8b61048bdc5a96aaff328406e073f1aa9",
+          "user_content_chars": 60
+        },
+        {
+          "turn_index": 20,
+          "user_content_sha256": "930528aa4776912f2cc91672bdf60d831a6dc6a688035173035f9b2dac924524",
+          "user_content_chars": 88
+        },
+        {
+          "turn_index": 21,
+          "user_content_sha256": "f1269cd51876090abbd28c40072f78716342a9e6ba8b997ceecf715c64784900",
+          "user_content_chars": 85
+        },
+        {
+          "turn_index": 22,
+          "user_content_sha256": "f77301e347c443f4dd9160f707df229441274e501a361e5352fe5597450ee175",
+          "user_content_chars": 76
+        },
+        {
+          "turn_index": 23,
+          "user_content_sha256": "8ef1334fd9464822d29405d1a9200e84c769984a3611752e8ddfdec1c5b6059c",
+          "user_content_chars": 111
+        },
+        {
+          "turn_index": 24,
+          "user_content_sha256": "df8a901dd2b2be381ccfd12d913733c14fbccba0153b63ad1cab7a2975112b56",
+          "user_content_chars": 132
+        },
+        {
+          "turn_index": 25,
+          "user_content_sha256": "ef435f6d8d89e983e2ffe8e1181da4e9c4b5d0ef3748b09402a489e7a5a58421",
+          "user_content_chars": 75
+        },
+        {
+          "turn_index": 26,
+          "user_content_sha256": "56e918ad6bdc41f7ae3527be55c716218d873845ef0453adb6edc49491a074a4",
+          "user_content_chars": 161
+        },
+        {
+          "turn_index": 27,
+          "user_content_sha256": "94061eb533aa63ba2fa0c4365356dc00eb654413230f344c2a45f23a235518f2",
+          "user_content_chars": 61
+        },
+        {
+          "turn_index": 28,
+          "user_content_sha256": "3dd20da5d771fe6e76eb0706c6f11e11fa0cc7b84cfbcf5781c2fcc5e93c6217",
+          "user_content_chars": 76
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "TTFA甲方阶段汇报图片型PPT最终版",
+          "kind": "file",
+          "format": "pptx",
+          "turn_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28
+          ],
+          "check_ids": [
+            "conv_514f6d8693d2:final:0:0",
+            "conv_514f6d8693d2:final:0:1"
+          ]
+        },
+        {
+          "name": "TTFA阶段汇报演讲稿",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_514f6d8693d2:final:1:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "图片型PPT与演讲稿明确，第16/27轮PPTX明确；第22轮第十页要求仍有效，可>=10而非旧AI恰10。"
+    },
+    {
+      "sid": "conv_5785a8ce4b6a",
+      "category": "OFFICE",
+      "title": "使用pdf-watermark 这个sk",
+      "user_turn_count": 2,
+      "user_turn_indices": [
+        0,
+        1
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "086418bcac9b51d717aab1458d0d0c038fe28fefce43145f82c1dc6300f6152b",
+          "user_content_chars": 114
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "597dd1595d0a5505af9e47cc7afca0e9cff4298b2c77a288d446060e9d6e1e24",
+          "user_content_chars": 96
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "按金桥吴彦祖默认水印要求交付的最终PDF",
+          "kind": "file",
+          "format": "pdf",
+          "turn_indices": [
+            0,
+            1
+          ],
+          "check_ids": [
+            "conv_5785a8ce4b6a:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "pdf-watermark操作及实际绑定PDF支持修改后PDF交付。"
+    },
+    {
+      "sid": "conv_5bff0ded32bc",
+      "category": "COMM",
+      "title": "帮我开一个下周一的例会",
+      "user_turn_count": 7,
+      "user_turn_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "93db49ce60a3d29591af6a9b20067286db5feb40a608f25bb0035c525b332a57",
+          "user_content_chars": 11
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "3d8b1c72a56826e57b5eae069647a2d28b0452438d9802da89284b71a9c8bbb6",
+          "user_content_chars": 69
+        },
+        {
+          "turn_index": 2,
+          "user_content_sha256": "10628ef7b782ee9029f7bb65eaa6ae984362e70c8282f35fcceaaeeb24ac1542",
+          "user_content_chars": 3
+        },
+        {
+          "turn_index": 3,
+          "user_content_sha256": "773a28c82a54eeed09900ddb85ed9b09dad7f89631d613fe4c231d18b1250c14",
+          "user_content_chars": 19
+        },
+        {
+          "turn_index": 4,
+          "user_content_sha256": "f3943a7b368154d1ed5562f324e65f1aea9884bb85492c5791ee86831b5ec85d",
+          "user_content_chars": 4
+        },
+        {
+          "turn_index": 5,
+          "user_content_sha256": "c3523225a59685d512af254f37f8bd94a66b03eecb3ab0d3319ed6c509a215fc",
+          "user_content_chars": 4
+        },
+        {
+          "turn_index": 6,
+          "user_content_sha256": "e7d540d16c2004832cd5ddd80fc5e08e748164b385e5ab68e7955efe1ac70b3d",
+          "user_content_chars": 5
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "保留B的周例会最终记录",
+          "kind": "service",
+          "format": "tencent_meeting",
+          "turn_indices": [
+            0,
+            1,
+            2,
+            5,
+            6
+          ],
+          "check_ids": [
+            "conv_5bff0ded32bc:final:0:0"
+          ]
+        },
+        {
+          "name": "周一09:55企微会议号提醒登记",
+          "kind": "service",
+          "format": "cron_registration",
+          "turn_indices": [
+            1,
+            3,
+            4
+          ],
+          "check_ids": [
+            "conv_5bff0ded32bc:final:1:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "周例会及企微提醒登记，无纪要文件；定时触发不验证。"
+    },
+    {
+      "sid": "conv_6176cb2a1bea",
+      "category": "OFFICE",
+      "title": "load-test-image-2026-06-25T17:48:07.659+08:00-7",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "3162b621d2c55628a3974ca1b7d7eed0f4f29bfbd7382b0b6f9c4f3b44efc341",
+          "user_content_chars": 35
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "未来感企业智能工作台图片",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_6176cb2a1bea:final:0:0",
+            "conv_6176cb2a1bea:final:0:1",
+            "conv_6176cb2a1bea:final:0:2"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "原用户明确一张图片及16:9。"
+    },
+    {
+      "sid": "conv_61ba37b1a086",
+      "category": "OFFICE",
+      "title": "审查本份文件的风险点",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "c43d81104b5e7adddd42d2577729800647c978ba9a33d35cb5f74013b15098cf",
+          "user_content_chars": 10
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "文件风险点审查文字",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_61ba37b1a086:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "文件风险审查最终文字，不加新文档。"
+    },
+    {
+      "sid": "conv_639563c765e9",
+      "category": "OFFICE",
+      "title": "审核一下这个报告",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "884eaca40f2654b0340bfcdfc4f21166951ed0b0c7ca299c5d212e3ca126a053",
+          "user_content_chars": 120
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "所给报告审核意见",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_639563c765e9:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "报告审核最终文字，不加新PDF。"
+    },
+    {
+      "sid": "conv_68708ebff46f",
+      "category": "COMM",
+      "title": "请帮我创建一个定时任务： - 任务名称：",
+      "user_turn_count": 3,
+      "user_turn_indices": [
+        0,
+        1,
+        2
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "4808785a6993fa12bcda579e62ee13e1e7f1cbe5e877ce1ab2d507e6b24d4cda",
+          "user_content_chars": 69
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "fde46d6519db115d56778b0de9550a5663be115cf1b8e656ee05d4752e0acba7",
+          "user_content_chars": 4
+        },
+        {
+          "turn_index": 2,
+          "user_content_sha256": "670d9743542cae3ea7ebe36af56bd53648b0a1126162e78d81a32934a711302e",
+          "user_content_chars": 2
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "提醒下班任务登记",
+          "kind": "service",
+          "format": "cron_registration",
+          "turn_indices": [
+            0,
+            1
+          ],
+          "check_ids": [
+            "conv_68708ebff46f:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "下班提醒登记，末尾问候不替代前任务。"
+    },
+    {
+      "sid": "conv_69d3e6ed7587",
+      "category": "OFFICE",
+      "title": "请使用「前端设计」协助我完成一个C端用户",
+      "user_turn_count": 8,
+      "user_turn_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "5cf8225ba4f30c1f535f4a55fb794fbb53df4075908565175fdb8baa8e1df222",
+          "user_content_chars": 657
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "a7fb05cdedcd039ba01ea182cb2db4506d26c60a82668dbbbcf9b20308e213b5",
+          "user_content_chars": 47
+        },
+        {
+          "turn_index": 2,
+          "user_content_sha256": "535d4246daab9bea3939644c9ea58921cd6d1d897dfe9c3c09c2f23018fd06f6",
+          "user_content_chars": 17
+        },
+        {
+          "turn_index": 3,
+          "user_content_sha256": "3787dbc9a3838c5fcf406ea7aa5bfa9066d2fc72391893c5aba9c746c07042e9",
+          "user_content_chars": 16
+        },
+        {
+          "turn_index": 4,
+          "user_content_sha256": "ce25478404be7ae65023f44b8ca0d7e52bca8671d590ec74bcee8e1e687fc9a7",
+          "user_content_chars": 40
+        },
+        {
+          "turn_index": 5,
+          "user_content_sha256": "33f1ef90b15439eb4b7cd93809bd8eeb9429067d100fe6d1bcacd859db768a37",
+          "user_content_chars": 211
+        },
+        {
+          "turn_index": 6,
+          "user_content_sha256": "d45face924b2b1325fea08eb4e729cf93b97c6b689a7d9bc497529b96dff84ec",
+          "user_content_chars": 390
+        },
+        {
+          "turn_index": 7,
+          "user_content_sha256": "1d5929009c39785ae31f952e543e98eea92d27a470c3a7e03095db2f56e383c7",
+          "user_content_chars": 37
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "充值指南HTML最终版",
+          "kind": "file",
+          "format": "html",
+          "turn_indices": [
+            0,
+            1,
+            3,
+            4,
+            6
+          ],
+          "check_ids": [
+            "conv_69d3e6ed7587:final:0:0",
+            "conv_69d3e6ed7587:final:0:1"
+          ]
+        },
+        {
+          "name": "充值指南PDF最终版",
+          "kind": "file",
+          "format": "pdf",
+          "turn_indices": [
+            2,
+            7
+          ],
+          "check_ids": [
+            "conv_69d3e6ed7587:final:1:0"
+          ]
+        },
+        {
+          "name": "汇总AI热点新闻任务登记",
+          "kind": "service",
+          "format": "cron_registration",
+          "turn_indices": [
+            5
+          ],
+          "check_ids": [
+            "conv_69d3e6ed7587:final:2:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "第2/7轮明确HTML转PDF；HTML及PDF均用户所需。"
+    },
+    {
+      "sid": "conv_6ad7c7eaf079",
+      "category": "OFFICE",
+      "title": "这一份报告也审查下",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "8f0a379ff8a2325509346695ca93685dfa40d343666b2ea6f96014c8c159189b",
+          "user_content_chars": 88
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "报告审查意见",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_6ad7c7eaf079:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "报告审查最终文字，不加新报告文件。"
+    },
+    {
+      "sid": "conv_6e4ea693d7fd",
+      "category": "COMM",
+      "title": "我要发送【126邮件】，请引导我获取授权",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "ca572bd85581ec62f42d8a177ec5abe7ef8528025371bcc0a3f1c49ab842a24c",
+          "user_content_chars": 76
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "给本人发送的测试邮件",
+          "kind": "service",
+          "format": "smtp",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_6e4ea693d7fd:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "测试邮件最终发送状态；个人模拟映射已确认，不加附件。"
+    },
+    {
+      "sid": "conv_737c4b010b18",
+      "category": "OFFICE",
+      "title": "先学习一下这份文件",
+      "user_turn_count": 4,
+      "user_turn_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "3209e0a62c54dd9ceaa436d0dee5d5b95e602b0e81321f675d3d47318e9a9697",
+          "user_content_chars": 32
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "26a93ca0073b3c4140fd6df5d5084a39c5a68b4d3a7bd0adfca13377ea523f0a",
+          "user_content_chars": 107
+        },
+        {
+          "turn_index": 2,
+          "user_content_sha256": "4fbf218f90ef87796f9aa508710ba4045e1830bf4670ccf18650bec3e6cbc811",
+          "user_content_chars": 96
+        },
+        {
+          "turn_index": 3,
+          "user_content_sha256": "b5a1266d77ad4c850f6eac67036cbd867331b3e39a59328b9d87b0a486c47854",
+          "user_content_chars": 56
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "面向科委汇报的每页文字/生图提示词",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            1,
+            2
+          ],
+          "check_ids": [
+            "conv_737c4b010b18:final:0:0"
+          ]
+        },
+        {
+          "name": "对应本次每页提示词的汇报图片",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            3
+          ],
+          "check_ids": [
+            "conv_737c4b010b18:final:1:0",
+            "conv_737c4b010b18:final:1:1"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "文字提示词后逐页图，无组装PPTX要求，页数不能用旧AI。"
+    },
+    {
+      "sid": "conv_859a9d4744f2",
+      "category": "OFFICE",
+      "title": "帮我分析一下",
+      "user_turn_count": 6,
+      "user_turn_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "30dc9e8f7ce9c9e5ecf459d5dbde23e2e44b345d8c75d4bc98df05f510bae520",
+          "user_content_chars": 6
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "30dc9e8f7ce9c9e5ecf459d5dbde23e2e44b345d8c75d4bc98df05f510bae520",
+          "user_content_chars": 6
+        },
+        {
+          "turn_index": 2,
+          "user_content_sha256": "87ddc039f6e7ea966f6c0676ffb379c42f40e3ce7f67711f7c21bb782ed16f29",
+          "user_content_chars": 4
+        },
+        {
+          "turn_index": 3,
+          "user_content_sha256": "9eef3558230ba4a16078be164538c47286910d2bbd84449946cd5fb06837e9d6",
+          "user_content_chars": 9
+        },
+        {
+          "turn_index": 4,
+          "user_content_sha256": "71a0d820d6e0cfbcbc4bade6b8a28ea472582f704e243f76ace18a24b798442b",
+          "user_content_chars": 9
+        },
+        {
+          "turn_index": 5,
+          "user_content_sha256": "87ddc039f6e7ea966f6c0676ffb379c42f40e3ce7f67711f7c21bb782ed16f29",
+          "user_content_chars": 4
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "文件分析和风险说明最终内容",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "check_ids": [
+            "conv_859a9d4744f2:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "重复文件分析与风险问题最终文字，无输出文件格式强加。"
+    },
+    {
+      "sid": "conv_8afe28c15daf",
+      "category": "OFFICE",
+      "title": "load-test-image-2026-06-25T17:48:07.148+08:00-4",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "3162b621d2c55628a3974ca1b7d7eed0f4f29bfbd7382b0b6f9c4f3b44efc341",
+          "user_content_chars": 35
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "未来感企业智能工作台图片",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_8afe28c15daf:final:0:0",
+            "conv_8afe28c15daf:final:0:1",
+            "conv_8afe28c15daf:final:0:2"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "原用户明确一张图片及16:9。"
+    },
+    {
+      "sid": "conv_965cf7b2c858",
+      "category": "OFFICE",
+      "title": "你看一下附件几个资料，我要给马校长做一份",
+      "user_turn_count": 7,
+      "user_turn_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "978e6a0c1061739283b1057fd246ed2d264a4e408cd36b181eeeb01bf23b6fcc",
+          "user_content_chars": 449
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "964d03f665fd5bdea7c2832b1b5c9084a946a536e24be4971437705f831a01b8",
+          "user_content_chars": 82
+        },
+        {
+          "turn_index": 2,
+          "user_content_sha256": "8b8e483369b25ad74ee8b7f09282ca1344630d0ba6d8efedfab1ac745e00c6ef",
+          "user_content_chars": 40
+        },
+        {
+          "turn_index": 3,
+          "user_content_sha256": "f99a8db8b4567cfe11d0e6e81a138c0b38137b5f3fc4f109eb1d9fb0708ee968",
+          "user_content_chars": 38
+        },
+        {
+          "turn_index": 4,
+          "user_content_sha256": "25b2c90149e0e373c93f820eece854fce29eb7164a34a0d2e2dd90a7b1cab5ac",
+          "user_content_chars": 36
+        },
+        {
+          "turn_index": 5,
+          "user_content_sha256": "10067c4d20a7bca79e47c599f594026df02976d5a0c503a9b873f580706b60a1",
+          "user_content_chars": 33
+        },
+        {
+          "turn_index": 6,
+          "user_content_sha256": "1200f61a697d472bfcab0bd5f40fbb958ebe5209fcd0d5bd520399fc2873ebd7",
+          "user_content_chars": 278
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "会议PPT每页生图提示词",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_965cf7b2c858:final:0:0"
+          ]
+        },
+        {
+          "name": "大会发言PPT逐页图片最终版",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            1,
+            2,
+            4,
+            6
+          ],
+          "check_ids": [
+            "conv_965cf7b2c858:final:1:0",
+            "conv_965cf7b2c858:final:1:1"
+          ]
+        },
+        {
+          "name": "前三张图的合并展示图片",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            3
+          ],
+          "check_ids": [
+            "conv_965cf7b2c858:final:2:0",
+            "conv_965cf7b2c858:final:2:1"
+          ]
+        },
+        {
+          "name": "拼接的大会发言PDF",
+          "kind": "file",
+          "format": "pdf",
+          "turn_indices": [
+            5
+          ],
+          "check_ids": [
+            "conv_965cf7b2c858:final:3:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "提示词、逐页图、一张拼图、PDF均用户明确；第四页修改使逐页图>=4有用户依据，不硬加PPTX或旧AI6页。"
+    },
+    {
+      "sid": "conv_9af1f51c4560",
+      "category": "OFFICE",
+      "title": "审核下这个",
+      "user_turn_count": 2,
+      "user_turn_indices": [
+        0,
+        1
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "1fd91e7f3a9846c51f97dc20abedf8aa566eac5cf8e78ca503daa964bb05d43a",
+          "user_content_chars": 117
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "5c7158d667338abe2504b9478d057627eb91e38999af4967ab4b57f83884a67d",
+          "user_content_chars": 87
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "报告审核意见Word版",
+          "kind": "file",
+          "format": "docx",
+          "turn_indices": [
+            0,
+            1
+          ],
+          "check_ids": [
+            "conv_9af1f51c4560:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "第1轮明确docx版本，Word不是输入格式推断。"
+    },
+    {
+      "sid": "conv_a196d952691c",
+      "category": "OFFICE",
+      "title": "做成动图",
+      "user_turn_count": 8,
+      "user_turn_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "91a473a7101fc8232a238081739093c2e43574fdf0da63e3af453281d938084a",
+          "user_content_chars": 56
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "5f17c8efbebcc590cb871d5d2692e5ade7e026ec3a257c381baaaafaac7bcff6",
+          "user_content_chars": 3511
+        },
+        {
+          "turn_index": 2,
+          "user_content_sha256": "9ddebfa74342b13ff5178ac56093ec550f7ce083b4a6ac90c70d712f79464c26",
+          "user_content_chars": 3540
+        },
+        {
+          "turn_index": 3,
+          "user_content_sha256": "a15f27649f8f2a91c078e92c6ec47316b0bbbc6671d5e9c2660a9c1feb7efcbf",
+          "user_content_chars": 30
+        },
+        {
+          "turn_index": 4,
+          "user_content_sha256": "dbffd7e963a18137c28e616df7ac23f3512ed89d308a9051b2b22871da943b8f",
+          "user_content_chars": 30
+        },
+        {
+          "turn_index": 5,
+          "user_content_sha256": "651c390a95dc0a37951be149cc3b66581ad7b2fb0bdcec1363bb4cd9e0244cc0",
+          "user_content_chars": 29
+        },
+        {
+          "turn_index": 6,
+          "user_content_sha256": "3522f1054ea9766221f96f11df890d654fee3367f7798746afb3db5248e5820f",
+          "user_content_chars": 34
+        },
+        {
+          "turn_index": 7,
+          "user_content_sha256": "e0687315c08bfd5b5cf3dcb689a4c3e5e2086d720229d172127f814fe18f7fb1",
+          "user_content_chars": 36
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "攻防箭分镜4K图片最终版",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            1,
+            2,
+            3,
+            6,
+            7
+          ],
+          "check_ids": [
+            "conv_a196d952691c:final:0:0",
+            "conv_a196d952691c:final:0:1",
+            "conv_a196d952691c:final:0:2"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "当前先生成高清图，第3轮4K明确；不要求GIF或MP4。分镜数量文本自身有冲突，不硬套旧AI张数。"
+    },
+    {
+      "sid": "conv_a222b7fe3e39",
+      "category": "OFFICE",
+      "title": "load-test-image-2026-06-25T17:48:07.495+08:00-6",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "3162b621d2c55628a3974ca1b7d7eed0f4f29bfbd7382b0b6f9c4f3b44efc341",
+          "user_content_chars": 35
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "未来感企业智能工作台图片",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_a222b7fe3e39:final:0:0",
+            "conv_a222b7fe3e39:final:0:1",
+            "conv_a222b7fe3e39:final:0:2"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "原用户明确一张图片及16:9。"
+    },
+    {
+      "sid": "conv_a322a78919b3",
+      "category": "OFFICE",
+      "title": "load-test-image-2026-06-25T17:48:08.017+08:00-9",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "3162b621d2c55628a3974ca1b7d7eed0f4f29bfbd7382b0b6f9c4f3b44efc341",
+          "user_content_chars": 35
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "未来感企业智能工作台图片",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_a322a78919b3:final:0:0",
+            "conv_a322a78919b3:final:0:1",
+            "conv_a322a78919b3:final:0:2"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "原用户明确一张图片及16:9。"
+    },
+    {
+      "sid": "conv_a3988f16cc4d",
+      "category": "OFFICE",
+      "title": "根据AI Builders Digest",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "41bc24c710655ff651c189e9eb65a25af4eae73cc82a56f3f3c3ddaeb58da265",
+          "user_content_chars": 45
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "AI Builders Digest 2026-06-19总结海报",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_a3988f16cc4d:final:0:0",
+            "conv_a3988f16cc4d:final:0:1"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "用户要总结海报图片，无PDF要求或原AI固定文件名。"
+    },
+    {
+      "sid": "conv_a52e0748557e",
+      "category": "DATA",
+      "title": "涉及到股权转让的会计分录如何写",
+      "user_turn_count": 3,
+      "user_turn_indices": [
+        0,
+        1,
+        2
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "26e4ce094beff35f8d5ec972b407280ce1f004885d35931ffacb8c25733b37fd",
+          "user_content_chars": 38
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "a7e1d3a4abf1a708d66a5b870744827f7201f87c91915f17c32375c3344afb30",
+          "user_content_chars": 84
+        },
+        {
+          "turn_index": 2,
+          "user_content_sha256": "6ab4afecc12e22d6edafef3a7d110fb7f0ae0311acb65e6f13d6963fe74a8259",
+          "user_content_chars": 65
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "从指定股权转让款起编制的会计分录内容",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            0,
+            1,
+            2
+          ],
+          "check_ids": [
+            "conv_a52e0748557e:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "银行账与股权表是输入，只写会计分录，无Excel输出要求。"
+    },
+    {
+      "sid": "conv_ab3863a19fb2",
+      "category": "OFFICE",
+      "title": "使用pdf-watermark 这个sk",
+      "user_turn_count": 12,
+      "user_turn_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "c615dbfc5886d43b88816454516bd7e5bfadb798d12341ff4e97a8858aa768bf",
+          "user_content_chars": 422
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "90246a99c7d444339d809d0f25962ff74845d5928f2ac66bafe8bbe06a8cb05f",
+          "user_content_chars": 168
+        },
+        {
+          "turn_index": 2,
+          "user_content_sha256": "4833dc9764ce0f4820dce3af615be334465f64cdbf22b551dfe446f58f1fad67",
+          "user_content_chars": 93
+        },
+        {
+          "turn_index": 3,
+          "user_content_sha256": "543cbfa6d55a73d5bded43a66ec0155aec74b26c1daeecc8f26b608136592e4f",
+          "user_content_chars": 97
+        },
+        {
+          "turn_index": 4,
+          "user_content_sha256": "0f6306d26c7256262204e307a1f33b97e408864c97ca549f4e51998276118b3b",
+          "user_content_chars": 104
+        },
+        {
+          "turn_index": 5,
+          "user_content_sha256": "e5a609be9d206d04d775ddbbe9e1073bdb5be3b93127926e782192a49adfe1b8",
+          "user_content_chars": 95
+        },
+        {
+          "turn_index": 6,
+          "user_content_sha256": "1ec6dff172a0159cd010cf209aa245f2296dc0212aa3391bebd9e06df6346ec8",
+          "user_content_chars": 126
+        },
+        {
+          "turn_index": 7,
+          "user_content_sha256": "7ef465ff72633c0607c2e36d967a18b7512564edfe1f4e246f73c7de67f4a636",
+          "user_content_chars": 102
+        },
+        {
+          "turn_index": 8,
+          "user_content_sha256": "bf8e0fe6fb0fb806e06d176682991dff14dadcbb58479b6d18aba0934d3dc1ea",
+          "user_content_chars": 92
+        },
+        {
+          "turn_index": 9,
+          "user_content_sha256": "7339232ae7ad4cbb7ef4fe4e44d72f9e17fd1f8dbaa13d62ce757fc712daf407",
+          "user_content_chars": 419
+        },
+        {
+          "turn_index": 10,
+          "user_content_sha256": "20961ff0fb347ae9d0416bd0c502de8f5be409790190172b554553bd2936e778",
+          "user_content_chars": 93
+        },
+        {
+          "turn_index": 11,
+          "user_content_sha256": "3ca20756cf2b739372c370db8b32298f9663e793c0c6120cc8ac6f02aa1fc932",
+          "user_content_chars": 95
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "附件PDF各自最终加水印版本",
+          "kind": "file",
+          "format": "pdf",
+          "turn_indices": [
+            0,
+            2,
+            3,
+            4,
+            5,
+            7,
+            8,
+            10,
+            11
+          ],
+          "check_ids": [
+            "conv_ab3863a19fb2:final:0:0",
+            "conv_ab3863a19fb2:final:0:1"
+          ]
+        },
+        {
+          "name": "pdf-watermark技能更新最终结果",
+          "kind": "skill",
+          "format": "skill",
+          "turn_indices": [
+            1,
+            6,
+            9
+          ],
+          "check_ids": [
+            "conv_ab3863a19fb2:final:1:0"
+          ]
+        }
+      ],
+      "verdict": "correction_recommended",
+      "basis": "实际绑定PDF的水印修改与现有skill更新明确；更新终态不应另强制导出链接。"
+    },
+    {
+      "sid": "conv_ab9d3c7b3eb5",
+      "category": "OFFICE",
+      "title": "load-test-image-2026-06-25T17:48:07.837+08:00-8",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "3162b621d2c55628a3974ca1b7d7eed0f4f29bfbd7382b0b6f9c4f3b44efc341",
+          "user_content_chars": 35
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "未来感企业智能工作台图片",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_ab9d3c7b3eb5:final:0:0",
+            "conv_ab9d3c7b3eb5:final:0:1",
+            "conv_ab9d3c7b3eb5:final:0:2"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "原用户明确一张图片及16:9。"
+    },
+    {
+      "sid": "conv_ac48282044f1",
+      "category": "OFFICE",
+      "title": "看一下,然后用小圈圈给我标出来",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "3010d06806d3bbcc3984c7c4eb17c10496c95e62ae300e5248b9ed492bf3d42d",
+          "user_content_chars": 15
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "圆形图谜的最终圈注图",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_ac48282044f1:final:0:0",
+            "conv_ac48282044f1:final:0:1"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "在给定图圈注，输出图，无新文档要求。"
+    },
+    {
+      "sid": "conv_b8e9e6e38770",
+      "category": "DATA",
+      "title": "帮我检查这份财务报表的数据是否正确，要符",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "8ddf5ab860cef37f0563a2f72213d3ee8ca5d6c04e674d47bc5bb687cd46d89b",
+          "user_content_chars": 51
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "三表勾稽关系检查结果",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_b8e9e6e38770:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "财务三表为输入，勾稽检查最终文字，无新Excel要求。"
+    },
+    {
+      "sid": "conv_bb5e39c2a2aa",
+      "category": "OFFICE",
+      "title": "解压到当前文件夹下，ai工作区文件夹下",
+      "user_turn_count": 2,
+      "user_turn_indices": [
+        0,
+        1
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "387f7bdd361456dff3b85d847a75d64d3096ed08c10db38c2b7aca7bd180ba54",
+          "user_content_chars": 138
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "9ac26d62e5e35bfe5f7d9a99365a1360138d1f7e40cc4d34a6e4a156bbd9bd39",
+          "user_content_chars": 38
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "AI工作区顶层的解压文件集",
+          "kind": "file",
+          "format": "directory",
+          "turn_indices": [
+            0,
+            1
+          ],
+          "check_ids": [
+            "conv_bb5e39c2a2aa:final:0:0",
+            "conv_bb5e39c2a2aa:final:0:1"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "原用户明确顶层AI工作区解压；成员状态根据输入ZIP。"
+    },
+    {
+      "sid": "conv_bd39d19c227c",
+      "category": "DATA",
+      "title": "请你帮我分析表格数据",
+      "user_turn_count": 2,
+      "user_turn_indices": [
+        0,
+        1
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "f08cdb42ae2d8ae80e97120585875eccd5a80ca56f798b475e278c23cc478217",
+          "user_content_chars": 10
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "17396614dc9b29938e4527d673078375c821dc424dbbe683325c2b65d399d824",
+          "user_content_chars": 8
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "表格分析内容",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_bd39d19c227c:final:0:0"
+          ]
+        },
+        {
+          "name": "文档分析内容",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            1
+          ],
+          "check_ids": [
+            "conv_bd39d19c227c:final:1:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "独立表格分析和文档分析最终文字，无XLSX或DOCX强加。"
+    },
+    {
+      "sid": "conv_c08aefce64c5",
+      "category": "OFFICE",
+      "title": "帮我根据我上传的图片设计一套动作图像 请",
+      "user_turn_count": 4,
+      "user_turn_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "183e2d9d3d3a1b829e6ce948e9bd9fb586d4b2e78166bc9ab44d3b6736af35c6",
+          "user_content_chars": 87
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "b790288bfbf1438312a55365ad170d815ca650ba5469c2a0d33635b54e9af348",
+          "user_content_chars": 44
+        },
+        {
+          "turn_index": 2,
+          "user_content_sha256": "7369e9019893db37b3e1e734fd4b520f295f36c2d46ddbaa294028d1af195993",
+          "user_content_chars": 43
+        },
+        {
+          "turn_index": 3,
+          "user_content_sha256": "1d607d4614f6ca440af48b93b4021bdd7963c703f26af65fa45e937536ce6d19",
+          "user_content_chars": 154
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "角色动作图像组",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_c08aefce64c5:final:0:0"
+          ]
+        },
+        {
+          "name": "爱心动作图最终改色版",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            1,
+            2,
+            3
+          ],
+          "check_ids": [
+            "conv_c08aefce64c5:final:1:0",
+            "conv_c08aefce64c5:final:1:1"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "动作图像组及后续爱心改色图，无旧AI固定动作张数。"
+    },
+    {
+      "sid": "conv_c3df2f18e9c9",
+      "category": "COMM",
+      "title": "我要发送【126邮件】，请引导我获取授权",
+      "user_turn_count": 2,
+      "user_turn_indices": [
+        0,
+        1
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "ca572bd85581ec62f42d8a177ec5abe7ef8528025371bcc0a3f1c49ab842a24c",
+          "user_content_chars": 76
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "ca572bd85581ec62f42d8a177ec5abe7ef8528025371bcc0a3f1c49ab842a24c",
+          "user_content_chars": 76
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "给本人发送的测试邮件",
+          "kind": "service",
+          "format": "smtp",
+          "turn_indices": [
+            0,
+            1
+          ],
+          "check_ids": [
+            "conv_c3df2f18e9c9:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "重复测试邮件只一次终态交付，不加附件。"
+    },
+    {
+      "sid": "conv_c618f1f9fb24",
+      "category": "OFFICE",
+      "title": "请将以上图片转化为ppt格式，内容保持一",
+      "user_turn_count": 2,
+      "user_turn_indices": [
+        0,
+        1
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "fa22a43987ce8ab4d0da2b3805a17803c12606d1ffc1e2740e5890b40a8f5a0f",
+          "user_content_chars": 44
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "ae1dacd5fb0af85c72f0ca34957a8ca0ca713db2401bf483011b814a96113d32",
+          "user_content_chars": 22
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "从参考图转换的一页PPT",
+          "kind": "file",
+          "format": "pptx",
+          "turn_indices": [
+            0,
+            1
+          ],
+          "check_ids": [
+            "conv_c618f1f9fb24:final:0:0",
+            "conv_c618f1f9fb24:final:0:1"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "第0轮转PPT，第1轮只一页，PPTX及页数来自用户。"
+    },
+    {
+      "sid": "conv_ca7f9a3dbef3",
+      "category": "OFFICE",
+      "title": "https://mp.weixin.qq",
+      "user_turn_count": 11,
+      "user_turn_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "c7738ca0f38bd326679b75edc616928982edcd33a4dcd0e2cd1eb527e3e528cb",
+          "user_content_chars": 64
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "029bef316222074de3d8d41a5979928a679bb4268463943534123af21418019d",
+          "user_content_chars": 30
+        },
+        {
+          "turn_index": 2,
+          "user_content_sha256": "3268f120bb34508a86203e8f0286d620b31d75e658ac5278ba0b93d9651900d2",
+          "user_content_chars": 25
+        },
+        {
+          "turn_index": 3,
+          "user_content_sha256": "ac33537d905e8ff89b095ddb30123a03c80f161610bfdc26eb1341284404b813",
+          "user_content_chars": 330
+        },
+        {
+          "turn_index": 4,
+          "user_content_sha256": "28f5006962ad68a6f20f5d6af242d36cfac58403127f7bc6b46d373769b8cf56",
+          "user_content_chars": 88
+        },
+        {
+          "turn_index": 5,
+          "user_content_sha256": "76aa1f69bea19c325e4b16cc38d880e808d9a73a9add84f59addee473d17572a",
+          "user_content_chars": 30
+        },
+        {
+          "turn_index": 6,
+          "user_content_sha256": "339cdf262762a0b1121d0689d225711c712d3723e8e5b358735163c56d26d93a",
+          "user_content_chars": 39
+        },
+        {
+          "turn_index": 7,
+          "user_content_sha256": "0d5ce647f83d2b596f56faa12bb860cabfa2d6d418c41e63eba7508c525c5336",
+          "user_content_chars": 60
+        },
+        {
+          "turn_index": 8,
+          "user_content_sha256": "7e090fc4bca574e88434b550a90962762983cf040419aa280e7a0c0a5fa03237",
+          "user_content_chars": 17
+        },
+        {
+          "turn_index": 9,
+          "user_content_sha256": "6181ebb87d00f3073bb62f366d264a989ac69a74c6a646dfaf770a088f5fee77",
+          "user_content_chars": 11
+        },
+        {
+          "turn_index": 10,
+          "user_content_sha256": "8e94582a63faea4ffc131eee44b3a50ba454e720d34d36a1a81a3e9c8903fad9",
+          "user_content_chars": 20
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "公众号工作流学习与民宿需求确认说明",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            0,
+            1,
+            2,
+            4
+          ],
+          "check_ids": [
+            "conv_ca7f9a3dbef3:final:0:0"
+          ]
+        },
+        {
+          "name": "民宿多角度效果图片最终版",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "check_ids": [
+            "conv_ca7f9a3dbef3:final:1:0",
+            "conv_ca7f9a3dbef3:final:1:1",
+            "conv_ca7f9a3dbef3:final:1:2"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "用户列多视角图和16:9；清单标签不应成为旧AI固定文件名或人工视觉判断。"
+    },
+    {
+      "sid": "conv_cbc028e87deb",
+      "category": "COMM",
+      "title": "我要发送【126邮件】，请引导我获取授权",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "ca572bd85581ec62f42d8a177ec5abe7ef8528025371bcc0a3f1c49ab842a24c",
+          "user_content_chars": 76
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "给本人发送的测试邮件",
+          "kind": "service",
+          "format": "smtp",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_cbc028e87deb:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "测试邮件最终发送状态；个人模拟映射已确认，不加附件。"
+    },
+    {
+      "sid": "conv_d1f719a47afb",
+      "category": "OFFICE",
+      "title": "你看一下get最新一篇纪要，是我刚和珠海",
+      "user_turn_count": 2,
+      "user_turn_indices": [
+        0,
+        1
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "bbcf38c3e0d82611b40e935b7ead2217bb22e12610b7f5348d3d2dbeaf45a187",
+          "user_content_chars": 30
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "b5c9c7d7ceb7e6c475d62f59e19e8da474619a0be97fc3682eba296a20d59b92",
+          "user_content_chars": 10
+        }
+      ],
+      "frozen_final_deliverables": [],
+      "verdict": "excluded_source_audit_only",
+      "basis": "当前仍GET需求，整源排除；不制造纪要输出填补。"
+    },
+    {
+      "sid": "conv_d3cabbe74862",
+      "category": "DATA",
+      "title": "小明，帮我分析一下这个财务报表，经营情况",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "4801aa8753a3a1d95acf46796be646e8fbf77d23a9756d00a742359f988eca40",
+          "user_content_chars": 141
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "经营财报分析内容",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_d3cabbe74862:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "输入三表只要经营分析文字，无Excel输出要求。"
+    },
+    {
+      "sid": "conv_d702dce9aea0",
+      "category": "OFFICE",
+      "title": "根据这份产品介绍PDF文档，帮我设计一份",
+      "user_turn_count": 4,
+      "user_turn_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "5dac953dc3fca31ac6efbea2b022ba4cf833a4c693e017abfb93a452f29ba1e9",
+          "user_content_chars": 4581
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "26f099bb4f175f384e5c8e63ace721840792510a0e3626737313e3449e6c6876",
+          "user_content_chars": 284
+        },
+        {
+          "turn_index": 2,
+          "user_content_sha256": "666c03b296b7b49bef76b04a67b850768302481449243b7083aeb9d837474ede",
+          "user_content_chars": 248
+        },
+        {
+          "turn_index": 3,
+          "user_content_sha256": "87034b2477c341293610b65e9d7c0c56c6077988b70edb9923a6457785890fa8",
+          "user_content_chars": 127
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "数字生成宣传视频每页文字、画面和总结的最终脚本",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "check_ids": [
+            "conv_d702dce9aea0:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "最终只要文字/画面/总结脚本，不要求实际视频文件。"
+    },
+    {
+      "sid": "conv_d828d7185e86",
+      "category": "OFFICE",
+      "title": "load-test-image-2026-06-25T17:48:06.387+08:00-1",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "3162b621d2c55628a3974ca1b7d7eed0f4f29bfbd7382b0b6f9c4f3b44efc341",
+          "user_content_chars": 35
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "未来感企业智能工作台图片",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_d828d7185e86:final:0:0",
+            "conv_d828d7185e86:final:0:1",
+            "conv_d828d7185e86:final:0:2"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "原用户明确一张图片及16:9。"
+    },
+    {
+      "sid": "conv_ebd31d802493",
+      "category": "OFFICE",
+      "title": "生成一张图片，结合新闻内容，今日 8 条",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "aac687f522fefc30d59ec6f544ab66c4bd17f337782ee5f13ed2a29e71d58958",
+          "user_content_chars": 514
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "八条AI热点速览图片",
+          "kind": "file",
+          "format": "image",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_ebd31d802493:final:0:0",
+            "conv_ebd31d802493:final:0:1"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "用户明确一张八热点图，不是八张图或新闻报告。"
+    },
+    {
+      "sid": "conv_edc9bbda3d45",
+      "category": "DATA",
+      "title": "请对D:\\Fei_DP\\作业\\用户反馈.",
+      "user_turn_count": 6,
+      "user_turn_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "3df115370a18fb58e706892417991b0b3b174c05df7f754b266899799a17e224",
+          "user_content_chars": 85
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "3df115370a18fb58e706892417991b0b3b174c05df7f754b266899799a17e224",
+          "user_content_chars": 85
+        },
+        {
+          "turn_index": 2,
+          "user_content_sha256": "6ef769456303313e9970cbcb6aea35f89358f6ca45a6267f3adea567b9044be9",
+          "user_content_chars": 118
+        },
+        {
+          "turn_index": 3,
+          "user_content_sha256": "80727bc326d115b68ae1c439a0fc3d448daff260e54bca6ded051e997eb825a8",
+          "user_content_chars": 137
+        },
+        {
+          "turn_index": 4,
+          "user_content_sha256": "f933f7d124fb7a68c71b0933c1748e175b4f625776d718c73ba684f5351ad782",
+          "user_content_chars": 37
+        },
+        {
+          "turn_index": 5,
+          "user_content_sha256": "ab14c9579262f18081e66a086ea8eec198915bd1d360606af602edb5c5ea2184",
+          "user_content_chars": 102
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "用户反馈分析报告最终Markdown",
+          "kind": "file",
+          "format": "md",
+          "turn_indices": [
+            0,
+            1,
+            5
+          ],
+          "check_ids": [
+            "conv_edc9bbda3d45:final:0:0"
+          ]
+        },
+        {
+          "name": "新增根因及改进建议列的反馈分析Excel",
+          "kind": "file",
+          "format": "xlsx",
+          "turn_indices": [
+            2
+          ],
+          "check_ids": [
+            "conv_edc9bbda3d45:final:1:0",
+            "conv_edc9bbda3d45:final:1:1"
+          ]
+        },
+        {
+          "name": "反馈分析报告PDF交付",
+          "kind": "file",
+          "format": "pdf",
+          "turn_indices": [
+            2
+          ],
+          "check_ids": [
+            "conv_edc9bbda3d45:final:2:0"
+          ]
+        },
+        {
+          "name": "用户反馈分析能力技能",
+          "kind": "skill",
+          "format": "skill",
+          "turn_indices": [
+            2
+          ],
+          "check_ids": [
+            "conv_edc9bbda3d45:final:3:0"
+          ]
+        },
+        {
+          "name": "需求研发关联分析Markdown",
+          "kind": "file",
+          "format": "md",
+          "turn_indices": [
+            3,
+            4
+          ],
+          "check_ids": [
+            "conv_edc9bbda3d45:final:4:0"
+          ]
+        },
+        {
+          "name": "需求研发关联分析HTML",
+          "kind": "file",
+          "format": "html",
+          "turn_indices": [
+            3,
+            4
+          ],
+          "check_ids": [
+            "conv_edc9bbda3d45:final:5:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "各MD、新Excel、PDF、skill、HTML均第0/2/3轮明确，输入Excel未扩成新格式。"
+    },
+    {
+      "sid": "conv_f0d878d4053a",
+      "category": "OFFICE",
+      "title": "请先 学习这份项目简介",
+      "user_turn_count": 2,
+      "user_turn_indices": [
+        0,
+        1
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "ebc4dac1055c89e99896d1427813f6f146bdcd2ba2909a4bb021f0e93910bbf2",
+          "user_content_chars": 12
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "2ccae08d694bada818e3edc602f498083582709f1a7a1fd10f74c909620c6947",
+          "user_content_chars": 54
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "按学习模板整理的项目简介一页PPT",
+          "kind": "file",
+          "format": "pptx",
+          "turn_indices": [
+            1
+          ],
+          "check_ids": [
+            "conv_f0d878d4053a:final:0:0",
+            "conv_f0d878d4053a:final:0:1"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "第1轮明确一页PPT且含产品图片，格式及恰1页来自用户。"
+    },
+    {
+      "sid": "conv_f5d7f89883e2",
+      "category": "OFFICE",
+      "title": "分析该文件",
+      "user_turn_count": 1,
+      "user_turn_indices": [
+        0
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "d9f1a49a0ca311ec5b37d94485c88ac08da978d47cecd5cc0f396e4cf5fde8ae",
+          "user_content_chars": 5
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "教学设计文件分析内容",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            0
+          ],
+          "check_ids": [
+            "conv_f5d7f89883e2:final:0:0"
+          ]
+        }
+      ],
+      "verdict": "format_basis_confirmed",
+      "basis": "教学设计文件分析只需文字，不加新Word/PDF。"
+    },
+    {
+      "sid": "conv_fcee61c6481d",
+      "category": "DATA",
+      "title": "小P你可以操控我的电脑界面吗",
+      "user_turn_count": 57,
+      "user_turn_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56
+      ],
+      "user_content_pins": [
+        {
+          "turn_index": 0,
+          "user_content_sha256": "bc719f792dec17eac6a12e4ca801195ef0a0393620574b221efb8ac96b819c0f",
+          "user_content_chars": 66
+        },
+        {
+          "turn_index": 1,
+          "user_content_sha256": "fedd52aae40f69ef44b61c81b310db775f49c4971ac84f366a89b7a898fe7cad",
+          "user_content_chars": 64
+        },
+        {
+          "turn_index": 2,
+          "user_content_sha256": "b419bd50ea87bf9ee563ebd9ebba15060742bfbe7c8e54ee680fc77e1c235f28",
+          "user_content_chars": 31
+        },
+        {
+          "turn_index": 3,
+          "user_content_sha256": "f0e57af3ec34a72bc93fdb392023588e0682c7c6592def6e61e38c8de3d2d793",
+          "user_content_chars": 27
+        },
+        {
+          "turn_index": 4,
+          "user_content_sha256": "e6da65cda1922c7338bf53f8be34ecfc86f3afec8bfba39594757b2a0460c6c2",
+          "user_content_chars": 27
+        },
+        {
+          "turn_index": 5,
+          "user_content_sha256": "a62391c34c89a8064fe8956694bb8316eafc1147e2c42b4d902b3f513510dd6e",
+          "user_content_chars": 90
+        },
+        {
+          "turn_index": 6,
+          "user_content_sha256": "d67b62e35c30cb3c62e5d66a74ed3bfdc59d50a7b89cdc24470bafc90a7603d8",
+          "user_content_chars": 44
+        },
+        {
+          "turn_index": 7,
+          "user_content_sha256": "6cb9b86aed3d1040efa8fd369368dc0daf0521937dd95df5f6fa1ad6dde7809d",
+          "user_content_chars": 147
+        },
+        {
+          "turn_index": 8,
+          "user_content_sha256": "0c9d97ea34f91548aea88c53d44d2d1115c66e317a7bb072057287ea8709d08f",
+          "user_content_chars": 54
+        },
+        {
+          "turn_index": 9,
+          "user_content_sha256": "70b28c35ac0ba9b81c12a51e9f55ee2972c46fc8533e416214f24cbfbc87c7ae",
+          "user_content_chars": 53
+        },
+        {
+          "turn_index": 10,
+          "user_content_sha256": "0ec4ffb3bacbbe44d313645bb37318076e46793292e1161a848b163d1b920fca",
+          "user_content_chars": 31
+        },
+        {
+          "turn_index": 11,
+          "user_content_sha256": "41fd54354e44030ba072c5b12dfbece41ce28f15a6107f9e7becdc3caafa4bc4",
+          "user_content_chars": 26
+        },
+        {
+          "turn_index": 12,
+          "user_content_sha256": "8660612e5f9a894a8df581175cbfef7435e4f44e1c3ed7c9b3dda04cceaf7985",
+          "user_content_chars": 40
+        },
+        {
+          "turn_index": 13,
+          "user_content_sha256": "597dbaefa4ae8e9719687a0f52fa2f1ba8f9bc390c835b5b3e824a01222c15ff",
+          "user_content_chars": 58
+        },
+        {
+          "turn_index": 14,
+          "user_content_sha256": "a70b6568513e6d121c8fecfd3692915d03352d133e3de15f6a84d2cfec38eb9f",
+          "user_content_chars": 44
+        },
+        {
+          "turn_index": 15,
+          "user_content_sha256": "fc4f6c227b3e2b8ca3d30ad84b6bde4bf6cbce4b705b4799b82eed67f6961c8e",
+          "user_content_chars": 38
+        },
+        {
+          "turn_index": 16,
+          "user_content_sha256": "f59ab164fce1d722684891e6865bdfa5fb3fb8dc8abae31bb25492dff4fd5681",
+          "user_content_chars": 37
+        },
+        {
+          "turn_index": 17,
+          "user_content_sha256": "019a3de4111ae600508b9f9dd3d06c8d6f197907a24dca397e8098c4eb2c9b39",
+          "user_content_chars": 263
+        },
+        {
+          "turn_index": 18,
+          "user_content_sha256": "3f46e1248a174d2775d685acc17d94a0a868156ddb74780ec9a99db31857d915",
+          "user_content_chars": 31
+        },
+        {
+          "turn_index": 19,
+          "user_content_sha256": "67b25c8c1b9943c583c24f4b73969ee13e00be93544db41c74296c5d9c8b4119",
+          "user_content_chars": 54
+        },
+        {
+          "turn_index": 20,
+          "user_content_sha256": "796faae4c7e302fb52149bc3a700069ff0ea4d55c5e9779b914272dbf95d0630",
+          "user_content_chars": 104
+        },
+        {
+          "turn_index": 21,
+          "user_content_sha256": "4658067c0b14cf839046d278ee41082a20421256b6b552b15efe56bb74a6a5bd",
+          "user_content_chars": 58
+        },
+        {
+          "turn_index": 22,
+          "user_content_sha256": "7dd6dce8890bbedce6d84750b0ee3c0b68cf014e3c8250e066989dfeeaefed7e",
+          "user_content_chars": 50
+        },
+        {
+          "turn_index": 23,
+          "user_content_sha256": "f5514b625d24fa208eb2f7b095854df07c3f10e80361af93de3eba46efdfc71d",
+          "user_content_chars": 37
+        },
+        {
+          "turn_index": 24,
+          "user_content_sha256": "8e2c6fb340917972d692f99abf5e6cace03a24e9c9c6136593a4024f514cf886",
+          "user_content_chars": 77
+        },
+        {
+          "turn_index": 25,
+          "user_content_sha256": "b6da3abf2730c3478605e28e3b8b644a12c91ac1ded79a6c11c0c490faed2bf9",
+          "user_content_chars": 59
+        },
+        {
+          "turn_index": 26,
+          "user_content_sha256": "8ac7f507bf177f32fc881e79fb57652bf45daaaaafa2bccb9c7d8df321b96376",
+          "user_content_chars": 40
+        },
+        {
+          "turn_index": 27,
+          "user_content_sha256": "090b225c2c9b7ac465e84c36be29cbd9741e6db3fefcc62467ef01945636ab24",
+          "user_content_chars": 54
+        },
+        {
+          "turn_index": 28,
+          "user_content_sha256": "39807ca57d7d6356287a1d2641aad259f68d62bbe911ad80baa1dee5d2f98608",
+          "user_content_chars": 60
+        },
+        {
+          "turn_index": 29,
+          "user_content_sha256": "778d28af6923f438e8eccf633d806f6eb4a1e45a4e17ca64decd6028c5ad4616",
+          "user_content_chars": 35
+        },
+        {
+          "turn_index": 30,
+          "user_content_sha256": "a7caa485041709fc0ab0b434ddbf411fa09327ff4d8dff7a9ffd09b36fc5bdda",
+          "user_content_chars": 56
+        },
+        {
+          "turn_index": 31,
+          "user_content_sha256": "6ce45db50ac827e1f3592e17e1b56f71c62c166192ba58d86d9dc75a1870764e",
+          "user_content_chars": 73
+        },
+        {
+          "turn_index": 32,
+          "user_content_sha256": "6d2428d50549837de13a4003d84496a6cc5d137a59ef806ae018a5254e35e149",
+          "user_content_chars": 83
+        },
+        {
+          "turn_index": 33,
+          "user_content_sha256": "9ad3b62372604b968057eaee39872ac5490dc5fe527db7aeb8bd471d6efe5388",
+          "user_content_chars": 82
+        },
+        {
+          "turn_index": 34,
+          "user_content_sha256": "385536b9e955c04ec8acd5d03cd25c982b1f39b7fef72bb23cc492af1ff6d838",
+          "user_content_chars": 60
+        },
+        {
+          "turn_index": 35,
+          "user_content_sha256": "c0867cf5b25a33c0766fa88e6201864efce04bb17044ee46155ad9f0ade0ef48",
+          "user_content_chars": 70
+        },
+        {
+          "turn_index": 36,
+          "user_content_sha256": "9a187c9c1bc0030d158ed602e9fa3217b1faeb90795ec4e916ea88db129e7973",
+          "user_content_chars": 55
+        },
+        {
+          "turn_index": 37,
+          "user_content_sha256": "f61a118e9dffe614b7f72638b6b074274efcf7f575dfdafac8c6723febe53b09",
+          "user_content_chars": 69
+        },
+        {
+          "turn_index": 38,
+          "user_content_sha256": "597dbaefa4ae8e9719687a0f52fa2f1ba8f9bc390c835b5b3e824a01222c15ff",
+          "user_content_chars": 58
+        },
+        {
+          "turn_index": 39,
+          "user_content_sha256": "c64ea26eaf0522fc64836ff62e9f967067c5b2f9e1a6a3abb8de78f817724df6",
+          "user_content_chars": 73
+        },
+        {
+          "turn_index": 40,
+          "user_content_sha256": "18e5a97800bb24fefd9be4cfa6d014f1e9f648b628be77836426a36082375b8c",
+          "user_content_chars": 67
+        },
+        {
+          "turn_index": 41,
+          "user_content_sha256": "5cece45ece4c7bef9726f73a1a3c465c7584f65b813a49263eb482e78854569d",
+          "user_content_chars": 66
+        },
+        {
+          "turn_index": 42,
+          "user_content_sha256": "25fcd98a383704f8032280ddcaad8fcf6eed9d680bd9823032e263eb7f62eb3c",
+          "user_content_chars": 292
+        },
+        {
+          "turn_index": 43,
+          "user_content_sha256": "3f46e1248a174d2775d685acc17d94a0a868156ddb74780ec9a99db31857d915",
+          "user_content_chars": 31
+        },
+        {
+          "turn_index": 44,
+          "user_content_sha256": "20cca2f034caa3139f8804a4217c1dcdd1957c2875d61f09eec2050cd61e23eb",
+          "user_content_chars": 133
+        },
+        {
+          "turn_index": 45,
+          "user_content_sha256": "c067b0a9db77da8174503fbea0218ca3de9733252d4a9fb6be8847d588968481",
+          "user_content_chars": 79
+        },
+        {
+          "turn_index": 46,
+          "user_content_sha256": "84f233f2af50e15c626ca19387f338dbb3bd73f2b83825a139c5c2c4319f3fbc",
+          "user_content_chars": 66
+        },
+        {
+          "turn_index": 47,
+          "user_content_sha256": "dfedc582ce8b783700c37d7120952e1e7be55c4922076baccd071662580b16e0",
+          "user_content_chars": 88
+        },
+        {
+          "turn_index": 48,
+          "user_content_sha256": "6b8aecc9ad57ef58a720f78d58801332bad0f999cb91254557f5de47fd13b914",
+          "user_content_chars": 39
+        },
+        {
+          "turn_index": 49,
+          "user_content_sha256": "674f5bce435901a1ea8d54c51c15c327d5c3536034f267276a3a8064f920a986",
+          "user_content_chars": 27
+        },
+        {
+          "turn_index": 50,
+          "user_content_sha256": "72a3cdd34c6ce751c6234f162e79fdd430693eaed57cd28a9bd29b518f61e6f2",
+          "user_content_chars": 69
+        },
+        {
+          "turn_index": 51,
+          "user_content_sha256": "a6ce938914168505826a71ac1f232c8837ed8be2c49474942cb25e550568cb32",
+          "user_content_chars": 55
+        },
+        {
+          "turn_index": 52,
+          "user_content_sha256": "a882c3b559b69e1b89c5f2f1a75f8c1ab7049865dc2828b89c5a4667879a0633",
+          "user_content_chars": 83
+        },
+        {
+          "turn_index": 53,
+          "user_content_sha256": "627dc9d2eb2bf6224599cd4ead2e06822f341640974d2611d2c8dc59a6d161cc",
+          "user_content_chars": 64
+        },
+        {
+          "turn_index": 54,
+          "user_content_sha256": "c235d5e5ee6ddb628fd3936ff02cb98c54601e8ad5866b2fcf630b5fa82222b9",
+          "user_content_chars": 99
+        },
+        {
+          "turn_index": 55,
+          "user_content_sha256": "7aab11878db9731564e0ecdf2a3176bfa9cb10442cf1988fc1f24c276e2f95e5",
+          "user_content_chars": 52
+        },
+        {
+          "turn_index": 56,
+          "user_content_sha256": "3bc7417949f7eac0d520e88dccd05b5d35c71b533abdafd2cd9528d246c88948",
+          "user_content_chars": 78
+        }
+      ],
+      "frozen_final_deliverables": [
+        {
+          "name": "未实缴投资以及借还款会计分录说明最终内容",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            5,
+            20,
+            44
+          ],
+          "check_ids": [
+            "conv_fcee61c6481d:final:0:0"
+          ]
+        },
+        {
+          "name": "游戏MOD加入方法",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            8,
+            32
+          ],
+          "check_ids": [
+            "conv_fcee61c6481d:final:1:0"
+          ]
+        },
+        {
+          "name": "运势和塔罗文字答复",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            9,
+            10,
+            33,
+            34
+          ],
+          "check_ids": [
+            "conv_fcee61c6481d:final:2:0"
+          ]
+        },
+        {
+          "name": "财务岗位需学习的知识技能建议",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            22,
+            45
+          ],
+          "check_ids": [
+            "conv_fcee61c6481d:final:3:0"
+          ]
+        },
+        {
+          "name": "上海未来五天天气文字交付",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            23,
+            46
+          ],
+          "check_ids": [
+            "conv_fcee61c6481d:final:4:0"
+          ]
+        },
+        {
+          "name": "红冲不释放额度与无公章银行注销说明",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            12,
+            13,
+            37,
+            38
+          ],
+          "check_ids": [
+            "conv_fcee61c6481d:final:5:0"
+          ]
+        },
+        {
+          "name": "无畏契约英雄与各地图点位建议",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            14,
+            15,
+            16,
+            39,
+            40,
+            41
+          ],
+          "check_ids": [
+            "conv_fcee61c6481d:final:6:0"
+          ]
+        },
+        {
+          "name": "文件夹上传说明",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            26,
+            50
+          ],
+          "check_ids": [
+            "conv_fcee61c6481d:final:7:0"
+          ]
+        },
+        {
+          "name": "橘色猫Steam头像框信息",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            27,
+            29,
+            52,
+            53
+          ],
+          "check_ids": [
+            "conv_fcee61c6481d:final:8:0"
+          ]
+        },
+        {
+          "name": "用户负责企业的一般纳税人查询结果",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            35,
+            54
+          ],
+          "check_ids": [
+            "conv_fcee61c6481d:final:9:0"
+          ]
+        },
+        {
+          "name": "谷歌邮箱注册及连接相关文字说明",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            48,
+            49
+          ],
+          "check_ids": [
+            "conv_fcee61c6481d:final:10:0"
+          ]
+        },
+        {
+          "name": "八月份企业电子税务局和自然人电子税务局操作清单",
+          "kind": "text",
+          "format": "text",
+          "turn_indices": [
+            7
+          ],
+          "check_ids": [
+            "conv_fcee61c6481d:final:11:0"
+          ]
+        },
+        {
+          "name": "用户指定公司基本信息的保存记录",
+          "kind": "file",
+          "format": "text",
+          "turn_indices": [
+            7
+          ],
+          "check_ids": [
+            "conv_fcee61c6481d:final:12:0"
+          ]
+        },
+        {
+          "name": "胆大发工资月度任务登记",
+          "kind": "service",
+          "format": "cron_registration",
+          "turn_indices": [
+            19
+          ],
+          "check_ids": [
+            "conv_fcee61c6481d:final:13:0"
+          ]
+        },
+        {
+          "name": "诚弓银行资料月度提醒最终登记",
+          "kind": "service",
+          "format": "cron_registration",
+          "turn_indices": [
+            25,
+            47
+          ],
+          "check_ids": [
+            "conv_fcee61c6481d:final:14:0"
+          ]
+        },
+        {
+          "name": "对话中交付的壹十八营业执照正本PDF",
+          "kind": "file",
+          "format": "pdf",
+          "turn_indices": [
+            24,
+            28
+          ],
+          "check_ids": [
+            "conv_fcee61c6481d:final:15:0"
+          ]
+        },
+        {
+          "name": "重新交付的人员照片Excel最终版",
+          "kind": "file",
+          "format": "xlsx",
+          "turn_indices": [
+            51,
+            55,
+            56
+          ],
+          "check_ids": [
+            "conv_fcee61c6481d:final:16:0",
+            "conv_fcee61c6481d:final:16:1"
+          ]
+        }
+      ],
+      "verdict": "correction_recommended",
+      "basis": "记一下公司是保存状态，非必须文本文件；照片XLSX按实际输入编辑；执照返回恢复输入PDF，无历史页数强加。"
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+{
+  "sid": "conv_8a594fd46217",
+  "session_id": "conv_8a594fd46217",
+  "title": "知识库整理与当前记忆查看",
+  "category": "KNOW",
+  "status": "proposed_active",
+  "final_target": "知识库整理终态；记忆读取正文",
+  "final_deliverables": [
+    {
+      "name": "知识库整理终态",
+      "kind": "service",
+      "format": "state_snapshot",
+      "turn_indices": [
+        0,
+        1,
+        2
+      ],
+      "checks": [
+        {
+          "kind": "final_state_readback",
+          "parameters": {},
+          "mandatory": true,
+          "point_id": "conv_8a594fd46217:delivery1:check1",
+          "display_object": "知识库整理终态",
+          "requirement_basis": [
+            {
+              "turn": 1,
+              "quote": "整理知识库"
+            },
+            {
+              "turn": 2,
+              "quote": "整理知识库"
+            }
+          ],
+          "evidence_method": "本次服务/知识存储的最终查询返回、可解析状态快照或实际保存文件；关联当前会话和对象“知识库整理终态”。",
+          "passing_condition": "需读本次终态已保存结果并关联attempt，不允许输入附件或旧状态被声称为新整理/导入结果；不强制用户未指定的改动数量或固定知识条数。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。",
+          "score_at": "conversation_end_only",
+          "audit_action": "replace",
+          "audit_rationale": "需读本次终态已保存结果并关联attempt，不允许输入附件或旧状态被声称为新整理/导入结果；不强制用户未指定的改动数量或固定知识条数。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。"
+        }
+      ],
+      "id": "delivery_01",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    },
+    {
+      "name": "记忆读取正文",
+      "kind": "text",
+      "format": null,
+      "turn_indices": [
+        0,
+        1,
+        2
+      ],
+      "checks": [
+        {
+          "kind": "delivered_body_nonempty",
+          "parameters": {
+            "strip_whitespace": true,
+            "no_minimum_words_invented": true,
+            "semantic_completion_not_inferred": true
+          },
+          "mandatory": true,
+          "point_id": "conv_8a594fd46217:delivery2:check1",
+          "display_object": "记忆读取正文",
+          "requirement_basis": [
+            {
+              "turn": 1,
+              "quote": "整理知识库"
+            },
+            {
+              "turn": 2,
+              "quote": "整理知识库"
+            }
+          ],
+          "evidence_method": "本次运行的“记忆读取正文”交付消息/最终文件正文及去空白长度；排除原AI记录。",
+          "passing_condition": "原非空点只按相关文本集合，需改为对应最终交付对象绑定，避免拿计划、无关聊天或工具状态充作新交付；不加语义质量Judge。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。",
+          "score_at": "conversation_end_only",
+          "audit_action": "replace",
+          "audit_rationale": "原非空点只按相关文本集合，需改为对应最终交付对象绑定，避免拿计划、无关聊天或工具状态充作新交付；不加语义质量Judge。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。"
+        }
+      ],
+      "id": "delivery_02",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    }
+  ],
+  "checks": [
+    {
+      "delivery_id": "delivery_01",
+      "kind": "final_state_readback",
+      "parameters": {},
+      "mandatory": true,
+      "point_id": "conv_8a594fd46217:delivery1:check1",
+      "display_object": "知识库整理终态",
+      "requirement_basis": [
+        {
+          "turn": 1,
+          "quote": "整理知识库"
+        },
+        {
+          "turn": 2,
+          "quote": "整理知识库"
+        }
+      ],
+      "evidence_method": "本次服务/知识存储的最终查询返回、可解析状态快照或实际保存文件；关联当前会话和对象“知识库整理终态”。",
+      "passing_condition": "需读本次终态已保存结果并关联attempt，不允许输入附件或旧状态被声称为新整理/导入结果；不强制用户未指定的改动数量或固定知识条数。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。",
+      "score_at": "conversation_end_only",
+      "audit_action": "replace",
+      "audit_rationale": "需读本次终态已保存结果并关联attempt，不允许输入附件或旧状态被声称为新整理/导入结果；不强制用户未指定的改动数量或固定知识条数。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。"
+    },
+    {
+      "delivery_id": "delivery_02",
+      "kind": "delivered_body_nonempty",
+      "parameters": {
+        "strip_whitespace": true,
+        "no_minimum_words_invented": true,
+        "semantic_completion_not_inferred": true
+      },
+      "mandatory": true,
+      "point_id": "conv_8a594fd46217:delivery2:check1",
+      "display_object": "记忆读取正文",
+      "requirement_basis": [
+        {
+          "turn": 1,
+          "quote": "整理知识库"
+        },
+        {
+          "turn": 2,
+          "quote": "整理知识库"
+        }
+      ],
+      "evidence_method": "本次运行的“记忆读取正文”交付消息/最终文件正文及去空白长度；排除原AI记录。",
+      "passing_condition": "原非空点只按相关文本集合，需改为对应最终交付对象绑定，避免拿计划、无关聊天或工具状态充作新交付；不加语义质量Judge。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。",
+      "score_at": "conversation_end_only",
+      "audit_action": "replace",
+      "audit_rationale": "原非空点只按相关文本集合，需改为对应最终交付对象绑定，避免拿计划、无关聊天或工具状态充作新交付；不加语义质量Judge。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。"
+    }
+  ],
+  "ignored_details": [
+    "历史AI答案与原生产物不是本次gold；不评分中间轮次success、技能调用、主观质量或法律/科学/金融正确性。"
+  ],
+  "input_bindings_needed": [],
+  "original_user_turn_indices_inspected": [
+    0,
+    1,
+    2
+  ],
+  "requirement_source": "D:\\skillloop\\benchmark\\enterprise_environment_admitted_v7_20261009\\有效轨迹.jsonl",
+  "original_trace_sha256": "4404836e7181c9c9e3dda3400b514aeea6ef7bbf1794c400c844b50b735032fe",
+  "prior_analysis_path": "D:\\skillloop\\output\\20261010_evaluation_delivery_verifiability\\edu_know_news_life.json",
+  "reviewed": false,
+  "rubric_activated": false,
+  "assessment_executed": false,
+  "schema": "audited-per-task-delivery-contract-v1",
+  "score_at": "conversation_end_only",
+  "full_user_input_review": true,
+  "checked_user_turn_indices": [
+    0,
+    1,
+    2
+  ],
+  "actor_can_see_historical_ai": false,
+  "quality_scored": false,
+  "intermediate_steps_scored": false,
+  "manual_judgement_scored": false,
+  "review_status": "audited_for_basic_delivery_only",
+  "validators_execution_status": "offline_controls_only_not_business_run",
+  "summary": "依据本来源投递的工作流程、项目事项登记和近期项目周报，两次请求整理知识库，随后要求查看记忆。终态保留可重新读回的知识库整理状态与记忆说明正文，同一整理对象不按重复请求累加。未要求新增定时任务、固定记忆条数或合并删除特定资料。",
+  "category_name": "知识库、记忆与资料整理",
+  "design_audit_status": "approved_basic_delivery_design",
+  "execution_preflight": {
+    "status": "current_attempt_evidence_required"
+  },
+  "user_source_texts": [
+    "整理知识库\n\n【本轮实际提供的输入文件】\n- 部门工作流程.docx：/workspace/个人知识库/合成环境材料/部门工作流程.docx（实验重建输入）\n- 项目事项原始登记.xlsx：/workspace/个人知识库/合成环境材料/项目事项原始登记.xlsx（实验重建输入）\n- 近期项目周报.md：/workspace/个人知识库/合成环境材料/近期项目周报.md（实验重建输入）",
+    "整理知识库",
+    "查看记忆"
+  ],
+  "input_source_specs": [
+    {
+      "mount": "个人知识库/合成环境材料/部门工作流程.docx",
+      "format": "docx",
+      "synthetic": true,
+      "provenance": null,
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\734c7e3aff18e08215d269bf3913a959ab0812bf9ecb50f88c2a8456bbc4d069\\部门工作流程.docx",
+      "sha256": "734c7e3aff18e08215d269bf3913a959ab0812bf9ecb50f88c2a8456bbc4d069"
+    },
+    {
+      "mount": "个人知识库/合成环境材料/项目事项原始登记.xlsx",
+      "format": "xlsx",
+      "synthetic": true,
+      "provenance": null,
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\05c2a7a1c969bc4262383602bcf663ec2feb2cf6f04317d246506c1b869c0153\\项目事项原始登记.xlsx",
+      "sha256": "05c2a7a1c969bc4262383602bcf663ec2feb2cf6f04317d246506c1b869c0153"
+    },
+    {
+      "mount": "个人知识库/合成环境材料/近期项目周报.md",
+      "format": "md",
+      "synthetic": true,
+      "provenance": null,
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\e1b2517525a13301358db7afd272511cbeb9eb5f75bcf965f7dc98812235e02b\\近期项目周报.md",
+      "sha256": "e1b2517525a13301358db7afd272511cbeb9eb5f75bcf965f7dc98812235e02b"
+    }
+  ]
+}

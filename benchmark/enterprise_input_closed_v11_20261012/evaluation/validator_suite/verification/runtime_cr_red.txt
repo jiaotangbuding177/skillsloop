@@ -1,0 +1,68 @@
+....FE...FF.F......F.........
+======================================================================
+ERROR: test_engine_dependency_fault_returns_unscored (test_runtime.RuntimeControls.test_engine_dependency_fault_returns_unscored)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\skillloop\output\20261012_task_validator_suite\tests\test_runtime.py", line 244, in test_engine_dependency_fault_returns_unscored
+    out = self.score(self.request())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\skillloop\output\20261012_task_validator_suite\tests\test_runtime.py", line 47, in score
+    return runtime.score_task_request(req, c or contract())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\skillloop\output\20261012_task_validator_suite\_runtime.py", line 167, in score_task_request
+    base = load_engine()
+           ^^^^^^^^^^^^^
+  File "C:\Users\22142\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\unittest\mock.py", line 1139, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\22142\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\unittest\mock.py", line 1143, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\22142\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\unittest\mock.py", line 1198, in _execute_mock_call
+    raise effect
+ImportError: missing runtime dependency
+
+======================================================================
+FAIL: test_copy_of_unchanged_old_file_under_new_name_is_rejected (test_runtime.RuntimeControls.test_copy_of_unchanged_old_file_under_new_name_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\skillloop\output\20261012_task_validator_suite\tests\test_runtime.py", line 213, in test_copy_of_unchanged_old_file_under_new_name_is_rejected
+    self.assertEqual(self.score(req, self.file_contract())['score'], 0)
+AssertionError: 1 != 0
+
+======================================================================
+FAIL: test_fixed_daily_schedule_cannot_be_changed_by_resolution (test_runtime.RuntimeControls.test_fixed_daily_schedule_cannot_be_changed_by_resolution)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\skillloop\output\20261012_task_validator_suite\tests\test_runtime.py", line 230, in test_fixed_daily_schedule_cannot_be_changed_by_resolution
+    self.assertIsNone(self.score(req, c)['score'])
+AssertionError: 1 is not None
+
+======================================================================
+FAIL: test_fixed_daily_schedule_does_not_need_output_as_gold (test_runtime.RuntimeControls.test_fixed_daily_schedule_does_not_need_output_as_gold)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\skillloop\output\20261012_task_validator_suite\tests\test_runtime.py", line 240, in test_fixed_daily_schedule_does_not_need_output_as_gold
+    self.assertEqual(self.score(req, c)['score'], 1)
+AssertionError: None != 1
+
+======================================================================
+FAIL: test_invalid_input_inventory_digest_is_measurement_fault (test_runtime.RuntimeControls.test_invalid_input_inventory_digest_is_measurement_fault)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\skillloop\output\20261012_task_validator_suite\tests\test_runtime.py", line 219, in test_invalid_input_inventory_digest_is_measurement_fault
+    self.assertIsNone(self.score(req, self.file_contract())['score'])
+AssertionError: 1 is not None
+
+======================================================================
+FAIL: test_prefilled_job_identity_without_real_initial_snapshot_not_trusted (test_runtime.RuntimeControls.test_prefilled_job_identity_without_real_initial_snapshot_not_trusted)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\skillloop\output\20261012_task_validator_suite\tests\test_runtime.py", line 252, in test_prefilled_job_identity_without_real_initial_snapshot_not_trusted
+    self.assertNotIn('original_job_id', enriched['evidence']['timeout_change_readbacks'][0])
+AssertionError: 'original_job_id' unexpectedly found in {'original_job_id': 'old_job', 'job_id': 'new_job'}
+
+----------------------------------------------------------------------
+Ran 29 tests in 0.106s
+
+FAILED (failures=5, errors=1)

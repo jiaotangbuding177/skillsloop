@@ -1,0 +1,547 @@
+{
+  "sid": "conv_965cf7b2c858",
+  "category": "OFFICE",
+  "title": "制作马校长大会发言逐页图片、三图拼图及PDF",
+  "user_turn_count": 7,
+  "scoring_time": "one_pass_at_session_end",
+  "final_target": "会议PPT每页生图提示词；大会发言PPT逐页图片最终版；前三张图的合并展示图片；拼接的大会发言PDF",
+  "final_deliverables": [
+    {
+      "name": "会议PPT每页生图提示词",
+      "kind": "text",
+      "format": "text",
+      "turn_indices": [
+        0
+      ],
+      "final_version_only": true,
+      "checks": [
+        {
+          "kind": "delivered_text_nonempty",
+          "parameters": {
+            "trim_whitespace": true
+          },
+          "mandatory": true,
+          "point_id": "conv_965cf7b2c858:delivery1:check1",
+          "display_object": "会议PPT每页生图提示词",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              1
+            ],
+            "quote": "用户输入索引0（第1轮）：你看一下附件几个资料，我要给马校长做一份PPT，用于大会发言，我准备PPT每一页都生图来制作，帮我先生成生图提示词，我要求浅色背景，带有华师大元素，文字输出 [附加文件: GUPLS26_DigitalPoster_210x297mm_V1 (1) (2).pdf (/works。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "会话终态读取本次向用户交付的「会议PPT每页生图提示词」文字集合，去掉空白后仍非空；允许相应文件原生抽取正文。不把计划、声明与实质完成做语义区分，不核事实或专业正确性。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+        }
+      ],
+      "delivery_id": "conv_965cf7b2c858:final:0",
+      "id": "delivery_01",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    },
+    {
+      "name": "大会发言PPT逐页图片最终版",
+      "kind": "file",
+      "format": "image",
+      "turn_indices": [
+        1,
+        2,
+        4,
+        6
+      ],
+      "final_version_only": true,
+      "checks": [
+        {
+          "kind": "delivered_file_open",
+          "parameters": {
+            "format": "image"
+          },
+          "mandatory": true,
+          "point_id": "conv_965cf7b2c858:delivery2:check1",
+          "display_object": "大会发言PPT逐页图片最终版",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              2,
+              3,
+              5,
+              7
+            ],
+            "quote": "用户输入索引1（第2轮）：先用图片生成PPT，生成前三页，逐页生成，high quality；用户输入索引6（第7轮）：请先读取我附加的当前文件（原文件名：page_004_保护知识的源头.png）的内容。 我接下来会补充具体修改要求。 处理时请保持事实准确、引用清晰，避免杜撰、虚构；如果涉及数据结论，请说明依据，必要时通过脚本验算。 这一页和其他几页图片背景存在明显色差，重新调整 [附加文件: 。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "本次「大会发言PPT逐页图片最终版」实际交付链接或路径可解析到当前可用的已声明的最终文件，image数据非空，并能用图片解码器打开，包含像素尺寸及有效图像帧。同一对象只计最终有效版本。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+        },
+        {
+          "kind": "manifest_corresponding_artifacts",
+          "parameters": {
+            "count_from": "current_attempt_prompt_page_manifest",
+            "manifest_source": "actually_delivered_prompt_text_for_turn_1",
+            "freeze_manifest_before_image_phase": true,
+            "require_one_readable_final_image_per_page": true,
+            "reject_terminal_self_declared_subsets": true
+          },
+          "mandatory": true,
+          "point_id": "conv_965cf7b2c858:delivery2:check2",
+          "display_object": "大会发言PPT逐页图片最终版",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              1,
+              2,
+              5
+            ],
+            "quote": "帮我先生成生图提示词"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "用户明确条目或生图前冻结的本次逐页提示词条目全部对应非重复、可读的最终图像。",
+          "score_at": "conversation_end_only",
+          "audit_action": "replace",
+          "audit_metadata_not_execution_parameters": {
+            "count_from": "current_attempt_prompt_page_manifest",
+            "manifest_source": "actually_delivered_prompt_text_for_turn_1",
+            "freeze_manifest_before_image_phase": true,
+            "require_one_readable_final_image_per_page": true,
+            "final_version_per_page": true,
+            "reject_terminal_self_declared_subsets": true
+          },
+          "audit_rationale": "按本次实际提示词页清单验逐页图片；明确前三页及随后继续不允许终态随意少报页。"
+        },
+        {
+          "kind": "delivered_artifact_count_minimum",
+          "parameters": {
+            "minimum": 4
+          },
+          "mandatory": true,
+          "point_id": "conv_965cf7b2c858:delivery2:check3",
+          "display_object": "大会发言PPT逐页图片最终版",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              2,
+              3,
+              5,
+              7
+            ],
+            "quote": "用户输入索引1（第2轮）：先用图片生成PPT，生成前三页，逐页生成，high quality；用户输入索引6（第7轮）：请先读取我附加的当前文件（原文件名：page_004_保护知识的源头.png）的内容。 我接下来会补充具体修改要求。 处理时请保持事实准确、引用清晰，避免杜撰、虚构；如果涉及数据结论，请说明依据，必要时通过脚本验算。 这一页和其他几页图片背景存在明显色差，重新调整 [附加文件: 。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "「大会发言PPT逐页图片最终版」最终逐页图片至少4张，不把同页旧版重复计为新页。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+        }
+      ],
+      "delivery_id": "conv_965cf7b2c858:final:1",
+      "id": "delivery_02",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    },
+    {
+      "name": "前三张图的合并展示图片",
+      "kind": "file",
+      "format": "image",
+      "turn_indices": [
+        3
+      ],
+      "final_version_only": true,
+      "checks": [
+        {
+          "kind": "delivered_file_open",
+          "parameters": {
+            "format": "image"
+          },
+          "mandatory": true,
+          "point_id": "conv_965cf7b2c858:delivery3:check1",
+          "display_object": "前三张图的合并展示图片",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              4
+            ],
+            "quote": "用户输入索引3（第4轮）：把这三张图先拼到一张图里面展示。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "本次「前三张图的合并展示图片」实际交付链接或路径可解析到当前可用的已声明的最终文件，image数据非空，并能用图片解码器打开，包含像素尺寸及有效图像帧。同一对象只计最终有效版本。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+        },
+        {
+          "kind": "delivered_artifact_count",
+          "parameters": {
+            "count": 1
+          },
+          "mandatory": true,
+          "point_id": "conv_965cf7b2c858:delivery3:check2",
+          "display_object": "前三张图的合并展示图片",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              4
+            ],
+            "quote": "用户输入索引3（第4轮）：把这三张图先拼到一张图里面展示。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "「前三张图的合并展示图片」交付清单中恰有1张不同的最终有效图片，旧稿、重试稿和同一文件重复链接不重复计数。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+        }
+      ],
+      "delivery_id": "conv_965cf7b2c858:final:2",
+      "id": "delivery_03",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    },
+    {
+      "name": "拼接的大会发言PDF",
+      "kind": "file",
+      "format": "pdf",
+      "turn_indices": [
+        5
+      ],
+      "final_version_only": true,
+      "checks": [
+        {
+          "kind": "delivered_file_open",
+          "parameters": {
+            "format": "pdf"
+          },
+          "mandatory": true,
+          "point_id": "conv_965cf7b2c858:delivery4:check1",
+          "display_object": "拼接的大会发言PDF",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              6
+            ],
+            "quote": "用户输入索引5（第6轮）：把他们拼成一份PDF。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "本次「拼接的大会发言PDF」实际交付链接或路径可解析到当前可用的已声明的最终文件，pdf数据非空，并能用PDF原生解析器打开，包含可读页面及非空正文或图像。同一对象只计最终有效版本。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+        }
+      ],
+      "delivery_id": "conv_965cf7b2c858:final:3",
+      "id": "delivery_04",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    }
+  ],
+  "checks": [
+    {
+      "delivery_id": "delivery_01",
+      "kind": "delivered_text_nonempty",
+      "parameters": {
+        "trim_whitespace": true
+      },
+      "mandatory": true,
+      "point_id": "conv_965cf7b2c858:delivery1:check1",
+      "display_object": "会议PPT每页生图提示词",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          1
+        ],
+        "quote": "用户输入索引0（第1轮）：你看一下附件几个资料，我要给马校长做一份PPT，用于大会发言，我准备PPT每一页都生图来制作，帮我先生成生图提示词，我要求浅色背景，带有华师大元素，文字输出 [附加文件: GUPLS26_DigitalPoster_210x297mm_V1 (1) (2).pdf (/works。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "会话终态读取本次向用户交付的「会议PPT每页生图提示词」文字集合，去掉空白后仍非空；允许相应文件原生抽取正文。不把计划、声明与实质完成做语义区分，不核事实或专业正确性。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+    },
+    {
+      "delivery_id": "delivery_02",
+      "kind": "delivered_file_open",
+      "parameters": {
+        "format": "image"
+      },
+      "mandatory": true,
+      "point_id": "conv_965cf7b2c858:delivery2:check1",
+      "display_object": "大会发言PPT逐页图片最终版",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          2,
+          3,
+          5,
+          7
+        ],
+        "quote": "用户输入索引1（第2轮）：先用图片生成PPT，生成前三页，逐页生成，high quality；用户输入索引6（第7轮）：请先读取我附加的当前文件（原文件名：page_004_保护知识的源头.png）的内容。 我接下来会补充具体修改要求。 处理时请保持事实准确、引用清晰，避免杜撰、虚构；如果涉及数据结论，请说明依据，必要时通过脚本验算。 这一页和其他几页图片背景存在明显色差，重新调整 [附加文件: 。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "本次「大会发言PPT逐页图片最终版」实际交付链接或路径可解析到当前可用的已声明的最终文件，image数据非空，并能用图片解码器打开，包含像素尺寸及有效图像帧。同一对象只计最终有效版本。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+    },
+    {
+      "delivery_id": "delivery_02",
+      "kind": "manifest_corresponding_artifacts",
+      "parameters": {
+        "count_from": "current_attempt_prompt_page_manifest",
+        "manifest_source": "actually_delivered_prompt_text_for_turn_1",
+        "freeze_manifest_before_image_phase": true,
+        "require_one_readable_final_image_per_page": true,
+        "reject_terminal_self_declared_subsets": true
+      },
+      "mandatory": true,
+      "point_id": "conv_965cf7b2c858:delivery2:check2",
+      "display_object": "大会发言PPT逐页图片最终版",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          1,
+          2,
+          5
+        ],
+        "quote": "帮我先生成生图提示词"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "用户明确条目或生图前冻结的本次逐页提示词条目全部对应非重复、可读的最终图像。",
+      "score_at": "conversation_end_only",
+      "audit_action": "replace",
+      "audit_metadata_not_execution_parameters": {
+        "count_from": "current_attempt_prompt_page_manifest",
+        "manifest_source": "actually_delivered_prompt_text_for_turn_1",
+        "freeze_manifest_before_image_phase": true,
+        "require_one_readable_final_image_per_page": true,
+        "final_version_per_page": true,
+        "reject_terminal_self_declared_subsets": true
+      },
+      "audit_rationale": "按本次实际提示词页清单验逐页图片；明确前三页及随后继续不允许终态随意少报页。"
+    },
+    {
+      "delivery_id": "delivery_02",
+      "kind": "delivered_artifact_count_minimum",
+      "parameters": {
+        "minimum": 4
+      },
+      "mandatory": true,
+      "point_id": "conv_965cf7b2c858:delivery2:check3",
+      "display_object": "大会发言PPT逐页图片最终版",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          2,
+          3,
+          5,
+          7
+        ],
+        "quote": "用户输入索引1（第2轮）：先用图片生成PPT，生成前三页，逐页生成，high quality；用户输入索引6（第7轮）：请先读取我附加的当前文件（原文件名：page_004_保护知识的源头.png）的内容。 我接下来会补充具体修改要求。 处理时请保持事实准确、引用清晰，避免杜撰、虚构；如果涉及数据结论，请说明依据，必要时通过脚本验算。 这一页和其他几页图片背景存在明显色差，重新调整 [附加文件: 。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "「大会发言PPT逐页图片最终版」最终逐页图片至少4张，不把同页旧版重复计为新页。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+    },
+    {
+      "delivery_id": "delivery_03",
+      "kind": "delivered_file_open",
+      "parameters": {
+        "format": "image"
+      },
+      "mandatory": true,
+      "point_id": "conv_965cf7b2c858:delivery3:check1",
+      "display_object": "前三张图的合并展示图片",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          4
+        ],
+        "quote": "用户输入索引3（第4轮）：把这三张图先拼到一张图里面展示。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "本次「前三张图的合并展示图片」实际交付链接或路径可解析到当前可用的已声明的最终文件，image数据非空，并能用图片解码器打开，包含像素尺寸及有效图像帧。同一对象只计最终有效版本。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+    },
+    {
+      "delivery_id": "delivery_03",
+      "kind": "delivered_artifact_count",
+      "parameters": {
+        "count": 1
+      },
+      "mandatory": true,
+      "point_id": "conv_965cf7b2c858:delivery3:check2",
+      "display_object": "前三张图的合并展示图片",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          4
+        ],
+        "quote": "用户输入索引3（第4轮）：把这三张图先拼到一张图里面展示。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "「前三张图的合并展示图片」交付清单中恰有1张不同的最终有效图片，旧稿、重试稿和同一文件重复链接不重复计数。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+    },
+    {
+      "delivery_id": "delivery_04",
+      "kind": "delivered_file_open",
+      "parameters": {
+        "format": "pdf"
+      },
+      "mandatory": true,
+      "point_id": "conv_965cf7b2c858:delivery4:check1",
+      "display_object": "拼接的大会发言PDF",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          6
+        ],
+        "quote": "用户输入索引5（第6轮）：把他们拼成一份PDF。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "本次「拼接的大会发言PDF」实际交付链接或路径可解析到当前可用的已声明的最终文件，pdf数据非空，并能用PDF原生解析器打开，包含可读页面及非空正文或图像。同一对象只计最终有效版本。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+    }
+  ],
+  "ignored_details": [
+    "最终第4页色差是否消失不人工评分；拼图是1张文件，不以其内含3图作图像识别评分；PDF无需用户未要求的后续自动更新。"
+  ],
+  "input_bindings_needed": [],
+  "service_patch_needed": false,
+  "exclusion_candidate": false,
+  "no_old_ai_as_gold": true,
+  "implemented": false,
+  "executed": false,
+  "session_id": "conv_965cf7b2c858",
+  "schema": "audited-per-task-delivery-contract-v1",
+  "score_at": "conversation_end_only",
+  "full_user_input_review": true,
+  "checked_user_turn_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "actor_can_see_historical_ai": false,
+  "quality_scored": false,
+  "intermediate_steps_scored": false,
+  "manual_judgement_scored": false,
+  "review_status": "audited_for_basic_delivery_only",
+  "validators_execution_status": "offline_controls_only_not_business_run",
+  "summary": "依据会议海报、七分钟讲话稿和研究报告，为马校长大会发言生成浅色、华师大元素的逐页提示词。用户先生成前三页、要求拼成一图，再继续后续页面并拼PDF，最后修改第四页背景色差。终态保留提示词、逐页图片、三图展示拼图和PDF，第4页修改只替代该页图片版本。",
+  "category_name": "文档、演示与视觉内容",
+  "design_audit_status": "approved_basic_with_revisions",
+  "execution_preflight": {
+    "status": "requires_current_attempt_evidence",
+    "note": "本轮未重验环境或执行任务；脚本须读当前attempt实际交付/服务状态。"
+  },
+  "user_source_texts": [
+    "请使用中文回复，除非用户明确使用其他语言。\n\n你看一下附件几个资料，我要给马校长做一份PPT，用于大会发言，我准备PPT每一页都生图来制作，帮我先生成生图提示词，我要求浅色背景，带有华师大元素，文字输出\n[附加文件: GUPLS26_DigitalPoster_210x297mm_V1 (1) (2).pdf (/workspace/对话附件/GUPLS26_DigitalPoster_210x297mm_V1 (1) (2).pdf)][附加文件: 附件2从火种到火炬-让全球知识创造共享价值-马余刚校长7分钟讲话稿V2 (2).docx (/workspace/对话附件/附件2从火种到火炬-让全球知识创造共享价值-马余刚校长7分钟讲话稿V2 (2).docx)][附加文件: 马余刚校长赴港参会7分钟讲话内容研究报告-全球创新网络视角修订版V2 (2).docx (/workspace/对话附件/马余刚校长赴港参会7分钟讲话内容研究报告-全球创新网络视角修订版V2 (2).docx)]\n\n【本轮实际提供的输入文件】\n- 合成_附件几个资料，我要给马校长做一份PPT，用于大会发言，我准备PPT.md：/workspace/合成待核输入/合成_附件几个资料，我要给马校长做一份PPT，用于大会发言，我准备PPT.md（实验重建输入）\n- GUPLS26_DigitalPoster_210x297mm_V1 (1) (2).pdf：/workspace/对话附件/GUPLS26_DigitalPoster_210x297mm_V1 (1) (2).pdf（实验重建输入）\n- 附件2从火种到火炬-让全球知识创造共享价值-马余刚校长7分钟讲话稿V2 (2).docx：/workspace/对话附件/附件2从火种到火炬-让全球知识创造共享价值-马余刚校长7分钟讲话稿V2 (2).docx（实验重建输入）\n- 马余刚校长赴港参会7分钟讲话内容研究报告-全球创新网络视角修订版V2 (2).docx：/workspace/对话附件/马余刚校长赴港参会7分钟讲话内容研究报告-全球创新网络视角修订版V2 (2).docx（实验重建输入）",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n请使用技能「Evomind图片生成」协助当前任务。\n先用图片生成PPT，生成前三页，逐页生成，high quality",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n画面内容是不是太少了，文字信息啥的",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n把这三张图先拼到一张图里面展示",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n前三页ok，继续生成后续的",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n把他们拼成一份PDF",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n请先读取我附加的当前文件（原文件名：page_004_保护知识的源头.png）的内容。\n我接下来会补充具体修改要求。\n处理时请保持事实准确、引用清晰，避免杜撰、虚构；如果涉及数据结论，请说明依据，必要时通过脚本验算。\n这一页和其他几页图片背景存在明显色差，重新调整\n[附加文件: page_004_保护知识的源头.png (/workspace/AI 工作区/成果文件/你看一下附件几个资料，我要给马校长做一份-conv_965cf7b2c858/PPT图片_v2/page_004_保护知识的源头.png)]\n\n【本轮实际提供的输入文件】\n- page_004_保护知识的源头.png：/workspace/inputs/staged/42f8379e88e0bc29/page_004_保护知识的源头.png（实验重建输入）\n- 合成__workspace_AI 工作区_成果文件_你看一下附件几个资料.xlsx：/workspace/inputs/staged/e1626337ba74d4a8/合成__workspace_AI 工作区_成果文件_你看一下附件几个资料.xlsx（实验重建输入）\n- 合成_读取我附加的当前文件（原文件.xlsx：/workspace/inputs/staged/c34aa5e367cf0c32/合成_读取我附加的当前文件（原文件.xlsx（实验重建输入）"
+  ],
+  "input_source_specs": [
+    {
+      "mount": "合成待核输入/合成_附件几个资料，我要给马校长做一份PPT，用于大会发言，我准备PPT.md",
+      "format": "md",
+      "synthetic": true,
+      "provenance": null,
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\clean_alignment\\v6\\e7d98eedc17eb4ec72e5011e417aa3d3f570ffb8c055a80e1125926fd128f690\\合成_附件几个资料，我要给马校长做一份PPT，用于大会发言，我准备PPT.md",
+      "sha256": "e7d98eedc17eb4ec72e5011e417aa3d3f570ffb8c055a80e1125926fd128f690"
+    },
+    {
+      "mount": "inputs/staged/42f8379e88e0bc29/page_004_保护知识的源头.png",
+      "format": "png",
+      "synthetic": true,
+      "provenance": null,
+      "when": 6,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\42f8379e88e0bc29637f690a733e62cd6e7d1fef753b738dec21e954c424ecc9\\page_004_保护知识的源头.png",
+      "sha256": "42f8379e88e0bc29637f690a733e62cd6e7d1fef753b738dec21e954c424ecc9"
+    },
+    {
+      "mount": "对话附件/GUPLS26_DigitalPoster_210x297mm_V1 (1) (2).pdf",
+      "format": "pdf",
+      "synthetic": true,
+      "provenance": "source_specific_domain_input_replacing_wrong_generic_template",
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\d705b9cd5c768131d40a6bc01b786e68e38344455e0af920f52a2341ddf39c92\\GUPLS26_DigitalPoster_210x297mm_V1 (1) (2).pdf",
+      "sha256": "d705b9cd5c768131d40a6bc01b786e68e38344455e0af920f52a2341ddf39c92"
+    },
+    {
+      "mount": "对话附件/附件2从火种到火炬-让全球知识创造共享价值-马余刚校长7分钟讲话稿V2 (2).docx",
+      "format": "docx",
+      "synthetic": true,
+      "provenance": null,
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\bc6588b8a0eeda223e7a0b4f521464e060a2edc5a8eeffbb5eaa639e6172ead2\\附件2从火种到火炬-让全球知识创造共享价值-马余刚校长7分钟讲话稿V2 (2).docx",
+      "sha256": "bc6588b8a0eeda223e7a0b4f521464e060a2edc5a8eeffbb5eaa639e6172ead2"
+    },
+    {
+      "mount": "对话附件/马余刚校长赴港参会7分钟讲话内容研究报告-全球创新网络视角修订版V2 (2).docx",
+      "format": "docx",
+      "synthetic": true,
+      "provenance": "source_scoped_experimental_initial_domain_material",
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\d1e0cffe850c17312488a710fdd4b8e5915c9a7154dd6629b59d34f423450a73\\马余刚校长赴港参会7分钟讲话内容研究报告-全球创新网络视角修订版V2 (2).docx",
+      "sha256": "d1e0cffe850c17312488a710fdd4b8e5915c9a7154dd6629b59d34f423450a73"
+    },
+    {
+      "mount": "对话附件/马余刚校长赴港参会7分钟讲话内容研究报告-全球创新网络视角修订版V2 (2).docx",
+      "format": "docx",
+      "synthetic": true,
+      "provenance": "source_scoped_experimental_initial_domain_material",
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\d1e0cffe850c17312488a710fdd4b8e5915c9a7154dd6629b59d34f423450a73\\马余刚校长赴港参会7分钟讲话内容研究报告-全球创新网络视角修订版V2 (2).docx",
+      "sha256": "d1e0cffe850c17312488a710fdd4b8e5915c9a7154dd6629b59d34f423450a73"
+    },
+    {
+      "mount": "对话附件/GUPLS26_DigitalPoster_210x297mm_V1 (1) (2).pdf",
+      "format": "pdf",
+      "synthetic": true,
+      "provenance": "source_specific_domain_input_replacing_wrong_generic_template",
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\d705b9cd5c768131d40a6bc01b786e68e38344455e0af920f52a2341ddf39c92\\GUPLS26_DigitalPoster_210x297mm_V1 (1) (2).pdf",
+      "sha256": "d705b9cd5c768131d40a6bc01b786e68e38344455e0af920f52a2341ddf39c92"
+    },
+    {
+      "mount": "inputs/staged/e1626337ba74d4a8/合成__workspace_AI 工作区_成果文件_你看一下附件几个资料.xlsx",
+      "format": "xlsx",
+      "synthetic": true,
+      "provenance": null,
+      "when": 6,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\clean_alignment\\v6\\e1626337ba74d4a8d5f1116060d27cba4857574325f318d3eb07d0f55b19b7a3\\合成__workspace_AI 工作区_成果文件_你看一下附件几个资料.xlsx",
+      "sha256": "e1626337ba74d4a8d5f1116060d27cba4857574325f318d3eb07d0f55b19b7a3"
+    },
+    {
+      "mount": "对话附件/附件2从火种到火炬-让全球知识创造共享价值-马余刚校长7分钟讲话稿V2 (2).docx",
+      "format": "docx",
+      "synthetic": true,
+      "provenance": null,
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\bc6588b8a0eeda223e7a0b4f521464e060a2edc5a8eeffbb5eaa639e6172ead2\\附件2从火种到火炬-让全球知识创造共享价值-马余刚校长7分钟讲话稿V2 (2).docx",
+      "sha256": "bc6588b8a0eeda223e7a0b4f521464e060a2edc5a8eeffbb5eaa639e6172ead2"
+    },
+    {
+      "mount": "inputs/staged/c34aa5e367cf0c32/合成_读取我附加的当前文件（原文件.xlsx",
+      "format": "xlsx",
+      "synthetic": true,
+      "provenance": null,
+      "when": 6,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\clean_alignment\\v6\\c34aa5e367cf0c3242a0ba72c14a441ca30f7969c9cf456b9d11dec9c1921c67\\合成_读取我附加的当前文件（原文件.xlsx",
+      "sha256": "c34aa5e367cf0c3242a0ba72c14a441ca30f7969c9cf456b9d11dec9c1921c67"
+    },
+    {
+      "mount": "inputs/staged/42f8379e88e0bc29/page_004_保护知识的源头.png",
+      "format": "png",
+      "synthetic": true,
+      "provenance": null,
+      "when": 6,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\42f8379e88e0bc29637f690a733e62cd6e7d1fef753b738dec21e954c424ecc9\\page_004_保护知识的源头.png",
+      "sha256": "42f8379e88e0bc29637f690a733e62cd6e7d1fef753b738dec21e954c424ecc9"
+    }
+  ]
+}

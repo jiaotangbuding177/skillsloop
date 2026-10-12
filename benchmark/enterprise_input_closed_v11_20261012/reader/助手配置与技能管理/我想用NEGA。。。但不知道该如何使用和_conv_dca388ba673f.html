@@ -1,0 +1,48 @@
+<!doctype html><html lang="zh"><meta charset="utf-8"><title>我想用NEGA。。。但不知道该如何使用和</title><style>body{font-family:Microsoft YaHei,sans-serif;max-width:1180px;margin:35px auto;padding:0 18px;background:#f4f7fb;color:#18283a}section,header,article{background:white;border:1px solid #dbe4ed;border-radius:9px;margin:15px 0;padding:18px}pre{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.7;font-family:inherit}a{color:#155fc4}.user{border-left:5px solid #2161b4}.ai{border-left:5px solid #359778}.note{color:#755224}td,th{padding:9px;border-bottom:1px solid #ddd;text-align:left}table{width:100%;border-collapse:collapse}input{padding:12px;width:90%}</style><header><a href="../../打开这里.html">会话目录</a><h1>我想用NEGA。。。但不知道该如何使用和</h1><p>演化 · 1 组问答</p><p>阅读页展示历史回复供审计；评测助手只收到逐次用户输入、当轮文件和本次新生成的对话。历史 AI、评分规则、其它会话不发给助手。</p></header><section><h2>第 1 次问答</h2><article class="user"><strong>本次完整用户输入</strong><pre>我想用NEGA。。。但不知道该如何使用和安装</pre></article><article class="ai"><strong>历史 AI · 第 1 段（审计，不发给评测助手）</strong><pre>搜到几个叫 NEGA 的项目,先确认下你说的是哪个——最可能的是这个 GitHub 上的 AI 英语口语教练项目,我拉一下它的完整文档:这个 NEGA 应该是 GitHub 上的开源项目 **diyanqi/NEGA**——一个 AI 英语口语教练/语法助手(自称&quot;西海岸口语教练&quot;,Next.js 写的)。如果你说的不是这个,把链接或截图发我,我再查。
+
+先按这个给你完整攻略:
+
+## 它是什么
+AI 驱动的英语助手,功能:实时语法纠错、发音指导(西海岸口音)、AI 口语对话、中英双语界面。技术栈:Next.js 16 + OpenAI API + NVIDIA Riva 语音服务(ASR 语音转文字 / TTS 文字转语音)。
+
+## 安装前提
+- **Node.js 18+**(建议 20 LTS)
+- **包管理器**:pnpm(推荐,`npm install -g pnpm` 可装)
+- **OpenAI API Key**(对话功能必需,付费)
+- 语音功能还需要 **NVIDIA Riva 服务**(`grpc://localhost:50051`),这玩意儿要 NVIDIA GPU + NGC 容器,比较重——**如果只想用文字对话/语法纠错,可以先不配 Riva**
+
+## 安装步骤(本地跑)
+```bash
+# 1. 克隆项目
+git clone https://github.com/diyanqi/NEGA.git
+cd NEGA
+
+# 2. 装依赖
+pnpm install
+
+# 3. 配置环境变量(项目里有 .env.example 就复制,没有就手动建)
+cp .env.example .env.local   # 如果存在的话
+
+# 4. 编辑 .env.local,填入你的 key
+#    OPENAI_API_KEY=sk-xxxx
+#    RIVA_ASR_SERVICE=grpc://localhost:50051   ← 没有 Riva 可先留空
+#    RIVA_TTS_SERVICE=grpc://localhost:50051   ← 没有 Riva 可先留空
+
+# 5. 启动开发模式
+pnpm dev
+```
+浏览器打开 `http://localhost:3000` 就能用了。
+
+## 生产部署
+```bash
+pnpm build
+pnpm start
+```
+想部署到公网可以用 Vercel(Next.js 亲儿子,`vercel` 一条命令),把环境变量在 Vercel 后台配好即可。
+
+## 几个提醒
+1. **这是个个人开源项目**,README 里的安装命令写得比较糙(有省略),上面是我按标准 Next.js 流程补全的,如果 clone 下来发现有 `.env.example`,以它为准
+2. **发音指导功能强依赖 Riva**,没有 NVIDIA GPU 的话这功能基本用不了——纯文字纠错和对话没问题
+3. 如果你只是想要&quot;AI 练口语&quot;这个效果,不想折腾本地环境,直接用现成的(比如 ChatGPT 语音模式)可能更省事;想体验/学习这个项目本身才值得装
+
+要不要我帮你确认下这个仓库最近有没有更新、作者有没有部署线上 demo?或者你说下是从哪看到 NEGA 的,我帮你确认是不是同一个东西。</pre></article></section><section><a href="../../sources/conv_dca388ba673f.json">修订前原始完整会话（保留）</a></section></html>

@@ -1,0 +1,404 @@
+{
+  "sid": "conv_ac64a14e656f",
+  "session_id": "conv_ac64a14e656f",
+  "title": "检索AI热点、解答后续新闻问题并导出三种文档",
+  "category": "NEWS",
+  "status": "proposed_active",
+  "final_target": "新闻及后续问题答复正文；新闻Word；新闻PDF；新闻Markdown",
+  "final_deliverables": [
+    {
+      "name": "新闻及后续问题答复正文",
+      "kind": "text",
+      "format": null,
+      "turn_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "checks": [
+        {
+          "kind": "delivered_body_nonempty",
+          "parameters": {
+            "strip_whitespace": true,
+            "no_minimum_words_invented": true,
+            "semantic_completion_not_inferred": true
+          },
+          "mandatory": true,
+          "point_id": "conv_ac64a14e656f:delivery1:check1",
+          "display_object": "新闻及后续问题答复正文",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ],
+            "quote": "用户输入索引0（第1轮）：检索下今天的ai热点新闻；用户输入索引7（第8轮）：倒数第二个新闻是什么。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "会话终态读取本次向用户交付的「新闻及后续问题答复正文」文字集合，去掉空白后仍非空；允许相应文件原生抽取正文。不把计划、声明与实质完成做语义区分，不核事实或专业正确性。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+        }
+      ],
+      "id": "delivery_01",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    },
+    {
+      "name": "新闻Word",
+      "kind": "file",
+      "format": "docx",
+      "turn_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "checks": [
+        {
+          "kind": "final_file_native_open",
+          "parameters": {
+            "allowed_formats": [
+              "docx"
+            ],
+            "required_distinct_file_count": 1,
+            "require_nonempty_payload": true,
+            "resolve_from_current_attempt_delivery_declaration": true
+          },
+          "mandatory": true,
+          "point_id": "conv_ac64a14e656f:delivery2:check1",
+          "display_object": "新闻Word",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ],
+            "quote": "用户输入索引0（第1轮）：检索下今天的ai热点新闻；用户输入索引7（第8轮）：倒数第二个新闻是什么。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "本次「新闻Word」实际交付链接或路径可解析到当前可用的1个不同最终文件，docx数据非空，并能用DOCX/OOXML读取器打开，包含正文或表格节点。同一对象只计最终有效版本。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+        }
+      ],
+      "id": "delivery_02",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    },
+    {
+      "name": "新闻PDF",
+      "kind": "file",
+      "format": "pdf",
+      "turn_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "checks": [
+        {
+          "kind": "final_file_native_open",
+          "parameters": {
+            "allowed_formats": [
+              "pdf"
+            ],
+            "required_distinct_file_count": 1,
+            "require_nonempty_payload": true,
+            "resolve_from_current_attempt_delivery_declaration": true
+          },
+          "mandatory": true,
+          "point_id": "conv_ac64a14e656f:delivery3:check1",
+          "display_object": "新闻PDF",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ],
+            "quote": "用户输入索引0（第1轮）：检索下今天的ai热点新闻；用户输入索引7（第8轮）：倒数第二个新闻是什么。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "本次「新闻PDF」实际交付链接或路径可解析到当前可用的1个不同最终文件，pdf数据非空，并能用PDF原生解析器打开，包含可读页面及非空正文或图像。同一对象只计最终有效版本。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+        }
+      ],
+      "id": "delivery_03",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    },
+    {
+      "name": "新闻Markdown",
+      "kind": "file",
+      "format": "md",
+      "turn_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "checks": [
+        {
+          "kind": "final_file_native_open",
+          "parameters": {
+            "allowed_formats": [
+              "md"
+            ],
+            "required_distinct_file_count": 1,
+            "require_nonempty_payload": true,
+            "resolve_from_current_attempt_delivery_declaration": true
+          },
+          "mandatory": true,
+          "point_id": "conv_ac64a14e656f:delivery4:check1",
+          "display_object": "新闻Markdown",
+          "requirement_basis": {
+            "user_turns_1_based": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ],
+            "quote": "用户输入索引0（第1轮）：检索下今天的ai热点新闻；用户输入索引7（第8轮）：倒数第二个新闻是什么。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+          },
+          "evidence_method": "current_attempt_terminal_deliverable_only",
+          "passing_condition": "本次「新闻Markdown」实际交付链接或路径可解析到当前可用的1个不同最终文件，md数据非空，并能用UTF-8文本读取器打开，包含非空Markdown正文。同一对象只计最终有效版本。",
+          "score_at": "conversation_end_only",
+          "audit_action": "keep",
+          "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+        }
+      ],
+      "id": "delivery_04",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    }
+  ],
+  "checks": [
+    {
+      "delivery_id": "delivery_01",
+      "kind": "delivered_body_nonempty",
+      "parameters": {
+        "strip_whitespace": true,
+        "no_minimum_words_invented": true,
+        "semantic_completion_not_inferred": true
+      },
+      "mandatory": true,
+      "point_id": "conv_ac64a14e656f:delivery1:check1",
+      "display_object": "新闻及后续问题答复正文",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "quote": "用户输入索引0（第1轮）：检索下今天的ai热点新闻；用户输入索引7（第8轮）：倒数第二个新闻是什么。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "会话终态读取本次向用户交付的「新闻及后续问题答复正文」文字集合，去掉空白后仍非空；允许相应文件原生抽取正文。不把计划、声明与实质完成做语义区分，不核事实或专业正确性。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+    },
+    {
+      "delivery_id": "delivery_02",
+      "kind": "final_file_native_open",
+      "parameters": {
+        "allowed_formats": [
+          "docx"
+        ],
+        "required_distinct_file_count": 1,
+        "require_nonempty_payload": true,
+        "resolve_from_current_attempt_delivery_declaration": true
+      },
+      "mandatory": true,
+      "point_id": "conv_ac64a14e656f:delivery2:check1",
+      "display_object": "新闻Word",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "quote": "用户输入索引0（第1轮）：检索下今天的ai热点新闻；用户输入索引7（第8轮）：倒数第二个新闻是什么。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "本次「新闻Word」实际交付链接或路径可解析到当前可用的1个不同最终文件，docx数据非空，并能用DOCX/OOXML读取器打开，包含正文或表格节点。同一对象只计最终有效版本。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+    },
+    {
+      "delivery_id": "delivery_03",
+      "kind": "final_file_native_open",
+      "parameters": {
+        "allowed_formats": [
+          "pdf"
+        ],
+        "required_distinct_file_count": 1,
+        "require_nonempty_payload": true,
+        "resolve_from_current_attempt_delivery_declaration": true
+      },
+      "mandatory": true,
+      "point_id": "conv_ac64a14e656f:delivery3:check1",
+      "display_object": "新闻PDF",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "quote": "用户输入索引0（第1轮）：检索下今天的ai热点新闻；用户输入索引7（第8轮）：倒数第二个新闻是什么。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "本次「新闻PDF」实际交付链接或路径可解析到当前可用的1个不同最终文件，pdf数据非空，并能用PDF原生解析器打开，包含可读页面及非空正文或图像。同一对象只计最终有效版本。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+    },
+    {
+      "delivery_id": "delivery_04",
+      "kind": "final_file_native_open",
+      "parameters": {
+        "allowed_formats": [
+          "md"
+        ],
+        "required_distinct_file_count": 1,
+        "require_nonempty_payload": true,
+        "resolve_from_current_attempt_delivery_declaration": true
+      },
+      "mandatory": true,
+      "point_id": "conv_ac64a14e656f:delivery4:check1",
+      "display_object": "新闻Markdown",
+      "requirement_basis": {
+        "user_turns_1_based": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "quote": "用户输入索引0（第1轮）：检索下今天的ai热点新闻；用户输入索引7（第8轮）：倒数第二个新闻是什么。参数依据为正式合同中该交付的现有检查；摘录不等于要求与期望全文。"
+      },
+      "evidence_method": "current_attempt_terminal_deliverable_only",
+      "passing_condition": "本次「新闻Markdown」实际交付链接或路径可解析到当前可用的1个不同最终文件，md数据非空，并能用UTF-8文本读取器打开，包含非空Markdown正文。同一对象只计最终有效版本。",
+      "score_at": "conversation_end_only",
+      "audit_action": "keep",
+      "audit_rationale": "只验会话终态的本次必要交付及明示基本格式/数量/结构/字段；不判中间过程或专业质量。"
+    }
+  ],
+  "ignored_details": [
+    "历史AI答案与原生产物不是本次gold；不评分中间轮次success、技能调用、主观质量或法律/科学/金融正确性。",
+    "三种格式是仍有效独立转换，不从旧AI文件复用；不锁定新闻条数/章节。"
+  ],
+  "input_bindings_needed": [],
+  "original_user_turn_indices_inspected": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "requirement_source": "D:\\skillloop\\benchmark\\enterprise_environment_admitted_v7_20261009\\有效轨迹.jsonl",
+  "original_trace_sha256": "78e889119c7302245d005135e5fbc826ac663dc2d5bd9e9dca0b9c17b6b108e0",
+  "prior_analysis_path": "D:\\skillloop\\output\\20261010_evaluation_delivery_verifiability\\edu_know_news_life.json",
+  "reviewed": false,
+  "rubric_activated": false,
+  "assessment_executed": false,
+  "schema": "audited-per-task-delivery-contract-v1",
+  "score_at": "conversation_end_only",
+  "full_user_input_review": true,
+  "checked_user_turn_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "actor_can_see_historical_ai": false,
+  "quality_scored": false,
+  "intermediate_steps_scored": false,
+  "manual_judgement_scored": false,
+  "review_status": "audited_for_basic_delivery_only",
+  "validators_execution_status": "offline_controls_only_not_business_run",
+  "summary": "用户先请求今天的AI热点新闻，随后分别要求Word、PDF和Markdown文件，并追问特朗普、MAGA以及倒数两条新闻的内容。三个格式转换未被取消，均作为有效独立交付保留。终态核正文与三个实际文件，事实真实性、新闻排序和问答语义正确性另行评价。",
+  "category_name": "新闻与一般信息检索",
+  "design_audit_status": "approved_basic",
+  "execution_preflight": {
+    "status": "requires_current_attempt_evidence",
+    "note": "本轮未重验环境或执行任务；脚本须读当前attempt实际交付/服务状态。"
+  },
+  "user_source_texts": [
+    "请使用中文回复，除非用户明确使用其他语言。\n\n检索下今天的ai热点新闻",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n生成一个word文档",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n生成一个pdf",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n特朗普甩锅详情是什么",
+    "请使用中文回复，除非用户明确使用其他语言。\n\nmaga的消息是什么",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n转成md文件？",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n最后一个新闻是什么",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n倒数第二个新闻是什么"
+  ],
+  "input_source_specs": []
+}

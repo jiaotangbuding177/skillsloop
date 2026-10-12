@@ -1,0 +1,394 @@
+{
+  "sid": "conv_8e2e43b43eb2",
+  "session_id": "conv_8e2e43b43eb2",
+  "title": "企业家一天AI培训方案与问卷星课程需求问卷",
+  "category": "EDU",
+  "status": "proposed_active",
+  "final_target": "一日培训方案正文；最终AI问卷/可导入文本正文",
+  "final_deliverables": [
+    {
+      "name": "一日培训方案正文",
+      "kind": "text",
+      "format": null,
+      "turn_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "checks": [
+        {
+          "kind": "delivered_body_nonempty",
+          "parameters": {
+            "strip_whitespace": true,
+            "no_minimum_words_invented": true,
+            "semantic_completion_not_inferred": true
+          },
+          "mandatory": true,
+          "point_id": "conv_8e2e43b43eb2:delivery1:check1",
+          "display_object": "一日培训方案正文",
+          "requirement_basis": [
+            {
+              "turn": 1,
+              "quote": "我要给企业做一个培训： 都是这个企业的老板，如何借机推荐我们的产品呢? 用evomind给他们讲什么内容他们回by in或者付费？"
+            },
+            {
+              "turn": 2,
+              "quote": "我们现场就是有半天培训"
+            }
+          ],
+          "evidence_method": "本次运行的“一日培训方案正文”交付消息/最终文件正文及去空白长度；排除原AI记录。",
+          "passing_condition": "原非空点只按相关文本集合，需改为对应最终交付对象绑定，避免拿计划、无关聊天或工具状态充作新交付；不加语义质量Judge。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。",
+          "score_at": "conversation_end_only",
+          "audit_action": "replace",
+          "audit_rationale": "原非空点只按相关文本集合，需改为对应最终交付对象绑定，避免拿计划、无关聊天或工具状态充作新交付；不加语义质量Judge。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。"
+        }
+      ],
+      "id": "delivery_01",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    },
+    {
+      "name": "最终AI问卷/可导入文本正文",
+      "kind": "text",
+      "format": null,
+      "turn_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "checks": [
+        {
+          "kind": "delivered_body_nonempty",
+          "parameters": {
+            "strip_whitespace": true,
+            "no_minimum_words_invented": true,
+            "semantic_completion_not_inferred": true
+          },
+          "mandatory": true,
+          "point_id": "conv_8e2e43b43eb2:delivery2:check1",
+          "display_object": "最终AI问卷/可导入文本正文",
+          "requirement_basis": [
+            {
+              "turn": 1,
+              "quote": "我要给企业做一个培训： 都是这个企业的老板，如何借机推荐我们的产品呢? 用evomind给他们讲什么内容他们回by in或者付费？"
+            },
+            {
+              "turn": 2,
+              "quote": "我们现场就是有半天培训"
+            }
+          ],
+          "evidence_method": "本次运行的“最终AI问卷/可导入文本正文”交付消息/最终文件正文及去空白长度；排除原AI记录。",
+          "passing_condition": "原非空点只按相关文本集合，需改为对应最终交付对象绑定，避免拿计划、无关聊天或工具状态充作新交付；不加语义质量Judge。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。",
+          "score_at": "conversation_end_only",
+          "audit_action": "replace",
+          "audit_rationale": "原非空点只按相关文本集合，需改为对应最终交付对象绑定，避免拿计划、无关聊天或工具状态充作新交付；不加语义质量Judge。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。"
+        },
+        {
+          "kind": "questionnaire_basic_form_structure",
+          "parameters": {
+            "section_count": 3,
+            "accepted_question_types": [
+              "单选",
+              "多选",
+              "开放",
+              "开放题",
+              "填空"
+            ],
+            "time_notice_max_minutes": 8
+          },
+          "mandatory": true,
+          "point_id": "conv_8e2e43b43eb2:delivery2:audited1",
+          "display_object": "最终AI问卷/可导入文本正文",
+          "requirement_basis": [
+            {
+              "turn": 6,
+              "turns": [
+                6
+              ],
+              "quote": "输出为结构化中文问卷，含题型说明（单选/多选/开放）、逻辑跳转建议及填写时长提示（≤8分钟）。"
+            }
+          ],
+          "evidence_method": "实际终态文件／状态的原生解析与独立读回",
+          "passing_condition": "实际问卷有3部分、题型标注和跳题说明，注明完成时间不超过8分钟；不验证实际用时。",
+          "score_at": "conversation_end_only",
+          "audit_action": "add",
+          "audit_metadata_not_execution_parameters": {
+            "question_type_annotations_required": true,
+            "skip_logic_notice_required": true,
+            "time_notice_only_not_actual_duration": true,
+            "no_minimum_question_count": true,
+            "no_exact_section_title_required": true,
+            "verified_scope": "Only identifiable sections, type labels, skip notice and explicit advertised minutes; no actual completion time or questionnaire quality."
+          },
+          "audit_rationale": "核三部分及题型/跳转/时长字段，受众后轮明确企业家老板；不验题目内容、真实填写耗时或课程效果。"
+        }
+      ],
+      "id": "delivery_02",
+      "score_at": "conversation_end_only",
+      "historical_ai_is_gold": false
+    },
+    {
+      "name": "丰蕾信息科技查询答复",
+      "kind": "text",
+      "format": null,
+      "turn_indices": [
+        8
+      ],
+      "id": "delivery_03",
+      "checks": [
+        {
+          "kind": "delivered_body_nonempty",
+          "parameters": {
+            "source_turn_indices": [
+              8
+            ],
+            "strip_whitespace": true,
+            "semantic_completion_not_inferred": true
+          },
+          "mandatory": true,
+          "point_id": "conv_8e2e43b43eb2:delivery3:audited1",
+          "display_object": "丰蕾信息科技查询答复",
+          "requirement_basis": [
+            {
+              "turn": 9,
+              "turns": [
+                9
+              ],
+              "quote": "丰蕾信息科技"
+            }
+          ],
+          "evidence_method": "实际终态文件／状态的原生解析与独立读回",
+          "passing_condition": "末轮新增独立公司咨询，不能拿此前培训/问卷任意文本代替该答复；只限定文字交付，不核公司事实。",
+          "score_at": "conversation_end_only",
+          "audit_action": "add",
+          "audit_rationale": "末轮新增独立公司咨询，不能拿此前培训/问卷任意文本代替该答复；只限定文字交付，不核公司事实。"
+        }
+      ],
+      "user_basis": [
+        {
+          "turn": 9,
+          "turns": [
+            9
+          ],
+          "quote": "丰蕾信息科技"
+        }
+      ],
+      "reason": "末轮新增独立公司咨询，不能拿此前培训/问卷任意文本代替该答复；只限定文字交付，不核公司事实。"
+    }
+  ],
+  "checks": [
+    {
+      "delivery_id": "delivery_01",
+      "kind": "delivered_body_nonempty",
+      "parameters": {
+        "strip_whitespace": true,
+        "no_minimum_words_invented": true,
+        "semantic_completion_not_inferred": true
+      },
+      "mandatory": true,
+      "point_id": "conv_8e2e43b43eb2:delivery1:check1",
+      "display_object": "一日培训方案正文",
+      "requirement_basis": [
+        {
+          "turn": 1,
+          "quote": "我要给企业做一个培训： 都是这个企业的老板，如何借机推荐我们的产品呢? 用evomind给他们讲什么内容他们回by in或者付费？"
+        },
+        {
+          "turn": 2,
+          "quote": "我们现场就是有半天培训"
+        }
+      ],
+      "evidence_method": "本次运行的“一日培训方案正文”交付消息/最终文件正文及去空白长度；排除原AI记录。",
+      "passing_condition": "原非空点只按相关文本集合，需改为对应最终交付对象绑定，避免拿计划、无关聊天或工具状态充作新交付；不加语义质量Judge。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。",
+      "score_at": "conversation_end_only",
+      "audit_action": "replace",
+      "audit_rationale": "原非空点只按相关文本集合，需改为对应最终交付对象绑定，避免拿计划、无关聊天或工具状态充作新交付；不加语义质量Judge。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。"
+    },
+    {
+      "delivery_id": "delivery_02",
+      "kind": "delivered_body_nonempty",
+      "parameters": {
+        "strip_whitespace": true,
+        "no_minimum_words_invented": true,
+        "semantic_completion_not_inferred": true
+      },
+      "mandatory": true,
+      "point_id": "conv_8e2e43b43eb2:delivery2:check1",
+      "display_object": "最终AI问卷/可导入文本正文",
+      "requirement_basis": [
+        {
+          "turn": 1,
+          "quote": "我要给企业做一个培训： 都是这个企业的老板，如何借机推荐我们的产品呢? 用evomind给他们讲什么内容他们回by in或者付费？"
+        },
+        {
+          "turn": 2,
+          "quote": "我们现场就是有半天培训"
+        }
+      ],
+      "evidence_method": "本次运行的“最终AI问卷/可导入文本正文”交付消息/最终文件正文及去空白长度；排除原AI记录。",
+      "passing_condition": "原非空点只按相关文本集合，需改为对应最终交付对象绑定，避免拿计划、无关聊天或工具状态充作新交付；不加语义质量Judge。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。",
+      "score_at": "conversation_end_only",
+      "audit_action": "replace",
+      "audit_rationale": "原非空点只按相关文本集合，需改为对应最终交付对象绑定，避免拿计划、无关聊天或工具状态充作新交付；不加语义质量Judge。 机器层由公共Context执行对象取证政策，不向原handler传入未经实现的新参数。"
+    },
+    {
+      "delivery_id": "delivery_03",
+      "kind": "delivered_body_nonempty",
+      "parameters": {
+        "source_turn_indices": [
+          8
+        ],
+        "strip_whitespace": true,
+        "semantic_completion_not_inferred": true
+      },
+      "mandatory": true,
+      "point_id": "conv_8e2e43b43eb2:delivery3:audited1",
+      "display_object": "丰蕾信息科技查询答复",
+      "requirement_basis": [
+        {
+          "turn": 9,
+          "turns": [
+            9
+          ],
+          "quote": "丰蕾信息科技"
+        }
+      ],
+      "evidence_method": "实际终态文件／状态的原生解析与独立读回",
+      "passing_condition": "末轮新增独立公司咨询，不能拿此前培训/问卷任意文本代替该答复；只限定文字交付，不核公司事实。",
+      "score_at": "conversation_end_only",
+      "audit_action": "add",
+      "audit_rationale": "末轮新增独立公司咨询，不能拿此前培训/问卷任意文本代替该答复；只限定文字交付，不核公司事实。"
+    },
+    {
+      "delivery_id": "delivery_02",
+      "kind": "questionnaire_basic_form_structure",
+      "parameters": {
+        "section_count": 3,
+        "accepted_question_types": [
+          "单选",
+          "多选",
+          "开放",
+          "开放题",
+          "填空"
+        ],
+        "time_notice_max_minutes": 8
+      },
+      "mandatory": true,
+      "point_id": "conv_8e2e43b43eb2:delivery2:audited1",
+      "display_object": "最终AI问卷/可导入文本正文",
+      "requirement_basis": [
+        {
+          "turn": 6,
+          "turns": [
+            6
+          ],
+          "quote": "输出为结构化中文问卷，含题型说明（单选/多选/开放）、逻辑跳转建议及填写时长提示（≤8分钟）。"
+        }
+      ],
+      "evidence_method": "实际终态文件／状态的原生解析与独立读回",
+      "passing_condition": "实际问卷有3部分、题型标注和跳题说明，注明完成时间不超过8分钟；不验证实际用时。",
+      "score_at": "conversation_end_only",
+      "audit_action": "add",
+      "audit_metadata_not_execution_parameters": {
+        "question_type_annotations_required": true,
+        "skip_logic_notice_required": true,
+        "time_notice_only_not_actual_duration": true,
+        "no_minimum_question_count": true,
+        "no_exact_section_title_required": true,
+        "verified_scope": "Only identifiable sections, type labels, skip notice and explicit advertised minutes; no actual completion time or questionnaire quality."
+      },
+      "audit_rationale": "核三部分及题型/跳转/时长字段，受众后轮明确企业家老板；不验题目内容、真实填写耗时或课程效果。"
+    }
+  ],
+  "ignored_details": [
+    "历史AI答案与原生产物不是本次gold；不评分中间轮次success、技能调用、主观质量或法律/科学/金融正确性。",
+    "不自设题目数/题目内容门槛，不评培训或题目质量。"
+  ],
+  "input_bindings_needed": [],
+  "original_user_turn_indices_inspected": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "requirement_source": "D:\\skillloop\\benchmark\\enterprise_environment_admitted_v7_20261009\\有效轨迹.jsonl",
+  "original_trace_sha256": "3a30c3f08a98e4bdb6979bdb3931ce75b010250e771ddcb3cbdc294816212f50",
+  "prior_analysis_path": "D:\\skillloop\\output\\20261010_evaluation_delivery_verifiability\\edu_know_news_life.json",
+  "reviewed": false,
+  "rubric_activated": false,
+  "assessment_executed": false,
+  "schema": "audited-per-task-delivery-contract-v1",
+  "score_at": "conversation_end_only",
+  "full_user_input_review": true,
+  "checked_user_turn_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "actor_can_see_historical_ai": false,
+  "quality_scored": false,
+  "intermediate_steps_scored": false,
+  "manual_judgement_scored": false,
+  "review_status": "audited_for_basic_delivery_only",
+  "validators_execution_status": "offline_controls_only_not_business_run",
+  "summary": "围绕企业老板的EvoMind产品培训，用户把半天改为一天，半天理论、半天实训，再要求三部分中文需求问卷、题型、跳转和不超过八分钟填写提示，转成问卷星导入格式。后轮再次明确企业家受众并加企业优先问题，最后追加丰蕾公司咨询；非空合同不能证明这些覆盖。",
+  "category_name": "教学、教育与科研",
+  "design_audit_status": "approved_basic_delivery_design",
+  "execution_preflight": {
+    "status": "current_attempt_evidence_required"
+  },
+  "user_source_texts": [
+    "请使用中文回复，除非用户明确使用其他语言。\n\n我要给企业做一个培训： 都是这个企业的老板，如何借机推荐我们的产品呢? 用evomind给他们讲什么内容他们回by in或者付费？\n\n【本轮实际提供的输入文件】\n- image (6).png：/workspace/对话附件/image (6).png（实验重建输入）",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n我们现场就是有半天培训",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n我的计划做一天的培训，半天理论，半天实训",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n我的计划是做一天的培训，半天理论，半天实训",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n我觉得应该做个调查问卷，他们现在AI工具的使用情况，以及他们觉得AI来了之后他们最希望被解决的问题是什么",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n请设计一份面向企业学员的AI赋能课程需求调研问卷，聚焦AI工具使用现状与核心痛点。问卷需包含三部分：（1）AI能力自评（含基础对话模型如豆包/文心一言使用频率、高阶Agent工具如WorkBuddy/Copilot等实操经验）；（2）当前AI应用瓶颈（如提示词编写、工作流嵌入、多工具协同、定制化Skill开发等）；（3）对Evomind作为“老板助手”及可定制Skill功能的期待场景与优先级排序。输出为结构化中文问卷，含题型说明（单选/多选/开放）、逻辑跳转建议及填写时长提示（≤8分钟）。未指定项按通用默认处理：目标人群为企业中层管理者与业务骨干，问卷匿名回收，结果用于课程模块设计。\n\n【本轮实际提供的输入文件】\n- 1.培训班的参训名单（发老师）.xlsx：/workspace/inputs/staged/0565153cc31b0c77/1.培训班的参训名单（发老师）.xlsx（实验重建输入）",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n帮我生成问卷星的导入格式",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n这些都是企业家老板，所以可以加几个问题就是他们企业内部使用AI希望优先解决的问题",
+    "请使用中文回复，除非用户明确使用其他语言。\n\n丰蕾信息科技"
+  ],
+  "input_source_specs": [
+    {
+      "mount": "inputs/staged/0565153cc31b0c77/1.培训班的参训名单（发老师）.xlsx",
+      "format": "xlsx",
+      "synthetic": true,
+      "provenance": "named_source_specific_domain_synthetic_input",
+      "when": 5,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\7c26631ecfc768af99cdf2374f3c6bd2d6ba308a52117053029699eab543518f\\1.培训班的参训名单（发老师）.xlsx",
+      "sha256": "7c26631ecfc768af99cdf2374f3c6bd2d6ba308a52117053029699eab543518f"
+    },
+    {
+      "mount": "对话附件/image (6).png",
+      "format": "png",
+      "synthetic": true,
+      "provenance": null,
+      "when": 0,
+      "path": "D:\\skillloop\\benchmark\\enterprise_input_closed_v11_20261012\\resources\\objects\\996e94993fd51434ee8d6a5c62ba89a647bac184581f8cff26b3856c952a1508\\image (6).png",
+      "sha256": "996e94993fd51434ee8d6a5c62ba89a647bac184581f8cff26b3856c952a1508"
+    }
+  ]
+}
