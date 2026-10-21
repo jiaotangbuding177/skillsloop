@@ -1,0 +1,79 @@
+{
+  "dataset": "enterprise-mixed-one-request-eval-v1",
+  "result_snapshot": "2026-10-16T12:31:24+08:00",
+  "records": 750,
+  "arms": {
+    "autoskill": 250,
+    "no_skill": 250,
+    "trace2skill": 250
+  },
+  "scores": {
+    "autoskill:FAIL": 3,
+    "autoskill:PASS": 247,
+    "no_skill:FAIL": 1,
+    "no_skill:PASS": 249,
+    "trace2skill:FAIL": 1,
+    "trace2skill:PASS": 249
+  },
+  "attempt_refs_exist": 750,
+  "attempt_refs_total": 750,
+  "rubric_tasks": 250,
+  "rubric_items": 2643,
+  "scoring_policy": {
+    "schema_version": "eval250-quality-rubric-v1",
+    "status": "DRAFT_PENDING_HUMAN_REVIEW",
+    "dimensions": {
+      "D1": {
+        "name": "内容正确性与依据",
+        "weight": 0.3
+      },
+      "D2": {
+        "name": "内容覆盖与充分性",
+        "weight": 0.2
+      },
+      "D3": {
+        "name": "当前要求适配与一致性",
+        "weight": 0.2
+      },
+      "D4": {
+        "name": "专业判断与业务可用性",
+        "weight": 0.2
+      },
+      "D5": {
+        "name": "表达与呈现质量",
+        "weight": 0.1
+      }
+    },
+    "item_scale": [
+      0,
+      0.5,
+      1
+    ],
+    "dimension_formula": "100 * sum(item_weight * score) / sum(applicable_preapproved_item_weight)",
+    "total_formula": "sum(dimension_weight * dimension_score); never multiply TSR",
+    "within_dimension_weights": "1 per item, pending human review before scoring freeze",
+    "missing_output": "dependent item=0, weights retained; evidence for existing independent items still required",
+    "multiple_output_dependencies": "Determine each affected item from actual required evidence; do not zero independent satisfied content merely because another deliverable is absent",
+    "corrupt_output": "Distinguish confirmed invalid Agent artifact from scorer/environment parser failure; no blanket zero",
+    "evidence_or_judge_failure": "item UNSCORED; corresponding dimension and Q null; preserve known subitems; retry then human review",
+    "na": "Only genuine task-inapplicability identified and approved before scoring; not missing evidence. Current drafts mark all authored items applicable.",
+    "process_errors": "No extra penalty for recovered process failures, tool path, rounds, latency or skill reading",
+    "judge_blinding": "Do not expose method identity, skill pack, TSR, historical scores or runs order as quality evidence; document accidental leakage",
+    "visual_and_functional": "Require actual pixels/functional observations; filenames/metadata/DOM or self-claims alone insufficient",
+    "reference": "No per-task historical AI reference for current 250",
+    "activation_prerequisites": [
+      "actual researcher rubric review",
+      "rubric-generator reliability verification",
+      "judge reliability verification",
+      "freeze evidence/render and judge configuration"
+    ],
+    "statistics": "same task/input/rubric paired; average repeats within task; 11-category macro and 250-task micro; paired bootstrap95%CI; report coverage and pair count; keep unscored"
+  },
+  "q_scored_on_this_batch": false,
+  "token_measurement": "partial; most calls estimated; see DATA/三基线...补算.md",
+  "notes": [
+    "Q is exploratory/uncalibrated",
+    "no private inputs or credentials included",
+    "750 output workspaces are referenced by local absolute paths, not copied"
+  ]
+}
