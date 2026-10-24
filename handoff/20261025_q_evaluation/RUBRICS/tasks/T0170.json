@@ -1,0 +1,731 @@
+{
+  "schema_version": "eval250-quality-rubric-v1",
+  "rubric_version": "1.1.0-ai-full-review",
+  "status": "REVIEWED_BY_AI_PENDING_HUMAN",
+  "task_id": "T0170",
+  "title": "社保调整说明与人员附件",
+  "category": "OFFICE",
+  "prompt": "行政负责人需要能一眼看懂的社保调整材料，请依据 inputs/调整实施通知.md 和 inputs/人员基数明细.csv，交付 社保调整汇报.docx 与 社保调整测算.xlsx，主文用表格呈现调整口径、责任流程及人数/费用变化，附件逐人在岗状态、基数上下限、个人和单位各险种计算及差额；离职人员单列不纳入调整，数字以给定公司口径为准，不检索或改写地方政策。",
+  "prompt_sha256": "e846dccb430427fb4aef2e595efbc5702bf69fabc1f08711acdb9b8dfaf6ee17",
+  "source_dataset": "eval250_review_v1.1",
+  "task_dataset_sha256": "960ccfe108260592c2d644237dc7536a66214e188e2dbc2e4b266a8cf5629597",
+  "inputs": [
+    {
+      "name": "inputs/调整实施通知.md",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0170\\inputs\\调整实施通知.md",
+      "sha256": "43a47f855b9f3277e513dca024f3bff541cc0c2034adbc2ad1f2ef6ffd5b1b66",
+      "bytes": 977
+    },
+    {
+      "name": "inputs/人员基数明细.csv",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0170\\inputs\\人员基数明细.csv",
+      "sha256": "440493997f1b05dff39411ccb97cdf794c154ebff2f4851e1706e9c76b3c2d5d",
+      "bytes": 1118
+    }
+  ],
+  "deliverables": [
+    {
+      "filename": "社保调整汇报.docx",
+      "format": "docx"
+    },
+    {
+      "filename": "社保调整测算.xlsx",
+      "format": "xlsx"
+    }
+  ],
+  "dimension_weights": {
+    "D1": 0.3,
+    "D2": 0.2,
+    "D3": 0.2,
+    "D4": 0.2,
+    "D5": 0.1
+  },
+  "within_dimension_weight_policy": "FIXED_EQUAL_ITEM_WEIGHTS_REVIEWED_BY_AI_PENDING_HUMAN",
+  "historical_reference_used": false,
+  "actor_outputs_used_for_authoring": false,
+  "authoring_timing": "AFTER_EXISTING_EXECUTIONS_BEFORE_NEW_QUALITY_SCORING_NOT_PREREGISTERED",
+  "author": {
+    "kind": "CODEX_AGENT",
+    "shard": "office_data"
+  },
+  "human_review": {
+    "status": "PENDING",
+    "reviewer": null,
+    "date": null
+  },
+  "calibration": {
+    "rubric_generator": "NOT_VALIDATED",
+    "judge": "NOT_VALIDATED"
+  },
+  "author_notes": [
+    "总人数32，在岗29，离职3；按CSV状态独立计数。公司给定口径，不评价地方政策合法性。"
+  ],
+  "items": [
+    {
+      "dimension": "D1",
+      "criterion": "仅29在岗，3离职E009/E018/E027单列，新基数按上年月均工资夹6200—31000取整数。",
+      "sources": [
+        {
+          "source": "inputs/调整实施通知.md",
+          "quote": "# 公司2026年10月社保基数调整实施通知\n这是公司批准的本次计算口径，供材料整理，不要求判断地方政策或法律效力。适用范围为员工明细中的在岗人员，10月起执行，离职人员不进入本次调整。\n缴费基数以上年度月平均工资为基础，低于6200元按6200，高于31000按31000，其余按实际月平均工资，统一保留整数元。职工个人养老8%、医疗2%、失业0.5%；单位养老16%、医疗9%、失业0.5%、工伤0.4%。本次不含住房公积金、不计算补缴，不按工资当月变化自动变更基数。\n每人每险种先计算并四舍五入到分，再按个人/单位合计。通知需要列变化前后基数、个人合计、单位合计与差额，财务总额应与人员表合计一致。\n实施责任：HR核上年度工资和在岗状态，薪酬专员出表，财务复核，负责人审批后再录入。本次仅整理报告与测算，不实际申报。",
+          "locator": "extracted_text_span",
+          "sha256": "43a47f855b9f3277e513dca024f3bff541cc0c2034adbc2ad1f2ef6ffd5b1b66",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 361,
+            "start_locator": "line:1",
+            "end_locator": "line:5"
+          }
+        },
+        {
+          "source": "inputs/人员基数明细.csv",
+          "quote": "员工编号,称谓,上年度月均工资元,原缴费基数元,状态\nE001,员工1,5713,6550,在岗\nE002,员工2,6626,7100,在岗\nE003,员工3,7539,7650,在岗\nE004,员工4,8452,8200,在岗\nE005,员工5,9365,8750,在岗\nE006,员工6,10278,9300,在岗\nE007,员工7,11191,9850,在岗\nE008,员工8,12104,10400,在岗\nE009,员工9,13017,10950,已离职\nE010,员工10,13930,11500,在岗\nE011,员工11,14843,12050,在岗\nE012,员工12,15756,12600,在岗\nE013,员工13,16669,13150,在岗\nE014,员工14,17582,13700,在岗\nE015,员工15,18495,14250,在岗\nE016,员工16,19408,14800,在岗\nE017,员工17,20321,15350,在岗\nE018,员工18,21234,15900,已离职\nE019,员工19,22147,16450,在岗\nE020,员工20,23060,17000,在岗\nE021,员工21,23973,17550,在岗\nE022,员工22,24886,18100,在岗\nE023,员工23,25799,18650,在岗\nE024,员工24,26712,19200,在岗\nE025,员工25,27625,19750,在岗\nE026,员工26,28538,20300,在岗\nE027,员工27,29451,20850,已离职\nE028,员工28,30364,21400,在岗\nE029,员工29,31277,21950,在岗\nE030,员工30,32190,22500,在岗\nE031,员工31,33103,23050,在岗\nE032,员工32,34016,23600,在岗",
+          "locator": "extracted_text_span",
+          "sha256": "440493997f1b05dff39411ccb97cdf794c154ebff2f4851e1706e9c76b3c2d5d",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 808,
+            "start_locator": "line:1",
+            "end_locator": "line:33"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "已经呈现的核心事实、计算、规则或证据归属错误，足以改变本项主要判断；单纯遗漏按D2归责。",
+        "0.5": "核心结论和主要事实成立，但已呈现的少量非关键值、口径标签或证据对应有局部错误；单纯遗漏不在本项再次扣分。",
+        "1": "仅29在岗，3离职E009/E018/E027单列，新基数按上年月均工资夹6200—31000取整数。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "社保调整测算.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0170-D1-01",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0170-D1-01",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D1",
+      "criterion": "个人养老8/医2/失0.5，单位养老16/医9/失0.5/工0.4，每人每险先四舍五入到分再合。",
+      "sources": [
+        {
+          "source": "inputs/调整实施通知.md",
+          "quote": "# 公司2026年10月社保基数调整实施通知\n这是公司批准的本次计算口径，供材料整理，不要求判断地方政策或法律效力。适用范围为员工明细中的在岗人员，10月起执行，离职人员不进入本次调整。\n缴费基数以上年度月平均工资为基础，低于6200元按6200，高于31000按31000，其余按实际月平均工资，统一保留整数元。职工个人养老8%、医疗2%、失业0.5%；单位养老16%、医疗9%、失业0.5%、工伤0.4%。本次不含住房公积金、不计算补缴，不按工资当月变化自动变更基数。\n每人每险种先计算并四舍五入到分，再按个人/单位合计。通知需要列变化前后基数、个人合计、单位合计与差额，财务总额应与人员表合计一致。\n实施责任：HR核上年度工资和在岗状态，薪酬专员出表，财务复核，负责人审批后再录入。本次仅整理报告与测算，不实际申报。",
+          "locator": "extracted_text_span",
+          "sha256": "43a47f855b9f3277e513dca024f3bff541cc0c2034adbc2ad1f2ef6ffd5b1b66",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 361,
+            "start_locator": "line:1",
+            "end_locator": "line:5"
+          }
+        },
+        {
+          "source": "inputs/人员基数明细.csv",
+          "quote": "员工编号,称谓,上年度月均工资元,原缴费基数元,状态\nE001,员工1,5713,6550,在岗\nE002,员工2,6626,7100,在岗\nE003,员工3,7539,7650,在岗\nE004,员工4,8452,8200,在岗\nE005,员工5,9365,8750,在岗\nE006,员工6,10278,9300,在岗\nE007,员工7,11191,9850,在岗\nE008,员工8,12104,10400,在岗\nE009,员工9,13017,10950,已离职\nE010,员工10,13930,11500,在岗\nE011,员工11,14843,12050,在岗\nE012,员工12,15756,12600,在岗\nE013,员工13,16669,13150,在岗\nE014,员工14,17582,13700,在岗\nE015,员工15,18495,14250,在岗\nE016,员工16,19408,14800,在岗\nE017,员工17,20321,15350,在岗\nE018,员工18,21234,15900,已离职\nE019,员工19,22147,16450,在岗\nE020,员工20,23060,17000,在岗\nE021,员工21,23973,17550,在岗\nE022,员工22,24886,18100,在岗\nE023,员工23,25799,18650,在岗\nE024,员工24,26712,19200,在岗\nE025,员工25,27625,19750,在岗\nE026,员工26,28538,20300,在岗\nE027,员工27,29451,20850,已离职\nE028,员工28,30364,21400,在岗\nE029,员工29,31277,21950,在岗\nE030,员工30,32190,22500,在岗\nE031,员工31,33103,23050,在岗\nE032,员工32,34016,23600,在岗",
+          "locator": "extracted_text_span",
+          "sha256": "440493997f1b05dff39411ccb97cdf794c154ebff2f4851e1706e9c76b3c2d5d",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 808,
+            "start_locator": "line:1",
+            "end_locator": "line:33"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "已经呈现的核心事实、计算、规则或证据归属错误，足以改变本项主要判断；单纯遗漏按D2归责。",
+        "0.5": "核心结论和主要事实成立，但已呈现的少量非关键值、口径标签或证据对应有局部错误；单纯遗漏不在本项再次扣分。",
+        "1": "个人养老8/医2/失0.5，单位养老16/医9/失0.5/工0.4，每人每险先四舍五入到分再合。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "社保调整测算.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0170-D1-02",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0170-D1-02",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D1",
+      "criterion": "原基数按本次相同费率核原个人/单位额，再逐人比较新额与差额，29在岗合计可复算；主文与人员表中已表达数字统一由本项检查，不另扣跨文件一致性。",
+      "sources": [
+        {
+          "source": "inputs/调整实施通知.md",
+          "quote": "# 公司2026年10月社保基数调整实施通知\n这是公司批准的本次计算口径，供材料整理，不要求判断地方政策或法律效力。适用范围为员工明细中的在岗人员，10月起执行，离职人员不进入本次调整。\n缴费基数以上年度月平均工资为基础，低于6200元按6200，高于31000按31000，其余按实际月平均工资，统一保留整数元。职工个人养老8%、医疗2%、失业0.5%；单位养老16%、医疗9%、失业0.5%、工伤0.4%。本次不含住房公积金、不计算补缴，不按工资当月变化自动变更基数。\n每人每险种先计算并四舍五入到分，再按个人/单位合计。通知需要列变化前后基数、个人合计、单位合计与差额，财务总额应与人员表合计一致。\n实施责任：HR核上年度工资和在岗状态，薪酬专员出表，财务复核，负责人审批后再录入。本次仅整理报告与测算，不实际申报。",
+          "locator": "extracted_text_span",
+          "sha256": "43a47f855b9f3277e513dca024f3bff541cc0c2034adbc2ad1f2ef6ffd5b1b66",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 361,
+            "start_locator": "line:1",
+            "end_locator": "line:5"
+          }
+        },
+        {
+          "source": "inputs/人员基数明细.csv",
+          "quote": "员工编号,称谓,上年度月均工资元,原缴费基数元,状态\nE001,员工1,5713,6550,在岗\nE002,员工2,6626,7100,在岗\nE003,员工3,7539,7650,在岗\nE004,员工4,8452,8200,在岗\nE005,员工5,9365,8750,在岗\nE006,员工6,10278,9300,在岗\nE007,员工7,11191,9850,在岗\nE008,员工8,12104,10400,在岗\nE009,员工9,13017,10950,已离职\nE010,员工10,13930,11500,在岗\nE011,员工11,14843,12050,在岗\nE012,员工12,15756,12600,在岗\nE013,员工13,16669,13150,在岗\nE014,员工14,17582,13700,在岗\nE015,员工15,18495,14250,在岗\nE016,员工16,19408,14800,在岗\nE017,员工17,20321,15350,在岗\nE018,员工18,21234,15900,已离职\nE019,员工19,22147,16450,在岗\nE020,员工20,23060,17000,在岗\nE021,员工21,23973,17550,在岗\nE022,员工22,24886,18100,在岗\nE023,员工23,25799,18650,在岗\nE024,员工24,26712,19200,在岗\nE025,员工25,27625,19750,在岗\nE026,员工26,28538,20300,在岗\nE027,员工27,29451,20850,已离职\nE028,员工28,30364,21400,在岗\nE029,员工29,31277,21950,在岗\nE030,员工30,32190,22500,在岗\nE031,员工31,33103,23050,在岗\nE032,员工32,34016,23600,在岗",
+          "locator": "extracted_text_span",
+          "sha256": "440493997f1b05dff39411ccb97cdf794c154ebff2f4851e1706e9c76b3c2d5d",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 808,
+            "start_locator": "line:1",
+            "end_locator": "line:33"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "已经呈现的核心事实、计算、规则或证据归属错误，足以改变本项主要判断；单纯遗漏按D2归责。",
+        "0.5": "核心结论和主要事实成立，但已呈现的少量非关键值、口径标签或证据对应有局部错误；单纯遗漏不在本项再次扣分。",
+        "1": "原基数按本次相同费率核原个人/单位额，再逐人比较新额与差额，29在岗合计可复算；主文与人员表中已表达数字统一由本项检查，不另扣跨文件一致性。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "社保调整测算.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0170-D1-03",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0170-D1-03",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "XLSX逐人列状态、原/新基数与上下限处理，离职单列。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "行政负责人需要能一眼看懂的社保调整材料，请依据 inputs/调整实施通知.md 和 inputs/人员基数明细.csv，交付 社保调整汇报.docx 与 社保调整测算.xlsx，主文用表格呈现调整口径、责任流程及人数/费用变化，附件逐人在岗状态、基数上下限、个人和单位各险种计算及差额；离职人员单列不纳入调整，数字以给定公司口径为准，不检索或改写地方政策。",
+          "locator": "prompt",
+          "sha256": "e846dccb430427fb4aef2e595efbc5702bf69fabc1f08711acdb9b8dfaf6ee17",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 179,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "该项必要内容主体没有提供或只有空标题，无法识别所需输出；已存在内容的具体数值/事实错误只归D1，不在本项重复。",
+        "0.5": "主体齐，一处状态/基数说明不足。（只按覆盖，不因相同数值或事实错误再次扣。）",
+        "1": "XLSX逐人列状态、原/新基数与上下限处理，离职单列。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "社保调整测算.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0170-D2-01",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0170-D2-01",
+      "coverage_only": true,
+      "non_duplication_rule": "只检查内容是否存在与覆盖充分；已存在但数值/状态错误归D1，建议具体可用性归D4，不在本项再扣。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "XLSX逐人各险个人/单位金额、合计和前后差额，另给在岗合计。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "行政负责人需要能一眼看懂的社保调整材料，请依据 inputs/调整实施通知.md 和 inputs/人员基数明细.csv，交付 社保调整汇报.docx 与 社保调整测算.xlsx，主文用表格呈现调整口径、责任流程及人数/费用变化，附件逐人在岗状态、基数上下限、个人和单位各险种计算及差额；离职人员单列不纳入调整，数字以给定公司口径为准，不检索或改写地方政策。",
+          "locator": "prompt",
+          "sha256": "e846dccb430427fb4aef2e595efbc5702bf69fabc1f08711acdb9b8dfaf6ee17",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 179,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "该项必要内容主体没有提供或只有空标题，无法识别所需输出；已存在内容的具体数值/事实错误只归D1，不在本项重复。",
+        "0.5": "主险种与差额有，一字段/合计不足。（只按覆盖，不因相同数值或事实错误再次扣。）",
+        "1": "XLSX逐人各险个人/单位金额、合计和前后差额，另给在岗合计。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "社保调整测算.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0170-D2-02",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0170-D2-02",
+      "coverage_only": true,
+      "non_duplication_rule": "只检查内容是否存在与覆盖充分；已存在但数值/状态错误归D1，建议具体可用性归D4，不在本项再扣。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "DOCX主文用表格列调整口径、责任流程、人数和费用变化；已呈现数值对错归D1。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "行政负责人需要能一眼看懂的社保调整材料，请依据 inputs/调整实施通知.md 和 inputs/人员基数明细.csv，交付 社保调整汇报.docx 与 社保调整测算.xlsx，主文用表格呈现调整口径、责任流程及人数/费用变化，附件逐人在岗状态、基数上下限、个人和单位各险种计算及差额；离职人员单列不纳入调整，数字以给定公司口径为准，不检索或改写地方政策。",
+          "locator": "prompt",
+          "sha256": "e846dccb430427fb4aef2e595efbc5702bf69fabc1f08711acdb9b8dfaf6ee17",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 179,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "该项必要内容主体没有提供或只有空标题，无法识别所需输出；已存在内容的具体数值/事实错误只归D1，不在本项重复。",
+        "0.5": "主体主文在，一处流程/数值依据不足。（只按覆盖，不因相同数值或事实错误再次扣。）",
+        "1": "DOCX主文用表格列调整口径、责任流程、人数和费用变化；已呈现数值对错归D1。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "社保调整汇报.docx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0170-D2-03",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0170-D2-03",
+      "coverage_only": true,
+      "non_duplication_rule": "只检查内容是否存在与覆盖充分；已存在但数值/状态错误归D1，建议具体可用性归D4，不在本项再扣。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D3",
+      "criterion": "仅用公司已批准口径整理报告和测算，不检索/改写地方政策、不实际申报或宣称已申报；公积金、补缴及当月工资自动变更的计算范围错误归D1。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "不检索或改写地方政策",
+          "locator": "prompt",
+          "sha256": "e846dccb430427fb4aef2e595efbc5702bf69fabc1f08711acdb9b8dfaf6ee17",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 168,
+            "char_end_exclusive": 178,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "实际违反本条当前criterion列出的独立格式、范围、保密或授权约束；不能拿criterion明确归D1/D2的原因在此重复扣。",
+        "0.5": "本项明确禁止行为不设半分：实际发生为0，未发生为1；不能只因缺额外解释而扣分。",
+        "1": "仅用公司已批准口径整理报告和测算，不检索/改写地方政策、不实际申报或宣称已申报；公积金、补缴及当月工资自动变更的计算范围错误归D1。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "社保调整汇报.docx",
+        "社保调整测算.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0170-D3-01",
+      "dimension_name": "当前要求适配与一致性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "CONTENT_SCOPED_NO_AUTOMATIC_FILE_AND",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0170-D3-01",
+      "evidence_precondition": "实际外部动作须可信动作/最终状态证据；文稿误写已完成的事实归D1，不以没有证据的怀疑扣此项。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "CONTENT_SCOPED_NO_AUTOMATIC_FILE_AND",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D3",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D4",
+      "criterion": "行政和财务能按“HR核状态/上年工资→薪酬出表→财务复核→负责人审批→再录入”理解交接顺序，实际测算与后续办理关系清楚；不重复评流程是否缺字段或计算是否错。",
+      "sources": [
+        {
+          "source": "inputs/调整实施通知.md",
+          "quote": "实施责任：HR核上年度工资和在岗状态，薪酬专员出表，财务复核，负责人审批后再录入。本次仅整理报告与测算，不实际申报。",
+          "locator": "line:5",
+          "sha256": "43a47f855b9f3277e513dca024f3bff541cc0c2034adbc2ad1f2ef6ffd5b1b66",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 303,
+            "char_end_exclusive": 361,
+            "start_locator": "line:5",
+            "end_locator": "line:5"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "内容虽存在，但组织方式或推理衔接使本题实际工作仍无法开展；必须指出独立于其他维度的新缺陷。",
+        "0.5": "主要业务使用成立，但局部对应、衔接或操作解释仍需人工整理；不得复用D1/D2/D3/D5已扣原因。",
+        "1": "行政和财务能按“HR核状态/上年工资→薪酬出表→财务复核→负责人审批→再录入”理解交接顺序，实际测算与后续办理关系清楚；不重复评流程是否缺字段或计算是否错。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "社保调整汇报.docx",
+        "社保调整测算.xlsx"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0170-D4-01",
+      "dimension_name": "专业判断与业务可用性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "CONTENT_SCOPED_NO_AUTOMATIC_FILE_AND",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0170-D4-01",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "CONTENT_SCOPED_NO_AUTOMATIC_FILE_AND",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D4",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D5",
+      "criterion": "在社保调整汇报.docx中，标题、段落、列表与表格层次适合本题受众；实际渲染后关键文字和表格完整可辨，无重叠、裁切或挤压到难以阅读。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "行政负责人需要能一眼看懂的社保调整材料，请依据 inputs/调整实施通知.md 和 inputs/人员基数明细.csv，交付 社保调整汇报.docx 与 社保调整测算.xlsx，主文用表格呈现调整口径、责任流程及人数/费用变化，附件逐人在岗状态、基数上下限、个人和单位各险种计算及差额；离职人员单列不纳入调整，数字以给定公司口径为准，不检索或改写地方政策。",
+          "locator": "prompt",
+          "sha256": "e846dccb430427fb4aef2e595efbc5702bf69fabc1f08711acdb9b8dfaf6ee17",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 179,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "实际渲染或文字呈现的关键内容有独立乱码、遮挡、裁切等缺陷，妨碍阅读；明确格式本身违约只归D3。",
+        "0.5": "主要内容清楚可读，个别层级、分页或疏密不佳但不妨碍找到关键事实和行动。",
+        "1": "在社保调整汇报.docx中，标题、段落、列表与表格层次适合本题受众；实际渲染后关键文字和表格完整可辨，无重叠、裁切或挤压到难以阅读。"
+      },
+      "evidence_modes": [
+        "visual",
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "社保调整汇报.docx"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0170-D5-01",
+      "dimension_name": "表达与呈现质量",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0170-D5-01",
+      "non_duplication_rule": "只评实际阅读/呈现；规定的字体、页数、A4/比例等本身违约归D3，不因同一格式违约再次扣。独立遮挡/乱码/裁切可在本项判。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D5",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D5",
+      "criterion": "在社保调整测算.xlsx中，明细、汇总和说明的层次与列标题清楚，编号、日期、金额/比例的显示不歧义，关键列和结论在实际打开或渲染时无截断、遮挡或不可辨认。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "行政负责人需要能一眼看懂的社保调整材料，请依据 inputs/调整实施通知.md 和 inputs/人员基数明细.csv，交付 社保调整汇报.docx 与 社保调整测算.xlsx，主文用表格呈现调整口径、责任流程及人数/费用变化，附件逐人在岗状态、基数上下限、个人和单位各险种计算及差额；离职人员单列不纳入调整，数字以给定公司口径为准，不检索或改写地方政策。",
+          "locator": "prompt",
+          "sha256": "e846dccb430427fb4aef2e595efbc5702bf69fabc1f08711acdb9b8dfaf6ee17",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 179,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "实际渲染或文字呈现的关键内容有独立乱码、遮挡、裁切等缺陷，妨碍阅读；明确格式本身违约只归D3。",
+        "0.5": "主体明细和结论能读懂，但个别列宽、单位展示或分页影响局部阅读；不掩盖关键结果。",
+        "1": "在社保调整测算.xlsx中，明细、汇总和说明的层次与列标题清楚，编号、日期、金额/比例的显示不歧义，关键列和结论在实际打开或渲染时无截断、遮挡或不可辨认。"
+      },
+      "evidence_modes": [
+        "visual",
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "社保调整测算.xlsx"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0170-D5-02",
+      "dimension_name": "表达与呈现质量",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0170-D5-02",
+      "non_duplication_rule": "只评实际阅读/呈现；规定的字体、页数、A4/比例等本身违约归D3，不因同一格式违约再次扣。独立遮挡/乱码/裁切可在本项判。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D5",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    }
+  ],
+  "reviewer": {
+    "kind": "CODEX_AGENT",
+    "scope": "OFFICE40_DATA30_HR20_FULL_SOURCE_REVIEW"
+  },
+  "deduplication_policy": {
+    "primary_attribution": {
+      "D1": "已经表达的事实、计算、规则解释、证据归属或未知状态是否正确",
+      "D2": "必需内容、记录、字段或产物的覆盖",
+      "D3": "独立授权/保密/不得改源/格式/对象范围约束；不是D1错误的重复描述",
+      "D4": "独立的业务推理、交接和实际操作可用性",
+      "D5": "实际视觉、语言和可读性"
+    },
+    "root_cause_once": "同一已具体识别的根因只在一个主条目扣分，其他条目记录关联但不再扣。不能把D1错值派生的图文不一致再扣D3、或把D2缺项再扣D4。存在独立新缺陷才可另扣。",
+    "content_omission": "在实际产物存在且有可评内容时，单纯未覆盖归D2；D1不以同一遗漏扣第二次。缺必需产物时依原合同，所有实际依赖该产物的条目为0；不因去重给空产物其他维度满分。",
+    "comparison": "一个版本值违背输入的，归D1并检查所有实际存在版本；D3比较仅针对不能由单一源事实直接判错的独立对象/承诺冲突。",
+    "technical_missingness": "评估器解析/渲染/公式缓存设施故障为UNSCORED；不记0，不删权重。"
+  },
+  "review_notes": [
+    "32总29在岗、E009/018/027离职；6200—31000、个人3/单位4险逐险先分后合；仅公司口径。",
+    "逐条查看criterion、三档锚点、来源、证据模式、依赖和weight；评分仍为空；AI复核不等于人工审核或可靠性校准。"
+  ],
+  "source_review_shards_preserved": true,
+  "scoring_status": "NOT_SCORED",
+  "review_record_ref": "../review_shards/office90_review.json"
+}

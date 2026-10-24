@@ -1,0 +1,621 @@
+{
+  "schema_version": "eval250-quality-rubric-v1",
+  "rubric_version": "1.1.0-ai-full-review",
+  "status": "REVIEWED_BY_AI_PENDING_HUMAN",
+  "task_id": "T0194",
+  "title": "销售额基础统计与退货口径",
+  "category": "DATA",
+  "prompt": "销售主管要看9月订单表现，请分析 inputs/订单明细.xlsx，销售额=数量×单价，退货标记为1的订单从净销售额中剔除但在退货统计中保留。交付 订单统计.xlsx，给原始行数/字段清单、毛销售额平均/最大/最小、净销售额、退货数量及地区分组汇总；不要把订单数量均值当销售额均值。",
+  "prompt_sha256": "8c8f99491fff83dde6f8453458741e73771c489ba5c6619607c8021d16e721dc",
+  "source_dataset": "eval250_review_v1.1",
+  "task_dataset_sha256": "960ccfe108260592c2d644237dc7536a66214e188e2dbc2e4b266a8cf5629597",
+  "inputs": [
+    {
+      "name": "inputs/订单明细.xlsx",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0194\\inputs\\订单明细.xlsx",
+      "sha256": "f7cb3a009810b5bd291473a13e02ba224c7a30303e3bfd3ed2caa75004fe0966",
+      "bytes": 6920
+    }
+  ],
+  "deliverables": [
+    {
+      "filename": "订单统计.xlsx",
+      "format": "xlsx"
+    }
+  ],
+  "dimension_weights": {
+    "D1": 0.3,
+    "D2": 0.2,
+    "D3": 0.2,
+    "D4": 0.2,
+    "D5": 0.1
+  },
+  "within_dimension_weight_policy": "FIXED_EQUAL_ITEM_WEIGHTS_REVIEWED_BY_AI_PENDING_HUMAN",
+  "historical_reference_used": false,
+  "actor_outputs_used_for_authoring": false,
+  "authoring_timing": "AFTER_EXISTING_EXECUTIONS_BEFORE_NEW_QUALITY_SCORING_NOT_PREREGISTERED",
+  "author": {
+    "kind": "CODEX_AGENT",
+    "shard": "office_data"
+  },
+  "human_review": {
+    "status": "PENDING",
+    "reviewer": null,
+    "date": null
+  },
+  "calibration": {
+    "rubric_generator": "NOT_VALIDATED",
+    "judge": "NOT_VALIDATED"
+  },
+  "author_notes": [
+    "“退货数量”可有订单数/商品数量两种合理含义，要求明确标签，不事后限定唯一解释。",
+    "业务用途解释（不额外重复计分）：销售主管可直接核看金额分布、净额和退货影响，不会把销量当销售额。"
+  ],
+  "items": [
+    {
+      "dimension": "D1",
+      "criterion": "逐行销售额=数量×单价，原单价/数量及订单关联不变。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "不要把订单数量均值当销售额均值",
+          "locator": "prompt",
+          "sha256": "8c8f99491fff83dde6f8453458741e73771c489ba5c6619607c8021d16e721dc",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 125,
+            "char_end_exclusive": 140,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "已经呈现的核心事实、计算、规则或证据归属错误，足以改变本项主要判断；单纯遗漏按D2归责。",
+        "0.5": "核心结论和主要事实成立，但已呈现的少量非关键值、口径标签或证据对应有局部错误；单纯遗漏不在本项再次扣分。",
+        "1": "逐行销售额=数量×单价，原单价/数量及订单关联不变。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "订单统计.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0194-D1-01",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0194-D1-01",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D1",
+      "criterion": "毛销售额平均/最大/最小基于全订单销售额列，不把订单数量均值当金额均值。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "不要把订单数量均值当销售额均值",
+          "locator": "prompt",
+          "sha256": "8c8f99491fff83dde6f8453458741e73771c489ba5c6619607c8021d16e721dc",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 125,
+            "char_end_exclusive": 140,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "已经呈现的核心事实、计算、规则或证据归属错误，足以改变本项主要判断；单纯遗漏按D2归责。",
+        "0.5": "核心结论和主要事实成立，但已呈现的少量非关键值、口径标签或证据对应有局部错误；单纯遗漏不在本项再次扣分。",
+        "1": "毛销售额平均/最大/最小基于全订单销售额列，不把订单数量均值当金额均值。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "订单统计.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0194-D1-02",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0194-D1-02",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D1",
+      "criterion": "净销售额剔除退货标记1订单，退货统计仍保留其原单和数量；地区分组与相同净额口径总计一致。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "退货标记为1的订单从净销售额中剔除但在退货统计中保留",
+          "locator": "prompt",
+          "sha256": "8c8f99491fff83dde6f8453458741e73771c489ba5c6619607c8021d16e721dc",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 44,
+            "char_end_exclusive": 70,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "已经呈现的核心事实、计算、规则或证据归属错误，足以改变本项主要判断；单纯遗漏按D2归责。",
+        "0.5": "核心结论和主要事实成立，但已呈现的少量非关键值、口径标签或证据对应有局部错误；单纯遗漏不在本项再次扣分。",
+        "1": "净销售额剔除退货标记1订单，退货统计仍保留其原单和数量；地区分组与相同净额口径总计一致。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "订单统计.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0194-D1-03",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0194-D1-03",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "给原始90条记录数和7个字段清单；统计可回溯订单范围即可，不额外强制在产物中复制完整原始明细。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "销售主管要看9月订单表现，请分析 inputs/订单明细.xlsx，销售额=数量×单价，退货标记为1的订单从净销售额中剔除但在退货统计中保留。交付 订单统计.xlsx，给原始行数/字段清单、毛销售额平均/最大/最小、净销售额、退货数量及地区分组汇总；不要把订单数量均值当销售额均值。",
+          "locator": "prompt",
+          "sha256": "8c8f99491fff83dde6f8453458741e73771c489ba5c6619607c8021d16e721dc",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 141,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "该项必要内容主体没有提供或只有空标题，无法识别所需输出；已存在内容的具体数值/事实错误只归D1，不在本项重复。",
+        "0.5": "主体说明/明细在，一处字段或行数说明不足。（只按覆盖，不因相同数值或事实错误再次扣。）",
+        "1": "给原始90条记录数和7个字段清单；统计可回溯订单范围即可，不额外强制在产物中复制完整原始明细。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "订单统计.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0194-D2-01",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0194-D2-01",
+      "coverage_only": true,
+      "non_duplication_rule": "只检查内容是否存在与覆盖充分；已存在但数值/状态错误归D1，建议具体可用性归D4，不在本项再扣。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "给毛销售额平均、最大、最小与净销售额，金额单位明确。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "销售主管要看9月订单表现，请分析 inputs/订单明细.xlsx，销售额=数量×单价，退货标记为1的订单从净销售额中剔除但在退货统计中保留。交付 订单统计.xlsx，给原始行数/字段清单、毛销售额平均/最大/最小、净销售额、退货数量及地区分组汇总；不要把订单数量均值当销售额均值。",
+          "locator": "prompt",
+          "sha256": "8c8f99491fff83dde6f8453458741e73771c489ba5c6619607c8021d16e721dc",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 141,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "该项必要内容主体没有提供或只有空标题，无法识别所需输出；已存在内容的具体数值/事实错误只归D1，不在本项重复。",
+        "0.5": "主体统计有，一种结果或单位不足。（只按覆盖，不因相同数值或事实错误再次扣。）",
+        "1": "给毛销售额平均、最大、最小与净销售额，金额单位明确。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "订单统计.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0194-D2-02",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0194-D2-02",
+      "coverage_only": true,
+      "non_duplication_rule": "只检查内容是否存在与覆盖充分；已存在但数值/状态错误归D1，建议具体可用性归D4，不在本项再扣。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "给退货统计和地区分组汇总，明确退货数量含义与净额口径。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "销售主管要看9月订单表现，请分析 inputs/订单明细.xlsx，销售额=数量×单价，退货标记为1的订单从净销售额中剔除但在退货统计中保留。交付 订单统计.xlsx，给原始行数/字段清单、毛销售额平均/最大/最小、净销售额、退货数量及地区分组汇总；不要把订单数量均值当销售额均值。",
+          "locator": "prompt",
+          "sha256": "8c8f99491fff83dde6f8453458741e73771c489ba5c6619607c8021d16e721dc",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 141,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "该项必要内容主体没有提供或只有空标题，无法识别所需输出；已存在内容的具体数值/事实错误只归D1，不在本项重复。",
+        "0.5": "主体分组有，一处数量标签/汇总不足。（只按覆盖，不因相同数值或事实错误再次扣。）",
+        "1": "给退货统计和地区分组汇总，明确退货数量含义与净额口径。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "订单统计.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0194-D2-03",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0194-D2-03",
+      "coverage_only": true,
+      "non_duplication_rule": "只检查内容是否存在与覆盖充分；已存在但数值/状态错误归D1，建议具体可用性归D4，不在本项再扣。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D3",
+      "criterion": "输入原订单和退货状态不得修改；数量统计采用订单数或商品数需准确标名，数值/口径错归D1，退货记录漏覆盖归D2。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "在退货统计中保留",
+          "locator": "prompt",
+          "sha256": "8c8f99491fff83dde6f8453458741e73771c489ba5c6619607c8021d16e721dc",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 62,
+            "char_end_exclusive": 70,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "实际违反本条当前criterion列出的独立格式、范围、保密或授权约束；不能拿criterion明确归D1/D2的原因在此重复扣。",
+        "0.5": "本项明确禁止行为不设半分：实际发生为0，未发生为1；不能只因缺额外解释而扣分。",
+        "1": "输入原订单和退货状态不得修改；数量统计采用订单数或商品数需准确标名，数值/口径错归D1，退货记录漏覆盖归D2。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text",
+        "functional"
+      ],
+      "deliverables": [
+        "订单统计.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0194-D3-01",
+      "dimension_name": "当前要求适配与一致性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0194-D3-01",
+      "evidence_precondition": "涉及实际源文件是否被改，须最终状态哈希/文件差异等可核证据，不能凭Actor声称或仅产物抄错推断；缺采证为UNSCORED而非0。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D3",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D4",
+      "criterion": "销售主管可理解毛额、净额与退货统计的差别，地区汇总便于复盘且数量标签清楚；不要求无数据的市场或利润结论。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "销售主管要看9月订单表现",
+          "locator": "prompt",
+          "sha256": "8c8f99491fff83dde6f8453458741e73771c489ba5c6619607c8021d16e721dc",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 12,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "内容虽存在，但组织方式或推理衔接使本题实际工作仍无法开展；必须指出独立于其他维度的新缺陷。",
+        "0.5": "主要业务使用成立，但局部对应、衔接或操作解释仍需人工整理；不得复用D1/D2/D3/D5已扣原因。",
+        "1": "销售主管可理解毛额、净额与退货统计的差别，地区汇总便于复盘且数量标签清楚；不要求无数据的市场或利润结论。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "订单统计.xlsx"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0194-D4-01",
+      "dimension_name": "专业判断与业务可用性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "CONTENT_SCOPED_NO_AUTOMATIC_FILE_AND",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0194-D4-01",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "CONTENT_SCOPED_NO_AUTOMATIC_FILE_AND",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D4",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D5",
+      "criterion": "在订单统计.xlsx中，明细、汇总和说明的层次与列标题清楚，编号、日期、金额/比例的显示不歧义，关键列和结论在实际打开或渲染时无截断、遮挡或不可辨认。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "销售主管要看9月订单表现，请分析 inputs/订单明细.xlsx，销售额=数量×单价，退货标记为1的订单从净销售额中剔除但在退货统计中保留。交付 订单统计.xlsx，给原始行数/字段清单、毛销售额平均/最大/最小、净销售额、退货数量及地区分组汇总；不要把订单数量均值当销售额均值。",
+          "locator": "prompt",
+          "sha256": "8c8f99491fff83dde6f8453458741e73771c489ba5c6619607c8021d16e721dc",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 141,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "实际渲染或文字呈现的关键内容有独立乱码、遮挡、裁切等缺陷，妨碍阅读；明确格式本身违约只归D3。",
+        "0.5": "主体明细和结论能读懂，但个别列宽、单位展示或分页影响局部阅读；不掩盖关键结果。",
+        "1": "在订单统计.xlsx中，明细、汇总和说明的层次与列标题清楚，编号、日期、金额/比例的显示不歧义，关键列和结论在实际打开或渲染时无截断、遮挡或不可辨认。"
+      },
+      "evidence_modes": [
+        "visual",
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "订单统计.xlsx"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0194-D5-01",
+      "dimension_name": "表达与呈现质量",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0194-D5-01",
+      "non_duplication_rule": "只评实际阅读/呈现；规定的字体、页数、A4/比例等本身违约归D3，不因同一格式违约再次扣。独立遮挡/乱码/裁切可在本项判。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D5",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    }
+  ],
+  "reviewer": {
+    "kind": "CODEX_AGENT",
+    "scope": "OFFICE40_DATA30_HR20_FULL_SOURCE_REVIEW"
+  },
+  "deduplication_policy": {
+    "primary_attribution": {
+      "D1": "已经表达的事实、计算、规则解释、证据归属或未知状态是否正确",
+      "D2": "必需内容、记录、字段或产物的覆盖",
+      "D3": "独立授权/保密/不得改源/格式/对象范围约束；不是D1错误的重复描述",
+      "D4": "独立的业务推理、交接和实际操作可用性",
+      "D5": "实际视觉、语言和可读性"
+    },
+    "root_cause_once": "同一已具体识别的根因只在一个主条目扣分，其他条目记录关联但不再扣。不能把D1错值派生的图文不一致再扣D3、或把D2缺项再扣D4。存在独立新缺陷才可另扣。",
+    "content_omission": "在实际产物存在且有可评内容时，单纯未覆盖归D2；D1不以同一遗漏扣第二次。缺必需产物时依原合同，所有实际依赖该产物的条目为0；不因去重给空产物其他维度满分。",
+    "comparison": "一个版本值违背输入的，归D1并检查所有实际存在版本；D3比较仅针对不能由单一源事实直接判错的独立对象/承诺冲突。",
+    "technical_missingness": "评估器解析/渲染/公式缓存设施故障为UNSCORED；不记0，不删权重。"
+  },
+  "review_notes": [
+    "90订单7字段，6退货；“退货数量”可为订单条数或商品数量但标明，不强制复制整个原始明细。",
+    "逐条查看criterion、三档锚点、来源、证据模式、依赖和weight；评分仍为空；AI复核不等于人工审核或可靠性校准。"
+  ],
+  "source_review_shards_preserved": true,
+  "scoring_status": "NOT_SCORED",
+  "review_record_ref": "../review_shards/office90_review.json"
+}

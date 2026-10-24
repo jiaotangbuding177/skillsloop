@@ -1,0 +1,265 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "eval250-quality-rubric-review-contract-v1.1",
+  "title": "Source-only AI full-review contract; real-person review and quality calibration pending",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "status",
+    "task_id",
+    "prompt_sha256",
+    "inputs",
+    "deliverables",
+    "dimension_weights",
+    "human_review",
+    "calibration",
+    "items",
+    "rubric_version",
+    "scoring_status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "eval250-quality-rubric-v1"
+    },
+    "status": {
+      "const": "REVIEWED_BY_AI_PENDING_HUMAN"
+    },
+    "task_id": {
+      "type": "string",
+      "pattern": "^T[0-9]{4}$"
+    },
+    "prompt_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "historical_reference_used": {
+      "const": false
+    },
+    "actor_outputs_used_for_authoring": {
+      "const": false
+    },
+    "dimension_weights": {
+      "type": "object",
+      "required": [
+        "D1",
+        "D2",
+        "D3",
+        "D4",
+        "D5"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "D1": {
+          "const": 0.3
+        },
+        "D2": {
+          "const": 0.2
+        },
+        "D3": {
+          "const": 0.2
+        },
+        "D4": {
+          "const": 0.2
+        },
+        "D5": {
+          "const": 0.1
+        }
+      }
+    },
+    "human_review": {
+      "type": "object",
+      "required": [
+        "status",
+        "reviewer",
+        "date"
+      ],
+      "properties": {
+        "status": {
+          "const": "PENDING"
+        },
+        "reviewer": {
+          "type": "null"
+        },
+        "date": {
+          "type": "null"
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "object",
+        "required": [
+          "item_id",
+          "dimension",
+          "criterion",
+          "sources",
+          "anchors",
+          "evidence_modes",
+          "deliverables",
+          "basis",
+          "weight",
+          "score",
+          "canonical_artifact_dependency",
+          "quality_evaluation_contract"
+        ],
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "pattern": "^T[0-9]{4}-D[1-5]-[0-9]{2}$"
+          },
+          "dimension": {
+            "enum": [
+              "D1",
+              "D2",
+              "D3",
+              "D4",
+              "D5"
+            ]
+          },
+          "criterion": {
+            "type": "string",
+            "minLength": 5
+          },
+          "sources": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "source",
+                "quote",
+                "locator",
+                "sha256",
+                "resolved_source_span"
+              ],
+              "properties": {
+                "source": {
+                  "type": "string"
+                },
+                "quote": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "locator": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "resolved_source_span": {
+                  "type": "object",
+                  "required": [
+                    "basis"
+                  ]
+                }
+              }
+            }
+          },
+          "anchors": {
+            "type": "object",
+            "required": [
+              "0",
+              "0.5",
+              "1"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "0": {
+                "type": "string",
+                "minLength": 5
+              },
+              "0.5": {
+                "type": "string",
+                "minLength": 5
+              },
+              "1": {
+                "type": "string",
+                "minLength": 5
+              }
+            }
+          },
+          "evidence_modes": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "source_text",
+                "output_text",
+                "structured",
+                "visual",
+                "functional"
+              ]
+            }
+          },
+          "deliverables": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "basis": {
+            "enum": [
+              "explicit",
+              "derived_quality"
+            ]
+          },
+          "weight": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "score": {
+            "type": "null"
+          },
+          "canonical_artifact_dependency": {
+            "type": "object",
+            "required": [
+              "mode"
+            ]
+          },
+          "quality_evaluation_contract": {
+            "type": "object",
+            "required": [
+              "single_defect_single_primary_item",
+              "whole_required_artifact_absent",
+              "file_exists_but_semantically_empty",
+              "positive_credit_requires_evidence",
+              "evidence_system_failure"
+            ],
+            "properties": {
+              "single_defect_single_primary_item": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "rubric_version": {
+      "const": "1.1.0-ai-full-review"
+    },
+    "scoring_status": {
+      "const": "NOT_SCORED"
+    },
+    "calibration": {
+      "type": "object",
+      "required": [
+        "rubric_generator",
+        "judge"
+      ],
+      "properties": {
+        "rubric_generator": {
+          "const": "NOT_VALIDATED"
+        },
+        "judge": {
+          "const": "NOT_VALIDATED"
+        }
+      }
+    }
+  }
+}

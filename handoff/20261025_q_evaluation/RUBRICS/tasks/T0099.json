@@ -1,0 +1,866 @@
+{
+  "schema_version": "eval250-quality-rubric-v1",
+  "rubric_version": "1.1.0-ai-full-review",
+  "status": "REVIEWED_BY_AI_PENDING_HUMAN",
+  "task_id": "T0099",
+  "title": "笔记全量导出与分类",
+  "category": "KNOW",
+  "prompt": "请将 inputs/notebooks.json 中全部笔记导出为知识目录，每个笔记本一个文件夹，未分类也保留；交付 notes_export.zip 和 export_manifest.csv，保持标题、正文、更新时间和note_id，导出记录数需与输入一致，不接入任何真实账户。 相关口径请一并参阅inputs/export_rules.md。",
+  "prompt_sha256": "fe26975bdacb2443cad48338105ace0953375a60b8e9011bd93e53dff9410c44",
+  "source_dataset": "eval250_review_v1.1",
+  "task_dataset_sha256": "960ccfe108260592c2d644237dc7536a66214e188e2dbc2e4b266a8cf5629597",
+  "inputs": [
+    {
+      "name": "inputs/notebooks.json",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0099\\inputs\\notebooks.json",
+      "sha256": "7fa1027882f93d5b41c528731c213e44f6e6add51f29887be98788f3d9da4080",
+      "bytes": 2421
+    },
+    {
+      "name": "inputs/export_rules.md",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0099\\inputs\\export_rules.md",
+      "sha256": "3075b95469e69adbb11d76b090f4af509a4ec99f1f3738b409a4b26e8f933989",
+      "bytes": 274
+    }
+  ],
+  "deliverables": [
+    {
+      "filename": "notes_export.zip",
+      "format": "zip"
+    },
+    {
+      "filename": "export_manifest.csv",
+      "format": "csv"
+    }
+  ],
+  "dimension_weights": {
+    "D1": 0.3,
+    "D2": 0.2,
+    "D3": 0.2,
+    "D4": 0.2,
+    "D5": 0.1
+  },
+  "within_dimension_weight_policy": "FIXED_EQUAL_ITEM_WEIGHTS_REVIEWED_BY_AI_PENDING_HUMAN",
+  "historical_reference_used": false,
+  "actor_outputs_used_for_authoring": false,
+  "authoring_timing": "AFTER_EXISTING_EXECUTIONS_BEFORE_NEW_QUALITY_SCORING_NOT_PREREGISTERED",
+  "author": {
+    "kind": "CODEX_AGENT",
+    "shard": "tech_edu"
+  },
+  "human_review": {
+    "status": "PENDING",
+    "reviewer": null,
+    "date": null
+  },
+  "calibration": {
+    "rubric_generator": "NOT_VALIDATED",
+    "judge": "NOT_VALIDATED"
+  },
+  "author_notes": [
+    "工作用途（说明，不新增评分条件）：用户能完整取得本地笔记快照并核对每条来源，分类和未分类内容均不丢失"
+  ],
+  "items": [
+    {
+      "dimension": "D1",
+      "criterion": "已导出的笔记标题、正文、note_id和更新时间逐条与输入一致，不改写原规则；10条覆盖与归属另在D2核",
+      "sources": [
+        {
+          "source": "inputs/export_rules.md",
+          "quote": "不在正文改写规则",
+          "locator": "line:2",
+          "sha256": "3075b95469e69adbb11d76b090f4af509a4ec99f1f3738b409a4b26e8f933989",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 30,
+            "char_end_exclusive": 38,
+            "start_locator": "line:2",
+            "end_locator": "line:2"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项涉及的关键事实、口径或计算错误，导致所述结论不成立；同一内容单纯未提供按D2归责。判定对象：已导出的笔记标题、正文、note_id和更新时间逐条与输入一致，不改写原规则；10条覆盖与归属另在D2核",
+        "0.5": "核心事实与结论成立，仅少量非关键转录、精度或依据标识有误，不改变主要判断；关键事实错不适用半分。判定对象：已导出的笔记标题、正文、note_id和更新时间逐条与输入一致，不改写原规则；10条覆盖与归属另在D2核",
+        "1": "已导出的笔记标题、正文、note_id和更新时间逐条与输入一致，不改写原规则；10条覆盖与归属另在D2核"
+      },
+      "evidence_modes": [
+        "structured"
+      ],
+      "deliverables": [
+        "notes_export.zip"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0099-D1-01",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "已陈述事实/计算错误；不以单纯未写重复扣D2。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "已导出的笔记标题、正文、note_id和更新时间逐条与输入一致，不改写原规则；10条覆盖与归属另在D2核",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "已导出的笔记标题、正文、note_id和更新时间逐条与输入一致，不改写原规则；10条覆盖与归属另在D2核",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D1",
+      "criterion": "笔记本归属为销售/交付/研发/管理/未分类各两条，若有附件元数据应正确理解NULL为无附件；不要求原不存在附件的下载",
+      "sources": [
+        {
+          "source": "inputs/export_rules.md",
+          "quote": "NULL附件代表没有附件",
+          "locator": "line:2",
+          "sha256": "3075b95469e69adbb11d76b090f4af509a4ec99f1f3738b409a4b26e8f933989",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 72,
+            "char_end_exclusive": 84,
+            "start_locator": "line:2",
+            "end_locator": "line:2"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项涉及的关键事实、口径或计算错误，导致所述结论不成立；同一内容单纯未提供按D2归责。判定对象：笔记本归属为销售/交付/研发/管理/未分类各两条，若有附件元数据应正确理解NULL为无附件；不要求原不存在附件的下载",
+        "0.5": "核心事实与结论成立，仅少量非关键转录、精度或依据标识有误，不改变主要判断；关键事实错不适用半分。判定对象：笔记本归属为销售/交付/研发/管理/未分类各两条，若有附件元数据应正确理解NULL为无附件；不要求原不存在附件的下载",
+        "1": "笔记本归属为销售/交付/研发/管理/未分类各两条，若有附件元数据应正确理解NULL为无附件；不要求原不存在附件的下载"
+      },
+      "evidence_modes": [
+        "structured"
+      ],
+      "deliverables": [
+        "notes_export.zip"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0099-D1-02",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "已陈述事实/计算错误；不以单纯未写重复扣D2。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "笔记本归属为销售/交付/研发/管理/未分类各两条，若有附件元数据应正确理解NULL为无附件；不要求原不存在附件的下载",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "笔记本归属为销售/交付/研发/管理/未分类各两条，若有附件元数据应正确理解NULL为无附件；不要求原不存在附件的下载",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "每笔记本一个文件夹，未分类也保留，每文件用note_id+标题避免重名",
+      "sources": [
+        {
+          "source": "inputs/export_rules.md",
+          "quote": "文件名使用note_id+标题，避免同名覆盖",
+          "locator": "line:2",
+          "sha256": "3075b95469e69adbb11d76b090f4af509a4ec99f1f3738b409a4b26e8f933989",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 7,
+            "char_end_exclusive": 29,
+            "start_locator": "line:2",
+            "end_locator": "line:2"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项要求的主体内容/对象缺失，或只有空标题、占位与完成承诺。判定对象：每笔记本一个文件夹，未分类也保留，每文件用note_id+标题避免重名",
+        "0.5": "主体内容已提供，本项列明的部分次要内容或对象不完整，仍能识别主要要求；只完成空壳不适用半分。判定对象：每笔记本一个文件夹，未分类也保留，每文件用note_id+标题避免重名",
+        "1": "每笔记本一个文件夹，未分类也保留，每文件用note_id+标题避免重名"
+      },
+      "evidence_modes": [
+        "structured"
+      ],
+      "deliverables": [
+        "notes_export.zip"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0099-D2-01",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "必须内容或对象未提供；已有内容的错误按D1或明确约束D3。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "每笔记本一个文件夹，未分类也保留，每文件用note_id+标题避免重名",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "每笔记本一个文件夹，未分类也保留，每文件用note_id+标题避免重名",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "manifest包含note_id/笔记本/输出路径/更新时间，与10实际导出条目一一对应",
+      "sources": [
+        {
+          "source": "inputs/export_rules.md",
+          "quote": "manifest字段为note_id、笔记本、输出路径、更新时间",
+          "locator": "line:2",
+          "sha256": "3075b95469e69adbb11d76b090f4af509a4ec99f1f3738b409a4b26e8f933989",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 39,
+            "char_end_exclusive": 71,
+            "start_locator": "line:2",
+            "end_locator": "line:2"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项要求的主体内容/对象缺失，或只有空标题、占位与完成承诺。判定对象：manifest包含note_id/笔记本/输出路径/更新时间，与10实际导出条目一一对应",
+        "0.5": "主体内容已提供，本项列明的部分次要内容或对象不完整，仍能识别主要要求；只完成空壳不适用半分。判定对象：manifest包含note_id/笔记本/输出路径/更新时间，与10实际导出条目一一对应",
+        "1": "manifest包含note_id/笔记本/输出路径/更新时间，与10实际导出条目一一对应"
+      },
+      "evidence_modes": [
+        "structured"
+      ],
+      "deliverables": [
+        "export_manifest.csv"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0099-D2-02",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "必须内容或对象未提供；已有内容的错误按D1或明确约束D3。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "manifest包含note_id/笔记本/输出路径/更新时间，与10实际导出条目一一对应",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "manifest包含note_id/笔记本/输出路径/更新时间，与10实际导出条目一一对应",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "导出正文与manifest总记录数均为10，N01—N10各一次；不把只有目录无正文视为内容覆盖",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "导出记录数需与输入一致",
+          "locator": "prompt",
+          "sha256": "fe26975bdacb2443cad48338105ace0953375a60b8e9011bd93e53dff9410c44",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 119,
+            "char_end_exclusive": 130,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项要求的主体内容/对象缺失，或只有空标题、占位与完成承诺。判定对象：导出正文与manifest总记录数均为10，N01—N10各一次；不把只有目录无正文视为内容覆盖",
+        "0.5": "主体内容已提供，本项列明的部分次要内容或对象不完整，仍能识别主要要求；只完成空壳不适用半分。判定对象：导出正文与manifest总记录数均为10，N01—N10各一次；不把只有目录无正文视为内容覆盖",
+        "1": "导出正文与manifest总记录数均为10，N01—N10各一次；不把只有目录无正文视为内容覆盖"
+      },
+      "evidence_modes": [
+        "structured"
+      ],
+      "deliverables": [
+        "notes_export.zip",
+        "export_manifest.csv"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0099-D2-03",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "ANY_AVAILABLE_COMPARE_ALL_PRESENT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "必须内容或对象未提供；已有内容的错误按D1或明确约束D3。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "导出正文与manifest总记录数均为10，N01—N10各一次；不把只有目录无正文视为内容覆盖",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "ANY_AVAILABLE_COMPARE_ALL_PRESENT",
+        "details": {
+          "content_scope": "导出正文与manifest总记录数均为10，N01—N10各一次；不把只有目录无正文视为内容覆盖",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D3",
+      "criterion": "不接真实账号、不虚报远端导出，不为NULL下载或编附件",
+      "sources": [
+        {
+          "source": "inputs/export_rules.md",
+          "quote": "没有远端账户授权",
+          "locator": "line:2",
+          "sha256": "3075b95469e69adbb11d76b090f4af509a4ec99f1f3738b409a4b26e8f933989",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 102,
+            "char_end_exclusive": 110,
+            "start_locator": "line:2",
+            "end_locator": "line:2"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "发生本项明确禁止的越界、擅改、泄露或虚报，或核心限制不满足。判定对象：不接真实账号、不虚报远端导出，不为NULL下载或编附件",
+        "0.5": "核心限制均满足，仅相关范围/状态说明不完整；实际禁项发生为0，不能以部分遵守换半分。判定对象：不接真实账号、不虚报远端导出，不为NULL下载或编附件",
+        "1": "不接真实账号、不虚报远端导出，不为NULL下载或编附件"
+      },
+      "evidence_modes": [
+        "output_text"
+      ],
+      "deliverables": [
+        "notes_export.zip"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0099-D3-01",
+      "dimension_name": "当前要求适配与一致性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "明确字数/时间/授权/禁改/交付范围违反或无依据状态升级；不复扣D1已记的同一事实错。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "不接真实账号、不虚报远端导出，不为NULL下载或编附件",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "不接真实账号、不虚报远端导出，不为NULL下载或编附件",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D3",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D3",
+      "criterion": "文件命名采用note_id+标题且笔记本各一目录，不能仅按相似标题合并稳定对象；少笔记/少未分类内容只在D2计",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "每个笔记本一个文件夹，未分类也保留",
+          "locator": "prompt",
+          "sha256": "fe26975bdacb2443cad48338105ace0953375a60b8e9011bd93e53dff9410c44",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 38,
+            "char_end_exclusive": 55,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "发生本项明确禁止的越界、擅改、泄露或虚报，或核心限制不满足。判定对象：文件命名采用note_id+标题且笔记本各一目录，不能仅按相似标题合并稳定对象；少笔记/少未分类内容只在D2计",
+        "0.5": "核心限制均满足，仅相关范围/状态说明不完整；实际禁项发生为0，不能以部分遵守换半分。判定对象：文件命名采用note_id+标题且笔记本各一目录，不能仅按相似标题合并稳定对象；少笔记/少未分类内容只在D2计",
+        "1": "文件命名采用note_id+标题且笔记本各一目录，不能仅按相似标题合并稳定对象；少笔记/少未分类内容只在D2计"
+      },
+      "evidence_modes": [
+        "output_text"
+      ],
+      "deliverables": [
+        "notes_export.zip"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0099-D3-02",
+      "dimension_name": "当前要求适配与一致性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "明确字数/时间/授权/禁改/交付范围违反或无依据状态升级；不复扣D1已记的同一事实错。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "文件命名采用note_id+标题且笔记本各一目录，不能仅按相似标题合并稳定对象；少笔记/少未分类内容只在D2计",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "文件命名采用note_id+标题且笔记本各一目录，不能仅按相似标题合并稳定对象；少笔记/少未分类内容只在D2计",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D3",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D4",
+      "criterion": "离线解压后manifest所列路径可找到对应笔记，格式能由常规工具打开，不依赖未提供查看系统；缺条目或正文转录错不重复扣",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "请将 inputs/notebooks.json 中全部笔记导出为知识目录，每个笔记本一个文件夹，未分类也保留；交付 notes_export.zip 和 export_manifest.csv，保持标题、正文、更新时间和note_id，导出记录数需与输入一致，不接入任何真实账户。 相关口径请一并参阅inputs/export_rules.md。",
+          "locator": "prompt",
+          "sha256": "fe26975bdacb2443cad48338105ace0953375a60b8e9011bd93e53dff9410c44",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 174,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "相关产物虽存在，但本项指定的判断、操作衔接或实际使用方式不能成立。判定对象：离线解压后manifest所列路径可找到对应笔记，格式能由常规工具打开，不依赖未提供查看系统；缺条目或正文转录错不重复扣",
+        "0.5": "本项主要判断或使用路径成立，但局部解释、交接或复核步骤需补充，尚未阻断主要用途。判定对象：离线解压后manifest所列路径可找到对应笔记，格式能由常规工具打开，不依赖未提供查看系统；缺条目或正文转录错不重复扣",
+        "1": "离线解压后manifest所列路径可找到对应笔记，格式能由常规工具打开，不依赖未提供查看系统；缺条目或正文转录错不重复扣"
+      },
+      "evidence_modes": [
+        "functional",
+        "structured"
+      ],
+      "deliverables": [
+        "notes_export.zip",
+        "export_manifest.csv"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0099-D4-01",
+      "dimension_name": "专业判断与业务可用性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "CONTENT_SCOPED_NO_AUTOMATIC_FILE_AND",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "在现有相关内容基础上的独立判断、学习组织、交接或功能使用缺陷；不复扣D1/D2/D3/D5。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "离线解压后manifest所列路径可找到对应笔记，格式能由常规工具打开，不依赖未提供查看系统；缺条目或正文转录错不重复扣",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "CONTENT_SCOPED_NO_AUTOMATIC_FILE_AND",
+        "details": {
+          "content_scope": "离线解压后manifest所列路径可找到对应笔记，格式能由常规工具打开，不依赖未提供查看系统；缺条目或正文转录错不重复扣",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D4",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D5",
+      "criterion": "notes_export.zip内目录和文件名可辨且可对应本题内容；现行/历史/参考或材料分组如适用清楚，不强求指定目录美术样式",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "请将 inputs/notebooks.json 中全部笔记导出为知识目录，每个笔记本一个文件夹，未分类也保留；交付 notes_export.zip 和 export_manifest.csv，保持标题、正文、更新时间和note_id，导出记录数需与输入一致，不接入任何真实账户。 相关口径请一并参阅inputs/export_rules.md。",
+          "locator": "prompt",
+          "sha256": "fe26975bdacb2443cad48338105ace0953375a60b8e9011bd93e53dff9410c44",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 174,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "编码、文字或布局存在妨碍阅读/辨识的实质问题。判定对象：notes_export.zip内目录和文件名可辨且可对应本题内容；现行/历史/参考或材料分组如适用清楚，不强求指定目录美术样式",
+        "0.5": "核心文字和数据可读，仅局部表头、层级、间距或版面影响查阅，不遮挡关键内容。判定对象：notes_export.zip内目录和文件名可辨且可对应本题内容；现行/历史/参考或材料分组如适用清楚，不强求指定目录美术样式",
+        "1": "notes_export.zip内目录和文件名可辨且可对应本题内容；现行/历史/参考或材料分组如适用清楚，不强求指定目录美术样式"
+      },
+      "evidence_modes": [
+        "output_text",
+        "structured"
+      ],
+      "deliverables": [
+        "notes_export.zip"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0099-D5-01",
+      "dimension_name": "表达与呈现质量",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "视觉、编码、排版和可辨性；不复扣事实或内容遗漏。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "notes_export.zip内目录和文件名可辨且可对应本题内容；现行/历史/参考或材料分组如适用清楚，不强求指定目录美术样式",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "notes_export.zip内目录和文件名可辨且可对应本题内容；现行/历史/参考或材料分组如适用清楚，不强求指定目录美术样式",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D5",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D5",
+      "criterion": "export_manifest.csv中主题、步骤或字段层次清楚，编号、日期和说明可辨认；没有妨碍审核的编码乱码或结构混乱",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "请将 inputs/notebooks.json 中全部笔记导出为知识目录，每个笔记本一个文件夹，未分类也保留；交付 notes_export.zip 和 export_manifest.csv，保持标题、正文、更新时间和note_id，导出记录数需与输入一致，不接入任何真实账户。 相关口径请一并参阅inputs/export_rules.md。",
+          "locator": "prompt",
+          "sha256": "fe26975bdacb2443cad48338105ace0953375a60b8e9011bd93e53dff9410c44",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 174,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "编码、文字或布局存在妨碍阅读/辨识的实质问题。判定对象：export_manifest.csv中主题、步骤或字段层次清楚，编号、日期和说明可辨认；没有妨碍审核的编码乱码或结构混乱",
+        "0.5": "核心文字和数据可读，仅局部表头、层级、间距或版面影响查阅，不遮挡关键内容。判定对象：export_manifest.csv中主题、步骤或字段层次清楚，编号、日期和说明可辨认；没有妨碍审核的编码乱码或结构混乱",
+        "1": "export_manifest.csv中主题、步骤或字段层次清楚，编号、日期和说明可辨认；没有妨碍审核的编码乱码或结构混乱"
+      },
+      "evidence_modes": [
+        "output_text",
+        "structured"
+      ],
+      "deliverables": [
+        "export_manifest.csv"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0099-D5-02",
+      "dimension_name": "表达与呈现质量",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "视觉、编码、排版和可辨性；不复扣事实或内容遗漏。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "export_manifest.csv中主题、步骤或字段层次清楚，编号、日期和说明可辨认；没有妨碍审核的编码乱码或结构混乱",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "export_manifest.csv中主题、步骤或字段层次清楚，编号、日期和说明可辨认；没有妨碍审核的编码乱码或结构混乱",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D5",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    }
+  ],
+  "review": {
+    "reviewer_kind": "CODEX_AI_SOURCE_ONLY",
+    "scope": "ALL_PROMPT_ALL_INPUTS_ALL_ITEMS_THREE_ANCHORS_DEPENDENCIES",
+    "human_review_completed": false,
+    "reliability_calibration_completed": false,
+    "method_outputs_or_skills_read": false,
+    "single_defect_attribution": {
+      "D1": "已陈述事实/计算错误；不以单纯未写重复扣D2。",
+      "D2": "必须内容或对象未提供；已有内容的错误按D1或明确约束D3。",
+      "D3": "明确字数/时间/授权/禁改/交付范围违反或无依据状态升级；不复扣D1已记的同一事实错。",
+      "D4": "在现有相关内容基础上的独立判断、学习组织、交接或功能使用缺陷；不复扣D1/D2/D3/D5。",
+      "D5": "视觉、编码、排版和可辨性；不复扣事实或内容遗漏。"
+    },
+    "all_artifacts_missing_rule": "ZERO_ALL_ITEMS_DEPENDENT_ON_ABSENT_REQUIRED_ARTIFACTS_NOT_FULL_CREDIT",
+    "scope_boundary": "NO_EVAL_API_NO_SCORE_NO_REMOTE_ACTION",
+    "typical_error_single_owner": [
+      {
+        "typical_error": "已导出的笔记标题、正文、note_id和更新时间逐条与输入一致，不改写原规则；10条覆盖与归属另在D2核（对应本维的实质缺陷）",
+        "owner_item_id": "T0099-D1-01",
+        "not_penalized_again_in": [
+          "D2",
+          "D3",
+          "D4",
+          "D5"
+        ],
+        "scope": "已陈述事实/计算错误；不以单纯未写重复扣D2。"
+      },
+      {
+        "typical_error": "每笔记本一个文件夹，未分类也保留，每文件用note_id+标题避免重名（对应本维的实质缺陷）",
+        "owner_item_id": "T0099-D2-01",
+        "not_penalized_again_in": [
+          "D1",
+          "D3",
+          "D4",
+          "D5"
+        ],
+        "scope": "必须内容或对象未提供；已有内容的错误按D1或明确约束D3。"
+      },
+      {
+        "typical_error": "不接真实账号、不虚报远端导出，不为NULL下载或编附件（对应本维的实质缺陷）",
+        "owner_item_id": "T0099-D3-01",
+        "not_penalized_again_in": [
+          "D1",
+          "D2",
+          "D4",
+          "D5"
+        ],
+        "scope": "明确字数/时间/授权/禁改/交付范围违反或无依据状态升级；不复扣D1已记的同一事实错。"
+      },
+      {
+        "typical_error": "离线解压后manifest所列路径可找到对应笔记，格式能由常规工具打开，不依赖未提供查看系统；缺条目或正文转录错不重复扣（对应本维的实质缺陷）",
+        "owner_item_id": "T0099-D4-01",
+        "not_penalized_again_in": [
+          "D1",
+          "D2",
+          "D3",
+          "D5"
+        ],
+        "scope": "在现有相关内容基础上的独立判断、学习组织、交接或功能使用缺陷；不复扣D1/D2/D3/D5。"
+      },
+      {
+        "typical_error": "notes_export.zip内目录和文件名可辨且可对应本题内容；现行/历史/参考或材料分组如适用清楚，不强求指定目录美术样式（对应本维的实质缺陷）",
+        "owner_item_id": "T0099-D5-01",
+        "not_penalized_again_in": [
+          "D1",
+          "D2",
+          "D3",
+          "D4"
+        ],
+        "scope": "视觉、编码、排版和可辨性；不复扣事实或内容遗漏。"
+      }
+    ]
+  },
+  "source_review_shards_preserved": true,
+  "scoring_status": "NOT_SCORED",
+  "review_record_ref": "../review_shards/tech77_review.json"
+}

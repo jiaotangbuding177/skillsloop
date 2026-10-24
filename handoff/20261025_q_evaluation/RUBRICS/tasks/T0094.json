@@ -1,0 +1,748 @@
+{
+  "schema_version": "eval250-quality-rubric-v1",
+  "rubric_version": "1.1.0-ai-full-review",
+  "status": "REVIEWED_BY_AI_PENDING_HUMAN",
+  "task_id": "T0094",
+  "title": "企业创新展演分工与时间表",
+  "category": "BIZ",
+  "prompt": "请依据 inputs/event_specs.json 与 inputs/team_roles.csv，为70人企业创新展演制作 event_runbook.docx 和现场时间表 run_of_show.xlsx；安排14组展示、换场和评审，留休息、设备检查与迟到处置，不虚构场地承载能力。",
+  "prompt_sha256": "6e2ee8d916ffd2f692f7accd28da193572b7e65dfda8269c63b4388aa7419452",
+  "source_dataset": "eval250_review_v1.1",
+  "task_dataset_sha256": "960ccfe108260592c2d644237dc7536a66214e188e2dbc2e4b266a8cf5629597",
+  "inputs": [
+    {
+      "name": "inputs/event_specs.json",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0094\\inputs\\event_specs.json",
+      "sha256": "da8a8d5b79c3b1b1a16caab58045f460a08d5bbf57b187ccc969747e9ed8b45d",
+      "bytes": 324
+    },
+    {
+      "name": "inputs/team_roles.csv",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0094\\inputs\\team_roles.csv",
+      "sha256": "6fea8320ff31b4740db3792a2a047acd6cc2e7e2fd3b2aae8feb9865c6c4acf9",
+      "bytes": 166
+    }
+  ],
+  "deliverables": [
+    {
+      "filename": "event_runbook.docx",
+      "format": "docx"
+    },
+    {
+      "filename": "run_of_show.xlsx",
+      "format": "xlsx"
+    }
+  ],
+  "dimension_weights": {
+    "D1": 0.3,
+    "D2": 0.2,
+    "D3": 0.2,
+    "D4": 0.2,
+    "D5": 0.1
+  },
+  "within_dimension_weight_policy": "FIXED_EQUAL_ITEM_WEIGHTS_DRAFT_PENDING_REVIEW",
+  "historical_reference_used": false,
+  "actor_outputs_used_for_authoring": false,
+  "authoring_timing": "AFTER_EXISTING_EXECUTIONS_BEFORE_NEW_QUALITY_SCORING_NOT_PREREGISTERED",
+  "author": {
+    "kind": "CODEX_AGENT",
+    "shard": "biz"
+  },
+  "human_review": {
+    "status": "PENDING",
+    "reviewer": null,
+    "date": null
+  },
+  "calibration": {
+    "rubric_generator": "NOT_VALIDATED",
+    "judge": "NOT_VALIDATED"
+  },
+  "author_notes": [],
+  "items": [
+    {
+      "dimension": "D1",
+      "criterion": "14组每组6分展示、3分问答、1分换场，时间核算正确。",
+      "sources": [
+        {
+          "source": "inputs/event_specs.json",
+          "quote": "presentation_min",
+          "locator": "line:10",
+          "sha256": "da8a8d5b79c3b1b1a16caab58045f460a08d5bbf57b187ccc969747e9ed8b45d",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 130,
+            "char_end_exclusive": 146,
+            "start_locator": "line:10",
+            "end_locator": "line:10"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "已交内容存在改变本项关键结论的事实、计算或依据错误；或所依赖必需产物缺失。",
+        "0.5": "关键结论及决定性事实/计算有据，仅出现一处局部、非决定性事实或表述误差；单纯覆盖遗漏只归D2。",
+        "1": "14组每组6分展示、3分问答、1分换场，时间核算正确。"
+      },
+      "evidence_modes": [
+        "output_text",
+        "structured"
+      ],
+      "deliverables": [
+        "run_of_show.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0094-D1-01",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "scoring_scope": "只核实际交付内容的事实、计算、引用和证据解释正确性。覆盖遗漏归D2；未经授权的新操作/改变归D3。同一状态错误不再跨维重复扣。必需产物全缺仍按原缺产物规则0。",
+      "primary_error_owner": "D1",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D1",
+      "criterion": "实际引用70人、14组、90容量等给定事实准确；是否另造并行舞台或承载能力归D3。",
+      "sources": [
+        {
+          "source": "inputs/event_specs.json",
+          "quote": "room_capacity",
+          "locator": "line:19",
+          "sha256": "da8a8d5b79c3b1b1a16caab58045f460a08d5bbf57b187ccc969747e9ed8b45d",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 279,
+            "char_end_exclusive": 292,
+            "start_locator": "line:19",
+            "end_locator": "line:19"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "已交内容存在改变本项关键结论的事实、计算或依据错误；或所依赖必需产物缺失。",
+        "0.5": "关键结论及决定性事实/计算有据，仅出现一处局部、非决定性事实或表述误差；单纯覆盖遗漏只归D2。",
+        "1": "实际引用70人、14组、90容量等给定事实准确；是否另造并行舞台或承载能力归D3。"
+      },
+      "evidence_modes": [
+        "output_text",
+        "structured"
+      ],
+      "deliverables": [
+        "event_runbook.docx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0094-D1-02",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "scoring_scope": "只核实际交付内容的事实、计算、引用和证据解释正确性。覆盖遗漏归D2；未经授权的新操作/改变归D3。同一状态错误不再跨维重复扣。必需产物全缺仍按原缺产物规则0。",
+      "primary_error_owner": "D1",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "全程在13—17时内，开场15分、闭场20分和两次10分休息有归宿。",
+      "sources": [
+        {
+          "source": "inputs/event_specs.json",
+          "quote": "13:00",
+          "locator": "line:7",
+          "sha256": "da8a8d5b79c3b1b1a16caab58045f460a08d5bbf57b187ccc969747e9ed8b45d",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 102,
+            "char_end_exclusive": 107,
+            "start_locator": "line:7",
+            "end_locator": "line:7"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项内容缺失、关键结论错误或违反明确限制，未达到：全程在13—17时内，开场15分、闭场20分和两次10分休息有归宿。",
+        "0.5": "必需时段齐全，一处余量用途说明欠清。",
+        "1": "全程在13—17时内，开场15分、闭场20分和两次10分休息有归宿。"
+      },
+      "evidence_modes": [
+        "output_text",
+        "structured"
+      ],
+      "deliverables": [
+        "run_of_show.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0094-D2-01",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "scoring_scope": "只核有效要求和必要内容覆盖、拆解与实际交付；已存在内容的同一事实或计算错误归D1，违反授权/禁项归D3，视觉障碍归D5。不要求额外字段/唯一样式。",
+      "primary_error_owner": "D2",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "14组均安排展示、问答/评审与换场。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "14组展示、换场和评审",
+          "locator": "prompt",
+          "sha256": "6e2ee8d916ffd2f692f7accd28da193572b7e65dfda8269c63b4388aa7419452",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 110,
+            "char_end_exclusive": 121,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项内容缺失、关键结论错误或违反明确限制，未达到：14组均安排展示、问答/评审与换场。",
+        "0.5": "全组覆盖，一处换场责任标记不清。",
+        "1": "14组均安排展示、问答/评审与换场。"
+      },
+      "evidence_modes": [
+        "output_text",
+        "structured"
+      ],
+      "deliverables": [
+        "run_of_show.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0094-D2-02",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "scoring_scope": "只核有效要求和必要内容覆盖、拆解与实际交付；已存在内容的同一事实或计算错误归D1，违反授权/禁项归D3，视觉障碍归D5。不要求额外字段/唯一样式。",
+      "primary_error_owner": "D2",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "安排投影音响等设备检查，与技术人员责任对应。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "设备检查",
+          "locator": "prompt",
+          "sha256": "6e2ee8d916ffd2f692f7accd28da193572b7e65dfda8269c63b4388aa7419452",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 126,
+            "char_end_exclusive": 130,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项内容缺失、关键结论错误或违反明确限制，未达到：安排投影音响等设备检查，与技术人员责任对应。",
+        "0.5": "有检查，一项检查时点或交接略缺。",
+        "1": "安排投影音响等设备检查，与技术人员责任对应。"
+      },
+      "evidence_modes": [
+        "output_text",
+        "structured"
+      ],
+      "deliverables": [
+        "event_runbook.docx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0094-D2-03",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "scoring_scope": "只核有效要求和必要内容覆盖、拆解与实际交付；已存在内容的同一事实或计算错误归D1，违反授权/禁项归D3，视觉障碍归D5。不要求额外字段/唯一样式。",
+      "primary_error_owner": "D2",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "给迟到及流程延误的可执行处置，不挤掉必需休息。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "迟到处置",
+          "locator": "prompt",
+          "sha256": "6e2ee8d916ffd2f692f7accd28da193572b7e65dfda8269c63b4388aa7419452",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 131,
+            "char_end_exclusive": 135,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项内容缺失、关键结论错误或违反明确限制，未达到：给迟到及流程延误的可执行处置，不挤掉必需休息。",
+        "0.5": "处置可用，一处调整权限说明稍弱。",
+        "1": "给迟到及流程延误的可执行处置，不挤掉必需休息。"
+      },
+      "evidence_modes": [
+        "output_text",
+        "structured"
+      ],
+      "deliverables": [
+        "event_runbook.docx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0094-D2-04",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "scoring_scope": "只核有效要求和必要内容覆盖、拆解与实际交付；已存在内容的同一事实或计算错误归D1，违反授权/禁项归D3，视觉障碍归D5。不要求额外字段/唯一样式。",
+      "primary_error_owner": "D2",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D3",
+      "criterion": "主持、技术、场务、评委、组联络与安全角色按给定职责分工。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "team_roles.csv",
+          "locator": "prompt",
+          "sha256": "6e2ee8d916ffd2f692f7accd28da193572b7e65dfda8269c63b4388aa7419452",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 37,
+            "char_end_exclusive": 51,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项内容缺失、关键结论错误或违反明确限制，未达到：主持、技术、场务、评委、组联络与安全角色按给定职责分工。",
+        "0.5": "主要分工完整，一个交接口职责略模糊。",
+        "1": "主持、技术、场务、评委、组联络与安全角色按给定职责分工。"
+      },
+      "evidence_modes": [
+        "output_text",
+        "structured"
+      ],
+      "deliverables": [
+        "event_runbook.docx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0094-D3-01",
+      "dimension_name": "当前要求适配与一致性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "scoring_scope": "只核用户规定的格式、范围、授权及禁止动作，或独立的跨版本对象/内容矛盾。单一事实/计划状态误报已记D1时不再扣；跨版本独立错配须给两边证据。",
+      "primary_error_owner": "D3",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D3",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D3",
+      "criterion": "遵循单舞台，不能凭空增场地容量或并行安排不同组；时间表与runbook出现独立执行冲突时亦在本项计。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "留休息",
+          "locator": "prompt",
+          "sha256": "6e2ee8d916ffd2f692f7accd28da193572b7e65dfda8269c63b4388aa7419452",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 122,
+            "char_end_exclusive": 125,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项核心要求未落实或出现决定性相反结果：遵循单舞台，不能凭空增场地容量或并行安排不同组；时间表与runbook出现独立执行冲突时亦在本项计。",
+        "0.5": "舞台与容量约束均守住，少量对应标识难辨。",
+        "1": "遵循单舞台，不能凭空增场地容量或并行安排不同组；时间表与runbook出现独立执行冲突时亦在本项计。"
+      },
+      "evidence_modes": [
+        "output_text",
+        "structured"
+      ],
+      "deliverables": [
+        "event_runbook.docx",
+        "run_of_show.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0094-D3-02",
+      "dimension_name": "当前要求适配与一致性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "CONTENT_SCOPED_NO_AUTOMATIC_FILE_AND",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "scoring_scope": "只核用户规定的格式、范围、授权及禁止动作，或独立的跨版本对象/内容矛盾。单一事实/计划状态误报已记D1时不再扣；跨版本独立错配须给两边证据。",
+      "primary_error_owner": "D3",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "CONTENT_SCOPED_NO_AUTOMATIC_FILE_AND",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D3",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D4",
+      "criterion": "现场流程的换场、检查、休息和迟到处置有合理交接，已有责任分工足以支持现场运行，不额外要求未指定表头。 本项仅评已有内容的独立推理/操作衔接缺陷；其他维度已记的同一事实错误、缺项、越权或可读性问题不重复计。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "现场时间表",
+          "locator": "prompt",
+          "sha256": "6e2ee8d916ffd2f692f7accd28da193572b7e65dfda8269c63b4388aa7419452",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 85,
+            "char_end_exclusive": 90,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "在已存在、已覆盖且未被其他维度计过的内容中，业务推理或操作关系存在关键断裂，无法用于该项工作。",
+        "0.5": "已有内容足以支持主要业务用途，但一处推理连接、取舍说明或操作交接仍含糊；没有新增未委托交付要求。",
+        "1": "现场流程的换场、检查、休息和迟到处置有合理交接，已有责任分工足以支持现场运行，不额外要求未指定表头。 本项仅评已有内容的独立推理/操作衔接缺陷；其他维度已记的同一事实错误、缺项、越权或可读性问题不重复计。"
+      },
+      "evidence_modes": [
+        "output_text",
+        "structured"
+      ],
+      "deliverables": [
+        "event_runbook.docx",
+        "run_of_show.xlsx"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0094-D4-01",
+      "dimension_name": "专业判断与业务可用性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "CONTENT_SCOPED_NO_AUTOMATIC_FILE_AND",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "scoring_scope": "只核现有内容独立的推理、取舍或实际使用衔接，不重新扣D1/D2/D3/D5已记同一缺陷。不得以业务可用性名义增加未委托产物。",
+      "primary_error_owner": "D4",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "CONTENT_SCOPED_NO_AUTOMATIC_FILE_AND",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D4",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D5",
+      "criterion": "event_runbook.docx：呈现适合“企业创新展演分工与时间表”的使用目的；标题/层级/单位或字段名清楚，关键内容可读，没有截断、重叠或乱码。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "event_runbook.docx",
+          "locator": "prompt",
+          "sha256": "6e2ee8d916ffd2f692f7accd28da193572b7e65dfda8269c63b4388aa7419452",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 65,
+            "char_end_exclusive": 83,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "该产物实际缺失或本身损坏，或表达/版式妨碍读取关键内容；裁判解析/渲染环境故障须UNSCORED而非0。",
+        "0.5": "主要内容可读，但局部标题、表头、分页或字段说明不清；关键内容仍完整可见。",
+        "1": "event_runbook.docx：呈现适合“企业创新展演分工与时间表”的使用目的；标题/层级/单位或字段名清楚，关键内容可读，没有截断、重叠或乱码。"
+      },
+      "evidence_modes": [
+        "visual"
+      ],
+      "deliverables": [
+        "event_runbook.docx"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0094-D5-01",
+      "dimension_name": "表达与呈现质量",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "scoring_scope": "只核相应实际产物的表达、结构和视觉可读性；不重复核内容覆盖/事实，文件存在不当质量充分证据。解析/渲染环境错是UNSCORED，不直接0。",
+      "primary_error_owner": "D5",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D5",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D5",
+      "criterion": "run_of_show.xlsx：呈现适合“企业创新展演分工与时间表”的使用目的；标题/层级/单位或字段名清楚，关键内容可读，没有截断、重叠或乱码。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "event_runbook.docx",
+          "locator": "prompt",
+          "sha256": "6e2ee8d916ffd2f692f7accd28da193572b7e65dfda8269c63b4388aa7419452",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 65,
+            "char_end_exclusive": 83,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "该产物实际缺失或本身损坏，或表达/版式妨碍读取关键内容；裁判解析/渲染环境故障须UNSCORED而非0。",
+        "0.5": "主要内容可读，但局部标题、表头、分页或字段说明不清；关键内容仍完整可见。",
+        "1": "run_of_show.xlsx：呈现适合“企业创新展演分工与时间表”的使用目的；标题/层级/单位或字段名清楚，关键内容可读，没有截断、重叠或乱码。"
+      },
+      "evidence_modes": [
+        "visual"
+      ],
+      "deliverables": [
+        "run_of_show.xlsx"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0094-D5-02",
+      "dimension_name": "表达与呈现质量",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "scoring_scope": "只核相应实际产物的表达、结构和视觉可读性；不重复核内容覆盖/事实，文件存在不当质量充分证据。解析/渲染环境错是UNSCORED，不直接0。",
+      "primary_error_owner": "D5",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D5",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    }
+  ],
+  "review": {
+    "reviewer_kind": "CODEX_AGENT",
+    "shard": "biz83",
+    "status": "REVIEWED_BY_AI_PENDING_HUMAN",
+    "method": "FULL_TASK_PROMPT_ALL_INPUT_UNITS_AND_ALL_ORIGINAL_ITEMS_SEMANTIC_REVIEW",
+    "actor_outputs_used": false,
+    "skills_used": false,
+    "notes": "核单台14组/70人/90容量、240分钟窗口与休息开闭场；分工/迟到处置独立可执行。"
+  },
+  "error_attribution_policy": {
+    "owner_by_error_type": {
+      "fact_calculation_reference": "D1",
+      "effective_requirement_omission": "D2",
+      "format_scope_authorization_or_independent_cross_version_conflict": "D3",
+      "independent_business_reasoning_or_operation": "D4",
+      "expression_visual_readability": "D5"
+    },
+    "single_defect_one_primary_item": true,
+    "ledger_rule": "给每个已观察缺陷登记defect_id、唯一主要item_id和证据；其他项出现同一缺陷仅交叉引用，不重复扣。多个独立缺陷可分别扣。产物全缺按依赖条目0保留原权重，不用此规则给空产物满分。",
+    "partial_credit": "不因未采用唯一措辞/布局/合理方案而扣；禁项实际发生不得以说明不全换半分。",
+    "failure_not_score": "裁判证据设施故障UNSCORED；依赖产物缺失对应0且不重分权重。"
+  },
+  "source_review_shards_preserved": true,
+  "scoring_status": "NOT_SCORED",
+  "review_record_ref": "../review_shards/biz83_review.json"
+}

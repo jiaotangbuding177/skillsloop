@@ -1,0 +1,686 @@
+{
+  "schema_version": "eval250-quality-rubric-v1",
+  "rubric_version": "1.1.0-ai-full-review",
+  "status": "REVIEWED_BY_AI_PENDING_HUMAN",
+  "task_id": "T0069",
+  "title": "合同低级错误与引用校对",
+  "category": "LEGAL",
+  "prompt": "签署前需要校对 inputs/服务合同校对稿.docx，请以 inputs/业务正确事实.md 为准交付 合同校对修正.docx 和 错误定位.xlsx，处理金额合计、周期、付款主体、不存在条款引用及错误方名；保留未授权法务原文，不能为补不存在条款新增重大权利，无法定位正确引用的地方说明待法务核。",
+  "prompt_sha256": "354ae53910f070b0b0fccadde22c708e053b2d61ac8f28d750f3fc41da178c06",
+  "source_dataset": "eval250_review_v1.1",
+  "task_dataset_sha256": "960ccfe108260592c2d644237dc7536a66214e188e2dbc2e4b266a8cf5629597",
+  "inputs": [
+    {
+      "name": "inputs/服务合同校对稿.docx",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0069\\inputs\\服务合同校对稿.docx",
+      "sha256": "a6c59a416097ee650bb974e8d380b40ebee88b123a29541e94f02b9b025e9d55",
+      "bytes": 38332
+    },
+    {
+      "name": "inputs/业务正确事实.md",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0069\\inputs\\业务正确事实.md",
+      "sha256": "610e0bb019236f732ca7d57951e499e9ca3c4456023c9492b44503a2b068bc38",
+      "bytes": 256
+    }
+  ],
+  "deliverables": [
+    {
+      "filename": "合同校对修正.docx",
+      "format": "docx"
+    },
+    {
+      "filename": "错误定位.xlsx",
+      "format": "xlsx"
+    }
+  ],
+  "dimension_weights": {
+    "D1": 0.3,
+    "D2": 0.2,
+    "D3": 0.2,
+    "D4": 0.2,
+    "D5": 0.1
+  },
+  "within_dimension_weight_policy": "FIXED_EQUAL_ITEM_WEIGHTS_DRAFT_PENDING_REVIEW",
+  "historical_reference_used": false,
+  "actor_outputs_used_for_authoring": false,
+  "authoring_timing": "AFTER_EXISTING_EXECUTIONS_BEFORE_NEW_QUALITY_SCORING_NOT_PREREGISTERED",
+  "author": {
+    "kind": "CODEX_AGENT",
+    "shard": "biz"
+  },
+  "human_review": {
+    "status": "PENDING",
+    "reviewer": null,
+    "date": null
+  },
+  "calibration": {
+    "rubric_generator": "NOT_VALIDATED",
+    "judge": "NOT_VALIDATED"
+  },
+  "author_notes": [],
+  "items": [
+    {
+      "dimension": "D1",
+      "criterion": "总12万、首尾各6万和附件合计一致，60份数量不变。",
+      "sources": [
+        {
+          "source": "inputs/业务正确事实.md",
+          "quote": "总价120000元",
+          "locator": "line:2",
+          "sha256": "610e0bb019236f732ca7d57951e499e9ca3c4456023c9492b44503a2b068bc38",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 16,
+            "char_end_exclusive": 25,
+            "start_locator": "line:2",
+            "end_locator": "line:2"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "已交内容存在改变本项关键结论的事实、计算或依据错误；或所依赖必需产物缺失。",
+        "0.5": "关键结论及决定性事实/计算有据，仅出现一处局部、非决定性事实或表述误差；单纯覆盖遗漏只归D2。",
+        "1": "总12万、首尾各6万和附件合计一致，60份数量不变。"
+      },
+      "evidence_modes": [
+        "output_text",
+        "structured"
+      ],
+      "deliverables": [
+        "合同校对修正.docx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0069-D1-01",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "scoring_scope": "只核实际交付内容的事实、计算、引用和证据解释正确性。覆盖遗漏归D2；未经授权的新操作/改变归D3。同一状态错误不再跨维重复扣。必需产物全缺仍按原缺产物规则0。",
+      "primary_error_owner": "D1",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D1",
+      "criterion": "周期统一为材料齐备后6周，主体仅甲付款乙交付。",
+      "sources": [
+        {
+          "source": "inputs/业务正确事实.md",
+          "quote": "材料齐备后6周",
+          "locator": "line:2",
+          "sha256": "610e0bb019236f732ca7d57951e499e9ca3c4456023c9492b44503a2b068bc38",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 36,
+            "char_end_exclusive": 43,
+            "start_locator": "line:2",
+            "end_locator": "line:2"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "已交内容存在改变本项关键结论的事实、计算或依据错误；或所依赖必需产物缺失。",
+        "0.5": "关键结论及决定性事实/计算有据，仅出现一处局部、非决定性事实或表述误差；单纯覆盖遗漏只归D2。",
+        "1": "周期统一为材料齐备后6周，主体仅甲付款乙交付。"
+      },
+      "evidence_modes": [
+        "output_text",
+        "structured"
+      ],
+      "deliverables": [
+        "合同校对修正.docx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0069-D1-02",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "scoring_scope": "只核实际交付内容的事实、计算、引用和证据解释正确性。覆盖遗漏归D2；未经授权的新操作/改变归D3。同一状态错误不再跨维重复扣。必需产物全缺仍按原缺产物规则0。",
+      "primary_error_owner": "D1",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "处理不存在14条，指交付及双方确认验收附件或标待法务核。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "不存在条款引用",
+          "locator": "prompt",
+          "sha256": "354ae53910f070b0b0fccadde22c708e053b2d61ac8f28d750f3fc41da178c06",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 92,
+            "char_end_exclusive": 99,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项内容缺失、关键结论错误或违反明确限制，未达到：处理不存在14条，指交付及双方确认验收附件或标待法务核。",
+        "0.5": "不存在引用已处理，一个定位解释略简。",
+        "1": "处理不存在14条，指交付及双方确认验收附件或标待法务核。"
+      },
+      "evidence_modes": [
+        "output_text",
+        "structured"
+      ],
+      "deliverables": [
+        "合同校对修正.docx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0069-D2-01",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "scoring_scope": "只核有效要求和必要内容覆盖、拆解与实际交付；已存在内容的同一事实或计算错误归D1，违反授权/禁项归D3，视觉障碍归D5。不要求额外字段/唯一样式。",
+      "primary_error_owner": "D2",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "方名/付款方向等需校对位置均在修订稿中被处理；此项只评修改覆盖，改后主体事实是否正确归D1。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "错误方名",
+          "locator": "prompt",
+          "sha256": "354ae53910f070b0b0fccadde22c708e053b2d61ac8f28d750f3fc41da178c06",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 100,
+            "char_end_exclusive": 104,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项核心要求未落实或出现决定性相反结果：方名/付款方向等需校对位置均在修订稿中被处理；此项只评修改覆盖，改后主体事实是否正确归D1。",
+        "0.5": "关键位置均已处理，一处非实质称谓残留。",
+        "1": "方名/付款方向等需校对位置均在修订稿中被处理；此项只评修改覆盖，改后主体事实是否正确归D1。"
+      },
+      "evidence_modes": [
+        "output_text",
+        "structured"
+      ],
+      "deliverables": [
+        "合同校对修正.docx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0069-D2-02",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "scoring_scope": "只核有效要求和必要内容覆盖、拆解与实际交付；已存在内容的同一事实或计算错误归D1，违反授权/禁项归D3，视觉障碍归D5。不要求额外字段/唯一样式。",
+      "primary_error_owner": "D2",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "错误表逐项列金额、周期、主体、引用和方名位置及修法。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "错误定位.xlsx",
+          "locator": "prompt",
+          "sha256": "354ae53910f070b0b0fccadde22c708e053b2d61ac8f28d750f3fc41da178c06",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 67,
+            "char_end_exclusive": 76,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项内容缺失、关键结论错误或违反明确限制，未达到：错误表逐项列金额、周期、主体、引用和方名位置及修法。",
+        "0.5": "五类有覆盖，一项前后内容不完整。",
+        "1": "错误表逐项列金额、周期、主体、引用和方名位置及修法。"
+      },
+      "evidence_modes": [
+        "output_text",
+        "structured"
+      ],
+      "deliverables": [
+        "错误定位.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0069-D2-03",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "scoring_scope": "只核有效要求和必要内容覆盖、拆解与实际交付；已存在内容的同一事实或计算错误归D1，违反授权/禁项归D3，视觉障碍归D5。不要求额外字段/唯一样式。",
+      "primary_error_owner": "D2",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D3",
+      "criterion": "保留未授权责任、IP、争议等法务原文。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "保留未授权法务原文",
+          "locator": "prompt",
+          "sha256": "354ae53910f070b0b0fccadde22c708e053b2d61ac8f28d750f3fc41da178c06",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 105,
+            "char_end_exclusive": 114,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项内容缺失、关键结论错误或违反明确限制，未达到：保留未授权责任、IP、争议等法务原文。",
+        "0.5": "无实质越改，局部版式变化不影响原文。",
+        "1": "保留未授权责任、IP、争议等法务原文。"
+      },
+      "evidence_modes": [
+        "output_text",
+        "structured"
+      ],
+      "deliverables": [
+        "合同校对修正.docx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0069-D3-01",
+      "dimension_name": "当前要求适配与一致性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "scoring_scope": "只核用户规定的格式、范围、授权及禁止动作，或独立的跨版本对象/内容矛盾。单一事实/计划状态误报已记D1时不再扣；跨版本独立错配须给两边证据。",
+      "primary_error_owner": "D3",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D3",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D3",
+      "criterion": "不为补14条引入赔偿、争议管辖等重大新权利。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "新增重大权利",
+          "locator": "prompt",
+          "sha256": "354ae53910f070b0b0fccadde22c708e053b2d61ac8f28d750f3fc41da178c06",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 124,
+            "char_end_exclusive": 130,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项内容缺失、关键结论错误或违反明确限制，未达到：不为补14条引入赔偿、争议管辖等重大新权利。",
+        "0.5": "无新增权利，待核说明略弱。",
+        "1": "不为补14条引入赔偿、争议管辖等重大新权利。"
+      },
+      "evidence_modes": [
+        "output_text",
+        "structured"
+      ],
+      "deliverables": [
+        "合同校对修正.docx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0069-D3-02",
+      "dimension_name": "当前要求适配与一致性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "scoring_scope": "只核用户规定的格式、范围、授权及禁止动作，或独立的跨版本对象/内容矛盾。单一事实/计划状态误报已记D1时不再扣；跨版本独立错配须给两边证据。",
+      "primary_error_owner": "D3",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D3",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D4",
+      "criterion": "错误定位表可引导经办人回查修订后的有效位置，待法务引用与已确定纠错有清楚不同的处理意义。 本项仅评已有内容的独立推理/操作衔接缺陷；其他维度已记的同一事实错误、缺项、越权或可读性问题不重复计。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "签署前需要校对",
+          "locator": "prompt",
+          "sha256": "354ae53910f070b0b0fccadde22c708e053b2d61ac8f28d750f3fc41da178c06",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 7,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "在已存在、已覆盖且未被其他维度计过的内容中，业务推理或操作关系存在关键断裂，无法用于该项工作。",
+        "0.5": "已有内容足以支持主要业务用途，但一处推理连接、取舍说明或操作交接仍含糊；没有新增未委托交付要求。",
+        "1": "错误定位表可引导经办人回查修订后的有效位置，待法务引用与已确定纠错有清楚不同的处理意义。 本项仅评已有内容的独立推理/操作衔接缺陷；其他维度已记的同一事实错误、缺项、越权或可读性问题不重复计。"
+      },
+      "evidence_modes": [
+        "output_text",
+        "structured"
+      ],
+      "deliverables": [
+        "合同校对修正.docx"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0069-D4-01",
+      "dimension_name": "专业判断与业务可用性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "scoring_scope": "只核现有内容独立的推理、取舍或实际使用衔接，不重新扣D1/D2/D3/D5已记同一缺陷。不得以业务可用性名义增加未委托产物。",
+      "primary_error_owner": "D4",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D4",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D5",
+      "criterion": "合同校对修正.docx：呈现适合“合同低级错误与引用校对”的使用目的；标题/层级/单位或字段名清楚，关键内容可读，没有截断、重叠或乱码。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "合同校对修正.docx",
+          "locator": "prompt",
+          "sha256": "354ae53910f070b0b0fccadde22c708e053b2d61ac8f28d750f3fc41da178c06",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 53,
+            "char_end_exclusive": 64,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "该产物实际缺失或本身损坏，或表达/版式妨碍读取关键内容；裁判解析/渲染环境故障须UNSCORED而非0。",
+        "0.5": "主要内容可读，但局部标题、表头、分页或字段说明不清；关键内容仍完整可见。",
+        "1": "合同校对修正.docx：呈现适合“合同低级错误与引用校对”的使用目的；标题/层级/单位或字段名清楚，关键内容可读，没有截断、重叠或乱码。"
+      },
+      "evidence_modes": [
+        "visual"
+      ],
+      "deliverables": [
+        "合同校对修正.docx"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0069-D5-01",
+      "dimension_name": "表达与呈现质量",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "scoring_scope": "只核相应实际产物的表达、结构和视觉可读性；不重复核内容覆盖/事实，文件存在不当质量充分证据。解析/渲染环境错是UNSCORED，不直接0。",
+      "primary_error_owner": "D5",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D5",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D5",
+      "criterion": "错误定位.xlsx：呈现适合“合同低级错误与引用校对”的使用目的；标题/层级/单位或字段名清楚，关键内容可读，没有截断、重叠或乱码。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "合同校对修正.docx",
+          "locator": "prompt",
+          "sha256": "354ae53910f070b0b0fccadde22c708e053b2d61ac8f28d750f3fc41da178c06",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 53,
+            "char_end_exclusive": 64,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "该产物实际缺失或本身损坏，或表达/版式妨碍读取关键内容；裁判解析/渲染环境故障须UNSCORED而非0。",
+        "0.5": "主要内容可读，但局部标题、表头、分页或字段说明不清；关键内容仍完整可见。",
+        "1": "错误定位.xlsx：呈现适合“合同低级错误与引用校对”的使用目的；标题/层级/单位或字段名清楚，关键内容可读，没有截断、重叠或乱码。"
+      },
+      "evidence_modes": [
+        "visual"
+      ],
+      "deliverables": [
+        "错误定位.xlsx"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0069-D5-02",
+      "dimension_name": "表达与呈现质量",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "scoring_scope": "只核相应实际产物的表达、结构和视觉可读性；不重复核内容覆盖/事实，文件存在不当质量充分证据。解析/渲染环境错是UNSCORED，不直接0。",
+      "primary_error_owner": "D5",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D5",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    }
+  ],
+  "review": {
+    "reviewer_kind": "CODEX_AGENT",
+    "shard": "biz83",
+    "status": "REVIEWED_BY_AI_PENDING_HUMAN",
+    "method": "FULL_TASK_PROMPT_ALL_INPUT_UNITS_AND_ALL_ORIGINAL_ITEMS_SEMANTIC_REVIEW",
+    "actor_outputs_used": false,
+    "skills_used": false,
+    "notes": "读完整模板与确认事实，核五错误类/正文附件/不存在14条；禁止重大新权利，删除全部修正总扣。"
+  },
+  "error_attribution_policy": {
+    "owner_by_error_type": {
+      "fact_calculation_reference": "D1",
+      "effective_requirement_omission": "D2",
+      "format_scope_authorization_or_independent_cross_version_conflict": "D3",
+      "independent_business_reasoning_or_operation": "D4",
+      "expression_visual_readability": "D5"
+    },
+    "single_defect_one_primary_item": true,
+    "ledger_rule": "给每个已观察缺陷登记defect_id、唯一主要item_id和证据；其他项出现同一缺陷仅交叉引用，不重复扣。多个独立缺陷可分别扣。产物全缺按依赖条目0保留原权重，不用此规则给空产物满分。",
+    "partial_credit": "不因未采用唯一措辞/布局/合理方案而扣；禁项实际发生不得以说明不全换半分。",
+    "failure_not_score": "裁判证据设施故障UNSCORED；依赖产物缺失对应0且不重分权重。"
+  },
+  "source_review_shards_preserved": true,
+  "scoring_status": "NOT_SCORED",
+  "review_record_ref": "../review_shards/biz83_review.json"
+}

@@ -1,0 +1,937 @@
+{
+  "schema_version": "eval250-quality-rubric-v1",
+  "rubric_version": "1.1.0-ai-full-review",
+  "status": "REVIEWED_BY_AI_PENDING_HUMAN",
+  "task_id": "T0231",
+  "title": "跨会议行动项统一追踪",
+  "category": "KNOW",
+  "prompt": "请依据 inputs/meeting_actions.csv 和 inputs/action_rules.md，生成 action_tracker.xlsx 与 action_digest.docx；按事项ID合并最新决定，清楚区分待办、受阻和完成，截止日更改保留历史，不擅自删除逾期任务。",
+  "prompt_sha256": "592bee8def16cddac3a12ef0ef37d8200a6a92b726a974f12d5732b4451cdb8d",
+  "source_dataset": "eval250_review_v1.1",
+  "task_dataset_sha256": "960ccfe108260592c2d644237dc7536a66214e188e2dbc2e4b266a8cf5629597",
+  "inputs": [
+    {
+      "name": "inputs/meeting_actions.csv",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0231\\inputs\\meeting_actions.csv",
+      "sha256": "c24817a9cacc734dbb44c9aa2f860cc4b2894bedcc236c4a711e38ffdbed76b4",
+      "bytes": 457
+    },
+    {
+      "name": "inputs/action_rules.md",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0231\\inputs\\action_rules.md",
+      "sha256": "dc793b82addcee44af590a1aaafbd601d93dd6fa9b1ccc37ed6a250ac079098b",
+      "bytes": 262
+    }
+  ],
+  "deliverables": [
+    {
+      "filename": "action_tracker.xlsx",
+      "format": "xlsx"
+    },
+    {
+      "filename": "action_digest.docx",
+      "format": "docx"
+    }
+  ],
+  "dimension_weights": {
+    "D1": 0.3,
+    "D2": 0.2,
+    "D3": 0.2,
+    "D4": 0.2,
+    "D5": 0.1
+  },
+  "within_dimension_weight_policy": "FIXED_EQUAL_ITEM_WEIGHTS_REVIEWED_BY_AI_PENDING_HUMAN",
+  "historical_reference_used": false,
+  "actor_outputs_used_for_authoring": false,
+  "authoring_timing": "AFTER_EXISTING_EXECUTIONS_BEFORE_NEW_QUALITY_SCORING_NOT_PREREGISTERED",
+  "author": {
+    "kind": "CODEX_AGENT",
+    "shard": "tech_edu"
+  },
+  "human_review": {
+    "status": "PENDING",
+    "reviewer": null,
+    "date": null
+  },
+  "calibration": {
+    "rubric_generator": "NOT_VALIDATED",
+    "judge": "NOT_VALIDATED"
+  },
+  "author_notes": [
+    "工作用途（说明，不新增评分条件）：团队能用一份当前行动表持续跟进四事项，不丢截止变更历史和逾期阻塞"
+  ],
+  "items": [
+    {
+      "dimension": "D1",
+      "criterion": "以10月9日和最新明确记录，A1受阻截止10月7、A2完成、A3处理中截止10月10、A4待办10月12",
+      "sources": [
+        {
+          "source": "inputs/action_rules.md",
+          "quote": "当前2026-10-09",
+          "locator": "line:1",
+          "sha256": "dc793b82addcee44af590a1aaafbd601d93dd6fa9b1ccc37ed6a250ac079098b",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 2,
+            "char_end_exclusive": 14,
+            "start_locator": "line:1",
+            "end_locator": "line:1"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项涉及的关键事实、口径或计算错误，导致所述结论不成立；同一内容单纯未提供按D2归责。判定对象：以10月9日和最新明确记录，A1受阻截止10月7、A2完成、A3处理中截止10月10、A4待办10月12",
+        "0.5": "核心事实与结论成立，仅少量非关键转录、精度或依据标识有误，不改变主要判断；关键事实错不适用半分。判定对象：以10月9日和最新明确记录，A1受阻截止10月7、A2完成、A3处理中截止10月10、A4待办10月12",
+        "1": "以10月9日和最新明确记录，A1受阻截止10月7、A2完成、A3处理中截止10月10、A4待办10月12"
+      },
+      "evidence_modes": [
+        "structured"
+      ],
+      "deliverables": [
+        "action_tracker.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0231-D1-01",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "已陈述事实/计算错误；不以单纯未写重复扣D2。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "以10月9日和最新明确记录，A1受阻截止10月7、A2完成、A3处理中截止10月10、A4待办10月12",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "以10月9日和最新明确记录，A1受阻截止10月7、A2完成、A3处理中截止10月10、A4待办10月12",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D1",
+      "criterion": "A1原10月5→7、A3原6→10的历史和变更会议M2/M3保留，负责人王工/赵琪/李宁不混",
+      "sources": [
+        {
+          "source": "inputs/meeting_actions.csv",
+          "quote": "M2,2026-10-04,A1,权限测试,王工,2026-10-07,受阻客户",
+          "locator": "line:4",
+          "sha256": "c24817a9cacc734dbb44c9aa2f860cc4b2894bedcc236c4a711e38ffdbed76b4",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 100,
+            "char_end_exclusive": 140,
+            "start_locator": "line:4",
+            "end_locator": "line:4"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项涉及的关键事实、口径或计算错误，导致所述结论不成立；同一内容单纯未提供按D2归责。判定对象：A1原10月5→7、A3原6→10的历史和变更会议M2/M3保留，负责人王工/赵琪/李宁不混",
+        "0.5": "核心事实与结论成立，仅少量非关键转录、精度或依据标识有误，不改变主要判断；关键事实错不适用半分。判定对象：A1原10月5→7、A3原6→10的历史和变更会议M2/M3保留，负责人王工/赵琪/李宁不混",
+        "1": "A1原10月5→7、A3原6→10的历史和变更会议M2/M3保留，负责人王工/赵琪/李宁不混"
+      },
+      "evidence_modes": [
+        "structured"
+      ],
+      "deliverables": [
+        "action_tracker.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0231-D1-02",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "已陈述事实/计算错误；不以单纯未写重复扣D2。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "A1原10月5→7、A3原6→10的历史和变更会议M2/M3保留，负责人王工/赵琪/李宁不混",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "A1原10月5→7、A3原6→10的历史和变更会议M2/M3保留，负责人王工/赵琪/李宁不混",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "按A1—A4各一当前事项合并跨会议记录，保留来源和历史而非逐行当七任务",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "按事项ID合并最新决定",
+          "locator": "prompt",
+          "sha256": "592bee8def16cddac3a12ef0ef37d8200a6a92b726a974f12d5732b4451cdb8d",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 100,
+            "char_end_exclusive": 111,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项要求的主体内容/对象缺失，或只有空标题、占位与完成承诺。判定对象：按A1—A4各一当前事项合并跨会议记录，保留来源和历史而非逐行当七任务",
+        "0.5": "主体内容已提供，本项列明的部分次要内容或对象不完整，仍能识别主要要求；只完成空壳不适用半分。判定对象：按A1—A4各一当前事项合并跨会议记录，保留来源和历史而非逐行当七任务",
+        "1": "按A1—A4各一当前事项合并跨会议记录，保留来源和历史而非逐行当七任务"
+      },
+      "evidence_modes": [
+        "structured"
+      ],
+      "deliverables": [
+        "action_tracker.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0231-D2-01",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "必须内容或对象未提供；已有内容的错误按D1或明确约束D3。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "按A1—A4各一当前事项合并跨会议记录，保留来源和历史而非逐行当七任务",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "按A1—A4各一当前事项合并跨会议记录，保留来源和历史而非逐行当七任务",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "追踪表含旧截止、当前截止、变更日期、负责人及证据会议；具体值错归D1，摘要内容另列条目，不把摘要绑在表中",
+      "sources": [
+        {
+          "source": "inputs/action_rules.md",
+          "quote": "完整追踪包括旧截止、当前截止、变更日期、负责人、证据会议",
+          "locator": "line:2",
+          "sha256": "dc793b82addcee44af590a1aaafbd601d93dd6fa9b1ccc37ed6a250ac079098b",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 47,
+            "char_end_exclusive": 75,
+            "start_locator": "line:2",
+            "end_locator": "line:2"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项要求的主体内容/对象缺失，或只有空标题、占位与完成承诺。判定对象：追踪表含旧截止、当前截止、变更日期、负责人及证据会议；具体值错归D1，摘要内容另列条目，不把摘要绑在表中",
+        "0.5": "主体内容已提供，本项列明的部分次要内容或对象不完整，仍能识别主要要求；只完成空壳不适用半分。判定对象：追踪表含旧截止、当前截止、变更日期、负责人及证据会议；具体值错归D1，摘要内容另列条目，不把摘要绑在表中",
+        "1": "追踪表含旧截止、当前截止、变更日期、负责人及证据会议；具体值错归D1，摘要内容另列条目，不把摘要绑在表中"
+      },
+      "evidence_modes": [
+        "output_text"
+      ],
+      "deliverables": [
+        "action_tracker.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0231-D2-02",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "必须内容或对象未提供；已有内容的错误按D1或明确约束D3。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "追踪表含旧截止、当前截止、变更日期、负责人及证据会议；具体值错归D1，摘要内容另列条目，不把摘要绑在表中",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "追踪表含旧截止、当前截止、变更日期、负责人及证据会议；具体值错归D1，摘要内容另列条目，不把摘要绑在表中",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "A1逾期受阻及已完成A2仍保留可追溯记录；同一当前状态错归D1，A3不可升级完成不另重复计",
+      "sources": [
+        {
+          "source": "inputs/action_rules.md",
+          "quote": "受阻的A1仍需列跟进",
+          "locator": "line:2",
+          "sha256": "dc793b82addcee44af590a1aaafbd601d93dd6fa9b1ccc37ed6a250ac079098b",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 28,
+            "char_end_exclusive": 38,
+            "start_locator": "line:2",
+            "end_locator": "line:2"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项要求的主体内容/对象缺失，或只有空标题、占位与完成承诺。判定对象：A1逾期受阻及已完成A2仍保留可追溯记录；同一当前状态错归D1，A3不可升级完成不另重复计",
+        "0.5": "主体内容已提供，本项列明的部分次要内容或对象不完整，仍能识别主要要求；只完成空壳不适用半分。判定对象：A1逾期受阻及已完成A2仍保留可追溯记录；同一当前状态错归D1，A3不可升级完成不另重复计",
+        "1": "A1逾期受阻及已完成A2仍保留可追溯记录；同一当前状态错归D1，A3不可升级完成不另重复计"
+      },
+      "evidence_modes": [
+        "output_text"
+      ],
+      "deliverables": [
+        "action_tracker.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0231-D2-03",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "必须内容或对象未提供；已有内容的错误按D1或明确约束D3。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "A1逾期受阻及已完成A2仍保留可追溯记录；同一当前状态错归D1，A3不可升级完成不另重复计",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "A1逾期受阻及已完成A2仍保留可追溯记录；同一当前状态错归D1，A3不可升级完成不另重复计",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D3",
+      "criterion": "不因逾期删除对象或抹去旧截止历史，不把单项完成升级整体验收；状态数值和日期错已在D1计",
+      "sources": [
+        {
+          "source": "inputs/action_rules.md",
+          "quote": "不额外推断验收全部完成",
+          "locator": "line:2",
+          "sha256": "dc793b82addcee44af590a1aaafbd601d93dd6fa9b1ccc37ed6a250ac079098b",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 85,
+            "char_end_exclusive": 96,
+            "start_locator": "line:2",
+            "end_locator": "line:2"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "发生本项明确禁止的越界、擅改、泄露或虚报，或核心限制不满足。判定对象：不因逾期删除对象或抹去旧截止历史，不把单项完成升级整体验收；状态数值和日期错已在D1计",
+        "0.5": "核心限制均满足，仅相关范围/状态说明不完整；实际禁项发生为0，不能以部分遵守换半分。判定对象：不因逾期删除对象或抹去旧截止历史，不把单项完成升级整体验收；状态数值和日期错已在D1计",
+        "1": "不因逾期删除对象或抹去旧截止历史，不把单项完成升级整体验收；状态数值和日期错已在D1计"
+      },
+      "evidence_modes": [
+        "output_text"
+      ],
+      "deliverables": [
+        "action_tracker.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0231-D3-01",
+      "dimension_name": "当前要求适配与一致性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "明确字数/时间/授权/禁改/交付范围违反或无依据状态升级；不复扣D1已记的同一事实错。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "不因逾期删除对象或抹去旧截止历史，不把单项完成升级整体验收；状态数值和日期错已在D1计",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "不因逾期删除对象或抹去旧截止历史，不把单项完成升级整体验收；状态数值和日期错已在D1计",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D3",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D3",
+      "criterion": "不捏新负责人/客户承诺日期，现有截止与建议分清",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "最新决定",
+          "locator": "prompt",
+          "sha256": "592bee8def16cddac3a12ef0ef37d8200a6a92b726a974f12d5732b4451cdb8d",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 107,
+            "char_end_exclusive": 111,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "发生本项明确禁止的越界、擅改、泄露或虚报，或核心限制不满足。判定对象：不捏新负责人/客户承诺日期，现有截止与建议分清",
+        "0.5": "核心限制均满足，仅相关范围/状态说明不完整；实际禁项发生为0，不能以部分遵守换半分。判定对象：不捏新负责人/客户承诺日期，现有截止与建议分清",
+        "1": "不捏新负责人/客户承诺日期，现有截止与建议分清"
+      },
+      "evidence_modes": [
+        "output_text"
+      ],
+      "deliverables": [
+        "action_tracker.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0231-D3-02",
+      "dimension_name": "当前要求适配与一致性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "明确字数/时间/授权/禁改/交付范围违反或无依据状态升级；不复扣D1已记的同一事实错。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "不捏新负责人/客户承诺日期，现有截止与建议分清",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "不捏新负责人/客户承诺日期，现有截止与建议分清",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D3",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D4",
+      "criterion": "摘要把当前跟进对象、依赖与下一步联系起来，团队知道应找谁确认什么；不强制指定新的承诺日期，表/摘要缺项不重复扣",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "请依据 inputs/meeting_actions.csv 和 inputs/action_rules.md，生成 action_tracker.xlsx 与 action_digest.docx；按事项ID合并最新决定，清楚区分待办、受阻和完成，截止日更改保留历史，不擅自删除逾期任务。",
+          "locator": "prompt",
+          "sha256": "592bee8def16cddac3a12ef0ef37d8200a6a92b726a974f12d5732b4451cdb8d",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 145,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "相关产物虽存在，但本项指定的判断、操作衔接或实际使用方式不能成立。判定对象：摘要把当前跟进对象、依赖与下一步联系起来，团队知道应找谁确认什么；不强制指定新的承诺日期，表/摘要缺项不重复扣",
+        "0.5": "本项主要判断或使用路径成立，但局部解释、交接或复核步骤需补充，尚未阻断主要用途。判定对象：摘要把当前跟进对象、依赖与下一步联系起来，团队知道应找谁确认什么；不强制指定新的承诺日期，表/摘要缺项不重复扣",
+        "1": "摘要把当前跟进对象、依赖与下一步联系起来，团队知道应找谁确认什么；不强制指定新的承诺日期，表/摘要缺项不重复扣"
+      },
+      "evidence_modes": [
+        "output_text"
+      ],
+      "deliverables": [
+        "action_digest.docx"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0231-D4-01",
+      "dimension_name": "专业判断与业务可用性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "在现有相关内容基础上的独立判断、学习组织、交接或功能使用缺陷；不复扣D1/D2/D3/D5。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "摘要把当前跟进对象、依赖与下一步联系起来，团队知道应找谁确认什么；不强制指定新的承诺日期，表/摘要缺项不重复扣",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "摘要把当前跟进对象、依赖与下一步联系起来，团队知道应找谁确认什么；不强制指定新的承诺日期，表/摘要缺项不重复扣",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D4",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D5",
+      "criterion": "action_tracker.xlsx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "请依据 inputs/meeting_actions.csv 和 inputs/action_rules.md，生成 action_tracker.xlsx 与 action_digest.docx；按事项ID合并最新决定，清楚区分待办、受阻和完成，截止日更改保留历史，不擅自删除逾期任务。",
+          "locator": "prompt",
+          "sha256": "592bee8def16cddac3a12ef0ef37d8200a6a92b726a974f12d5732b4451cdb8d",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 145,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "编码、文字或布局存在妨碍阅读/辨识的实质问题。判定对象：action_tracker.xlsx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+        "0.5": "核心文字和数据可读，仅局部表头、层级、间距或版面影响查阅，不遮挡关键内容。判定对象：action_tracker.xlsx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+        "1": "action_tracker.xlsx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断"
+      },
+      "evidence_modes": [
+        "visual",
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "action_tracker.xlsx"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0231-D5-01",
+      "dimension_name": "表达与呈现质量",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "视觉、编码、排版和可辨性；不复扣事实或内容遗漏。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "action_tracker.xlsx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "action_tracker.xlsx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D5",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D5",
+      "criterion": "action_digest.docx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "请依据 inputs/meeting_actions.csv 和 inputs/action_rules.md，生成 action_tracker.xlsx 与 action_digest.docx；按事项ID合并最新决定，清楚区分待办、受阻和完成，截止日更改保留历史，不擅自删除逾期任务。",
+          "locator": "prompt",
+          "sha256": "592bee8def16cddac3a12ef0ef37d8200a6a92b726a974f12d5732b4451cdb8d",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 145,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "编码、文字或布局存在妨碍阅读/辨识的实质问题。判定对象：action_digest.docx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+        "0.5": "核心文字和数据可读，仅局部表头、层级、间距或版面影响查阅，不遮挡关键内容。判定对象：action_digest.docx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+        "1": "action_digest.docx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断"
+      },
+      "evidence_modes": [
+        "visual",
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "action_digest.docx"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0231-D5-02",
+      "dimension_name": "表达与呈现质量",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "视觉、编码、排版和可辨性；不复扣事实或内容遗漏。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "action_digest.docx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "action_digest.docx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D5",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "摘要区分当前待办、受阻和完成，覆盖A1—A4的必要跟进及会议依据，A1逾期受阻不被隐去",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "action_digest.docx",
+          "locator": "prompt",
+          "sha256": "592bee8def16cddac3a12ef0ef37d8200a6a92b726a974f12d5732b4451cdb8d",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 81,
+            "char_end_exclusive": 99,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项要求的主体内容/对象缺失，或只有空标题、占位与完成承诺。判定对象：摘要区分当前待办、受阻和完成，覆盖A1—A4的必要跟进及会议依据，A1逾期受阻不被隐去",
+        "0.5": "主体内容已提供，本项列明的部分次要内容或对象不完整，仍能识别主要要求；只完成空壳不适用半分。判定对象：摘要区分当前待办、受阻和完成，覆盖A1—A4的必要跟进及会议依据，A1逾期受阻不被隐去",
+        "1": "摘要区分当前待办、受阻和完成，覆盖A1—A4的必要跟进及会议依据，A1逾期受阻不被隐去"
+      },
+      "evidence_modes": [
+        "output_text"
+      ],
+      "deliverables": [
+        "action_digest.docx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0231-D2-04",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "必须内容或对象未提供；已有内容的错误按D1或明确约束D3。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "摘要区分当前待办、受阻和完成，覆盖A1—A4的必要跟进及会议依据，A1逾期受阻不被隐去",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "摘要区分当前待办、受阻和完成，覆盖A1—A4的必要跟进及会议依据，A1逾期受阻不被隐去",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    }
+  ],
+  "review": {
+    "reviewer_kind": "CODEX_AI_SOURCE_ONLY",
+    "scope": "ALL_PROMPT_ALL_INPUTS_ALL_ITEMS_THREE_ANCHORS_DEPENDENCIES",
+    "human_review_completed": false,
+    "reliability_calibration_completed": false,
+    "method_outputs_or_skills_read": false,
+    "single_defect_attribution": {
+      "D1": "已陈述事实/计算错误；不以单纯未写重复扣D2。",
+      "D2": "必须内容或对象未提供；已有内容的错误按D1或明确约束D3。",
+      "D3": "明确字数/时间/授权/禁改/交付范围违反或无依据状态升级；不复扣D1已记的同一事实错。",
+      "D4": "在现有相关内容基础上的独立判断、学习组织、交接或功能使用缺陷；不复扣D1/D2/D3/D5。",
+      "D5": "视觉、编码、排版和可辨性；不复扣事实或内容遗漏。"
+    },
+    "all_artifacts_missing_rule": "ZERO_ALL_ITEMS_DEPENDENT_ON_ABSENT_REQUIRED_ARTIFACTS_NOT_FULL_CREDIT",
+    "scope_boundary": "NO_EVAL_API_NO_SCORE_NO_REMOTE_ACTION",
+    "typical_error_single_owner": [
+      {
+        "typical_error": "以10月9日和最新明确记录，A1受阻截止10月7、A2完成、A3处理中截止10月10、A4待办10月12（对应本维的实质缺陷）",
+        "owner_item_id": "T0231-D1-01",
+        "not_penalized_again_in": [
+          "D2",
+          "D3",
+          "D4",
+          "D5"
+        ],
+        "scope": "已陈述事实/计算错误；不以单纯未写重复扣D2。"
+      },
+      {
+        "typical_error": "按A1—A4各一当前事项合并跨会议记录，保留来源和历史而非逐行当七任务（对应本维的实质缺陷）",
+        "owner_item_id": "T0231-D2-01",
+        "not_penalized_again_in": [
+          "D1",
+          "D3",
+          "D4",
+          "D5"
+        ],
+        "scope": "必须内容或对象未提供；已有内容的错误按D1或明确约束D3。"
+      },
+      {
+        "typical_error": "不因逾期删除对象或抹去旧截止历史，不把单项完成升级整体验收；状态数值和日期错已在D1计（对应本维的实质缺陷）",
+        "owner_item_id": "T0231-D3-01",
+        "not_penalized_again_in": [
+          "D1",
+          "D2",
+          "D4",
+          "D5"
+        ],
+        "scope": "明确字数/时间/授权/禁改/交付范围违反或无依据状态升级；不复扣D1已记的同一事实错。"
+      },
+      {
+        "typical_error": "摘要把当前跟进对象、依赖与下一步联系起来，团队知道应找谁确认什么；不强制指定新的承诺日期，表/摘要缺项不重复扣（对应本维的实质缺陷）",
+        "owner_item_id": "T0231-D4-01",
+        "not_penalized_again_in": [
+          "D1",
+          "D2",
+          "D3",
+          "D5"
+        ],
+        "scope": "在现有相关内容基础上的独立判断、学习组织、交接或功能使用缺陷；不复扣D1/D2/D3/D5。"
+      },
+      {
+        "typical_error": "action_tracker.xlsx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断（对应本维的实质缺陷）",
+        "owner_item_id": "T0231-D5-01",
+        "not_penalized_again_in": [
+          "D1",
+          "D2",
+          "D3",
+          "D4"
+        ],
+        "scope": "视觉、编码、排版和可辨性；不复扣事实或内容遗漏。"
+      }
+    ]
+  },
+  "source_review_shards_preserved": true,
+  "scoring_status": "NOT_SCORED",
+  "review_record_ref": "../review_shards/tech77_review.json"
+}

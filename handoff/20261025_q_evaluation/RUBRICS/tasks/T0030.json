@@ -1,0 +1,881 @@
+{
+  "schema_version": "eval250-quality-rubric-v1",
+  "rubric_version": "1.1.0-ai-full-review",
+  "status": "REVIEWED_BY_AI_PENDING_HUMAN",
+  "task_id": "T0030",
+  "title": "下载流程版本验收与问题说明",
+  "category": "TECH",
+  "prompt": "星岚产品经理要决定下载流程新版是否进入内测，请依据旧页面.html、新页面.html、用户事件.csv、反馈.md和验收范围.md交付验收报告.md及问题清单.json。评审实际页面行为与附件记录，区分已解决和仍未覆盖的问题，给出可复核的证据及内测建议；当前范围只含浏览器文本报告下载，不能据此认定所有PDF、PPT或移动端导出都已完成。",
+  "prompt_sha256": "cbd1f5289c02a49183bc1f97d7062d6a06cce7a9f25d6ac85868596fd20c9c8c",
+  "source_dataset": "eval250_review_v1.1",
+  "task_dataset_sha256": "960ccfe108260592c2d644237dc7536a66214e188e2dbc2e4b266a8cf5629597",
+  "inputs": [
+    {
+      "name": "inputs/旧页面.html",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0030\\inputs\\旧页面.html",
+      "sha256": "adb3f6096e80ae0a09c13d6aeec5c42474e8da77d20c290599e937d32fb3f162",
+      "bytes": 858
+    },
+    {
+      "name": "inputs/新页面.html",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0030\\inputs\\新页面.html",
+      "sha256": "2ae4cbd597dd252d24acda4c601dfa27a62f4465148945b3e6c507bc407a8346",
+      "bytes": 1169
+    },
+    {
+      "name": "inputs/用户事件.csv",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0030\\inputs\\用户事件.csv",
+      "sha256": "bda5a6202bc0afe2e4413c75e957691530625d6195c09708e197078cb6a7da5f",
+      "bytes": 221
+    },
+    {
+      "name": "inputs/反馈.md",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0030\\inputs\\反馈.md",
+      "sha256": "e6fd9fcaa60e1cc6b660561effdcb8938c83080beef857b9c723144e24dc8c61",
+      "bytes": 251
+    },
+    {
+      "name": "inputs/验收范围.md",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0030\\inputs\\验收范围.md",
+      "sha256": "aea6f05ee50fa353c1ebd8f101abd47f86e0111f94ce1834887268792aa73f66",
+      "bytes": 290
+    }
+  ],
+  "deliverables": [
+    {
+      "filename": "验收报告.md",
+      "format": "md"
+    },
+    {
+      "filename": "问题清单.json",
+      "format": "json"
+    }
+  ],
+  "dimension_weights": {
+    "D1": 0.3,
+    "D2": 0.2,
+    "D3": 0.2,
+    "D4": 0.2,
+    "D5": 0.1
+  },
+  "within_dimension_weight_policy": "FIXED_EQUAL_ITEM_WEIGHTS_REVIEWED_BY_AI_PENDING_HUMAN",
+  "historical_reference_used": false,
+  "actor_outputs_used_for_authoring": false,
+  "authoring_timing": "AFTER_EXISTING_EXECUTIONS_BEFORE_NEW_QUALITY_SCORING_NOT_PREREGISTERED",
+  "author": {
+    "kind": "CODEX_AGENT",
+    "shard": "tech_edu"
+  },
+  "human_review": {
+    "status": "PENDING",
+    "reviewer": null,
+    "date": null
+  },
+  "calibration": {
+    "rubric_generator": "NOT_VALIDATED",
+    "judge": "NOT_VALIDATED"
+  },
+  "author_notes": [
+    "工作用途（说明，不新增评分条件）：产品经理能据证据决定是否在限定桌面文本下载范围内开展内测，并清楚哪些问题仍需验证"
+  ],
+  "items": [
+    {
+      "dimension": "D1",
+      "criterion": "准确说明旧页仅更新成功文字、新页通过Blob及下载链接发起项目报告.txt保存；本项核代码事实，未实际浏览器验证时不得推断文件必已保存",
+      "sources": [
+        {
+          "source": "inputs/旧页面.html",
+          "quote": "textContent=\"下载成功\"",
+          "locator": "line:1",
+          "sha256": "adb3f6096e80ae0a09c13d6aeec5c42474e8da77d20c290599e937d32fb3f162",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 775,
+            "char_end_exclusive": 793,
+            "start_locator": "line:1",
+            "end_locator": "line:1"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项涉及的关键事实、口径或计算错误，导致所述结论不成立；同一内容单纯未提供按D2归责。判定对象：准确说明旧页仅更新成功文字、新页通过Blob及下载链接发起项目报告.txt保存；本项核代码事实，未实际浏览器验证时不得推断文件必已保存",
+        "0.5": "核心事实与结论成立，仅少量非关键转录、精度或依据标识有误，不改变主要判断；关键事实错不适用半分。判定对象：准确说明旧页仅更新成功文字、新页通过Blob及下载链接发起项目报告.txt保存；本项核代码事实，未实际浏览器验证时不得推断文件必已保存",
+        "1": "准确说明旧页仅更新成功文字、新页通过Blob及下载链接发起项目报告.txt保存；本项核代码事实，未实际浏览器验证时不得推断文件必已保存"
+      },
+      "evidence_modes": [
+        "output_text"
+      ],
+      "deliverables": [
+        "验收报告.md"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0030-D1-01",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "已陈述事实/计算错误；不以单纯未写重复扣D2。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "准确说明旧页仅更新成功文字、新页通过Blob及下载链接发起项目报告.txt保存；本项核代码事实，未实际浏览器验证时不得推断文件必已保存",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "准确说明旧页仅更新成功文字、新页通过Blob及下载链接发起项目报告.txt保存；本项核代码事实，未实际浏览器验证时不得推断文件必已保存",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D1",
+      "criterion": "事件记录解释为旧版100次点击0文件、新版100次点击94文件、63次查看列表；不把汇总当全自动验收或100%成功",
+      "sources": [
+        {
+          "source": "inputs/用户事件.csv",
+          "quote": "new,file_created,94,desktop",
+          "locator": "line:5",
+          "sha256": "bda5a6202bc0afe2e4413c75e957691530625d6195c09708e197078cb6a7da5f",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 121,
+            "char_end_exclusive": 148,
+            "start_locator": "line:5",
+            "end_locator": "line:5"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项涉及的关键事实、口径或计算错误，导致所述结论不成立；同一内容单纯未提供按D2归责。判定对象：事件记录解释为旧版100次点击0文件、新版100次点击94文件、63次查看列表；不把汇总当全自动验收或100%成功",
+        "0.5": "核心事实与结论成立，仅少量非关键转录、精度或依据标识有误，不改变主要判断；关键事实错不适用半分。判定对象：事件记录解释为旧版100次点击0文件、新版100次点击94文件、63次查看列表；不把汇总当全自动验收或100%成功",
+        "1": "事件记录解释为旧版100次点击0文件、新版100次点击94文件、63次查看列表；不把汇总当全自动验收或100%成功"
+      },
+      "evidence_modes": [
+        "output_text"
+      ],
+      "deliverables": [
+        "验收报告.md"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0030-D1-02",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "已陈述事实/计算错误；不以单纯未写重复扣D2。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "事件记录解释为旧版100次点击0文件、新版100次点击94文件、63次查看列表；不把汇总当全自动验收或100%成功",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "事件记录解释为旧版100次点击0文件、新版100次点击94文件、63次查看列表；不把汇总当全自动验收或100%成功",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "报告对文本文件生成、发起保存提示、下载位置说明及按钮文本逐项给出评价和可回查证据；允许源码审查与附件事件记录相结合，不强制额外浏览器执行",
+      "sources": [
+        {
+          "source": "inputs/验收范围.md",
+          "quote": "需要真实生成文本文件",
+          "locator": "line:3",
+          "sha256": "aea6f05ee50fa353c1ebd8f101abd47f86e0111f94ce1834887268792aa73f66",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 7,
+            "char_end_exclusive": 17,
+            "start_locator": "line:3",
+            "end_locator": "line:3"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项要求的主体内容/对象缺失，或只有空标题、占位与完成承诺。判定对象：报告对文本文件生成、发起保存提示、下载位置说明及按钮文本逐项给出评价和可回查证据；允许源码审查与附件事件记录相结合，不强制额外浏览器执行",
+        "0.5": "主体内容已提供，本项列明的部分次要内容或对象不完整，仍能识别主要要求；只完成空壳不适用半分。判定对象：报告对文本文件生成、发起保存提示、下载位置说明及按钮文本逐项给出评价和可回查证据；允许源码审查与附件事件记录相结合，不强制额外浏览器执行",
+        "1": "报告对文本文件生成、发起保存提示、下载位置说明及按钮文本逐项给出评价和可回查证据；允许源码审查与附件事件记录相结合，不强制额外浏览器执行"
+      },
+      "evidence_modes": [
+        "output_text"
+      ],
+      "deliverables": [
+        "验收报告.md"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0030-D2-01",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "必须内容或对象未提供；已有内容的错误按D1或明确约束D3。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "报告对文本文件生成、发起保存提示、下载位置说明及按钮文本逐项给出评价和可回查证据；允许源码审查与附件事件记录相结合，不强制额外浏览器执行",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "报告对文本文件生成、发起保存提示、下载位置说明及按钮文本逐项给出评价和可回查证据；允许源码审查与附件事件记录相结合，不强制额外浏览器执行",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "列出仍未覆盖的浏览器拦截及保存位置疑问，对应附件反馈和证据",
+      "sources": [
+        {
+          "source": "inputs/反馈.md",
+          "quote": "部分浏览器阻止下载",
+          "locator": "line:3",
+          "sha256": "e6fd9fcaa60e1cc6b660561effdcb8938c83080beef857b9c723144e24dc8c61",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 38,
+            "char_end_exclusive": 47,
+            "start_locator": "line:3",
+            "end_locator": "line:3"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项要求的主体内容/对象缺失，或只有空标题、占位与完成承诺。判定对象：列出仍未覆盖的浏览器拦截及保存位置疑问，对应附件反馈和证据",
+        "0.5": "主体内容已提供，本项列明的部分次要内容或对象不完整，仍能识别主要要求；只完成空壳不适用半分。判定对象：列出仍未覆盖的浏览器拦截及保存位置疑问，对应附件反馈和证据",
+        "1": "列出仍未覆盖的浏览器拦截及保存位置疑问，对应附件反馈和证据"
+      },
+      "evidence_modes": [
+        "output_text"
+      ],
+      "deliverables": [
+        "验收报告.md"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0030-D2-02",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "必须内容或对象未提供；已有内容的错误按D1或明确约束D3。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "列出仍未覆盖的浏览器拦截及保存位置疑问，对应附件反馈和证据",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "列出仍未覆盖的浏览器拦截及保存位置疑问，对应附件反馈和证据",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "问题清单包含可识别问题、证据和当前状态，与报告中的已解决/未覆盖区分一致",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "区分已解决和仍未覆盖的问题",
+          "locator": "prompt",
+          "sha256": "cbd1f5289c02a49183bc1f97d7062d6a06cce7a9f25d6ac85868596fd20c9c8c",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 99,
+            "char_end_exclusive": 112,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项要求的主体内容/对象缺失，或只有空标题、占位与完成承诺。判定对象：问题清单包含可识别问题、证据和当前状态，与报告中的已解决/未覆盖区分一致",
+        "0.5": "主体内容已提供，本项列明的部分次要内容或对象不完整，仍能识别主要要求；只完成空壳不适用半分。判定对象：问题清单包含可识别问题、证据和当前状态，与报告中的已解决/未覆盖区分一致",
+        "1": "问题清单包含可识别问题、证据和当前状态，与报告中的已解决/未覆盖区分一致"
+      },
+      "evidence_modes": [
+        "structured"
+      ],
+      "deliverables": [
+        "问题清单.json"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0030-D2-03",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "必须内容或对象未提供；已有内容的错误按D1或明确约束D3。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "问题清单包含可识别问题、证据和当前状态，与报告中的已解决/未覆盖区分一致",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "问题清单包含可识别问题、证据和当前状态，与报告中的已解决/未覆盖区分一致",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D3",
+      "criterion": "验收仅覆盖浏览器文本报告下载；不把PDF、PPT或移动端列为全部已完成",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "当前范围只含浏览器文本报告下载",
+          "locator": "prompt",
+          "sha256": "cbd1f5289c02a49183bc1f97d7062d6a06cce7a9f25d6ac85868596fd20c9c8c",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 127,
+            "char_end_exclusive": 142,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "发生本项明确禁止的越界、擅改、泄露或虚报，或核心限制不满足。判定对象：验收仅覆盖浏览器文本报告下载；不把PDF、PPT或移动端列为全部已完成",
+        "0.5": "核心限制均满足，仅相关范围/状态说明不完整；实际禁项发生为0，不能以部分遵守换半分。判定对象：验收仅覆盖浏览器文本报告下载；不把PDF、PPT或移动端列为全部已完成",
+        "1": "验收仅覆盖浏览器文本报告下载；不把PDF、PPT或移动端列为全部已完成"
+      },
+      "evidence_modes": [
+        "output_text"
+      ],
+      "deliverables": [
+        "验收报告.md"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0030-D3-01",
+      "dimension_name": "当前要求适配与一致性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "明确字数/时间/授权/禁改/交付范围违反或无依据状态升级；不复扣D1已记的同一事实错。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "验收仅覆盖浏览器文本报告下载；不把PDF、PPT或移动端列为全部已完成",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "验收仅覆盖浏览器文本报告下载；不把PDF、PPT或移动端列为全部已完成",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D3",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D3",
+      "criterion": "明确区分静态源码判断、附件内测记录和自行实测；未自行实测不虚称已实测保存成功。代码/事件数值错误统一归D1",
+      "sources": [
+        {
+          "source": "inputs/验收范围.md",
+          "quote": "消息准确反映“发起保存”而非断言保存成功",
+          "locator": "line:3",
+          "sha256": "aea6f05ee50fa353c1ebd8f101abd47f86e0111f94ce1834887268792aa73f66",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 18,
+            "char_end_exclusive": 38,
+            "start_locator": "line:3",
+            "end_locator": "line:3"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "发生本项明确禁止的越界、擅改、泄露或虚报，或核心限制不满足。判定对象：明确区分静态源码判断、附件内测记录和自行实测；未自行实测不虚称已实测保存成功。代码/事件数值错误统一归D1",
+        "0.5": "核心限制均满足，仅相关范围/状态说明不完整；实际禁项发生为0，不能以部分遵守换半分。判定对象：明确区分静态源码判断、附件内测记录和自行实测；未自行实测不虚称已实测保存成功。代码/事件数值错误统一归D1",
+        "1": "明确区分静态源码判断、附件内测记录和自行实测；未自行实测不虚称已实测保存成功。代码/事件数值错误统一归D1"
+      },
+      "evidence_modes": [
+        "output_text"
+      ],
+      "deliverables": [
+        "验收报告.md"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0030-D3-02",
+      "dimension_name": "当前要求适配与一致性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "明确字数/时间/授权/禁改/交付范围违反或无依据状态升级；不复扣D1已记的同一事实错。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "明确区分静态源码判断、附件内测记录和自行实测；未自行实测不虚称已实测保存成功。代码/事件数值错误统一归D1",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "明确区分静态源码判断、附件内测记录和自行实测；未自行实测不虚称已实测保存成功。代码/事件数值错误统一归D1",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D3",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D4",
+      "criterion": "内测建议说明可进入的范围、保留问题和复核方式，依据当前文本下载行为而非泛泛说体验更好",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "星岚产品经理要决定下载流程新版是否进入内测，请依据旧页面.html、新页面.html、用户事件.csv、反馈.md和验收范围.md交付验收报告.md及问题清单.json。评审实际页面行为与附件记录，区分已解决和仍未覆盖的问题，给出可复核的证据及内测建议；当前范围只含浏览器文本报告下载，不能据此认定所有PDF、PPT或移动端导出都已完成。",
+          "locator": "prompt",
+          "sha256": "cbd1f5289c02a49183bc1f97d7062d6a06cce7a9f25d6ac85868596fd20c9c8c",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 169,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "相关产物虽存在，但本项指定的判断、操作衔接或实际使用方式不能成立。判定对象：内测建议说明可进入的范围、保留问题和复核方式，依据当前文本下载行为而非泛泛说体验更好",
+        "0.5": "本项主要判断或使用路径成立，但局部解释、交接或复核步骤需补充，尚未阻断主要用途。判定对象：内测建议说明可进入的范围、保留问题和复核方式，依据当前文本下载行为而非泛泛说体验更好",
+        "1": "内测建议说明可进入的范围、保留问题和复核方式，依据当前文本下载行为而非泛泛说体验更好"
+      },
+      "evidence_modes": [
+        "output_text"
+      ],
+      "deliverables": [
+        "验收报告.md"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0030-D4-01",
+      "dimension_name": "专业判断与业务可用性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "在现有相关内容基础上的独立判断、学习组织、交接或功能使用缺陷；不复扣D1/D2/D3/D5。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "内测建议说明可进入的范围、保留问题和复核方式，依据当前文本下载行为而非泛泛说体验更好",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "内测建议说明可进入的范围、保留问题和复核方式，依据当前文本下载行为而非泛泛说体验更好",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D4",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D5",
+      "criterion": "验收报告.md中主题、步骤或字段层次清楚，编号、日期和说明可辨认；没有妨碍审核的编码乱码或结构混乱",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "星岚产品经理要决定下载流程新版是否进入内测，请依据旧页面.html、新页面.html、用户事件.csv、反馈.md和验收范围.md交付验收报告.md及问题清单.json。评审实际页面行为与附件记录，区分已解决和仍未覆盖的问题，给出可复核的证据及内测建议；当前范围只含浏览器文本报告下载，不能据此认定所有PDF、PPT或移动端导出都已完成。",
+          "locator": "prompt",
+          "sha256": "cbd1f5289c02a49183bc1f97d7062d6a06cce7a9f25d6ac85868596fd20c9c8c",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 169,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "编码、文字或布局存在妨碍阅读/辨识的实质问题。判定对象：验收报告.md中主题、步骤或字段层次清楚，编号、日期和说明可辨认；没有妨碍审核的编码乱码或结构混乱",
+        "0.5": "核心文字和数据可读，仅局部表头、层级、间距或版面影响查阅，不遮挡关键内容。判定对象：验收报告.md中主题、步骤或字段层次清楚，编号、日期和说明可辨认；没有妨碍审核的编码乱码或结构混乱",
+        "1": "验收报告.md中主题、步骤或字段层次清楚，编号、日期和说明可辨认；没有妨碍审核的编码乱码或结构混乱"
+      },
+      "evidence_modes": [
+        "output_text",
+        "structured"
+      ],
+      "deliverables": [
+        "验收报告.md"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0030-D5-01",
+      "dimension_name": "表达与呈现质量",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "视觉、编码、排版和可辨性；不复扣事实或内容遗漏。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "验收报告.md中主题、步骤或字段层次清楚，编号、日期和说明可辨认；没有妨碍审核的编码乱码或结构混乱",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "验收报告.md中主题、步骤或字段层次清楚，编号、日期和说明可辨认；没有妨碍审核的编码乱码或结构混乱",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D5",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D5",
+      "criterion": "问题清单.json中主题、步骤或字段层次清楚，编号、日期和说明可辨认；没有妨碍审核的编码乱码或结构混乱",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "星岚产品经理要决定下载流程新版是否进入内测，请依据旧页面.html、新页面.html、用户事件.csv、反馈.md和验收范围.md交付验收报告.md及问题清单.json。评审实际页面行为与附件记录，区分已解决和仍未覆盖的问题，给出可复核的证据及内测建议；当前范围只含浏览器文本报告下载，不能据此认定所有PDF、PPT或移动端导出都已完成。",
+          "locator": "prompt",
+          "sha256": "cbd1f5289c02a49183bc1f97d7062d6a06cce7a9f25d6ac85868596fd20c9c8c",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 169,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "编码、文字或布局存在妨碍阅读/辨识的实质问题。判定对象：问题清单.json中主题、步骤或字段层次清楚，编号、日期和说明可辨认；没有妨碍审核的编码乱码或结构混乱",
+        "0.5": "核心文字和数据可读，仅局部表头、层级、间距或版面影响查阅，不遮挡关键内容。判定对象：问题清单.json中主题、步骤或字段层次清楚，编号、日期和说明可辨认；没有妨碍审核的编码乱码或结构混乱",
+        "1": "问题清单.json中主题、步骤或字段层次清楚，编号、日期和说明可辨认；没有妨碍审核的编码乱码或结构混乱"
+      },
+      "evidence_modes": [
+        "output_text",
+        "structured"
+      ],
+      "deliverables": [
+        "问题清单.json"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0030-D5-02",
+      "dimension_name": "表达与呈现质量",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "视觉、编码、排版和可辨性；不复扣事实或内容遗漏。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "问题清单.json中主题、步骤或字段层次清楚，编号、日期和说明可辨认；没有妨碍审核的编码乱码或结构混乱",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "问题清单.json中主题、步骤或字段层次清楚，编号、日期和说明可辨认；没有妨碍审核的编码乱码或结构混乱",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D5",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    }
+  ],
+  "review": {
+    "reviewer_kind": "CODEX_AI_SOURCE_ONLY",
+    "scope": "ALL_PROMPT_ALL_INPUTS_ALL_ITEMS_THREE_ANCHORS_DEPENDENCIES",
+    "human_review_completed": false,
+    "reliability_calibration_completed": false,
+    "method_outputs_or_skills_read": false,
+    "single_defect_attribution": {
+      "D1": "已陈述事实/计算错误；不以单纯未写重复扣D2。",
+      "D2": "必须内容或对象未提供；已有内容的错误按D1或明确约束D3。",
+      "D3": "明确字数/时间/授权/禁改/交付范围违反或无依据状态升级；不复扣D1已记的同一事实错。",
+      "D4": "在现有相关内容基础上的独立判断、学习组织、交接或功能使用缺陷；不复扣D1/D2/D3/D5。",
+      "D5": "视觉、编码、排版和可辨性；不复扣事实或内容遗漏。"
+    },
+    "all_artifacts_missing_rule": "ZERO_ALL_ITEMS_DEPENDENT_ON_ABSENT_REQUIRED_ARTIFACTS_NOT_FULL_CREDIT",
+    "scope_boundary": "NO_EVAL_API_NO_SCORE_NO_REMOTE_ACTION",
+    "typical_error_single_owner": [
+      {
+        "typical_error": "准确说明旧页仅更新成功文字、新页通过Blob及下载链接发起项目报告.txt保存；本项核代码事实，未实际浏览器验证时不得推断文件必已保存（对应本维的实质缺陷）",
+        "owner_item_id": "T0030-D1-01",
+        "not_penalized_again_in": [
+          "D2",
+          "D3",
+          "D4",
+          "D5"
+        ],
+        "scope": "已陈述事实/计算错误；不以单纯未写重复扣D2。"
+      },
+      {
+        "typical_error": "报告对文本文件生成、发起保存提示、下载位置说明及按钮文本逐项给出评价和可回查证据；允许源码审查与附件事件记录相结合，不强制额外浏览器执行（对应本维的实质缺陷）",
+        "owner_item_id": "T0030-D2-01",
+        "not_penalized_again_in": [
+          "D1",
+          "D3",
+          "D4",
+          "D5"
+        ],
+        "scope": "必须内容或对象未提供；已有内容的错误按D1或明确约束D3。"
+      },
+      {
+        "typical_error": "验收仅覆盖浏览器文本报告下载；不把PDF、PPT或移动端列为全部已完成（对应本维的实质缺陷）",
+        "owner_item_id": "T0030-D3-01",
+        "not_penalized_again_in": [
+          "D1",
+          "D2",
+          "D4",
+          "D5"
+        ],
+        "scope": "明确字数/时间/授权/禁改/交付范围违反或无依据状态升级；不复扣D1已记的同一事实错。"
+      },
+      {
+        "typical_error": "内测建议说明可进入的范围、保留问题和复核方式，依据当前文本下载行为而非泛泛说体验更好（对应本维的实质缺陷）",
+        "owner_item_id": "T0030-D4-01",
+        "not_penalized_again_in": [
+          "D1",
+          "D2",
+          "D3",
+          "D5"
+        ],
+        "scope": "在现有相关内容基础上的独立判断、学习组织、交接或功能使用缺陷；不复扣D1/D2/D3/D5。"
+      },
+      {
+        "typical_error": "验收报告.md中主题、步骤或字段层次清楚，编号、日期和说明可辨认；没有妨碍审核的编码乱码或结构混乱（对应本维的实质缺陷）",
+        "owner_item_id": "T0030-D5-01",
+        "not_penalized_again_in": [
+          "D1",
+          "D2",
+          "D3",
+          "D4"
+        ],
+        "scope": "视觉、编码、排版和可辨性；不复扣事实或内容遗漏。"
+      }
+    ]
+  },
+  "source_review_shards_preserved": true,
+  "scoring_status": "NOT_SCORED",
+  "review_record_ref": "../review_shards/tech77_review.json"
+}

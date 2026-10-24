@@ -1,0 +1,814 @@
+{
+  "schema_version": "eval250-quality-rubric-v1",
+  "rubric_version": "1.1.0-ai-full-review",
+  "status": "REVIEWED_BY_AI_PENDING_HUMAN",
+  "task_id": "T0155",
+  "title": "九项目评审唯一排序",
+  "category": "EDU",
+  "prompt": "请依据 inputs/project_evidence.csv、inputs/project_details.md 与 inputs/ranking_rules.md，生成 project_ranking.xlsx 和每项目一页的 review_questions.docx；每个维度分别给九项目1-9名且不并列，1为最优，另列证据不足与每项目5个提问，排名不是1-9质量分。",
+  "prompt_sha256": "b0f9641ff1483ca7c363e54f79ea48f131757b00941cd79c8b6c5f838b09bb41",
+  "source_dataset": "eval250_review_v1.1",
+  "task_dataset_sha256": "960ccfe108260592c2d644237dc7536a66214e188e2dbc2e4b266a8cf5629597",
+  "inputs": [
+    {
+      "name": "inputs/project_evidence.csv",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0155\\inputs\\project_evidence.csv",
+      "sha256": "4f041c2f798b8acc09e3303a7959ca62f8f21bd302186a390e5cfe4b05619df0",
+      "bytes": 403
+    },
+    {
+      "name": "inputs/project_details.md",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0155\\inputs\\project_details.md",
+      "sha256": "401da03090a321df25752a8194c0e7bcef8bd96e50337e32797d35ab4fc52dac",
+      "bytes": 1046
+    },
+    {
+      "name": "inputs/ranking_rules.md",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0155\\inputs\\ranking_rules.md",
+      "sha256": "1e02f8d1ccf6d67c7204db992f3f1277f00fc0cd91358f37104e4271ec5eebbc",
+      "bytes": 338
+    }
+  ],
+  "deliverables": [
+    {
+      "filename": "project_ranking.xlsx",
+      "format": "xlsx"
+    },
+    {
+      "filename": "review_questions.docx",
+      "format": "docx"
+    }
+  ],
+  "dimension_weights": {
+    "D1": 0.3,
+    "D2": 0.2,
+    "D3": 0.2,
+    "D4": 0.2,
+    "D5": 0.1
+  },
+  "within_dimension_weight_policy": "FIXED_EQUAL_ITEM_WEIGHTS_REVIEWED_BY_AI_PENDING_HUMAN",
+  "historical_reference_used": false,
+  "actor_outputs_used_for_authoring": false,
+  "authoring_timing": "AFTER_EXISTING_EXECUTIONS_BEFORE_NEW_QUALITY_SCORING_NOT_PREREGISTERED",
+  "author": {
+    "kind": "CODEX_AGENT",
+    "shard": "tech_edu"
+  },
+  "human_review": {
+    "status": "PENDING",
+    "reviewer": null,
+    "date": null
+  },
+  "calibration": {
+    "rubric_generator": "NOT_VALIDATED",
+    "judge": "NOT_VALIDATED"
+  },
+  "author_notes": [
+    "工作用途（说明，不新增评分条件）：评委可复算唯一名次并逐项目询问独立验证，理解排序只是本题证据规则下的结果"
+  ],
+  "items": [
+    {
+      "dimension": "D1",
+      "criterion": "五维分别按数值降序给1—9唯一名次，平局按ID字典序，1最优；不是把原数值缩放为质量分",
+      "sources": [
+        {
+          "source": "inputs/ranking_rules.md",
+          "quote": "各维分别降序，平局按ID字典序",
+          "locator": "line:2",
+          "sha256": "1e02f8d1ccf6d67c7204db992f3f1277f00fc0cd91358f37104e4271ec5eebbc",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 25,
+            "char_end_exclusive": 40,
+            "start_locator": "line:2",
+            "end_locator": "line:2"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项涉及的关键事实、口径或计算错误，导致所述结论不成立；同一内容单纯未提供按D2归责。判定对象：五维分别按数值降序给1—9唯一名次，平局按ID字典序，1最优；不是把原数值缩放为质量分",
+        "0.5": "核心事实与结论成立，仅少量非关键转录、精度或依据标识有误，不改变主要判断；关键事实错不适用半分。判定对象：五维分别按数值降序给1—9唯一名次，平局按ID字典序，1最优；不是把原数值缩放为质量分",
+        "1": "五维分别按数值降序给1—9唯一名次，平局按ID字典序，1最优；不是把原数值缩放为质量分"
+      },
+      "evidence_modes": [
+        "structured"
+      ],
+      "deliverables": [
+        "project_ranking.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0155-D1-01",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "已陈述事实/计算错误；不以单纯未写重复扣D2。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "五维分别按数值降序给1—9唯一名次，平局按ID字典序，1最优；不是把原数值缩放为质量分",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "五维分别按数值降序给1—9唯一名次，平局按ID字典序，1最优；不是把原数值缩放为质量分",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D1",
+      "criterion": "综合平均名次越低越好，保留P1—P9与五维原证据及E1—E9关联，不能方向反转",
+      "sources": [
+        {
+          "source": "inputs/ranking_rules.md",
+          "quote": "综合平均名次越低越优",
+          "locator": "line:2",
+          "sha256": "1e02f8d1ccf6d67c7204db992f3f1277f00fc0cd91358f37104e4271ec5eebbc",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 41,
+            "char_end_exclusive": 51,
+            "start_locator": "line:2",
+            "end_locator": "line:2"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项涉及的关键事实、口径或计算错误，导致所述结论不成立；同一内容单纯未提供按D2归责。判定对象：综合平均名次越低越好，保留P1—P9与五维原证据及E1—E9关联，不能方向反转",
+        "0.5": "核心事实与结论成立，仅少量非关键转录、精度或依据标识有误，不改变主要判断；关键事实错不适用半分。判定对象：综合平均名次越低越好，保留P1—P9与五维原证据及E1—E9关联，不能方向反转",
+        "1": "综合平均名次越低越好，保留P1—P9与五维原证据及E1—E9关联，不能方向反转"
+      },
+      "evidence_modes": [
+        "structured"
+      ],
+      "deliverables": [
+        "project_ranking.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0155-D1-02",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "已陈述事实/计算错误；不以单纯未写重复扣D2。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "综合平均名次越低越好，保留P1—P9与五维原证据及E1—E9关联，不能方向反转",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "综合平均名次越低越好，保留P1—P9与五维原证据及E1—E9关联，不能方向反转",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "排序表包含九项目的五维名次及综合平均，并列出证据不足；缺项目/缺列归本项，名次计算/并列错误仅归D1",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "每个维度分别给九项目1-9名且不并列",
+          "locator": "prompt",
+          "sha256": "b0f9641ff1483ca7c363e54f79ea48f131757b00941cd79c8b6c5f838b09bb41",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 138,
+            "char_end_exclusive": 156,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项要求的主体内容/对象缺失，或只有空标题、占位与完成承诺。判定对象：排序表包含九项目的五维名次及综合平均，并列出证据不足；缺项目/缺列归本项，名次计算/并列错误仅归D1",
+        "0.5": "主体内容已提供，本项列明的部分次要内容或对象不完整，仍能识别主要要求；只完成空壳不适用半分。判定对象：排序表包含九项目的五维名次及综合平均，并列出证据不足；缺项目/缺列归本项，名次计算/并列错误仅归D1",
+        "1": "排序表包含九项目的五维名次及综合平均，并列出证据不足；缺项目/缺列归本项，名次计算/并列错误仅归D1"
+      },
+      "evidence_modes": [
+        "structured"
+      ],
+      "deliverables": [
+        "project_ranking.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0155-D2-01",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "必须内容或对象未提供；已有内容的错误按D1或明确约束D3。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "排序表包含九项目的五维名次及综合平均，并列出证据不足；缺项目/缺列归本项，名次计算/并列错误仅归D1",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "排序表包含九项目的五维名次及综合平均，并列出证据不足；缺项目/缺列归本项，名次计算/并列错误仅归D1",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "每项目一页并各有5个问题，内容对应相应项目；问题针对性在专门条目判定，本项只核页数分配/数量",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "每项目一页的 review_questions.docx",
+          "locator": "prompt",
+          "sha256": "b0f9641ff1483ca7c363e54f79ea48f131757b00941cd79c8b6c5f838b09bb41",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 109,
+            "char_end_exclusive": 137,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项要求的主体内容/对象缺失，或只有空标题、占位与完成承诺。判定对象：每项目一页并各有5个问题，内容对应相应项目；问题针对性在专门条目判定，本项只核页数分配/数量",
+        "0.5": "主体内容已提供，本项列明的部分次要内容或对象不完整，仍能识别主要要求；只完成空壳不适用半分。判定对象：每项目一页并各有5个问题，内容对应相应项目；问题针对性在专门条目判定，本项只核页数分配/数量",
+        "1": "每项目一页并各有5个问题，内容对应相应项目；问题针对性在专门条目判定，本项只核页数分配/数量"
+      },
+      "evidence_modes": [
+        "visual",
+        "output_text"
+      ],
+      "deliverables": [
+        "review_questions.docx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0155-D2-02",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "必须内容或对象未提供；已有内容的错误按D1或明确约束D3。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "每项目一页并各有5个问题，内容对应相应项目；问题针对性在专门条目判定，本项只核页数分配/数量",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "每项目一页并各有5个问题，内容对应相应项目；问题针对性在专门条目判定，本项只核页数分配/数量",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "九组问题分别针对各实际概要中的场景与缺口，覆盖独立验证所需问题，不使用同一套空泛问题替代",
+      "sources": [
+        {
+          "source": "inputs/project_details.md",
+          "quote": "工业噪声与多人移动没测",
+          "locator": "line:8",
+          "sha256": "401da03090a321df25752a8194c0e7bcef8bd96e50337e32797d35ab4fc52dac",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 273,
+            "char_end_exclusive": 284,
+            "start_locator": "line:8",
+            "end_locator": "line:8"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项要求的主体内容/对象缺失，或只有空标题、占位与完成承诺。判定对象：九组问题分别针对各实际概要中的场景与缺口，覆盖独立验证所需问题，不使用同一套空泛问题替代",
+        "0.5": "主体内容已提供，本项列明的部分次要内容或对象不完整，仍能识别主要要求；只完成空壳不适用半分。判定对象：九组问题分别针对各实际概要中的场景与缺口，覆盖独立验证所需问题，不使用同一套空泛问题替代",
+        "1": "九组问题分别针对各实际概要中的场景与缺口，覆盖独立验证所需问题，不使用同一套空泛问题替代"
+      },
+      "evidence_modes": [
+        "output_text"
+      ],
+      "deliverables": [
+        "review_questions.docx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0155-D2-03",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "必须内容或对象未提供；已有内容的错误按D1或明确约束D3。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "九组问题分别针对各实际概要中的场景与缺口，覆盖独立验证所需问题，不使用同一套空泛问题替代",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "九组问题分别针对各实际概要中的场景与缺口，覆盖独立验证所需问题，不使用同一套空泛问题替代",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D3",
+      "criterion": "E1—E9均自报，不称独立审计；不能依据排序直接下投资或认证结论",
+      "sources": [
+        {
+          "source": "inputs/ranking_rules.md",
+          "quote": "不能称已审计。不做投资结论",
+          "locator": "line:2",
+          "sha256": "1e02f8d1ccf6d67c7204db992f3f1277f00fc0cd91358f37104e4271ec5eebbc",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 89,
+            "char_end_exclusive": 102,
+            "start_locator": "line:2",
+            "end_locator": "line:2"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "发生本项明确禁止的越界、擅改、泄露或虚报，或核心限制不满足。判定对象：E1—E9均自报，不称独立审计；不能依据排序直接下投资或认证结论",
+        "0.5": "核心限制均满足，仅相关范围/状态说明不完整；实际禁项发生为0，不能以部分遵守换半分。判定对象：E1—E9均自报，不称独立审计；不能依据排序直接下投资或认证结论",
+        "1": "E1—E9均自报，不称独立审计；不能依据排序直接下投资或认证结论"
+      },
+      "evidence_modes": [
+        "output_text"
+      ],
+      "deliverables": [
+        "project_ranking.xlsx",
+        "review_questions.docx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0155-D3-01",
+      "dimension_name": "当前要求适配与一致性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "ANY_AVAILABLE_COMPARE_ALL_PRESENT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "明确字数/时间/授权/禁改/交付范围违反或无依据状态升级；不复扣D1已记的同一事实错。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "E1—E9均自报，不称独立审计；不能依据排序直接下投资或认证结论",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "ANY_AVAILABLE_COMPARE_ALL_PRESENT",
+        "details": {
+          "content_scope": "E1—E9均自报，不称独立审计；不能依据排序直接下投资或认证结论",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D3",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D4",
+      "criterion": "五个问题具有可交流的粒度和顺序，能让评委核实关键证据而非深度理论考试或数个问题塞一句；不强制项目页新增未要求的优势陈述",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "请依据 inputs/project_evidence.csv、inputs/project_details.md 与 inputs/ranking_rules.md，生成 project_ranking.xlsx 和每项目一页的 review_questions.docx；每个维度分别给九项目1-9名且不并列，1为最优，另列证据不足与每项目5个提问，排名不是1-9质量分。",
+          "locator": "prompt",
+          "sha256": "b0f9641ff1483ca7c363e54f79ea48f131757b00941cd79c8b6c5f838b09bb41",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 188,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        },
+        {
+          "source": "inputs/ranking_rules.md",
+          "quote": "提问必须针对各概要的具体场景与缺口",
+          "locator": "line:2",
+          "sha256": "1e02f8d1ccf6d67c7204db992f3f1277f00fc0cd91358f37104e4271ec5eebbc",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 103,
+            "char_end_exclusive": 120,
+            "start_locator": "line:2",
+            "end_locator": "line:2"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "相关产物虽存在，但本项指定的判断、操作衔接或实际使用方式不能成立。判定对象：五个问题具有可交流的粒度和顺序，能让评委核实关键证据而非深度理论考试或数个问题塞一句；不强制项目页新增未要求的优势陈述",
+        "0.5": "本项主要判断或使用路径成立，但局部解释、交接或复核步骤需补充，尚未阻断主要用途。判定对象：五个问题具有可交流的粒度和顺序，能让评委核实关键证据而非深度理论考试或数个问题塞一句；不强制项目页新增未要求的优势陈述",
+        "1": "五个问题具有可交流的粒度和顺序，能让评委核实关键证据而非深度理论考试或数个问题塞一句；不强制项目页新增未要求的优势陈述"
+      },
+      "evidence_modes": [
+        "output_text"
+      ],
+      "deliverables": [
+        "review_questions.docx"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0155-D4-01",
+      "dimension_name": "专业判断与业务可用性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "在现有相关内容基础上的独立判断、学习组织、交接或功能使用缺陷；不复扣D1/D2/D3/D5。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "五个问题具有可交流的粒度和顺序，能让评委核实关键证据而非深度理论考试或数个问题塞一句；不强制项目页新增未要求的优势陈述",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "五个问题具有可交流的粒度和顺序，能让评委核实关键证据而非深度理论考试或数个问题塞一句；不强制项目页新增未要求的优势陈述",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D4",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D5",
+      "criterion": "project_ranking.xlsx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "请依据 inputs/project_evidence.csv、inputs/project_details.md 与 inputs/ranking_rules.md，生成 project_ranking.xlsx 和每项目一页的 review_questions.docx；每个维度分别给九项目1-9名且不并列，1为最优，另列证据不足与每项目5个提问，排名不是1-9质量分。",
+          "locator": "prompt",
+          "sha256": "b0f9641ff1483ca7c363e54f79ea48f131757b00941cd79c8b6c5f838b09bb41",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 188,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "编码、文字或布局存在妨碍阅读/辨识的实质问题。判定对象：project_ranking.xlsx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+        "0.5": "核心文字和数据可读，仅局部表头、层级、间距或版面影响查阅，不遮挡关键内容。判定对象：project_ranking.xlsx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+        "1": "project_ranking.xlsx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断"
+      },
+      "evidence_modes": [
+        "visual",
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "project_ranking.xlsx"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0155-D5-01",
+      "dimension_name": "表达与呈现质量",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "视觉、编码、排版和可辨性；不复扣事实或内容遗漏。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "project_ranking.xlsx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "project_ranking.xlsx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D5",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D5",
+      "criterion": "review_questions.docx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "请依据 inputs/project_evidence.csv、inputs/project_details.md 与 inputs/ranking_rules.md，生成 project_ranking.xlsx 和每项目一页的 review_questions.docx；每个维度分别给九项目1-9名且不并列，1为最优，另列证据不足与每项目5个提问，排名不是1-9质量分。",
+          "locator": "prompt",
+          "sha256": "b0f9641ff1483ca7c363e54f79ea48f131757b00941cd79c8b6c5f838b09bb41",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 188,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "编码、文字或布局存在妨碍阅读/辨识的实质问题。判定对象：review_questions.docx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+        "0.5": "核心文字和数据可读，仅局部表头、层级、间距或版面影响查阅，不遮挡关键内容。判定对象：review_questions.docx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+        "1": "review_questions.docx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断"
+      },
+      "evidence_modes": [
+        "visual",
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "review_questions.docx"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0155-D5-02",
+      "dimension_name": "表达与呈现质量",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ABSENT_REQUIRED_CONTENT_ZERO; ALL_DEPENDENT_ARTIFACTS_ABSENT_ZERO; NO_WEIGHT_REDISTRIBUTION; INDEPENDENT_PRESENT_CONTENT_NOT_AUTOMATICALLY_ZERO",
+      "evidence_failure_rule": "UNSCORED_IF_JUDGE_PARSER_OR_RENDERER_FAILS; NOT_ZERO; RETRY_THEN_HUMAN",
+      "score": null,
+      "deduction_scope": "视觉、编码、排版和可辨性；不复扣事实或内容遗漏。",
+      "source_only_review_status": "REVIEWED_BY_AI_PENDING_HUMAN",
+      "artifact_dependency_details": {
+        "content_scope": "review_questions.docx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+        "if_all_listed_deliverables_absent": "ZERO",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+        "comparison_requires_deliverables": [],
+        "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": {
+          "content_scope": "review_questions.docx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+          "if_all_listed_deliverables_absent": "ZERO",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_THAT_REQUIRES_THE_ABSENT_ARTIFACT; DO_NOT_ZERO_INDEPENDENT_PRESENT_CONTENT",
+          "comparison_requires_deliverables": [],
+          "missing_comparison_side_rule": "ZERO_COMPARISON_CONTENT; KEEP_INDEPENDENT_CONTENT_WITH_FIXED_WEIGHT"
+        }
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D5",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    }
+  ],
+  "review": {
+    "reviewer_kind": "CODEX_AI_SOURCE_ONLY",
+    "scope": "ALL_PROMPT_ALL_INPUTS_ALL_ITEMS_THREE_ANCHORS_DEPENDENCIES",
+    "human_review_completed": false,
+    "reliability_calibration_completed": false,
+    "method_outputs_or_skills_read": false,
+    "single_defect_attribution": {
+      "D1": "已陈述事实/计算错误；不以单纯未写重复扣D2。",
+      "D2": "必须内容或对象未提供；已有内容的错误按D1或明确约束D3。",
+      "D3": "明确字数/时间/授权/禁改/交付范围违反或无依据状态升级；不复扣D1已记的同一事实错。",
+      "D4": "在现有相关内容基础上的独立判断、学习组织、交接或功能使用缺陷；不复扣D1/D2/D3/D5。",
+      "D5": "视觉、编码、排版和可辨性；不复扣事实或内容遗漏。"
+    },
+    "all_artifacts_missing_rule": "ZERO_ALL_ITEMS_DEPENDENT_ON_ABSENT_REQUIRED_ARTIFACTS_NOT_FULL_CREDIT",
+    "scope_boundary": "NO_EVAL_API_NO_SCORE_NO_REMOTE_ACTION",
+    "typical_error_single_owner": [
+      {
+        "typical_error": "五维分别按数值降序给1—9唯一名次，平局按ID字典序，1最优；不是把原数值缩放为质量分（对应本维的实质缺陷）",
+        "owner_item_id": "T0155-D1-01",
+        "not_penalized_again_in": [
+          "D2",
+          "D3",
+          "D4",
+          "D5"
+        ],
+        "scope": "已陈述事实/计算错误；不以单纯未写重复扣D2。"
+      },
+      {
+        "typical_error": "排序表包含九项目的五维名次及综合平均，并列出证据不足；缺项目/缺列归本项，名次计算/并列错误仅归D1（对应本维的实质缺陷）",
+        "owner_item_id": "T0155-D2-01",
+        "not_penalized_again_in": [
+          "D1",
+          "D3",
+          "D4",
+          "D5"
+        ],
+        "scope": "必须内容或对象未提供；已有内容的错误按D1或明确约束D3。"
+      },
+      {
+        "typical_error": "E1—E9均自报，不称独立审计；不能依据排序直接下投资或认证结论（对应本维的实质缺陷）",
+        "owner_item_id": "T0155-D3-01",
+        "not_penalized_again_in": [
+          "D1",
+          "D2",
+          "D4",
+          "D5"
+        ],
+        "scope": "明确字数/时间/授权/禁改/交付范围违反或无依据状态升级；不复扣D1已记的同一事实错。"
+      },
+      {
+        "typical_error": "五个问题具有可交流的粒度和顺序，能让评委核实关键证据而非深度理论考试或数个问题塞一句；不强制项目页新增未要求的优势陈述（对应本维的实质缺陷）",
+        "owner_item_id": "T0155-D4-01",
+        "not_penalized_again_in": [
+          "D1",
+          "D2",
+          "D3",
+          "D5"
+        ],
+        "scope": "在现有相关内容基础上的独立判断、学习组织、交接或功能使用缺陷；不复扣D1/D2/D3/D5。"
+      },
+      {
+        "typical_error": "project_ranking.xlsx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断（对应本维的实质缺陷）",
+        "owner_item_id": "T0155-D5-01",
+        "not_penalized_again_in": [
+          "D1",
+          "D2",
+          "D3",
+          "D4"
+        ],
+        "scope": "视觉、编码、排版和可辨性；不复扣事实或内容遗漏。"
+      }
+    ]
+  },
+  "source_review_shards_preserved": true,
+  "scoring_status": "NOT_SCORED",
+  "review_record_ref": "../review_shards/tech77_review.json"
+}

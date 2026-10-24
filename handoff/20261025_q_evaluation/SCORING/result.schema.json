@@ -1,0 +1,237 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "q-handoff-case-result-v1",
+  "title": "Exploratory source-evidence Q result with mandatory per-case self-review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "is_template", "case_id", "task_id", "evaluation_status", "quality_status", "judge", "rubric", "task_and_input_bindings", "artifact_role_mapping", "items", "defects", "dimensions", "quality_score", "coverage", "render_manifest_ref", "unblinding", "self_review"],
+  "properties": {
+    "schema_version": {"const": "q-handoff-case-result-v1"},
+    "is_template": {"type": "boolean"},
+    "case_id": {"type": "string", "minLength": 1},
+    "task_id": {"type": "string", "pattern": "^T[0-9]{4}$"},
+    "evaluation_status": {"enum": ["COMPLETE", "PARTIAL_UNSCORED", "TEMPLATE_UNSCORED"]},
+    "quality_status": {"const": "EXPLORATORY_NOT_CALIBRATED"},
+    "judge": {
+      "type": "object", "additionalProperties": false,
+      "required": ["identity", "model_or_agent_version", "date", "phase"],
+      "properties": {
+        "identity": {"type": ["string", "null"]},
+        "model_or_agent_version": {"type": ["string", "null"]},
+        "date": {"type": ["string", "null"]},
+        "phase": {"enum": ["DRAFT", "REVIEWED", "TEMPLATE"]}
+      }
+    },
+    "rubric": {
+      "type": "object", "additionalProperties": false,
+      "required": ["ref", "schema_version", "rubric_version", "record_sha256"],
+      "properties": {
+        "ref": {"type": "string"},
+        "schema_version": {"type": "string"},
+        "rubric_version": {"type": "string"},
+        "record_sha256": {"$ref": "#/$defs/hashOrNull"}
+      }
+    },
+    "task_and_input_bindings": {
+      "type": "array", "items": {"$ref": "#/$defs/fileBinding"}
+    },
+    "artifact_role_mapping": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["expected_role", "actual_paths", "status", "reason"],
+        "properties": {
+          "expected_role": {"type": "string"},
+          "actual_paths": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "status": {"enum": ["RESOLVED", "CONFIRMED_ABSENT", "SEMANTICALLY_EMPTY", "AMBIGUOUS", "TEMPLATE"]},
+          "reason": {"type": "string"}
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["item_id", "dimension", "applicability", "weight", "status", "score", "reason", "evidence", "defect_ids", "deduction_role"],
+        "properties": {
+          "item_id": {"type": "string", "pattern": "^T[0-9]{4}-D[1-5]-[0-9]{2}$"},
+          "dimension": {"enum": ["D1", "D2", "D3", "D4", "D5"]},
+          "applicability": {"enum": ["APPLICABLE", "PREAPPROVED_NA"]},
+          "weight": {"type": "number", "exclusiveMinimum": 0},
+          "status": {"enum": ["SCORED", "MISSING_REQUIRED_CONTENT", "UNSCORED", "PREAPPROVED_NA", "TEMPLATE_UNSCORED"]},
+          "score": {"enum": [0, 0.5, 1, null]},
+          "reason": {"type": "string", "minLength": 1},
+          "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}},
+          "defect_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "deduction_role": {"enum": ["NONE", "PRIMARY", "REFERENCE_ONLY", "MISSING_REQUIRED_ARTIFACT_DEPENDENCY"]}
+        },
+        "allOf": [
+          {"if": {"properties": {"status": {"const": "SCORED"}}, "required": ["status"]}, "then": {"properties": {"score": {"enum": [0, 0.5, 1]}, "evidence": {"minItems": 1}}}},
+          {"if": {"properties": {"status": {"const": "MISSING_REQUIRED_CONTENT"}}, "required": ["status"]}, "then": {"properties": {"score": {"const": 0}, "evidence": {"minItems": 1}}}},
+          {"if": {"properties": {"status": {"enum": ["UNSCORED", "PREAPPROVED_NA", "TEMPLATE_UNSCORED"]}}, "required": ["status"]}, "then": {"properties": {"score": {"type": "null"}}}},
+          {"if": {"properties": {"dimension": {"const": "D5"}, "status": {"const": "SCORED"}}, "required": ["dimension", "status"]}, "then": {"properties": {"evidence": {"contains": {"properties": {"mode": {"const": "visual"}}, "required": ["mode"]}}}}}
+        ]
+      }
+    },
+    "defects": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["defect_id", "primary_item_id", "kind", "observation", "evidence", "also_referenced_by"],
+        "properties": {
+          "defect_id": {"type": "string", "minLength": 1},
+          "primary_item_id": {"type": "string", "pattern": "^T[0-9]{4}-D[1-5]-[0-9]{2}$"},
+          "kind": {"enum": ["CONTENT_FACT", "OMISSION", "REQUIREMENT_OR_CONSISTENCY", "REASONING", "PRESENTATION", "MISSING_REQUIRED_ARTIFACT"]},
+          "observation": {"type": "string", "minLength": 1},
+          "evidence": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/evidence"}},
+          "also_referenced_by": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+        }
+      }
+    },
+    "dimensions": {
+      "type": "object", "additionalProperties": false,
+      "required": ["D1", "D2", "D3", "D4", "D5"],
+      "properties": {
+        "D1": {"$ref": "#/$defs/dimension"},
+        "D2": {"$ref": "#/$defs/dimension"},
+        "D3": {"$ref": "#/$defs/dimension"},
+        "D4": {"$ref": "#/$defs/dimension"},
+        "D5": {"$ref": "#/$defs/dimension"}
+      }
+    },
+    "quality_score": {"type": ["number", "null"], "minimum": 0, "maximum": 100},
+    "coverage": {
+      "type": "object", "additionalProperties": false,
+      "required": ["applicable_items", "scored_items", "unscored_items", "preapproved_na_items"],
+      "properties": {
+        "applicable_items": {"type": "integer", "minimum": 0},
+        "scored_items": {"type": "integer", "minimum": 0},
+        "unscored_items": {"type": "integer", "minimum": 0},
+        "preapproved_na_items": {"type": "integer", "minimum": 0}
+      }
+    },
+    "render_manifest_ref": {"type": ["string", "null"]},
+    "unblinding": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["source", "observation", "affected_items", "handling"],
+        "properties": {
+          "source": {"type": "string"},
+          "observation": {"type": "string"},
+          "affected_items": {"type": "array", "items": {"type": "string"}},
+          "handling": {"type": "string"}
+        }
+      }
+    },
+    "self_review": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "draft_ref", "checks", "changes", "remaining_issues"],
+      "properties": {
+        "status": {"enum": ["NOT_STARTED", "SELF_REVIEWED", "NEEDS_REVIEW"]},
+        "draft_ref": {"type": ["string", "null"]},
+        "checks": {
+          "type": "object", "additionalProperties": false,
+          "required": ["current_task_and_rubric", "all_items_once", "positive_evidence", "no_method_or_cost_penalty", "filename_role_resolution", "missing_vs_evaluator_failure", "visual_pixels", "one_defect_one_primary", "fixed_weight_arithmetic"],
+          "properties": {
+            "current_task_and_rubric": {"type": ["boolean", "null"]},
+            "all_items_once": {"type": ["boolean", "null"]},
+            "positive_evidence": {"type": ["boolean", "null"]},
+            "no_method_or_cost_penalty": {"type": ["boolean", "null"]},
+            "filename_role_resolution": {"type": ["boolean", "null"]},
+            "missing_vs_evaluator_failure": {"type": ["boolean", "null"]},
+            "visual_pixels": {"type": ["boolean", "null"]},
+            "one_defect_one_primary": {"type": ["boolean", "null"]},
+            "fixed_weight_arithmetic": {"type": ["boolean", "null"]}
+          }
+        },
+        "changes": {
+          "type": "array",
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": ["item_id", "before", "after", "reason", "evidence"],
+            "properties": {
+              "item_id": {"type": "string"},
+              "before": {"type": ["number", "null"], "enum": [0, 0.5, 1, null]},
+              "after": {"type": ["number", "null"], "enum": [0, 0.5, 1, null]},
+              "reason": {"type": "string", "minLength": 1},
+              "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}}
+            }
+          }
+        },
+        "remaining_issues": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  },
+  "$defs": {
+    "hashOrNull": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "fileBinding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {"path": {"type": "string"}, "sha256": {"$ref": "#/$defs/hashOrNull"}}
+    },
+    "evidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "locator", "mode", "observation", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "locator": {"type": "string", "minLength": 1},
+        "mode": {"enum": ["source_text", "output_text", "structured", "visual", "functional", "inventory", "log"]},
+        "observation": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/hashOrNull"}
+      }
+    },
+    "dimension": {
+      "type": "object", "additionalProperties": false,
+      "required": ["score", "applicable_weight", "scored_weight", "unscored_item_ids"],
+      "properties": {
+        "score": {"type": ["number", "null"], "minimum": 0, "maximum": 100},
+        "applicable_weight": {"type": "number", "minimum": 0},
+        "scored_weight": {"type": "number", "minimum": 0},
+        "unscored_item_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"is_template": {"const": true}}, "required": ["is_template"]},
+      "then": {"properties": {"evaluation_status": {"const": "TEMPLATE_UNSCORED"}, "quality_score": {"type": "null"}, "judge": {"properties": {"phase": {"const": "TEMPLATE"}}}}},
+      "else": {"properties": {"items": {"minItems": 5}, "task_and_input_bindings": {"minItems": 1}, "artifact_role_mapping": {"minItems": 1}, "judge": {"properties": {"phase": {"enum": ["DRAFT", "REVIEWED"]}}}}}
+    },
+    {
+      "if": {"properties": {"evaluation_status": {"const": "COMPLETE"}}, "required": ["evaluation_status"]},
+      "then": {"properties": {"is_template": {"const": false}, "quality_score": {"type": "number"}, "items": {"items": {"properties": {"status": {"enum": ["SCORED", "MISSING_REQUIRED_CONTENT", "PREAPPROVED_NA"]}}}}, "dimensions": {"properties": {"D1": {"properties": {"score": {"type": "number"}}}, "D2": {"properties": {"score": {"type": "number"}}}, "D3": {"properties": {"score": {"type": "number"}}}, "D4": {"properties": {"score": {"type": "number"}}}, "D5": {"properties": {"score": {"type": "number"}}}}}}}
+    },
+    {
+      "if": {"properties": {"evaluation_status": {"const": "PARTIAL_UNSCORED"}}, "required": ["evaluation_status"]},
+      "then": {"properties": {"is_template": {"const": false}, "quality_score": {"type": "null"}}}
+    },
+    {
+      "if": {"properties": {"judge": {"properties": {"phase": {"const": "REVIEWED"}}, "required": ["phase"]}}, "required": ["judge"]},
+      "then": {
+        "properties": {
+          "is_template": {"const": false},
+          "self_review": {
+            "properties": {
+              "status": {"const": "SELF_REVIEWED"},
+              "draft_ref": {"type": "string", "minLength": 1},
+              "checks": {
+                "properties": {
+                  "current_task_and_rubric": {"const": true},
+                  "all_items_once": {"const": true},
+                  "positive_evidence": {"const": true},
+                  "no_method_or_cost_penalty": {"const": true},
+                  "filename_role_resolution": {"const": true},
+                  "missing_vs_evaluator_failure": {"const": true},
+                  "visual_pixels": {"const": true},
+                  "one_defect_one_primary": {"const": true},
+                  "fixed_weight_arithmetic": {"const": true}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

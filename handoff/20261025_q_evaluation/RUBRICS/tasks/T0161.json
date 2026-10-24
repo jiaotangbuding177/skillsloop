@@ -1,0 +1,743 @@
+{
+  "schema_version": "eval250-quality-rubric-v2-locator-design",
+  "rubric_version": "eval250-current-modified28-rubric-20261025-v1",
+  "status": "AI_SELF_REVIEWED_PENDING_HUMAN",
+  "task_id": "T0161",
+  "title": "企业每日科技简报",
+  "category": "NEWS",
+  "prompt": "请依据 inputs/daily_snapshot.json 与 inputs/editorial_policy.md，为制造集团编一份5-8条每日科技简报 daily_brief.docx；只选10月13日已发布且与制造信息化有关的消息，去重、给主题与来源ID，未经核实的性能纪录列为待跟进，不用凑条数加入无关娱乐。 本次选题范围与栏目已批准，按editorial_policy.md和10月13日快照直接成稿；不另拟版式或等选题确认，也不将未来计划和待核消息改写成已发生事实。",
+  "prompt_sha256": "853b394645f05e7c94df4eb94b8cb7b34963500909010dad6719b3b599b30886",
+  "source_dataset": "D:\\skillloop\\output\\20261024_experiment_adopt35\\current_tasks250.json",
+  "task_dataset_sha256": "142871fe33d047f1d964703a2c3370af06d3af08f9a095464bc109852290d396",
+  "inputs": [
+    {
+      "name": "inputs/daily_snapshot.json",
+      "path": "tasks/T0161/inputs/daily_snapshot.json",
+      "sha256": "13aaa66a9ea8b24005ea679c479152e6354c85714cbf0608eff0acb0147579a1",
+      "bytes": 2271
+    },
+    {
+      "name": "inputs/editorial_policy.md",
+      "path": "tasks/T0161/inputs/editorial_policy.md",
+      "sha256": "8081fef521f75bce76ba4904f1029d4038493ddb05fe3bd791e1a5e902825859",
+      "bytes": 222
+    }
+  ],
+  "deliverables": [
+    {
+      "filename": "daily_brief.docx",
+      "format": "docx"
+    }
+  ],
+  "dimension_weights": {
+    "D1": 0.3,
+    "D2": 0.2,
+    "D3": 0.2,
+    "D4": 0.2,
+    "D5": 0.1
+  },
+  "within_dimension_weight_policy": "FIXED_EQUAL_ITEM_WEIGHTS_DRAFT_PENDING_REVIEW",
+  "historical_reference_used": false,
+  "actor_outputs_used_for_authoring": false,
+  "authoring_timing": "POST_EXISTING_RUNS_SOURCE_ONLY_REVISION; NOT_PRE_RUN_PREREGISTRATION",
+  "calibration": {
+    "rubric_generator": "NOT_VALIDATED",
+    "judge": "NOT_VALIDATED"
+  },
+  "items": [
+    {
+      "criterion": "实际选入事件的主体、非状态数值及所引来源事实准确；预售/试点/只读/OCR等状态边界只归D1-02，选择数量及重复只归D2。",
+      "anchors": {
+        "0": "存在改变核心事实或主要结论的错误；纯遗漏由D2主责。",
+        "0.5": "决定性事实和结论正确，仅一处非决定性转录或依据标识有误。",
+        "1": "实际选入事件的主体、非状态数值及所引来源事实准确；预售/试点/只读/OCR等状态边界只归D1-02，选择数量及重复只归D2。"
+      },
+      "deduction_scope": "仅已有事实、数值、计算及证据解释错误；纯缺漏归D2。",
+      "item_id": "T0161-D1-01",
+      "dimension": "D1",
+      "dimension_name": "内容正确性与依据",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "inputs/editorial_policy.md",
+          "locator": "已发布6个相关可核事件",
+          "sha256": "8081fef521f75bce76ba4904f1029d4038493ddb05fe3bd791e1a5e902825859"
+        },
+        {
+          "source": "prompt",
+          "locator": "请依据 inputs/daily_snapshot.json 与 inputs/editorial_policy.md，为制造集团编一份5-8条每日科技简报 daily_brief.docx；只选10月13日已发布且与制造信息化有关的消息，去重、给主题与来源ID，未经核实的性能纪录列为待跟进，不用凑条数加入无关娱乐。 本次选题范围与栏目已批准，按editorial_policy.md和10月13日快照直接成稿；不另拟版式或等选题确认，也不将未来计划和待核消息改写成已发生事实。",
+          "sha256": "853b394645f05e7c94df4eb94b8cb7b34963500909010dad6719b3b599b30886"
+        }
+      ],
+      "evidence_details": [
+        "daily_brief.docx：output_text"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "daily_brief.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "实际选入事件的主体、非状态数值及所引来源事实准确；预售/试点/只读/OCR等状态边界只归D1-02，选择数量及重复只归D2。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "实际选入事件的主体、非状态数值及所引来源事实准确；预售/试点/只读/OCR等状态边界只归D1-02，选择数量及重复只归D2。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "预售非已交货、试点无效率、写回不支持和扫描需OCR状态准确。",
+      "anchors": {
+        "0": "已交内容存在改变本项关键结论的事实、计算或依据错误；或所依赖必需产物缺失。",
+        "0.5": "关键结论及决定性事实/计算有据，仅出现一处局部、非决定性事实或表述误差；单纯覆盖遗漏只归D2。",
+        "1": "预售非已交货、试点无效率、写回不支持和扫描需OCR状态准确。"
+      },
+      "deduction_scope": "仅已有事实、数值、计算及证据解释错误；纯缺漏归D2。",
+      "item_id": "T0161-D1-02",
+      "dimension": "D1",
+      "dimension_name": "内容正确性与依据",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "inputs/daily_snapshot.json",
+          "locator": "预售，11月交货，兼容性待测",
+          "sha256": "13aaa66a9ea8b24005ea679c479152e6354c85714cbf0608eff0acb0147579a1"
+        }
+      ],
+      "evidence_details": [
+        "daily_brief.docx：output_text"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "daily_brief.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "预售非已交货、试点无效率、写回不支持和扫描需OCR状态准确。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "预售非已交货、试点无效率、写回不支持和扫描需OCR状态准确。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "正式消息取5—8条经核且相关的独立事件；快照只有六个符合事件，可合理选5或6条，不强制六条。M01/M02为同一事件；匿名传闻不计正式数量，不以娱乐或10月12日旧闻凑数。",
+      "anchors": {
+        "0": "所需主体内容/关键对象缺失，或仅有标题、占位、完成承诺。已有内容的事实错误与越界不在本项重复扣。",
+        "0.5": "主体内容与对象已覆盖，仅一处次要字段、来源标记或说明缺漏。",
+        "1": "正式消息取5—8条经核且相关的独立事件；快照只有六个符合事件，可合理选5或6条，不强制六条。M01/M02为同一事件；匿名传闻不计正式数量，不以娱乐或10月12日旧闻凑数。"
+      },
+      "deduction_scope": "仅必要内容/对象/字段覆盖不足；已有内容同一错误不重扣。",
+      "item_id": "T0161-D2-01",
+      "dimension": "D2",
+      "dimension_name": "内容覆盖与充分性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "5-8条每日科技简报",
+          "sha256": "853b394645f05e7c94df4eb94b8cb7b34963500909010dad6719b3b599b30886"
+        },
+        {
+          "source": "prompt",
+          "locator": "请依据 inputs/daily_snapshot.json 与 inputs/editorial_policy.md，为制造集团编一份5-8条每日科技简报 daily_brief.docx；只选10月13日已发布且与制造信息化有关的消息，去重、给主题与来源ID，未经核实的性能纪录列为待跟进，不用凑条数加入无关娱乐。 本次选题范围与栏目已批准，按editorial_policy.md和10月13日快照直接成稿；不另拟版式或等选题确认，也不将未来计划和待核消息改写成已发生事实。",
+          "sha256": "853b394645f05e7c94df4eb94b8cb7b34963500909010dad6719b3b599b30886"
+        }
+      ],
+      "evidence_details": [
+        "daily_brief.docx：output_text"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "daily_brief.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "正式消息取5—8条经核且相关的独立事件；快照只有六个符合事件，可合理选5或6条，不强制六条。M01/M02为同一事件；匿名传闻不计正式数量，不以娱乐或10月12日旧闻凑数。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "正式消息取5—8条经核且相关的独立事件；快照只有六个符合事件，可合理选5或6条，不强制六条。M01/M02为同一事件；匿名传闻不计正式数量，不以娱乐或10月12日旧闻凑数。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "正式消息均在10月13日14:00前发布；本项只负责日期窗口，已在D2-01归责的同一凑数或重复问题仅交叉引用，不再次扣分。",
+      "anchors": {
+        "0": "所需主体内容/关键对象缺失，或仅有标题、占位、完成承诺。已有内容的事实错误与越界不在本项重复扣。",
+        "0.5": "主体内容与对象已覆盖，仅一处次要字段、来源标记或说明缺漏。",
+        "1": "正式消息均在10月13日14:00前发布；本项只负责日期窗口，已在D2-01归责的同一凑数或重复问题仅交叉引用，不再次扣分。"
+      },
+      "deduction_scope": "仅必要内容/对象/字段覆盖不足；已有内容同一错误不重扣。",
+      "item_id": "T0161-D2-02",
+      "dimension": "D2",
+      "dimension_name": "内容覆盖与充分性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "10月13日已发布",
+          "sha256": "853b394645f05e7c94df4eb94b8cb7b34963500909010dad6719b3b599b30886"
+        },
+        {
+          "source": "prompt",
+          "locator": "请依据 inputs/daily_snapshot.json 与 inputs/editorial_policy.md，为制造集团编一份5-8条每日科技简报 daily_brief.docx；只选10月13日已发布且与制造信息化有关的消息，去重、给主题与来源ID，未经核实的性能纪录列为待跟进，不用凑条数加入无关娱乐。 本次选题范围与栏目已批准，按editorial_policy.md和10月13日快照直接成稿；不另拟版式或等选题确认，也不将未来计划和待核消息改写成已发生事实。",
+          "sha256": "853b394645f05e7c94df4eb94b8cb7b34963500909010dad6719b3b599b30886"
+        }
+      ],
+      "evidence_details": [
+        "daily_brief.docx：output_text"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "daily_brief.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "正式消息均在10月13日14:00前发布；本项只负责日期窗口，已在D2-01归责的同一凑数或重复问题仅交叉引用，不再次扣分。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "正式消息均在10月13日14:00前发布；本项只负责日期窗口，已在D2-01归责的同一凑数或重复问题仅交叉引用，不再次扣分。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "每个正式条目有主题、来源ID、60—100字摘要及业务关联说明；本项核字段/字数覆盖，已有业务关联的推理质量只归D4，错误来源值归D1。",
+      "anchors": {
+        "0": "所需主体内容/关键对象缺失，或仅有标题、占位、完成承诺。已有内容的事实错误与越界不在本项重复扣。",
+        "0.5": "主体内容与对象已覆盖，仅一处次要字段、来源标记或说明缺漏。",
+        "1": "每个正式条目有主题、来源ID、60—100字摘要及业务关联说明；本项核字段/字数覆盖，已有业务关联的推理质量只归D4，错误来源值归D1。"
+      },
+      "deduction_scope": "仅必要内容/对象/字段覆盖不足；已有内容同一错误不重扣。",
+      "item_id": "T0161-D2-03",
+      "dimension": "D2",
+      "dimension_name": "内容覆盖与充分性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "主题与来源ID",
+          "sha256": "853b394645f05e7c94df4eb94b8cb7b34963500909010dad6719b3b599b30886"
+        },
+        {
+          "source": "prompt",
+          "locator": "请依据 inputs/daily_snapshot.json 与 inputs/editorial_policy.md，为制造集团编一份5-8条每日科技简报 daily_brief.docx；只选10月13日已发布且与制造信息化有关的消息，去重、给主题与来源ID，未经核实的性能纪录列为待跟进，不用凑条数加入无关娱乐。 本次选题范围与栏目已批准，按editorial_policy.md和10月13日快照直接成稿；不另拟版式或等选题确认，也不将未来计划和待核消息改写成已发生事实。",
+          "sha256": "853b394645f05e7c94df4eb94b8cb7b34963500909010dad6719b3b599b30886"
+        }
+      ],
+      "evidence_details": [
+        "daily_brief.docx：output_text"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "daily_brief.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "每个正式条目有主题、来源ID、60—100字摘要及业务关联说明；本项核字段/字数覆盖，已有业务关联的推理质量只归D4，错误来源值归D1。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "每个正式条目有主题、来源ID、60—100字摘要及业务关联说明；本项核字段/字数覆盖，已有业务关联的推理质量只归D4，错误来源值归D1。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "末尾提供两项行动建议；本项只核是否实际提供两项内容，已提供建议的贴题性及操作衔接只归D4。",
+      "anchors": {
+        "0": "所需主体内容/关键对象缺失，或仅有标题、占位、完成承诺。已有内容的事实错误与越界不在本项重复扣。",
+        "0.5": "主体内容与对象已覆盖，仅一处次要字段、来源标记或说明缺漏。",
+        "1": "末尾提供两项行动建议；本项只核是否实际提供两项内容，已提供建议的贴题性及操作衔接只归D4。"
+      },
+      "deduction_scope": "仅必要内容/对象/字段覆盖不足；已有内容同一错误不重扣。",
+      "item_id": "T0161-D2-04",
+      "dimension": "D2",
+      "dimension_name": "内容覆盖与充分性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "inputs/editorial_policy.md",
+          "locator": "两项行动建议",
+          "sha256": "8081fef521f75bce76ba4904f1029d4038493ddb05fe3bd791e1a5e902825859"
+        },
+        {
+          "source": "prompt",
+          "locator": "请依据 inputs/daily_snapshot.json 与 inputs/editorial_policy.md，为制造集团编一份5-8条每日科技简报 daily_brief.docx；只选10月13日已发布且与制造信息化有关的消息，去重、给主题与来源ID，未经核实的性能纪录列为待跟进，不用凑条数加入无关娱乐。 本次选题范围与栏目已批准，按editorial_policy.md和10月13日快照直接成稿；不另拟版式或等选题确认，也不将未来计划和待核消息改写成已发生事实。",
+          "sha256": "853b394645f05e7c94df4eb94b8cb7b34963500909010dad6719b3b599b30886"
+        }
+      ],
+      "evidence_details": [
+        "daily_brief.docx：output_text"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "daily_brief.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "末尾提供两项行动建议；本项只核是否实际提供两项内容，已提供建议的贴题性及操作衔接只归D4。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "末尾提供两项行动建议；本项只核是否实际提供两项内容，已提供建议的贴题性及操作衔接只归D4。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "99.99%无样本消息仅待跟进，不做正式性能事实。",
+      "anchors": {
+        "0": "本项内容缺失、关键结论错误或违反明确限制，未达到：99.99%无样本消息仅待跟进，不做正式性能事实。",
+        "0.5": "无虚假性能，一处待证标签不醒目。",
+        "1": "99.99%无样本消息仅待跟进，不做正式性能事实。"
+      },
+      "deduction_scope": "仅当前显式范围/格式/授权限制或独立跨产物矛盾；不复扣同一D1事实。",
+      "item_id": "T0161-D3-01",
+      "dimension": "D3",
+      "dimension_name": "当前要求适配与一致性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "inputs/editorial_policy.md",
+          "locator": "匿名消息单列跟进不计正式条数",
+          "sha256": "8081fef521f75bce76ba4904f1029d4038493ddb05fe3bd791e1a5e902825859"
+        }
+      ],
+      "evidence_details": [
+        "daily_brief.docx：output_text"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "daily_brief.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "99.99%无样本消息仅待跟进，不做正式性能事实。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "99.99%无样本消息仅待跟进，不做正式性能事实。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "依固定模拟快照、已批准栏目直接形成简报，不冒称实时外部核实，也不把再次选题或版式确认当交付前提；不按工具路径、轮次或耗时扣质量分。",
+      "anchors": {
+        "0": "发生本项明确禁止的虚报、越界，或核心范围/状态与当前委托相反。",
+        "0.5": "核心限制均遵守，仅局部范围或一致性标识不清；实际禁项发生不适用半分。",
+        "1": "依固定模拟快照、已批准栏目直接形成简报，不冒称实时外部核实，也不把再次选题或版式确认当交付前提；不按工具路径、轮次或耗时扣质量分。"
+      },
+      "deduction_scope": "仅当前显式范围/格式/授权限制或独立跨产物矛盾；不复扣同一D1事实。",
+      "item_id": "T0161-D3-02",
+      "dimension": "D3",
+      "dimension_name": "当前要求适配与一致性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "无关娱乐",
+          "sha256": "853b394645f05e7c94df4eb94b8cb7b34963500909010dad6719b3b599b30886"
+        },
+        {
+          "source": "prompt",
+          "locator": "请依据 inputs/daily_snapshot.json 与 inputs/editorial_policy.md，为制造集团编一份5-8条每日科技简报 daily_brief.docx；只选10月13日已发布且与制造信息化有关的消息，去重、给主题与来源ID，未经核实的性能纪录列为待跟进，不用凑条数加入无关娱乐。 本次选题范围与栏目已批准，按editorial_policy.md和10月13日快照直接成稿；不另拟版式或等选题确认，也不将未来计划和待核消息改写成已发生事实。",
+          "sha256": "853b394645f05e7c94df4eb94b8cb7b34963500909010dad6719b3b599b30886"
+        }
+      ],
+      "evidence_details": [
+        "daily_brief.docx：output_text"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "daily_brief.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "依固定模拟快照、已批准栏目直接形成简报，不冒称实时外部核实，也不把再次选题或版式确认当交付前提；不按工具路径、轮次或耗时扣质量分。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "依固定模拟快照、已批准栏目直接形成简报，不冒称实时外部核实，也不把再次选题或版式确认当交付前提；不按工具路径、轮次或耗时扣质量分。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "简报让制造读者理解消息与业务的关系，行动建议贴合所选证据，未经核实信息不会隐含成为采购理由。 本项仅评已有内容的独立推理/操作衔接缺陷；其他维度已记的同一事实错误、缺项、越权或可读性问题不重复计。",
+      "anchors": {
+        "0": "在已存在、已覆盖且未被其他维度计过的内容中，业务推理或操作关系存在关键断裂，无法用于该项工作。",
+        "0.5": "已有内容足以支持主要业务用途，但一处推理连接、取舍说明或操作交接仍含糊；没有新增未委托交付要求。",
+        "1": "简报让制造读者理解消息与业务的关系，行动建议贴合所选证据，未经核实信息不会隐含成为采购理由。 本项仅评已有内容的独立推理/操作衔接缺陷；其他维度已记的同一事实错误、缺项、越权或可读性问题不重复计。"
+      },
+      "deduction_scope": "仅已覆盖内容中独立的判断、取舍及操作衔接缺陷；不借可用性重复扣其他维度。",
+      "item_id": "T0161-D4-01",
+      "dimension": "D4",
+      "dimension_name": "专业判断与业务可用性",
+      "weight": 1,
+      "basis": "derived_quality",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "为制造集团",
+          "sha256": "853b394645f05e7c94df4eb94b8cb7b34963500909010dad6719b3b599b30886"
+        }
+      ],
+      "evidence_details": [
+        "daily_brief.docx：output_text,structured"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "daily_brief.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "简报让制造读者理解消息与业务的关系，行动建议贴合所选证据，未经核实信息不会隐含成为采购理由。 本项仅评已有内容的独立推理/操作衔接缺陷；其他维度已记的同一事实错误、缺项、越权或可读性问题不重复计。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "简报让制造读者理解消息与业务的关系，行动建议贴合所选证据，未经核实信息不会隐含成为采购理由。 本项仅评已有内容的独立推理/操作衔接缺陷；其他维度已记的同一事实错误、缺项、越权或可读性问题不重复计。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "daily_brief.docx：呈现适合“企业每日科技简报”的使用目的；标题/层级/单位或字段名清楚，关键内容可读，没有截断、重叠或乱码。",
+      "anchors": {
+        "0": "该产物实际缺失或本身损坏，或表达/版式妨碍读取关键内容；裁判解析/渲染环境故障须UNSCORED而非0。",
+        "0.5": "主要内容可读，但局部标题、表头、分页或字段说明不清；关键内容仍完整可见。",
+        "1": "daily_brief.docx：呈现适合“企业每日科技简报”的使用目的；标题/层级/单位或字段名清楚，关键内容可读，没有截断、重叠或乱码。"
+      },
+      "deduction_scope": "仅对应产物表达、排版及实际视觉可读性；不复扣事实或内容缺项。",
+      "item_id": "T0161-D5-01",
+      "dimension": "D5",
+      "dimension_name": "表达与呈现质量",
+      "weight": 1,
+      "basis": "derived_quality",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "daily_brief.docx",
+          "sha256": "853b394645f05e7c94df4eb94b8cb7b34963500909010dad6719b3b599b30886"
+        }
+      ],
+      "evidence_details": [
+        "daily_brief.docx：visual"
+      ],
+      "evidence_modes": [
+        "visual",
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "daily_brief.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "daily_brief.docx：呈现适合“企业每日科技简报”的使用目的；标题/层级/单位或字段名清楚，关键内容可读，没有截断、重叠或乱码。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "daily_brief.docx：呈现适合“企业每日科技简报”的使用目的；标题/层级/单位或字段名清楚，关键内容可读，没有截断、重叠或乱码。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    }
+  ],
+  "error_attribution_policy": {
+    "owner_by_error_type": {
+      "fact_calculation_reference": "D1",
+      "effective_requirement_omission": "D2",
+      "format_scope_authorization_or_independent_cross_version_conflict": "D3",
+      "independent_business_reasoning_or_operation": "D4",
+      "expression_visual_readability": "D5"
+    },
+    "single_defect_one_primary_item": true,
+    "ledger_rule": "给每个已观察缺陷登记defect_id、唯一主要item_id和证据；其他项出现同一缺陷仅交叉引用，不重复扣。多个独立缺陷可分别扣。产物全缺按依赖条目0保留原权重，不用此规则给空产物满分。",
+    "partial_credit": "不因未采用唯一措辞/布局/合理方案而扣；禁项实际发生不得以说明不全换半分。",
+    "failure_not_score": "裁判证据设施故障UNSCORED；依赖产物缺失对应0且不重分权重。"
+  },
+  "scoring_status": "NOT_SCORED",
+  "input_root": "D:\\skillloop\\output\\20261024_wrd6_interface_retry\\frozen",
+  "human_review": {
+    "status": "PENDING",
+    "reviewer": null,
+    "date": null
+  },
+  "review": {
+    "status": "AI_SELF_REVIEWED",
+    "checks": {
+      "current_task_bound": true,
+      "all_five_dimensions": true,
+      "no_added_requirements": true,
+      "delivery_quality_separated": true,
+      "anchors_distinct": true,
+      "source_evidence_locatable": true,
+      "one_defect_one_primary": true
+    },
+    "findings_fixed": [
+      "保留5—8范围，在六个合法事件中选5或6都可，不恢复旧强制六条。",
+      "传闻只跟进；字数、主题、业务关系、行动建议均属Q，非TSR。"
+    ],
+    "remaining_unknowns": [
+      "尚未进行实际人员审核或评分器可靠性校准；本文件不含任务得分。"
+    ],
+    "task_id": "T0161",
+    "current_task_sha256": "142871fe33d047f1d964703a2c3370af06d3af08f9a095464bc109852290d396",
+    "authored_sha256": "a8a1f354cad75913ab68b31686f1325fa984ac0fcef91adb64d503a4397bab39",
+    "tsr_checks_reviewed": [
+      "DELIVERED_AS_NAMED_REGULAR_FILE",
+      "BYTE_SIZE_GT_ZERO",
+      "OPENS_IN_REAL_DECLARED_FORMAT"
+    ],
+    "rubric_items": 10
+  },
+  "source_revision": "eval33_task_with_interface_wrd_T0161_adopted",
+  "source_task_sha256": "142871fe33d047f1d964703a2c3370af06d3af08f9a095464bc109852290d396",
+  "source_only_authored_path": "D:\\skillloop\\output\\20261025_modified28_evaluation_standard\\authored\\T0161.json",
+  "author": "CODEx_SOURCE_ONLY_AI_REVISION_20261025",
+  "prior_rubric_source": "D:\\skillloop\\output\\20261017_eval250_quality_review\\release\\rubrics.jsonl"
+}

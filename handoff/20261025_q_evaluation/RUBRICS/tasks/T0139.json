@@ -1,0 +1,668 @@
+{
+  "schema_version": "eval250-quality-rubric-v2-locator-design",
+  "rubric_version": "eval250-current-modified28-rubric-20261025-v1",
+  "status": "AI_SELF_REVIEWED_PENDING_HUMAN",
+  "task_id": "T0139",
+  "title": "BD候选人30分钟面试",
+  "category": "HR",
+  "prompt": "公司已决定面试H1801但未决定录用，请读 inputs/BD岗位要求.md 与 inputs/BD候选履历.pdf，输出 BD面试提纲.docx，严格30分钟，围绕线索来源、需求判断、本人推进、订单/回款证据、技术协作和早期公司自主工作设计问题，给追问与记录栏；不要按创始人资源等同本人开发，也不预设真实成交。 这是已排定的一次候选人面试，岗位、候选人与本轮时长均已确认。仅准备本次可直接使用的提纲和记录栏，不扩展为全套招聘流程；材料缺口作为面试追问，不需要联网调查个人信息或等待补充后才交稿。",
+  "prompt_sha256": "de469414f2f1c084ccab0d8d043e49fc359a58b279b91aaeeff87f0e068f7c6b",
+  "source_dataset": "D:\\skillloop\\output\\20261024_experiment_adopt35\\current_tasks250.json",
+  "task_dataset_sha256": "bb2a0ce3d661c0a11bebef9dcb4a617a36c3b92c6cea3bd5b5f7ba3fbb90527b",
+  "inputs": [
+    {
+      "name": "inputs/BD候选履历.pdf",
+      "path": "tasks/T0139/inputs/BD候选履历.pdf",
+      "sha256": "f1baf4c124844b317f354cfe1671b74a923eb14656effcf1b514cec24150345f",
+      "bytes": 44156
+    },
+    {
+      "name": "inputs/BD岗位要求.md",
+      "path": "tasks/T0139/inputs/BD岗位要求.md",
+      "sha256": "59ef9d3f12f6c59a91f8243fe271128b3cbdf3756d729c32778530bf076847e9",
+      "bytes": 504
+    }
+  ],
+  "deliverables": [
+    {
+      "filename": "BD面试提纲.docx",
+      "format": "docx"
+    }
+  ],
+  "dimension_weights": {
+    "D1": 0.3,
+    "D2": 0.2,
+    "D3": 0.2,
+    "D4": 0.2,
+    "D5": 0.1
+  },
+  "within_dimension_weight_policy": "FIXED_EQUAL_ITEM_WEIGHTS_REVIEWED_BY_AI_PENDING_HUMAN",
+  "historical_reference_used": false,
+  "actor_outputs_used_for_authoring": false,
+  "authoring_timing": "POST_EXISTING_RUNS_SOURCE_ONLY_REVISION; NOT_PRE_RUN_PREREGISTRATION",
+  "calibration": {
+    "rubric_generator": "NOT_VALIDATED",
+    "judge": "NOT_VALIDATED"
+  },
+  "items": [
+    {
+      "criterion": "H1801漏斗与商业阶段前提准确：80线索、12访谈、3试点、2年度订单为履历陈述，未提供回款证据；提问不预设订单已核真或已经到账，材料缺口作为待核问题。",
+      "anchors": {
+        "0": "将试点/订单/回款阶段混为已证实成交或到账，或编造关键漏斗事实。",
+        "1": "已使用的漏斗、订单与回款状态均符合履历自述边界，不把自述直接升为核实结论。",
+        "0.5": "核心漏斗及回款待核状态正确，少量非关键数字表述/标签失准。"
+      },
+      "item_id": "T0139-D1-01",
+      "dimension": "D1",
+      "dimension_name": "内容正确性与依据",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "inputs/BD候选履历.pdf",
+          "locator": "第1页「主要项目」：80线索、12场访谈、3试点、2年度订单；未提供回款证据",
+          "sha256": "f1baf4c124844b317f354cfe1671b74a923eb14656effcf1b514cec24150345f"
+        },
+        {
+          "source": "prompt",
+          "locator": "也不预设真实成交",
+          "sha256": "de469414f2f1c084ccab0d8d043e49fc359a58b279b91aaeeff87f0e068f7c6b"
+        }
+      ],
+      "evidence_details": [
+        "BD面试提纲.docx：开场事实、漏斗/订单/回款问题前提"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "BD面试提纲.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "H1801漏斗与商业阶段前提准确：80线索、12访谈、3试点、2年度订单为履历陈述，未提供回款证据；提问不预设订单已核真或已经到账，材料缺口作为待核问题。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "deduction_scope": "仅已有事实、数值、计算及证据解释错误；纯缺漏归D2。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "H1801漏斗与商业阶段前提准确：80线索、12访谈、3试点、2年度订单为履历陈述，未提供回款证据；提问不预设订单已核真或已经到账，材料缺口作为待核问题。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "本人角色与岗位前提准确：技术方案由售前同事做，本人负责需求、报价、合同和回访；公司/个人资源混合、来源待核。岗位需早期公司独立拓展及研发协作，不要求算法训练，不能把创始人资源等同本人开发。",
+      "anchors": {
+        "0": "把售前技术方案或公司/创始人资源无依据归为本人独立产出，或增加算法训练硬门槛。",
+        "1": "已有提问前提尊重本人/售前分工及混合资源待核边界，岗位职责和例外与来源一致。",
+        "0.5": "核心职责/资源边界正确，少量非关键分工表述不够准确。"
+      },
+      "item_id": "T0139-D1-02",
+      "dimension": "D1",
+      "dimension_name": "内容正确性与依据",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "inputs/BD候选履历.pdf",
+          "locator": "第1页「主要项目」：技术方案由售前同事做；本人负责业务需求、报价、合同与回访；「资料边界及意愿」：公司和个人混合，来源需核",
+          "sha256": "f1baf4c124844b317f354cfe1671b74a923eb14656effcf1b514cec24150345f"
+        },
+        {
+          "source": "inputs/BD岗位要求.md",
+          "locator": "第2—3行：不要求已掌握算法训练；独立开发客户与渠道、主动推进既有资源、跟研发对齐交付",
+          "sha256": "59ef9d3f12f6c59a91f8243fe271128b3cbdf3756d729c32778530bf076847e9"
+        }
+      ],
+      "evidence_details": [
+        "BD面试提纲.docx：本人推进、线索来源、技术协作及自主工作题前提"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "BD面试提纲.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "本人角色与岗位前提准确：技术方案由售前同事做，本人负责需求、报价、合同和回访；公司/个人资源混合、来源待核。岗位需早期公司独立拓展及研发协作，不要求算法训练，不能把创始人资源等同本人开发。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "deduction_scope": "仅已有事实、数值、计算及证据解释错误；纯缺漏归D2。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "本人角色与岗位前提准确：技术方案由售前同事做，本人负责需求、报价、合同和回访；公司/个人资源混合、来源待核。岗位需早期公司独立拓展及研发协作，不要求算法训练，不能把创始人资源等同本人开发。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "实质提问覆盖线索来源、需求判断、本人推进、订单/回款证据、技术协作和早期公司自主工作六类主题，可跨题整合，不要求固定题数或增加全套招聘环节。",
+      "anchors": {
+        "0": "六类主题中仅0—2类有实质问题，主体覆盖不足。",
+        "1": "六类主题均有能够引出相应职业证据的实质问题。",
+        "0.5": "六类主题中3—5类有实质问题，仍有遗漏。"
+      },
+      "item_id": "T0139-D2-01",
+      "dimension": "D2",
+      "dimension_name": "内容覆盖与充分性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "围绕线索来源、需求判断、本人推进、订单/回款证据、技术协作和早期公司自主工作设计问题",
+          "sha256": "de469414f2f1c084ccab0d8d043e49fc359a58b279b91aaeeff87f0e068f7c6b"
+        }
+      ],
+      "evidence_details": [
+        "BD面试提纲.docx：全部主问题与追问；不能以目录标题计覆盖"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "BD面试提纲.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "实质提问覆盖线索来源、需求判断、本人推进、订单/回款证据、技术协作和早期公司自主工作六类主题，可跨题整合，不要求固定题数或增加全套招聘环节。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "deduction_scope": "仅必要内容/对象/字段覆盖不足；已有内容同一错误不重扣。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "实质提问覆盖线索来源、需求判断、本人推进、订单/回款证据、技术协作和早期公司自主工作六类主题，可跨题整合，不要求固定题数或增加全套招聘环节。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "对已有主问题给出可辨识的后续追问，不要求额外的评分量表或观察标准；只评追问是否提供，核证能力归D4。整类问题遗漏只归D2-01。",
+      "anchors": {
+        "0": "已有问题普遍没有追问，只有一级问题清单。",
+        "1": "已有主问题均有能够继续展开该主题的追问。",
+        "0.5": "部分主问题有追问，仍有主问题缺少后续追问。"
+      },
+      "item_id": "T0139-D2-02",
+      "dimension": "D2",
+      "dimension_name": "内容覆盖与充分性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "给追问与记录栏",
+          "sha256": "de469414f2f1c084ccab0d8d043e49fc359a58b279b91aaeeff87f0e068f7c6b"
+        }
+      ],
+      "evidence_details": [
+        "BD面试提纲.docx：逐题后续追问"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "BD面试提纲.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "对已有主问题给出可辨识的后续追问，不要求额外的评分量表或观察标准；只评追问是否提供，核证能力归D4。整类问题遗漏只归D2-01。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "deduction_scope": "仅必要内容/对象/字段覆盖不足；已有内容同一错误不重扣。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "对已有主问题给出可辨识的后续追问，不要求额外的评分量表或观察标准；只评追问是否提供，核证能力归D4。整类问题遗漏只归D2-01。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "每个已有主问题配有对应的空白记录栏或题号关联记录区，方便记录本次回答/证据；只评构件覆盖，填写了预断结论归D3-02，视觉清晰度归D5。",
+      "anchors": {
+        "0": "已有题目普遍没有可对应记录栏。",
+        "1": "每个已有主问题均有对应的空白记录栏/记录区。",
+        "0.5": "部分题有记录区，但还有题目缺记录位置。"
+      },
+      "item_id": "T0139-D2-03",
+      "dimension": "D2",
+      "dimension_name": "内容覆盖与充分性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "给追问与记录栏；本次可直接使用的提纲和记录栏",
+          "sha256": "de469414f2f1c084ccab0d8d043e49fc359a58b279b91aaeeff87f0e068f7c6b"
+        }
+      ],
+      "evidence_details": [
+        "BD面试提纲.docx：逐题记录栏或题号关联记录表"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "BD面试提纲.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "每个已有主问题配有对应的空白记录栏或题号关联记录区，方便记录本次回答/证据；只评构件覆盖，填写了预断结论归D3-02，视觉清晰度归D5。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "deduction_scope": "仅必要内容/对象/字段覆盖不足；已有内容同一错误不重扣。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "每个已有主问题配有对应的空白记录栏或题号关联记录区，方便记录本次回答/证据；只评构件覆盖，填写了预断结论归D3-02，视觉清晰度归D5。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "各环节有可执行的时间分配并严格合计30分钟；主问题与必答/可选追问安排适合本次时长。",
+      "anchors": {
+        "0": "时间分配总和不是30分钟，或没有任何可执行的环节时间安排。",
+        "1": "分配清楚且合计30分钟，主问题与可选追问能按此完成。",
+        "0.5": "可核分配总计30分钟，但局部环节重叠或必答题量与时间不协调，需轻微调整。"
+      },
+      "item_id": "T0139-D3-01",
+      "dimension": "D3",
+      "dimension_name": "当前要求适配与一致性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "严格30分钟；岗位、候选人与本轮时长均已确认",
+          "sha256": "de469414f2f1c084ccab0d8d043e49fc359a58b279b91aaeeff87f0e068f7c6b"
+        }
+      ],
+      "evidence_details": [
+        "BD面试提纲.docx：环节分钟数/时间区间、主问题与可选追问安排"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "BD面试提纲.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "各环节有可执行的时间分配并严格合计30分钟；主问题与必答/可选追问安排适合本次时长。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "deduction_scope": "仅当前显式范围/格式/授权限制或独立跨产物矛盾；不复扣同一D1事实。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "各环节有可执行的时间分配并严格合计30分钟；主问题与必答/可选追问安排适合本次时长。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "保持公司已决定面试H1801、尚未决定录用的状态，仅准备本次提纲与记录；不预填实际候选回答/录用结论，不以等待补充材料或全套招聘流程替代本次可用提纲。真实成交与本人资源归属的事实前提错误只归D1。",
+      "anchors": {
+        "0": "将未进行的面试写成已评价/已录用结论，或主体扩成其他招聘流程使本次提纲无法使用。",
+        "1": "对象与决策状态均为本次H1801待面试，记录留供现场填写，无预设录用或用其他流程替代。",
+        "0.5": "本次提纲可用，但局部出现预断评价/预填回答或无关招聘流程内容，需删改。"
+      },
+      "item_id": "T0139-D3-02",
+      "dimension": "D3",
+      "dimension_name": "当前要求适配与一致性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "公司已决定面试H1801但未决定录用；仅准备本次可直接使用的提纲和记录栏，不扩展为全套招聘流程；材料缺口作为面试追问",
+          "sha256": "de469414f2f1c084ccab0d8d043e49fc359a58b279b91aaeeff87f0e068f7c6b"
+        }
+      ],
+      "evidence_details": [
+        "BD面试提纲.docx：对象说明、记录栏、结尾与额外流程部分"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "BD面试提纲.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "保持公司已决定面试H1801、尚未决定录用的状态，仅准备本次提纲与记录；不预填实际候选回答/录用结论，不以等待补充材料或全套招聘流程替代本次可用提纲。真实成交与本人资源归属的事实前提错误只归D1。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "deduction_scope": "仅当前显式范围/格式/授权限制或独立跨产物矛盾；不复扣同一D1事实。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "保持公司已决定面试H1801、尚未决定录用的状态，仅准备本次提纲与记录；不预填实际候选回答/录用结论，不以等待补充材料或全套招聘流程替代本次可用提纲。真实成交与本人资源归属的事实前提错误只归D1。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "已有追问能从漏斗数字追到线索来源、需求判断、本人推进动作、与售前/研发协作及订单/回款可核证据，能区分资源获得与个人开发、自述与证明；不新增固定成交门槛或完整评分量表。遗漏归D2，事实错归D1，时间归D3。",
+      "anchors": {
+        "0": "已有追问停留于自我评价或抽象BD知识，无法辨别本人推进及商业证据。",
+        "1": "主要追问沿实际案例核实本人动作、分工、来源与业务证据，能帮助面试官辨别真实贡献及尚待核验内容。",
+        "0.5": "部分追问能核实本人动作/证据，但部分仍泛化，难区分资源来源或业务阶段。"
+      },
+      "item_id": "T0139-D4-01",
+      "dimension": "D4",
+      "dimension_name": "专业判断与业务可用性",
+      "weight": 1,
+      "basis": "derived_quality",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "线索来源、需求判断、本人推进、订单/回款证据、技术协作和早期公司自主工作；不要按创始人资源等同本人开发",
+          "sha256": "de469414f2f1c084ccab0d8d043e49fc359a58b279b91aaeeff87f0e068f7c6b"
+        },
+        {
+          "source": "inputs/BD候选履历.pdf",
+          "locator": "第1页「主要项目」「能力及工作方式」「资料边界及意愿」",
+          "sha256": "f1baf4c124844b317f354cfe1671b74a923eb14656effcf1b514cec24150345f"
+        }
+      ],
+      "evidence_details": [
+        "BD面试提纲.docx：已有追问链及现场需记录的具体证据方向"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "BD面试提纲.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "已有追问能从漏斗数字追到线索来源、需求判断、本人推进动作、与售前/研发协作及订单/回款可核证据，能区分资源获得与个人开发、自述与证明；不新增固定成交门槛或完整评分量表。遗漏归D2，事实错归D1，时间归D3。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "deduction_scope": "仅已覆盖内容中独立的判断、取舍及操作衔接缺陷；不借可用性重复扣其他维度。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "已有追问能从漏斗数字追到线索来源、需求判断、本人推进动作、与售前/研发协作及订单/回款可核证据，能区分资源获得与个人开发、自述与证明；不新增固定成交门槛或完整评分量表。遗漏归D2，事实错归D1，时间归D3。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "BD面试提纲.docx的实际页面能清楚区分问题、追问和空白记录区，字号、段落层级和分页便于现场连续阅读与记录，无影响关键内容的乱码、遮挡或裁切；文件存在、非零和可打开仅属TSR。",
+      "anchors": {
+        "0": "关键问题或记录位置被严重遮挡、乱码、裁切，现场难以阅读使用。",
+        "1": "实际渲染页面的问题层级、追问及记录区清楚，关键内容完整可读，现场定位方便。",
+        "0.5": "主要问题及记录区可辨认，局部换行、分页或层级需整理。"
+      },
+      "item_id": "T0139-D5-01",
+      "dimension": "D5",
+      "dimension_name": "表达与呈现质量",
+      "weight": 1,
+      "basis": "derived_quality",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "交付BD面试提纲.docx；本次可直接使用的提纲和记录栏",
+          "sha256": "de469414f2f1c084ccab0d8d043e49fc359a58b279b91aaeeff87f0e068f7c6b"
+        }
+      ],
+      "evidence_details": [
+        "BD面试提纲.docx：原生渲染后的各页，结合文字/表格结构核实；不能只看文件元数据或制作方自称"
+      ],
+      "evidence_modes": [
+        "visual",
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "BD面试提纲.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "BD面试提纲.docx的实际页面能清楚区分问题、追问和空白记录区，字号、段落层级和分页便于现场连续阅读与记录，无影响关键内容的乱码、遮挡或裁切；文件存在、非零和可打开仅属TSR。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "deduction_scope": "仅对应产物表达、排版及实际视觉可读性；不复扣事实或内容缺项。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "BD面试提纲.docx的实际页面能清楚区分问题、追问和空白记录区，字号、段落层级和分页便于现场连续阅读与记录，无影响关键内容的乱码、遮挡或裁切；文件存在、非零和可打开仅属TSR。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    }
+  ],
+  "deduplication_policy": {
+    "primary_attribution": {
+      "D1": "已经表达的事实、计算、规则解释、证据归属或未知状态是否正确",
+      "D2": "必需内容、记录、字段或产物的覆盖",
+      "D3": "独立授权/保密/不得改源/格式/对象范围约束；不是D1错误的重复描述",
+      "D4": "独立的业务推理、交接和实际操作可用性",
+      "D5": "实际视觉、语言和可读性"
+    },
+    "root_cause_once": "同一已具体识别的根因只在一个主条目扣分，其他条目记录关联但不再扣。不能把D1错值派生的图文不一致再扣D3、或把D2缺项再扣D4。存在独立新缺陷才可另扣。",
+    "content_omission": "在实际产物存在且有可评内容时，单纯未覆盖归D2；D1不以同一遗漏扣第二次。缺必需产物时依原合同，所有实际依赖该产物的条目为0；不因去重给空产物其他维度满分。",
+    "comparison": "一个版本值违背输入的，归D1并检查所有实际存在版本；D3比较仅针对不能由单一源事实直接判错的独立对象/承诺冲突。",
+    "technical_missingness": "评估器解析/渲染/公式缓存设施故障为UNSCORED；不记0，不删权重。"
+  },
+  "scoring_status": "NOT_SCORED",
+  "input_root": "D:\\skillloop\\output\\20261024_eval33_replacement\\release\\evaluation_visible",
+  "human_review": {
+    "status": "PENDING",
+    "reviewer": null,
+    "date": null
+  },
+  "review": {
+    "status": "AI_SELF_REVIEWED",
+    "checks": {
+      "current_task_bound": true,
+      "all_five_dimensions": true,
+      "no_added_requirements": true,
+      "delivery_quality_separated": true,
+      "anchors_distinct": true,
+      "source_evidence_locatable": true,
+      "one_defect_one_primary": true
+    },
+    "findings_fixed": [
+      "逐项核对H1801第1页后，保留80/12/3/2漏斗为自述，年度订单与回款证据分开，售前方案不归本人。",
+      "逐项对照30分钟一次性委托，六主题、追问与空白记录覆盖，未加T0079才要求的逐题观察依据或评分量表。",
+      "将真实成交/资源归属的错误前提仅归D1，当前面试/未决定录用状态及30分钟仅归D3，已有追问核证效用归D4。"
+    ],
+    "remaining_unknowns": [
+      "尚未进行人工审核/评分器可靠性校准"
+    ],
+    "task_id": "T0139",
+    "current_task_sha256": "bb2a0ce3d661c0a11bebef9dcb4a617a36c3b92c6cea3bd5b5f7ba3fbb90527b",
+    "authored_sha256": "659cacf11f0718cfe95bbb0e01d9b7faf823ffa3fcb543b02dc233b608b161f2",
+    "tsr_checks_reviewed": [
+      "DELIVERED_AS_NAMED_REGULAR_FILE",
+      "BYTE_SIZE_GT_ZERO",
+      "OPENS_IN_REAL_DECLARED_FORMAT"
+    ],
+    "rubric_items": 9
+  },
+  "source_revision": "adopted_targeted17",
+  "source_task_sha256": "bb2a0ce3d661c0a11bebef9dcb4a617a36c3b92c6cea3bd5b5f7ba3fbb90527b",
+  "source_only_authored_path": "D:\\skillloop\\output\\20261025_modified28_evaluation_standard\\authored\\T0139.json",
+  "author": "CODEx_SOURCE_ONLY_AI_REVISION_20261025",
+  "prior_rubric_source": "D:\\skillloop\\output\\20261017_eval250_quality_review\\release\\rubrics.jsonl"
+}

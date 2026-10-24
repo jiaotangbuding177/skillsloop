@@ -1,0 +1,388 @@
+{
+  "schema_version": "modified28-independent-source-review-v1",
+  "review_date": "2026-10-25",
+  "reviewer": "CODEX_INDEPENDENT_SOURCE_ONLY_AGENT",
+  "status": "ALL28_SOURCE_ONLY_INDEPENDENT_REVIEW_COMPLETE",
+  "initial_review_status": "SUPERSEDED_BY_FINAL_REVIEW; INITIAL_FINDINGS_AND_HASHES_RETAINED_AS_HISTORY",
+  "scope": "Current prompts, all task inputs, inherited 1.1.0 rubrics, authored standards, release builder and TSR design; no Actor outputs or task scores read",
+  "human_review_completed": false,
+  "reliability_calibration_completed": false,
+  "current_tasks_source": "D:/skillloop/output/20261024_experiment_adopt35/current_tasks250.json",
+  "current_tasks_sha256": "c7ec87f93313da61023729b4d1b3c1b79556937feb458a938512a9ef06731bdc",
+  "source_input_verification": {
+    "tasks": 250,
+    "input_bindings": 689,
+    "exists_hash_and_size_pass": 689,
+    "modified_task_input_bindings": 119,
+    "failures": 0,
+    "verification_type": "Read-only actual filesystem SHA256 and byte-size comparison against current task registry"
+  },
+  "initial_shared_findings": [
+    {
+      "id": "GLOBAL-DEPENDENCIES",
+      "status": "REVISION_REQUESTED",
+      "finding": "Initial normalization dropped authored per-item artifact dependency rules. Multiple evidence files must not imply all-file AND; explicit cross-file comparison requires its named sides only for that comparison scope.",
+      "requested_resolution": "Publish per-item content scope, explicit comparison scope and named comparison_requires_deliverables; retain independent present-content scoring and fixed missing-content weights.",
+      "resolution": "Builder now adds a common authored-content dependency rule; explicit per-item comparison binding still to be verified in final release."
+    },
+    {
+      "id": "GLOBAL-OLD-METADATA",
+      "status": "FIX_OBSERVED_PENDING_FINAL_RECHECK",
+      "finding": "Initial deepcopy retained old author, author notes, review shard and review record pointers for newly authored standards.",
+      "requested_resolution": "Remove stale current-author/review fields or explicitly preserve them as historical provenance; bind new review records and current task/input SHA256.",
+      "resolution": "Builder now removes the stale author/review fields and adds new authorship and prior-source fields. Final assembled records remain to be reviewed."
+    },
+    {
+      "id": "GLOBAL-SOURCE-BINDING",
+      "status": "REVISION_REQUESTED",
+      "finding": "Source locators survive normalization but current source SHA256 and prompt SHA256 are not attached to individual references. Old resolved source spans must not be silently reused after prompt changes.",
+      "requested_resolution": "Bind source references to the verified current input SHA256 or current prompt SHA256; use truthful locators without inventing resolved spans.",
+      "resolution": "Sent to primary author; final release pending."
+    },
+    {
+      "id": "GLOBAL-D2-ANCHORS",
+      "status": "REVISION_REQUESTED",
+      "finding": "Several inherited D2 zero anchors include core conclusion errors and explicit restriction violations, overlapping D1 and D3 despite the single-defect policy.",
+      "requested_resolution": "Make D2 anchors evaluate actual coverage and omission only, with separate error ownership and no repeated deduction for the same fact, limit or business judgment.",
+      "resolution": "Sent to primary author; authored files pending recheck."
+    },
+    {
+      "id": "GLOBAL-TSR-UNSCORED",
+      "status": "CLARIFICATION_REQUESTED",
+      "finding": "TSR design correctly limits each artifact to actual delivery, positive bytes and normal opening. The fixed-250 aggregate with UNSCORED tasks needs an explicit null or bounded-result rule to prevent treating unknown as zero or removing it from the denominator.",
+      "requested_resolution": "State complete-coverage TSR only when all 250 tasks are decidable; otherwise retain fixed denominator, known counts, coverage and bounds with official TSR null.",
+      "resolution": "Sent to primary author."
+    }
+  ],
+  "initial_tsr_design_review": {
+    "path": "D:/skillloop/output/20261025_modified28_evaluation_standard/TSR设计.md",
+    "bound_file_sha256": "c2256093432b1386e972fe169f5fb93d236905affad16e68d0c33a16b52b0aa6",
+    "status": "THREE_CHECK_BOUNDARY_ACCEPTED_AGGREGATION_CLARIFICATION_PENDING",
+    "findings": [
+      "Legitimate blank, title-only, placeholder and unrelated but normally opening nonzero files pass TSR; their semantic quality is Q only.",
+      "Page count, text length, candidate coverage, numbers, style, editing and functional behavior are excluded from TSR.",
+      "Confirmed corrupt real format fails; missing evaluator dependencies and unsupported-reader behavior remain UNSCORED.",
+      "No old TSR results or failures are rewritten; this file states a design rather than executed scoring."
+    ]
+  },
+  "initial_review_tasks": [
+    {
+      "task_id": "T0010",
+      "status": "REVISIONS_REQUESTED",
+      "bound_file": "D:/skillloop/output/20261025_modified28_evaluation_standard/authored/T0010.json",
+      "bound_file_sha256": "28dbfb191208cae0bfb36cc89d5c7cbb84cd0154edfa328bef0d23d0bb5daa17",
+      "findings": [
+        {"id": "T0010-F1", "finding": "D3-01 includes assessment-date correctness already owned by D1-01; D2-04 includes grant-budget-as-eligibility reasoning overlapping D1.", "resolution": "Keep date/year/certificate/qualification fact errors in D1; D3 owns actual source-scope or simulation-status violations, and D2 owns only missing materials/coverage."},
+        {"id": "T0010-F2", "finding": "D3-02 compares qualification state across two artifacts but lacks an explicit comparison dependency and exception for the identical fact error already charged in D1.", "resolution": "Require both named files only for independent cross-file contradiction, with no second penalty for the same fact error."},
+        {"id": "T0010-F3", "finding": "D5-02 cites grant_fit.xlsx while judging grant_actions.docx.", "resolution": "Bind its prompt locator to grant_actions.docx."},
+        {"id": "T0010-F4", "finding": "D1-01 computes company age and qualification from company_eligibility.json but its basis lists programs.csv and prompt only.", "resolution": "Add the company source SHA and locatable founded/as_of/known qualification facts."},
+        {"id": "T0010-F5", "finding": "Several D2 zero/half anchors also score conclusion correctness or business sequencing.", "resolution": "Apply GLOBAL-D2-ANCHORS and reserve existing-content sequencing judgment for D4."}
+      ],
+      "accepted_checks": ["P1 satisfies provided conditions; P2 lacks certification; P3 exceeds three years as of 2026-10-13", "P4 funding history and P5 manufacturing line remain unknown rather than invented", "Both deliverables and five quality dimensions are bound", "No quality requirement enters TSR"]
+    },
+    {
+      "task_id": "T0031",
+      "status": "REVISIONS_REQUESTED",
+      "bound_file": "D:/skillloop/output/20261025_modified28_evaluation_standard/authored/T0031.json",
+      "bound_file_sha256": "30bcbb7373974c3df1577686af0a2e9a8d3d0d0c6b471150b8eb0b1d5102c219",
+      "findings": [
+        {"id": "T0031-F1", "finding": "D2-02 four-theme grouping overlaps D3-01's current four-theme editing scope.", "resolution": "D2 alone owns missing themes/classification coverage; D3 owns independent investment-advice or scope violations without repeated grouping deduction."},
+        {"id": "T0031-F2", "finding": "D1-02 enumerates several selected-message facts but does not clearly include other selected technical claims such as E7's 45-minute cap/noise caveat.", "resolution": "Extend scope to other actually selected message facts without mandating selection of every event; preserve current correction-chain ownership."},
+        {"id": "T0031-F3", "finding": "D5-02 cites ai_weekly.docx while judging event_evidence.xlsx.", "resolution": "Bind its prompt locator to event_evidence.xlsx."},
+        {"id": "T0031-F4", "finding": "D2-04 half anchor judges action specificity also present in D4; several D2 zero anchors include incorrect conclusions/restrictions.", "resolution": "D2 owns three-action presence, D4 owns independent inference/action usefulness; apply GLOBAL-D2-ANCHORS."}
+      ],
+      "accepted_checks": ["M11 semantically corrects E1 despite the E9 metadata", "M01/M02/M11 and M03/M08 event chains are preserved", "Window, four themes, three follow-ups, fixed-snapshot source and no fabricated external checking are represented", "No quality requirement enters TSR"]
+    },
+    {
+      "task_id": "T0038",
+      "status": "REVISIONS_REQUESTED",
+      "bound_file": "D:/skillloop/output/20261025_modified28_evaluation_standard/authored/T0038.json",
+      "bound_file_sha256": "d93672bff74f694cc120cfbd6d72ed0ede166668f203902fdf38a8678ea713c2",
+      "findings": [
+        {"id": "T0038-F1", "finding": "D3-02 mixes bilingual agreement, cross-file state comparison and permitted disclosure scope. Only the cross-file comparison needs both artifacts.", "resolution": "Declare comparison content scope and both file dependencies; score independent bilingual/disclosure evidence from the present applicable artifact, retaining the no-second-deduction exception for D1 and D3-01."},
+        {"id": "T0038-F2", "finding": "Current author confirmation must receive source SHA/locator binding after normalization; references to an older prompt remain as source fragments and should not imply old prompt identity.", "resolution": "Bind all prompt references to current prompt SHA and the actual author-confirmation input to its current SHA; preserve older wording only as a matching fragment or historical source."}
+      ],
+      "accepted_checks": ["All R1-R5 require Chinese and English replies", "48 convenience samples, no power analysis and 6/8-hour conditions remain accurate", "No experiment, manuscript revision, coauthor confirmation, line numbers or repository URL is fabricated", "Missing line numbers/URLs remain pre-submission todo rather than demanded completed results", "No new experiment is required", "No quality requirement enters TSR"]
+    },
+    {
+      "task_id": "T0161",
+      "status": "REVISIONS_REQUESTED",
+      "bound_file": "D:/skillloop/output/20261025_modified28_evaluation_standard/authored/T0161.json",
+      "bound_file_sha256": "bde5dbebe58b9528e098829b607bdee81ffb5d4a6bd3574472b2929ad1965790",
+      "findings": [
+        {"id": "T0161-F1", "finding": "D1-01's generic selected-message content accuracy overlaps D1-02's presale/pilot/writeback/OCR status facts.", "resolution": "Assign those named state errors only to D1-02 and reserve D1-01 for other presented facts/source identity, with explicit cross-reference instead of repeated deduction."},
+        {"id": "T0161-F2", "finding": "D2-03 evaluates business relationship and word count while D4 evaluates the same business relationship; D2-04's action relevance/half anchor overlaps D4 action usefulness.", "resolution": "Separate required fields/action count, explicit 60-100-word restriction, and independent business reasoning, with one primary owner for each defect."},
+        {"id": "T0161-F3", "finding": "D2-01/D2-02 generic anchors can give half credit without distinguishing a missing fifth independent event from a minor omitted field; other D2 zero anchors still include correctness/restriction errors.", "resolution": "Use task-specific count/window/field anchors and apply the single-defect rule where one outside-window story also causes insufficient valid-event count."}
+      ],
+      "accepted_checks": ["Five or six valid independent events both satisfy the supplied 5-8 range", "M01/M02 is one event; anonymous rumor is follow-up only", "Entertainment and October 12 news do not fill the official count", "60-100 words, topics, IDs, business relationship and two actions remain quality requirements", "No real-time verification or prior approval is fabricated", "No quality requirement enters TSR"]
+    }
+  ],
+  "final_review": {
+    "status": "PASS_SOURCE_DESIGN_REVIEW_NOT_HUMAN_CALIBRATION",
+    "reviewed_task_count": 28,
+    "reviewed_item_count": 338,
+    "unresolved_findings": [],
+    "source_inputs": "All current prompts and textual source files were compared; 82 HR PDFs with 121 text-bearing pages were actually loaded, authored PDF page anchors matched, and candidate-role boundary cases were independently checked. This is source review, not visual assessment of Actor artifacts.",
+    "structural_verification": {
+      "current_tasks": 250,
+      "rubric_records": 250,
+      "modified_task_rubrics": 28,
+      "modified_items": 338,
+      "self_reviews_bound_to_authored_sha256": 28,
+      "inherited_raw_json_lines_unchanged": 222,
+      "source_references_with_current_sha256": 524,
+      "explicit_comparison_items_with_named_sides": 24,
+      "tsr_contracts": 250,
+      "required_artifact_bindings": 436,
+      "current_input_exists_hash_and_size_pass": 689,
+      "modified_task_json_objects_equal_registry": 28,
+      "registry_task_digest_matches_actual_file_bytes": 8,
+      "registry_task_digest_matches_sorted_json_serialization": 20,
+      "task_digest_explanation": "The existing registry uses file-byte SHA256 for eight frozen tasks and SHA256(json.dumps(task, ensure_ascii=False, sort_keys=True)) without a newline for twenty eval33-release tasks. All twenty-eight objects equal the actual task.json; these two pre-existing digest conventions are preserved and are not described as twenty-eight equal file-byte hashes.",
+      "checks": [
+        "All modified records bind the current task, prompt, inputs and required deliverables.",
+        "All five dimensions are present with weights 0.30/0.20/0.20/0.20/0.10; item IDs are unique and weights remain one.",
+        "All items have distinct 0/0.5/1 anchors, no scores, actual deliverable bindings and current input or prompt source SHA256.",
+        "D5 requires visual evidence; unsupported fabricated quote/span metadata is absent from the new locator-design schema.",
+        "Each explicit comparison has an authored comparison scope and named required sides; other items preserve independent present content.",
+        "The generated task Markdown contains the same item IDs and criteria as the final machine records.",
+        "Old author/reviewer notes and pointers were removed from new standards; old rubric provenance is named separately.",
+        "All 250 TSR contracts contain exactly delivery, positive bytes and real-format opening checks, no content quality checks and null scores."
+      ],
+      "failures": []
+    },
+    "bound_release_files": {
+      "TSR设计.md": "39b5aecfaea6923990def8fb1cbc834b91fede970571ea3dbe12eba646d5ee8c",
+      "rubrics250.jsonl": "1873dddaf9e84584549d084c9fd802321c8be60401747586ff3f69da48abf2f1",
+      "tsr_contracts250.jsonl": "b8687ab54bbb361a24279cb41c16fed02dd47a9a5b40a9928abc79796e582b26",
+      "scoring_policy.json": "e5952df279b3a8c3cb885e4705e47a2321ea539acc640b460c2e9894f076749f"
+    },
+    "shared_resolutions": [
+      {"finding_id": "GLOBAL-DEPENDENCIES", "status": "RESOLVED_AND_VERIFIED", "resolution": "Final records preserve authored content scope and canonical dependency metadata; all twenty-four explicit comparison items name their required sides. Missing comparison evidence zeros that comparison only, without zeroing independent present content."},
+      {"finding_id": "GLOBAL-OLD-METADATA", "status": "RESOLVED_AND_VERIFIED", "resolution": "New records remove old author/reviewer notes, review shard claims and review record pointers. Current authorship and retrospective status are separate from prior rubric provenance."},
+      {"finding_id": "GLOBAL-SOURCE-BINDING", "status": "RESOLVED_AND_VERIFIED", "resolution": "The new v2-locator-design schema explicitly stores source locators with current prompt/input SHA256. It does not fabricate literal quotes or resolved spans; the other 222 v1 records retain their original bytes."},
+      {"finding_id": "GLOBAL-D2-ANCHORS", "status": "RESOLVED_AND_VERIFIED", "resolution": "New D2 anchors and deduction scopes evaluate coverage and omission. Existing fact, scope, independent reasoning and visual defects have separate primary owners; recovered tool/process costs are not Q penalties."},
+      {"finding_id": "GLOBAL-TSR-UNSCORED", "status": "RESOLVED_AND_VERIFIED", "resolution": "TSR design now explicitly retains a null complete TSR when any task is UNSCORED and permits fixed-denominator lower and upper bounds. Unknown is neither silently zeroed nor removed."}
+    ],
+    "post_review_updates": [
+      {
+        "date": "2026-10-25",
+        "change": "The primary author added explicit ICS, EML and ZIP opening-contract rows after the initial final review.",
+        "review_observation": "Re-read the complete updated TSR design. ICS requires only normal loading of VCALENDAR structure, EML normal loading of mail structure, and ZIP normal opening/access to archive structure. Event counts/dates/time zones, mail recipient/content/sending status, archive business completeness and repository/code function remain outside TSR. No quality condition entered the three-check contract.",
+        "binding_correction": "Replaced the stale final TSR design binding 334a52e95faaa86cd6853dedaf6fea0128f42467752eb4494cd4c8ba595ea4f8 with actual SHA256 39b5aecfaea6923990def8fb1cbc834b91fede970571ea3dbe12eba646d5ee8c. Historical initial-review bindings remain historical. Authored standards and final rubric records were not changed.",
+        "status": "ACCEPTED_AND_REBOUND"
+      }
+    ],
+    "limitations": [
+      "This is independent AI source/design review, not actual human approval or demonstrated Judge reliability.",
+      "No Actor output, old score or method identity was used as quality evidence; no task execution or TSR/Q scoring was performed.",
+      "The new standards were written after existing runs and are not pre-run preregistration."
+    ]
+  },
+  "tasks": [
+    {
+      "task_id": "T0010", "status": "PASS_AFTER_REVIEW_FIXES", "items": 11,
+      "bound_file_sha256": "6d3ead3d6d0ceb81263ed200fcfa07ef36063a744dd9b0c327c6c51446a1e9c4",
+      "bound_rubric_sha256": "6536177fb4368b55428af5c42802ccdb3d6aa1a8da8a9e9f21d3d40d6f8dfa2a",
+      "findings": [],
+      "resolutions": ["T0010-F1/F2/F5: date/qualification facts remain D1; materials coverage is D2; independent cross-file state contradiction alone is D3, with both file dependencies explicit.", "T0010-F3/F4: grant_actions.docx visual basis and company eligibility/date source binding are corrected."],
+      "observations": ["All five plans are covered; P1 meets supplied conditions, P2 lacks certification and P3 exceeds three years at 2026-10-13.", "P4 funding history and P5 production-line status remain unknown, with no invented eligibility or real-policy claim."]
+    },
+    {
+      "task_id": "T0012", "status": "PASS_SOURCE_REVIEW", "items": 11,
+      "bound_file_sha256": "da97b3bbf5be9a5916b54b2a5c837704f1801f0438114db8baf3508e8312adfc",
+      "bound_rubric_sha256": "af274ef7a9cad9b561bca816c7637a7249ac231bde1038e0eae2ff75e35ffd33",
+      "findings": [], "resolutions": ["Eight-candidate scope replaces the inherited four-candidate scope; no unresolved independent finding."],
+      "observations": ["H201-H208 have actual PDF source anchors; H202 overlapping dates must not inflate experience.", "MCP/A2A remain a bonus, office and production-backend conditions retain their original scope, and ranking is not forced to one answer."]
+    },
+    {
+      "task_id": "T0031", "status": "PASS_AFTER_REVIEW_FIXES", "items": 11,
+      "bound_file_sha256": "6c365b9e7d10c09f8b0634b099674877648d6a716acd4130cfffb6b078a22031",
+      "bound_rubric_sha256": "925ccc55f597a2b4c8ab6189b78f1b6fd624e11920ea1320e9f8d96a7dc2f924",
+      "findings": [],
+      "resolutions": ["T0031-F1/F4: four-theme coverage and three-action presence remain D2; investment-advice scope remains D3; independent action reasoning remains D4.", "T0031-F2/F3: D1 includes all other actually selected message facts, including the 45-minute/noise caveat; event_evidence.xlsx visual basis is corrected."],
+      "observations": ["M11 semantically corrects E1 despite its E9 tag; E1 and E2 duplicate chains retain IDs/dates.", "The October 5-11 window, four themes, three follow-ups and fixed simulated source are preserved without requiring every event to be selected."]
+    },
+    {
+      "task_id": "T0038", "status": "PASS_AFTER_REVIEW_FIXES", "items": 11,
+      "bound_file_sha256": "814d8ec0fbcd8f64713ffb838a5be7673c40532f38792ea264a5c57919904f75",
+      "bound_rubric_sha256": "c3598f838624f2cae21818b3f2f062d3d589c8ecab98a9881ad155cdc64e6637",
+      "findings": [],
+      "resolutions": ["T0038-F1: cross-file state comparison, disclosure scope and bilingual consistency now have separate authored items and appropriate dependencies.", "T0038-F2: current author-confirmation and prompt source SHA256 are attached under the locator-design schema."],
+      "observations": ["R1-R5 require Chinese/English replies using 48 convenience samples, 6/8-hour classes and task-minute units correctly.", "No new experiment, completed manuscript change, coauthor approval, line number or public URL is invented; missing submission details remain todo."]
+    },
+    {
+      "task_id": "T0047", "status": "PASS_SOURCE_REVIEW", "items": 14,
+      "bound_file_sha256": "d9b3b9f25923a1e719a9ca8c6f2842b779042b43a60b4735b901fd087cc9ac1f",
+      "bound_rubric_sha256": "5014d9a73314aa3f2e318b70628aea9b16eebbf4e495f1a3561911b8dd1fd8bf",
+      "findings": [], "resolutions": ["No unresolved independent finding."],
+      "observations": ["Inputs 2,910,000 plus outputs 880,000 equal 3,790,000 tokens; model fee is RMB 1,209.40, image fee RMB 26.64 and weighted time 6.3 seconds.", "18 open/17 active/6 new accounts, 27 support cases and two pending export regressions retain distinct meanings; six slides and about five minutes remain Q."]
+    },
+    {
+      "task_id": "T0056", "status": "PASS_SOURCE_REVIEW", "items": 11,
+      "bound_file_sha256": "6b4f7ed0c021214ec81ce72078dbece911a7289d6f65762811b9dd2e3e3194a7",
+      "bound_rubric_sha256": "dc52f205ac67216e1669f5b1e61859e53a135c8a64c3d49c1bcddf013acaf4fc",
+      "findings": [], "resolutions": ["Eight-candidate scope and each actual source PDF are bound; no unresolved independent finding."],
+      "observations": ["H701-H708 are assessed against device product work from requirements through launch materials.", "Class III experience stays preferred and regulatory approval is not a personal guarantee; cosmetics operations do not automatically substitute for device evidence."]
+    },
+    {
+      "task_id": "T0073", "status": "PASS_SOURCE_REVIEW", "items": 14,
+      "bound_file_sha256": "c0606a2200bc5b61b60036a2370fb3c3b5e1c275a7a2fa13cea8d9518aa966f0",
+      "bound_rubric_sha256": "cc84c27966caa41e2d792b6109d710ce193e83784f8981c2320523567f4361e6",
+      "findings": [], "resolutions": ["Approved presentation instructions are included without adding a chart or separate cover requirement."],
+      "observations": ["At most two pages, no separate cover, approved 16:9 blue/white style and about three-minute narration match the new input.", "KYC remains missing two proofs, account opening and payment terms remain incomplete, October 3/10/12/20 actions remain plans, and personal identities stay hidden."]
+    },
+    {
+      "task_id": "T0074", "status": "PASS_SOURCE_REVIEW", "items": 11,
+      "bound_file_sha256": "82b4a73ded1d476994184380cc337c2c5dbc3af59c40df635abf5bda6b90a07d",
+      "bound_rubric_sha256": "77a543615c62574a40dbbb7119219719b32f0d5c5d1705deb694d47e0118511f",
+      "findings": [], "resolutions": ["The ambiguous master's-or-bachelor's experience connection explicitly permits explained reasonable readings rather than inventing a unique threshold."],
+      "observations": ["H601-H608 are covered with actual PDF anchors; strain construction and personal experimental work remain central.", "A 50-liter pilot is not made a hard assistant-role requirement, and candidate-reported outcomes do not become independently replicated facts."]
+    },
+    {
+      "task_id": "T0079", "status": "PASS_SOURCE_REVIEW", "items": 10,
+      "bound_file_sha256": "25fdd593441e7b8cd655c84b0161d3b5d196995f9214b390655ea46fd0b3172d",
+      "bound_rubric_sha256": "bd9760f83b4b50012f317b236f6e9d6ce5d952a5607acec601e858d5dccffd47",
+      "findings": [], "resolutions": ["The single scheduled interview stays bounded to an outline and blank records; no complete recruiting process or prefilled score is required."],
+      "observations": ["Seven explicit topics, follow-ups, observation basis, record areas and exactly 45-minute allocation are represented.", "Actual PDF confirms external-vendor ERP implementation with the candidate defining interfaces/acceptance; inventory improvement remains a claim to verify."]
+    },
+    {
+      "task_id": "T0084", "status": "PASS_SOURCE_REVIEW", "items": 11,
+      "bound_file_sha256": "6d3ecfd8e05b8f071e87093c5c0af79fec10c78d21ae2b4a9edecef28cc5bf4d",
+      "bound_rubric_sha256": "4a5e88f4854b69a18009d4296b8085ebe684c8366e380583168bfe86b210dbe4",
+      "findings": [], "resolutions": ["Generic appended wording does not create a new narration deliverable; only PPTX and PDF remain required."],
+      "observations": ["RMB 30 million allocation yields 30/20/30/15/5 percent; all three dated measurable milestones remain future targets.", "One-page 16:9 and all six brand fields are preserved; valuation, equity sale and unspecified round labels are not invented."]
+    },
+    {
+      "task_id": "T0098", "status": "PASS_SOURCE_REVIEW", "items": 11,
+      "bound_file_sha256": "9ab68270ad66afb37ac04e88c253fd35532fdba2ac55b220f1f1ac0f2d237ab1",
+      "bound_rubric_sha256": "ec99f0c52615db53a6a0d6b7f92e9ded5799dc33e087781745eccdf2224ca607",
+      "findings": [], "resolutions": ["All eight candidates and explicit excluded private attributes are bound; no unresolved independent finding."],
+      "observations": ["Vue or React, personal cross-platform contribution and WebSocket experience retain their actual status.", "Node stays an engineering bonus rather than backend replacement; photos, age and marriage do not become evaluation evidence."]
+    },
+    {
+      "task_id": "T0110", "status": "PASS_SOURCE_REVIEW", "items": 11,
+      "bound_file_sha256": "3a31b1d960b6b4ea92ffff66de2f09ea99a9e935d3796470bd417f51b26736dd",
+      "bound_rubric_sha256": "fe10e5a3c11190a0cdf2e75235ecd9dd73a56eb9460d054fe3c07c91fe47ef34",
+      "findings": [], "resolutions": ["H1001-H1008 replace the old four-person coverage without a predetermined ranking."],
+      "observations": ["Lead-to-cooperation evidence distinguishes founder-provided resources from personal development and claimed amounts from evidence.", "Algorithm training is not a hard condition; appearance, age and private connections are excluded as required."]
+    },
+    {
+      "task_id": "T0136", "status": "PASS_SOURCE_REVIEW", "items": 11,
+      "bound_file_sha256": "f696c84ee9b9dc6becf87fe4002a32ce0e46c9a235a51b7c9613869feff664ae",
+      "bound_rubric_sha256": "aec0dbbfe8b8032767e67fb7ae64926db751cd6c468b085eb99dd271825cb865",
+      "findings": [], "resolutions": ["The reused evaluated task is still an eight-person task relative to the old rubric; all H801-H808 are now represented."],
+      "observations": ["Device clinical project management, CRO/center work and personal SIV/monitoring/database-lock scope stay explicit.", "Drug-project experience may transfer with differences stated; ethics/regulatory approval is not guaranteed by an individual."]
+    },
+    {
+      "task_id": "T0139", "status": "PASS_SOURCE_REVIEW", "items": 9,
+      "bound_file_sha256": "659cacf11f0718cfe95bbb0e01d9b7faf823ffa3fcb543b02dc233b608b161f2",
+      "bound_rubric_sha256": "44bbab35c525dd3b373457d2237417cf6c14077bba9d3e7e390412e848032e1f",
+      "findings": [], "resolutions": ["No unrequested observation scorecard or completed recruiting process is introduced."],
+      "observations": ["Six required topics, follow-ups and blank records fit an exactly 30-minute allocation.", "Actual PDF confirms 80 leads/12 interviews/3 pilots/2 claimed annual orders, no payment evidence, presales technical ownership and mixed company/personal resource sources."]
+    },
+    {
+      "task_id": "T0140", "status": "PASS_SOURCE_REVIEW", "items": 11,
+      "bound_file_sha256": "2a990ad12d12759374ae1f5ef54f11c44488461eaf355dac830eddc6cf333aa1",
+      "bound_rubric_sha256": "165abeb75f126d193653e300c974b8e5cc1ab6be05295ff5a85de5f96f58fb32",
+      "findings": [], "resolutions": ["Eight-candidate coverage and actual role source are retained; no unresolved independent finding."],
+      "observations": ["At least 5-liter hands-on fermentation and DO/pH/temperature/feed evidence retain hard-condition status; scale-up and transfer evidence are assessed appropriately.", "Company cell-bank ownership and controlled process transfer are preserved; GRAS/IND communication does not become a registration guarantee."]
+    },
+    {
+      "task_id": "T0161", "status": "PASS_AFTER_REVIEW_FIXES", "items": 10,
+      "bound_file_sha256": "a8a1f354cad75913ab68b31686f1325fa984ac0fcef91adb64d503a4397bab39",
+      "bound_rubric_sha256": "f711cf5140697e2cb95c91fa5c0fe977e2d6172ce33bf2e2374b676ec8b203b0",
+      "findings": [],
+      "resolutions": ["T0161-F1: D1-01 excludes the named presale/pilot/writeback/OCR states owned by D1-02.", "T0161-F2/F3: D2 covers formal-event count/window and required fields/actions; independent business reasoning remains D4, with explicit same-defect non-repetition and 5-or-6 valid-event acceptance."],
+      "observations": ["M01/M02 is one event; anonymous rumor is follow-up only and entertainment/October 12 news cannot fill the official count.", "60-100 words, source IDs, business relationship and two actions remain Q requirements; unverified plans do not become facts."]
+    },
+    {
+      "task_id": "T0171", "status": "PASS_SOURCE_REVIEW", "items": 11,
+      "bound_file_sha256": "f03cfd8d31e92cd7ecdf53541c741eedd346c5cd7eab3fc7786442e905786342",
+      "bound_rubric_sha256": "269dfe25a5b53099bd31af3831aaa13d0ff5840b7b88b15785ffdbdbeefb2854",
+      "findings": [], "resolutions": ["All H901-H908 sources and the scenario-specific degree/procurement checks are retained."],
+      "observations": ["Medical-service, hospital or distributor procurement does not automatically become device R&D/manufacturing procurement.", "The role has no immediate subordinates and needs personal supplier, pricing, payment and warehouse execution; a manager title alone is insufficient."]
+    },
+    {
+      "task_id": "T0178", "status": "PASS_SOURCE_REVIEW", "items": 14,
+      "bound_file_sha256": "d91cfc36ff8ed09bd1f969cbfb055efaaa116a4d4c98885e6fe40f4cd28cd962",
+      "bound_rubric_sha256": "fe8131faf756fe3587e913ec150a2596dc2f17d03e905e0074a1f707ca5cac6b",
+      "findings": [], "resolutions": ["No unprovided price, universal email gateway or zero-leak guarantee is introduced."],
+      "observations": ["Default/basic, configured enhanced checks and high-sensitivity manual approval retain distinct scopes and version recheck behavior.", "Both business examples, four roles, 30-day logs, owner backups and downloaded external-email limitations remain in Q; seven slides/about five minutes are preserved."]
+    },
+    {
+      "task_id": "T0193", "status": "PASS_SOURCE_REVIEW", "items": 14,
+      "bound_file_sha256": "3ac6a5c67d10c0ba049fbe46496b9a8dd73cda92319ae34872cb8bfbd760db30",
+      "bound_rubric_sha256": "f6c96a21ed475f7422df6c196685a40708f9ff543ac21a10025d94b82a717225",
+      "findings": [], "resolutions": ["Arithmetic and maturity/state boundaries match the source; no unresolved independent finding."],
+      "observations": ["18/40/10 total 68 units without implying delivery; inventory 560, obsolete 140 and 23 discrepancies preserve units and a 25-percent amount ratio.", "Existing ERP, two pending BOM freezes, dated actions and unapproved equipment/system costs are preserved across six-slide/Q requirements."]
+    },
+    {
+      "task_id": "T0199", "status": "PASS_SOURCE_REVIEW", "items": 11,
+      "bound_file_sha256": "ce164f0d35e9caf62275800d87e63aea355222cf89a9d00dc9c837e2ca5051da",
+      "bound_rubric_sha256": "534cc9e818eb055331bd79cc5e2057e9ce1837113d93a626045bfde50da7fd3f",
+      "findings": [], "resolutions": ["The previously reused evaluated task is correctly revised from old four-person rubric coverage to H401-H408."],
+      "observations": ["Three site roles, ten-year manufacturing management, personal PMC/warehouse/quality coordination and cross-site transfers remain central.", "Guangzhou residence/about 20-percent travel and existing ERP improvement retain their source scope; no full-system replacement is presumed."]
+    },
+    {
+      "task_id": "T0203", "status": "PASS_SOURCE_REVIEW", "items": 12,
+      "bound_file_sha256": "adc18c4926e6583a19d36adc9d23e5a7d181234b872055eef70418594cd65398",
+      "bound_rubric_sha256": "47b094bbac95ca65da0dd698aa431767d16617449eefdb278dea93351e5b8d11",
+      "findings": [], "resolutions": ["The hardware-history exception and confidentiality boundary are explicitly retained rather than inferred from job-title keywords."],
+      "observations": ["Actual H101 text contains hardware/embedded platform responsibility, so a generic RAG title cannot justify declaring no hardware experience.", "H101-H108 coverage, Guangzhou availability-to-confirm, no algorithm hard condition and no waiver of existing confidentiality obligations are represented."]
+    },
+    {
+      "task_id": "T0204", "status": "PASS_SOURCE_REVIEW", "items": 14,
+      "bound_file_sha256": "83b7a17641be858f8264c8ac4bdd04f51aaacbd883d14da72903a16f2e785eeb",
+      "bound_rubric_sha256": "0edb3c4146fb837bff8bd01082bcb3223b9eb22cb6faafe2cb19823f268ec83b",
+      "findings": [], "resolutions": ["No invented salary, equity, measured reduction or approved future staffing is demanded."],
+      "observations": ["Site headcounts 5/8/4, ten-year hard condition, robotics preference and about 20-percent travel match the source.", "Existing procurement/ERP, six monthly goals, cross-team dependencies and pending budget/configuration approvals remain quality content in five slides and narration."]
+    },
+    {
+      "task_id": "T0218", "status": "PASS_SOURCE_REVIEW", "items": 14,
+      "bound_file_sha256": "6de2d766b1516a11acf114f49162991acf7bc24654b892279bd520560f7718a1",
+      "bound_rubric_sha256": "5ebf865e228cc63c504004e6b969ea795dba07042148195653dc80d36576c9e4",
+      "findings": [], "resolutions": ["Budget and cash-plan sums independently checked; no unresolved finding."],
+      "observations": ["Seven budget categories and six monthly payments each total RMB 3 million; separate RMB 3 million self-funding does not change the special-fund denominator.", "Personnel/material/outsource/equipment bases, approvals, technical milestones, month-three review and month-six acceptance remain plans and dependencies."]
+    },
+    {
+      "task_id": "T0229", "status": "PASS_SOURCE_REVIEW", "items": 14,
+      "bound_file_sha256": "0f1c1535efeb2bf781ffb2532950f9368c600f653fd43233f3bf69845025ed62",
+      "bound_rubric_sha256": "fe5d67fb7b2c53b5d499ea293b6d6f8b945ad58bc6c1a0fc5ad8aec532c8c79f",
+      "findings": [], "resolutions": ["Revenue/cost/customer arithmetic and unfinished actions were independently checked."],
+      "observations": ["18 customers equal 11 renewals plus seven new; four prior customers are still in discussion, not proven churn.", "Revenue 245 versus target 300, partial costs 161 without net-profit inference, 12/14 on-time projects and next-quarter 320/18/two planned consultants retain their states."]
+    },
+    {
+      "task_id": "T0236", "status": "PASS_SOURCE_REVIEW", "items": 14,
+      "bound_file_sha256": "783de379fb895763a01a56e85880588ebac0ccbde5186c5e5f05218a57e4dd61",
+      "bound_rubric_sha256": "bfb74347f5f0065d37cdfef40a9bde155ee0d173ecbf903b97728847eb2ae469",
+      "findings": [], "resolutions": ["Stage-scope acceptance is kept distinct from nonexistent final sign-off and unprovided pass rates."],
+      "observations": ["150 total/120 submitted/30 pending with category splits and 14 old/new version groups are correct.", "30 confirmed versus ten pending answers among 40 samples, three test types, pending OCR price and two November 5 training sessions remain visible quality boundaries."]
+    },
+    {
+      "task_id": "T0238", "status": "PASS_SOURCE_REVIEW", "items": 14,
+      "bound_file_sha256": "74a791eb763b2aa4d590af4847f9ac48f62bfa3f3366c44a902930ab968b90d1",
+      "bound_rubric_sha256": "7480db934fd064fa525237001ccffcd40ddb1163304487078b78a6466e5e7133",
+      "findings": [], "resolutions": ["The source's ambiguous maximum-range wording is not forced: mean-relative deviation is 0.4 percentage points, full range 0.8 points, and standard deviation is not asserted."],
+      "observations": ["The 100-batch distribution yields 98.6-percent weighted mean; 50-liter/two-batch work does not become completed 200-liter or ton-scale production.", "Four engineers plus one lead, conditional pilot cooperation, no orders, no unprovided savings and retained background IP all match the input."]
+    },
+    {
+      "task_id": "T0239", "status": "PASS_SOURCE_REVIEW", "items": 14,
+      "bound_file_sha256": "a7815439917fecb0e8e9f07dc199852e77e504e788a4fd7adc65307d75a3595e",
+      "bound_rubric_sha256": "2e2b0bd8efcd651bd6405249aadab0590d6fdf77730f2783590f5ea2250cffcf",
+      "findings": [], "resolutions": ["Stage durations/dates and payment arithmetic independently checked; no unresolved finding."],
+      "observations": ["4/6/4/2 weeks total 16 and the cross-year dates match; RMB 800,000 payments are 240,000/320,000/240,000 on acceptance conditions.", "120 versioned files, 30 confirmed tests and two trainings retain exclusions, named responsibilities, weekly meetings, issue fields and written change authorization."]
+    },
+    {
+      "task_id": "T0250", "status": "PASS_SOURCE_REVIEW", "items": 14,
+      "bound_file_sha256": "95ca8125f06f5ebddbb89ddd0b73c9755c9fd166def9c5959e9de7e43ced213a",
+      "bound_rubric_sha256": "13b22335d50fc75e539f5f3a774dd7cfcdd556b253d3a5053d83a72a27fa9758",
+      "findings": [], "resolutions": ["Area, rent, contingency basis and full budget independently recomputed; no unresolved finding."],
+      "observations": ["500 square meters, yearly rent 510,000 yuan, decoration 1.23 million, equipment 490,000, design/fire 78,000 and 8-percent contingency 143,840 total 2,451,840 yuan.", "2026 November construction and 2027 February equipment/payment timing remain cross-year; design/acceptance and approvals are pending, with no invented production/clinical license."]
+    }
+  ],
+  "bound_task_file_convention": "For each final task, bound_file_sha256 hashes authored/Txxxx.json and bound_rubric_sha256 hashes release/rubrics/Txxxx.json, both relative to this standard package root.",
+  "remaining_task_reviews": "None; all twenty-eight current modified task standards received source-only independent review and final binding checks.",
+  "scores_generated": false,
+  "actor_execution_or_model_calls": 0
+}

@@ -1,0 +1,440 @@
+{
+  "schema_version": "eval250-quality-rubric-v1",
+  "rubric_version": "1.1.0-ai-full-review",
+  "status": "REVIEWED_BY_AI_PENDING_HUMAN",
+  "task_id": "T0247",
+  "title": "评审资料PDF水印与正文保留",
+  "category": "OFFICE",
+  "prompt": "请在 inputs/项目概要.pdf 的所有页面添加浅灰斜向水印“内部评审”，交付 评审概要.pdf；保持原A4竖版页面、正文、版本和完整预算，水印可见且不能遮挡文字或表格，PDF正文仍可选取，不只处理封面，不改变未验收事项的状态。",
+  "prompt_sha256": "12ca712c0a281ee04094c902d5bedb387846f5e13acf5fd0539b0739b2326a28",
+  "source_dataset": "eval250_review_v1.1",
+  "task_dataset_sha256": "960ccfe108260592c2d644237dc7536a66214e188e2dbc2e4b266a8cf5629597",
+  "inputs": [
+    {
+      "name": "inputs/项目概要.pdf",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0247\\inputs\\项目概要.pdf",
+      "sha256": "4a2f00c61b53081171ce273188c023e79c42c3468bff1913cbc0553ed994d3cd",
+      "bytes": 37596
+    }
+  ],
+  "deliverables": [
+    {
+      "filename": "评审概要.pdf",
+      "format": "pdf"
+    }
+  ],
+  "dimension_weights": {
+    "D1": 0.3,
+    "D2": 0.2,
+    "D3": 0.2,
+    "D4": 0.2,
+    "D5": 0.1
+  },
+  "within_dimension_weight_policy": "FIXED_EQUAL_ITEM_WEIGHTS_REVIEWED_BY_AI_PENDING_HUMAN",
+  "historical_reference_used": false,
+  "actor_outputs_used_for_authoring": false,
+  "authoring_timing": "AFTER_EXISTING_EXECUTIONS_BEFORE_NEW_QUALITY_SCORING_NOT_PREREGISTERED",
+  "author": {
+    "kind": "CODEX_AGENT",
+    "shard": "office_data"
+  },
+  "human_review": {
+    "status": "PENDING",
+    "reviewer": null,
+    "date": null
+  },
+  "calibration": {
+    "rubric_generator": "NOT_VALIDATED",
+    "judge": "NOT_VALIDATED"
+  },
+  "author_notes": [
+    "视觉判定必须逐页查看输出；源页文本提取和结构核对不能代替水印遮挡/可见性的图像证据。"
+  ],
+  "items": [
+    {
+      "dimension": "D1",
+      "criterion": "原文项目名称、V0.7、2026-09-25、20台实验室/300台现场未验、180万元及80+60+25+15预算等已表达事实保持，不改试点/资质状态。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "请在 inputs/项目概要.pdf 的所有页面添加浅灰斜向水印“内部评审”，交付 评审概要.pdf；保持原A4竖版页面、正文、版本和完整预算，水印可见且不能遮挡文字或表格，PDF正文仍可选取，不只处理封面，不改变未验收事项的状态。",
+          "locator": "prompt",
+          "sha256": "12ca712c0a281ee04094c902d5bedb387846f5e13acf5fd0539b0739b2326a28",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 116,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        },
+        {
+          "source": "inputs/项目概要.pdf",
+          "quote": "项目概要内部资料\n文档状态：内部评审版。项目名称：模块化园区储能控制器，材料版本V0.7，日期2026年9月25日。\n背景：园区现有三类逆变设备接口不统一，维护人员需分别查询。拟用边缘网关统一采集，但一期仅接三家已\n提供开放接口的设备，剩余型号需单独验证。\n性能目标：记录每10秒采样一次，告警延迟小于30秒；当前实验室20设备测试达标，现场300设备尚未验收。投\n资预算180万元，先做两园区试点，未批准全集团部署。\n",
+          "locator": "page:1",
+          "sha256": "4a2f00c61b53081171ce273188c023e79c42c3468bff1913cbc0553ed994d3cd",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 210,
+            "start_locator": "page:1",
+            "end_locator": "page:1"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项主要内容或核心要求没有实现。",
+        "0.5": "核心事实准确，仅少量已表达的非关键标注失真。",
+        "1": "原文项目名称、V0.7、2026-09-25、20台实验室/300台现场未验、180万元及80+60+25+15预算等已表达事实保持，不改试点/资质状态。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "评审概要.pdf"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "score": null,
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "item_id": "T0247-D1-01",
+      "dimension_name": "内容正确性与依据",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "两页原PDF正文完整保留，第一页项目概要和第二页完整预算/风险/验收条件都在，不只交封面、水印空页或摘要。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "请在 inputs/项目概要.pdf 的所有页面添加浅灰斜向水印“内部评审”，交付 评审概要.pdf；保持原A4竖版页面、正文、版本和完整预算，水印可见且不能遮挡文字或表格，PDF正文仍可选取，不只处理封面，不改变未验收事项的状态。",
+          "locator": "prompt",
+          "sha256": "12ca712c0a281ee04094c902d5bedb387846f5e13acf5fd0539b0739b2326a28",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 116,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "该项必要内容主体没有提供或只有空标题，无法识别所需输出；已存在内容的具体数值/事实错误只归D1，不在本项重复。",
+        "0.5": "两页主体均在，但少量原文内容未保留。（只按覆盖，不因相同数值或事实错误再次扣。）",
+        "1": "两页原PDF正文完整保留，第一页项目概要和第二页完整预算/风险/验收条件都在，不只交封面、水印空页或摘要。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "评审概要.pdf"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "score": null,
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "item_id": "T0247-D2-01",
+      "dimension_name": "内容覆盖与充分性",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "原文件每页均添加准确文字“内部评审”的水印。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "请在 inputs/项目概要.pdf 的所有页面添加浅灰斜向水印“内部评审”，交付 评审概要.pdf；保持原A4竖版页面、正文、版本和完整预算，水印可见且不能遮挡文字或表格，PDF正文仍可选取，不只处理封面，不改变未验收事项的状态。",
+          "locator": "prompt",
+          "sha256": "12ca712c0a281ee04094c902d5bedb387846f5e13acf5fd0539b0739b2326a28",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 116,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "该项必要内容主体没有提供或只有空标题，无法识别所需输出；已存在内容的具体数值/事实错误只归D1，不在本项重复。",
+        "0.5": "两页均有水印，仅一页非关键位置标识欠完整；缺任一页水印为0。（只按覆盖，不因相同数值或事实错误再次扣。）",
+        "1": "原文件每页均添加准确文字“内部评审”的水印。"
+      },
+      "evidence_modes": [
+        "visual",
+        "structured"
+      ],
+      "deliverables": [
+        "评审概要.pdf"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "score": null,
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "item_id": "T0247-D2-02",
+      "dimension_name": "内容覆盖与充分性",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D3",
+      "criterion": "保留原A4竖版页面和页数；正文仍可选取，不把整页栅格化成不可选正文。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "请在 inputs/项目概要.pdf 的所有页面添加浅灰斜向水印“内部评审”，交付 评审概要.pdf；保持原A4竖版页面、正文、版本和完整预算，水印可见且不能遮挡文字或表格，PDF正文仍可选取，不只处理封面，不改变未验收事项的状态。",
+          "locator": "prompt",
+          "sha256": "12ca712c0a281ee04094c902d5bedb387846f5e13acf5fd0539b0739b2326a28",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 116,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "实际违反本条当前criterion列出的独立格式、范围、保密或授权约束；不能拿criterion明确归D1/D2的原因在此重复扣。",
+        "0.5": "本项独立明确约束不设半分：发生违约为0、满足为1；轻微措辞差异或没有额外边界解释不扣。",
+        "1": "保留原A4竖版页面和页数；正文仍可选取，不把整页栅格化成不可选正文。"
+      },
+      "evidence_modes": [
+        "structured",
+        "functional",
+        "visual"
+      ],
+      "deliverables": [
+        "评审概要.pdf"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "score": null,
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "item_id": "T0247-D3-01",
+      "dimension_name": "当前要求适配与一致性",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D3",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D4",
+      "criterion": "水印叠加后的文档仍能按原正文连续阅读和检索，水印文字与正文内容不会在选取/查找时混为业务结论；仅评实际阅读检索使用，不以其他维度同一缺陷再扣。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "请在 inputs/项目概要.pdf 的所有页面添加浅灰斜向水印“内部评审”，交付 评审概要.pdf；保持原A4竖版页面、正文、版本和完整预算，水印可见且不能遮挡文字或表格，PDF正文仍可选取，不只处理封面，不改变未验收事项的状态。",
+          "locator": "prompt",
+          "sha256": "12ca712c0a281ee04094c902d5bedb387846f5e13acf5fd0539b0739b2326a28",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 116,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "本项主要内容或核心要求没有实现。",
+        "0.5": "主要阅读检索成立，局部选取顺序受叠加影响但仍能定位正文。",
+        "1": "水印叠加后的文档仍能按原正文连续阅读和检索，水印文字与正文内容不会在选取/查找时混为业务结论；仅评实际阅读检索使用，不以其他维度同一缺陷再扣。"
+      },
+      "evidence_modes": [
+        "functional",
+        "structured"
+      ],
+      "deliverables": [
+        "评审概要.pdf"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "score": null,
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "item_id": "T0247-D4-01",
+      "dimension_name": "专业判断与业务可用性",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D4",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D5",
+      "criterion": "水印实际呈浅灰斜向、可见且不遮挡正文/预算表；两页原内容在渲染中仍清楚可辨，无裁切或新增遮挡。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "请在 inputs/项目概要.pdf 的所有页面添加浅灰斜向水印“内部评审”，交付 评审概要.pdf；保持原A4竖版页面、正文、版本和完整预算，水印可见且不能遮挡文字或表格，PDF正文仍可选取，不只处理封面，不改变未验收事项的状态。",
+          "locator": "prompt",
+          "sha256": "12ca712c0a281ee04094c902d5bedb387846f5e13acf5fd0539b0739b2326a28",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 116,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "实际渲染或文字呈现的关键内容有独立乱码、遮挡、裁切等缺陷，妨碍阅读；明确格式本身违约只归D3。",
+        "0.5": "水印可辨且主要内容可读，少量位置/深浅不统一但不挡关键内容。",
+        "1": "水印实际呈浅灰斜向、可见且不遮挡正文/预算表；两页原内容在渲染中仍清楚可辨，无裁切或新增遮挡。"
+      },
+      "evidence_modes": [
+        "visual"
+      ],
+      "deliverables": [
+        "评审概要.pdf"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "score": null,
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "item_id": "T0247-D5-01",
+      "dimension_name": "表达与呈现质量",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D5",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    }
+  ],
+  "reviewer": {
+    "kind": "CODEX_AGENT",
+    "scope": "OFFICE40_DATA30_HR20_FULL_SOURCE_REVIEW"
+  },
+  "deduplication_policy": {
+    "primary_attribution": {
+      "D1": "已经表达的事实、计算、规则解释、证据归属或未知状态是否正确",
+      "D2": "必需内容、记录、字段或产物的覆盖",
+      "D3": "独立授权/保密/不得改源/格式/对象范围约束；不是D1错误的重复描述",
+      "D4": "独立的业务推理、交接和实际操作可用性",
+      "D5": "实际视觉、语言和可读性"
+    },
+    "root_cause_once": "同一已具体识别的根因只在一个主条目扣分，其他条目记录关联但不再扣。不能把D1错值派生的图文不一致再扣D3、或把D2缺项再扣D4。存在独立新缺陷才可另扣。",
+    "content_omission": "在实际产物存在且有可评内容时，单纯未覆盖归D2；D1不以同一遗漏扣第二次。缺必需产物时依原合同，所有实际依赖该产物的条目为0；不因去重给空产物其他维度满分。",
+    "comparison": "一个版本值违背输入的，归D1并检查所有实际存在版本；D3比较仅针对不能由单一源事实直接判错的独立对象/承诺冲突。",
+    "technical_missingness": "评估器解析/渲染/公式缓存设施故障为UNSCORED；不记0，不删权重。"
+  },
+  "review_notes": [
+    "两页A4原文全读；每页水印、可选取、浅灰斜向、遮挡只分项单判，删7个重叠旧项重建6项。",
+    "逐条查看criterion、三档锚点、来源、证据模式、依赖和weight；评分仍为空；AI复核不等于人工审核或可靠性校准。"
+  ],
+  "source_review_shards_preserved": true,
+  "scoring_status": "NOT_SCORED",
+  "review_record_ref": "../review_shards/office90_review.json"
+}

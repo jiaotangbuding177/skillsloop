@@ -1,0 +1,649 @@
+{
+  "schema_version": "eval250-quality-rubric-v1",
+  "rubric_version": "1.1.0-ai-full-review",
+  "status": "REVIEWED_BY_AI_PENDING_HUMAN",
+  "task_id": "T0221",
+  "title": "专家反馈对外回复",
+  "category": "OFFICE",
+  "prompt": "项目组要回复专家对专家库模块的意见，请读 inputs/专家意见材料.md 及 inputs/项目组确认口径.md，交付 专家意见回复.docx，先感谢建议，再按问题回复现有支持、拟调整和待确认内容，不把内部意见写成已发布功能。语气专业自然，保留问题具体事实，避免机械套话。",
+  "prompt_sha256": "232222e6f630416720c113904eb5815ea9c1ed11948fb594341b815c23fb8a81",
+  "source_dataset": "eval250_review_v1.1",
+  "task_dataset_sha256": "960ccfe108260592c2d644237dc7536a66214e188e2dbc2e4b266a8cf5629597",
+  "inputs": [
+    {
+      "name": "inputs/专家意见材料.md",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0221\\inputs\\专家意见材料.md",
+      "sha256": "fb524fd43b1b96006a5c99d1bd10bf5b11f24ea57dfc64cfaf9531d944a56a3f",
+      "bytes": 973
+    },
+    {
+      "name": "inputs/项目组确认口径.md",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0221\\inputs\\项目组确认口径.md",
+      "sha256": "bbc570793313030f50d43e50c0b47c6686d2eed71c0dfe22c7c7c365b953060d",
+      "bytes": 283
+    }
+  ],
+  "deliverables": [
+    {
+      "filename": "专家意见回复.docx",
+      "format": "docx"
+    }
+  ],
+  "dimension_weights": {
+    "D1": 0.3,
+    "D2": 0.2,
+    "D3": 0.2,
+    "D4": 0.2,
+    "D5": 0.1
+  },
+  "within_dimension_weight_policy": "FIXED_EQUAL_ITEM_WEIGHTS_REVIEWED_BY_AI_PENDING_HUMAN",
+  "historical_reference_used": false,
+  "actor_outputs_used_for_authoring": false,
+  "authoring_timing": "AFTER_EXISTING_EXECUTIONS_BEFORE_NEW_QUALITY_SCORING_NOT_PREREGISTERED",
+  "author": {
+    "kind": "CODEX_AGENT",
+    "shard": "office_data"
+  },
+  "human_review": {
+    "status": "PENDING",
+    "reviewer": null,
+    "date": null
+  },
+  "calibration": {
+    "rubric_generator": "NOT_VALIDATED",
+    "judge": "NOT_VALIDATED"
+  },
+  "author_notes": [],
+  "items": [
+    {
+      "dimension": "D1",
+      "criterion": "已复述的专家A/B问题事实准确：机构简称/全称重复、保留原记录、最近确认日期、关键词细分及旧电话更新；不将未证偏好或产品状态补成事实。",
+      "sources": [
+        {
+          "source": "inputs/专家意见材料.md",
+          "quote": "# 专家库试用反馈原始问题\n记录日期：2026年9月18日。反馈来自三位已匿名化试用专家，不包含项目组答复。\n专家A：专家表里同一人出现两次，一条是机构简称、一条是全称，请说明能否合并，同时保留原记录。搜索结果只显示姓名，无法知道研究方向是否仍有效，希望显示资料最近确认日期。\n专家B：产业关键词太宽，搜索“材料”把很多不相关方向一起给出；建议关键词与专长细分，但不希望系统自行猜测专家新的研究兴趣。部分联系电话旧了，希望提醒经办人员更新。\n专家C：邀请合作时需要知道曾参与的项目类型，但不能公开所有商业委托名称。希望专家能确认可外发资料，未确认内容不要先展示。也担心系统会自动把自己排为“优秀/一般”等级。\n以上原意见不包含功能已实现状态、项目组解释或目标回复措辞。",
+          "locator": "extracted_text_span",
+          "sha256": "fb524fd43b1b96006a5c99d1bd10bf5b11f24ea57dfc64cfaf9531d944a56a3f",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 334,
+            "start_locator": "line:1",
+            "end_locator": "line:6"
+          }
+        },
+        {
+          "source": "inputs/项目组确认口径.md",
+          "quote": "# 项目组本次确认\n专家反馈只是需求输入；源材料未说明已实现的功能一律不得写成已上线。可写“将核对/拟完善”，不得承诺发布日期；与现有需求重复的内容可说明已纳入需求核对清单但不能写已开发完成。",
+          "locator": "extracted_text_span",
+          "sha256": "bbc570793313030f50d43e50c0b47c6686d2eed71c0dfe22c7c7c365b953060d",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 96,
+            "start_locator": "line:1",
+            "end_locator": "line:2"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "已经呈现的核心事实、计算、规则或证据归属错误，足以改变本项主要判断；单纯遗漏按D2归责。",
+        "0.5": "核心结论和主要事实成立，但已呈现的少量非关键值、口径标签或证据对应有局部错误；单纯遗漏不在本项再次扣分。",
+        "1": "已复述的专家A/B问题事实准确：机构简称/全称重复、保留原记录、最近确认日期、关键词细分及旧电话更新；不将未证偏好或产品状态补成事实。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "专家意见回复.docx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0221-D1-01",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0221-D1-01",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D1",
+      "criterion": "准确理解C只需项目类型、商业委托保密、外发确认和反对自动等级的关切，不替专家推新兴趣。",
+      "sources": [
+        {
+          "source": "inputs/专家意见材料.md",
+          "quote": "# 专家库试用反馈原始问题\n记录日期：2026年9月18日。反馈来自三位已匿名化试用专家，不包含项目组答复。\n专家A：专家表里同一人出现两次，一条是机构简称、一条是全称，请说明能否合并，同时保留原记录。搜索结果只显示姓名，无法知道研究方向是否仍有效，希望显示资料最近确认日期。\n专家B：产业关键词太宽，搜索“材料”把很多不相关方向一起给出；建议关键词与专长细分，但不希望系统自行猜测专家新的研究兴趣。部分联系电话旧了，希望提醒经办人员更新。\n专家C：邀请合作时需要知道曾参与的项目类型，但不能公开所有商业委托名称。希望专家能确认可外发资料，未确认内容不要先展示。也担心系统会自动把自己排为“优秀/一般”等级。\n以上原意见不包含功能已实现状态、项目组解释或目标回复措辞。",
+          "locator": "extracted_text_span",
+          "sha256": "fb524fd43b1b96006a5c99d1bd10bf5b11f24ea57dfc64cfaf9531d944a56a3f",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 334,
+            "start_locator": "line:1",
+            "end_locator": "line:6"
+          }
+        },
+        {
+          "source": "inputs/项目组确认口径.md",
+          "quote": "# 项目组本次确认\n专家反馈只是需求输入；源材料未说明已实现的功能一律不得写成已上线。可写“将核对/拟完善”，不得承诺发布日期；与现有需求重复的内容可说明已纳入需求核对清单但不能写已开发完成。",
+          "locator": "extracted_text_span",
+          "sha256": "bbc570793313030f50d43e50c0b47c6686d2eed71c0dfe22c7c7c365b953060d",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 96,
+            "start_locator": "line:1",
+            "end_locator": "line:2"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "已经呈现的核心事实、计算、规则或证据归属错误，足以改变本项主要判断；单纯遗漏按D2归责。",
+        "0.5": "核心结论和主要事实成立，但已呈现的少量非关键值、口径标签或证据对应有局部错误；单纯遗漏不在本项再次扣分。",
+        "1": "准确理解C只需项目类型、商业委托保密、外发确认和反对自动等级的关切，不替专家推新兴趣。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "专家意见回复.docx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0221-D1-02",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0221-D1-02",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "开头感谢专业自然，不把感谢替代实质逐项答复。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "项目组要回复专家对专家库模块的意见，请读 inputs/专家意见材料.md 及 inputs/项目组确认口径.md，交付 专家意见回复.docx，先感谢建议，再按问题回复现有支持、拟调整和待确认内容，不把内部意见写成已发布功能。语气专业自然，保留问题具体事实，避免机械套话。",
+          "locator": "prompt",
+          "sha256": "232222e6f630416720c113904eb5815ea9c1ed11948fb594341b815c23fb8a81",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 137,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "该项必要内容主体没有提供或只有空标题，无法识别所需输出；已存在内容的具体数值/事实错误只归D1，不在本项重复。",
+        "0.5": "有感谢但少量套话/生硬措辞。（只按覆盖，不因相同数值或事实错误再次扣。）",
+        "1": "开头感谢专业自然，不把感谢替代实质逐项答复。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "专家意见回复.docx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0221-D2-01",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0221-D2-01",
+      "coverage_only": true,
+      "non_duplication_rule": "只检查内容是否存在与覆盖充分；已存在但数值/状态错误归D1，建议具体可用性归D4，不在本项再扣。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "逐条回应重复合并/保原记录/最近确认日期、关键词细分/联系方式更新等问题。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "项目组要回复专家对专家库模块的意见，请读 inputs/专家意见材料.md 及 inputs/项目组确认口径.md，交付 专家意见回复.docx，先感谢建议，再按问题回复现有支持、拟调整和待确认内容，不把内部意见写成已发布功能。语气专业自然，保留问题具体事实，避免机械套话。",
+          "locator": "prompt",
+          "sha256": "232222e6f630416720c113904eb5815ea9c1ed11948fb594341b815c23fb8a81",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 137,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "该项必要内容主体没有提供或只有空标题，无法识别所需输出；已存在内容的具体数值/事实错误只归D1，不在本项重复。",
+        "0.5": "主要回应有，一项具体问题不足。（只按覆盖，不因相同数值或事实错误再次扣。）",
+        "1": "逐条回应重复合并/保原记录/最近确认日期、关键词细分/联系方式更新等问题。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "专家意见回复.docx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0221-D2-02",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0221-D2-02",
+      "coverage_only": true,
+      "non_duplication_rule": "只检查内容是否存在与覆盖充分；已存在但数值/状态错误归D1，建议具体可用性归D4，不在本项再扣。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "回应可外发资料确认、项目类型而非披露商业委托、担心自动等级等关切，区分拟核与未确认。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "项目组要回复专家对专家库模块的意见，请读 inputs/专家意见材料.md 及 inputs/项目组确认口径.md，交付 专家意见回复.docx，先感谢建议，再按问题回复现有支持、拟调整和待确认内容，不把内部意见写成已发布功能。语气专业自然，保留问题具体事实，避免机械套话。",
+          "locator": "prompt",
+          "sha256": "232222e6f630416720c113904eb5815ea9c1ed11948fb594341b815c23fb8a81",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 137,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "该项必要内容主体没有提供或只有空标题，无法识别所需输出；已存在内容的具体数值/事实错误只归D1，不在本项重复。",
+        "0.5": "主要边界有，一项关切或待确认标签不足。（只按覆盖，不因相同数值或事实错误再次扣。）",
+        "1": "回应可外发资料确认、项目类型而非披露商业委托、担心自动等级等关切，区分拟核与未确认。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "专家意见回复.docx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0221-D2-03",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0221-D2-03",
+      "coverage_only": true,
+      "non_duplication_rule": "只检查内容是否存在与覆盖充分；已存在但数值/状态错误归D1，建议具体可用性归D4，不在本项再扣。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D3",
+      "criterion": "项目组口径优先：未说明实现一律不写已上线，不承诺发布日期，已纳需求清单不等已开发完。",
+      "sources": [
+        {
+          "source": "inputs/项目组确认口径.md",
+          "quote": "专家反馈只是需求输入；源材料未说明已实现的功能一律不得写成已上线。可写“将核对/拟完善”，不得承诺发布日期；与现有需求重复的内容可说明已纳入需求核对清单但不能写已开发完成。",
+          "locator": "line:2",
+          "sha256": "bbc570793313030f50d43e50c0b47c6686d2eed71c0dfe22c7c7c365b953060d",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 10,
+            "char_end_exclusive": 96,
+            "start_locator": "line:2",
+            "end_locator": "line:2"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "实际违反本条当前criterion列出的独立格式、范围、保密或授权约束；不能拿criterion明确归D1/D2的原因在此重复扣。",
+        "0.5": "本项独立明确约束不设半分：发生违约为0、满足为1；轻微措辞差异或没有额外边界解释不扣。",
+        "1": "项目组口径优先：未说明实现一律不写已上线，不承诺发布日期，已纳需求清单不等已开发完。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "专家意见回复.docx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0221-D3-01",
+      "dimension_name": "当前要求适配与一致性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0221-D3-01",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D3",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D4",
+      "criterion": "每项答复以该专家的具体问题为对象，能说明将核对/拟完善什么并尊重资料授权与不自动评级的关切；不要求编造发布日期、已实现功能或额外整改清单。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "保留问题具体事实，避免机械套话",
+          "locator": "prompt",
+          "sha256": "232222e6f630416720c113904eb5815ea9c1ed11948fb594341b815c23fb8a81",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 121,
+            "char_end_exclusive": 136,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "内容虽存在，但组织方式或推理衔接使本题实际工作仍无法开展；必须指出独立于其他维度的新缺陷。",
+        "0.5": "主要业务使用成立，但局部对应、衔接或操作解释仍需人工整理；不得复用D1/D2/D3/D5已扣原因。",
+        "1": "每项答复以该专家的具体问题为对象，能说明将核对/拟完善什么并尊重资料授权与不自动评级的关切；不要求编造发布日期、已实现功能或额外整改清单。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "专家意见回复.docx"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0221-D4-01",
+      "dimension_name": "专业判断与业务可用性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "CONTENT_SCOPED_NO_AUTOMATIC_FILE_AND",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0221-D4-01",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "CONTENT_SCOPED_NO_AUTOMATIC_FILE_AND",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D4",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D5",
+      "criterion": "语气专业自然，按问题分段便于回查，感谢不过度营销或夸张，读者可区分意见与答复。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "语气专业自然",
+          "locator": "prompt",
+          "sha256": "232222e6f630416720c113904eb5815ea9c1ed11948fb594341b815c23fb8a81",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 114,
+            "char_end_exclusive": 120,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "实际渲染或文字呈现的关键内容有独立乱码、遮挡、裁切等缺陷，妨碍阅读；明确格式本身违约只归D3。",
+        "0.5": "主体专业，个别套话/冗句或层级欠佳。",
+        "1": "语气专业自然，按问题分段便于回查，感谢不过度营销或夸张，读者可区分意见与答复。"
+      },
+      "evidence_modes": [
+        "visual",
+        "output_text"
+      ],
+      "deliverables": [
+        "专家意见回复.docx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0221-D5-01",
+      "dimension_name": "表达与呈现质量",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0221-D5-01",
+      "non_duplication_rule": "只评实际阅读/呈现；规定的字体、页数、A4/比例等本身违约归D3，不因同一格式违约再次扣。独立遮挡/乱码/裁切可在本项判。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D5",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D5",
+      "criterion": "在专家意见回复.docx中，标题、段落、列表与表格层次适合本题受众；实际渲染后关键文字和表格完整可辨，无重叠、裁切或挤压到难以阅读。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "项目组要回复专家对专家库模块的意见，请读 inputs/专家意见材料.md 及 inputs/项目组确认口径.md，交付 专家意见回复.docx，先感谢建议，再按问题回复现有支持、拟调整和待确认内容，不把内部意见写成已发布功能。语气专业自然，保留问题具体事实，避免机械套话。",
+          "locator": "prompt",
+          "sha256": "232222e6f630416720c113904eb5815ea9c1ed11948fb594341b815c23fb8a81",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 137,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "实际渲染或文字呈现的关键内容有独立乱码、遮挡、裁切等缺陷，妨碍阅读；明确格式本身违约只归D3。",
+        "0.5": "主要内容清楚可读，个别层级、分页或疏密不佳但不妨碍找到关键事实和行动。",
+        "1": "在专家意见回复.docx中，标题、段落、列表与表格层次适合本题受众；实际渲染后关键文字和表格完整可辨，无重叠、裁切或挤压到难以阅读。"
+      },
+      "evidence_modes": [
+        "visual",
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "专家意见回复.docx"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0221-D5-02",
+      "dimension_name": "表达与呈现质量",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0221-D5-02",
+      "non_duplication_rule": "只评实际阅读/呈现；规定的字体、页数、A4/比例等本身违约归D3，不因同一格式违约再次扣。独立遮挡/乱码/裁切可在本项判。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D5",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    }
+  ],
+  "reviewer": {
+    "kind": "CODEX_AGENT",
+    "scope": "OFFICE40_DATA30_HR20_FULL_SOURCE_REVIEW"
+  },
+  "deduplication_policy": {
+    "primary_attribution": {
+      "D1": "已经表达的事实、计算、规则解释、证据归属或未知状态是否正确",
+      "D2": "必需内容、记录、字段或产物的覆盖",
+      "D3": "独立授权/保密/不得改源/格式/对象范围约束；不是D1错误的重复描述",
+      "D4": "独立的业务推理、交接和实际操作可用性",
+      "D5": "实际视觉、语言和可读性"
+    },
+    "root_cause_once": "同一已具体识别的根因只在一个主条目扣分，其他条目记录关联但不再扣。不能把D1错值派生的图文不一致再扣D3、或把D2缺项再扣D4。存在独立新缺陷才可另扣。",
+    "content_omission": "在实际产物存在且有可评内容时，单纯未覆盖归D2；D1不以同一遗漏扣第二次。缺必需产物时依原合同，所有实际依赖该产物的条目为0；不因去重给空产物其他维度满分。",
+    "comparison": "一个版本值违背输入的，归D1并检查所有实际存在版本；D3比较仅针对不能由单一源事实直接判错的独立对象/承诺冲突。",
+    "technical_missingness": "评估器解析/渲染/公式缓存设施故障为UNSCORED；不记0，不删权重。"
+  },
+  "review_notes": [
+    "专家意见仅需求而无上线证据；A合并保记录/日期，B词细分/联系方式更新，C项目类型/授权/不评级全覆盖。",
+    "逐条查看criterion、三档锚点、来源、证据模式、依赖和weight；评分仍为空；AI复核不等于人工审核或可靠性校准。"
+  ],
+  "source_review_shards_preserved": true,
+  "scoring_status": "NOT_SCORED",
+  "review_record_ref": "../review_shards/office90_review.json"
+}

@@ -1,0 +1,22 @@
+diff --git a/web/ConversationPanel.tsx b/web/ConversationPanel.tsx
+--- a/web/ConversationPanel.tsx
++++ b/web/ConversationPanel.tsx
+@@ -42,2 +42,3 @@
+- const reuse = messages.length > 0 && currentId === id;
+- useEffect(() => { if (!reuse) fetchSession(id).then(setMessages); }, [id, reuse]);
++ const loadedId = useRef<string | null>(null);
++ useEffect(() => { if (loadedId.current === id) return;
++   loadedId.current = id; fetchSession(id).then(setMessages); }, [id]);
+diff --git a/web/visibility.ts b/web/visibility.ts
+--- a/web/visibility.ts
++++ b/web/visibility.ts
+@@ -7,1 +7,2 @@
+- document.addEventListener('visibilitychange', refresh);
++ const refreshVisible = () => { if (document.visibilityState === 'visible') refresh(); };
++ document.addEventListener('visibilitychange', refreshVisible);
+diff --git a/server/session.ts b/server/session.ts
+--- a/server/session.ts
++++ b/server/session.ts
+@@ -18,1 +18,1 @@
+- return rows;
++ return { items: rows, nextCursor: rows.at(-1)?.id ?? null };

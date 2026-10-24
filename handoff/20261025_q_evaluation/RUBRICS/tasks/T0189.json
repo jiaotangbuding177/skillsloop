@@ -1,0 +1,645 @@
+{
+  "schema_version": "eval250-quality-rubric-v1",
+  "rubric_version": "1.1.0-ai-full-review",
+  "status": "REVIEWED_BY_AI_PENDING_HUMAN",
+  "task_id": "T0189",
+  "title": "两期间财报按模板填报",
+  "category": "DATA",
+  "prompt": "财务负责人需完成对外报送。请按 inputs/填报须知.md，用 inputs/资产负债表.xlsx、inputs/利润表.xlsx、inputs/现金流量表.xlsx 填入 inputs/外报财报模板.xlsx，交付 对外财务报表.xlsx；保留模板四张工作表、科目代码、行列布局和合计公式，另加勾稽复核表，全部源值从元换算为万元并保留两位小数。资产负债表按给定日期，利润与现金流明确全年和半年口径，不将不同长度期间当同比，不追加主观经营评级，输入原件保持不变。",
+  "prompt_sha256": "910a9da3dad04b05df39f3a89774d15b3eddfcac7afcd4decd63e1b6b38142de",
+  "source_dataset": "eval250_review_v1.1",
+  "task_dataset_sha256": "960ccfe108260592c2d644237dc7536a66214e188e2dbc2e4b266a8cf5629597",
+  "inputs": [
+    {
+      "name": "inputs/填报须知.md",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0189\\inputs\\填报须知.md",
+      "sha256": "45754f340499642a56766041eb4e52bc98ab5429e7f5f46a8338140566b891f2",
+      "bytes": 921
+    },
+    {
+      "name": "inputs/资产负债表.xlsx",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0189\\inputs\\资产负债表.xlsx",
+      "sha256": "9b1feb8468240da64589d4cabc2a89e3df03c23a13502056a63c3aca3f466530",
+      "bytes": 4386
+    },
+    {
+      "name": "inputs/利润表.xlsx",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0189\\inputs\\利润表.xlsx",
+      "sha256": "ec785da0910a2f7c2431944e98a262db875a961fe6e6ca2cba66753653e4f768",
+      "bytes": 4219
+    },
+    {
+      "name": "inputs/现金流量表.xlsx",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0189\\inputs\\现金流量表.xlsx",
+      "sha256": "4d392c9b1be43340c98357b493f427a6890886cd8b74c4f36d6eea2c3f8b0e26",
+      "bytes": 4148
+    },
+    {
+      "name": "inputs/外报财报模板.xlsx",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0189\\inputs\\外报财报模板.xlsx",
+      "sha256": "554fa98ba58b38a9206eedd1670ad764b1ddd3894b27bfe2b690b36fff97254a",
+      "bytes": 7282
+    }
+  ],
+  "deliverables": [
+    {
+      "filename": "对外财务报表.xlsx",
+      "format": "xlsx"
+    }
+  ],
+  "dimension_weights": {
+    "D1": 0.3,
+    "D2": 0.2,
+    "D3": 0.2,
+    "D4": 0.2,
+    "D5": 0.1
+  },
+  "within_dimension_weight_policy": "FIXED_EQUAL_ITEM_WEIGHTS_REVIEWED_BY_AI_PENDING_HUMAN",
+  "historical_reference_used": false,
+  "actor_outputs_used_for_authoring": false,
+  "authoring_timing": "AFTER_EXISTING_EXECUTIONS_BEFORE_NEW_QUALITY_SCORING_NOT_PREREGISTERED",
+  "author": {
+    "kind": "CODEX_AGENT",
+    "shard": "office_data"
+  },
+  "human_review": {
+    "status": "PENDING",
+    "reviewer": null,
+    "date": null
+  },
+  "calibration": {
+    "rubric_generator": "NOT_VALIDATED",
+    "judge": "NOT_VALIDATED"
+  },
+  "author_notes": [
+    "题面保留原4表且另加勾稽复核表，完整工作簿应含原4+新1，不把“4张”误当最终上限。模板合计公式优先保留。",
+    "业务用途解释（不额外重复计分）：产物可在报送前逐科目复核，源值、换算单位、期间和公式链都有清楚对应。"
+  ],
+  "items": [
+    {
+      "dimension": "D1",
+      "criterion": "逐科目两期间源金额/10000换算万元，显示两位，不将原表空白未填当零。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "全部源值从元换算为万元并保留两位小数",
+          "locator": "prompt",
+          "sha256": "910a9da3dad04b05df39f3a89774d15b3eddfcac7afcd4decd63e1b6b38142de",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 155,
+            "char_end_exclusive": 173,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "已经呈现的核心事实、计算、规则或证据归属错误，足以改变本项主要判断；单纯遗漏按D2归责。",
+        "0.5": "核心结论和主要事实成立，但已呈现的少量非关键值、口径标签或证据对应有局部错误；单纯遗漏不在本项再次扣分。",
+        "1": "逐科目两期间源金额/10000换算万元，显示两位，不将原表空白未填当零。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "对外财务报表.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0189-D1-01",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0189-D1-01",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D1",
+      "criterion": "资产负债标2025-12-31/2026-06-30，利润现金流标2025全年/2026半年，不混期间。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "全部源值从元换算为万元并保留两位小数",
+          "locator": "prompt",
+          "sha256": "910a9da3dad04b05df39f3a89774d15b3eddfcac7afcd4decd63e1b6b38142de",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 155,
+            "char_end_exclusive": 173,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "已经呈现的核心事实、计算、规则或证据归属错误，足以改变本项主要判断；单纯遗漏按D2归责。",
+        "0.5": "核心结论和主要事实成立，但已呈现的少量非关键值、口径标签或证据对应有局部错误；单纯遗漏不在本项再次扣分。",
+        "1": "资产负债标2025-12-31/2026-06-30，利润现金流标2025全年/2026半年，不混期间。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "对外财务报表.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0189-D1-02",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0189-D1-02",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D1",
+      "criterion": "勾稽核资产=负债+权益、三类净流量和=净增、期初+净增=期末及23+43−13=53万元未分配利润；分配未支付不入现金流/费用。只按实际公式语义或经重算结果核，不用评估器未更新缓存0判错。",
+      "sources": [
+        {
+          "source": "inputs/填报须知.md",
+          "quote": "请核资产=负债+权益、现金净增加=经营+投资+筹资、期初现金+净增加=期末现金、未分配利润滚动。科目代码为文本；模板每个科目保留两期间数据。",
+          "locator": "line:5",
+          "sha256": "45754f340499642a56766041eb4e52bc98ab5429e7f5f46a8338140566b891f2",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 212,
+            "char_end_exclusive": 282,
+            "start_locator": "line:5",
+            "end_locator": "line:5"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "已经呈现的核心事实、计算、规则或证据归属错误，足以改变本项主要判断；单纯遗漏按D2归责。",
+        "0.5": "核心结论和主要事实成立，但已呈现的少量非关键值、口径标签或证据对应有局部错误；单纯遗漏不在本项再次扣分。",
+        "1": "勾稽核资产=负债+权益、三类净流量和=净增、期初+净增=期末及23+43−13=53万元未分配利润；分配未支付不入现金流/费用。只按实际公式语义或经重算结果核，不用评估器未更新缓存0判错。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "对外财务报表.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0189-D1-03",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0189-D1-03",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "保留原模板填报须知、资产负债表、利润表、现金流量表四表，各科目两期间完整。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "财务负责人需完成对外报送。请按 inputs/填报须知.md，用 inputs/资产负债表.xlsx、inputs/利润表.xlsx、inputs/现金流量表.xlsx 填入 inputs/外报财报模板.xlsx，交付 对外财务报表.xlsx；保留模板四张工作表、科目代码、行列布局和合计公式，另加勾稽复核表，全部源值从元换算为万元并保留两位小数。资产负债表按给定日期，利润与现金流明确全年和半年口径，不将不同长度期间当同比，不追加主观经营评级，输入原件保持不变。",
+          "locator": "prompt",
+          "sha256": "910a9da3dad04b05df39f3a89774d15b3eddfcac7afcd4decd63e1b6b38142de",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 232,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "该项必要内容主体没有提供或只有空标题，无法识别所需输出；已存在内容的具体数值/事实错误只归D1，不在本项重复。",
+        "0.5": "原四表在，局部科目/期间未填。（只按覆盖，不因相同数值或事实错误再次扣。）",
+        "1": "保留原模板填报须知、资产负债表、利润表、现金流量表四表，各科目两期间完整。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "对外财务报表.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0189-D2-01",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0189-D2-01",
+      "coverage_only": true,
+      "non_duplication_rule": "只检查内容是否存在与覆盖充分；已存在但数值/状态错误归D1，建议具体可用性归D4，不在本项再扣。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "新增勾稽复核表，列公式、代入值、差额和结论，覆盖给定四类勾稽。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "财务负责人需完成对外报送。请按 inputs/填报须知.md，用 inputs/资产负债表.xlsx、inputs/利润表.xlsx、inputs/现金流量表.xlsx 填入 inputs/外报财报模板.xlsx，交付 对外财务报表.xlsx；保留模板四张工作表、科目代码、行列布局和合计公式，另加勾稽复核表，全部源值从元换算为万元并保留两位小数。资产负债表按给定日期，利润与现金流明确全年和半年口径，不将不同长度期间当同比，不追加主观经营评级，输入原件保持不变。",
+          "locator": "prompt",
+          "sha256": "910a9da3dad04b05df39f3a89774d15b3eddfcac7afcd4decd63e1b6b38142de",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 232,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "该项必要内容主体没有提供或只有空标题，无法识别所需输出；已存在内容的具体数值/事实错误只归D1，不在本项重复。",
+        "0.5": "复核主体在，某等式/字段不足。（只按覆盖，不因相同数值或事实错误再次扣。）",
+        "1": "新增勾稽复核表，列公式、代入值、差额和结论，覆盖给定四类勾稽。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "对外财务报表.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0189-D2-02",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0189-D2-02",
+      "coverage_only": true,
+      "non_duplication_rule": "只检查内容是否存在与覆盖充分；已存在但数值/状态错误归D1，建议具体可用性归D4，不在本项再扣。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "表头包含主体、单位、两期日期/期间及科目代码标识；标识实际值错误归D1，文本类型/模板保持归D3。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "财务负责人需完成对外报送。请按 inputs/填报须知.md，用 inputs/资产负债表.xlsx、inputs/利润表.xlsx、inputs/现金流量表.xlsx 填入 inputs/外报财报模板.xlsx，交付 对外财务报表.xlsx；保留模板四张工作表、科目代码、行列布局和合计公式，另加勾稽复核表，全部源值从元换算为万元并保留两位小数。资产负债表按给定日期，利润与现金流明确全年和半年口径，不将不同长度期间当同比，不追加主观经营评级，输入原件保持不变。",
+          "locator": "prompt",
+          "sha256": "910a9da3dad04b05df39f3a89774d15b3eddfcac7afcd4decd63e1b6b38142de",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 232,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "该项必要内容主体没有提供或只有空标题，无法识别所需输出；已存在内容的具体数值/事实错误只归D1，不在本项重复。",
+        "0.5": "主体标签有，某一单位/期间展示不足。（只按覆盖，不因相同数值或事实错误再次扣。）",
+        "1": "表头包含主体、单位、两期日期/期间及科目代码标识；标识实际值错误归D1，文本类型/模板保持归D3。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "对外财务报表.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0189-D2-03",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0189-D2-03",
+      "coverage_only": true,
+      "non_duplication_rule": "只检查内容是否存在与覆盖充分；已存在但数值/状态错误归D1，建议具体可用性归D4，不在本项再扣。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D3",
+      "criterion": "保留模板原四张表、科目代码文本、行列布局与合计公式，输入原件不变，不增加主观经营评级；具体数值/不等长同比错归D1。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "科目代码、行列布局和合计公式",
+          "locator": "prompt",
+          "sha256": "910a9da3dad04b05df39f3a89774d15b3eddfcac7afcd4decd63e1b6b38142de",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 132,
+            "char_end_exclusive": 146,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "实际违反本条当前criterion列出的独立格式、范围、保密或授权约束；不能拿criterion明确归D1/D2的原因在此重复扣。",
+        "0.5": "无禁项，个别非关键格式保持不足。",
+        "1": "保留模板原四张表、科目代码文本、行列布局与合计公式，输入原件不变，不增加主观经营评级；具体数值/不等长同比错归D1。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text",
+        "functional"
+      ],
+      "deliverables": [
+        "对外财务报表.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0189-D3-01",
+      "dimension_name": "当前要求适配与一致性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0189-D3-01",
+      "evidence_precondition": "涉及实际源文件是否被改，须最终状态哈希/文件差异等可核证据，不能凭Actor声称或仅产物抄错推断；缺采证为UNSCORED而非0。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D3",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D4",
+      "criterion": "财务能按源科目与期间核查模板填值，复核结论含义和回查线索清楚；不以解析器未重算的旧公式缓存0断言产物错误。",
+      "sources": [
+        {
+          "source": "inputs/填报须知.md",
+          "quote": "模板布局：资产负债表、利润表、现金流量表分别独立工作表，表头含主体、日期/期间、单位；勾稽复核独立工作表，列公式、代入值、差额和结论。",
+          "locator": "line:6",
+          "sha256": "45754f340499642a56766041eb4e52bc98ab5429e7f5f46a8338140566b891f2",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 283,
+            "char_end_exclusive": 350,
+            "start_locator": "line:6",
+            "end_locator": "line:6"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "内容虽存在，但组织方式或推理衔接使本题实际工作仍无法开展；必须指出独立于其他维度的新缺陷。",
+        "0.5": "主要业务使用成立，但局部对应、衔接或操作解释仍需人工整理；不得复用D1/D2/D3/D5已扣原因。",
+        "1": "财务能按源科目与期间核查模板填值，复核结论含义和回查线索清楚；不以解析器未重算的旧公式缓存0断言产物错误。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "对外财务报表.xlsx"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0189-D4-01",
+      "dimension_name": "专业判断与业务可用性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "CONTENT_SCOPED_NO_AUTOMATIC_FILE_AND",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0189-D4-01",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "CONTENT_SCOPED_NO_AUTOMATIC_FILE_AND",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D4",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D5",
+      "criterion": "在对外财务报表.xlsx中，明细、汇总和说明的层次与列标题清楚，编号、日期、金额/比例的显示不歧义，关键列和结论在实际打开或渲染时无截断、遮挡或不可辨认。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "财务负责人需完成对外报送。请按 inputs/填报须知.md，用 inputs/资产负债表.xlsx、inputs/利润表.xlsx、inputs/现金流量表.xlsx 填入 inputs/外报财报模板.xlsx，交付 对外财务报表.xlsx；保留模板四张工作表、科目代码、行列布局和合计公式，另加勾稽复核表，全部源值从元换算为万元并保留两位小数。资产负债表按给定日期，利润与现金流明确全年和半年口径，不将不同长度期间当同比，不追加主观经营评级，输入原件保持不变。",
+          "locator": "prompt",
+          "sha256": "910a9da3dad04b05df39f3a89774d15b3eddfcac7afcd4decd63e1b6b38142de",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 232,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "实际渲染或文字呈现的关键内容有独立乱码、遮挡、裁切等缺陷，妨碍阅读；明确格式本身违约只归D3。",
+        "0.5": "主体明细和结论能读懂，但个别列宽、单位展示或分页影响局部阅读；不掩盖关键结果。",
+        "1": "在对外财务报表.xlsx中，明细、汇总和说明的层次与列标题清楚，编号、日期、金额/比例的显示不歧义，关键列和结论在实际打开或渲染时无截断、遮挡或不可辨认。"
+      },
+      "evidence_modes": [
+        "visual",
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "对外财务报表.xlsx"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0189-D5-01",
+      "dimension_name": "表达与呈现质量",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0189-D5-01",
+      "non_duplication_rule": "只评实际阅读/呈现；规定的字体、页数、A4/比例等本身违约归D3，不因同一格式违约再次扣。独立遮挡/乱码/裁切可在本项判。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D5",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    }
+  ],
+  "reviewer": {
+    "kind": "CODEX_AGENT",
+    "scope": "OFFICE40_DATA30_HR20_FULL_SOURCE_REVIEW"
+  },
+  "deduplication_policy": {
+    "primary_attribution": {
+      "D1": "已经表达的事实、计算、规则解释、证据归属或未知状态是否正确",
+      "D2": "必需内容、记录、字段或产物的覆盖",
+      "D3": "独立授权/保密/不得改源/格式/对象范围约束；不是D1错误的重复描述",
+      "D4": "独立的业务推理、交接和实际操作可用性",
+      "D5": "实际视觉、语言和可读性"
+    },
+    "root_cause_once": "同一已具体识别的根因只在一个主条目扣分，其他条目记录关联但不再扣。不能把D1错值派生的图文不一致再扣D3、或把D2缺项再扣D4。存在独立新缺陷才可另扣。",
+    "content_omission": "在实际产物存在且有可评内容时，单纯未覆盖归D2；D1不以同一遗漏扣第二次。缺必需产物时依原合同，所有实际依赖该产物的条目为0；不因去重给空产物其他维度满分。",
+    "comparison": "一个版本值违背输入的，归D1并检查所有实际存在版本；D3比较仅针对不能由单一源事实直接判错的独立对象/承诺冲突。",
+    "technical_missingness": "评估器解析/渲染/公式缓存设施故障为UNSCORED；不记0，不删权重。"
+  },
+  "review_notes": [
+    "三源各两期与四表模板；权益133万、现金净增16万使勾稽成立。缓存0非重算真值，保留公式/结构，不能另加主观经营评级。",
+    "逐条查看criterion、三档锚点、来源、证据模式、依赖和weight；评分仍为空；AI复核不等于人工审核或可靠性校准。"
+  ],
+  "source_review_shards_preserved": true,
+  "scoring_status": "NOT_SCORED",
+  "review_record_ref": "../review_shards/office90_review.json"
+}

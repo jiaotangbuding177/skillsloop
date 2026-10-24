@@ -1,0 +1,835 @@
+{
+  "schema_version": "eval250-quality-rubric-v2-locator-design",
+  "rubric_version": "eval250-current-modified28-rubric-20261025-v1",
+  "status": "AI_SELF_REVIEWED_PENDING_HUMAN",
+  "task_id": "T0010",
+  "title": "政策项目申报资格筛选",
+  "category": "BIZ",
+  "prompt": "请依据 inputs/company_eligibility.json 与 inputs/programs.csv，为项目经理写申报推荐 grant_fit.xlsx 和申报行动清单 grant_actions.docx；逐项判硬条件与截止日，材料缺失标待补，不能把模拟政策说成现实政府现行政策。 评估日以企业画像中的2026-10-13为准，按该日计算成立年限和是否逾期。未说明是否获得同类资助、制造业产线等事实时写待补，不自行判已满足。政策均为本次模拟快照，不另行上网更新；请直接交可供项目经理使用的推荐与行动文件。",
+  "prompt_sha256": "83ff9ea545b58cf735186e3d12a3423d317e6fdb3dc8b8bf04b09bf4d18599ab",
+  "source_dataset": "D:\\skillloop\\output\\20261024_experiment_adopt35\\current_tasks250.json",
+  "task_dataset_sha256": "be27f85f02a45bf02c1356116e6f05a5e0d59453f1d3117f33806215b4bc2d2a",
+  "inputs": [
+    {
+      "name": "inputs/company_eligibility.json",
+      "path": "tasks/T0010/inputs/company_eligibility.json",
+      "sha256": "5478cb4b55b70698d64a4cd3bd241403a2953eec5b31734014f778d1f502a5b6",
+      "bytes": 236
+    },
+    {
+      "name": "inputs/programs.csv",
+      "path": "tasks/T0010/inputs/programs.csv",
+      "sha256": "27642027a192d9a65870d0573ba86f45ca49475f39f853e0476ea7fbb56e8aaf",
+      "bytes": 435
+    }
+  ],
+  "deliverables": [
+    {
+      "filename": "grant_fit.xlsx",
+      "format": "xlsx"
+    },
+    {
+      "filename": "grant_actions.docx",
+      "format": "docx"
+    }
+  ],
+  "dimension_weights": {
+    "D1": 0.3,
+    "D2": 0.2,
+    "D3": 0.2,
+    "D4": 0.2,
+    "D5": 0.1
+  },
+  "within_dimension_weight_policy": "FIXED_EQUAL_ITEM_WEIGHTS_DRAFT_PENDING_REVIEW",
+  "historical_reference_used": false,
+  "actor_outputs_used_for_authoring": false,
+  "authoring_timing": "POST_EXISTING_RUNS_SOURCE_ONLY_REVISION; NOT_PRE_RUN_PREREGISTRATION",
+  "calibration": {
+    "rubric_generator": "NOT_VALIDATED",
+    "judge": "NOT_VALIDATED"
+  },
+  "items": [
+    {
+      "criterion": "以2026-10-13为评估日核对成立年限和截止日：2023-04-20成立已超过3年；P1已给条件满足，P2缺高新证书，P3超过成立年限；未到截止不等于满足资格。已有事实误判归本项，遗漏只归D2。",
+      "anchors": {
+        "0": "存在改变核心事实或主要结论的错误；纯遗漏由D2主责。",
+        "0.5": "决定性事实和结论正确，仅一处非决定性转录或依据标识有误。",
+        "1": "以2026-10-13为评估日核对成立年限和截止日：2023-04-20成立已超过3年；P1已给条件满足，P2缺高新证书，P3超过成立年限；未到截止不等于满足资格。已有事实误判归本项，遗漏只归D2。"
+      },
+      "deduction_scope": "仅已有事实、数值、计算及证据解释错误；纯缺漏归D2。",
+      "item_id": "T0010-D1-01",
+      "dimension": "D1",
+      "dimension_name": "内容正确性与依据",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "inputs/programs.csv",
+          "locator": "成立≤3年",
+          "sha256": "27642027a192d9a65870d0573ba86f45ca49475f39f853e0476ea7fbb56e8aaf"
+        },
+        {
+          "source": "prompt",
+          "locator": "请依据 inputs/company_eligibility.json 与 inputs/programs.csv，为项目经理写申报推荐 grant_fit.xlsx 和申报行动清单 grant_actions.docx；逐项判硬条件与截止日，材料缺失标待补，不能把模拟政策说成现实政府现行政策。 评估日以企业画像中的2026-10-13为准，按该日计算成立年限和是否逾期。未说明是否获得同类资助、制造业产线等事实时写待补，不自行判已满足。政策均为本次模拟快照，不另行上网更新；请直接交可供项目经理使用的推荐与行动文件。",
+          "sha256": "83ff9ea545b58cf735186e3d12a3423d317e6fdb3dc8b8bf04b09bf4d18599ab"
+        },
+        {
+          "source": "inputs/company_eligibility.json",
+          "locator": "founded=2023-04-20;as_of=2026-10-13;hightech_cert=false;patents_granted=2",
+          "sha256": "5478cb4b55b70698d64a4cd3bd241403a2953eec5b31734014f778d1f502a5b6"
+        }
+      ],
+      "evidence_details": [
+        "grant_fit.xlsx：output_text,structured",
+        "grant_actions.docx：output_text,structured"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "grant_fit.xlsx",
+        "grant_actions.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "以2026-10-13为评估日核对成立年限和截止日：2023-04-20成立已超过3年；P1已给条件满足，P2缺高新证书，P3超过成立年限；未到截止不等于满足资格。已有事实误判归本项，遗漏只归D2。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "以2026-10-13为评估日核对成立年限和截止日：2023-04-20成立已超过3年；P1已给条件满足，P2缺高新证书，P3超过成立年限；未到截止不等于满足资格。已有事实误判归本项，遗漏只归D2。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "P4未获同类资助、P5制造业产线均未给定，列待补后判断；专利等已知事实不得替代未知条件。材料未交不等于资格已满足或已不满足。",
+      "anchors": {
+        "0": "存在改变核心事实或主要结论的错误；纯遗漏由D2主责。",
+        "0.5": "决定性事实和结论正确，仅一处非决定性转录或依据标识有误。",
+        "1": "P4未获同类资助、P5制造业产线均未给定，列待补后判断；专利等已知事实不得替代未知条件。材料未交不等于资格已满足或已不满足。"
+      },
+      "deduction_scope": "仅已有事实、数值、计算及证据解释错误；纯缺漏归D2。",
+      "item_id": "T0010-D1-02",
+      "dimension": "D1",
+      "dimension_name": "内容正确性与依据",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "inputs/programs.csv",
+          "locator": "未获同类资助",
+          "sha256": "27642027a192d9a65870d0573ba86f45ca49475f39f853e0476ea7fbb56e8aaf"
+        },
+        {
+          "source": "prompt",
+          "locator": "请依据 inputs/company_eligibility.json 与 inputs/programs.csv，为项目经理写申报推荐 grant_fit.xlsx 和申报行动清单 grant_actions.docx；逐项判硬条件与截止日，材料缺失标待补，不能把模拟政策说成现实政府现行政策。 评估日以企业画像中的2026-10-13为准，按该日计算成立年限和是否逾期。未说明是否获得同类资助、制造业产线等事实时写待补，不自行判已满足。政策均为本次模拟快照，不另行上网更新；请直接交可供项目经理使用的推荐与行动文件。",
+          "sha256": "83ff9ea545b58cf735186e3d12a3423d317e6fdb3dc8b8bf04b09bf4d18599ab"
+        },
+        {
+          "source": "inputs/company_eligibility.json",
+          "locator": "founded=2023-04-20;as_of=2026-10-13;hightech_cert=false;patents_granted=2",
+          "sha256": "5478cb4b55b70698d64a4cd3bd241403a2953eec5b31734014f778d1f502a5b6"
+        }
+      ],
+      "evidence_details": [
+        "grant_fit.xlsx：output_text,structured",
+        "grant_actions.docx：output_text,structured"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "grant_fit.xlsx",
+        "grant_actions.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "P4未获同类资助、P5制造业产线均未给定，列待补后判断；专利等已知事实不得替代未知条件。材料未交不等于资格已满足或已不满足。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "P4未获同类资助、P5制造业产线均未给定，列待补后判断；专利等已知事实不得替代未知条件。材料未交不等于资格已满足或已不满足。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "五个模拟计划逐项给硬条件判断及申报截止日。",
+      "anchors": {
+        "0": "所需主体内容/关键对象缺失，或仅有标题、占位、完成承诺。已有内容的事实错误与越界不在本项重复扣。",
+        "0.5": "主体内容与对象已覆盖，仅一处次要字段、来源标记或说明缺漏。",
+        "1": "五个模拟计划逐项给硬条件判断及申报截止日。"
+      },
+      "deduction_scope": "仅必要内容/对象/字段覆盖不足；已有内容同一错误不重扣。",
+      "item_id": "T0010-D2-01",
+      "dimension": "D2",
+      "dimension_name": "内容覆盖与充分性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "逐项判硬条件与截止日",
+          "sha256": "83ff9ea545b58cf735186e3d12a3423d317e6fdb3dc8b8bf04b09bf4d18599ab"
+        }
+      ],
+      "evidence_details": [
+        "grant_fit.xlsx：output_text,structured"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "grant_fit.xlsx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "五个模拟计划逐项给硬条件判断及申报截止日。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "五个模拟计划逐项给硬条件判断及申报截止日。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "推荐表区分可推荐、不满足与待补后再判断的项目。",
+      "anchors": {
+        "0": "所需主体内容/关键对象缺失，或仅有标题、占位、完成承诺。已有内容的事实错误与越界不在本项重复扣。",
+        "0.5": "主体内容与对象已覆盖，仅一处次要字段、来源标记或说明缺漏。",
+        "1": "推荐表区分可推荐、不满足与待补后再判断的项目。"
+      },
+      "deduction_scope": "仅必要内容/对象/字段覆盖不足；已有内容同一错误不重扣。",
+      "item_id": "T0010-D2-02",
+      "dimension": "D2",
+      "dimension_name": "内容覆盖与充分性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "申报推荐",
+          "sha256": "83ff9ea545b58cf735186e3d12a3423d317e6fdb3dc8b8bf04b09bf4d18599ab"
+        }
+      ],
+      "evidence_details": [
+        "grant_fit.xlsx：output_text,structured"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "grant_fit.xlsx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "推荐表区分可推荐、不满足与待补后再判断的项目。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "推荐表区分可推荐、不满足与待补后再判断的项目。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "行动清单列需补资料和相应申报步骤，衔接截止日。",
+      "anchors": {
+        "0": "所需主体内容/关键对象缺失，或仅有标题、占位、完成承诺。已有内容的事实错误与越界不在本项重复扣。",
+        "0.5": "主体内容与对象已覆盖，仅一处次要字段、来源标记或说明缺漏。",
+        "1": "行动清单列需补资料和相应申报步骤，衔接截止日。"
+      },
+      "deduction_scope": "仅必要内容/对象/字段覆盖不足；已有内容同一错误不重扣。",
+      "item_id": "T0010-D2-03",
+      "dimension": "D2",
+      "dimension_name": "内容覆盖与充分性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "申报行动清单",
+          "sha256": "83ff9ea545b58cf735186e3d12a3423d317e6fdb3dc8b8bf04b09bf4d18599ab"
+        }
+      ],
+      "evidence_details": [
+        "grant_actions.docx：output_text,structured"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "grant_actions.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "行动清单列需补资料和相应申报步骤，衔接截止日。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "行动清单列需补资料和相应申报步骤，衔接截止日。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "五个项目所列材料要求在行动清单中有相应准备安排；本项仅核材料覆盖，不复扣资格事实错误。",
+      "anchors": {
+        "0": "所需主体内容/关键对象缺失，或仅有标题、占位、完成承诺。已有内容的事实错误与越界不在本项重复扣。",
+        "0.5": "主体内容与对象已覆盖，仅一处次要字段、来源标记或说明缺漏。",
+        "1": "五个项目所列材料要求在行动清单中有相应准备安排；本项仅核材料覆盖，不复扣资格事实错误。"
+      },
+      "deduction_scope": "仅必要内容/对象/字段覆盖不足；已有内容同一错误不重扣。",
+      "item_id": "T0010-D2-04",
+      "dimension": "D2",
+      "dimension_name": "内容覆盖与充分性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "inputs/programs.csv",
+          "locator": "审计+研发归集",
+          "sha256": "27642027a192d9a65870d0573ba86f45ca49475f39f853e0476ea7fbb56e8aaf"
+        },
+        {
+          "source": "prompt",
+          "locator": "请依据 inputs/company_eligibility.json 与 inputs/programs.csv，为项目经理写申报推荐 grant_fit.xlsx 和申报行动清单 grant_actions.docx；逐项判硬条件与截止日，材料缺失标待补，不能把模拟政策说成现实政府现行政策。 评估日以企业画像中的2026-10-13为准，按该日计算成立年限和是否逾期。未说明是否获得同类资助、制造业产线等事实时写待补，不自行判已满足。政策均为本次模拟快照，不另行上网更新；请直接交可供项目经理使用的推荐与行动文件。",
+          "sha256": "83ff9ea545b58cf735186e3d12a3423d317e6fdb3dc8b8bf04b09bf4d18599ab"
+        }
+      ],
+      "evidence_details": [
+        "grant_actions.docx：output_text,structured"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "grant_actions.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "五个项目所列材料要求在行动清单中有相应准备安排；本项仅核材料覆盖，不复扣资格事实错误。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "五个项目所列材料要求在行动清单中有相应准备安排；本项仅核材料覆盖，不复扣资格事实错误。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "遵循固定模拟政策来源，不把模拟计划冒称现实现行政策、不用实时政策替换附件；评估日及资格事实错只归D1，不要求重复免责声明。",
+      "anchors": {
+        "0": "发生本项明确禁止的虚报、越界，或核心范围/状态与当前委托相反。",
+        "0.5": "核心限制均遵守，仅局部范围或一致性标识不清；实际禁项发生不适用半分。",
+        "1": "遵循固定模拟政策来源，不把模拟计划冒称现实现行政策、不用实时政策替换附件；评估日及资格事实错只归D1，不要求重复免责声明。"
+      },
+      "deduction_scope": "仅当前显式范围/格式/授权限制或独立跨产物矛盾；不复扣同一D1事实。",
+      "item_id": "T0010-D3-01",
+      "dimension": "D3",
+      "dimension_name": "当前要求适配与一致性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "不能把模拟政策说成现实政府现行政策",
+          "sha256": "83ff9ea545b58cf735186e3d12a3423d317e6fdb3dc8b8bf04b09bf4d18599ab"
+        },
+        {
+          "source": "prompt",
+          "locator": "请依据 inputs/company_eligibility.json 与 inputs/programs.csv，为项目经理写申报推荐 grant_fit.xlsx 和申报行动清单 grant_actions.docx；逐项判硬条件与截止日，材料缺失标待补，不能把模拟政策说成现实政府现行政策。 评估日以企业画像中的2026-10-13为准，按该日计算成立年限和是否逾期。未说明是否获得同类资助、制造业产线等事实时写待补，不自行判已满足。政策均为本次模拟快照，不另行上网更新；请直接交可供项目经理使用的推荐与行动文件。",
+          "sha256": "83ff9ea545b58cf735186e3d12a3423d317e6fdb3dc8b8bf04b09bf4d18599ab"
+        }
+      ],
+      "evidence_details": [
+        "grant_fit.xlsx：output_text,structured",
+        "grant_actions.docx：output_text,structured"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "grant_fit.xlsx",
+        "grant_actions.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "遵循固定模拟政策来源，不把模拟计划冒称现实现行政策、不用实时政策替换附件；评估日及资格事实错只归D1，不要求重复免责声明。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "遵循固定模拟政策来源，不把模拟计划冒称现实现行政策、不用实时政策替换附件；评估日及资格事实错只归D1，不要求重复免责声明。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "推荐表与行动文件对于资格及待补状态无独立矛盾；同一事实在两份文件都写错只归D1。本项仅负责两份产物之间的状态比较。",
+      "anchors": {
+        "0": "发生本项明确禁止的虚报、越界，或核心范围/状态与当前委托相反。",
+        "0.5": "核心限制均遵守，仅局部范围或一致性标识不清；实际禁项发生不适用半分。",
+        "1": "推荐表与行动文件对于资格及待补状态无独立矛盾；同一事实在两份文件都写错只归D1。本项仅负责两份产物之间的状态比较。"
+      },
+      "deduction_scope": "仅当前显式范围/格式/授权限制或独立跨产物矛盾；不复扣同一D1事实。",
+      "comparison_deliverables": [
+        "grant_fit.xlsx",
+        "grant_actions.docx"
+      ],
+      "item_id": "T0010-D3-02",
+      "dimension": "D3",
+      "dimension_name": "当前要求适配与一致性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "材料缺失标待补",
+          "sha256": "83ff9ea545b58cf735186e3d12a3423d317e6fdb3dc8b8bf04b09bf4d18599ab"
+        },
+        {
+          "source": "prompt",
+          "locator": "请依据 inputs/company_eligibility.json 与 inputs/programs.csv，为项目经理写申报推荐 grant_fit.xlsx 和申报行动清单 grant_actions.docx；逐项判硬条件与截止日，材料缺失标待补，不能把模拟政策说成现实政府现行政策。 评估日以企业画像中的2026-10-13为准，按该日计算成立年限和是否逾期。未说明是否获得同类资助、制造业产线等事实时写待补，不自行判已满足。政策均为本次模拟快照，不另行上网更新；请直接交可供项目经理使用的推荐与行动文件。",
+          "sha256": "83ff9ea545b58cf735186e3d12a3423d317e6fdb3dc8b8bf04b09bf4d18599ab"
+        }
+      ],
+      "evidence_details": [
+        "grant_fit.xlsx：output_text,structured",
+        "grant_actions.docx：output_text,structured"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "grant_fit.xlsx",
+        "grant_actions.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "ALL_REQUIRED_FOR_EXPLICIT_COMPARISON",
+      "artifact_dependency_details": {
+        "content_scope": "推荐表与行动文件对于资格及待补状态无独立矛盾；同一事实在两份文件都写错只归D1。本项仅负责两份产物之间的状态比较。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [
+          "grant_fit.xlsx",
+          "grant_actions.docx"
+        ],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "EXPLICIT_ALL_REQUIRED_COMPARISON",
+        "required_deliverables": [
+          "grant_fit.xlsx",
+          "grant_actions.docx"
+        ],
+        "details": {
+          "content_scope": "推荐表与行动文件对于资格及待补状态无独立矛盾；同一事实在两份文件都写错只归D1。本项仅负责两份产物之间的状态比较。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [
+            "grant_fit.xlsx",
+            "grant_actions.docx"
+          ],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "已有推荐与补证动作的先后关系合理，时间紧迫性与资格不确定性得到不同处理；不把推荐逻辑等同获批保证。 本项仅评已有内容的独立推理/操作衔接缺陷；其他维度已记的同一事实错误、缺项、越权或可读性问题不重复计。",
+      "anchors": {
+        "0": "在已存在、已覆盖且未被其他维度计过的内容中，业务推理或操作关系存在关键断裂，无法用于该项工作。",
+        "0.5": "已有内容足以支持主要业务用途，但一处推理连接、取舍说明或操作交接仍含糊；没有新增未委托交付要求。",
+        "1": "已有推荐与补证动作的先后关系合理，时间紧迫性与资格不确定性得到不同处理；不把推荐逻辑等同获批保证。 本项仅评已有内容的独立推理/操作衔接缺陷；其他维度已记的同一事实错误、缺项、越权或可读性问题不重复计。"
+      },
+      "deduction_scope": "仅已覆盖内容中独立的判断、取舍及操作衔接缺陷；不借可用性重复扣其他维度。",
+      "item_id": "T0010-D4-01",
+      "dimension": "D4",
+      "dimension_name": "专业判断与业务可用性",
+      "weight": 1,
+      "basis": "derived_quality",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "项目经理",
+          "sha256": "83ff9ea545b58cf735186e3d12a3423d317e6fdb3dc8b8bf04b09bf4d18599ab"
+        }
+      ],
+      "evidence_details": [
+        "grant_actions.docx：output_text,structured"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "grant_actions.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "已有推荐与补证动作的先后关系合理，时间紧迫性与资格不确定性得到不同处理；不把推荐逻辑等同获批保证。 本项仅评已有内容的独立推理/操作衔接缺陷；其他维度已记的同一事实错误、缺项、越权或可读性问题不重复计。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "已有推荐与补证动作的先后关系合理，时间紧迫性与资格不确定性得到不同处理；不把推荐逻辑等同获批保证。 本项仅评已有内容的独立推理/操作衔接缺陷；其他维度已记的同一事实错误、缺项、越权或可读性问题不重复计。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "grant_fit.xlsx：呈现适合“政策项目申报资格筛选”的使用目的；标题/层级/单位或字段名清楚，关键内容可读，没有截断、重叠或乱码。",
+      "anchors": {
+        "0": "该产物实际缺失或本身损坏，或表达/版式妨碍读取关键内容；裁判解析/渲染环境故障须UNSCORED而非0。",
+        "0.5": "主要内容可读，但局部标题、表头、分页或字段说明不清；关键内容仍完整可见。",
+        "1": "grant_fit.xlsx：呈现适合“政策项目申报资格筛选”的使用目的；标题/层级/单位或字段名清楚，关键内容可读，没有截断、重叠或乱码。"
+      },
+      "deduction_scope": "仅对应产物表达、排版及实际视觉可读性；不复扣事实或内容缺项。",
+      "item_id": "T0010-D5-01",
+      "dimension": "D5",
+      "dimension_name": "表达与呈现质量",
+      "weight": 1,
+      "basis": "derived_quality",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "grant_fit.xlsx",
+          "sha256": "83ff9ea545b58cf735186e3d12a3423d317e6fdb3dc8b8bf04b09bf4d18599ab"
+        }
+      ],
+      "evidence_details": [
+        "grant_fit.xlsx：visual"
+      ],
+      "evidence_modes": [
+        "visual",
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "grant_fit.xlsx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "grant_fit.xlsx：呈现适合“政策项目申报资格筛选”的使用目的；标题/层级/单位或字段名清楚，关键内容可读，没有截断、重叠或乱码。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "grant_fit.xlsx：呈现适合“政策项目申报资格筛选”的使用目的；标题/层级/单位或字段名清楚，关键内容可读，没有截断、重叠或乱码。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "grant_actions.docx：呈现适合“政策项目申报资格筛选”的使用目的；标题/层级/单位或字段名清楚，关键内容可读，没有截断、重叠或乱码。",
+      "anchors": {
+        "0": "该产物实际缺失或本身损坏，或表达/版式妨碍读取关键内容；裁判解析/渲染环境故障须UNSCORED而非0。",
+        "0.5": "主要内容可读，但局部标题、表头、分页或字段说明不清；关键内容仍完整可见。",
+        "1": "grant_actions.docx：呈现适合“政策项目申报资格筛选”的使用目的；标题/层级/单位或字段名清楚，关键内容可读，没有截断、重叠或乱码。"
+      },
+      "deduction_scope": "仅对应产物表达、排版及实际视觉可读性；不复扣事实或内容缺项。",
+      "item_id": "T0010-D5-02",
+      "dimension": "D5",
+      "dimension_name": "表达与呈现质量",
+      "weight": 1,
+      "basis": "derived_quality",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "grant_actions.docx",
+          "sha256": "83ff9ea545b58cf735186e3d12a3423d317e6fdb3dc8b8bf04b09bf4d18599ab"
+        }
+      ],
+      "evidence_details": [
+        "grant_actions.docx：visual"
+      ],
+      "evidence_modes": [
+        "visual",
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "grant_actions.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "grant_actions.docx：呈现适合“政策项目申报资格筛选”的使用目的；标题/层级/单位或字段名清楚，关键内容可读，没有截断、重叠或乱码。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "grant_actions.docx：呈现适合“政策项目申报资格筛选”的使用目的；标题/层级/单位或字段名清楚，关键内容可读，没有截断、重叠或乱码。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    }
+  ],
+  "error_attribution_policy": {
+    "owner_by_error_type": {
+      "fact_calculation_reference": "D1",
+      "effective_requirement_omission": "D2",
+      "format_scope_authorization_or_independent_cross_version_conflict": "D3",
+      "independent_business_reasoning_or_operation": "D4",
+      "expression_visual_readability": "D5"
+    },
+    "single_defect_one_primary_item": true,
+    "ledger_rule": "给每个已观察缺陷登记defect_id、唯一主要item_id和证据；其他项出现同一缺陷仅交叉引用，不重复扣。多个独立缺陷可分别扣。产物全缺按依赖条目0保留原权重，不用此规则给空产物满分。",
+    "partial_credit": "不因未采用唯一措辞/布局/合理方案而扣；禁项实际发生不得以说明不全换半分。",
+    "failure_not_score": "裁判证据设施故障UNSCORED；依赖产物缺失对应0且不重分权重。"
+  },
+  "scoring_status": "NOT_SCORED",
+  "input_root": "D:\\skillloop\\output\\20261024_wrd16_light_two_arm\\frozen",
+  "human_review": {
+    "status": "PENDING",
+    "reviewer": null,
+    "date": null
+  },
+  "review": {
+    "status": "AI_SELF_REVIEWED",
+    "checks": {
+      "current_task_bound": true,
+      "all_five_dimensions": true,
+      "no_added_requirements": true,
+      "delivery_quality_separated": true,
+      "anchors_distinct": true,
+      "source_evidence_locatable": true,
+      "one_defect_one_primary": true
+    },
+    "findings_fixed": [
+      "固定评估日，避免把P3未过截止误当成立年限合格。",
+      "P4资助史及P5生产线未知维持待补；五计划/两成果内容归Q。"
+    ],
+    "remaining_unknowns": [
+      "尚未进行实际人员审核或评分器可靠性校准；本文件不含任务得分。"
+    ],
+    "task_id": "T0010",
+    "current_task_sha256": "be27f85f02a45bf02c1356116e6f05a5e0d59453f1d3117f33806215b4bc2d2a",
+    "authored_sha256": "6d3ead3d6d0ceb81263ed200fcfa07ef36063a744dd9b0c327c6c51446a1e9c4",
+    "tsr_checks_reviewed": [
+      "DELIVERED_AS_NAMED_REGULAR_FILE",
+      "BYTE_SIZE_GT_ZERO",
+      "OPENS_IN_REAL_DECLARED_FORMAT"
+    ],
+    "rubric_items": 11
+  },
+  "source_revision": "eval33_frozen_task_with_light_wrd_adopted",
+  "source_task_sha256": "be27f85f02a45bf02c1356116e6f05a5e0d59453f1d3117f33806215b4bc2d2a",
+  "source_only_authored_path": "D:\\skillloop\\output\\20261025_modified28_evaluation_standard\\authored\\T0010.json",
+  "author": "CODEx_SOURCE_ONLY_AI_REVISION_20261025",
+  "prior_rubric_source": "D:\\skillloop\\output\\20261017_eval250_quality_review\\release\\rubrics.jsonl"
+}

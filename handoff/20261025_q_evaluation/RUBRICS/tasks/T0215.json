@@ -1,0 +1,753 @@
+{
+  "schema_version": "eval250-quality-rubric-v1",
+  "rubric_version": "1.1.0-ai-full-review",
+  "status": "REVIEWED_BY_AI_PENDING_HUMAN",
+  "task_id": "T0215",
+  "title": "银行日记账生成录入凭证",
+  "category": "DATA",
+  "prompt": "请按 inputs/凭证科目口径.md 将 inputs/银行日记账.xlsx 的全部交易编为 金融日记账凭证.docx 和 凭证录入表.xlsx，按流水日期排序，每笔保留流水ID、摘要和分录；利息收入必须以银行存款正借方、财务费用—手续费负借方冲减格式表示，不能改成其他收益或正贷方。对全部凭证逐笔核借贷平衡，不登录实际财务系统。",
+  "prompt_sha256": "12fb04d8b9fc615d40b43ab3f6e61eaa023bfe444a70c548e9e86e968069042c",
+  "source_dataset": "eval250_review_v1.1",
+  "task_dataset_sha256": "960ccfe108260592c2d644237dc7536a66214e188e2dbc2e4b266a8cf5629597",
+  "inputs": [
+    {
+      "name": "inputs/银行日记账.xlsx",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0215\\inputs\\银行日记账.xlsx",
+      "sha256": "1800f1acd3e5131bcb7f60e9eba6325c6f9366b103f8aa82524458898fb2b71e",
+      "bytes": 6330
+    },
+    {
+      "name": "inputs/凭证科目口径.md",
+      "path": "D:\\skillloop\\output\\20261013_eval250_review\\release\\evaluation_visible\\tasks\\T0215\\inputs\\凭证科目口径.md",
+      "sha256": "eae168614f359a9ee6c57f07a66a9ecf548a9824a01735e8afc6d2b32db978c2",
+      "bytes": 863
+    }
+  ],
+  "deliverables": [
+    {
+      "filename": "金融日记账凭证.docx",
+      "format": "docx"
+    },
+    {
+      "filename": "凭证录入表.xlsx",
+      "format": "xlsx"
+    }
+  ],
+  "dimension_weights": {
+    "D1": 0.3,
+    "D2": 0.2,
+    "D3": 0.2,
+    "D4": 0.2,
+    "D5": 0.1
+  },
+  "within_dimension_weight_policy": "FIXED_EQUAL_ITEM_WEIGHTS_REVIEWED_BY_AI_PENDING_HUMAN",
+  "historical_reference_used": false,
+  "actor_outputs_used_for_authoring": false,
+  "authoring_timing": "AFTER_EXISTING_EXECUTIONS_BEFORE_NEW_QUALITY_SCORING_NOT_PREREGISTERED",
+  "author": {
+    "kind": "CODEX_AGENT",
+    "shard": "office_data"
+  },
+  "human_review": {
+    "status": "PENDING",
+    "reviewer": null,
+    "date": null
+  },
+  "calibration": {
+    "rubric_generator": "NOT_VALIDATED",
+    "judge": "NOT_VALIDATED"
+  },
+  "author_notes": [
+    "业务用途解释（不额外重复计分）：财务可逐笔审核再录入，负借方特殊口径可辨，文档与表格来源一致。"
+  ],
+  "items": [
+    {
+      "dimension": "D1",
+      "criterion": "全部交易按给定科目映射和源金额编分录，逐笔借贷平衡；利息交易的特殊两借格式仅D1-02判，日期排序归D3，记录缺失归D2。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "对全部凭证逐笔核借贷平衡",
+          "locator": "prompt",
+          "sha256": "12fb04d8b9fc615d40b43ab3f6e61eaa023bfe444a70c548e9e86e968069042c",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 143,
+            "char_end_exclusive": 155,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "已经呈现的核心事实、计算、规则或证据归属错误，足以改变本项主要判断；单纯遗漏按D2归责。",
+        "0.5": "核心结论和主要事实成立，但已呈现的少量非关键值、口径标签或证据对应有局部错误；单纯遗漏不在本项再次扣分。",
+        "1": "全部交易按给定科目映射和源金额编分录，逐笔借贷平衡；利息交易的特殊两借格式仅D1-02判，日期排序归D3，记录缺失归D2。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "凭证录入表.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0215-D1-01",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0215-D1-01",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D1",
+      "criterion": "利息收入必须银行存款正借方、财务费用—手续费负借方冲减，两借方净和为0；不改为其他收益或正贷方。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "利息收入必须以银行存款正借方、财务费用—手续费负借方冲减格式表示",
+          "locator": "prompt",
+          "sha256": "12fb04d8b9fc615d40b43ab3f6e61eaa023bfe444a70c548e9e86e968069042c",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 97,
+            "char_end_exclusive": 129,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "已经呈现的核心事实、计算、规则或证据归属错误，足以改变本项主要判断；单纯遗漏按D2归责。",
+        "0.5": "核心结论和主要事实成立，但已呈现的少量非关键值、口径标签或证据对应有局部错误；单纯遗漏不在本项再次扣分。",
+        "1": "利息收入必须银行存款正借方、财务费用—手续费负借方冲减，两借方净和为0；不改为其他收益或正贷方。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "凭证录入表.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0215-D1-02",
+      "dimension_name": "内容正确性与依据",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0215-D1-02",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D1",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "DOCX凭证覆盖全部交易，每笔有流水ID、摘要、日期与分录；排序只归D3，具体科目数值只归D1。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "请按 inputs/凭证科目口径.md 将 inputs/银行日记账.xlsx 的全部交易编为 金融日记账凭证.docx 和 凭证录入表.xlsx，按流水日期排序，每笔保留流水ID、摘要和分录；利息收入必须以银行存款正借方、财务费用—手续费负借方冲减格式表示，不能改成其他收益或正贷方。对全部凭证逐笔核借贷平衡，不登录实际财务系统。",
+          "locator": "prompt",
+          "sha256": "12fb04d8b9fc615d40b43ab3f6e61eaa023bfe444a70c548e9e86e968069042c",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 166,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "该项必要内容主体没有提供或只有空标题，无法识别所需输出；已存在内容的具体数值/事实错误只归D1，不在本项重复。",
+        "0.5": "全部交易主体在，局部字段/排序不足。（只按覆盖，不因相同数值或事实错误再次扣。）",
+        "1": "DOCX凭证覆盖全部交易，每笔有流水ID、摘要、日期与分录；排序只归D3，具体科目数值只归D1。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "金融日记账凭证.docx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0215-D2-01",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0215-D2-01",
+      "coverage_only": true,
+      "non_duplication_rule": "只检查内容是否存在与覆盖充分；已存在但数值/状态错误归D1，建议具体可用性归D4，不在本项再扣。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "XLSX录入表覆盖全部交易，日期、ID、摘要、科目及借贷金额/负借方可辨。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "请按 inputs/凭证科目口径.md 将 inputs/银行日记账.xlsx 的全部交易编为 金融日记账凭证.docx 和 凭证录入表.xlsx，按流水日期排序，每笔保留流水ID、摘要和分录；利息收入必须以银行存款正借方、财务费用—手续费负借方冲减格式表示，不能改成其他收益或正贷方。对全部凭证逐笔核借贷平衡，不登录实际财务系统。",
+          "locator": "prompt",
+          "sha256": "12fb04d8b9fc615d40b43ab3f6e61eaa023bfe444a70c548e9e86e968069042c",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 166,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "该项必要内容主体没有提供或只有空标题，无法识别所需输出；已存在内容的具体数值/事实错误只归D1，不在本项重复。",
+        "0.5": "主表齐，一类字段或局部交易不足。（只按覆盖，不因相同数值或事实错误再次扣。）",
+        "1": "XLSX录入表覆盖全部交易，日期、ID、摘要、科目及借贷金额/负借方可辨。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "凭证录入表.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0215-D2-02",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0215-D2-02",
+      "coverage_only": true,
+      "non_duplication_rule": "只检查内容是否存在与覆盖充分；已存在但数值/状态错误归D1，建议具体可用性归D4，不在本项再扣。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D2",
+      "criterion": "逐笔留借贷平衡核对，全部凭证都核，非只给总账平衡声明。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "请按 inputs/凭证科目口径.md 将 inputs/银行日记账.xlsx 的全部交易编为 金融日记账凭证.docx 和 凭证录入表.xlsx，按流水日期排序，每笔保留流水ID、摘要和分录；利息收入必须以银行存款正借方、财务费用—手续费负借方冲减格式表示，不能改成其他收益或正贷方。对全部凭证逐笔核借贷平衡，不登录实际财务系统。",
+          "locator": "prompt",
+          "sha256": "12fb04d8b9fc615d40b43ab3f6e61eaa023bfe444a70c548e9e86e968069042c",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 166,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "该项必要内容主体没有提供或只有空标题，无法识别所需输出；已存在内容的具体数值/事实错误只归D1，不在本项重复。",
+        "0.5": "主要检查有，个别凭证核对缺失。（只按覆盖，不因相同数值或事实错误再次扣。）",
+        "1": "逐笔留借贷平衡核对，全部凭证都核，非只给总账平衡声明。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "凭证录入表.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0215-D2-03",
+      "dimension_name": "内容覆盖与充分性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0215-D2-03",
+      "coverage_only": true,
+      "non_duplication_rule": "只检查内容是否存在与覆盖充分；已存在但数值/状态错误归D1，建议具体可用性归D4，不在本项再扣。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D2",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D3",
+      "criterion": "不登录真实财务系统、不修改日记账源数据，不将草拟凭证宣称已入账；具体科目/负借格式错误归D1。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "不登录实际财务系统",
+          "locator": "prompt",
+          "sha256": "12fb04d8b9fc615d40b43ab3f6e61eaa023bfe444a70c548e9e86e968069042c",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 156,
+            "char_end_exclusive": 165,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "实际违反本条当前criterion列出的独立格式、范围、保密或授权约束；不能拿criterion明确归D1/D2的原因在此重复扣。",
+        "0.5": "本项独立明确约束不设半分：发生违约为0、满足为1；轻微措辞差异或没有额外边界解释不扣。",
+        "1": "不登录真实财务系统、不修改日记账源数据，不将草拟凭证宣称已入账；具体科目/负借格式错误归D1。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text",
+        "functional"
+      ],
+      "deliverables": [
+        "金融日记账凭证.docx",
+        "凭证录入表.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0215-D3-01",
+      "dimension_name": "当前要求适配与一致性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "CONTENT_SCOPED_NO_AUTOMATIC_FILE_AND",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0215-D3-01",
+      "evidence_precondition": "实际外部动作须可信动作/最终状态证据；文稿误写已完成的事实归D1，不以没有证据的怀疑扣此项。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "CONTENT_SCOPED_NO_AUTOMATIC_FILE_AND",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D3",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D3",
+      "criterion": "DOCX和XLSX均针对同一批日记账交易，不能用摘要说明替代凭证授权范围；具体同ID数值错归D1。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "请按 inputs/凭证科目口径.md 将 inputs/银行日记账.xlsx 的全部交易编为 金融日记账凭证.docx 和 凭证录入表.xlsx，按流水日期排序，每笔保留流水ID、摘要和分录；利息收入必须以银行存款正借方、财务费用—手续费负借方冲减格式表示，不能改成其他收益或正贷方。对全部凭证逐笔核借贷平衡，不登录实际财务系统。",
+          "locator": "prompt",
+          "sha256": "12fb04d8b9fc615d40b43ab3f6e61eaa023bfe444a70c548e9e86e968069042c",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 166,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "实际违反本条当前criterion列出的独立格式、范围、保密或授权约束；不能拿criterion明确归D1/D2的原因在此重复扣。",
+        "0.5": "本项独立明确约束不设半分：发生违约为0、满足为1；轻微措辞差异或没有额外边界解释不扣。",
+        "1": "DOCX和XLSX均针对同一批日记账交易，不能用摘要说明替代凭证授权范围；具体同ID数值错归D1。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "金融日记账凭证.docx",
+        "凭证录入表.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "item_id": "T0215-D3-02",
+      "dimension_name": "当前要求适配与一致性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "CONTENT_SCOPED_NO_AUTOMATIC_FILE_AND",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0215-D3-02",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "CONTENT_SCOPED_NO_AUTOMATIC_FILE_AND",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D3",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D3",
+      "criterion": "两份产物交易按流水日期排序，同日顺序不限；不得用ID字典序替代日期顺序。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "按流水日期排序",
+          "locator": "prompt",
+          "sha256": "12fb04d8b9fc615d40b43ab3f6e61eaa023bfe444a70c548e9e86e968069042c",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 74,
+            "char_end_exclusive": 81,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "实际违反本条当前criterion列出的独立格式、范围、保密或授权约束；不能拿criterion明确归D1/D2的原因在此重复扣。",
+        "0.5": "主要按日期，少量同日内部顺序不同不扣；一处非关键错位可半分。",
+        "1": "两份产物交易按流水日期排序，同日顺序不限；不得用ID字典序替代日期顺序。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "金融日记账凭证.docx",
+        "凭证录入表.xlsx"
+      ],
+      "basis": "explicit",
+      "weight": 1,
+      "score": null,
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "CONTENT_SCOPED_NO_AUTOMATIC_FILE_AND",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "item_id": "T0215-D3-03",
+      "dimension_name": "当前要求适配与一致性",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "CONTENT_SCOPED_NO_AUTOMATIC_FILE_AND",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D3",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D4",
+      "criterion": "录入表的正负金额与借贷列组织使负借方式能被正确用于录入前审核，凭证与录入行定位顺畅；不重复判具体借贷科目/数值。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "凭证录入表.xlsx",
+          "locator": "prompt",
+          "sha256": "12fb04d8b9fc615d40b43ab3f6e61eaa023bfe444a70c548e9e86e968069042c",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 63,
+            "char_end_exclusive": 73,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "内容虽存在，但组织方式或推理衔接使本题实际工作仍无法开展；必须指出独立于其他维度的新缺陷。",
+        "0.5": "主要业务使用成立，但局部对应、衔接或操作解释仍需人工整理；不得复用D1/D2/D3/D5已扣原因。",
+        "1": "录入表的正负金额与借贷列组织使负借方式能被正确用于录入前审核，凭证与录入行定位顺畅；不重复判具体借贷科目/数值。"
+      },
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "金融日记账凭证.docx",
+        "凭证录入表.xlsx"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0215-D4-01",
+      "dimension_name": "专业判断与业务可用性",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "CONTENT_SCOPED_NO_AUTOMATIC_FILE_AND",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0215-D4-01",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "CONTENT_SCOPED_NO_AUTOMATIC_FILE_AND",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D4",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D5",
+      "criterion": "在金融日记账凭证.docx中，标题、段落、列表与表格层次适合本题受众；实际渲染后关键文字和表格完整可辨，无重叠、裁切或挤压到难以阅读。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "请按 inputs/凭证科目口径.md 将 inputs/银行日记账.xlsx 的全部交易编为 金融日记账凭证.docx 和 凭证录入表.xlsx，按流水日期排序，每笔保留流水ID、摘要和分录；利息收入必须以银行存款正借方、财务费用—手续费负借方冲减格式表示，不能改成其他收益或正贷方。对全部凭证逐笔核借贷平衡，不登录实际财务系统。",
+          "locator": "prompt",
+          "sha256": "12fb04d8b9fc615d40b43ab3f6e61eaa023bfe444a70c548e9e86e968069042c",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 166,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "实际渲染或文字呈现的关键内容有独立乱码、遮挡、裁切等缺陷，妨碍阅读；明确格式本身违约只归D3。",
+        "0.5": "主要内容清楚可读，个别层级、分页或疏密不佳但不妨碍找到关键事实和行动。",
+        "1": "在金融日记账凭证.docx中，标题、段落、列表与表格层次适合本题受众；实际渲染后关键文字和表格完整可辨，无重叠、裁切或挤压到难以阅读。"
+      },
+      "evidence_modes": [
+        "visual",
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "金融日记账凭证.docx"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0215-D5-01",
+      "dimension_name": "表达与呈现质量",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0215-D5-01",
+      "non_duplication_rule": "只评实际阅读/呈现；规定的字体、页数、A4/比例等本身违约归D3，不因同一格式违约再次扣。独立遮挡/乱码/裁切可在本项判。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D5",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    },
+    {
+      "dimension": "D5",
+      "criterion": "在凭证录入表.xlsx中，明细、汇总和说明的层次与列标题清楚，编号、日期、金额/比例的显示不歧义，关键列和结论在实际打开或渲染时无截断、遮挡或不可辨认。",
+      "sources": [
+        {
+          "source": "prompt",
+          "quote": "请按 inputs/凭证科目口径.md 将 inputs/银行日记账.xlsx 的全部交易编为 金融日记账凭证.docx 和 凭证录入表.xlsx，按流水日期排序，每笔保留流水ID、摘要和分录；利息收入必须以银行存款正借方、财务费用—手续费负借方冲减格式表示，不能改成其他收益或正贷方。对全部凭证逐笔核借贷平衡，不登录实际财务系统。",
+          "locator": "prompt",
+          "sha256": "12fb04d8b9fc615d40b43ab3f6e61eaa023bfe444a70c548e9e86e968069042c",
+          "resolved_source_span": {
+            "basis": "FROZEN_EXTRACTED_TEXT_NOT_BINARY_BYTE_OFFSET",
+            "char_start_0based": 0,
+            "char_end_exclusive": 166,
+            "start_locator": "prompt",
+            "end_locator": "prompt"
+          }
+        }
+      ],
+      "anchors": {
+        "0": "实际渲染或文字呈现的关键内容有独立乱码、遮挡、裁切等缺陷，妨碍阅读；明确格式本身违约只归D3。",
+        "0.5": "主体明细和结论能读懂，但个别列宽、单位展示或分页影响局部阅读；不掩盖关键结果。",
+        "1": "在凭证录入表.xlsx中，明细、汇总和说明的层次与列标题清楚，编号、日期、金额/比例的显示不歧义，关键列和结论在实际打开或渲染时无截断、遮挡或不可辨认。"
+      },
+      "evidence_modes": [
+        "visual",
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "凭证录入表.xlsx"
+      ],
+      "basis": "derived_quality",
+      "weight": 1,
+      "item_id": "T0215-D5-02",
+      "dimension_name": "表达与呈现质量",
+      "required_for_quality": true,
+      "applicability": "APPLICABLE",
+      "artifact_dependency_mode": "SINGLE_ARTIFACT",
+      "missing_artifact_rule": "ZERO_FOR_ABSENT_REQUIRED_CONTENT_OF_THIS_ITEM; NO_WEIGHT_REDISTRIBUTION",
+      "evidence_failure_rule": "UNSCORED; RETRY_OR_HUMAN_REVIEW; NOT_ZERO",
+      "score": null,
+      "review_original_item_id": "T0215-D5-02",
+      "non_duplication_rule": "只评实际阅读/呈现；规定的字体、页数、A4/比例等本身违约归D3，不因同一格式违约再次扣。独立遮挡/乱码/裁切可在本项判。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "original_mode": "SINGLE_ARTIFACT",
+        "details": null
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "primary_error_dimension": "D5",
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "TREAT_WHOLE_TITLE_ONLY_PLACEHOLDER_OR_UNRELATED_CONTENT_AS_MISSING_REQUIRED_ARTIFACT; DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "partly_missing_content": "ZERO_OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT_IN_OTHER_DIMENSIONS",
+        "present_independent_content": "SCORE_FROM_ACTUAL_EVIDENCE",
+        "positive_credit_requires_evidence": "NO_DEFAULT_1_OR_0.5; NO_POSTHOC_NA_OR_WEIGHT_REDISTRIBUTION",
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO",
+        "comparison_rule": "USE_EXPLICIT_DEPENDENCY_DETAILS; NO_KEYWORD_BASED_FILE_AND",
+        "non_owner_item": "CROSS_REFERENCE_SAME_DEFECT_WITHOUT_SECOND_DEDUCTION"
+      }
+    }
+  ],
+  "reviewer": {
+    "kind": "CODEX_AGENT",
+    "scope": "OFFICE40_DATA30_HR20_FULL_SOURCE_REVIEW"
+  },
+  "deduplication_policy": {
+    "primary_attribution": {
+      "D1": "已经表达的事实、计算、规则解释、证据归属或未知状态是否正确",
+      "D2": "必需内容、记录、字段或产物的覆盖",
+      "D3": "独立授权/保密/不得改源/格式/对象范围约束；不是D1错误的重复描述",
+      "D4": "独立的业务推理、交接和实际操作可用性",
+      "D5": "实际视觉、语言和可读性"
+    },
+    "root_cause_once": "同一已具体识别的根因只在一个主条目扣分，其他条目记录关联但不再扣。不能把D1错值派生的图文不一致再扣D3、或把D2缺项再扣D4。存在独立新缺陷才可另扣。",
+    "content_omission": "在实际产物存在且有可评内容时，单纯未覆盖归D2；D1不以同一遗漏扣第二次。缺必需产物时依原合同，所有实际依赖该产物的条目为0；不因去重给空产物其他维度满分。",
+    "comparison": "一个版本值违背输入的，归D1并检查所有实际存在版本；D3比较仅针对不能由单一源事实直接判错的独立对象/承诺冲突。",
+    "technical_missingness": "评估器解析/渲染/公式缓存设施故障为UNSCORED；不记0，不删权重。"
+  },
+  "review_notes": [
+    "60交易日期非ID排序；利息银行正借+手续费负借、贷空，净借0等贷0；非一般正贷法。",
+    "逐条查看criterion、三档锚点、来源、证据模式、依赖和weight；评分仍为空；AI复核不等于人工审核或可靠性校准。"
+  ],
+  "source_review_shards_preserved": true,
+  "scoring_status": "NOT_SCORED",
+  "review_record_ref": "../review_shards/office90_review.json"
+}

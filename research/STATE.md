@@ -1,5 +1,9 @@
 # 当前研究状态
 
+## 2026-10-25：当前355条Q评测资料交接
+
+用户确认28改造AS/TS56＋49强匹配NS＋250 WRD，并说明AS/TS已补齐后继续上传。355份request、1090输入绑定及实际产物已核对，Q尚未评分；独立新分支codex/q-evaluation-handoff-20261025只发布交接包与本轮记忆，不带入D盘无关未提交修改。112条改造四组优先；四条failed按真实内容评，T0197取最新完成结果，10个替换旧尝试只审计。最新取消精确文件名，Q仍五维、独立、逐例自review。[指南与证据](../handoff/20261025_q_evaluation/README.md) / [记忆](memory/2026-10-25_q_evaluation_handoff.md)。以下状态保留原历史身份。
+
 ## 第291轮：三域（Retail/Airline/Telecom）AutoSkill 配对实验全部收官
 
 [268 最终报告](experiments/268_tau2_telecom_autoskill/reports/final_report_268.md)、[记忆291](memory/291_2026-10-05_telecom_v1_paired_eval_complete_three_domains.md)：268 telecom B0 0.7937（127/160）vs B1 0.7438（119/160），**−5.0pp**（配对 23胜/31负/106平，p=0.341，CI[-16.3pp,+5.6pp]；任务级 10/13/17）；技能真实读取 **160/160=100%**。

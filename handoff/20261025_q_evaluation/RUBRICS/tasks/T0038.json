@@ -1,0 +1,836 @@
+{
+  "schema_version": "eval250-quality-rubric-v2-locator-design",
+  "rubric_version": "eval250-current-modified28-rubric-20261025-v1",
+  "status": "AI_SELF_REVIEWED_PENDING_HUMAN",
+  "task_id": "T0038",
+  "title": "审稿问题回复和待补证据",
+  "category": "EDU",
+  "prompt": "请依据 inputs/reviewer_comments.csv 与 inputs/author_evidence.md，准备中英文逐点回复 response.docx 和待补表 evidence_todo.xlsx；如缺实验不能声称已做，回复应承认限制并说明拟修订位置，不能靠模糊表达隐瞒问题。 请一并读取 inputs/本次作者确认.md，按R1至R5逐项回复；本次是返修提交前草稿，拟修改与已完成事实必须分开，缺少行号或公开链接时列待补。信息已足够起草，请一次性交付可供作者审阅的完整草稿及证据待补表。",
+  "prompt_sha256": "d77042595a03c48f2beea0179101a986b3627e60acb6bbb60f4af88f053830cd",
+  "source_dataset": "D:\\skillloop\\output\\20261024_experiment_adopt35\\current_tasks250.json",
+  "task_dataset_sha256": "7a1b18272176a26cecf8245291460799e804f8f2469b74d7862644d7c8eab612",
+  "inputs": [
+    {
+      "name": "inputs/author_evidence.md",
+      "path": "tasks/T0038/inputs/author_evidence.md",
+      "sha256": "215ee62a3a3fc17f2c391207a3636b0d43cc73082c1bcee2892087eedb02d9fc",
+      "bytes": 340
+    },
+    {
+      "name": "inputs/reviewer_comments.csv",
+      "path": "tasks/T0038/inputs/reviewer_comments.csv",
+      "sha256": "52379ac65a170ff54e329f7219b4c8ae81ab5d0663e0e87b5828b9392b65a252",
+      "bytes": 155
+    },
+    {
+      "name": "inputs/本次作者确认.md",
+      "path": "tasks/T0038/inputs/本次作者确认.md",
+      "sha256": "91491519285312722ffb55a2ce4a339309b744cb4ac99d1faffb48f579e7ff0e",
+      "bytes": 687
+    }
+  ],
+  "deliverables": [
+    {
+      "filename": "response.docx",
+      "format": "docx"
+    },
+    {
+      "filename": "evidence_todo.xlsx",
+      "format": "xlsx"
+    }
+  ],
+  "dimension_weights": {
+    "D1": 0.3,
+    "D2": 0.2,
+    "D3": 0.2,
+    "D4": 0.2,
+    "D5": 0.1
+  },
+  "within_dimension_weight_policy": "FIXED_EQUAL_ITEM_WEIGHTS_REVIEWED_BY_AI_PENDING_HUMAN",
+  "historical_reference_used": false,
+  "actor_outputs_used_for_authoring": false,
+  "authoring_timing": "POST_EXISTING_RUNS_SOURCE_ONLY_REVISION; NOT_PRE_RUN_PREREGISTRATION",
+  "calibration": {
+    "rubric_generator": "NOT_VALIDATED",
+    "judge": "NOT_VALIDATED"
+  },
+  "items": [
+    {
+      "criterion": "样本为48便利样本、无功效分析，两班6/8小时非同条件随机对照；不掩饰这些限制",
+      "anchors": {
+        "0": "本项涉及的关键事实、口径或计算错误，导致所述结论不成立；同一内容单纯未提供按D2归责。判定对象：样本为48便利样本、无功效分析，两班6/8小时非同条件随机对照；不掩饰这些限制",
+        "0.5": "核心事实与结论成立，仅少量非关键转录、精度或依据标识有误，不改变主要判断；关键事实错不适用半分。判定对象：样本为48便利样本、无功效分析，两班6/8小时非同条件随机对照；不掩饰这些限制",
+        "1": "样本为48便利样本、无功效分析，两班6/8小时非同条件随机对照；不掩饰这些限制"
+      },
+      "deduction_scope": "已陈述事实/计算错误；不以单纯未写重复扣D2。",
+      "item_id": "T0038-D1-01",
+      "dimension": "D1",
+      "dimension_name": "内容正确性与依据",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "inputs/author_evidence.md",
+          "locator": "便利样本没有功效分析",
+          "sha256": "215ee62a3a3fc17f2c391207a3636b0d43cc73082c1bcee2892087eedb02d9fc"
+        }
+      ],
+      "evidence_details": [
+        "response.docx：output_text",
+        "evidence_todo.xlsx：output_text"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "response.docx",
+        "evidence_todo.xlsx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "样本为48便利样本、无功效分析，两班6/8小时非同条件随机对照；不掩饰这些限制",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "样本为48便利样本、无功效分析，两班6/8小时非同条件随机对照；不掩饰这些限制",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "图2单位为完成任务分钟；事实转录准确，公开许可范围统一在D3判定",
+      "anchors": {
+        "0": "本项涉及的关键事实、口径或计算错误，导致所述结论不成立；同一内容单纯未提供按D2归责。判定对象：图2单位为完成任务分钟；事实转录准确，公开许可范围统一在D3判定",
+        "0.5": "核心事实与结论成立，仅少量非关键转录、精度或依据标识有误，不改变主要判断；关键事实错不适用半分。判定对象：图2单位为完成任务分钟；事实转录准确，公开许可范围统一在D3判定",
+        "1": "图2单位为完成任务分钟；事实转录准确，公开许可范围统一在D3判定"
+      },
+      "deduction_scope": "已陈述事实/计算错误；不以单纯未写重复扣D2。",
+      "item_id": "T0038-D1-02",
+      "dimension": "D1",
+      "dimension_name": "内容正确性与依据",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "inputs/author_evidence.md",
+          "locator": "图2单位为完成任务分钟",
+          "sha256": "215ee62a3a3fc17f2c391207a3636b0d43cc73082c1bcee2892087eedb02d9fc"
+        }
+      ],
+      "evidence_details": [
+        "response.docx：output_text",
+        "evidence_todo.xlsx：output_text"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "response.docx",
+        "evidence_todo.xlsx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "图2单位为完成任务分钟；事实转录准确，公开许可范围统一在D3判定",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "图2单位为完成任务分钟；事实转录准确，公开许可范围统一在D3判定",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "R1—R5每点都有中文和英文回复，交代现有证据/限制及拟修订位置；本项只核逐点覆盖，不与后续重复覆盖条目计两次遗漏",
+      "anchors": {
+        "0": "所需主体内容/关键对象缺失，或仅有标题、占位、完成承诺。已有内容的事实错误与越界不在本项重复扣。",
+        "0.5": "主体内容与对象已覆盖，仅一处次要字段、来源标记或说明缺漏。",
+        "1": "R1—R5每点都有中文和英文回复，交代现有证据/限制及拟修订位置；本项只核逐点覆盖，不与后续重复覆盖条目计两次遗漏"
+      },
+      "deduction_scope": "必须内容或对象未提供；已有内容的错误按D1或明确约束D3。",
+      "item_id": "T0038-D2-01",
+      "dimension": "D2",
+      "dimension_name": "内容覆盖与充分性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "中英文逐点回复 response.docx",
+          "sha256": "d77042595a03c48f2beea0179101a986b3627e60acb6bbb60f4af88f053830cd"
+        }
+      ],
+      "evidence_details": [
+        "response.docx：output_text"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "response.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "R1—R5每点都有中文和英文回复，交代现有证据/限制及拟修订位置；本项只核逐点覆盖，不与后续重复覆盖条目计两次遗漏",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "R1—R5每点都有中文和英文回复，交代现有证据/限制及拟修订位置；本项只核逐点覆盖，不与后续重复覆盖条目计两次遗漏",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "待补表落实缺失证据、拟采取措施及拟修订位置；尚缺行号和真实公开链接时列为提交前待补，不要求现在产生未提供的链接或新增实验。",
+      "anchors": {
+        "0": "所需主体内容/关键对象缺失，或仅有标题、占位、完成承诺。已有内容的事实错误与越界不在本项重复扣。",
+        "0.5": "主体内容与对象已覆盖，仅一处次要字段、来源标记或说明缺漏。",
+        "1": "待补表落实缺失证据、拟采取措施及拟修订位置；尚缺行号和真实公开链接时列为提交前待补，不要求现在产生未提供的链接或新增实验。"
+      },
+      "deduction_scope": "必须内容或对象未提供；已有内容的错误按D1或明确约束D3。",
+      "item_id": "T0038-D2-02",
+      "dimension": "D2",
+      "dimension_name": "内容覆盖与充分性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "待补表 evidence_todo.xlsx",
+          "sha256": "d77042595a03c48f2beea0179101a986b3627e60acb6bbb60f4af88f053830cd"
+        },
+        {
+          "source": "prompt",
+          "locator": "请依据 inputs/reviewer_comments.csv 与 inputs/author_evidence.md，准备中英文逐点回复 response.docx 和待补表 evidence_todo.xlsx；如缺实验不能声称已做，回复应承认限制并说明拟修订位置，不能靠模糊表达隐瞒问题。 请一并读取 inputs/本次作者确认.md，按R1至R5逐项回复；本次是返修提交前草稿，拟修改与已完成事实必须分开，缺少行号或公开链接时列待补。信息已足够起草，请一次性交付可供作者审阅的完整草稿及证据待补表。",
+          "sha256": "d77042595a03c48f2beea0179101a986b3627e60acb6bbb60f4af88f053830cd"
+        },
+        {
+          "source": "inputs/本次作者确认.md",
+          "locator": "作者没有新增实验；当前尚未完成稿件改写；未提供实际公开仓库链接",
+          "sha256": "91491519285312722ffb55a2ce4a339309b744cb4ac99d1faffb48f579e7ff0e"
+        }
+      ],
+      "evidence_details": [
+        "evidence_todo.xlsx：structured"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "evidence_todo.xlsx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "待补表落实缺失证据、拟采取措施及拟修订位置；尚缺行号和真实公开链接时列为提交前待补，不要求现在产生未提供的链接或新增实验。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "待补表落实缺失证据、拟采取措施及拟修订位置；尚缺行号和真实公开链接时列为提交前待补，不要求现在产生未提供的链接或新增实验。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "按本次作者确认区分现有事实、拟修改和仍需补证：没有新增实验，稿件尚未改写，不虚报已完成实验/修改、全部合著者确认、行号或实际公开链接。",
+      "anchors": {
+        "0": "发生本项明确禁止的虚报、越界，或核心范围/状态与当前委托相反。",
+        "0.5": "核心限制均遵守，仅局部范围或一致性标识不清；实际禁项发生不适用半分。",
+        "1": "按本次作者确认区分现有事实、拟修改和仍需补证：没有新增实验，稿件尚未改写，不虚报已完成实验/修改、全部合著者确认、行号或实际公开链接。"
+      },
+      "deduction_scope": "明确字数/时间/授权/禁改/交付范围违反或无依据状态升级；不复扣D1已记的同一事实错。",
+      "item_id": "T0038-D3-01",
+      "dimension": "D3",
+      "dimension_name": "当前要求适配与一致性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "inputs/author_evidence.md",
+          "locator": "没有新增实验",
+          "sha256": "215ee62a3a3fc17f2c391207a3636b0d43cc73082c1bcee2892087eedb02d9fc"
+        },
+        {
+          "source": "prompt",
+          "locator": "请依据 inputs/reviewer_comments.csv 与 inputs/author_evidence.md，准备中英文逐点回复 response.docx 和待补表 evidence_todo.xlsx；如缺实验不能声称已做，回复应承认限制并说明拟修订位置，不能靠模糊表达隐瞒问题。 请一并读取 inputs/本次作者确认.md，按R1至R5逐项回复；本次是返修提交前草稿，拟修改与已完成事实必须分开，缺少行号或公开链接时列待补。信息已足够起草，请一次性交付可供作者审阅的完整草稿及证据待补表。",
+          "sha256": "d77042595a03c48f2beea0179101a986b3627e60acb6bbb60f4af88f053830cd"
+        },
+        {
+          "source": "inputs/本次作者确认.md",
+          "locator": "作者没有新增实验；当前尚未完成稿件改写；未提供实际公开仓库链接",
+          "sha256": "91491519285312722ffb55a2ce4a339309b744cb4ac99d1faffb48f579e7ff0e"
+        }
+      ],
+      "evidence_details": [
+        "response.docx：output_text"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "response.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "按本次作者确认区分现有事实、拟修改和仍需补证：没有新增实验，稿件尚未改写，不虚报已完成实验/修改、全部合著者确认、行号或实际公开链接。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "按本次作者确认区分现有事实、拟修改和仍需补证：没有新增实验，稿件尚未改写，不虚报已完成实验/修改、全部合著者确认、行号或实际公开链接。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "Word回复与待补Excel的修订状态无独立矛盾；相同未经完成的状态升级只归D3-01。本项仅负责两份产物之间的状态比较。",
+      "anchors": {
+        "0": "发生本项明确禁止的虚报、越界，或核心范围/状态与当前委托相反。",
+        "0.5": "核心限制均遵守，仅局部范围或一致性标识不清；实际禁项发生不适用半分。",
+        "1": "Word回复与待补Excel的修订状态无独立矛盾；相同未经完成的状态升级只归D3-01。本项仅负责两份产物之间的状态比较。"
+      },
+      "deduction_scope": "明确字数/时间/授权/禁改/交付范围违反或无依据状态升级；不复扣D1已记的同一事实错。",
+      "comparison_deliverables": [
+        "response.docx",
+        "evidence_todo.xlsx"
+      ],
+      "item_id": "T0038-D3-02",
+      "dimension": "D3",
+      "dimension_name": "当前要求适配与一致性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "不能靠模糊表达隐瞒问题",
+          "sha256": "d77042595a03c48f2beea0179101a986b3627e60acb6bbb60f4af88f053830cd"
+        },
+        {
+          "source": "prompt",
+          "locator": "请依据 inputs/reviewer_comments.csv 与 inputs/author_evidence.md，准备中英文逐点回复 response.docx 和待补表 evidence_todo.xlsx；如缺实验不能声称已做，回复应承认限制并说明拟修订位置，不能靠模糊表达隐瞒问题。 请一并读取 inputs/本次作者确认.md，按R1至R5逐项回复；本次是返修提交前草稿，拟修改与已完成事实必须分开，缺少行号或公开链接时列待补。信息已足够起草，请一次性交付可供作者审阅的完整草稿及证据待补表。",
+          "sha256": "d77042595a03c48f2beea0179101a986b3627e60acb6bbb60f4af88f053830cd"
+        },
+        {
+          "source": "inputs/本次作者确认.md",
+          "locator": "作者没有新增实验；当前尚未完成稿件改写；未提供实际公开仓库链接",
+          "sha256": "91491519285312722ffb55a2ce4a339309b744cb4ac99d1faffb48f579e7ff0e"
+        }
+      ],
+      "evidence_details": [
+        "response.docx：output_text",
+        "evidence_todo.xlsx：output_text"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "response.docx",
+        "evidence_todo.xlsx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "ALL_REQUIRED_FOR_EXPLICIT_COMPARISON",
+      "artifact_dependency_details": {
+        "content_scope": "Word回复与待补Excel的修订状态无独立矛盾；相同未经完成的状态升级只归D3-01。本项仅负责两份产物之间的状态比较。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [
+          "response.docx",
+          "evidence_todo.xlsx"
+        ],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "EXPLICIT_ALL_REQUIRED_COMPARISON",
+        "required_deliverables": [
+          "response.docx",
+          "evidence_todo.xlsx"
+        ],
+        "details": {
+          "content_scope": "Word回复与待补Excel的修订状态无独立矛盾；相同未经完成的状态升级只归D3-01。本项仅负责两份产物之间的状态比较。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [
+            "response.docx",
+            "evidence_todo.xlsx"
+          ],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "公开范围仅去标识汇总和统计脚本，不扩大到个体资料；不将尚缺真实公开链接写成已公开。实际公开状态虚报已归D3-01时不复扣。",
+      "anchors": {
+        "0": "发生本项明确的授权越界或跨语言关键矛盾。",
+        "0.5": "核心授权或含义一致，仅局部范围或语言对应标记不够清晰。",
+        "1": "公开范围仅去标识汇总和统计脚本，不扩大到个体资料；不将尚缺真实公开链接写成已公开。实际公开状态虚报已归D3-01时不复扣。"
+      },
+      "item_id": "T0038-D3-03",
+      "dimension": "D3",
+      "dimension_name": "当前要求适配与一致性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "inputs/author_evidence.md",
+          "locator": "可公开去标识汇总和统计脚本，但个体资料受授权限制",
+          "sha256": "215ee62a3a3fc17f2c391207a3636b0d43cc73082c1bcee2892087eedb02d9fc"
+        }
+      ],
+      "evidence_details": [
+        "response.docx：中英文逐点回复及公开范围"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "response.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "公开范围仅去标识汇总和统计脚本，不扩大到个体资料；不将尚缺真实公开链接写成已公开。实际公开状态虚报已归D3-01时不复扣。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "deduction_scope": "仅当前显式范围/格式/授权限制或独立跨产物矛盾；不复扣同一D1事实。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "公开范围仅去标识汇总和统计脚本，不扩大到个体资料；不将尚缺真实公开链接写成已公开。实际公开状态虚报已归D3-01时不复扣。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "中英文逐点含义及修订状态一致；本项只核两种语言之间的独立矛盾，同一事实误写归D1或D3-01。",
+      "anchors": {
+        "0": "发生本项明确的授权越界或跨语言关键矛盾。",
+        "0.5": "核心授权或含义一致，仅局部范围或语言对应标记不够清晰。",
+        "1": "中英文逐点含义及修订状态一致；本项只核两种语言之间的独立矛盾，同一事实误写归D1或D3-01。"
+      },
+      "item_id": "T0038-D3-04",
+      "dimension": "D3",
+      "dimension_name": "当前要求适配与一致性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "中英文逐点回复",
+          "sha256": "d77042595a03c48f2beea0179101a986b3627e60acb6bbb60f4af88f053830cd"
+        }
+      ],
+      "evidence_details": [
+        "response.docx：中英文逐点回复及公开范围"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "response.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "中英文逐点含义及修订状态一致；本项只核两种语言之间的独立矛盾，同一事实误写归D1或D3-01。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "deduction_scope": "仅当前显式范围/格式/授权限制或独立跨产物矛盾；不复扣同一D1事实。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "中英文逐点含义及修订状态一致；本项只核两种语言之间的独立矛盾，同一事实误写归D1或D3-01。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "已提供回复解释R1样本量、R2条件差异、R5因果措辞等担忧如何通过现有说明及拟修订回应；未解决处说明影响与可行调整，不以礼貌套话代替论证，不强制新增实验。仅核独立推理衔接，不复扣已归D1/D2/D3的同一缺陷。",
+      "anchors": {
+        "0": "已覆盖的回复推理不能回应审稿关切，或建议与已知约束不相容。",
+        "0.5": "主要回应路径成立，仅一个修订与关切之间的解释连接不清。",
+        "1": "已提供回复解释R1样本量、R2条件差异、R5因果措辞等担忧如何通过现有说明及拟修订回应；未解决处说明影响与可行调整，不以礼貌套话代替论证，不强制新增实验。仅核独立推理衔接，不复扣已归D1/D2/D3的同一缺陷。"
+      },
+      "deduction_scope": "在现有相关内容基础上的独立判断、学习组织、交接或功能使用缺陷；不复扣D1/D2/D3/D5。",
+      "item_id": "T0038-D4-01",
+      "dimension": "D4",
+      "dimension_name": "专业判断与业务可用性",
+      "weight": 1,
+      "basis": "derived_quality",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "请依据 inputs/reviewer_comments.csv 与 inputs/author_evidence.md，准备中英文逐点回复 response.docx 和待补表 evidence_todo.xlsx；如缺实验不能声称已做，回复应承认限制并说明拟修订位置，不能靠模糊表达隐瞒问题。",
+          "sha256": "d77042595a03c48f2beea0179101a986b3627e60acb6bbb60f4af88f053830cd"
+        },
+        {
+          "source": "inputs/author_evidence.md",
+          "locator": "计划修订方法第2段、图2注释、限制第1段和结论",
+          "sha256": "215ee62a3a3fc17f2c391207a3636b0d43cc73082c1bcee2892087eedb02d9fc"
+        },
+        {
+          "source": "prompt",
+          "locator": "请依据 inputs/reviewer_comments.csv 与 inputs/author_evidence.md，准备中英文逐点回复 response.docx 和待补表 evidence_todo.xlsx；如缺实验不能声称已做，回复应承认限制并说明拟修订位置，不能靠模糊表达隐瞒问题。 请一并读取 inputs/本次作者确认.md，按R1至R5逐项回复；本次是返修提交前草稿，拟修改与已完成事实必须分开，缺少行号或公开链接时列待补。信息已足够起草，请一次性交付可供作者审阅的完整草稿及证据待补表。",
+          "sha256": "d77042595a03c48f2beea0179101a986b3627e60acb6bbb60f4af88f053830cd"
+        },
+        {
+          "source": "inputs/本次作者确认.md",
+          "locator": "作者没有新增实验；当前尚未完成稿件改写；未提供实际公开仓库链接",
+          "sha256": "91491519285312722ffb55a2ce4a339309b744cb4ac99d1faffb48f579e7ff0e"
+        }
+      ],
+      "evidence_details": [
+        "response.docx：output_text"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "response.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "已提供回复解释R1样本量、R2条件差异、R5因果措辞等担忧如何通过现有说明及拟修订回应；未解决处说明影响与可行调整，不以礼貌套话代替论证，不强制新增实验。仅核独立推理衔接，不复扣已归D1/D2/D3的同一缺陷。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "已提供回复解释R1样本量、R2条件差异、R5因果措辞等担忧如何通过现有说明及拟修订回应；未解决处说明影响与可行调整，不以礼貌套话代替论证，不强制新增实验。仅核独立推理衔接，不复扣已归D1/D2/D3的同一缺陷。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "response.docx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+      "anchors": {
+        "0": "编码、文字或布局存在妨碍阅读/辨识的实质问题。判定对象：response.docx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+        "0.5": "核心文字和数据可读，仅局部表头、层级、间距或版面影响查阅，不遮挡关键内容。判定对象：response.docx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+        "1": "response.docx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断"
+      },
+      "deduction_scope": "视觉、编码、排版和可辨性；不复扣事实或内容遗漏。",
+      "item_id": "T0038-D5-01",
+      "dimension": "D5",
+      "dimension_name": "表达与呈现质量",
+      "weight": 1,
+      "basis": "derived_quality",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "response.docx",
+          "sha256": "d77042595a03c48f2beea0179101a986b3627e60acb6bbb60f4af88f053830cd"
+        }
+      ],
+      "evidence_details": [
+        "response.docx：visual,structured,output_text"
+      ],
+      "evidence_modes": [
+        "visual",
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "response.docx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "response.docx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "response.docx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "evidence_todo.xlsx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+      "anchors": {
+        "0": "编码、文字或布局存在妨碍阅读/辨识的实质问题。判定对象：evidence_todo.xlsx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+        "0.5": "核心文字和数据可读，仅局部表头、层级、间距或版面影响查阅，不遮挡关键内容。判定对象：evidence_todo.xlsx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+        "1": "evidence_todo.xlsx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断"
+      },
+      "deduction_scope": "视觉、编码、排版和可辨性；不复扣事实或内容遗漏。",
+      "item_id": "T0038-D5-02",
+      "dimension": "D5",
+      "dimension_name": "表达与呈现质量",
+      "weight": 1,
+      "basis": "derived_quality",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "evidence_todo.xlsx",
+          "sha256": "d77042595a03c48f2beea0179101a986b3627e60acb6bbb60f4af88f053830cd"
+        }
+      ],
+      "evidence_details": [
+        "evidence_todo.xlsx：visual,structured,output_text"
+      ],
+      "evidence_modes": [
+        "visual",
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "evidence_todo.xlsx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "evidence_todo.xlsx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "evidence_todo.xlsx中章节/表头/字段与本题主题对应，中文、编号、单位和说明易于辨认；完整视图下无妨碍内容阅读的遮挡或截断",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    }
+  ],
+  "scoring_status": "NOT_SCORED",
+  "input_root": "D:\\skillloop\\output\\20261024_eval33_replacement\\release\\evaluation_visible",
+  "human_review": {
+    "status": "PENDING",
+    "reviewer": null,
+    "date": null
+  },
+  "review": {
+    "status": "AI_SELF_REVIEWED",
+    "checks": {
+      "current_task_bound": true,
+      "all_five_dimensions": true,
+      "no_added_requirements": true,
+      "delivery_quality_separated": true,
+      "anchors_distinct": true,
+      "source_evidence_locatable": true,
+      "one_defect_one_primary": true
+    },
+    "findings_fixed": [
+      "新增作者确认优先：已获准修改不等于已经修改。",
+      "缺行号/公开链接列待补，不补造新实验、合著者确认或链接。"
+    ],
+    "remaining_unknowns": [
+      "尚未进行实际人员审核或评分器可靠性校准；本文件不含任务得分。"
+    ],
+    "task_id": "T0038",
+    "current_task_sha256": "7a1b18272176a26cecf8245291460799e804f8f2469b74d7862644d7c8eab612",
+    "authored_sha256": "814d8ec0fbcd8f64713ffb838a5be7673c40532f38792ea264a5c57919904f75",
+    "tsr_checks_reviewed": [
+      "DELIVERED_AS_NAMED_REGULAR_FILE",
+      "BYTE_SIZE_GT_ZERO",
+      "OPENS_IN_REAL_DECLARED_FORMAT"
+    ],
+    "rubric_items": 11
+  },
+  "source_revision": "adopted_targeted17",
+  "source_task_sha256": "7a1b18272176a26cecf8245291460799e804f8f2469b74d7862644d7c8eab612",
+  "source_only_authored_path": "D:\\skillloop\\output\\20261025_modified28_evaluation_standard\\authored\\T0038.json",
+  "author": "CODEx_SOURCE_ONLY_AI_REVISION_20261025",
+  "prior_rubric_source": "D:\\skillloop\\output\\20261017_eval250_quality_review\\release\\rubrics.jsonl"
+}

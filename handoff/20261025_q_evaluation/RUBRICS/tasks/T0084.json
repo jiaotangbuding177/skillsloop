@@ -1,0 +1,832 @@
+{
+  "schema_version": "eval250-quality-rubric-v2-locator-design",
+  "rubric_version": "eval250-current-modified28-rubric-20261025-v1",
+  "status": "AI_SELF_REVIEWED_PENDING_HUMAN",
+  "task_id": "T0084",
+  "title": "融资规划单页",
+  "category": "BIZ",
+  "prompt": "请按 inputs/company_plan.md 和 inputs/brand_spec.json，为潜在投资者制作一页16:9融资规划 financing_plan.pptx 并导出 financing_plan.pdf；资金用途用金额与比例同时表示，保留三个可验里程碑，不推算出让股份或投后估值。 本次受众、页数、讲解时长及输入中的视觉规范均已确认，按既定口径直接交付完整成稿，无需先交风格样张或等待确认。原有表格、图表、计算、讲稿及导出文件要求照常保留；未提供的事实标待确认。",
+  "prompt_sha256": "5ef9bd1b78fd8796e80af7e6e7a48aa883ff1cd8f4fc7a7bf58a51b6abfc8c50",
+  "source_dataset": "D:\\skillloop\\output\\20261024_experiment_adopt35\\current_tasks250.json",
+  "task_dataset_sha256": "fe854db29483cacb107bee96c17bfeca4d88c1efeeb67e716fb3a13d05da402b",
+  "inputs": [
+    {
+      "name": "inputs/brand_spec.json",
+      "path": "tasks/T0084/inputs/brand_spec.json",
+      "sha256": "b9f61606e95bec91f11cb837d75a37b49c50601aa77bb0d2ac9b2e1b6bafe7a2",
+      "bytes": 162
+    },
+    {
+      "name": "inputs/company_plan.md",
+      "path": "tasks/T0084/inputs/company_plan.md",
+      "sha256": "070a9072322ec9c2a80a98b36944b6319b665f7e30e78a94e6eb124af1f4b24d",
+      "bytes": 413
+    }
+  ],
+  "deliverables": [
+    {
+      "filename": "financing_plan.pptx",
+      "format": "pptx"
+    },
+    {
+      "filename": "financing_plan.pdf",
+      "format": "pdf"
+    }
+  ],
+  "dimension_weights": {
+    "D1": 0.3,
+    "D2": 0.2,
+    "D3": 0.2,
+    "D4": 0.2,
+    "D5": 0.1
+  },
+  "within_dimension_weight_policy": "FIXED_EQUAL_ITEM_WEIGHTS_DRAFT_PENDING_REVIEW",
+  "historical_reference_used": false,
+  "actor_outputs_used_for_authoring": false,
+  "authoring_timing": "POST_EXISTING_RUNS_SOURCE_ONLY_REVISION; NOT_PRE_RUN_PREREGISTRATION",
+  "calibration": {
+    "rubric_generator": "NOT_VALIDATED",
+    "judge": "NOT_VALIDATED"
+  },
+  "items": [
+    {
+      "criterion": "拟融资3000万元；研发900、产品可靠性600、交付与算力900、市场450、流动资金150万元，总和3000，金额与用途对应准确。只评已呈现事实，纯遗漏归D2。",
+      "anchors": {
+        "0": "融资总额或主要用途金额/对应关系错误，改变融资安排。",
+        "1": "已呈现融资金额和用途对应均与批准计划一致。",
+        "0.5": "总额及主要分配正确，但一处次要标签/局部金额呈现有误。"
+      },
+      "item_id": "T0084-D1-01",
+      "dimension": "D1",
+      "dimension_name": "内容正确性与依据",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "inputs/company_plan.md",
+          "locator": "“本轮拟融资3000万元。研发900万、产品可靠性600万、交付与算力900万、市场450万、流动资金150万”",
+          "sha256": "070a9072322ec9c2a80a98b36944b6319b665f7e30e78a94e6eb124af1f4b24d"
+        }
+      ],
+      "evidence_details": [
+        "financing_plan.pptx或financing_plan.pdf中资金总额及用途表/图/正文；逐处核对可得独立证据"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "financing_plan.pptx",
+        "financing_plan.pdf"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "拟融资3000万元；研发900、产品可靠性600、交付与算力900、市场450、流动资金150万元，总和3000，金额与用途对应准确。只评已呈现事实，纯遗漏归D2。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "deduction_scope": "仅已有事实、数值、计算及证据解释错误；纯缺漏归D2。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "拟融资3000万元；研发900、产品可靠性600、交付与算力900、市场450、流动资金150万元，总和3000，金额与用途对应准确。只评已呈现事实，纯遗漏归D2。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "五用途比例按各金额/3000计算为30%、20%、30%、15%、5%，合计100%；金额/比例/单位对应，允许等价小数表达。只评已呈现计算，缺比例归D2。",
+      "anchors": {
+        "0": "比例分母或主要比例错误，无法正确表达资金分配。",
+        "1": "已呈现比例与金额及总额一致，五用途比例和加总计算正确。",
+        "0.5": "计算方法和主要比例正确，但局部比例/加总标签有误。"
+      },
+      "item_id": "T0084-D1-02",
+      "dimension": "D1",
+      "dimension_name": "内容正确性与依据",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "inputs/company_plan.md",
+          "locator": "融资3000万元及五用途金额",
+          "sha256": "070a9072322ec9c2a80a98b36944b6319b665f7e30e78a94e6eb124af1f4b24d"
+        },
+        {
+          "source": "prompt",
+          "locator": "“资金用途用金额与比例同时表示”",
+          "sha256": "5ef9bd1b78fd8796e80af7e6e7a48aa883ff1cd8f4fc7a7bf58a51b6abfc8c50"
+        }
+      ],
+      "evidence_details": [
+        "financing_plan.pptx或financing_plan.pdf用途金额与比例，按源金额独立复算"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "financing_plan.pptx",
+        "financing_plan.pdf"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "五用途比例按各金额/3000计算为30%、20%、30%、15%、5%，合计100%；金额/比例/单位对应，允许等价小数表达。只评已呈现计算，缺比例归D2。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "deduction_scope": "仅已有事实、数值、计算及证据解释错误；纯缺漏归D2。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "五用途比例按各金额/3000计算为30%、20%、30%、15%、5%，合计100%；金额/比例/单位对应，允许等价小数表达。只评已呈现计算，缺比例归D2。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "里程碑为2027-03完成3种ERP离线适配验收、2027-06完成20站点可靠性验证、2027-09付费续费率目标80%，均为计划；80%不能说已实现。核心价值为离线、证据可定位、操作留痕。已呈现事实错误归本项，纯缺失归D2。",
+      "anchors": {
+        "0": "主要日期、验收数量/内容或目标状态错误，例如把80%目标写已实现。",
+        "1": "已呈现的里程碑日期、数量、目标状态及核心价值均与计划一致。",
+        "0.5": "主要里程碑/状态正确，但一处次要术语或局部事实对应有误。"
+      },
+      "item_id": "T0084-D1-03",
+      "dimension": "D1",
+      "dimension_name": "内容正确性与依据",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "inputs/company_plan.md",
+          "locator": "“里程碑：2027-03……”“2027-09付费续费率目标80%（目标而非已实现）”“核心价值”",
+          "sha256": "070a9072322ec9c2a80a98b36944b6319b665f7e30e78a94e6eb124af1f4b24d"
+        }
+      ],
+      "evidence_details": [
+        "financing_plan.pptx或financing_plan.pdf中里程碑、价值主张及目标标注"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "financing_plan.pptx",
+        "financing_plan.pdf"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "里程碑为2027-03完成3种ERP离线适配验收、2027-06完成20站点可靠性验证、2027-09付费续费率目标80%，均为计划；80%不能说已实现。核心价值为离线、证据可定位、操作留痕。已呈现事实错误归本项，纯缺失归D2。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "deduction_scope": "仅已有事实、数值、计算及证据解释错误；纯缺漏归D2。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "里程碑为2027-03完成3种ERP离线适配验收、2027-06完成20站点可靠性验证、2027-09付费续费率目标80%，均为计划；80%不能说已实现。核心价值为离线、证据可定位、操作留痕。已呈现事实错误归本项，纯缺失归D2。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "PPTX实质覆盖融资总额、五用途各金额及比例、三个带时间与可验指标的里程碑、离线/证据定位/留痕三项核心价值，不能只给标题或部分概念；这里只评覆盖，已呈现事实错误归D1，单页/比例/视觉归D3/D5。",
+      "anchors": {
+        "0": "PPTX没有面向本题的实质融资规划，或仅有标题/占位。",
+        "1": "PPTX中上述资金、里程碑和价值内容均完整可定位。",
+        "0.5": "融资规划主体存在，但至少一块列明必要内容或其关键子内容缺失。"
+      },
+      "item_id": "T0084-D2-01",
+      "dimension": "D2",
+      "dimension_name": "内容覆盖与充分性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "inputs/company_plan.md",
+          "locator": "全文已批准融资计划",
+          "sha256": "070a9072322ec9c2a80a98b36944b6319b665f7e30e78a94e6eb124af1f4b24d"
+        },
+        {
+          "source": "prompt",
+          "locator": "“资金用途用金额与比例同时表示，保留三个可验里程碑”",
+          "sha256": "5ef9bd1b78fd8796e80af7e6e7a48aa883ff1cd8f4fc7a7bf58a51b6abfc8c50"
+        }
+      ],
+      "evidence_details": [
+        "financing_plan.pptx全页正文、表/图和标注"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "financing_plan.pptx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "PPTX实质覆盖融资总额、五用途各金额及比例、三个带时间与可验指标的里程碑、离线/证据定位/留痕三项核心价值，不能只给标题或部分概念；这里只评覆盖，已呈现事实错误归D1，单页/比例/视觉归D3/D5。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "deduction_scope": "仅必要内容/对象/字段覆盖不足；已有内容同一错误不重扣。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "PPTX实质覆盖融资总额、五用途各金额及比例、三个带时间与可验指标的里程碑、离线/证据定位/留痕三项核心价值，不能只给标题或部分概念；这里只评覆盖，已呈现事实错误归D1，单页/比例/视觉归D3/D5。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "PDF实质覆盖融资总额、五用途各金额及比例、三个带时间与可验指标的里程碑、离线/证据定位/留痕三项核心价值，形成完整融资规划；这里只评PDF自身覆盖，不因PPTX缺失机械置零，事实错和排版问题分别归D1/D5。 若PPT原样存在同一内容缺失，只归D2-01；本项只扣PDF独立内容丢失。",
+      "anchors": {
+        "0": "PDF没有本题实质规划内容，或仅标题/空白占位。",
+        "1": "PDF中上述资金、里程碑和价值内容均完整可定位。",
+        "0.5": "PDF已有完整规划主体，但至少一块列明必要内容或其关键子内容缺失。"
+      },
+      "item_id": "T0084-D2-02",
+      "dimension": "D2",
+      "dimension_name": "内容覆盖与充分性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "inputs/company_plan.md",
+          "locator": "全文已批准融资计划",
+          "sha256": "070a9072322ec9c2a80a98b36944b6319b665f7e30e78a94e6eb124af1f4b24d"
+        },
+        {
+          "source": "prompt",
+          "locator": "“并导出financing_plan.pdf”",
+          "sha256": "5ef9bd1b78fd8796e80af7e6e7a48aa883ff1cd8f4fc7a7bf58a51b6abfc8c50"
+        }
+      ],
+      "evidence_details": [
+        "financing_plan.pdf全部页面可见正文、表/图及标注"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "financing_plan.pdf"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "PDF实质覆盖融资总额、五用途各金额及比例、三个带时间与可验指标的里程碑、离线/证据定位/留痕三项核心价值，形成完整融资规划；这里只评PDF自身覆盖，不因PPTX缺失机械置零，事实错和排版问题分别归D1/D5。 若PPT原样存在同一内容缺失，只归D2-01；本项只扣PDF独立内容丢失。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "deduction_scope": "仅必要内容/对象/字段覆盖不足；已有内容同一错误不重扣。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "PDF实质覆盖融资总额、五用途各金额及比例、三个带时间与可验指标的里程碑、离线/证据定位/留痕三项核心价值，形成完整融资规划；这里只评PDF自身覆盖，不因PPTX缺失机械置零，事实错和排版问题分别归D1/D5。 若PPT原样存在同一内容缺失，只归D2-01；本项只扣PDF独立内容丢失。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "PPTX与PDF均为一页16:9；按brand_spec采用背景#F4F7FA、主色#173C68、强调#16A6A0、微软雅黑和页脚“内部沟通稿·2026-10”。本项只评指定规格，缺内容归D2，可读性归D5。",
+      "anchors": {
+        "0": "页数/比例或整体品牌实现明显偏离，多类主要规格未满足。",
+        "1": "两份现有产物均满足单页16:9和给定品牌字段；颜色使用允许抗锯齿/导出微差，不要求像素逐点取色完全一致。",
+        "0.5": "单页规划和主要品牌已满足，但一类规格或局部颜色/字体/页脚有偏差。"
+      },
+      "item_id": "T0084-D3-01",
+      "dimension": "D3",
+      "dimension_name": "当前要求适配与一致性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "“一页16:9融资规划”",
+          "sha256": "5ef9bd1b78fd8796e80af7e6e7a48aa883ff1cd8f4fc7a7bf58a51b6abfc8c50"
+        },
+        {
+          "source": "inputs/brand_spec.json",
+          "locator": "ratio/background/primary/accent/font/footer全部字段",
+          "sha256": "b9f61606e95bec91f11cb837d75a37b49c50601aa77bb0d2ac9b2e1b6bafe7a2"
+        }
+      ],
+      "evidence_details": [
+        "financing_plan.pptx与financing_plan.pdf各自实际渲染像素、页数/页面尺寸；字体样式信息辅助，不能替代实际渲染"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "financing_plan.pptx",
+        "financing_plan.pdf"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "PPTX与PDF均为一页16:9；按brand_spec采用背景#F4F7FA、主色#173C68、强调#16A6A0、微软雅黑和页脚“内部沟通稿·2026-10”。本项只评指定规格，缺内容归D2，可读性归D5。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "deduction_scope": "仅当前显式范围/格式/授权限制或独立跨产物矛盾；不复扣同一D1事实。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "PPTX与PDF均为一页16:9；按brand_spec采用背景#F4F7FA、主色#173C68、强调#16A6A0、微软雅黑和页脚“内部沟通稿·2026-10”。本项只评指定规格，缺内容归D2，可读性归D5。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "PDF与PPTX表达同一融资方案，独立组织/非源事实安排不得相互冲突；无需像素完全相同。源数值/状态错误只D1，单边内容缺失只对应D2，视觉裁切只D5。",
+      "anchors": {
+        "0": "两份产物表达相互冲突的融资对象或独立方案，不能视为同一规划导出。",
+        "1": "两份规划对象和方案一致，独立安排兼容，允许等价表述和导出排版微差。",
+        "0.5": "主体方案一致，但局部非源事实安排存在冲突。"
+      },
+      "comparison_deliverables": [
+        "financing_plan.pptx",
+        "financing_plan.pdf"
+      ],
+      "item_id": "T0084-D3-02",
+      "dimension": "D3",
+      "dimension_name": "当前要求适配与一致性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "“financing_plan.pptx并导出financing_plan.pdf”",
+          "sha256": "5ef9bd1b78fd8796e80af7e6e7a48aa883ff1cd8f4fc7a7bf58a51b6abfc8c50"
+        }
+      ],
+      "evidence_details": [
+        "financing_plan.pptx与financing_plan.pdf相应段落/表图对照，必须检查双方"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "financing_plan.pptx",
+        "financing_plan.pdf"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "ALL_REQUIRED_FOR_EXPLICIT_COMPARISON",
+      "artifact_dependency_details": {
+        "content_scope": "PDF与PPTX表达同一融资方案，独立组织/非源事实安排不得相互冲突；无需像素完全相同。源数值/状态错误只D1，单边内容缺失只对应D2，视觉裁切只D5。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [
+          "financing_plan.pptx",
+          "financing_plan.pdf"
+        ],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "deduction_scope": "仅当前显式范围/格式/授权限制或独立跨产物矛盾；不复扣同一D1事实。",
+      "canonical_artifact_dependency": {
+        "mode": "EXPLICIT_ALL_REQUIRED_COMPARISON",
+        "required_deliverables": [
+          "financing_plan.pptx",
+          "financing_plan.pdf"
+        ],
+        "details": {
+          "content_scope": "PDF与PPTX表达同一融资方案，独立组织/非源事实安排不得相互冲突；无需像素完全相同。源数值/状态错误只D1，单边内容缺失只对应D2，视觉裁切只D5。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [
+            "financing_plan.pptx",
+            "financing_plan.pdf"
+          ],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "不自行推算或宣称未确定的估值、出让股份和轮次名称；有需要时标未确定/待确认。仅评明确禁止/未确定范围的越界，已给金额和里程碑事实错只D1。",
+      "anchors": {
+        "0": "给出无依据的估值、股份或已确定轮次，并作为融资决策事实。",
+        "1": "未擅自推算或确定估值/出让股份/轮次，缺失信息如需提及则明确未定。",
+        "0.5": "没有作为确定事实给出，但仍展开题面禁止的估值/股份推算，或留下易被误认已定的轮次称谓。"
+      },
+      "item_id": "T0084-D3-03",
+      "dimension": "D3",
+      "dimension_name": "当前要求适配与一致性",
+      "weight": 1,
+      "basis": "explicit",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "“不推算出让股份或投后估值”",
+          "sha256": "5ef9bd1b78fd8796e80af7e6e7a48aa883ff1cd8f4fc7a7bf58a51b6abfc8c50"
+        },
+        {
+          "source": "inputs/company_plan.md",
+          "locator": "“未确定估值、轮次名称和出让比例”",
+          "sha256": "070a9072322ec9c2a80a98b36944b6319b665f7e30e78a94e6eb124af1f4b24d"
+        }
+      ],
+      "evidence_details": [
+        "financing_plan.pptx与financing_plan.pdf中融资轮次/估值/股份及备注，分别检查现有内容"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "financing_plan.pptx",
+        "financing_plan.pdf"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "不自行推算或宣称未确定的估值、出让股份和轮次名称；有需要时标未确定/待确认。仅评明确禁止/未确定范围的越界，已给金额和里程碑事实错只D1。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "deduction_scope": "仅当前显式范围/格式/授权限制或独立跨产物矛盾；不复扣同一D1事实。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "不自行推算或宣称未确定的估值、出让股份和轮次名称；有需要时标未确定/待确认。仅评明确禁止/未确定范围的越界，已给金额和里程碑事实错只D1。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "潜在投资者可从已有资金用途、核心价值和可验里程碑理解融资计划将支持什么、何时验证；不要求为每笔资金强造一一对应产出或额外回报预测。仅评价独立叙事/推理衔接，不复扣事实、缺项和可读性。",
+      "anchors": {
+        "0": "现有各块信息缺少可理解的业务联系，难以理解融资用途与后续验证。",
+        "1": "现有资金、价值和里程碑关系清楚，能用于本题潜在投资者沟通。",
+        "0.5": "主要逻辑可理解，但一处关键联系跳跃或表述无法支持投资者讨论。"
+      },
+      "item_id": "T0084-D4-01",
+      "dimension": "D4",
+      "dimension_name": "专业判断与业务可用性",
+      "weight": 1,
+      "basis": "derived_quality",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "“为潜在投资者制作……融资规划”",
+          "sha256": "5ef9bd1b78fd8796e80af7e6e7a48aa883ff1cd8f4fc7a7bf58a51b6abfc8c50"
+        },
+        {
+          "source": "inputs/company_plan.md",
+          "locator": "资金用途、里程碑及核心价值全文",
+          "sha256": "070a9072322ec9c2a80a98b36944b6319b665f7e30e78a94e6eb124af1f4b24d"
+        }
+      ],
+      "evidence_details": [
+        "financing_plan.pptx或financing_plan.pdf中资金—价值—里程碑的叙事联系"
+      ],
+      "evidence_modes": [
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "financing_plan.pptx",
+        "financing_plan.pdf"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "潜在投资者可从已有资金用途、核心价值和可验里程碑理解融资计划将支持什么、何时验证；不要求为每笔资金强造一一对应产出或额外回报预测。仅评价独立叙事/推理衔接，不复扣事实、缺项和可读性。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "deduction_scope": "仅已覆盖内容中独立的判断、取舍及操作衔接缺陷；不借可用性重复扣其他维度。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "潜在投资者可从已有资金用途、核心价值和可验里程碑理解融资计划将支持什么、何时验证；不要求为每笔资金强造一一对应产出或额外回报预测。仅评价独立叙事/推理衔接，不复扣事实、缺项和可读性。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "financing_plan.pptx实际渲染后，标题/层级/金额单位/比例/里程碑和目标标注可读，无关键内容裁切、遮挡、重叠或乱码；指定色值、字体、页脚和单页规格只归D3。",
+      "anchors": {
+        "0": "关键资金、里程碑或目标状态不可辨认，妨碍使用。",
+        "1": "关键内容完整可辨、层级清楚，符合投资者单页沟通用途。",
+        "0.5": "主体可读，但局部拥挤、层级或裁切/对齐问题需要修整。"
+      },
+      "item_id": "T0084-D5-01",
+      "dimension": "D5",
+      "dimension_name": "表达与呈现质量",
+      "weight": 1,
+      "basis": "derived_quality",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "“为潜在投资者制作一页16:9融资规划……并导出……pdf”",
+          "sha256": "5ef9bd1b78fd8796e80af7e6e7a48aa883ff1cd8f4fc7a7bf58a51b6abfc8c50"
+        }
+      ],
+      "evidence_details": [
+        "financing_plan.pptx全部实际渲染像素及具体问题区域；不能以压缩包文本/元数据或自称代替"
+      ],
+      "evidence_modes": [
+        "visual",
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "financing_plan.pptx"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "financing_plan.pptx实际渲染后，标题/层级/金额单位/比例/里程碑和目标标注可读，无关键内容裁切、遮挡、重叠或乱码；指定色值、字体、页脚和单页规格只归D3。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "deduction_scope": "仅对应产物表达、排版及实际视觉可读性；不复扣事实或内容缺项。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "financing_plan.pptx实际渲染后，标题/层级/金额单位/比例/里程碑和目标标注可读，无关键内容裁切、遮挡、重叠或乱码；指定色值、字体、页脚和单页规格只归D3。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    },
+    {
+      "criterion": "financing_plan.pdf实际渲染后，标题/层级/金额单位/比例/里程碑和目标标注可读，无关键内容裁切、遮挡、重叠或乱码；指定色值、字体、页脚和单页规格只归D3。",
+      "anchors": {
+        "0": "关键资金、里程碑或目标状态不可辨认，妨碍使用。",
+        "1": "关键内容完整可辨、层级清楚，符合投资者单页沟通用途。",
+        "0.5": "主体可读，但局部拥挤、层级或裁切/对齐问题需要修整。"
+      },
+      "item_id": "T0084-D5-02",
+      "dimension": "D5",
+      "dimension_name": "表达与呈现质量",
+      "weight": 1,
+      "basis": "derived_quality",
+      "sources": [
+        {
+          "source": "prompt",
+          "locator": "“为潜在投资者制作一页16:9融资规划……并导出……pdf”",
+          "sha256": "5ef9bd1b78fd8796e80af7e6e7a48aa883ff1cd8f4fc7a7bf58a51b6abfc8c50"
+        }
+      ],
+      "evidence_details": [
+        "financing_plan.pdf全部实际渲染像素及具体问题区域；不能以压缩包文本/元数据或自称代替"
+      ],
+      "evidence_modes": [
+        "visual",
+        "structured",
+        "output_text"
+      ],
+      "deliverables": [
+        "financing_plan.pdf"
+      ],
+      "score": null,
+      "applicability": "APPLICABLE",
+      "required_for_quality": true,
+      "artifact_dependency_mode": "USE_AUTHORED_CONTENT_SCOPE",
+      "artifact_dependency_details": {
+        "content_scope": "financing_plan.pdf实际渲染后，标题/层级/金额单位/比例/里程碑和目标标注可读，无关键内容裁切、遮挡、重叠或乱码；指定色值、字体、页脚和单页规格只归D3。",
+        "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+        "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+        "comparison_requires_deliverables": [],
+        "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+      },
+      "quality_evaluation_contract": {
+        "single_defect_single_primary_item": true,
+        "whole_required_artifact_absent": "DEPENDENT_ITEMS_ZERO_KEEP_WEIGHTS",
+        "file_exists_but_semantically_empty": "QUALITY_ONLY_DEPENDENT_ITEMS_ZERO; NEVER_TSR_FAILURE",
+        "partly_missing_content": "OMISSION_OWNER_ONLY; DO_NOT_REPEAT_SAME_DEFECT",
+        "positive_credit_requires_evidence": true,
+        "evidence_system_failure": "UNSCORED_RETRY_THEN_HUMAN; NEVER_AUTOMATIC_ZERO"
+      },
+      "deduction_scope": "仅对应产物表达、排版及实际视觉可读性；不复扣事实或内容缺项。",
+      "canonical_artifact_dependency": {
+        "mode": "USE_AUTHORED_CONTENT_SCOPE",
+        "required_deliverables": [],
+        "details": {
+          "content_scope": "financing_plan.pdf实际渲染后，标题/层级/金额单位/比例/里程碑和目标标注可读，无关键内容裁切、遮挡、重叠或乱码；指定色值、字体、页脚和单页规格只归D3。",
+          "if_one_deliverable_absent": "ZERO_ONLY_CONTENT_REQUIRING_ABSENT_ARTIFACT; SCORE_INDEPENDENT_PRESENT_CONTENT",
+          "explicit_comparison": "ONLY_NAMED_COMPARISON_CONTENT_REQUIRES_ALL_NAMED_SIDES",
+          "comparison_requires_deliverables": [],
+          "if_all_listed_deliverables_absent": "ZERO_KEEP_WEIGHTS"
+        }
+      }
+    }
+  ],
+  "error_attribution_policy": {
+    "owner_by_error_type": {
+      "fact_calculation_reference": "D1",
+      "effective_requirement_omission": "D2",
+      "format_scope_authorization_or_independent_cross_version_conflict": "D3",
+      "independent_business_reasoning_or_operation": "D4",
+      "expression_visual_readability": "D5"
+    },
+    "single_defect_one_primary_item": true,
+    "ledger_rule": "给每个已观察缺陷登记defect_id、唯一主要item_id和证据；其他项出现同一缺陷仅交叉引用，不重复扣。多个独立缺陷可分别扣。产物全缺按依赖条目0保留原权重，不用此规则给空产物满分。",
+    "partial_credit": "不因未采用唯一措辞/布局/合理方案而扣；禁项实际发生不得以说明不全换半分。",
+    "failure_not_score": "裁判证据设施故障UNSCORED；依赖产物缺失对应0且不重分权重。"
+  },
+  "scoring_status": "NOT_SCORED",
+  "input_root": "D:\\skillloop\\output\\20261024_eval33_replacement\\release\\evaluation_visible",
+  "human_review": {
+    "status": "PENDING",
+    "reviewer": null,
+    "date": null
+  },
+  "review": {
+    "status": "AI_SELF_REVIEWED",
+    "checks": {
+      "current_task_bound": true,
+      "all_five_dimensions": true,
+      "no_added_requirements": true,
+      "delivery_quality_separated": true,
+      "anchors_distinct": true,
+      "source_evidence_locatable": true,
+      "one_defect_one_primary": true
+    },
+    "findings_fixed": [
+      "当前prompt只要求PPTX与PDF，删除旧rubric额外的“可编辑”要求；公共追加“原有讲稿照常”不解释为新增讲稿。",
+      "逐项复算900/600/900/450/150万元合计3000万元，对应30%/20%/30%/15%/5%合计100%，要求金额与比例同时呈现。",
+      "保留2027年三里程碑及80%为目标；品牌色/微软雅黑/内部沟通稿页脚依据brand_spec逐项评，页数/视觉/PDF一致性仅Q。",
+      "分别给PPTX与PDF内容覆盖和实际像素证据，跨文件一致性显式绑定两份文件，源数字错误不重复扣一致性。",
+      "自审进一步排除资金数字连带比例错的双扣，以及PPT源内容缺失同步PDF时的双扣；仅PDF独立丢失在PDF覆盖项扣。"
+    ],
+    "remaining_unknowns": [
+      "尚未人工审核/评分器可靠性校准"
+    ],
+    "task_id": "T0084",
+    "current_task_sha256": "fe854db29483cacb107bee96c17bfeca4d88c1efeeb67e716fb3a13d05da402b",
+    "authored_sha256": "6d3ecfd8e05b8f071e87093c5c0af79fec10c78d21ae2b4a9edecef28cc5bf4d",
+    "tsr_checks_reviewed": [
+      "DELIVERED_AS_NAMED_REGULAR_FILE",
+      "BYTE_SIZE_GT_ZERO",
+      "OPENS_IN_REAL_DECLARED_FORMAT"
+    ],
+    "rubric_items": 11
+  },
+  "source_revision": "adopted_targeted23",
+  "source_task_sha256": "fe854db29483cacb107bee96c17bfeca4d88c1efeeb67e716fb3a13d05da402b",
+  "source_only_authored_path": "D:\\skillloop\\output\\20261025_modified28_evaluation_standard\\authored\\T0084.json",
+  "author": "CODEx_SOURCE_ONLY_AI_REVISION_20261025",
+  "prior_rubric_source": "D:\\skillloop\\output\\20261017_eval250_quality_review\\release\\rubrics.jsonl"
+}
