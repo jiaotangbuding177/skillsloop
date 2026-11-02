@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>禾原采购器材报价表单（离线版）</title>
+<style>
+  :root { --brand:#1a5276; --bg:#f4f6f8; --line:#d5dbdb; --err:#c0392b; --ok:#1e8449; }
+  * { box-sizing:border-box; }
+  body { font-family:"Noto Sans CJK SC","Microsoft YaHei",sans-serif; margin:0; background:var(--bg); color:#212f3d; }
+  header { background:var(--brand); color:#fff; padding:16px 24px; }
+  header h1 { margin:0; font-size:20px; }
+  header p { margin:4px 0 0; font-size:13px; opacity:.85; }
+  main { max-width:960px; margin:20px auto; padding:0 16px; }
+  section { background:#fff; border:1px solid var(--line); border-radius:8px; padding:16px 20px; margin-bottom:16px; }
+  h2 { font-size:16px; margin:0 0 12px; color:var(--brand); border-left:4px solid var(--brand); padding-left:8px; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .field label { display:block; font-size:13px; margin-bottom:4px; }
+  .field input, .field select { width:100%; padding:8px; border:1px solid var(--line); border-radius:4px; font-size:14px; }
+  .field .req::after { content:" *"; color:var(--err); }
+  table { width:100%; border-collapse:collapse; font-size:14px; }
+  th, td { border:1px solid var(--line); padding:6px 8px; text-align:left; }
+  th { background:#eaf2f8; }
+  td.num, th.num { text-align:right; }
+  td input[type=number], td select { width:100%; padding:5px; border:1px solid var(--line); border-radius:4px; }
+  .rowbtn { color:var(--err); background:none; border:none; cursor:pointer; font-size:15px; }
+  .actions { margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; }
+  button.btn { padding:8px 16px; border:none; border-radius:4px; cursor:pointer; font-size:14px; }
+  .btn-add { background:var(--brand); color:#fff; }
+  .btn-demo { background:#f9e79f; color:#7d6608; }
+  .btn-export { background:var(--ok); color:#fff; }
+  .btn-clear { background:#e5e8e8; color:#515a5a; }
+  .totals { margin-top:12px; }
+  .totals table td:first-child { width:60%; }
+  .totals .grand td { font-weight:bold; background:#eaf2f8; }
+  .msg { margin-top:12px; padding:10px 12px; border-radius:4px; font-size:14px; display:none; }
+  .msg-error { background:#fdedec; color:var(--err); border:1px solid #f5b7b1; display:block; }
+  .msg-info { background:#eafaf1; color:var(--ok); border:1px solid #a9dfbf; display:block; }
+  footer { text-align:center; font-size:12px; color:#7f8c8d; padding:12px 0 24px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>禾原采购器材报价表单</h1>
+  <p>离线使用 · 数据不外发 · 单价按产品目录，不允许手动改价 · 税率 9%</p>
+</header>
+<main>
+  <datalist id="skuList"></datalist>
+
+  <section>
+    <h2>客户信息</h2>
+    <div class="grid">
+      <div class="field"><label class="req" for="company">客户名称</label><input id="company" placeholder="如：青砚实验室"></div>
+      <div class="field"><label class="req" for="contact">联系人</label><input id="contact" placeholder="如：苏言"></div>
+      <div class="field"><label for="email">电子邮箱（选填）</label><input id="email" type="email" placeholder="如：suyan@example.com"></div>
+      <div class="field"><label class="req" for="quoteDate">报价日期</label><input id="quoteDate" type="date"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>商品明细（可多行，重复型号自动合并）</h2>
+    <table id="linesTable">
+      <thead>
+        <tr>
+          <th style="width:170px">型号</th><th>商品名称</th><th style="width:70px">单位</th>
+          <th class="num" style="width:110px">数量</th><th class="num" style="width:120px">未税单价（元）</th>
+          <th class="num" style="width:120px">未税金额（元）</th><th style="width:50px">操作</th>
+        </tr>
+      </thead>
+      <tbody id="linesBody"></tbody>
+    </table>
+    <div class="actions">
+      <button class="btn btn-add" type="button" onclick="addLine()">+ 添加商品行</button>
+      <button class="btn btn-demo" type="button" onclick="loadSample()">载入样例（青砚实验室）</button>
+      <button class="btn btn-clear" type="button" onclick="clearAll()">清空表单</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>报价汇总</h2>
+    <div class="totals">
+      <table>
+        <tr><td>未税合计</td><td class="num" id="sumExTax">0.00</td></tr>
+        <tr><td>税额（税率 9%，按未税总额计算）</td><td class="num" id="sumTax">0.00</td></tr>
+        <tr class="grand"><td>含税总价</td><td class="num" id="sumTotal">0.00</td></tr>
+      </table>
+    </div>
+    <div class="actions">
+      <button class="btn btn-export" type="button" onclick="exportCSV()">导出 CSV</button>
+    </div>
+    <div class="msg" id="msg"></div>
+  </section>
+</main>
+<footer>本表单为离线演示用途，不连接任何真实采购系统；商品单价与产品目录一致，不可手动修改。</footer>
+
+<script>
+// 产品目录（来自 产品目录.csv）
+const CATALOG = [
+  { sku:'LAB-01', name:'样品架',   unit:'套', price:180 },
+  { sku:'LAB-02', name:'防静电垫', unit:'张', price:95  },
+  { sku:'LAB-03', name:'样品标签', unit:'包', price:28  },
+  { sku:'LAB-04', name:'便携工具箱', unit:'个', price:320 },
+  { sku:'LAB-05', name:'记录板',   unit:'块', price:64  },
+  { sku:'LAB-06', name:'收纳盒',   unit:'个', price:46  }
+];
+document.getElementById('skuList').innerHTML =
+  CATALOG.map(p=>'<option value="'+p.sku+'">'+p.name+'</option>').join('');
+const TAX_RATE = 0.09;
+
+// 客户样例（来自 客户样例.json）
+const SAMPLE = {
+  company:'青砚实验室', contact:'苏言', email:'suyan@example.com', quoteDate:'2026-10-13',
+  lines:[ {sku:'LAB-01', quantity:3}, {sku:'LAB-03', quantity:10}, {sku:'LAB-04', quantity:2} ]
+};
+
+function fmt2(n){ return (Math.round(n*100)/100).toFixed(2); }
+function bySku(sku){ return CATALOG.find(p=>p.sku===sku); }
+
+function addLine(sku, qty){
+  const tbody = document.getElementById('linesBody');
+  const tr = document.createElement('tr');
+  tr.innerHTML =
+    '<td><input class="sku" list="skuList" placeholder="如 LAB-01" autocomplete="off" onchange="onSkuChange(this)">' +
+    '<td class="pname">—</td><td class="punit">—</td>' +
+    '<td><input type="number" class="qty" min="1" step="1" placeholder="正整数" value="'+(qty!=null?qty:'')+'"></td>' +
+    '<td class="num price">—</td><td class="num amount">0.00</td>' +
+    '<td><button class="rowbtn" type="button" title="删除此行" onclick="removeRow(this)">✕</button></td>';
+  tbody.appendChild(tr);
+  tr.querySelector('.sku').value = sku || '';
+  if(sku) onSkuChange(tr.querySelector('.sku'), true);
+  recalc();
+}
+
+function onSkuChange(inp, silent){
+  const val = inp.value.trim();
+  const p = bySku(val);
+  const tr = inp.closest('tr');
+  tr.querySelector('.pname').textContent = p ? p.name : '—';
+  tr.querySelector('.punit').textContent = p ? p.unit : '—';
+  tr.querySelector('.price').textContent = p ? fmt2(p.price) : '—';
+  // 重复型号自动合并（仅合并目录中存在的型号）
+  if(p){
+    let dup = null;
+    document.querySelectorAll('#linesBody tr').forEach(r=>{
+      if(r!==tr && r.querySelector('.sku').value.trim()===val) dup = r;
+    });
+    if(dup){
+      const dQty = dup.querySelector('.qty'), cQty = tr.querySelector('.qty');
+      const a = parseInt(dQty.value)||0, b = parseInt(cQty.value)||0;
+      dQty.value = a + b;
+      setTimeout(()=>{ try{ tr.remove(); }catch(e){} }, 0);
+      showMsg('info','型号 '+val+' 已存在，两行数量已自动合并为 '+dQty.value+'。');
+      recalc();
+      return;
+    }
+  }
+  if(!silent) recalc();
+}
+
+function removeRow(btn){ btn.closest('tr').remove(); recalc(); }
+
+function recalc(){
+  let total = 0;
+  document.querySelectorAll('#linesBody tr').forEach(tr=>{
+    const p = bySku(tr.querySelector('.sku').value);
+    const qty = parseInt(tr.querySelector('.qty').value);
+    let amount = 0;
+    if(p && Number.isInteger(qty) && qty>0) amount = p.price*qty;
+    tr.querySelector('.amount').textContent = fmt2(amount);
+    total += amount;
+  });
+  const tax = Math.round(total*TAX_RATE*100)/100;
+  document.getElementById('sumExTax').textContent = fmt2(total);
+  document.getElementById('sumTax').textContent = fmt2(tax);
+  document.getElementById('sumTotal').textContent = fmt2(total+tax);
+}
+document.addEventListener('input', e=>{ if(e.target.classList.contains('qty')) recalc(); });
+
+function showMsg(type, text){
+  const m = document.getElementById('msg');
+  m.className = 'msg msg-'+type;
+  m.textContent = text;
+}
+
+// 校验：返回错误数组；空数组表示通过
+function validate(){
+  const errs = [];
+  if(!document.getElementById('company').value.trim()) errs.push('客户名称为空：请填写客户名称。');
+  if(!document.getElementById('contact').value.trim()) errs.push('联系人为空：请填写联系人。');
+  if(!document.getElementById('quoteDate').value) errs.push('报价日期为空：请选择报价日期。');
+  const rows = document.querySelectorAll('#linesBody tr');
+  if(rows.length===0) errs.push('未添加任何商品行。');
+  rows.forEach((tr,i)=>{
+    const sku = tr.querySelector('.sku').value.trim();
+    const qtyRaw = tr.querySelector('.qty').value.trim();
+    const qty = Number(qtyRaw);
+    if(!sku) errs.push('第'+(i+1)+'行：未选择商品型号。');
+    else if(!bySku(sku)) errs.push('第'+(i+1)+'行：型号 '+sku+' 不在产品目录中，属于不存在的型号。');
+    if(qtyRaw==='') errs.push('第'+(i+1)+'行：数量为空。');
+    else if(!Number.isInteger(qty) || qty<=0) errs.push('第'+(i+1)+'行：数量“'+qtyRaw+'”非法，必须为正整数。');
+  });
+  return errs;
+}
+
+function loadSample(){
+  clearAll();
+  document.getElementById('company').value = SAMPLE.company;
+  document.getElementById('contact').value = SAMPLE.contact;
+  document.getElementById('email').value = SAMPLE.email;
+  document.getElementById('quoteDate').value = SAMPLE.quoteDate;
+  SAMPLE.lines.forEach(l=>addLine(l.sku, l.quantity));
+  showMsg('info','已载入客户样例：青砚实验室，3 行商品明细。可点击“导出 CSV”查看导出效果。');
+}
+
+function clearAll(){
+  document.getElementById('company').value='';
+  document.getElementById('contact').value='';
+  document.getElementById('email').value='';
+  document.getElementById('quoteDate').value='';
+  document.getElementById('linesBody').innerHTML='';
+  document.getElementById('msg').className='msg';
+  recalc();
+}
+
+// 导出 CSV：带 BOM，防止 Excel 打开中文乱码；保留客户信息与价格口径
+function exportCSV(){
+  const errs = validate();
+  if(errs.length){ showMsg('error', '无法导出，请先修正：\n'+errs.join('\n')); return; }
+  const company = document.getElementById('company').value.trim();
+  const contact = document.getElementById('contact').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const date = document.getElementById('quoteDate').value;
+  const rows = [];
+  rows.push(['禾原采购器材报价单']);
+  rows.push(['客户名称', company]);
+  rows.push(['联系人', contact]);
+  if(email) rows.push(['电子邮箱', email]);
+  rows.push(['报价日期', date]);
+  rows.push(['价格口径','未税单价与金额均为人民币（CNY），税额=未税总额×9%，金额保留2位小数']);
+  rows.push([]);
+  rows.push(['SKU','商品名称','数量','单位','未税单价（CNY）','未税金额（CNY）']);
+  let total = 0;
+  document.querySelectorAll('#linesBody tr').forEach(tr=>{
+    const p = bySku(tr.querySelector('.sku').value.trim());
+    const qty = parseInt(tr.querySelector('.qty').value);
+    const amount = p.price*qty;
+    total += amount;
+    rows.push([p.sku, p.name, qty, p.unit, fmt2(p.price), fmt2(amount)]);
+  });
+  const tax = Math.round(total*TAX_RATE*100)/100;
+  rows.push([]);
+  rows.push(['未税合计','','','','', fmt2(total)]);
+  rows.push(['税额（9%）','','','','', fmt2(tax)]);
+  rows.push(['含税总价','','','','', fmt2(total+tax)]);
+  const csv = '\ufeff' + rows.map(r=>r.map(c=>{
+    c = String(c==null?'':c);
+    return /[",\n]/.test(c) ? '"'+c.replace(/"/g,'""')+'"' : c;
+  }).join(',')).join('\r\n');
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '报价单_'+company+'_'+date+'.csv';
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(a.href);
+  showMsg('info','已导出 CSV 文件：报价单_'+company+'_'+date+'.csv（UTF-8 带 BOM，Excel 可直接打开）。');
+}
+
+// 初始一行
+addLine();
+</script>
+</body>
+</html>

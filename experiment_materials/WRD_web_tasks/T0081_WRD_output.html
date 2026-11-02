@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>澜桥成果服务 · 成果转化平台</title>
+<meta name="description" content="澜桥成果服务：帮助企业发现成果价值并联系产业需求的成果转化平台。核心业务：成果评估、产业匹配、政策匹配、专家服务。">
+<style>
+:root{
+  --teal:#176b79;--teal-dark:#0f5560;--ink:#173d49;--body-c:#33505c;--muted:#4d6a75;
+  --bg:#f7fbfc;--card:#fff;--line:#d7e4e8;--radius:14px;
+  --shadow:0 8px 24px rgba(23,61,73,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+body{margin:0;font:16px/1.7 "Noto Sans CJK SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:var(--body-c);background:var(--bg)}
+h1,h2,h3{color:var(--ink);line-height:1.35;margin:0 0 .4em}
+p{margin:.2em 0 .8em}
+a{color:var(--teal-dark)}
+img,svg{max-width:100%}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--teal);color:#fff;padding:10px 16px;border-radius:8px;z-index:100}
+.skip:focus{left:8px}
+:focus-visible{outline:3px solid #0b6a7d;outline-offset:2px;border-radius:4px}
+
+/* ===== header ===== */
+.site-head{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
+.head-in{display:flex;align-items:center;gap:20px;min-height:72px}
+.brand{display:inline-flex;align-items:center;margin-right:auto}
+.brand svg{display:block}
+.site-nav ul{display:flex;gap:6px;list-style:none;margin:0;padding:0}
+.site-nav a,.site-nav button.linklike{
+  display:block;padding:10px 14px;border-radius:8px;color:var(--ink);text-decoration:none;
+  background:none;border:0;font:inherit;cursor:pointer}
+.site-nav a:hover,.site-nav button.linklike:hover{background:#e9f3f5}
+.has-drop{position:relative}
+.caret{width:10px;height:10px;display:inline-block;vertical-align:middle;margin-left:4px}
+.drop{position:absolute;top:calc(100% + 6px);left:0;min-width:180px;background:#fff;border:1px solid var(--line);
+  border-radius:12px;box-shadow:var(--shadow);padding:8px;display:none;flex-direction:column;gap:2px}
+.drop.open{display:flex}
+.drop a{padding:10px 14px;border-radius:8px}
+.btn{display:inline-block;padding:11px 22px;border-radius:10px;border:1px solid transparent;font:inherit;font-weight:600;
+  cursor:pointer;text-decoration:none;text-align:center;transition:background .2s,box-shadow .2s,transform .2s}
+.btn-primary{background:var(--teal);color:#fff}
+.btn-primary:hover{background:var(--teal-dark);box-shadow:var(--shadow);transform:translateY(-1px)}
+.btn-ghost{background:#fff;color:var(--teal-dark);border-color:var(--teal)}
+.btn-ghost:hover{background:#e9f3f5}
+.nav-toggle{display:none;margin-left:auto}
+.login-slot{margin-left:8px}
+
+/* ===== hero ===== */
+.hero{padding:64px 0 40px;text-align:center;background:
+  radial-gradient(60% 80% at 50% 0%,#e4f1f4 0%,transparent 70%)}
+.hero .kicker{display:inline-block;font-size:14px;letter-spacing:.12em;color:var(--teal-dark);
+  border:1px solid var(--teal);border-radius:999px;padding:4px 16px;margin-bottom:18px;background:#fff}
+.hero h1{font-size:clamp(28px,4.4vw,42px);margin-bottom:.35em}
+.hero .lead{max-width:640px;margin:0 auto 28px;font-size:18px;color:var(--muted)}
+.hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* ===== ring module entries ===== */
+.rings-sec{padding:26px 0 10px}
+.rings{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.ring{display:flex;flex-direction:column;align-items:center;gap:14px;text-decoration:none;color:var(--ink);
+  padding:18px 8px;border-radius:16px;transition:transform .25s,background .25s}
+.ring:hover{background:#fff;box-shadow:var(--shadow);transform:translateY(-4px)}
+.ring-disc{width:132px;height:132px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  border:3px solid var(--teal);position:relative;background:#fff;color:var(--teal-dark);text-align:center;
+  font-weight:700;font-size:17px;letter-spacing:.06em}
+.ring-disc::before{content:"";position:absolute;inset:7px;border-radius:50%;border:1px dashed #9dc3cb}
+.ring:hover .ring-disc{background:var(--teal);color:#fff;border-color:var(--teal-dark)}
+.ring small{font-weight:400;color:var(--muted);font-size:13px}
+
+/* ===== sections ===== */
+section{padding:56px 0}
+section,[id]{scroll-margin-top:88px}
+.sec-alt{background:#eef6f8}
+.sec-head{text-align:center;max-width:640px;margin:0 auto 34px}
+.sec-head h2{font-size:28px}
+.sec-head p{color:var(--muted);margin:0}
+
+/* modules */
+.mods{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.mod{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:8px}
+.mod h3{font-size:20px;margin:0}
+.mod p{margin:0;color:var(--muted)}
+.mod .mod-foot{margin-top:auto;padding-top:14px}
+.mod .tag{display:inline-block;font-size:13px;color:var(--teal-dark);background:#e2eff2;border-radius:999px;padding:2px 12px;margin-bottom:6px}
+
+/* results */
+.results{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.rcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:6px}
+.rcard h3{font-size:19px;margin:0}
+.rcard .meta{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 8px}
+.chip{font-size:13px;border-radius:999px;padding:2px 12px;background:#e2eff2;color:var(--teal-dark)}
+.chip-trl{background:var(--ink);color:#fff}
+.rcard p{margin:0;color:var(--muted);font-size:15px}
+.rcard .rc-foot{margin-top:auto;padding-top:14px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.rcard .owner{font-size:14px;color:var(--muted)}
+
+/* about / contact */
+.about-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.about-item{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+.about-item h3{font-size:17px}
+.about-item p{margin:0;font-size:15px;color:var(--muted)}
+.contact-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:34px;display:flex;flex-wrap:wrap;gap:26px;align-items:center;justify-content:space-between}
+.contact-card ul{list-style:none;margin:0;padding:0;font-size:17px}
+.contact-card li{margin:6px 0}
+.contact-card a{font-weight:600}
+
+/* footer */
+footer{background:var(--ink);color:#cfe0e5;padding:28px 0;font-size:14px}
+.foot-in{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+footer a{color:#fff}
+
+/* dialog */
+dialog{border:0;border-radius:16px;box-shadow:0 24px 60px rgba(23,61,73,.25);padding:28px;max-width:520px;width:calc(100% - 40px);color:var(--body-c)}
+dialog::backdrop{background:rgba(23,61,73,.45)}
+dialog h3{margin-top:0}
+.dlg-close{float:right;background:none;border:0;font-size:22px;line-height:1;cursor:pointer;color:var(--muted);padding:6px}
+.trl-track{height:10px;border-radius:999px;background:#e2eff2;margin:10px 0 4px;position:relative}
+.trl-fill{height:100%;border-radius:999px;background:var(--teal)}
+.trl-note{font-size:13px;color:var(--muted)}
+.dlg-actions{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
+
+/* ===== tablet ===== */
+@media (max-width:920px){
+  .rings{grid-template-columns:repeat(2,1fr)}
+  .about-grid{grid-template-columns:1fr}
+  .nav-toggle{display:inline-block;background:#fff;border:1px solid var(--teal);color:var(--teal-dark);border-radius:10px;padding:9px 14px;font:inherit;font-weight:600;cursor:pointer}
+  .site-nav{display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border-bottom:1px solid var(--line);box-shadow:var(--shadow);padding:10px 20px 18px}
+  .site-nav.open{display:block}
+  .site-nav ul{flex-direction:column;gap:2px}
+  .drop{position:static;display:none;box-shadow:none;border:0;padding:0 0 0 14px}
+  .drop.open{display:flex}
+  .login-slot{margin-left:0}
+  .head-in{flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+}
+@media (max-width:640px){
+  .mods,.results{grid-template-columns:1fr}
+  .hero{padding:44px 0 30px}
+}
+</style>
+</head>
+<body id="top">
+<a class="skip" href="#main">跳到主要内容</a>
+
+<header class="site-head">
+  <div class="wrap head-in">
+    <a class="brand" href="#top" aria-label="澜桥成果服务 首页">
+      <svg xmlns="http://www.w3.org/2000/svg" width="190" height="41" viewBox="0 0 260 56" role="img" aria-label="澜桥成果服务标志">
+        <rect x="4" y="4" width="48" height="48" rx="12" fill="#176b79"/>
+        <path d="M14 35L28 14L42 35Z" fill="#fff"/>
+        <text x="66" y="36" font-size="21" fill="#173d49">澜桥成果服务</text>
+      </svg>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav">菜单</button>
+    <nav id="siteNav" class="site-nav" aria-label="主导航">
+      <ul>
+        <li><a href="#top">首页</a></li>
+        <li class="has-drop">
+          <button class="linklike" id="dropBtn" aria-expanded="false" aria-haspopup="true">业务模块
+            <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+          </button>
+          <ul class="drop" id="dropMenu">
+            <li><a href="#assess">成果评估</a></li>
+            <li><a href="#match">产业匹配</a></li>
+            <li><a href="#policy">政策匹配</a></li>
+            <li><a href="#expert">专家服务</a></li>
+          </ul>
+        </li>
+        <li><a href="#about">关于平台</a></li>
+        <li><a href="#contact">联系我们</a></li>
+      </ul>
+    </nav>
+    <div class="login-slot">
+      <button class="btn btn-primary" id="loginBtn">账号登录</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="wrap">
+      <span class="kicker">成果转化平台</span>
+      <h1 id="heroTitle">让科技成果找到产业出口</h1>
+      <p class="lead">澜桥成果服务帮助企业发现成果价值并联系产业需求：从成果评估出发，衔接产业匹配、政策匹配与专家服务。</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#modules">了解业务模块</a>
+        <a class="btn btn-ghost" href="#contact">联系我们</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="rings-sec" aria-label="核心业务环形入口">
+    <div class="wrap">
+      <div class="rings">
+        <a class="ring" href="#assess"><span class="ring-disc" aria-hidden="true">评估</span><span>成果评估<br><small>看清成果价值</small></span></a>
+        <a class="ring" href="#match"><span class="ring-disc" aria-hidden="true">匹配</span><span>产业匹配<br><small>对接产业需求</small></span></a>
+        <a class="ring" href="#policy"><span class="ring-disc" aria-hidden="true">政策</span><span>政策匹配<br><small>用足政策支持</small></span></a>
+        <a class="ring" href="#expert"><span class="ring-disc" aria-hidden="true">专家</span><span>专家服务<br><small>专家全程护航</small></span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="modules" aria-labelledby="modulesTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="modulesTitle">核心业务模块</h2>
+        <p>四个模块覆盖成果转化的关键环节，均可直接访问了解。</p>
+      </div>
+      <div class="mods">
+        <article class="mod" id="assess">
+          <span class="tag">模块一</span>
+          <h3>成果评估</h3>
+          <p>围绕技术成熟度、试点与验证证据，帮助企业判断成果所处阶段与转化价值，形成清晰的评估参照。</p>
+          <div class="mod-foot"><a class="btn btn-ghost" href="#results">查看评估样例成果</a></div>
+        </article>
+        <article class="mod" id="match">
+          <span class="tag">模块二</span>
+          <h3>产业匹配</h3>
+          <p>按智能制造、新材料、人工智能、合成生物等产业方向归集成果，帮助成果找到对口的产业需求场景。</p>
+          <div class="mod-foot"><a class="btn btn-ghost" href="#results">查看产业方向样例</a></div>
+        </article>
+        <article class="mod" id="policy">
+          <span class="tag">模块三</span>
+          <h3>政策匹配</h3>
+          <p>帮助团队与企业在转化各环节梳理可参照的政策口径，减少信息不对称，便于后续对接申报与落地支持。</p>
+          <div class="mod-foot"><a class="btn btn-ghost" href="#contact">咨询政策匹配服务</a></div>
+        </article>
+        <article class="mod" id="expert">
+          <span class="tag">模块四</span>
+          <h3>专家服务</h3>
+          <p>由各领域成果负责人与专家对接产业需求，提供专业沟通与判断支持，详见平台展示的成果负责人信息。</p>
+          <div class="mod-foot"><a class="btn btn-ghost" href="#contact">联系专家服务</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec-alt" id="results" aria-labelledby="resultsTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="resultsTitle">样例成果</h2>
+        <p>以下为平台当前展示的样例成果事实，点击「查看详情」了解技术成熟度与验证情况。</p>
+      </div>
+      <div class="results" id="resultCards"></div>
+    </div>
+  </section>
+
+  <section id="about" aria-labelledby="aboutTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="aboutTitle">关于平台</h2>
+        <p>澜桥成果服务是一个成果转化平台。</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-item">
+          <h3>平台定位</h3>
+          <p>面向成果转化场景，帮助企业发现成果价值并联系产业需求。</p>
+        </div>
+        <div class="about-item">
+          <h3>服务方式</h3>
+          <p>以成果评估、产业匹配、政策匹配、专家服务四个模块组织平台能力。</p>
+        </div>
+        <div class="about-item">
+          <h3>当前数据</h3>
+          <p>平台样例数据随页面内嵌发布，展示的成果、负责人与证据均以样例包为准。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" aria-labelledby="contactTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="contactTitle">联系我们</h2>
+        <p>欢迎就成果评估、产业匹配等业务与我们联系。</p>
+      </div>
+      <div class="contact-card">
+        <ul>
+          <li>联系邮箱：<a href="mailto:contact@example.com">contact@example.com</a></li>
+          <li>联系电话：<a href="tel:4000000108">400-000-0108</a></li>
+        </ul>
+        <div class="dlg-actions">
+          <a class="btn btn-primary" href="mailto:contact@example.com">发送邮件咨询</a>
+          <a class="btn btn-ghost" href="tel:4000000108">拨打电话</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <span>Copyright 2026 澜桥成果服务</span>
+    <span><a href="mailto:contact@example.com">contact@example.com</a> · 400-000-0108</span>
+  </div>
+</footer>
+
+<!-- 成果详情对话框 -->
+<dialog id="detailDlg" aria-labelledby="detailTitle">
+  <button class="dlg-close" id="detailClose" aria-label="关闭详情">×</button>
+  <h3 id="detailTitle"></h3>
+  <div class="meta" id="detailMeta" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px"></div>
+  <p id="detailEvidence"></p>
+  <p class="trl-note" id="detailTrlNote"></p>
+  <div class="trl-track" role="img" id="detailTrlBar" aria-label="技术成熟度位置"></div>
+  <p class="trl-note">TRL 1–9：数值越高表示越接近成熟应用，图中标注当前样例成果所处位置。</p>
+  <div class="dlg-actions">
+    <a class="btn btn-primary" href="mailto:contact@example.com" id="detailContact">咨询该成果</a>
+  </div>
+</dialog>
+
+<!-- 登录说明对话框 -->
+<dialog id="loginDlg" aria-labelledby="loginTitle">
+  <button class="dlg-close" id="loginClose" aria-label="关闭登录说明">×</button>
+  <h3 id="loginTitle">账号登录</h3>
+  <p>当前演示页面未接入真实登录服务，也不包含登录后的账号数据。如需开通或咨询账号事宜，请通过下方方式联系我们。</p>
+  <div class="dlg-actions">
+    <a class="btn btn-primary" href="mailto:contact@example.com">邮件联系</a>
+    <a class="btn btn-ghost" href="tel:4000000108">电话 400-000-0108</a>
+  </div>
+</dialog>
+
+<script>
+// 内嵌样例数据，避免 file:// 协议读取 JSON 失败（与 样例数据.json 一致）
+var SAMPLE_RESULTS = [
+  {id:"R01",name:"工业声学检测",domain:"智能制造",trl:6,owner:"钟老师",evidence:"已完成工厂试点"},
+  {id:"R02",name:"低温固化材料",domain:"新材料",trl:5,owner:"孟老师",evidence:"已取得样品性能测试"},
+  {id:"R03",name:"设备预测维护",domain:"人工智能",trl:7,owner:"安老师",evidence:"两条产线验证"},
+  {id:"R04",name:"酶催化工艺",domain:"合成生物",trl:4,owner:"任老师",evidence:"实验室稳定性资料"}
+];
+
+(function renderCards(){
+  var host = document.getElementById("resultCards");
+  SAMPLE_RESULTS.forEach(function(r){
+    var card = document.createElement("article");
+    card.className = "rcard";
+
+    var h = document.createElement("h3");
+    h.textContent = r.name;
+    card.appendChild(h);
+
+    var meta = document.createElement("div");
+    meta.className = "meta";
+    var cId = document.createElement("span"); cId.className="chip"; cId.textContent = "编号 "+r.id;
+    var cDom = document.createElement("span"); cDom.className="chip"; cDom.textContent = r.domain;
+    var cTrl = document.createElement("span"); cTrl.className="chip chip-trl"; cTrl.textContent = "TRL "+r.trl;
+    meta.appendChild(cId); meta.appendChild(cDom); meta.appendChild(cTrl);
+    card.appendChild(meta);
+
+    var ev = document.createElement("p");
+    ev.textContent = "验证情况："+r.evidence;
+    card.appendChild(ev);
+
+    var foot = document.createElement("div"); foot.className="rc-foot";
+    var owner = document.createElement("span"); owner.className="owner"; owner.textContent="成果负责人："+r.owner;
+    var btn = document.createElement("button"); btn.className="btn btn-ghost"; btn.type="button"; btn.textContent="查看详情";
+    btn.addEventListener("click", function(){ openDetail(r, btn); });
+    foot.appendChild(owner); foot.appendChild(btn);
+    card.appendChild(foot);
+
+    host.appendChild(card);
+  });
+})();
+
+var detailDlg = document.getElementById("detailDlg");
+var lastDetailTrigger = null;
+function openDetail(r, trigger){
+  lastDetailTrigger = trigger || null;
+  document.getElementById("detailTitle").textContent = r.name + "（" + r.id + "）";
+  var meta = document.getElementById("detailMeta");
+  meta.innerHTML = "";
+  [["产业方向",r.domain],["技术成熟度","TRL "+r.trl],["成果负责人",r.owner]].forEach(function(pair){
+    var s = document.createElement("span"); s.className="chip"; s.textContent = pair[0]+"："+pair[1];
+    meta.appendChild(s);
+  });
+  document.getElementById("detailEvidence").textContent = "验证情况：" + r.evidence;
+  document.getElementById("detailTrlNote").textContent = "当前样例成果技术成熟度为 TRL " + r.trl + "。";
+  var bar = document.getElementById("detailTrlBar");
+  bar.innerHTML = "";
+  var fill = document.createElement("div"); fill.className="trl-fill";
+  fill.style.width = (r.trl/9*100) + "%";
+  bar.appendChild(fill);
+  bar.setAttribute("aria-label", "技术成熟度 TRL "+r.trl+"（共9级）");
+  detailDlg.showModal();
+}
+document.getElementById("detailClose").addEventListener("click", function(){ detailDlg.close(); });
+detailDlg.addEventListener("close", function(){ if(lastDetailTrigger) lastDetailTrigger.focus(); });
+
+var loginDlg = document.getElementById("loginDlg");
+document.getElementById("loginBtn").addEventListener("click", function(){ loginDlg.showModal(); });
+document.getElementById("loginClose").addEventListener("click", function(){ loginDlg.close(); });
+
+// 导航下拉：点击/键盘均可，Escape 关闭并归还焦点
+var dropBtn = document.getElementById("dropBtn");
+var dropMenu = document.getElementById("dropMenu");
+function setDrop(open){
+  dropMenu.classList.toggle("open", open);
+  dropBtn.setAttribute("aria-expanded", open ? "true" : "false");
+}
+dropBtn.addEventListener("click", function(){ setDrop(!dropMenu.classList.contains("open")); });
+dropBtn.addEventListener("keydown", function(e){
+  if(e.key === "ArrowDown"){ e.preventDefault(); setDrop(true); var first = dropMenu.querySelector("a"); if(first) first.focus(); }
+});
+dropMenu.addEventListener("keydown", function(e){
+  if(e.key === "Escape"){ setDrop(false); dropBtn.focus(); }
+});
+dropMenu.addEventListener("click", function(e){
+  if(e.target.closest("a")) setDrop(false);
+});
+document.addEventListener("click", function(e){
+  if(!e.target.closest(".has-drop")) setDrop(false);
+});
+document.addEventListener("keydown", function(e){
+  if(e.key === "Escape" && dropMenu.classList.contains("open")){ setDrop(false); dropBtn.focus(); }
+});
+
+// 平板端导航收纳
+var navToggle = document.getElementById("navToggle");
+var siteNav = document.getElementById("siteNav");
+navToggle.addEventListener("click", function(){
+  var open = siteNav.classList.toggle("open");
+  navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+});
+siteNav.addEventListener("click", function(e){
+  if(e.target.closest("a")){ siteNav.classList.remove("open"); navToggle.setAttribute("aria-expanded","false"); }
+});
+</script>
+</body>
+</html>

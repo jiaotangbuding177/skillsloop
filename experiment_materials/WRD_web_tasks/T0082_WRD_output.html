@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>实训：HTTP 请求响应流程模拟（第1课 · 90分钟）</title>
+<style>
+  body { font-family: "Noto Sans CJK SC", "Microsoft YaHei", sans-serif; margin: 0; background: #f4f6f8; color: #222; line-height: 1.6; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 16px; }
+  header { background: #1f3a5f; color: #fff; padding: 18px 16px; }
+  header h1 { margin: 0 0 4px; font-size: 22px; }
+  header .meta { font-size: 14px; opacity: .9; }
+  .warn { background: #fff3f3; border: 2px solid #d33; border-radius: 8px; padding: 10px 14px; margin: 14px 0; color: #a11; font-weight: bold; }
+  section { background: #fff; border-radius: 10px; padding: 16px 20px; margin: 14px 0; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  h2 { font-size: 18px; border-left: 4px solid #1f3a5f; padding-left: 10px; margin-top: 0; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: 14px; }
+  th, td { border: 1px solid #c9d2dc; padding: 6px 10px; text-align: left; }
+  th { background: #eef2f7; }
+  .card { border: 1px solid #c9d2dc; border-radius: 8px; padding: 10px 14px; margin: 10px 0; }
+  button { background: #1f3a5f; color: #fff; border: none; border-radius: 6px; padding: 8px 16px; font-size: 14px; cursor: pointer; margin: 4px 6px 4px 0; }
+  button:disabled { background: #9aa7b4; cursor: not-allowed; }
+  button.secondary { background: #5a7ba6; }
+  pre.log { background: #0f1720; color: #d7e3ee; padding: 10px 14px; border-radius: 8px; font-size: 13px; max-height: 260px; overflow: auto; }
+  select, textarea { font-size: 14px; padding: 6px; border: 1px solid #b8c4d0; border-radius: 6px; width: 95%; }
+  textarea { min-height: 70px; }
+  .check { font-size: 15px; margin: 6px 0; }
+  .ok { color: #157a2e; font-weight: bold; }
+  .no { color: #a33; }
+  .gen { background: #157a2e; }
+  footer { font-size: 13px; color: #555; padding: 10px 4px 30px; }
+  .hint { font-size: 13px; color: #667; }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap" style="padding:0;">
+    <h1>实训：浏览器本地 HTTP 请求响应流程模拟</h1>
+    <div class="meta">企业转岗班 · 第1课 · 90分钟（概念20 + 示范15 + 操作40 + 复盘15） · 离线运行，无需外部付费账号，不安装任何服务</div>
+  </div>
+</header>
+<div class="wrap">
+  <div class="warn">安全红线：本页面为纯浏览器离线模拟，全程不连接网络。禁止将真实企业密钥、口令、Token、内网地址等敏感信息写入本页任何输入框或提交文件；填写“保存路径”时只写本地练习目录路径。</div>
+
+  <section id="concept">
+    <h2>1. 概念速览（对照讲师示范）</h2>
+    <table>
+      <tr><th>状态码</th><th>含义</th><th>典型处置</th></tr>
+      <tr><td>200</td><td>OK：请求成功，服务端已返回资源</td><td>记录结果即可</td></tr>
+      <tr><td>404</td><td>Not Found：资源不存在，多为请求路径错误（客户端问题）</td><td>核对URL与资源名，修正后重发；<b>不盲目重试</b></td></tr>
+      <tr><td>503</td><td>Service Unavailable：服务端暂不可用（过载或维护）</td><td>有限次间隔重试（如≤3次），仍失败则停止重试并上报</td></tr>
+    </table>
+    <p class="hint">一次HTTP交互 = 请求（方法 + 路径 + 头部） → 响应（状态行 + 头部 + 正文）。本模拟固定使用 GET 方法，主机为 localhost:8080（虚拟）。</p>
+  </section>
+
+  <section id="console">
+    <h2>2. 模拟请求台（依次发送三个请求）</h2>
+    <div class="card">
+      <b>请求A：</b>GET http://localhost:8080/status
+      <button onclick="sendRequest('A')">发送请求A</button>
+    </div>
+    <div class="card">
+      <b>请求B：</b>GET http://localhost:8080/missing
+      <button onclick="sendRequest('B')">发送请求B</button>
+    </div>
+    <div class="card">
+      <b>请求C：</b>GET http://localhost:8080/busy（本服务持续返回503，用于练习“失败重试边界”）
+      <button onclick="sendRequest('C')">发送请求C</button>
+      <span class="hint">可多次点击观察重试日志，但请在记录表中写下你设定的停止条件（边界）。</span>
+    </div>
+    <pre class="log" id="reqlog">（请求/响应日志将显示在此处）</pre>
+  </section>
+
+  <section id="record">
+    <h2>3. 结果记录（提交要求①②）</h2>
+    <table>
+      <tr><th>请求</th><th>URL</th><th>实际状态码</th><th>处置记录</th></tr>
+      <tr><td>A</td><td>/status</td><td id="stA">—</td><td>成功，记录结果即可（自动）</td></tr>
+      <tr><td>B</td><td>/missing</td><td id="stB">—</td><td><select id="dispB">
+          <option value="">— 请选择处置 —</option>
+          <option value="check">核对URL与资源名，修正后重发一次</option>
+          <option value="retry3">不做检查，立即重试3次以上</option>
+          <option value="report">直接上报，不做任何检查</option>
+        </select></td></tr>
+      <tr><td>C</td><td>/busy</td><td id="stC">—</td><td><select id="dispC">
+          <option value="">— 请选择处置 —</option>
+          <option value="limited">间隔后有限重试（≤3次），仍503则停止并上报</option>
+          <option value="forever">持续重试直到成功为止</option>
+          <option value="giveup">一次失败立即放弃，不重试不上报</option>
+        </select></td></tr>
+    </table>
+    <p class="hint">我的重试边界（请求C，选填补充）：<input type="text" id="retryNote" size="60" placeholder="例如：每2秒重试一次，最多3次，仍失败则上报值班接口人"></p>
+  </section>
+
+  <section id="source">
+    <h2>4. 来源与保存路径说明（提交要求③）</h2>
+    <p>请说明：结果来自本页离线模拟（非真实网络），以及你将把提交文件保存到的本地路径。</p>
+    <textarea id="srcNote" placeholder="示例：以上结果均来自本页 localhost:8080 离线模拟，未访问真实网络；提交文件将保存到 D:\ops\lesson1\submission.txt"></textarea>
+  </section>
+
+  <section id="submit">
+    <h2>5. 可检查的提交要求</h2>
+    <div class="check" id="chk1">① 三请求结果已记录：<span class="no">未完成（请发送A/B/C三个请求）</span></div>
+    <div class="check" id="chk2">② 404与503已选择<b>不同</b>的正确处置：<span class="no">未完成</span></div>
+    <div class="check" id="chk3">③ 来源与保存路径说明已填写：<span class="no">未完成</span></div>
+    <p>
+      <button id="genBtn" class="gen" disabled="disabled" onclick="generateSubmission()">生成提交内容</button>
+      <button id="copyBtn" class="secondary" disabled="disabled" onclick="copySubmission()">复制提交文本</button>
+      <button id="dlBtn" class="secondary" disabled="disabled" onclick="downloadSubmission()">下载 submission.txt</button>
+    </p>
+    <pre class="log" id="submission" style="display:none; background:#eef2f7; color:#222;"></pre>
+  </section>
+
+  <footer>
+    异常处置要点：404属于客户端路径问题，应先核对URL再重发，盲目重试无意义；503属于服务端问题，应设置重试次数与间隔上限（边界），超界即停止并上报，避免重试风暴。本练习不涉及任何真实凭据；如练习中误输入真实密钥，请立即清空并告知讲师。
+  </footer>
+</div>
+
+<script>
+var ENDPOINTS = {
+  A: { url: "/status", status: 200, text: "OK", body: '{"service":"demo","state":"running"}' },
+  B: { url: "/missing", status: 404, text: "Not Found", body: '{"error":"resource not found"}' },
+  C: { url: "/busy", status: 503, text: "Service Unavailable", body: '{"error":"service temporarily unavailable"}' }
+};
+var sent = { A: false, B: false, C: false };
+var attempts = { C: 0 };
+var logEl = document.getElementById("reqlog");
+var logLines = [];
+
+function appendLog(s) {
+  logLines.push(s);
+  logEl.textContent = logLines.join("\n");
+  logEl.scrollTop = logEl.scrollHeight;
+}
+
+function sendRequest(id) {
+  var ep = ENDPOINTS[id];
+  var t = new Date().toLocaleTimeString();
+  appendLog(">>> [" + t + "] GET http://localhost:8080" + ep.url + " HTTP/1.1");
+  appendLog("    Host: localhost:8080");
+  appendLog("<<< [" + t + "] HTTP/1.1 " + ep.status + " " + ep.text);
+  appendLog("    Content-Type: application/json");
+  appendLog("    " + ep.body);
+  if (id === "C") { attempts.C = attempts.C + 1; appendLog("    （第 " + attempts.C + " 次尝试，仍为503）"); }
+  appendLog("");
+  sent[id] = true;
+  document.getElementById("st" + id).textContent = String(ep.status);
+  refreshChecks();
+}
+
+function dispOK(sel, expected) { return sel.value === expected; }
+
+function refreshChecks() {
+  var c1 = sent.A && sent.B && sent.C;
+  setCheck("chk1", c1, "未完成（请发送A/B/C三个请求）");
+  var dB = document.getElementById("dispB");
+  var dC = document.getElementById("dispC");
+  var c2 = dispOK(dB, "check") && dispOK(dC, "limited");
+  setCheck("chk2", c2, "未完成（B选核对路径后重发，C选有限重试并上报）");
+  var src = document.getElementById("srcNote").value.trim();
+  var c3 = src.length >= 15 && src.indexOf("模拟") !== -1 && (src.indexOf("保存") !== -1 || src.indexOf("路径") !== -1);
+  setCheck("chk3", c3, "未完成（写明结果来自离线模拟，且写明保存路径）");
+  document.getElementById("genBtn").disabled = !(c1 && c2 && c3);
+}
+
+function setCheck(id, ok, msg) {
+  var el = document.getElementById(id);
+  var spans = el.getElementsByTagName("span");
+  if (spans.length) {
+    spans[0].className = ok ? "ok" : "no";
+    spans[0].textContent = ok ? "已完成 ✓" : msg;
+  }
+}
+
+function generateSubmission() {
+  var now = new Date().toLocaleString();
+  var lines = [];
+  lines.push("=== 第1课实训提交：HTTP请求响应流程模拟 ===");
+  lines.push("提交时间：" + now);
+  lines.push("");
+  lines.push("一、三请求结果");
+  lines.push("  A  GET /status  -> " + ENDPOINTS.A.status + " OK（请求成功）");
+  lines.push("  B  GET /missing -> " + ENDPOINTS.B.status + " Not Found（资源不存在，客户端路径问题）");
+  lines.push("  C  GET /busy    -> " + ENDPOINTS.C.status + " Service Unavailable（服务端暂不可用）");
+  lines.push("");
+  lines.push("二、404与503的不同处置");
+  var dispBVal = document.getElementById("dispB").value;
+  var dispCVal = document.getElementById("dispC").value;
+  lines.push("  404（请求B）：" + (dispBVal === "check" ? "核对URL与资源名，修正后重发一次" : dispBVal));
+  lines.push("  503（请求C）：" + (dispCVal === "limited" ? "间隔后有限重试（≤3次），仍503则停止并上报" : dispCVal));
+  var rn = document.getElementById("retryNote").value.trim();
+  if (rn) { lines.push("  我的重试边界：" + rn); }
+  lines.push("");
+  lines.push("三、来源与保存路径说明");
+  lines.push("  " + document.getElementById("srcNote").value.trim());
+  lines.push("");
+  lines.push("安全声明：本练习全程离线模拟，未使用也未写入任何真实企业密钥或凭据。");
+  var text = lines.join("\n");
+  var el = document.getElementById("submission");
+  el.textContent = text;
+  el.style.display = "block";
+  document.getElementById("copyBtn").disabled = false;
+  document.getElementById("dlBtn").disabled = false;
+}
+
+function copySubmission() {
+  var text = document.getElementById("submission").textContent;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text);
+  }
+}
+
+function downloadSubmission() {
+  var text = document.getElementById("submission").textContent;
+  var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "submission.txt";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
+}
+
+document.getElementById("dispB").addEventListener("change", refreshChecks);
+document.getElementById("dispC").addEventListener("change", refreshChecks);
+document.getElementById("srcNote").addEventListener("input", refreshChecks);
+refreshChecks();
+</script>
+</body>
+</html>
