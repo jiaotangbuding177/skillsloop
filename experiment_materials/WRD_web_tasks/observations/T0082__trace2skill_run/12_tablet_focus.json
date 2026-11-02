@@ -1,0 +1,249 @@
+{
+  "url": "file:///C:/Users/22142/Documents/Codex/2026-10-22/task/web24_evidence_20261023/original_copies/artifacts/T0082__trace2skill/outputs/practice.html",
+  "title": "实训：HTTP 请求响应流程模拟（第1课 · 90分钟）",
+  "scroll": {
+    "x": 0,
+    "y": 1206
+  },
+  "size": {
+    "width": 820,
+    "height": 1180,
+    "scrollWidth": 820,
+    "scrollHeight": 2386
+  },
+  "focus": {
+    "tag": "PRE",
+    "id": "submission",
+    "text": "=== 第1课实训提交：HTTP请求响应流程模拟 ===\n提交时间：2026/10/23 15:28:30\n\n一、三请求结果\n  A  GET /status  -> 200 OK（请求成功）\n  B  GET /missing -> 404 Not Found（资源不存在，客户端路径问题）\n  C  GET /busy    -> 503 Service Unavailable（服务端暂不可用）\n\n二、404与503的不同处置\n  404（请求B）：核对URL与资源名，修正后重发一次\n  503（请求C）：间隔后有限重试（≤3次），仍503则停止并上报\n  我的重试边界：等待2秒再重试，最多",
+    "outline": "rgb(16, 16, 16) auto 1px"
+  },
+  "body": "实训：浏览器本地 HTTP 请求响应流程模拟\n企业转岗班 · 第1课 · 90分钟（概念20 + 示范15 + 操作40 + 复盘15） · 离线运行，无需外部付费账号，不安装任何服务\n安全红线：本页面为纯浏览器离线模拟，全程不连接网络。禁止将真实企业密钥、口令、Token、内网地址等敏感信息写入本页任何输入框或提交文件；填写“保存路径”时只写本地练习目录路径。\n1. 概念速览（对照讲师示范）\n状态码\t含义\t典型处置\n200\tOK：请求成功，服务端已返回资源\t记录结果即可\n404\tNot Found：资源不存在，多为请求路径错误（客户端问题）\t核对URL与资源名，修正后重发；不盲目重试\n503\tService Unavailable：服务端暂不可用（过载或维护）\t有限次间隔重试（如≤3次），仍失败则停止重试并上报\n\n一次HTTP交互 = 请求（方法 + 路径 + 头部） → 响应（状态行 + 头部 + 正文）。本模拟固定使用 GET 方法，主机为 localhost:8080（虚拟）。\n\n2. 模拟请求台（依次发送三个请求）\n请求A：GET http://localhost:8080/status 发送请求A\n请求B：GET http://localhost:8080/missing 发送请求B\n请求C：GET http://localhost:8080/busy（本服务持续返回503，用于练习“失败重试边界”） 发送请求C 可多次点击观察重试日志，但请在记录表中写下你设定的停止条件（边界）。\n>>> [15:28:11] GET http://localhost:8080/status HTTP/1.1\n    Host: localhost:8080\n<<< [15:28:11] HTTP/1.1 200 OK\n    Content-Type: application/json\n    {\"service\":\"demo\",\"state\":\"running\"}\n\n>>> [15:28:13] GET http://localhost:8080/missing HTTP/1.1\n    Host: localhost:8080\n<<< [15:28:13] HTTP/1.1 404 Not Found\n    Content-Type: application/json\n    {\"error\":\"resource not found\"}\n\n>>> [15:28:15] GET http://localhost:8080/busy HTTP/1.1\n    Host: localhost:8080\n<<< [15:28:15] HTTP/1.1 503 Service Unavailable\n    Content-Type: application/json\n    {\"error\":\"service temporarily unavailable\"}\n    （第 1 次尝试，仍为503）\n\n>>> [15:28:19] GET http://localhost:8080/busy HTTP/1.1\n    Host: localhost:8080\n<<< [15:28:19] HTTP/1.1 503 Service Unavailable\n    Content-Type: application/json\n    {\"error\":\"service temporarily unavailable\"}\n    （第 2 次尝试，仍为503）\n\n>>> [15:28:23] GET http://localhost:8080/busy HTTP/1.1\n    Host: localhost:8080\n<<< [15:28:23] HTTP/1.1 503 Service Unavailable\n    Content-Type: application/json\n    {\"error\":\"service temporarily unavailable\"}\n    （第 3 次尝试，仍为503）\n\n3. 结果记录（提交要求①②）\n请求\tURL\t实际状态码\t处置记录\nA\t/status\t200\t成功，记录结果即可（自动）\nB\t/missing\t404\t\n— 请选择处置 —\n核对URL与资源名，修正后重发一次\n不做检查，立即重试3次以上\n直接上报，不做任何检查\n\nC\t/busy\t503\t\n— 请选择处置 —\n间隔后有限重试（≤3次），仍503则停止并上报\n持续重试直到成功为止\n一次失败立即放弃，不重试不上报\n\n我的重试边界（请求C，选填补充）：\n\n4. 来源与保存路径说明（提交要求③）\n\n请说明：结果来自本页离线模拟（非真实网络），以及你将把提交文件保存到的本地路径。\n\n5. 可检查的提交要求\n① 三请求结果已记录：已完成 ✓\n② 404与503已选择不同的正确处置：已完成 ✓\n③ 来源与保存路径说明已填写：已完成 ✓\n\n生成提交内容 复制提交文本 下载 submission.txt\n\n=== 第1课实训提交：HTTP请求响应流程模拟 ===\n提交时间：2026/10/23 15:28:30\n\n一、三请求结果\n  A  GET /status  -> 200 OK（请求成功）\n  B  GET /missing -> 404 Not Found（资源不存在，客户端路径问题）\n  C  GET /busy    -> 503 Service Unavailable（服务端暂不可用）\n\n二、404与503的不同处置\n  404（请求B）：核对URL与资源名，修正后重发一次\n  503（请求C）：间隔后有限重试（≤3次），仍503则停止并上报\n  我的重试边界：等待2秒再重试，最多3次，仍503时停止并记录上报。\n\n三、来源与保存路径说明\n  本结果来自 practice.html 离线模拟，未使用真实凭据；保存路径：本任务临时目录 downloads。\n\n安全声明：本练习全程离线模拟，未使用也未写入任何真实企业密钥或凭据。\n异常处置要点：404属于客户端路径问题，应先核对URL再重发，盲目重试无意义；503属于服务端问题，应设置重试次数与间隔上限（边界），超界即停止并上报，避免重试风暴。本练习不涉及任何真实凭据；如练习中误输入真实密钥，请立即清空并告知讲师。",
+  "controls": [
+    {
+      "i": 0,
+      "tag": "BUTTON",
+      "id": "",
+      "text": "发送请求A",
+      "type": "submit",
+      "name": "",
+      "href": null,
+      "download": null,
+      "disabled": false,
+      "visible": true,
+      "box": {
+        "x": 362.515625,
+        "y": -547.4375,
+        "w": 97.34375,
+        "h": 36
+      }
+    },
+    {
+      "i": 1,
+      "tag": "BUTTON",
+      "id": "",
+      "text": "发送请求B",
+      "type": "submit",
+      "name": "",
+      "href": null,
+      "download": null,
+      "disabled": false,
+      "visible": true,
+      "box": {
+        "x": 374.40625,
+        "y": -471.4375,
+        "w": 97.34375,
+        "h": 36
+      }
+    },
+    {
+      "i": 2,
+      "tag": "BUTTON",
+      "id": "",
+      "text": "发送请求C",
+      "type": "submit",
+      "name": "",
+      "href": null,
+      "download": null,
+      "disabled": false,
+      "visible": true,
+      "box": {
+        "x": 51,
+        "y": -369.84375,
+        "w": 98.125,
+        "h": 36
+      }
+    },
+    {
+      "i": 3,
+      "tag": "SELECT",
+      "id": "dispB",
+      "text": "— 请选择处置 —\n核对URL与资源名，修正后重发一次\n不做检查，立即重试3次以上\n直接上报，不做任何检查",
+      "type": "select-one",
+      "name": "",
+      "href": null,
+      "download": null,
+      "disabled": false,
+      "visible": true,
+      "box": {
+        "x": 339.421875,
+        "y": 154.671875,
+        "w": 411.890625,
+        "h": 32
+      },
+      "options": [
+        {
+          "text": "— 请选择处置 —",
+          "value": "",
+          "selected": false
+        },
+        {
+          "text": "核对URL与资源名，修正后重发一次",
+          "value": "check",
+          "selected": true
+        },
+        {
+          "text": "不做检查，立即重试3次以上",
+          "value": "retry3",
+          "selected": false
+        },
+        {
+          "text": "直接上报，不做任何检查",
+          "value": "report",
+          "selected": false
+        }
+      ]
+    },
+    {
+      "i": 4,
+      "tag": "SELECT",
+      "id": "dispC",
+      "text": "— 请选择处置 —\n间隔后有限重试（≤3次），仍503则停止并上报\n持续重试直到成功为止\n一次失败立即放弃，不重试不上报",
+      "type": "select-one",
+      "name": "",
+      "href": null,
+      "download": null,
+      "disabled": false,
+      "visible": true,
+      "box": {
+        "x": 339.421875,
+        "y": 199.671875,
+        "w": 411.890625,
+        "h": 32
+      },
+      "options": [
+        {
+          "text": "— 请选择处置 —",
+          "value": "",
+          "selected": false
+        },
+        {
+          "text": "间隔后有限重试（≤3次），仍503则停止并上报",
+          "value": "limited",
+          "selected": true
+        },
+        {
+          "text": "持续重试直到成功为止",
+          "value": "forever",
+          "selected": false
+        },
+        {
+          "text": "一次失败立即放弃，不重试不上报",
+          "value": "giveup",
+          "selected": false
+        }
+      ]
+    },
+    {
+      "i": 5,
+      "tag": "INPUT",
+      "id": "retryNote",
+      "text": "等待2秒再重试，最多3次，仍503时停止并记录上报。",
+      "type": "text",
+      "name": "",
+      "href": null,
+      "download": null,
+      "disabled": false,
+      "readOnly": false,
+      "visible": true,
+      "box": {
+        "x": 252.703125,
+        "y": 251.671875,
+        "w": 457,
+        "h": 21
+      }
+    },
+    {
+      "i": 6,
+      "tag": "TEXTAREA",
+      "id": "srcNote",
+      "text": "本结果来自 practice.html 离线模拟，未使用真实凭据；保存路径：本任务临时目录 downloads。",
+      "type": "textarea",
+      "name": "",
+      "href": null,
+      "download": null,
+      "disabled": false,
+      "readOnly": false,
+      "visible": true,
+      "box": {
+        "x": 36,
+        "y": 418.859375,
+        "w": 724.59375,
+        "h": 84
+      }
+    },
+    {
+      "i": 7,
+      "tag": "BUTTON",
+      "id": "genBtn",
+      "text": "生成提交内容",
+      "type": "submit",
+      "name": "",
+      "href": null,
+      "download": null,
+      "disabled": false,
+      "visible": true,
+      "box": {
+        "x": 36,
+        "y": 703.1875,
+        "w": 116,
+        "h": 36
+      }
+    },
+    {
+      "i": 8,
+      "tag": "BUTTON",
+      "id": "copyBtn",
+      "text": "复制提交文本",
+      "type": "submit",
+      "name": "",
+      "href": null,
+      "download": null,
+      "disabled": false,
+      "visible": true,
+      "box": {
+        "x": 162.734375,
+        "y": 703.1875,
+        "w": 116,
+        "h": 36
+      }
+    },
+    {
+      "i": 9,
+      "tag": "BUTTON",
+      "id": "dlBtn",
+      "text": "下载 submission.txt",
+      "type": "submit",
+      "name": "",
+      "href": null,
+      "download": null,
+      "disabled": false,
+      "visible": true,
+      "box": {
+        "x": 289.46875,
+        "y": 703.1875,
+        "w": 152.59375,
+        "h": 36
+      }
+    }
+  ]
+}
