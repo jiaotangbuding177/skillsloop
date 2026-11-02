@@ -1,4 +1,114 @@
+**WRD58最终训练审计、修正数据与质量预估已Git实交（2026-11-02）：** 最终f4a033f，1260/295478正/241上限；31合法调用F+650、92步aux系数缩放/每step≤20%，新增中途选模及thinking/native接口合同，原R/A/D/input与原226隔离保持。两次实际还原419文件、双profile四features/241步可执行目标、远端64普通＋1pointer/完整10303636B实体冷下载、回执6文件再冷读均PASS；旧包不改。预估WRD领域策略V1，B制作/局部修复最强，质量为前瞻判断，无学生训练。[完整计划](https://github.com/jiaotangbuding177/WRD_dataset/blob/f4a033fd5df70a1ec9dfd941750fe798b0cef854/plans/20261102_final_training_audit58/PLAN.md)／[质量预估](https://github.com/jiaotangbuding177/WRD_dataset/blob/f4a033fd5df70a1ec9dfd941750fe798b0cef854/plans/20261102_final_training_audit58/QUALITY_FORECAST58.md)／[本轮记忆](memory/2026-11-02_wrd_final_training_audit58.md)。
+
+**WRD57完整主集1260与训练计划已Git实交（2026-11-01）：** 最终7283f2e；401契约＋232真实过程＋627辅助＝1260/294828正、241候选更新。新81,166,541B AES两次真实还原4035文件逐SHA及1260四features通过，远端78普通＋1pointer/完整实体冷下载、回执5文件再冷读均PASS；旧05—11/离线57不改。原思考/两故障修复/CSV真实缺口完整保留，原226隔离、学生训练0；双稿57及记忆齐。[完整训练计划](https://github.com/jiaotangbuding177/WRD_dataset/blob/7283f2e9a788b6b08355230e951ffcefdab3a910/plans/20261101_increment57_native/PLAN.md)／[远端证明](https://github.com/jiaotangbuding177/WRD_dataset/blob/7283f2e9a788b6b08355230e951ffcefdab3a910/deliveries/20261101_increment57_native/REMOTE_VERIFICATION.json)／[执行记忆](memory/2026-11-01_wrd_increment57_execution.md)。
+
+**WRD独立经验与真实修订链增量计划56（2026-11-01，仅规划）：** 相对全部TRAIN267组重基，拟审24候选，目标12首次新TRAIN＋4dev/4test，离线恢复优先；缺链TRAIN原生累计2→6有界提案，12另批，不重复计组。局部正确性＋同版本NS/V0/V1独立消费效用授信，后验不回填原父。当前1250/55课程、原226及保留组不改，学生错误仅未来TRAIN-MINING取得；无采集/模型/训练。双稿56。[计划Git](https://github.com/jiaotangbuding177/WRD_dataset/blob/77ea6a875f528b7881fe2a5569d966fdcae0384d/plans/20261101_experience_increment56/PLAN.md)／[本轮记忆](memory/2026-11-01_wrd_experience_increment56_plan.md)。
+
+**WRD完整数据与55全流程计划已Git交付（2026-11-01）：** Git认证已恢复，完整05—11七实体1,307,762,484B已远端重新下载逐SHA通过，新10/11实推553,740,709B；新增/修改83普通文件冷读通过。正式完整课程契约418接过程832，1250唯一／1254曝光／236候选更新，14B主8B对照；双稿55、原数据52/54不改，原226隔离、未训练。[完整计划Git](https://github.com/jiaotangbuding177/WRD_dataset/blob/aa2b184585bab5baa58a9b27605c708d085afc83/plans/20261101_full_pipeline_sft/PLAN.md)／[远端实体及计划回执](https://github.com/jiaotangbuding177/WRD_dataset/blob/aa2b184585bab5baa58a9b27605c708d085afc83/deliveries/20261101_full_data_and_plan/REMOTE_VERIFICATION.json)／[记忆](memory/2026-11-01_wrd_full_data_and_plan_git_delivery.md)。
+
+**WRD完整流程SFT范围澄清（2026-11-01）：** 已具备覆盖A—D完整流程的逐步联合SFT入口，1,250唯一目标／284,595正监督已实际联合验收。默认过程课程832，契约418另行安排；原生完整专家长轨迹0属于长程经验覆盖项，不能据此否定全阶段逐步训练。完整自主效果由14B／8B训练后的原生未见任务闭环检验；本轮未训练、不改54设计，原226隔离。[本轮判断](memory/2026-11-01_wrd_full_pipeline_sft_scope.md)。
+
+**WRD数据量判断（2026-11-01）：** 当前1,250完整监督目标／284,595正监督tokens适合作为V1，足以开展首轮WRD领域SFT及14B/8B模块对照。来源隔离的任务质量、动作/修复成功和单位合格技能总成本作为效果充分性的实证判据；增量扩展独立任务和真实修订链。按来源经验与构造课程分别记账，原226/reserved隔离、54设计和不训练保持。[本轮判断与依据](memory/2026-11-01_wrd_data_sufficiency.md)。
+
+**WRD数据侧完整SFT入口已联合验证（2026-11-01）：** 1,250唯一目标／284,595正监督／10,207,038序列tokens，三个pool同时binary读取，所有行有效loss及四features完整，941≤16K＋309长。当前可训练需求契约、过程推理、248原生工具调用目标、反馈修复和流程取舍；A471/B328/C243/D182/历史R26。用户要求实事求是的优势叙事，汇报以“能训练什么、优化什么”组织。保持54设计、原226/reserved边界与既有数据；本轮未训练或改算法。[报告](reports/2026-11-01_WRD数据训练能力与pipeline模块映射.md)／[记忆](memory/2026-11-01_wrd_training_value_report.md)。
+
+**WRD11本地交付完成，Git认证仍缺失（2026-10-31）：** 原main623 SHA9aace保留；合1250可用／832过程，新增57362正全新作者，原R未替换。full/budget同627，16929495→6353061seq，225 full53/402显式D-only，62.47%只是静态辅助seq变化。双profile全627双HF/mask、各1881 bin和base205四features独审PASS；预算832池535短297长8890987seq。原来源56/44不增，构造KEEP32而真实KEEP/自主/学生闭环0，NOT_READY且无训练/新业务。两profile最终逐step同序，pilot136steps/full209steps含4原view重复，不能混淆样本/曝光或全局/局部权重。双稿54；原226继续隔离。[本轮记忆](memory/2026-10-31_wrd_curation11.md)。
+
+实际329185069B补充包已真实还原，4241文件／两版3762数组与base205接线独审PASS；本地提交2f969c84455e2511039fd8fbd0cd05863a363fcf，实际push因缺凭据退出128、远端仍75b7042。详见[最终本地交付回执](../output/20261031_wrd_curation11_delivery/FINAL_LOCAL_DELIVERY11.json)与[本轮记忆](memory/2026-10-31_wrd_curation11.md)。
+
+**WRD10实际主集623、真实还原PASS，Git认证阻塞（2026-10-31）：** 227233正监督／3853977序列，418契约＋205过程（56来源／44全局组），联合288／267；新29、暂扣UNKNOWN1、原R撤0；539短84长。原件／失败／修订链实际保全，全623双token、精确mask与1869数组四features重新从真实还原根通过；22601认证文件，实体224555640B SHA c8940c7028ab2f71f8637b80f279bb74cc131f5df0c45df9810242ecffb800a4。本地Git efea3ffa，远端仍75b7042，LFS实际0B；本机GCM无账号、gh未登录、SSH无可用agent/密钥，已请求用户恢复GitHub登录。完整自主／KEEP／完整学生评估0、主NOT_READY，full53新29有18超32K；0训练／新业务，原226隔离。双稿52；[本轮记忆](memory/2026-10-31_wrd_curation10.md)。
+
+以下为本轮早期及更早历史状态，不覆盖上述实际主集与上传状态。
+
+**WRD计划51已Git实核（2026-10-31）：** [下一轮完整计划](https://github.com/jiaotangbuding177/WRD_dataset/blob/75b70424f0c7a650da4a94b8b5288ca077c050ce/plans/20261031_next51/PLAN.md)已上传，独立复核通过；远端24普通文件逐字节核验，全部dataset树／09子树／训练入口与原9577220相同。本轮仅规划，新增训练行／业务采集／权重／训练0；原226继续隔离，实际09仍595，完整自主／KEEP仍0。双稿规划51、实际数据合同50；[交付记忆及回执](memory/2026-10-31_wrd_next51_plan.md)。
+
+**WRD下一轮计划51（2026-10-31，仅规划）：** 实际09仍595目标／216154正监督／177过程，完整自主与合格KEEP仍0。本轮只读重核：原R的91.78%位于46个R-only，原生原R＋当前动作配对仅2来源；旧8376重基为117保护＋840保留＋62局部关联＋7357条件prefix。下一轮先99正工具owner血缘、补来源身份、接原R—动作—版本—反馈与修订，再编译实际新主集；139HOLD仅新证据重开。准备8完整父输入（TRAIN2/dev2/test4）及16消费case，后续2TRAIN原生示范提案最多24native／200请求／6M IO／6小时，本轮未执行。原226隔离、09不改、不加载权重或训练；双稿51、实际数据合同仍50。[下一步计划](plans/20261031_wrd_next51/PLAN.md)／[记忆](memory/2026-10-31_wrd_next51_plan.md)。
+
+**WRD09已实际Git交付验证（2026-10-31）：** 595目标／216154正监督／3518732序列tokens，418契约＋177过程；新增49／53319，内容级保护别名纠正撤23／14727，旧08保全审计不可单独沿用。原R54745不减，新R2163／公开E155另账；全595双tokenizer、精确mask、原行保真及1785数组四features已过。31writer＋1321业务辅助逐项收口、34616最终overlay已产；9dev17test仅组件，full53最长29576不能当整次rollout可用。完整自主／KEEP／完整WRD学生评测仍0，不训练／不新采集，主NOT_READY。真实190393113B／4186成员，05—09还原18894文件，91段远端实体SHA及最终28普通文件冷核PASS；[Git最终9577220](https://github.com/jiaotangbuding177/WRD_dataset/tree/9577220bbf13a3bbcaf9123e0a613189a3c5b67f/dataset/20261031_v10_checkpoint09)。双稿50；[实际数量与缺口](plans/20261031_wrd_curation09/ACTUAL_DATA_REPORT.md)／[训练策略](plans/20261031_wrd_curation09/TRAINING_STRATEGY_09.md)／[本轮记忆](memory/2026-10-31_wrd_curation09.md)。
+
+**WRD训练就绪度统筹计划已交付（2026-10-31，仅规划）：** 当前08仍569／177562正监督，过程133／23连接组；完整自主／KEEP／学生dev-test均0，不支持完整正式训练，组件研究先补独立评测与Spark验机。新互斥账1363业务＝746＋615＋2，40writer＝8部分准入＋1坏HOLD＋31其余，先31→706→615批审；未用387来源／378组仅候选，63方法producer已保护不预报可救。先冻结真实材料dev/test、原R与因果修订、来源级学习曲线和总成本协议；双稿规划49、实际数据仍48。未训练／未新采集／新增准入0。[计划Git](https://github.com/jiaotangbuding177/WRD_dataset/blob/1cbd85c96db124c74a9fac8cee797672d7497ff7/plans/20261031_readiness/PLAN.md)，23普通文件远端实核、原08整树不变；[完整记忆](memory/2026-10-31_wrd_readiness_plan.md)。
+
+**WRD补齐08已完成实际Git交付（2026-10-31）：** [最终检查点152963d](https://github.com/jiaotangbuding177/WRD_dataset/tree/152963df11e8046548fdb1baa5874667ad8de714/dataset/20261030_v10_checkpoint08)，341011987B实体／4183认证成员，05＋06＋07＋08真还原14708文件；全569双tokenizer／mask／标准loader及1707数组四features通过，163段远端独立下载整SHA通过，最终41普通文件冷核通过。实际569／177562正监督（＋17／26888）、436契约＋133过程；原件1871native／34616owner／2990API保全，781缺件exactSHA恢复。原226／H12／static隔离、0训练／0新业务采集；完整自主／KEEP／dev-test仍0，完整主NOT_READY，不以实体交付冒称足量。双稿48；[最终记忆](memory/2026-10-31_wrd_gap08_verified_delivery.md)／[训练计划](plans/20261030_wrd_gap_completion/TRAINING_PLAN_08.md)。以下保留交付前历史记录。
+
+**WRD补齐08已实际处理、交付核验中（2026-10-30）：** 全库1871 native／34616 owner与2990原API carrier实体恢复（781缺件exactSHA），653完整write正文含40来源闭合候选；196裁定125保护／63合并未闭／8缺件。56原R52823字符确证static评测、保全零loss。实际新增17／26888监督，主569／177562／3496949，484短＋85长；全569双tokenizer／mask／loader及1707 canonical数组通过。仅组件增量，原226隔离，0训练／0新业务采集，完整主NOT_READY。双稿48，Git真实还原／冷回读待完成。[记忆](memory/2026-10-30_wrd_gap08_processing.md)／[训练接线](plans/20261030_wrd_gap_completion/TRAINING_PLAN_08.md)。
+
+**WRD下一步补齐方案已上传（2026-10-30，仅计划未执行）：** 先合全库owner来源／语义／编译账，纠正196只属已审100 maker；旧9096另8046未在该批，8242仅条件UNKNOWN、非最新可训数。原R先10位置多键试核，补共享祖先94／复杂构建50／元数据8／其它44；391source／382组仅候选。复杂构建／真实修订／同版本Q成本／原生自主分别补证；拟2路线≤24native／200请求／6M IO／6小时，本轮未采集、不训练。规划双稿5.0.47、实际07仍552／150674／5.0.46，原226隔离、完整主NOT_READY。[详细方案](plans/20261030_wrd_gap_completion/PLAN.md)／[记忆](memory/2026-10-30_wrd_gap_completion_plan.md)。 [Git计划](https://github.com/jiaotangbuding177/WRD_dataset/blob/a52ccd45026bc4acb684dc0b3915a049ad5f430b/plans/20261030_gap_completion/PLAN.md)，15普通文件独立远端字节核验通过。
+
+**WRD下一步数据批处理已交付（2026-10-30）：** 100 maker／969待核位置实恢复，原1050最终854保护、196缺证。实际主552／150674监督／3300896输入，436契约＋116过程；新22仅状态/读取，不称完整自主足量。07真实30.21MB／3127成员，05+06+07还原10524文件、552双tokenizer/mask/loader及1656 canonical数组过；远端实体SHA和最终27普通文件回读PASS。[Git07](https://github.com/jiaotangbuding177/WRD_dataset/tree/16691a75944f3d38df892cad772f802beb5c2dd8/dataset/20261030_v10_checkpoint07)／[完整记忆](memory/2026-10-30_wrd_batch07_processing.md)／[训练方案](plans/20261029_wrd_next_data/TRAINING_PLAN_07.md)。原226隔离，0训练，完整主NOT_READY。
+
+**下一轮WRD数据整理计划（2026-10-29，未执行）：** 已给100maker episode／969待核位置的批量计划，首批7路线24episode／379位置，优先完整构建、真实反馈修订及调度收尾；候选不计训练量。原530／146999及Git06不改，规划双稿5.0.45、实际数据仍5.0.44；本轮不新采集、不运行资源或训练。[计划](plans/20261029_wrd_next_data/PLAN.md)／[记忆](memory/2026-10-29_wrd_next_data_plan.md)。
+
+**WRD训练数据实际交付（2026-10-29）：** 已上传[检查点06](https://github.com/jiaotangbuding177/WRD_dataset/tree/e8615c596b9c2fbf485a86997eb80e1b99334ac5/dataset/20261029_v10_checkpoint06)，530目标／146999监督／3240662输入，436契约＋94过程（12源／9component），450≤16K／80长桶。05+06合并7397源文件，530双tokenizer／mask／loader全过；05的439普通＋3LFS189677119B、06的22普通＋2.83MB实体均独立冷核，最终e8615c5 metadata回读通过。新增数学完整程序930A／0R；9096缺证全元数据／2409文件引用已核，354来源chunks和9001字符原write实恢复，87重点中81保护祖先＋6未闭均0新增正loss。双稿5.0.44；原226／H／static隔离、不训练。完整自主和正向保留训练链仍0，完整主集未足量，不以实际交付称整体目标完成。[本轮完整记忆](memory/2026-10-29_wrd_main_v10_delivery05.md)／[具体训练方案](plans/20261027_wrd_main_v10/TRAINING_PLAN.md)。
+
+**WRD训练数据接续（2026-10-29，进行中）：** 本地实际529目标／146069监督tokens，436契约＋93过程（12来源／9component），449≤16K／80长桶；05实包189578320B／7250成员独立还原、529双tokenizer／mask／loader及339原响应重解析通过。双稿5.0.43，14B／8B组件计划52／最多100更新；完整自主与合格保留0、不训练。本地Git bb3d3c0，远端push与冷核未结束，不称已上传。405允许前缀实际只读无程序；9096缺证正追资源祖先，未审不说无价值。[本轮记忆](memory/2026-10-29_wrd_main_v10_delivery05.md)。
+
+**WRD可靠主集v10继续重构（2026-10-27）：** 本地实际526目标／143156监督tokens／3210576输入tokens，446≤16K／80长桶、271源／258联合component；436契约目标74758与90过程目标68398分账，不等于526完整沉淀。原生原R21201／历史原R33153／新R668、原动作7942／新动作投影5276／新STOP158分别计量。原全文／工具／失败／版本保全；HTML原27过程及CV完整三脚本＋SKILL四新功能构建已获根双tokenizer／语义准入，错误／重复／过宽句逐token撤正。检查点04实际495／124452已上传[c481b2b](https://github.com/jiaotangbuding177/WRD_dataset/tree/c481b2b47afac966b1dab99d5a827d362bb0c629/dataset/20261027_v10_checkpoint04)，3779认证成员根独立restore／loader＋远端106419758B冷实体SHA通过；本地新增31目标尚未05上传。双稿5.0.42，原五场仍原5.0.41冻结执行不回写；已结束19 outer／20 native为20215214已知tokens／263请求／3unknown，独立CV有限盲Q仅另获1场授权且在途，不计免费或成功。合格保留0、单原生自主A—D示范0，主量仍不足；继续恢复旧整writer暂扣的长代码及真实局修。不训练，原226／新H／静态dev-test隔离。[记忆](memory/2026-10-27_wrd_main_v10.md)／[训练方案](plans/20261027_wrd_main_v10/TRAINING_PLAN.md)。
+
+**WRD实际41题对无skills（2026-10-26）：** Q按同一40题（排T0082未知）为88.8958→92.1708，+3.275分，22高/8平/10低；41题Token40784113→28838396（−29.29%，NS含估算）、调用700→480（−31.43%），两组均41/41交付。见[41题比较](../output/20261026_q1000_integration/WRD使用技能41题_Q.md)与[记忆](memory/2026-10-26_wrd41_vs_no_skill_quality.md)。仅离线统计。
+
+**WRD实际读用41题Q澄清（2026-10-26）：** 单看WRD组40份数值Q的均值为92.1708（92.17），T0082视觉证据不足保留UNKNOWN；不缩为native公共23或四组公共35。已提供[完整41题Q](../output/20261026_q1000_integration/WRD使用技能41题_Q.md)；[记忆](memory/2026-10-26_wrd41_quality_mean_clarified.md)。仅离线复算，无新实验或原分修改。
+
+**主实验Q已补齐可评分记录（2026-10-26）：** 用户1000份最终CHECK已离线复算并与当前任务/附件及1731份现有产物SHA对应。976数值/24UNKNOWN；同一批232题Q为NS92.5004、AS89.4393、TS91.5539、WRD91.7443，native28中共同23题为87.1920/82.7717/87.7717/91.2319。主表TSR/开销仍全250，Q覆盖另列，不补零/不乘TSR，评分未人工校准；原费用与结果未变，0新实验。已更新[主实验中文初稿](paper/manuscript/Experiments_zh_draft.md)及[Q汇总](../output/20261026_q1000_integration/Q质量分汇总.md)；[本轮记忆](memory/2026-10-26_q1000_integrated_main_experiments.md)。生成质量待统计和未完成消融保持待补，其他并行工作不变。
+
+**新消融实际并发审计（2026-10-26 22:31）：** 此前17:54→22:23确有约4小时29分误拦停机，不能称持续十并发。现实查10个本轮原生容器、active10，S0已结束6/6，业务会话已结束9个，后续按10上限调度；H0/96仍待E/V。当前无block/主管错误，未重启或重复派发，运行5.0.36不变。[实时进度](../output/20261026_ablation_v2/progress.html) / [时间线与证据](memory/2026-10-26_ablation_actual_concurrency_and_downtime_audit.md)。
+
+**消融设计时口径（历史；执行范围已由本轮新授权覆盖）：** A49四组保留；原B/C/D全部效果失效，不以其正负成绩支持机制、不混入新主表，旧原生轨迹与所有费用保留。以下为5.0.30当时的仅设计状态：L/E/V/H隔离、H四臂N/S0/S*/同知识平铺S*，联合检验组织/演化与独立V冻结的固定路由成本筛选；首批6路线H96、业务≤192会话，Q/制作/恢复另列，来源及功效未核。当时execution_authorized=false，旧授权不转新方案；本轮用户已另行明确授权，现以顶部5.0.33运行记录为准。双稿5.0.30/ALG20261026-03，生产/训练边界不改。[方案](plans/20261026_ablation_redesign/PLAN.md) / [失效覆盖](plans/20261026_ablation_redesign/invalidation.json) / [记忆](memory/2026-10-26_ablation_invalidated_and_redesigned.md)。
+
+**旧消融恢复2历史收口（2026-10-26，BCD效果已被用户后续判失效）：** recovery2队列在09:17北京时间结束，active=0、主管退出、Docker健康。A四组完成并维持原49题结论；B/C/D执行数据收齐但不等于机制验证完成：1条D失败、PPT路线blocked、B/C评审1条缺失、测试大量共享fallback，delivery_status未评且Q未评分。新增849物理尝试886058886已知Token/13968调用/104缺usage；累计旧账已知实测1344162099Token，63104估算单列，货币未知。具体结果/假设判断见[历史报告](../output/20261025_ablation_remaining/recovery2_20261025/消融实验进度与结果报告.md)。
+
 # 当前研究状态
+
+**COLING 2027应用定位调研：** 建议围绕科技投资、孵化及成果转化机构跨职能知识工作的会话经验复用定位；行业跨任务有政策与论文依据，不认定全部题目都是核心业务。公共服务为潜在延伸，当前未证明实际公共服务职责或效果；论文需修正数据及结果证据口径。[报告](reports/2026-10-29_COLING领域定位与公共服务motivation.md) / [记忆](memory/2026-10-29_coling_domain_motivation.md)。
+
+**用户指定原始包核查：** Downloads原始导出直接复核为37成员／1524会话／46407消息／1391工具样本；与上轮工作树副本消息表有2行content差异，其余3表SHA一致。1614来源仍未核实。[记忆](memory/2026-10-29_user_original_export_recheck.md)。
+
+**最早原始导出与1614核查：** 找到本机2026-09-25脱敏原始四表，直接解析37成员／1524会话／46407消息／1391工具样本；早期按ID归集和用户时间补充后，分1466有正文用户会话、19内部和39无导出消息。尚无1614的来源清单，不能推断该数由上述数据形成。[报告](reports/2026-10-29_最原始数据与会话整理.md) / [记忆](memory/2026-10-29_earliest_raw_export_and_1614.md)。
+
+**250任务类别已按用户要求修订（2026-10-29）：** 新版目录将T0028 EDU→LIFE、T0186 KNOW→LIFE，250题中EDU 24、KNOW 19、LIFE 2，1107来源不变；原封存评测目录及历史成绩未覆盖。两题是研学参访与差旅报销，不能当作旅行规划技能已验证。[分类与数量](reports/2026-10-29_250类别调整/分类调整说明.md) / [记忆](memory/2026-10-29_life_reclassification_250.md)。
+
+**LIFE 250题逐题复核：** 原目录LIFE主类0，但T0186企业差旅报销和T0028研学参访安排存在出行服务或行程安排交叉；是否归类取决于统一边界，尚未重标。此前仅按选题意图解释，未逐题核查，现补充更正。[报告](reports/2026-10-29_LIFE_250分类复核.md) / [记忆](memory/2026-10-29_life_250_taskwise_audit.md)。
+
+**LIFE测试类别说明：** 250企业评测构建时未强制补私人生活咨询，故LIFE演化来源33/测试0；不是该类没有原始数据，也不能据此评价该类技能。未查到用户明确要求整类排除，具体33会话的业务关联仍须逐条核对。[记忆](memory/2026-10-29_life_category_test_exclusion_explanation.md)。
+
+**类别数量核对：** 1107演化来源按12个主任务类统计，最后250测试题按任务ID连接分类目录为11类，LIFE个人生活旅行33条来源/0测试。会话与题目是不同统计单位。[逐类分布](memory/2026-10-29_1107_and_250_category_counts.md)。
+
+**2026年10月29日数据集构建过程说明：** 已追溯1107历史会话池与另行制作及修订的250题，区分原始会话、合成附件、旧881/226身份及后续训练数据。用户论文pic3中1357=1107+250及严格来源分开缺支持，1614/7322等数字待核；未改图或论文。[说明](reports/2026-10-29_数据集完整构建过程说明.md) / [记忆](memory/2026-10-29_dataset_build_history_walkthrough.md)。
+
+**2026年10月29日41题口径纠正：** 用户确认实际读取skills的任务为41题，实验稿5.3已按完整41题分析交付及开销；其中T0082 Q未知，其余40题同题均分NS 88.8958/WRD 92.1708。旧稿按执行环境另列的子集已移出正文，不再冒作读用集合；历史记录保留。[更正记忆](memory/2026-10-29_experiment_41_skill_read_correction.md)。
+
+**2026年10月29日实验稿：** Downloads draft1新增 `Experiments_zh.md` 第5节，基于既有四组主记录、同环境28题和保留的49题A，配图和证据说明；Q分母/用量补估、选样、已缺产物与未完成项目均有对应口径。无新实验或方法变更。双稿5.0.43目前可读。[本轮记忆](memory/2026-10-29_experiment_manuscript_draft.md)。
+
+**方法稿两阶段简化：** Downloads方法稿第4.2节已改为“从历史会话中找可复用的工作”和“把可复用工作做成候选技能”，各配一张图3分图；原图和编辑前备份保留。无新实证或设计更改。[记忆](memory/2026-10-28_method_two_simple_figures.md)。
+
+## 2026年10月28日 最后实验数据存续检查
+
+1107完整母本/制作会话大小及SHA通过；当前修订250任务/689输入通过；四组1000结果和1000Q在。D:/slruns不存在导致401原产物引用缺失（1731中1330现存匹配），231原episode目录缺失（WRD215/AS8/TS8）。D/E默认rg全项目枚举后仅2引用有同SHA文件副本，余399未找到；旧产物包有2同SHA，远端历史备份当前未查。benchmark11301封签中11295通过，6缺失与原UPLOAD_OMISSIONS一致，本地缺失原因未知。此为原件存续缺口，不修改原成绩或冒称重新验收完好。无删除/重跑，详见[报告](../output/20261028_data_presence_audit/检查报告.md)及[记忆](memory/2026-10-28_benchmark_experiment_presence_audit.md)。
+
+**方法稿术语：** 用户要求将“工作路线”替换为“workflow工作流”；Downloads 方法稿正文已更新，既有图 pic2 仍含旧术语。此为写作术语调整，不修改方法设计。[记忆](memory/2026-10-28_method_rewrite.md)。
+
+## 2026年10月28日 方法初稿重写
+
+用户提供的 `C:/Users/22142/Downloads/draft1/draft1/Method_zh.md` 已重写，原稿同目录备份，重点讲清candidate skills逐步生成与复现，沿用4.1—4.5结构及pic2。双设计目录本轮读取时不存在，保留上轮5.0.42记忆与报告，依据存续源码和根管道核对；原因未知，不重建。未调整算法或运行实验。[记忆](memory/2026-10-28_method_rewrite.md)。
+
+## 2026年10月28日 A与B真实案例解释
+
+已交付[两阶段真实案例报告](reports/2026-10-28_A_B真实案例报告.md)：以JD筛选、招聘流程和简历改写的实际来源、路线及包说明A形成有来源和条件的路线候选，B形成带资源的candidate skills。三个为现有样本，不是本轮新生成计数；历史事件未认证及部分附件重建/缺失已披露。仅离线取证，未修改设计5.0.42、源码、技能、队列或实验。[本轮记忆](memory/2026-10-28_A_B_real_case_report.md)。
+
+v9已实际Git交付并验证：数据c13d8e6，最终含收据元数据fa0daee；41载荷/404720719字节，40普通Git文件与403815105字节LFS真实对象逐SHA/大小PASS，旧训练实包未改。实际解包+loader重建1968序列/490182监督标签通过，最终train1660/2090目标/403788监督；native辅助960/1368目标/44651监督，10报错正owner已撤销且全上下文保留；coord1008/1078目标/445531监督。完整WRD主仍0、原R保全而本轮主R正loss0，不能凭辅助量启动全目标训练。原226/新H/并行消融保持，0训练/新业务。[远端收据](../output/20261026_wrd_dataset_v9/REMOTE_GIT_VERIFICATION.json) / [本轮完整记忆](memory/2026-10-26_wrd_dataset_v9.md)。
+
+**WRD实际数据处理当前口径v9（2026-10-26）：** 已恢复1843会话/34239助手全文与原工具反馈，实建完整版本→试跑→评审图和逐目标来源/质量账；271真实边/229试跑银标，145文件贡献及87证据review都已对应结果。原226/新H严格交集后分别144保护+1未知、85保护+2未知，完整制作/修订/语义评审主正监督0；不能据raw量或新辅助训练行数说全目标已就绪。439未知恢复成明确保护，3149clean prefix不变。实际3771原协调状态主准入0；新867入口、162规则、12完整假设控制trace为明确新标注，非原教师CoT/非实证成功。共同数组/mask/分组与完整原件实包交付，实际数量见FINAL_DATA_STATISTICS及QA，不是只交索引。0训练/权重/新Teacher/Actor/业务，旧v6原R仍历史保留；原消融仍绑定5.0.33，本轮双稿5.0.35仅数据。[计划](../output/20261026_wrd_dataset_v9/TRAINING_PLAN.md) / [记忆](memory/2026-10-26_wrd_dataset_v9.md)。
+
+v8质量评估已Git交付70cd132：46载荷/24.31MB，32普通Git文件＋14 LFS真实对象逐项远端SHA/大小PASS；旧训练载荷未改。[远端收据](../output/20261026_wrd_quality_v8/REMOTE_GIT_VERIFICATION.json)。此为完成的质量/充分性评估及元数据证据，非新SFT正文或全量准入。
+
+**WRD质量/充分性当前判断v8（2026-10-26）：** 不能再用历史93/106窄子集判原材料不足。全旧1763会话/32342位置核查，32014非空目标10674583目标tokens；77/121档案接口组、29 retained全覆盖、113真实反馈读取连接。154终包文件静态及18局部窗口/20链案例评估已完成，八篇原论文已核。原规模值得领域SFT准备，但不等于最终可训练数：原system/schema/R恢复、语义/来源逐目标准入、完整协调监督和独立闭环仍缺，正终包9/12类。不能保证一次SFT完整自主/教师等效/降本，训练与新增业务均0。双稿5.0.34/ALG20261026-07仅非执行质量同步；顶部并行消融仍以其冻结5.0.33为执行合同，不改47116或运行配置。原226继续隔离。[报告](../output/20261026_wrd_quality_v8/QUALITY_ASSESSMENT.md) / [记忆](memory/2026-10-26_wrd_quality_sufficiency_v8.md)。下方v6/训练充分性旧口径保留为历史，其“核心0”等不能外推整个原数据母本。
+
+v7地址普查已Git交付1644617：98载荷/100.40MB，远端74普通Git文件及24个LFS实对象逐项核SHA为PASS，[远端收据](../output/20261026_wrd_raw_census_v7/REMOTE_GIT_VERIFICATION.json)。本次统计/索引上传不代表全量SFT正文已整理，旧训练实包保持。
+
+**WRD原制作数据普查与旧整理范围更正v7（2026-10-26）：** 最终175目录/794222文件路径/75.27GB，副本/缓存单列，另精确C盘原Codex会话75.56MB只stat另账；[总报告](../output/20261026_wrd_raw_census_v7/RAW_DATA_LOCATIONS.md)。1107输入、1751job、1822attempt引用、1763会话/32342助手/30438工具及29技能图是旧已解析入口，不是新目录全量上限。旧14380执行/评审只导引用、6692主行未审、prepare禁止句误拦、名称角色误分和窄规则漏根均成立；不能用93/106认定原过程少或大部分无价值。普查不等同全量SFT整理完成，可训练总数未知；原226/5.0.33/并行消融保持、未训练。[更正记忆](memory/2026-10-26_wrd_original_raw_locations_census_v7.md)。
+
+**WRD训练量充分性（2026-10-26）：** 对完整自主沉淀目标，当前不够。106主响应仅8企业源、原生WRD核心/完整自主链0；43Actor不能补maker。可作局部过程适配探索资料，但未有模型效果，不能称正式全目标训练已准备好；不训练、不以重放虚增独立量。本轮无新实证，保留5.0.33并行状态。[澄清记录](memory/2026-10-26_wrd_training_sufficiency_clarification.md)。
+
+**WRD训练数据当前口径（2026-10-26，v6）：** 原226继续隔离；真实可SFT历史主106响应/182659监督（30原R/121511tokens、8源），原生业务Actor43窗/178目标/128269监督单列。公开替代72主+34Actor，不与受控相加。91来源54保护/36未闭合/1旧业务源通但协议未过，91核心正例0；原生WRD A/B/C取题/C评估/D各0、完整自主链0。正例与原始因果链已核验并装入251.7MB/958成员增量，未训练或新调用业务；完整目标仍未就绪。双稿5.0.31/ALG04，保留并行5.0.30失效BCD；9e7fa8c已上传并完成远端149文件/22个LFS实对象SHA核验。[本轮实数/证据/缺口](memory/2026-10-26_wrd_resource_lineage_positive_sft_v6.md)。
 
 ## 第291轮：三域（Retail/Airline/Telecom）AutoSkill 配对实验全部收官
 
@@ -1892,3 +2002,9 @@ Squoosh第1轮`...1791129536850164583`原controller126497/ticks1635703/native127
 最新落地方向：[轮次 006](memory/006_2026-09-18_task_discovery_instrumentation.md)。
 
 最新对照说明：[轮次 007](memory/007_2026-09-18_before_after_changes.md)。版本检查不自动继承给后来修改版本；新增分析和存储开销尚未测量。
+**完整论文初稿审阅（2026-11-02）：** 工作区 `research/paper/paper_draft/` 与下载ZIP正文一致；针对会话经验复用主线、实验条件与分母、来源和过强因果表述提出逐处建议。仅审阅，未改论文或实验；本轮无新增实证发现。[记忆](memory/2026-11-02_paper_draft_review.md)。
+
+**论文写作要求纠正（2026-11-02）：** 用户要求重做正面修改意见，保留现有数据章节与指定成本表述，避免将实验审计写成论文自我批评；历史证据记录不改，本轮无新增实证发现。[纠正记录](memory/2026-11-02_paper_writing_principles_correction.md)。
+
+**COLING 2027 Industry Track写作定位（2026-11-02）：** 已核官网征稿与正式样式说明；论文建议突出企业知识工作与可复用工作流资源、成本及应用案例，正文6页自足，正式投稿前需核定COLING样式与双盲。未改初稿或实验。[记录](memory/2026-11-02_coling_industry_revision_checklist.md)。
+
